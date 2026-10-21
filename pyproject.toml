@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "deepinfer-mac"
-version = "0.1.0a1"
+version = "0.1.0a2"
 description = "DeepInfer-inspired local inference for Apple Silicon, powered by MLX"
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
@@ -28,7 +28,7 @@ packages = ["src/deepinfer_mac"]
 include = ["/src", "/tests", "/docs", "/benchmarks", "/models.lock.json", "/upstream.lock.json", "/README*", "/LICENSE", "/NOTICE", "/third_party", "/pyproject.toml", "/uv.lock", "/site", "/scripts", "/.github", "/CONTRIBUTING.md"]
 
 [tool.hatch.build]
-exclude = ["docs/CODEX_*", "docs/PROGRESS.md", "site/dist", "benchmark-results", "benchmarks/results", "docs/evidence/*.log"]
+exclude = ["docs/CODEX_*", "docs/PROGRESS.md", "site/dist", "benchmark-results", "benchmarks/results", "docs/evidence/*.log", "results", "**/quality-cache/**", "**/*.safetensors", "**/*.gguf"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

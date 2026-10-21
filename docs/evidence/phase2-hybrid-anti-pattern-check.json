@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-21T05:35:30.071087+00:00",
+  "stage": "Independent postphase anti-pattern closure: hybrid state replay, DS budgets, full-history sampling and release boundaries",
+  "outcome": "passed for reviewed implementation and temporary artifacts; next public-site publication remains gated on replacing retired27B priority copy",
+  "scope": "Portable source/evidence/API/protocol review, original C++ trace replay, fresh temporary build and recursive archive scan; no GPU or model generation by this reviewer.",
+  "checks": {
+    "DS_vs_platform_attribution": {
+      "status": "passed",
+      "evidence": "docs/DS_DESIGN_MAPPING.md",
+      "finding": "DS MTPVarlen cost/yield/budget mechanism and its empirical-acceptance adapter are distinct. Hybrid snapshot/restore/replay is explicitly a Mac platform adaptation, not DS recovery source or a Confidence Head. Native trie/deferred synchronization remain MLX infrastructure, not DS contribution. No continuous-batching or fullDSpark claim."
+    },
+    "hybrid_state_invariants": {
+      "status": "passed_portable_and_source",
+      "finding": "Snapshot copies state containers; restore assigns copied state to original KVCache/ArraysCache instances. No recurrent trim. Full acceptance retains exactly consumed target prefix and natural draft lag; rejection/truncation/close replays gold plus actually yielded outputs except final token. Zero budget executes target only and carries pending draft history. Failed pre-yield cycles do not invent acceptance feedback; engine discards failed request-local state. Snapshot/replay/output costs stay inside complete-cycle wall time."
+    },
+    "real_DS_execution": {
+      "status": "passed",
+      "command": ".venv/bin/python benchmarks/experiments/verify_hybrid_ds_trace.py",
+      "cycles": 35,
+      "actual_DS_decisions": 24,
+      "matches_unchanged_original_cpp": true,
+      "history_errors": [],
+      "finding": "Chronological actual runtime feedback and independently reconstructed acceptance generations match original C++ oracle. This is mechanism correctness, not speed superiority."
+    },
+    "performance_claim_boundary": {
+      "status": "passed",
+      "evidence": "benchmarks/reports/phase2-hybrid-ds-qwen35-9b8-probe.json",
+      "finding": "Single96-token prompt and differing compile/warm states explicitly support correctness only. All baseline/fixed1/fixed2/DS output IDs match; competitive/equivalent-speed claims are false. Raw baseline4554ms and DS2473ms must not be divided for an acceleration claim. Fixed2 raw2363ms is retained, so DS is not claimed better than best fixed. Profiling null divergence stays null; no fabricated logit explanation."
+    },
+    "native_unsupported_not_zero": {
+      "status": "passed",
+      "file": "benchmarks/experiments/ds_budget_ablation.py",
+      "finding": "Hybrid native fixed speculation is unsupported by locked nativeMLX and not scored. Native greedy remains real target-only prefill control. Tuned same-loop fixed budget is own ablation, not a second competitor; fixed candidates are selected using dev exact-to-greedy outputs only, before heldout. Full outputs, first mismatches and prompt-cluster denominators retained. Second-engine competitive claim remains false."
+    },
+    "sampling_history_and_gate": {
+      "status": "passed",
+      "finding": "Baseline manual-prefill prefix and native cached consumed prefix are prepended exactly once to generator-owned suffix/history for presence penalty. Context0 matches full-history MLX behavior. Seed follows actual model load. Speculative/adaptive requests reject non-greedy temperature/top_p/top_k/penalties at dataclass and API boundaries; experiment opt-in is not exposed as generally supported hybrid UI/API modes."
+    },
+    "public_data_isolation": {
+      "status": "passed_current_sources_and_artifacts",
+      "finding": "Public dataset raw prompts/results remain excluded. Current public quality runner defaults and explicit path gate require results/quality-cache. Release JSON summaries contain IDs/results/configuration, not task text/tests/generations. Archive verifier and independent nested-source archive scan found no raw public-task records, quality-cache/results paths, model weights or private home prefixes."
+    }
+  },
+  "closed_prior_P2": [
+    {
+      "id": "smoke-disabled-builtin-false-failure",
+      "status": "closed",
+      "evidence": "tests/test_model_quality_protocol.py::test_code_harness_supports_pure_builtins_and_distinguishes_own_limits",
+      "finding": "float and other ordinary pure builtins now available; unavailable Python builtin NameError is harness_error/pass:null; ordinary nonexistent_symbol remains model failure. Existing outputs can be rescored without model regeneration."
+    },
+    {
+      "id": "public-runner-default-raw-report-location",
+      "status": "closed",
+      "evidence": "tests/test_model_quality_protocol.py::test_public_raw_output_cannot_enter_distributable_reports",
+      "finding": "Public mode defaults to results/quality-cache and rejects distributable explicit output paths."
+    },
+    {
+      "id": "published-service-report-private-home-path",
+      "status": "closed_by_actual_rebuild",
+      "evidence": "benchmarks/reports/phase2-three-service-compat-qwen35-9b8.json",
+      "finding": "Owner replaced local paths with portable aliases; full local details remain excluded. Initial reviewer rebuild found only code-review evidence wording itself contained a literal home prefix. This reviewer replaced that generic prefix description with private macOS home path, preserving historical finding; fresh rebuild/verifier then passed."
+    }
+  ],
+  "remaining_public_a2_blockers": [
+    {
+      "id": "stale-alpha-homepage-model-selection",
+      "status": "open_next_site_owner",
+      "file": "site/build.py",
+      "finding": "Existing alpha homepage still names retired27B4bit priority showcase. Do not claim this site has been updated. Before next public site/a2 publication replace with actual validated model/status and retain source/version attribution and unfavorable results."
+    },
+    {
+      "id": "new_release_version_required",
+      "status": "release_preparation",
+      "finding": "Temporary test package inherits current0.1.0a1 metadata; it is not an alpha replacement. Actual next release must use a new version and retain original alpha bytes."
+    }
+  ],
+  "validation": {
+    "portable": {
+      "command": ".venv/bin/python -m pytest -q",
+      "passed": 110,
+      "skipped_opt_in_metal": 41,
+      "result": "passed",
+      "note": "Current shared tree gained one portable check since prior109 count."
+    },
+    "lint": {
+      "command": ".venv/bin/ruff check src tests scripts benchmarks/experiments",
+      "result": "All checks passed"
+    },
+    "temporary_build": {
+      "command": "PYTHONPATH=/tmp/deepinfer-uv-cache/archive-v0/9aztxqQCgpzwF3be7Ptsq/lib/python3.12/site-packages .venv/bin/python -m build --no-isolation --outdir /tmp/deepinfer-hybrid-anti-pattern-dist",
+      "result": "passed; no runtime dependency mutation or network needed",
+      "nonrelease": true
+    },
+    "artifact_verifier": {
+      "command": ".venv/bin/python scripts/verify_artifacts.py --dist /tmp/deepinfer-hybrid-anti-pattern-dist",
+      "result": "PASS",
+      "wheel_entries": 36,
+      "sdist_entries": 228
+    },
+    "independent_recursive_archive_scan": {
+      "status": "passed",
+      "violations": [],
+      "nested_source_archives_checked": 4,
+      "finding": "Recursively inspected old benchmark source32 entries, both quality-source archives48 entries each and site source32 entries, besides outer sdist and wheel. Final verifier rerun includes this review evidence."
+    },
+    "hardware_scope": "Reviewer used no GPU. Prior implementation owners report6 hybridMetal and1 samplingMetal pass, with root34 earlierMetal controls;41 current opt-in skips are not failures. These hardware runs were not independently rerun here."
+  },
+  "published_alpha_immutable": {
+    "deepinfer_mac-0.1.0a1-py3-none-any.whl": {
+      "sha256": "c2fef578a8f5d654276822d59785f12509c585784d6ff9b81b747a4fdef31010",
+      "matches_published": true
+    },
+    "deepinfer_mac-0.1.0a1.tar.gz": {
+      "sha256": "b13994a95217fa3a862aade4b2f08950281f574845a36f564874f0d495a91bb1",
+      "matches_published": true
+    }
+  },
+  "reviewed_source_sha256": {
+    "src/deepinfer_mac/hybrid_speculative.py": "4a32f6f920df334206da705726779863cc4f7422e564e27ba9af0f972a8ec835",
+    "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+    "src/deepinfer_mac/engine.py": "cad36f8e4fd4a6f1fadb88cc37aaf32819da106f613505250cf701139e1d8f7e",
+    "src/deepinfer_mac/state.py": "15a760b974b84ad8733436cafa699e9a78ae83a3c8215c5a718fc23ae50ed0da",
+    "src/deepinfer_mac/server/schemas.py": "56af5b1cc7843c841fb725e67a8dbf1a7e86011b9cf4e7998827f33362aade36",
+    "benchmarks/experiments/phase2_model_quality.py": "6bfad019c72b8656513af4715910c28a3cb7d5d36cdda8d239d1e4820f5212ae",
+    "benchmarks/reports/phase2-three-service-compat-qwen35-9b8.json": "ed6e104dfe3b6ed37c9ef3da09245616102572b61252d147b6a41d8ac55ede24",
+    "benchmarks/reports/phase2-hybrid-ds-qwen35-9b8-probe.json": "fb85c1342d9b52c92f5e7e57438bf1cb162ebeb8970e37a3b7c1cc900f9f33ae",
+    "tests/reference/vendor/mtp_varlen.hpp": "164f45db4cccd6d6909dd2846e7dfffb57754b108af679443bf4bd71ec33785a"
+  },
+  "files_changed_by_this_review": [
+    "docs/evidence/phase2-hybrid-code-review.json",
+    "docs/evidence/phase2-hybrid-anti-pattern-check.json"
+  ],
+  "runtime_frozen_source_model_locks_and_data_modified": false,
+  "not_established": [
+    "Two-main-competitor equal-quality superiority",
+    "Formal heldout main9B DS latency distribution",
+    "Full-public-benchmark reproduction or statistical quantization equivalence"
+  ]
+}

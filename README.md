@@ -1,62 +1,50 @@
 # DeepInfer-Mac
 
-**DeepInfer-inspired inference for Apple Silicon, powered by MLX.** Independent community software, Apache-2.0, experimental alpha.
+**Local inference for Apple Silicon, powered by MLX, with executable methods derived from DeepInfer.** Independent community project · Apache-2.0 · experimental alpha.
 
-[简体中文](README.zh-CN.md) · [Architecture](docs/architecture.md) · [Benchmarks](docs/benchmarking.md) · [Compatibility](docs/compatibility.md) · [Contribute](CONTRIBUTING.md)
+[中文](README.zh-CN.md) · [Phase 2 evidence](docs/phase2.md) · [Architecture and attribution](docs/architecture.md) · [Reproduce measurements](docs/benchmarking.md) · [Compatibility](docs/compatibility.md)
 
-Ordinary baseline decoding is the safe default; fixed and adaptive speculation require explicit selection.
+The current primary candidate is **Qwen3.5-9B-8bit**. Real loading, baseline generation, sampled generation, API streaming/cancellation/cache consistency and a local UI request have been checked on a 24 GiB M4 Pro. Same-model 4-bit and 14B fallback comparisons remain in progress; this is not final model-quality acceptance. Retired 27B weights have been removed, while their failed experiments remain documented.
 
-Run quantized language models locally, compare ordinary, fixed speculative and adaptive greedy decoding, and reuse exact prompt prefixes within a byte budget. The local browser demo ships in the Python wheel. This release does not claim a universal speedup; measurements and mismatches are published together. It does not port official DSpark or full DeepSeek V4.1.
+The DeepInfer MTPVarlen-derived scheduler runs in the engine with empirical acceptance estimates. The original C++ reference checks its decisions. A hybrid-state snapshot/replay adapter has produced the same 96 tokens as baseline and fixed budgets on one real 9B prompt. **No superiority over tuned fixed decoding or two common frameworks has been established.** The joint Phase 2 acceptance goal remains open.
 
+## Run locally
 
-**Priority showcase candidate:** Qwen3.8-27B MLX 4-bit is under model/Metal/resource validation; it is not the default. Its first scope is text baseline and exact-cache reuse. Hybrid recurrent state and a different vocabulary prevent reuse of the Qwen3-0.6B draft. Qwen3-4B remains the quick regression and speculative control; its results cannot be attributed to 27B.
-
-## Start locally
-
-Requires an Apple Silicon Mac, Metal and Python 3.12 or 3.13. Allow model download storage and available unified memory; 24 GB M4 Pro is the initial verification machine.
+Apple Silicon, Metal and Python 3.12/3.13 are required for generation. Weights download separately at immutable revisions; leave room for active state, snapshots and the operating system.
 
 ```sh
 git clone https://github.com/ZEVIN17/deepinfer-mac.git
 cd deepinfer-mac
 uv sync --frozen --extra mlx --extra dev
 uv run deepinfer-mac doctor
-uv run deepinfer-mac models
-uv run deepinfer-mac models --download qwen3-4b
-uv run deepinfer-mac run --profile qwen3-4b --mode baseline '用中文解释推测解码。'
+uv run deepinfer-mac models --download qwen3.5-9b-8bit --target-only
+uv run deepinfer-mac run --profile qwen3.5-9b-8bit --mode baseline 'Explain unified memory.'
 uv run deepinfer-mac serve
 ```
 
-Open `http://127.0.0.1:8765` for chat, comparison and JSON export. First use downloads immutable model revisions from Hugging Face; weights are not part of the release. `qwen3-0.6b` is a smaller standalone baseline profile. Model and tokenizer details live in [models.lock.json](models.lock.json).
+Open `http://127.0.0.1:8765` and select the 9B candidate. The default profile remains the smaller Qwen3-4B regression model. The public showcase is static and does not connect to localhost. There is no assumed PyPI publication. Published [v0.1.0a1](https://github.com/ZEVIN17/deepinfer-mac/releases/tag/v0.1.0a1) is historical; the working tree prepares experimental 0.1.0a2.
 
-Install a built wheel with `python3 -m pip install 'dist/deepinfer_mac-0.1.0a1-py3-none-any.whl[mlx]'`. A plain install without `[mlx]` supports diagnostics and portable logic tests, but cannot generate. This repository is the installation source for the alpha; do not assume a PyPI release exists.
-
-## Compare and reproduce
+Baseline supports temperature, top-p, top-k, presence penalty and a seed. For example:
 
 ```sh
-uv run deepinfer-mac run --mode fixed_speculative --draft-tokens 2 'Write a Python binary search.'
-uv run deepinfer-mac run --mode adaptive --json 'Write a Python binary search.'
-uv run deepinfer-mac bench --profile qwen3-4b --suite quick --repeats 3 --fixed-lengths 1 2 4 --output benchmark-results
-uv run pytest -q -m 'not metal'
-# Optional: deterministic Metal control tests on Apple Silicon
+uv run deepinfer-mac run --profile qwen3.5-9b-8bit --temperature 0.7 --top-p 0.8 --top-k 20 --presence-penalty 1.5 --seed 42 --json 'What can a small local model help a developer do?'
+uv run deepinfer-mac run --profile qwen3-4b --mode adaptive --adaptive-scheduler ds --no-cache --json 'Write a Python binary search.'
+uv run pytest -q
 uv run pytest -q --run-metal -m metal
 python3 site/build.py
 python3 site/check.py
-uv build
+uv build --out-dir dist/v0.1.0a2
+python3 scripts/verify_artifacts.py --dist dist/v0.1.0a2
 ```
 
-The benchmark includes same-version native MLX-LM, exact token comparisons, rotating mode order, multiple fixed lengths and separate reuse measurements. Keep every failure and numerical mismatch; do not filter the corpus to make a speed claim. [Reproduction and evidence](docs/benchmarking.md) describe measurement boundaries and available reports.
+Speculative modes remain greedy. The public 9B API/UI offers baseline only; hybrid speculation requires the explicit experimental Python entry in [DS_DESIGN_MAPPING.md](docs/DS_DESIGN_MAPPING.md). It is not a trained Confidence Head, full DSpark, continuous batching or a full DeepSeek V4.1 port.
 
-The initial M4 Pro full-corpus result does **not** establish equivalent speculative acceleration: zero failures, but only 27/36 comparison groups match across all variants. Adaptive did not beat the tuned fixed control. Baseline/native token agreement is 36/36. Complete results and the measured source archive are in `benchmarks/reports/m4-pro-qwen3-4b/`.
+## Evidence and limits
 
-## Added to MLX-LM
+The real 9B UI clamp repair completed in 1834.24 ms with TTFT 939.62 ms and 27.94 decode tokens/s. This is one interactive request, not a competitive benchmark. The 12-task local quality smoke retained factual/arithmetic failures; native and project greedy outputs matched on all 12 tasks. Public subsets and quantization comparisons use a separate frozen-source protocol and publish sanitized summaries, not restricted benchmark text.
 
-- An experimental cost-aware draft budget with zero-draft fallback.
-- Exact prefix snapshots with identity isolation, a byte budget and LRU eviction.
-- A bounded single-owner local API, cancellation and a bundled chat/compare UI.
-- Locked model profiles, transparent diagnostics and reproducible evidence export.
+Historical alpha Qwen3-4B measurements contain 216 measured runs: baseline/native agreement 36/36, all-variant equality 27/36. Adaptive did not beat tuned fixed decoding; differing outputs prevent an equivalent-speedup claim. These alpha numbers do not describe the new 9B model.
 
-Greedy output equivalence must be checked against baseline on each workload: different matrix shapes can change floating point decisions. Only declare equivalent speedup when the entire predetermined corpus succeeds with matching full token sequences. Retain all elapsed times and label differing-output comparisons as different work; matching-subset ratios are diagnostic only. Sampling distributions, specialized confidence heads, V4.1 CED/CSA2/MTP, cluster serving and custom Metal kernels remain future work.
+Cache lookup reuses MLX-LM's native LRU for trimmable models; hybrid models use exact snapshots and suffix replay. This cache work is independent/platform adaptation, not DS core credit. RSS and Metal allocation overlap on unified memory and are reported separately. Frequent model reloads have unresolved process-RSS retention; use separate processes for reload-heavy runs.
 
-See [release notes](docs/release-notes.md), [roadmap](docs/roadmap.md), [NOTICE](NOTICE) and [upstream.lock.json](upstream.lock.json). Please contribute reproducible reports with model revisions, hardware and complete raw results.
-
-Frequent profile reloads have a known RSS-retention issue despite released Metal arrays/cache; restart the service or use separate OS processes for reload-heavy sessions. Fixed-model cache stability is measured separately. See architecture resource limits.
+See [model locks](models.lock.json), [source attribution](NOTICE), [release notes](docs/release-notes.md), [evidence](docs/evidence.md) and [contributing](CONTRIBUTING.md). Complete failures, outputs, settings and numerical mismatches stay in each permitted report.

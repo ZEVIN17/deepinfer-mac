@@ -1,0 +1,158 @@
+{
+  "independent_cpp_real_trace": {
+    "source_report": "benchmarks/reports/phase2-ds-engine-smoke-qwen3-4b.json",
+    "total_cycles": 42,
+    "decisions": 31,
+    "matches": true,
+    "actual_seqlens_q": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "expected_seqlens_q": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "history_state_errors": [],
+    "method": "unchanged original C++ oracle; chronological R updates from actual cycles; independent empirical-history reconstruction; no Python scheduler called",
+    "reproduce_command": ".venv/bin/python benchmarks/experiments/verify_ds_trace.py"
+  },
+  "source_hash": "164f45db4cccd6d6909dd2846e7dfffb57754b108af679443bf4bd71ec33785a",
+  "cleanup": {
+    "verified_absent": [
+      "models--keXjos--Qwen3.8-27B-mlx-2Bit",
+      "models--agnosticeng--Qwen3.8-27B-2bit",
+      "models--mlx-community--Qwen3.8-27B-4bit",
+      "agnostic27b2bit",
+      "Qwen3.8-27B-4bit",
+      "qwen38-2bit"
+    ],
+    "target_count": 6
+  },
+  "review_scope": "Independent source/semantic verification plus authorized local corrections; no GPU run by reviewer; no performance superiority claim",
+  "portable_validation": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 35,
+    "skipped_opt_in_metal": 34,
+    "result": "passed"
+  },
+  "lint_validation": {
+    "command": ".venv/bin/ruff check src tests scripts benchmarks/experiments",
+    "result": "All checks passed"
+  },
+  "upstream_git_blob": "09af680aa42b724fe86315007a160d5012a1fde9",
+  "licenses": {
+    "production_design": "Apache-2.0, NOTICE + upstream.lock.json + third_party/licenses/DeepInfer.txt",
+    "unchanged_cpp_oracle": "Test-only original header; shim replaces host Sequence/TORCH_CHECK only",
+    "speculative_adaptation": "MLX-LM MIT notice retained"
+  },
+  "findings": [
+    {
+      "id": "forward-exception-policy-state",
+      "severity": "P2",
+      "status": "fixed_by_independent_reviewer_after_authorization",
+      "before": "Two forwards failing before first yield leave process_cnt=0 and schedule_cnt=2; later completed rounds preserve gap and DS schedule raises ValueError. Outer finally also guesses cache rewind despite unknown device progress.",
+      "after": "abort_cycle drops uncompleted scheduling state without acceptance/runtime samples; request-local cache discarded; yielded cycles still use inner finally.",
+      "evidence": "tests/test_execution_failures.py::test_failed_forward_does_not_poison_persistent_ds_policy",
+      "metal_followup": "tests/test_speculative_metal.py::test_ds_policy_recovers_after_real_device_boundary_forward_failure, two cases; queued, not run by reviewer"
+    },
+    {
+      "id": "native-cache-prefix-double-consumption",
+      "severity": "P2",
+      "status": "fixed_by_independent_reviewer_after_authorization",
+      "before": "Explicit GenerationRequest(mode=native_mlx,use_cache=True) obtains a cached baseline prefix but sends the whole prompt to native stream_generate, consuming prefix twice. native_generate helper disables cache and was unaffected.",
+      "after": "Native generator receives tokens[hit:] with the matching consumed-prefix state.",
+      "evidence": "tests/test_execution_failures.py::test_native_cached_request_only_consumes_uncached_suffix"
+    },
+    {
+      "id": "cache-physical-memory-double-count",
+      "severity": "P2",
+      "status": "fixed_by_independent_reviewer_after_authorization",
+      "before": "Explicit memory budget adds logical retained snapshot bytes to MLX active memory, which already owns those arrays; usable cache hit may be cleared or request rejected.",
+      "after": "Compare active allocator bytes plus conservative future KV reserve only; logical cache bytes remain the admission limit and are not physical extra memory.",
+      "evidence": "Explicit-budget parameter of cached-native portable test: active100 + reserve2064 fits budget2168; logical snapshot8 must not be added again."
+    }
+  ],
+  "mechanism_review": {
+    "N_minus_2_N_minus_1": "31 actual decisions independently reconstructed from completed cycle acceptance and compared with recorded state; no leakage found",
+    "runtime_residual": "Chronological C++ R feedback from actual full cycles, excluding documented catchup; decisions match without importing Python scheduler. Portable randomized oracle separately covers negative residual, 5000-window eviction, graph thresholds and n=1/2/4.",
+    "expiry": "Existing portable test re-explores budgets after refresh_steps; legacy engine expiration resets policy after deadline. No permanent draft-disabled state retained.",
+    "fast_path": "diagnostics=False disables state/replay serialization; minimal per-round aggregate count records and complete-cycle timing remain required for adaptive observations.",
+    "cache_tail_and_ownership": "Inspected locked MLX-LM trie/trim implementation; facade leaves one uncached input; nontrimmable exact full hit falls back to earlier exact snapshot. Stored snapshots deep-copied before mutable request ownership; cancellation/branch cannot mutate prior snapshot. No arbitrary hybrid trim introduced."
+  },
+  "model_registry": {
+    "active_new_profiles": "9B8bit,9B4bit,14B4bit remain candidate/baseline-only at review time; no verified performance status",
+    "retired_27b": "Both historical profiles reject get_profile before network/download; not listed as active",
+    "lock_copies_identical": true
+  },
+  "not_completed": [
+    "New main-model 9B actual quality/memory/API/UI verification is owned by quality agent, not certified here.",
+    "9B DS execution mechanism has not yet been verified.",
+    "No reproducible superiority over two major competitors exists yet.",
+    "New Metal tests require scheduled GPU run after quality releases the device."
+  ],
+  "changed_source_sha256": {
+    "src/deepinfer_mac/policy.py": "25dbbac857e2f7a1fdc0e0956a90b31eca1661b9f0ce1b51b07ab35479313d43",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/engine.py": "180d7e040e20e7ebc556713cc5e4c567accf14a38649ad462274d343a69a144c",
+    "tests/test_execution_failures.py": "d3452655f06bdc575d22f709ecf5f388463af4c11f18c2034896629ce8163cd6",
+    "tests/test_speculative_metal.py": "4a7c4fe9c6e4d7d148d99ede920585fb20dcd60e37230d2b7044334713626acf"
+  }
+}

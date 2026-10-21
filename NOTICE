@@ -4,16 +4,25 @@ Copyright 2026 DeepInfer-Mac contributors
 Independent community project. DeepInfer-inspired inference for Apple Silicon,
 powered by MLX. No affiliation with or endorsement by DeepSeek or Apple.
 
-The unchanged reference-only tests/reference/vendor/mtp_varlen.hpp originates
+The unchanged tests/reference/vendor/mtp_varlen.hpp originates
 from deepseek-ai/DeepInfer csrc/engine/mtp_varlen.hpp at commit
 774ce244b87cc0eb8d4b94ab9f5de2ab22049f01 (Apache-2.0).
-Its required sequence.hpp was not vendored. This material is neither linked
-into the Python runtime nor a runnable C++ test. See upstream.lock.json.
+Its required sequence.hpp was not vendored. A separate minimal test-only host
+boundary compiles the unchanged header as an independent C++ oracle. The
+production src/deepinfer_mac/ds/ implementation follows this Apache-2.0 design
+in portable Python. It is not linked to the C++ header. See upstream.lock.json.
 
 MLX and MLX-LM are MIT-licensed runtime dependencies. The isolated greedy
 speculative loop adaptation in src/deepinfer_mac/speculative.py is based on
 MLX-LM 0.32.2. Its copyright and MIT notice are preserved in
 third_party/licenses/MLX-LM.txt. Dependency and model licenses remain separate.
+
+benchmarks/quality/vendor/ifeval_checkers.py contains seven unchanged checker
+classes from Google Research's instruction_following_eval/instructions.py.
+Copyright 2026 The Google Research Authors. Licensed under Apache-2.0.
+The local base interface and constants are adapters; exact source URL, SHA256,
+class hashes and changes are recorded in benchmarks/quality/vendor/provenance.json.
+This checker attribution does not grant rights to third-party benchmark prompts.
 
 DSpark, DeepSeek V4.1 CED/CSA2/MTP, distributed KV storage, confidence heads,
 and upstream CUDA/Ascend kernels have not been ported by this release.

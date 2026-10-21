@@ -1,0 +1,2744 @@
+{
+  "source": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "78a58c7f035803d21a047e48fba4b6ea562e60343cd71bd368aa04cb98b13652",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "c2e02b3867aa6e0051d936c4a7e91d68bda8a94213d98e9d8ca7222b21870e19",
+      "src/deepinfer_mac/cli.py": "7052488e4d51a7a05ee853a848e8e863afdff2a2c467b375bb303b2cd2abcfcd",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+      "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+      "src/deepinfer_mac/engine.py": "d6ed53e4cf36dd62b446ef298cf32793f5261ced888b4f475d958ad46d82ee0b",
+      "src/deepinfer_mac/models.lock.json": "4ac0c2322f693fe0beb1032fdcd0ceab09c78631e14a9770debf5bd378acdf0b",
+      "src/deepinfer_mac/models.py": "536d84129a35014dc9e58c2b002e0e0b89a71d03d5a0c3db4b4cbab861376dfc",
+      "src/deepinfer_mac/policy.py": "83b9df0e0309c2f889d213d95ccc59e82a88a57ed151feac124854b4eca7ab94",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "ab43ba5ea5a24d39b0c9fc9db782df504e43a7b58e7ca030d2ef06436d0fb6c5",
+      "src/deepinfer_mac/server/schemas.py": "c8a2f65b564cc074a53ebdfc639dc20c148c4d9b8a10737a61750169a700a8c4",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/speculative.py": "015da0605d3fa5fff44c70e439793810feb6b63b20516700b5cb8a61ad221bb1",
+      "src/deepinfer_mac/state.py": "da6e31908d54b9c4d593b868676fb1f27d8212d5b6e2ac71add65922d1bca187",
+      "src/deepinfer_mac/web/app.js": "d1d175345691be029a7be254a9bd28660a58fd9dbf5a7acc118df24837f20ffe",
+      "src/deepinfer_mac/web/index.html": "77295d5b11018c937615b4f428d83fc6f04d857da4ed5b4ed53b437e5a3eaf52",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "a0822af7a99b993596ef3f98edd5b7c7d0a51974fba085a9b3e256597b5b68f7",
+      "uv.lock": "65d76b103c46139eca0f1556efdbde14322125ff7cac03113ba0f9604f202e81",
+      "models.lock.json": "4ac0c2322f693fe0beb1032fdcd0ceab09c78631e14a9770debf5bd378acdf0b",
+      "upstream.lock.json": "8584f3d05ad0cc061e334e87a3a51a56f02b4fec5c08a410ff78ee1f7fae92a3"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "profile": "qwen3-4b",
+  "protocol": {
+    "development": [
+      [
+        "dev-zh",
+        "用两句话解释统一内存，并说明它对本地语言模型的影响。"
+      ],
+      [
+        "dev-code",
+        "Write Python dedupe(items) preserving insertion order. Include a brief example."
+      ],
+      [
+        "dev-json",
+        "Return only JSON with keys \"city\" and \"country\" for the capital of France."
+      ]
+    ],
+    "held_out": [
+      [
+        "test-zh",
+        "请解释为什么前缀缓存能降低首字延迟，但不一定提高逐字生成速度。"
+      ],
+      [
+        "test-code",
+        "Write Python is_palindrome(text) ignoring spaces and case. Show two asserts."
+      ],
+      [
+        "test-json",
+        "Return a JSON object with sorted numbers [9,2,5,2] and their unique count."
+      ],
+      [
+        "test-facts",
+        "Given apples=7, bought=5, gave_away=3, state the final count and one equation."
+      ],
+      [
+        "test-branch",
+        "System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. System design context: exact cache snapshots must protect branch isolation. Explain one correctness risk and one mitigation, briefly."
+      ],
+      [
+        "test-long-code",
+        "A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. A local Python utility must preserve user records and report bad input. Write parse_positive_int(value) returning a positive int or raising ValueError."
+      ]
+    ],
+    "repeats": 3,
+    "max_tokens": 24,
+    "smoke": true,
+    "cache": "all cold KV, warm model",
+    "primary_metric": "task total_ms including prefill; exact token equality required for speed ratios",
+    "fixed_tuning": "minimum development median total_ms among fixed0/1/2/4; no held-out tuning",
+    "generation": "greedy, thinking=false, prefill512; all same-loop variants deferred sync",
+    "quality_scope": "token equivalence control; not a model capability benchmark or two-engine claim"
+  },
+  "samples": [
+    {
+      "stage": "warmup",
+      "repeat": 0,
+      "prompt_id": "dev-zh",
+      "variants": {
+        "fixed0": {
+          "total_ms": 363.4495409205556,
+          "ttft_ms": 83.59541592653841,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            31615,
+            33108,
+            49891,
+            91572,
+            104925,
+            102700,
+            99922,
+            111390,
+            101065,
+            105535,
+            3837,
+            99652,
+            32320,
+            103931,
+            100169,
+            17447
+          ],
+          "text": "统一内存（Unified Memory）是一种允许CPU和GPU同时访问同一块内存区域的技术，它消除了传统上",
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2881289608,
+          "prompt_tokens": 27
+        },
+        "fixed1": {
+          "total_ms": 276.9671248970553,
+          "ttft_ms": 69.21283295378089,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2881289608,
+          "prompt_tokens": 27
+        },
+        "fixed2": {
+          "total_ms": 290.15658400021493,
+          "ttft_ms": 70.25337498635054,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2881289608,
+          "prompt_tokens": 27
+        },
+        "fixed4": {
+          "total_ms": 361.09516595024616,
+          "ttft_ms": 82.63387496117502,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2881289608,
+          "prompt_tokens": 27
+        },
+        "legacy": {
+          "total_ms": 312.7344169188291,
+          "ttft_ms": 64.71504201181233,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            31615,
+            33108,
+            49891,
+            91572,
+            104925,
+            102700,
+            99922,
+            111390,
+            101065,
+            105535,
+            3837,
+            99652,
+            32320,
+            103931,
+            100169,
+            17447
+          ],
+          "text": "统一内存（Unified Memory）是一种允许CPU和GPU同时访问同一块内存区域的技术，它消除了传统上",
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "policy": {
+            "cycle_ms_per_token": {
+              "0": 12.162125553004444,
+              "1": 7.626833277754486,
+              "2": 13.995811983477324,
+              "3": 8.090208323361972,
+              "4": 22.329395753331482
+            },
+            "acceptance_by_position": {
+              "0": 0.6666666666666666,
+              "1": 0.3333333333333333,
+              "2": 0.0,
+              "3": 0.0
+            }
+          },
+          "peak_memory_bytes": 2881289608,
+          "prompt_tokens": 27
+        },
+        "ds": {
+          "total_ms": 287.02466608956456,
+          "ttft_ms": 64.18379105161875,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            31615,
+            33108,
+            49891,
+            91572,
+            104925,
+            102700,
+            99922,
+            111390,
+            101065,
+            105535,
+            3837,
+            99652,
+            32320,
+            103931,
+            100169,
+            17447
+          ],
+          "text": "统一内存（Unified Memory）是一种允许CPU和GPU同时访问同一块内存区域的技术，它消除了传统上",
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            }
+          ],
+          "policy": {
+            "cycle_ms_per_token": {
+              "0": 12.093020952306688,
+              "1": 7.570895482786,
+              "2": 6.215125011901061,
+              "3": 10.231079921747249,
+              "4": 19.62476400270437
+            },
+            "acceptance_by_position": {
+              "0": 0.8,
+              "1": 0.5714285714285714,
+              "2": 0.0,
+              "3": 0.0
+            },
+            "implementation": "DeepInfer MTPVarlen-derived scheduler with empirical acceptance",
+            "source_commit": "774ce244b87cc0eb8d4b94ab9f5de2ab22049f01",
+            "startup_curve_scope": "complete draft+verify+host cycle; sampler residual counted once",
+            "cycle_ms_by_graph": {
+              "1": 12.136603996623307,
+              "2": 15.174708561971784,
+              "3": 18.68770900182426,
+              "4": 24.634000030346215,
+              "5": 29.640686989296228
+            },
+            "decisions": 12,
+            "refresh_steps": 64,
+            "confidence_head": false,
+            "catchup_cycle_ms": [
+              15.503333997912705
+            ]
+          },
+          "peak_memory_bytes": 2881289608,
+          "prompt_tokens": 27
+        },
+        "native_greedy": {
+          "total_ms": 312.64679110608995,
+          "ttft_ms": 67.30237510055304,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            31615,
+            33108,
+            49891,
+            91572,
+            104925,
+            102700,
+            99922,
+            111390,
+            101065,
+            105535,
+            3837,
+            99652,
+            32320,
+            103931,
+            100169,
+            17447
+          ],
+          "text": "统一内存（Unified Memory）是一种允许CPU和GPU同时访问同一块内存区域的技术，它消除了传统上",
+          "rounds": [],
+          "policy": null,
+          "peak_memory_bytes": 2881289608,
+          "prompt_tokens": 27
+        },
+        "native_fixed": {
+          "total_ms": 298.9023750415072,
+          "ttft_ms": 75.45300002675503,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [],
+          "policy": null,
+          "peak_memory_bytes": 2881617288,
+          "prompt_tokens": 27
+        }
+      },
+      "equal_to_greedy": {
+        "fixed0": true,
+        "fixed1": false,
+        "fixed2": false,
+        "fixed4": false,
+        "legacy": true,
+        "ds": true,
+        "native_greedy": true,
+        "native_fixed": false
+      },
+      "first_divergence": {
+        "fixed0": null,
+        "fixed1": 8,
+        "fixed2": 8,
+        "fixed4": 8,
+        "legacy": null,
+        "ds": null,
+        "native_greedy": null,
+        "native_fixed": 8
+      }
+    },
+    {
+      "stage": "development",
+      "repeat": 0,
+      "prompt_id": "dev-zh",
+      "variants": {
+        "fixed0": {
+          "total_ms": 340.4990420676768,
+          "ttft_ms": 64.86291706096381,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            31615,
+            33108,
+            49891,
+            91572,
+            104925,
+            102700,
+            99922,
+            111390,
+            101065,
+            105535,
+            3837,
+            99652,
+            32320,
+            103931,
+            100169,
+            17447
+          ],
+          "text": "统一内存（Unified Memory）是一种允许CPU和GPU同时访问同一块内存区域的技术，它消除了传统上",
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2881617288,
+          "prompt_tokens": 27
+        },
+        "fixed1": {
+          "total_ms": 278.31966697704047,
+          "ttft_ms": 67.47670902404934,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2881617288,
+          "prompt_tokens": 27
+        },
+        "fixed2": {
+          "total_ms": 291.9316249899566,
+          "ttft_ms": 71.09791703987867,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2881617288,
+          "prompt_tokens": 27
+        },
+        "fixed4": {
+          "total_ms": 360.43795791920274,
+          "ttft_ms": 83.15266598947346,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2881617288,
+          "prompt_tokens": 27
+        },
+        "legacy": {
+          "total_ms": 284.07949989195913,
+          "ttft_ms": 67.08091695327312,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            }
+          ],
+          "policy": {
+            "cycle_ms_per_token": {
+              "0": 12.148709036409855,
+              "1": 14.886416029185057,
+              "2": 13.995811983477324,
+              "3": 8.113416649090746,
+              "4": 22.329395753331482
+            },
+            "acceptance_by_position": {
+              "0": 0.6538461538461539,
+              "1": 0.2857142857142857,
+              "2": 0.0,
+              "3": 0.0
+            }
+          },
+          "peak_memory_bytes": 2881617288,
+          "prompt_tokens": 27
+        },
+        "ds": {
+          "total_ms": 292.71587496623397,
+          "ttft_ms": 70.82695898134261,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "policy": {
+            "cycle_ms_per_token": {
+              "0": 12.093020952306688,
+              "1": 7.648281229194254,
+              "2": 18.363624927587807,
+              "3": 10.231079921747249,
+              "4": 19.62476400270437
+            },
+            "acceptance_by_position": {
+              "0": 0.6521739130434783,
+              "1": 0.42105263157894735,
+              "2": 0.0,
+              "3": 0.0
+            },
+            "implementation": "DeepInfer MTPVarlen-derived scheduler with empirical acceptance",
+            "source_commit": "774ce244b87cc0eb8d4b94ab9f5de2ab22049f01",
+            "startup_curve_scope": "complete draft+verify+host cycle; sampler residual counted once",
+            "cycle_ms_by_graph": {
+              "1": 12.136603996623307,
+              "2": 15.185334021225572,
+              "3": 18.70775001589209,
+              "4": 24.634000030346215,
+              "5": 29.640686989296228
+            },
+            "decisions": 25,
+            "refresh_steps": 64,
+            "confidence_head": false,
+            "catchup_cycle_ms": [
+              15.503333997912705
+            ]
+          },
+          "peak_memory_bytes": 2881617288,
+          "prompt_tokens": 27
+        },
+        "native_greedy": {
+          "total_ms": 312.697833054699,
+          "ttft_ms": 67.79858306981623,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            31615,
+            33108,
+            49891,
+            91572,
+            104925,
+            102700,
+            99922,
+            111390,
+            101065,
+            105535,
+            3837,
+            99652,
+            32320,
+            103931,
+            100169,
+            17447
+          ],
+          "text": "统一内存（Unified Memory）是一种允许CPU和GPU同时访问同一块内存区域的技术，它消除了传统上",
+          "rounds": [],
+          "policy": null,
+          "peak_memory_bytes": 2881617288,
+          "prompt_tokens": 27
+        },
+        "native_fixed": {
+          "total_ms": 299.2825830588117,
+          "ttft_ms": 75.74837503489107,
+          "ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            111390,
+            85329
+          ],
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问内存资源",
+          "rounds": [],
+          "policy": null,
+          "peak_memory_bytes": 2881617288,
+          "prompt_tokens": 27
+        }
+      },
+      "equal_to_greedy": {
+        "fixed0": true,
+        "fixed1": false,
+        "fixed2": false,
+        "fixed4": false,
+        "legacy": false,
+        "ds": false,
+        "native_greedy": true,
+        "native_fixed": false
+      },
+      "first_divergence": {
+        "fixed0": null,
+        "fixed1": 8,
+        "fixed2": 8,
+        "fixed4": 8,
+        "legacy": 8,
+        "ds": 8,
+        "native_greedy": null,
+        "native_fixed": 8
+      }
+    },
+    {
+      "stage": "held_out",
+      "repeat": 0,
+      "prompt_id": "test-zh",
+      "variants": {
+        "fixed0": {
+          "total_ms": 339.96062504593283,
+          "ttft_ms": 64.99966699630022,
+          "ids": [
+            105464,
+            101888,
+            334,
+            24562,
+            103630,
+            99982,
+            24360,
+            334,
+            9909,
+            11849,
+            47430,
+            7552,
+            18493,
+            334,
+            43959,
+            28330,
+            104949,
+            334,
+            9909,
+            29524,
+            102064,
+            104949,
+            7552,
+            15946
+          ],
+          "text": "这是一个关于**前缀缓存**（prefix caching）在**生成式模型**（如语言模型）中",
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2929180176,
+          "prompt_tokens": 33
+        },
+        "fixed1": {
+          "total_ms": 259.63424996007234,
+          "ttft_ms": 65.6958749750629,
+          "ids": [
+            105464,
+            101888,
+            334,
+            24562,
+            103630,
+            99982,
+            24360,
+            334,
+            9909,
+            11849,
+            47430,
+            7552,
+            18493,
+            334,
+            43959,
+            28330,
+            104949,
+            334,
+            9909,
+            29524,
+            102064,
+            104949,
+            7552,
+            15946
+          ],
+          "text": "这是一个关于**前缀缓存**（prefix caching）在**生成式模型**（如语言模型）中",
+          "rounds": [
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2929180176,
+          "prompt_tokens": 33
+        },
+        "fixed2": {
+          "total_ms": 255.95899997279048,
+          "ttft_ms": 69.03170805890113,
+          "ids": [
+            105464,
+            101888,
+            334,
+            24562,
+            103630,
+            99982,
+            24360,
+            334,
+            9909,
+            11849,
+            47430,
+            7552,
+            18493,
+            334,
+            43959,
+            28330,
+            104949,
+            334,
+            9909,
+            29524,
+            102064,
+            104949,
+            7552,
+            15946
+          ],
+          "text": "这是一个关于**前缀缓存**（prefix caching）在**生成式模型**（如语言模型）中",
+          "rounds": [
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2929180096,
+          "prompt_tokens": 33
+        },
+        "fixed4": {
+          "total_ms": 285.32625001389533,
+          "ttft_ms": 81.42095897346735,
+          "ids": [
+            105464,
+            101888,
+            334,
+            24562,
+            103630,
+            99982,
+            24360,
+            334,
+            9909,
+            11849,
+            47430,
+            7552,
+            18493,
+            334,
+            43959,
+            28330,
+            104949,
+            334,
+            9909,
+            29524,
+            102064,
+            104949,
+            7552,
+            15946
+          ],
+          "text": "这是一个关于**前缀缓存**（prefix caching）在**生成式模型**（如语言模型）中",
+          "rounds": [
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            }
+          ],
+          "policy": null,
+          "peak_memory_bytes": 2929180096,
+          "prompt_tokens": 33
+        },
+        "legacy": {
+          "total_ms": 272.0642080530524,
+          "ttft_ms": 76.32495800498873,
+          "ids": [
+            105464,
+            101888,
+            334,
+            24562,
+            103630,
+            99982,
+            24360,
+            334,
+            9909,
+            11849,
+            47430,
+            7552,
+            18493,
+            334,
+            43959,
+            28330,
+            104949,
+            334,
+            9909,
+            29524,
+            102064,
+            104949,
+            7552,
+            15946
+          ],
+          "text": "这是一个关于**前缀缓存**（prefix caching）在**生成式模型**（如语言模型）中",
+          "rounds": [
+            {
+              "budget": 3,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            }
+          ],
+          "policy": {
+            "cycle_ms_per_token": {
+              "0": 12.148709036409855,
+              "1": 14.886416029185057,
+              "2": 13.995811983477324,
+              "3": 8.242347316506008,
+              "4": 22.329395753331482
+            },
+            "acceptance_by_position": {
+              "0": 0.6571428571428571,
+              "1": 0.4375,
+              "2": 0.2857142857142857,
+              "3": 0.0
+            }
+          },
+          "peak_memory_bytes": 2929180096,
+          "prompt_tokens": 33
+        },
+        "ds": {
+          "total_ms": 260.78433298971504,
+          "ttft_ms": 70.16879203729331,
+          "ids": [
+            105464,
+            101888,
+            334,
+            24562,
+            103630,
+            99982,
+            24360,
+            334,
+            9909,
+            11849,
+            47430,
+            7552,
+            18493,
+            334,
+            43959,
+            28330,
+            104949,
+            334,
+            9909,
+            29524,
+            102064,
+            104949,
+            7552,
+            15946
+          ],
+          "text": "这是一个关于**前缀缓存**（prefix caching）在**生成式模型**（如语言模型）中",
+          "rounds": [
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            }
+          ],
+          "policy": {
+            "cycle_ms_per_token": {
+              "0": 12.093020952306688,
+              "1": 7.648281229194254,
+              "2": 6.359000030594568,
+              "3": 10.231079921747249,
+              "4": 19.62476400270437
+            },
+            "acceptance_by_position": {
+              "0": 0.6470588235294118,
+              "1": 0.4666666666666667,
+              "2": 0.0,
+              "3": 0.0
+            },
+            "implementation": "DeepInfer MTPVarlen-derived scheduler with empirical acceptance",
+            "source_commit": "774ce244b87cc0eb8d4b94ab9f5de2ab22049f01",
+            "startup_curve_scope": "complete draft+verify+host cycle; sampler residual counted once",
+            "cycle_ms_by_graph": {
+              "1": 12.136603996623307,
+              "2": 15.185334021225572,
+              "3": 19.074208103120327,
+              "4": 24.634000030346215,
+              "5": 29.640686989296228
+            },
+            "decisions": 36,
+            "refresh_steps": 64,
+            "confidence_head": false,
+            "catchup_cycle_ms": [
+              15.503333997912705
+            ]
+          },
+          "peak_memory_bytes": 2929180096,
+          "prompt_tokens": 33
+        },
+        "native_greedy": {
+          "total_ms": 313.4603330399841,
+          "ttft_ms": 66.1060829879716,
+          "ids": [
+            105464,
+            101888,
+            334,
+            24562,
+            103630,
+            99982,
+            24360,
+            334,
+            9909,
+            11849,
+            47430,
+            7552,
+            18493,
+            334,
+            43959,
+            28330,
+            104949,
+            334,
+            9909,
+            29524,
+            102064,
+            104949,
+            7552,
+            15946
+          ],
+          "text": "这是一个关于**前缀缓存**（prefix caching）在**生成式模型**（如语言模型）中",
+          "rounds": [],
+          "policy": null,
+          "peak_memory_bytes": 2929180096,
+          "prompt_tokens": 33
+        },
+        "native_fixed": {
+          "total_ms": 265.50212502479553,
+          "ttft_ms": 69.23020898830146,
+          "ids": [
+            105464,
+            101888,
+            334,
+            24562,
+            103630,
+            99982,
+            24360,
+            334,
+            9909,
+            11849,
+            47430,
+            7552,
+            18493,
+            334,
+            43959,
+            28330,
+            104949,
+            334,
+            9909,
+            29524,
+            102064,
+            104949,
+            7552,
+            15946
+          ],
+          "text": "这是一个关于**前缀缓存**（prefix caching）在**生成式模型**（如语言模型）中",
+          "rounds": [],
+          "policy": null,
+          "peak_memory_bytes": 2928344512,
+          "prompt_tokens": 33
+        }
+      },
+      "equal_to_greedy": {
+        "fixed0": true,
+        "fixed1": true,
+        "fixed2": true,
+        "fixed4": true,
+        "legacy": true,
+        "ds": true,
+        "native_greedy": true,
+        "native_fixed": true
+      },
+      "first_divergence": {
+        "fixed0": null,
+        "fixed1": null,
+        "fixed2": null,
+        "fixed4": null,
+        "legacy": null,
+        "ds": null,
+        "native_greedy": null,
+        "native_fixed": null
+      }
+    }
+  ],
+  "locked_native_fixed_budget": 1,
+  "summary": {
+    "task_groups": 1,
+    "all_outputs_retained": true,
+    "native_over_ds": {
+      "eligible_prompts": 1,
+      "ratio": 1.2019906619633725,
+      "interval": null,
+      "cluster": "prompt; paired exact-token matches only",
+      "interval_note": "one prompt; insufficient independent clusters"
+    },
+    "tuned_native_over_ds": {
+      "eligible_prompts": 1,
+      "ratio": 1.0180907801515306,
+      "interval": null,
+      "cluster": "prompt; paired exact-token matches only",
+      "interval_note": "one prompt; insufficient independent clusters"
+    },
+    "legacy_over_ds": {
+      "eligible_prompts": 1,
+      "ratio": 1.0432536530627483,
+      "interval": null,
+      "cluster": "prompt; paired exact-token matches only",
+      "interval_note": "one prompt; insufficient independent clusters"
+    },
+    "equal_counts": {
+      "fixed0": 1,
+      "fixed1": 1,
+      "fixed2": 1,
+      "fixed4": 1,
+      "legacy": 1,
+      "ds": 1,
+      "native_greedy": 1,
+      "native_fixed": 1
+    },
+    "equivalent_speedup_claim_supported": false,
+    "competitive_advantage_claim_supported": false,
+    "performance_validity": "correctness smoke during model download I/O; no performance claim"
+  }
+}

@@ -1,0 +1,113 @@
+# DS设计与Mac实现对应
+
+本轮目标为生产执行路径中的明确DS机制和同质量竞争优势。下列代码已实现，不代表性能目标已达到；主展示Qwen3.5-9B为混合状态，不能直接使用可trim Qwen3的草稿回退。4B是控制模型，14B为后续控制候选，其结果不能替代9B证据。
+
+## 固定来源与归属
+
+依据[DeepInfer MTPVarlen原始源码](https://github.com/deepseek-ai/DeepInfer/blob/774ce244b87cc0eb8d4b94ab9f5de2ab22049f01/csrc/engine/mtp_varlen.hpp)，commit `774ce244b87cc0eb8d4b94ab9f5de2ab22049f01`。未修改头保存于 `tests/reference/vendor/mtp_varlen.hpp`，git blob `09af680aa42b724fe86315007a160d5012a1fde9`，SHA256 `164f45db4cccd6d6909dd2846e7dfffb57754b108af679443bf4bd71ec33785a`。Apache-2.0归属见NOTICE和upstream.lock.json。
+
+| 分类 | DS具体方法 | Mac执行对应 | 保留不变量与差异 | 证据 |
+|---|---|---|---|---|
+| 依据DS设计重新实现 | SamplerRuntimeEstimator，20–42行：9样本滑动中位数、5样本门槛 | `ds/mtp_varlen.py:SamplerRuntimeEstimator` | 窗口和门槛完全对应；Python deque替代C++环数组 | C++ oracle逐次对照含奇偶中位数、窗口覆盖 |
+| 依据DS设计重新实现 | ForwardRuntimeEstimator，48–131行：5000样本全局FIFO，按graph残差中位数，再对达10样本的graph中位数等权聚合 | 同模块ForwardRuntimeEstimator | duplicate淘汰、每graph等权、启动0保持；Python列表重算代替平衡multiset，开销独立测 | 5110次oracle输入，含负残差、重复值、不同graph、淘汰 |
+| 依据DS设计重新实现 | MTPVarlen，133–275行：expected yield / (启动曲线+残差斜率×graph+sampler)最大化 | 同模块MTPVarlen.schedule / update_runtime | float32累计、lower_bound graph、负斜率截0、严格大于更新、rate相同时seq index优先均保留 | 250组固定种子随机C++ oracle，batch1/2/4、空曲线、无草稿、不同长度 |
+| 依据DS设计重新实现 | 两代接受率隔离，N−2选total_q、N−1分配每请求seqlen_q；schedule/process差0或1 | MTPState及schedule两排序队列 | paired时total用prev，不配对时用accept；分配始终accept。不读取本轮尚未验证的token来决定本轮预算 | oracle及明确反例测试；每个DS选择可保存curve/state/budget用于回放 |
+| 源码复用 | 上述原始C++头 | tests/reference/mtp_oracle.cpp + shim/sequence.hpp | 头字节未改；shim只替代Sequence/TORCH_CHECK宿主边界，不实现调度。生产不链接C++ | pytest编译C++17并通过stdin协议调用原实现，无GPU/下载依赖 |
+| 平台适配 | 为核心机制提供启动性能曲线/接受率/运行反馈 | `policy.DSAdaptivePolicy` | 无Confidence Head，使用仅已完成周期的接受生存频率加Beta(1,1)平滑。两代历史仍隔离；设备执行前choose，输出/rewind后observe推进process | Metal确定性模型检查state计数配对、accept/reject/EOS式close、diagnostics开关 |
+| 平台适配 | DS曲线假设MTP前向成本；Mac独立draft有额外成本 | DSAdaptivePolicy初始逐预算实测2次；curve为完整draft+verify+host wall成本 | 不是原DS启动校准器。每个graph第一次校准后固定，只有扩展短请求曲线才重建并清空旧残差。sampler项传0避免host成本重复相加；正残差修正仍用原算法。catch-up额外重放周期不进入稳态curve，单独保留，不从端到端耗时中扣除 | 同循环fixed/legacy/DS消融与完整周期记录；性能结论待真实报告 |
+| 独立基础优化 | MLX-LM 0.32.2 generate.py的device-array / async_eval草稿生成 | speculative.py defer_draft_sync | MLX来源，不计DS贡献；combined interval不能拆成伪GPU draft/verify时间；旧同步路径保留测试 | 历史phase2-draft-sync报告、双路径Metal控制 |
+| 独立基础优化 | 原生MLX-LM LRUPromptCache的trie/trim | cache.NativePromptCacheStore，engine默认native，exact保留历史消融 | 可trim取公共前缀；hybrid仅精确snapshot+suffix replay。不能宣传成DS缓存移植 | test_native_cache，原生cache对照单列 |
+
+## 生产入口与边界
+
+```sh
+.venv/bin/deepinfer-mac run --profile qwen3-4b --mode adaptive --adaptive-scheduler ds --no-cache --max-tokens 128 --json '解释统一内存并给出一个实际例子。'
+.venv/bin/python -m pytest -q tests/test_ds_scheduler.py
+.venv/bin/python -m pytest -q --run-metal -m metal tests/test_speculative_metal.py
+```
+
+等价Python入口为 `InferenceEngine(adaptive_scheduler="ds", round_diagnostics=True)` 和普通 `GenerationRequest(mode="adaptive", ...)`。legacy开关使用同一deferred执行循环、完整周期观测，避免把同步修复算作DS调度贡献。legacy目标-only bucket在60秒后重新校准；DS每64个周期重探到期budget，无永久禁用。
+
+完整周期以主机wall time记录，包含choose、host转换、验证、同步消费者detokenize/emit、draft状态更新和rewind；combined draft+verify只测整体，非分离GPU kernel计时。generator.close/EOS式中断在finally中结算已输出token，不把未输出的预测token当完成工作。诊断关闭仍保留轻量budget/accepted/produced/fallback计数，关闭state/curve回放与逐轮时间字段；正式性能和profiling必须分开。
+
+名称明确为 **DeepInfer MTPVarlen-derived scheduler with empirical acceptance**。没有官方Confidence Head、完整DSpark、连续批处理、多请求GPU批执行；Python核心支持N>1的离线预算验证，当前生产仅N=1。启动探索、经验接受率、独立draft成本属于Mac适配，不能声称与DS完整原生系统相同。
+
+## 性能验收约定
+
+`benchmarks/experiments/ds_budget_ablation.py`固定开发/保留题，使用相同模型revision、草稿、prefill形状、greedy、输出上限、缓存状态和执行循环比较fixed0/1/2/4、legacy、DS；再附native greedy/fixed对照。先用实际native0/1/2/4开发集锁定native fixed预算，保留集不得反向选参数。输出不一致全部保留，不纳入精确等价速度结论；另保留全量任务输出与首次分歧，禁止删失败样本。重复测量按prompt聚类bootstrap，不能把一次prompt的多轮重复当独立题。
+
+当前没有该机制优于两个主要框架的证据。原生持平、相对旧循环改善、模型选择质量提升均不满足竞争优势标准。最终9B需另有真实DS对应执行路径和同模型消融；此文档不提前宣称9B已加速。
+
+## 本阶段实际验证（2026-10-21）
+
+- Portable验证命令：`.venv/bin/python -m pytest -q`。C++ oracle在普通CPU测试中编译/执行，无GPU或下载依赖。
+- 实际Metal控制命令：`.venv/bin/python -m pytest -q --run-metal -m metal tests/test_speculative_metal.py`。设备初始化需要允许Metal访问的运行环境；portable通过不能代替Metal证据。
+- `benchmarks/reports/phase2-ds-engine-smoke-qwen3-4b.json`：短请求只做6轮探索；长请求96输出tokens、42周期、31次MTPVarlen curve/state/budget实际决策，附完整回放输入。不是只实例化scheduler。
+- `benchmarks/reports/phase2-ds-budget-smoke-qwen3-4b.json`：同loop和native控制，保留warmup/development中真实token分歧及首个位置；单heldout中文题全部相同。运行与下载I/O重叠且只有单heldout题，因此不支持性能或竞争优势结论，单cluster interval已设null。
+- 旧4B分歧的same-history single/batch logits定位仍待继续。9B已完成下述真实hybrid执行控制；正式开发集调优/保留集统计与两个主要框架的竞争优势尚未完成。
+
+## 主展示9B混合状态适配（首轮硬件正确性通过，正式性能待验收）
+
+新增 `hybrid_speculative.py`，由同一MTPVarlen经验接受率policy决定每轮草稿预算。恢复机制属于**平台适配**：DS原预算算法没有提供当前MLX Qwen3.5 recurrent状态的精确回退实现，不能把此恢复算法宣传成DS源码复用。使用锁定MLX-LM 0.32.2的 `ArraysCache.state`（recurrent tensors/left_padding/lengths）和 `KVCache.state`（keys/values/offset）契约，验证前快照、恢复时给原对象state赋值，保留engine combined-cache列表中对象identity。未调用混合state.trim，也未假设任意删除最后n个token可逆。
+
+状态流：
+
+1. 零预算仅target消费当前gold token；draft网络不执行，已消费输入累积为pending。
+2. 正预算快照target/draft容器；首个draft forward合并pending与当前gold，之后顺序提出k个token；target批验证gold+drafts。
+3. 全接受且输出完整k+1时保留target已消费状态，draft最后一个accepted输入作为下一轮pending，与下一次首forward合并，不额外执行一个draft网络步骤。
+4. 拒绝、输出预算截断或EOS式close时，恢复快照并重放 **gold + 已实际yield的outputs[:-1]**；最后一个输出保留未消费。draft恢复另补原pending。精确满足prefix时保留已有draft状态。
+5. 首yield前网络失败恢复可用快照并abort尚未完成的policy周期；不会发明acceptance反馈。当前请求失败后由engine丢弃局部cache。
+
+每轮真实成本必须覆盖snapshot、draft、target验证、必要的target/draft重放、host输出与恢复。仅从操作计数可知：低接受率时常需额外target replay，可能比普通解码更慢；这只是成本方向分析，不是性能测量。DS startup curve用完整周期实测，不能扣掉恢复或只报告验证forward速度。`budget0`可回退并定期再探索。
+
+候选小草稿已完成只读官方metadata与完整tokenizer核验：
+
+| 草稿 | revision | 核验结果 |
+|---|---|---|
+| mlx-community/Qwen3.5-0.8B-4bit | da28692b5f139cb0ec58a356b437486b7dac7462 | 输出词表248320；与9B8bit整个tokenizer.json完全一致，SHA256 87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4 |
+| mlx-community/Qwen3.5-2B-4bit | 674aaa7240b91e8012fcad5d791b7dfe5ba90207 | 同上；没有为本实验下载其权重 |
+
+证据在 `artifacts/phase2-model-audit/hybrid-draft/compatibility.json` 与对应官方API/config快照。完整词表、added_tokens、tokenizer_config、EOS/BOS全部比对。独立chat_template.jinja文件有差异：9B默认thinking，0.8B默认non-thinking；两者显式enable_thinking=True/False渲染tokens均相同。引擎使用target tokens同时送入draft，禁止二次模板。2B尚未审计独立jinja，不把tokenizer_config相同外推全部模板相同。通过这些静态检查不代表真实模型输出一致或取得速度收益。0.8B权重下载/manifest由统一模型审计维护，不在适配器里隐式下载。
+
+实验生产入口为 `InferenceEngine(adaptive_scheduler="ds", experimental_hybrid_speculation=True)`；要求profile明确有experimental_speculation元数据与真实锁定draft。公开API/UI默认仍只允许已经验证的supported_modes，不绕过为可用功能。已实际执行的硬件正确性控制可用下列命令重现（正式性能仍需独占硬件和冻结source）：
+
+```sh
+.venv/bin/python -m pytest -q tests/test_hybrid_speculative.py
+.venv/bin/python -m pytest -q --run-metal -m metal tests/test_speculative_metal.py -k hybrid
+.venv/bin/python benchmarks/experiments/hybrid_ds_probe.py --profile qwen3.5-9b-8bit --max-tokens 96
+```
+
+首次分歧诊断是独立profiling pass：固定k=2，找到首个与普通greedy不同的实际输出，保留验证前snapshot、原始batch logits及输入；在完全相同snapshot上逐token执行相同历史，记录top-2/token ID/margin、最大logit误差、KV offsets。若相同prestate的单步与批argmax也不同，才有该步形状效应证据；若两者相同而baseline不同，则继续隔离更早的state轨迹，不能直接归咎浮点。诊断开销不混入正式性能样本。
+
+当前portable hybrid状态用例覆盖真实已消费历史、状态依赖输出、拒绝/中途close、零预算不调draft、pending追赶、网络异常、cache对象identity与分支隔离；全部通过。6项真实ArraysCache/KVCache tinyMetal控制已实际通过。9B8bit+0.8B4bit生产probe也已完成：baseline/fixed1/fixed2/DS各96输出tokens逐token相同，DS35周期中24次实际MTPVarlen选择；独立固定k=2诊断pass也未发现输出分歧，故logit分歧字段为null，不能捏造数值归因。报告为 `benchmarks/reports/phase2-hybrid-ds-qwen35-9b8-probe.json`。本轮单prompt、不同编译热身，只有机制/正确性证据，没有竞争速度结论。raw DS2473ms、固定k2 2363ms，尚未证明DS优于最佳fixed；baseline首请求4554ms含编译影响，禁止相除宣称收益。
+
+主9B正式消融使用同一 `ds_budget_ablation.py --profile qwen3.5-9b-8bit`，会自动选择hybrid adapter。原生MLX-LM 0.32.2的speculative_generate_step显式拒绝非trimmable target cache，因此hybrid不运行native fixed、不伪造其耗时零分；原生greedy保留target-only预填充能力。同循环fixed0/1/2/4开发集上只从逐token与greedy相同的候选中选tunedfixed；这是自家消融控制，不算第二个竞争框架。正式运行尚未执行，最终需冻结模型、source与空闲I/O，并交第二完整服务引擎对照。
+
+## 显式实验成本适配：N−2 lagged_mean
+
+原始DS/MTPVarlen核心及默认`hybrid_cost_adapter="original"`均保留。新增 `ds/recovery_cost.py:LaggedMeanRecoveryPolicy` 是**Mac平台适配**，不是官方DS的启动校准实现。入口为 `InferenceEngine(adaptive_scheduler="ds", experimental_hybrid_speculation=True, hybrid_cost_adapter="lagged_mean")`，仅接受明确hybrid_cache元数据。
+
+实际9B开发probe的恢复耗时是混合分布：固定k2的41个周期中27次全接受，中位fullcycle43.78ms但算术均值55.54ms；原DS adapter k4的25周期中10次全接受、15次拒绝，中位fullcycle85.52ms但均值72.86ms。首轮仅2样本曲线和中位数不能可靠表达这种随机恢复成本。不同模式的状态/顺序/编译不同，以上只描述旧测量，不能作竞争加速结论。
+
+最小适配直接为原DS吞吐目标提供E[cost]估计：每预算至少5个已完成完整周期，使用最近9个完整周期的算术均值。**不从真实端到端耗时中扣除snapshot、draft、验证、replay、catch-up或host工作。** 输出预算截断/EOS式中途中止的实际成本仍保留在报告，只不作为完整稳态周期的校准样本。缺少样本时明确unknown并继续探索，不插值、不编造性能点。阈值5/window9是预先固定的实验参数，尚未通过保留集证明最优。
+
+整个最新N−1 observation（包含与acceptance相关的runtime）延后一轮发布；当前N轮曲线与yield均只能使用N−2或更早信息。测试专门令N−1的acceptance和cost同时极端改变，验证当前预算与曲线不变。原core仍按N−2算total、N−1分配。每个estimated curve点记录真实cycle索引、原始完整耗时和stage分项，严格区分estimated与measured。
+
+此适配直接观测完整cost曲线，所以**不向ForwardRuntimeEstimator提交残差**、不额外叠加旧baseline的slope、也不在更新曲线时清空历史掩盖漂移。core的residual/sampler输入明确为0；测量漂移已在滚动完整成本样本里。全部样本历史与反馈年龄可回放，原始C++ oracle继续核对每次最终budget。此模式不声称保留官方启动曲线+残差拟合的整套运行策略，只保留其expected-yield/cost预算算法。
+
+```sh
+.venv/bin/python -m pytest -q tests/test_recovery_cost_policy.py tests/test_ds_scheduler.py tests/test_hybrid_speculative.py
+.venv/bin/python benchmarks/experiments/recovery_cost_replay.py
+```
+
+CPU分析产物：`benchmarks/reports/phase2-hybrid-recovery-cost-analysis.json`。35个旧实际DS周期对graphs1–4都不足5个可用样本，故没有完整新curve、没有新的core估计选择，也没有速度预测。报告中的hypothetical exploration不是实际执行请求，不能据此计算任何counterfactual耗时或收益。未运行新adapter的GPU性能/保留集；原报告字节未改。
+
+### 中途关闭的反馈修复（RECOVERY-P2-001）
+
+独立审查发现：旧观察器虽在lagged_mean排除了partial的cost，却仍把未输出的draft位置计为拒绝。这会污染跨请求的接受率；N−2滞后并不能修复错误样本。本次同时修复lagged_mean、原DS adapter和legacy中的同类风险，**只更改不完整周期反馈**，完整周期的统计/选择方法保持原样，原MTPVarlen核心与历史报告不修改。
+
+实际observer收到的是已yield的accepted/produced计数。完整greedy验证周期必须在accepted输出之后再输出一个target/golden token，因此 `produced > accepted` 才是完整周期。EOS、max_tokens或消费者异常在accepted块内关闭时，后续draft位置是未知，不能当拒绝；整个partial周期同时退出shared cost与yield统计，实际wall time和已输出计数保留在原round记录及policy.partial_cycles诊断中。
+
+DS的schedule/process轮次仍正常推进，prev_accept_rates移为先前accept_rates，当前accept_rates保持原估计，不制造新拒绝；lagged_mean保持整个observation一轮滞后，partial标记不进入后续cost曲线。之前已完成周期仍按年龄正常发布，不能为隐藏partial而重置历史。
+
+portable回归通过真实hybrid与trimmable生成器分别验证：legacy/DS/lagged三策略在首次k4输出一个accepted token后close或消费者抛错，shared cost/positions完全不变；下次仍探索缺证据的k4，后续完整周期只贡献一次真实接受信息，N−2状态正确。原始C++ oracle回放同时插入partial周期验证预算规则。证据与源码hash见 `docs/evidence/phase2-recovery-partial-feedback-fix.json`。此修复没有新增GPU性能证据。

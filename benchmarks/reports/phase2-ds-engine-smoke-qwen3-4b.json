@@ -1,0 +1,2533 @@
+{
+  "scope": "Actual production CLI/engine DS path correctness smoke only; download I/O overlapped; no performance claim",
+  "command": ".venv/bin/deepinfer-mac run --profile qwen3-4b --mode adaptive --adaptive-scheduler ds --no-cache --max-tokens 32 --json 'What is 2+2? Give one sentence.'",
+  "result": {
+    "run_id": "e7083720344346d8a7a13f97c2c1510f",
+    "mode": "adaptive",
+    "profile": "qwen3-4b",
+    "text": "2 + 2 equals 4.",
+    "token_ids": [
+      17,
+      488,
+      220,
+      17,
+      16819,
+      220,
+      19,
+      13,
+      151645
+    ],
+    "prompt_tokens": 23,
+    "finish_reason": "stop",
+    "metrics": {
+      "load_ms": 1145.4420000081882,
+      "ttft_ms": 1251.5190000412986,
+      "total_ms": 1329.0140830213204,
+      "prefill_ms": 92.94024994596839,
+      "prompt_tps": 236.71122051845018,
+      "decode_tps": 103.23235607170578,
+      "prompt_tokens": 23,
+      "generation_tokens": 9,
+      "peak_memory_gb": 2.847620472,
+      "peak_memory_bytes": 2847620472,
+      "active_memory_bytes": 2667183204,
+      "rss_bytes": 2989408256,
+      "swap_before_bytes": 5481299968,
+      "swap_after_bytes": 5481299968,
+      "swap_delta_bytes": 0,
+      "swap_measurement_available": true,
+      "estimated_active_kv_bytes": 148635648,
+      "cache_hit_tokens": 0,
+      "cache_bytes": 0,
+      "active_kv_bytes": 67108864,
+      "cache_evictions": 0,
+      "cache_backend": "native",
+      "cache_operations": {
+        "lookups": 0,
+        "hits": 0,
+        "writes": 0,
+        "rejected_writes": 0,
+        "lookup_ms": 0.0,
+        "clone_ms": 0.0,
+        "write_ms": 0.0,
+        "eviction_ms": 0.0
+      },
+      "draft_acceptance": 0.8,
+      "fallback_rate": 0.3333333333333333,
+      "cycles": 6,
+      "policy": {
+        "cycle_ms_per_token": {
+          "0": 12.264667020644993,
+          "1": 7.933354005217552,
+          "2": 9.480667009484023
+        },
+        "acceptance_by_position": {
+          "0": 0.75,
+          "1": 1.0
+        },
+        "implementation": "DeepInfer MTPVarlen-derived scheduler with empirical acceptance",
+        "source_commit": "774ce244b87cc0eb8d4b94ab9f5de2ab22049f01",
+        "startup_curve_scope": "complete draft+verify+host cycle; sampler residual counted once",
+        "cycle_ms_by_graph": {
+          "1": 12.389875017106533,
+          "2": 15.12145804008469,
+          "3": 19.04675003606826
+        },
+        "decisions": 6,
+        "refresh_steps": 64,
+        "confidence_head": false,
+        "catchup_cycle_ms": [
+          15.954958042129874
+        ]
+      },
+      "draft_accepted_tokens": 4,
+      "calibrated_fallback": false,
+      "adaptive_scheduler": "ds",
+      "round_diagnostics": true
+    },
+    "rounds": [
+      {
+        "budget": 0,
+        "accepted": 0,
+        "produced": 1,
+        "draft_ms": 0.0,
+        "verify_ms": 12.595375068485737,
+        "fallback": true,
+        "scheduler_ms": 0.06566604133695364,
+        "catchup_tokens": 0,
+        "timing_scope": "combined_draft_verify",
+        "cycle_ms": 12.779999990016222,
+        "cycle_scope": "host wall including scheduler, output consumer and rewind"
+      },
+      {
+        "budget": 0,
+        "accepted": 0,
+        "produced": 1,
+        "draft_ms": 0.0,
+        "verify_ms": 11.933958972804248,
+        "fallback": true,
+        "scheduler_ms": 0.026999972760677338,
+        "catchup_tokens": 0,
+        "timing_scope": "combined_draft_verify",
+        "cycle_ms": 11.999750044196844,
+        "cycle_scope": "host wall including scheduler, output consumer and rewind"
+      },
+      {
+        "budget": 1,
+        "accepted": 1,
+        "produced": 2,
+        "draft_ms": 0.0,
+        "verify_ms": 15.866708010435104,
+        "fallback": false,
+        "scheduler_ms": 0.02337503246963024,
+        "catchup_tokens": 1,
+        "timing_scope": "combined_draft_verify",
+        "cycle_ms": 15.954958042129874,
+        "cycle_scope": "host wall including scheduler, output consumer and rewind"
+      },
+      {
+        "budget": 1,
+        "accepted": 0,
+        "produced": 1,
+        "draft_ms": 0.0,
+        "verify_ms": 15.156875015236437,
+        "fallback": false,
+        "scheduler_ms": 0.027291011065244675,
+        "catchup_tokens": 0,
+        "timing_scope": "combined_draft_verify",
+        "cycle_ms": 15.247500035911798,
+        "cycle_scope": "host wall including scheduler, output consumer and rewind"
+      },
+      {
+        "budget": 1,
+        "accepted": 1,
+        "produced": 2,
+        "draft_ms": 0.0,
+        "verify_ms": 14.895917032845318,
+        "fallback": false,
+        "scheduler_ms": 0.030375085771083832,
+        "catchup_tokens": 0,
+        "timing_scope": "combined_draft_verify",
+        "cycle_ms": 14.995416044257581,
+        "cycle_scope": "host wall including scheduler, output consumer and rewind"
+      },
+      {
+        "budget": 2,
+        "accepted": 2,
+        "produced": 2,
+        "draft_ms": 0.0,
+        "verify_ms": 18.961334018968046,
+        "fallback": false,
+        "scheduler_ms": 0.03075005952268839,
+        "catchup_tokens": 0,
+        "timing_scope": "combined_draft_verify",
+        "cycle_ms": 19.04675003606826,
+        "cycle_scope": "host wall including scheduler, output consumer and rewind"
+      }
+    ],
+    "model": {
+      "target": {
+        "repo": "mlx-community/Qwen3-4B-4bit",
+        "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+      },
+      "draft": {
+        "repo": "mlx-community/Qwen3-0.6B-4bit",
+        "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+      },
+      "minimum_memory_bytes": 4831838208,
+      "weight_bytes": 2263022529
+    }
+  },
+  "long_request": {
+    "command": ".venv/bin/deepinfer-mac run --profile qwen3-4b --mode adaptive --adaptive-scheduler ds --no-cache --max-tokens 96 --json 'Write Python dedupe(items) preserving insertion order, then explain its time and space complexity with examples.'",
+    "result": {
+      "run_id": "3694554cead04b4a976fbd90a8d438ab",
+      "mode": "adaptive",
+      "profile": "qwen3-4b",
+      "text": "Sure! Here's a Python function `dedupe(items)` that removes duplicate elements **while preserving the insertion order** of the remaining elements. Then I'll explain its **time and space complexity** with examples.\n\n---\n\n## ✅ Python Function: `dedupe(items)`\n\n```python\ndef dedupe(items):\n    seen = set()\n    result = []\n    for item in items:\n        if item not in seen:\n            seen.add(item)\n            result.append(item)\n   ",
+      "token_ids": [
+        39814,
+        0,
+        5692,
+        594,
+        264,
+        13027,
+        729,
+        1565,
+        9789,
+        85477,
+        24337,
+        46186,
+        429,
+        28160,
+        22513,
+        5424,
+        3070,
+        3472,
+        46895,
+        279,
+        35927,
+        1973,
+        334,
+        315,
+        279,
+        9664,
+        5424,
+        13,
+        5005,
+        358,
+        3278,
+        10339,
+        1181,
+        3070,
+        1678,
+        323,
+        3550,
+        23094,
+        334,
+        448,
+        10295,
+        382,
+        44364,
+        565,
+        25521,
+        227,
+        13027,
+        5712,
+        25,
+        1565,
+        9789,
+        85477,
+        24337,
+        8,
+        19324,
+        73594,
+        12669,
+        198,
+        750,
+        7681,
+        85477,
+        24337,
+        982,
+        262,
+        3884,
+        284,
+        738,
+        741,
+        262,
+        1102,
+        284,
+        4167,
+        262,
+        369,
+        1509,
+        304,
+        3589,
+        510,
+        286,
+        421,
+        1509,
+        537,
+        304,
+        3884,
+        510,
+        310,
+        3884,
+        1364,
+        5393,
+        340,
+        310,
+        1102,
+        2057,
+        5393,
+        340,
+        262
+      ],
+      "prompt_tokens": 32,
+      "finish_reason": "length",
+      "metrics": {
+        "load_ms": 1034.7270000493154,
+        "ttft_ms": 1124.6771659934893,
+        "total_ms": 1927.9849160229787,
+        "prefill_ms": 77.27329095359892,
+        "prompt_tps": 401.17354415013705,
+        "decode_tps": 118.26102760307312,
+        "prompt_tokens": 32,
+        "generation_tokens": 96,
+        "peak_memory_gb": 2.921463196,
+        "peak_memory_bytes": 2921463196,
+        "active_memory_bytes": 2667183240,
+        "rss_bytes": 2986246144,
+        "swap_before_bytes": 5481299968,
+        "swap_after_bytes": 5481299968,
+        "swap_delta_bytes": 0,
+        "swap_measurement_available": true,
+        "estimated_active_kv_bytes": 167772160,
+        "cache_hit_tokens": 0,
+        "cache_bytes": 0,
+        "active_kv_bytes": 67108864,
+        "cache_evictions": 0,
+        "cache_backend": "native",
+        "cache_operations": {
+          "lookups": 0,
+          "hits": 0,
+          "writes": 0,
+          "rejected_writes": 0,
+          "lookup_ms": 0.0,
+          "clone_ms": 0.0,
+          "write_ms": 0.0,
+          "eviction_ms": 0.0
+        },
+        "draft_acceptance": 0.6707317073170732,
+        "fallback_rate": 0.047619047619047616,
+        "cycles": 42,
+        "policy": {
+          "cycle_ms_per_token": {
+            "0": 11.983228963799775,
+            "1": 15.141833981033415,
+            "2": 6.453874986618757,
+            "3": 9.141577902482823,
+            "4": 22.26195822004229
+          },
+          "acceptance_by_position": {
+            "0": 0.75,
+            "1": 0.6666666666666666,
+            "2": 0.25,
+            "3": 0.0
+          },
+          "implementation": "DeepInfer MTPVarlen-derived scheduler with empirical acceptance",
+          "source_commit": "774ce244b87cc0eb8d4b94ab9f5de2ab22049f01",
+          "startup_curve_scope": "complete draft+verify+host cycle; sampler residual counted once",
+          "cycle_ms_by_graph": {
+            "1": 12.064312002621591,
+            "2": 15.103250043466687,
+            "3": 19.509041914716363,
+            "4": 24.39664606936276,
+            "5": 29.766812513116747
+          },
+          "decisions": 42,
+          "refresh_steps": 64,
+          "confidence_head": false,
+          "catchup_cycle_ms": [
+            16.838915995322168
+          ]
+        },
+        "draft_accepted_tokens": 55,
+        "calibrated_fallback": false,
+        "adaptive_scheduler": "ds",
+        "round_diagnostics": true
+      },
+      "rounds": [
+        {
+          "budget": 0,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 12.260207906365395,
+          "fallback": true,
+          "scheduler_ms": 0.030666007660329342,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 12.359583051875234,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 0,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 11.706250021234155,
+          "fallback": true,
+          "scheduler_ms": 0.02208305522799492,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 11.769040953367949,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 1,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 16.777166980318725,
+          "fallback": false,
+          "scheduler_ms": 0.014915945939719677,
+          "catchup_tokens": 1,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 16.838915995322168,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 1,
+          "accepted": 1,
+          "produced": 2,
+          "draft_ms": 0.0,
+          "verify_ms": 14.598041074350476,
+          "fallback": false,
+          "scheduler_ms": 0.021292013116180897,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 14.675959013402462,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 1,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 15.03045903518796,
+          "fallback": false,
+          "scheduler_ms": 0.023250002413988113,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 15.103250043466687,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 18.382958020083606,
+          "fallback": false,
+          "scheduler_ms": 0.026124995201826096,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 18.456250079907477,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 18.03254208061844,
+          "fallback": false,
+          "scheduler_ms": 0.020625069737434387,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 18.095834064297378,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 3,
+          "accepted": 3,
+          "produced": 4,
+          "draft_ms": 0.0,
+          "verify_ms": 24.12329101935029,
+          "fallback": false,
+          "scheduler_ms": 0.028416980057954788,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 24.206667090766132,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 3,
+          "accepted": 1,
+          "produced": 2,
+          "draft_ms": 0.0,
+          "verify_ms": 24.504666100256145,
+          "fallback": false,
+          "scheduler_ms": 0.020707957446575165,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 24.586625047959387,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 4,
+          "accepted": 1,
+          "produced": 2,
+          "draft_ms": 0.0,
+          "verify_ms": 29.7436669934541,
+          "fallback": false,
+          "scheduler_ms": 0.023250002413988113,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 29.813791043125093,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 4,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 29.652082943357527,
+          "fallback": false,
+          "scheduler_ms": 0.022333930246531963,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "cycle_ms": 29.7198339831084,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 18.44091690145433,
+          "fallback": false,
+          "scheduler_ms": 0.10849989484995604,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.45454545454545453,
+                0.25,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5,
+                0.2857142857142857,
+                0.4,
+                0.3333333333333333
+              ],
+              "has_draft_info": true,
+              "process_cnt": 11,
+              "schedule_cnt": 11
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 18.60824995674193,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.653249997645617,
+          "fallback": false,
+          "scheduler_ms": 0.07795903366059065,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.4166666666666667,
+                0.2222222222222222,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.45454545454545453,
+                0.25,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 12,
+              "schedule_cnt": 12
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.793084007687867,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.200040958821774,
+          "fallback": false,
+          "scheduler_ms": 0.07074989844113588,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.46153846153846156,
+                0.3,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.4166666666666667,
+                0.2222222222222222,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 13,
+              "schedule_cnt": 13
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.325707922689617,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 1,
+          "produced": 2,
+          "draft_ms": 0.0,
+          "verify_ms": 18.92658299766481,
+          "fallback": false,
+          "scheduler_ms": 0.06004201713949442,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5,
+                0.36363636363636365,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.46153846153846156,
+                0.3,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 14,
+              "schedule_cnt": 14
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.028209033422172,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 18.829125096090138,
+          "fallback": false,
+          "scheduler_ms": 0.048749963752925396,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5333333333333333,
+                0.3333333333333333,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5,
+                0.36363636363636365,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 15,
+              "schedule_cnt": 15
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 18.917915993370116,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 1,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 15.25320892687887,
+          "fallback": false,
+          "scheduler_ms": 0.04845799412578344,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5625,
+                0.38461538461538464,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5333333333333333,
+                0.3333333333333333,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 16,
+              "schedule_cnt": 16
+            },
+            "budget": 1,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 15.336249954998493,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 18.759500002488494,
+          "fallback": false,
+          "scheduler_ms": 0.05191704258322716,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5294117647058824,
+                0.38461538461538464,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5625,
+                0.38461538461538464,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 17,
+              "schedule_cnt": 17
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 18.85516697075218,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 19.23550001811236,
+          "fallback": false,
+          "scheduler_ms": 0.05216698627918959,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5555555555555556,
+                0.42857142857142855,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5294117647058824,
+                0.38461538461538464,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 18,
+              "schedule_cnt": 18
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.32679198216647,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 18.8838749891147,
+          "fallback": false,
+          "scheduler_ms": 0.05849997978657484,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5263157894736842,
+                0.4,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5555555555555556,
+                0.42857142857142855,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 19,
+              "schedule_cnt": 19
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 18.985332921147346,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.44900001399219,
+          "fallback": false,
+          "scheduler_ms": 0.05674990825355053,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.55,
+                0.4375,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5263157894736842,
+                0.4,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 20,
+              "schedule_cnt": 20
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.555624923668802,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 18.79612496122718,
+          "fallback": false,
+          "scheduler_ms": 0.05095801316201687,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5714285714285714,
+                0.47058823529411764,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.55,
+                0.4375,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 21,
+              "schedule_cnt": 21
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.0,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 18.90862500295043,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 19.92358302231878,
+          "fallback": false,
+          "scheduler_ms": 0.07270800415426493,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5909090909090909,
+                0.5,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5714285714285714,
+                0.47058823529411764,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 22,
+              "schedule_cnt": 22
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.2435760130174458,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 20.087416050955653,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 0,
+          "produced": 1,
+          "draft_ms": 0.0,
+          "verify_ms": 19.602749962359667,
+          "fallback": false,
+          "scheduler_ms": 0.08162506856024265,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5652173913043478,
+                0.47368421052631576,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5909090909090909,
+                0.5,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 23,
+              "schedule_cnt": 23
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.25072203172991675,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.741374999284744,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 20.289374981075525,
+          "fallback": false,
+          "scheduler_ms": 0.0723750563338399,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5416666666666666,
+                0.45,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5652173913043478,
+                0.47368421052631576,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 24,
+              "schedule_cnt": 24
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.3003051799411575,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 20.440416992641985,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 20.03537490963936,
+          "fallback": false,
+          "scheduler_ms": 0.0724999699741602,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.56,
+                0.47619047619047616,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5416666666666666,
+                0.45,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 25,
+              "schedule_cnt": 25
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.3498883281523983,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 20.17787506338209,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.530999939888716,
+          "fallback": false,
+          "scheduler_ms": 0.07691700011491776,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5769230769230769,
+                0.5,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.56,
+                0.47619047619047616,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 26,
+              "schedule_cnt": 26
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.3500690047318737,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.67008295468986,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.4783330662176,
+          "fallback": false,
+          "scheduler_ms": 0.06812496576458216,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.5925925925925926,
+                0.5217391304347826,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5769230769230769,
+                0.5,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 27,
+              "schedule_cnt": 27
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.3502496813113491,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.604790955781937,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.492791034281254,
+          "fallback": false,
+          "scheduler_ms": 0.06620807107537985,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.6071428571428571,
+                0.5416666666666666,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.5925925925925926,
+                0.5217391304347826,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 28,
+              "schedule_cnt": 28
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.3883885048950712,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.623707979917526,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.435791997238994,
+          "fallback": false,
+          "scheduler_ms": 0.07458298932760954,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.6206896551724138,
+                0.56,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.6071428571428571,
+                0.5416666666666666,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 29,
+              "schedule_cnt": 29
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.4265273284787933,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.5721669588238,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 1,
+          "produced": 2,
+          "draft_ms": 0.0,
+          "verify_ms": 19.432874978519976,
+          "fallback": false,
+          "scheduler_ms": 0.061707920394837856,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.6333333333333333,
+                0.5769230769230769,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.6206896551724138,
+                0.56,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 30,
+              "schedule_cnt": 30
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.4292843343379597,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.56054090987891,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.88133299164474,
+          "fallback": false,
+          "scheduler_ms": 0.06616697646677494,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.6451612903225806,
+                0.5555555555555556,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.6333333333333333,
+                0.5769230769230769,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 31,
+              "schedule_cnt": 31
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.42816599054882926,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 20.00766701530665,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.506499986164272,
+          "fallback": false,
+          "scheduler_ms": 0.07791700772941113,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.65625,
+                0.5714285714285714,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.6451612903225806,
+                0.5555555555555556,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 32,
+              "schedule_cnt": 32
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.4301036653729777,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.64991702698171,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 1,
+          "produced": 2,
+          "draft_ms": 0.0,
+          "verify_ms": 19.423792022280395,
+          "fallback": false,
+          "scheduler_ms": 0.07733306847512722,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.6666666666666666,
+                0.5862068965517241,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.65625,
+                0.5714285714285714,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 33,
+              "schedule_cnt": 33
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.4320413401971261,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.574917037971318,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 18.8595000654459,
+          "fallback": false,
+          "scheduler_ms": 0.0908339861780405,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.6764705882352942,
+                0.5666666666666667,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.6666666666666666,
+                0.5862068965517241,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 34,
+              "schedule_cnt": 34
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.43249968672171235,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.013333949260414,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 18.853625049814582,
+          "fallback": false,
+          "scheduler_ms": 0.07216690573841333,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.6857142857142857,
+                0.5806451612903226,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.6764705882352942,
+                0.5666666666666667,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 35,
+              "schedule_cnt": 35
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.4320413401971261,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 18.972708960063756,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 18.95120902918279,
+          "fallback": false,
+          "scheduler_ms": 0.06075005512684584,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.6944444444444444,
+                0.59375,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.6857142857142857,
+                0.5806451612903226,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 36,
+              "schedule_cnt": 36
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.4301036653729777,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.082333077676594,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.333750009536743,
+          "fallback": false,
+          "scheduler_ms": 0.07029192056506872,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.7027027027027027,
+                0.6060606060606061,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.6944444444444444,
+                0.59375,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 37,
+              "schedule_cnt": 37
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.42816599054882926,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.47329193353653,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.536166917532682,
+          "fallback": false,
+          "scheduler_ms": 0.06370898336172104,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.7105263157894737,
+                0.6176470588235294,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.7027027027027027,
+                0.6060606060606061,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 38,
+              "schedule_cnt": 38
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.4273466595138113,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.65620892588049,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.425125094130635,
+          "fallback": false,
+          "scheduler_ms": 0.06870797369629145,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.717948717948718,
+                0.6285714285714286,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.7105263157894737,
+                0.6176470588235294,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 39,
+              "schedule_cnt": 39
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.42816599054882926,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.561082939617336,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 3,
+          "draft_ms": 0.0,
+          "verify_ms": 19.36162495985627,
+          "fallback": false,
+          "scheduler_ms": 0.06983301136642694,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "accept_rates": [
+                0.725,
+                0.6388888888888888,
+                0.3333333333333333,
+                0.25
+              ],
+              "prev_accept_rates": [
+                0.717948717948718,
+                0.6285714285714286,
+                0.3333333333333333,
+                0.25
+              ],
+              "has_draft_info": true,
+              "process_cnt": 40,
+              "schedule_cnt": 40
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.42825632883856696,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.509041914716363,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        },
+        {
+          "budget": 2,
+          "accepted": 2,
+          "produced": 2,
+          "draft_ms": 0.0,
+          "verify_ms": 19.417542032897472,
+          "fallback": false,
+          "scheduler_ms": 0.06787502206861973,
+          "catchup_tokens": 0,
+          "timing_scope": "combined_draft_verify",
+          "scheduler_replay": {
+            "curve": [
+              [
+                1,
+                12.064311981201172
+              ],
+              [
+                2,
+                14.889604568481445
+              ],
+              [
+                3,
+                18.276042938232422
+              ],
+              [
+                4,
+                24.39664649963379
+              ],
+              [
+                5,
+                29.766813278198242
+              ]
+            ],
+            "state": {
+              "draft_tokens": [
+                0,
+                1
+              ],
+              "accept_rates": [
+                0.7317073170731707,
+                0.6486486486486487
+              ],
+              "prev_accept_rates": [
+                0.725,
+                0.6388888888888888
+              ],
+              "has_draft_info": true,
+              "process_cnt": 41,
+              "schedule_cnt": 41
+            },
+            "budget": 2,
+            "runtime_projection": {
+              "forward_slope_ms": 0.42816599054882926,
+              "sampler_ms": 0.0
+            }
+          },
+          "cycle_ms": 19.544582930393517,
+          "cycle_scope": "host wall including scheduler, output consumer and rewind"
+        }
+      ],
+      "model": {
+        "target": {
+          "repo": "mlx-community/Qwen3-4B-4bit",
+          "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+        },
+        "draft": {
+          "repo": "mlx-community/Qwen3-0.6B-4bit",
+          "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+        },
+        "minimum_memory_bytes": 4831838208,
+        "weight_bytes": 2263022529
+      }
+    },
+    "replay_validation": {
+      "decisions": 31,
+      "all_replayed": true,
+      "method": "Reconstructed original residual history from retained complete-cycle observations; effective runtime projection attached offline. Core runtime and token measurements unchanged."
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "run_id": "6101b88f39e64849af52c733a9333037",
+  "mode": "baseline",
+  "profile": "qwen3.5-9b-8bit",
+  "text": "8",
+  "token_ids": [
+    23,
+    248046
+  ],
+  "prompt_tokens": 48,
+  "finish_reason": "stop",
+  "metrics": {
+    "sampling": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "seed": 42
+    },
+    "enable_thinking": false,
+    "load_ms": 2280.097666895017,
+    "ttft_ms": 2982.786208973266,
+    "total_ms": 3018.5634589288384,
+    "prefill_ms": 622.9419159935787,
+    "prompt_tps": 75.44844678662541,
+    "decode_tps": 27.950722910279282,
+    "prompt_tokens": 48,
+    "generation_tokens": 2,
+    "peak_memory_gb": 9.750079969,
+    "peak_memory_bytes": 9750079969,
+    "active_memory_bytes": 9604907642,
+    "rss_bytes": 4191780864,
+    "swap_before_bytes": 5930156032,
+    "swap_after_bytes": 5930156032,
+    "swap_delta_bytes": 0,
+    "swap_measurement_available": true,
+    "estimated_active_kv_bytes": 2170028032,
+    "cache_hit_tokens": 0,
+    "cache_bytes": 0,
+    "active_kv_bytes": 59899904,
+    "cache_evictions": 0,
+    "cache_backend": "native",
+    "cache_operations": {
+      "lookups": 0,
+      "hits": 0,
+      "writes": 0,
+      "rejected_writes": 0,
+      "lookup_ms": 0.0,
+      "clone_ms": 0.0,
+      "write_ms": 0.0,
+      "eviction_selection_ms": 0.0
+    },
+    "draft_acceptance": null,
+    "fallback_rate": 0,
+    "cycles": 0,
+    "policy": null,
+    "draft_accepted_tokens": 0,
+    "calibrated_fallback": false,
+    "adaptive_scheduler": null,
+    "round_diagnostics": true,
+    "speculative_recovery": null
+  },
+  "rounds": [],
+  "model": {
+    "target": {
+      "repo": "mlx-community/Qwen3.5-9B-8bit",
+      "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+    },
+    "draft": {
+      "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+      "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+    },
+    "draft_weight_bytes": 625229487,
+    "experimental_speculation": true,
+    "hybrid_cache": true,
+    "runtime_reserve_bytes": 2147483648,
+    "minimum_memory_bytes": 0,
+    "advisory_memory_estimates": true,
+    "weight_bytes": 10426592423,
+    "text_tensor_bytes": 9514412544,
+    "quantization": "8-bit affine, group size 64",
+    "context_limit": 8192,
+    "supported_modes": [
+      "baseline"
+    ],
+    "status": "quality_review_required",
+    "role": "primary_quality_candidate",
+    "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; broader quality pending. Hybrid speculative/MTP unsupported."
+  }
+}

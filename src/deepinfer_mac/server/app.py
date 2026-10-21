@@ -13,6 +13,7 @@ from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi.staticfiles import StaticFiles
 
+from .. import __version__
 from .schemas import ChatRequest, CompareRequest
 from .worker import InferenceWorker, QueueFull
 
@@ -37,7 +38,7 @@ def create_app(engine_factory=None, queue_size=4, token: str | None = None):
         yield
         await asyncio.to_thread(app.state.worker.close)
 
-    app = FastAPI(title="DeepInfer-Mac", version="0.1.0a1", lifespan=lifespan)
+    app = FastAPI(title="DeepInfer-Mac", version=__version__, lifespan=lifespan)
     security = [Depends(authorize)]
 
     def submit(request, compared=False):
@@ -84,6 +85,7 @@ def create_app(engine_factory=None, queue_size=4, token: str | None = None):
             raise HTTPException(422, f"Profile {name} supports only {supported}; {mode} is not verified")
         if compared and not {"baseline", "fixed_speculative", "adaptive"}.issubset(supported):
             raise HTTPException(422, f"Profile {name} supports baseline/cache only; three-mode comparison is unavailable")
+        return model
 
     @app.get("/health")
     async def health():
@@ -99,9 +101,14 @@ def create_app(engine_factory=None, queue_size=4, token: str | None = None):
     @app.post("/v1/chat/completions", dependencies=security)
     async def chat(body: ChatRequest, request: Request):
         from ..state import GenerationRequest
-        validate_model(body.model, mode=body.mode)
+        model = validate_model(body.model, mode=body.mode)
+        if body.top_k and body.top_k >= model["vocab_size"]:
+            raise HTTPException(422, "top_k must be smaller than the model vocabulary")
         generation = GenerationRequest(messages=[message.model_dump() for message in body.messages],
-                                       max_tokens=body.max_tokens, mode=body.mode, profile=body.model)
+                                       max_tokens=body.max_tokens, mode=body.mode, profile=body.model,
+                                       temperature=body.temperature, top_p=body.top_p, top_k=body.top_k,
+                                       presence_penalty=body.presence_penalty, seed=body.seed,
+                                       enable_thinking=body.enable_thinking, use_cache=body.use_cache)
         job = submit(generation)
         created = int(time.time())
         if not body.stream:

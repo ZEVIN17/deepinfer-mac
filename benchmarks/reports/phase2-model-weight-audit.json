@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "scope": "Pinned public model file SHA/header audit, separate from quality and performance acceptance",
+  "models": [
+    {
+      "repo": "mlx-community/Qwen3.5-9B-8bit",
+      "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d",
+      "quantization": {
+        "group_size": 64,
+        "bits": 8,
+        "mode": "affine"
+      },
+      "files": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "size_bytes": 5339522525,
+          "sha256": "0dcb3cdba0f43743875c861792685da5266aebcb58f7c0e345b9cd090bb0d289",
+          "tensor_count_by_category": {
+            "text": 432,
+            "vision": 333,
+            "mtp": 0,
+            "other": 0
+          },
+          "tensor_bytes_by_category": {
+            "text": 4427407616,
+            "vision": 912020960,
+            "mtp": 0,
+            "other": 0
+          }
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "size_bytes": 5087069898,
+          "sha256": "5abf861e7a13e7af805105270b2648634b41fda02238ae8ee1bd64628acce9b1",
+          "tensor_count_by_category": {
+            "text": 495,
+            "vision": 0,
+            "mtp": 0,
+            "other": 0
+          },
+          "tensor_bytes_by_category": {
+            "text": 5087004928,
+            "vision": 0,
+            "mtp": 0,
+            "other": 0
+          }
+        }
+      ],
+      "tensor_count": 1260,
+      "tensor_bytes_by_category": {
+        "text": 9514412544,
+        "vision": 912020960,
+        "mtp": 0,
+        "other": 0
+      },
+      "weight_files_sha256_verified": true,
+      "mtp_keys": [],
+      "metadata_sha256": {
+        "config.json": "19082a0ef21dee3840a8bab56ee5325ead177085285c63ea47e79a204a566a53",
+        "tokenizer.json": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+        "tokenizer_config.json": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182",
+        "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+      },
+      "load_evidence": "benchmarks/reports/quality-qwen3.5-9b-8bit.json",
+      "license": "Apache-2.0",
+      "source_url": "https://huggingface.co/mlx-community/Qwen3.5-9B-8bit/tree/16daa4818c54ce5f5436f929d52542eb65bbed9d",
+      "weights_loaded_during_header_audit": true,
+      "runtime_chat_template_string_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+    },
+    {
+      "repo": "mlx-community/Qwen3.5-9B-4bit",
+      "revision": "8b2b98c00a6b4d291155e4890773ca8f769aee53",
+      "quantization": {
+        "group_size": 64,
+        "bits": 4,
+        "mode": "affine"
+      },
+      "files": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "size_bytes": 5349771222,
+          "sha256": "a68b87558c6ef43f74c2bd63ce7e9092ceddc3101f3def0030774bae5f42aadd",
+          "tensor_count_by_category": {
+            "text": 920,
+            "vision": 333,
+            "mtp": 0,
+            "other": 0
+          },
+          "tensor_bytes_by_category": {
+            "text": 4437592576,
+            "vision": 912020960,
+            "mtp": 0,
+            "other": 0
+          }
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "size_bytes": 600449850,
+          "sha256": "b0a770bf8469c7f3f18756a0e0283f1c1174344a83e059a4e483f6af4907352d",
+          "tensor_count_by_category": {
+            "text": 7,
+            "vision": 0,
+            "mtp": 0,
+            "other": 0
+          },
+          "tensor_bytes_by_category": {
+            "text": 600449024,
+            "vision": 0,
+            "mtp": 0,
+            "other": 0
+          }
+        }
+      ],
+      "index_present": true,
+      "tensor_count": 1260,
+      "tensor_bytes_by_category": {
+        "text": 5038041600,
+        "vision": 912020960,
+        "mtp": 0,
+        "other": 0
+      },
+      "weight_files_sha256_verified": true,
+      "mtp_keys": [],
+      "metadata_sha256": {
+        "config.json": "a96942cb6a8a1d3f1d17514d81a1925d04362a6a3233b389d13012211baaa9f8",
+        "tokenizer.json": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+        "tokenizer_config.json": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182",
+        "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+      },
+      "license": "Apache-2.0",
+      "source_url": "https://huggingface.co/mlx-community/Qwen3.5-9B-4bit/tree/8b2b98c00a6b4d291155e4890773ca8f769aee53",
+      "weights_loaded_during_header_audit": false,
+      "runtime_chat_template_string_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+    },
+    {
+      "repo": "mlx-community/Qwen3-14B-4bit",
+      "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "quantization": {
+        "group_size": 64,
+        "bits": 4
+      },
+      "files": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "size_bytes": 5354381380,
+          "sha256": "5795efcfc7c96fd273e600562e8b111bfcc427415de9001d0a07e70cd99cff19",
+          "tensor_count_by_category": {
+            "text": 670,
+            "vision": 0,
+            "mtp": 0,
+            "other": 0
+          },
+          "tensor_bytes_by_category": {
+            "text": 5354305024,
+            "vision": 0,
+            "mtp": 0,
+            "other": 0
+          }
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "size_bytes": 2953517134,
+          "sha256": "2814562d654fe2d541fd4682804a0ccaa400e79701872c8e9f5998cf9481fdf8",
+          "tensor_count_by_category": {
+            "text": 337,
+            "vision": 0,
+            "mtp": 0,
+            "other": 0
+          },
+          "tensor_bytes_by_category": {
+            "text": 2953478656,
+            "vision": 0,
+            "mtp": 0,
+            "other": 0
+          }
+        }
+      ],
+      "index_present": true,
+      "tensor_count": 1007,
+      "tensor_bytes_by_category": {
+        "text": 8307783680,
+        "vision": 0,
+        "mtp": 0,
+        "other": 0
+      },
+      "weight_files_sha256_verified": true,
+      "mtp_keys": [],
+      "metadata_sha256": {
+        "config.json": "a54ec18ffe24f3c909e9556471dc156ed9b3b61b872008831c7cba9d4768b4a5",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "license": "Apache-2.0",
+      "source_url": "https://huggingface.co/mlx-community/Qwen3-14B-4bit/tree/a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "weights_loaded_during_header_audit": false
+    },
+    {
+      "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+      "revision": "da28692b5f139cb0ec58a356b437486b7dac7462",
+      "quantization": {
+        "group_size": 64,
+        "bits": 4,
+        "mode": "affine"
+      },
+      "files": [
+        {
+          "path": "model.safetensors",
+          "size_bytes": 625229487,
+          "sha256": "f5a0d9dd3efa73510542a8023d610ff26be2b4b020d181cfc4bedaa1fcc5dd9e",
+          "tensor_count_by_category": {
+            "text": 694,
+            "vision": 153,
+            "mtp": 0,
+            "other": 0
+          },
+          "tensor_bytes_by_category": {
+            "text": 423938240,
+            "vision": 201185792,
+            "mtp": 0,
+            "other": 0
+          }
+        }
+      ],
+      "index_present": true,
+      "tensor_count": 847,
+      "tensor_bytes_by_category": {
+        "text": 423938240,
+        "vision": 201185792,
+        "mtp": 0,
+        "other": 0
+      },
+      "weight_files_sha256_verified": true,
+      "mtp_keys": [],
+      "metadata_sha256": {
+        "config.json": "ba7770da23eae5ebd6827571f086e331956b33f4442a9e876fb4aa10969a6772",
+        "tokenizer.json": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+        "tokenizer_config.json": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182",
+        "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+      },
+      "license": "Apache-2.0",
+      "source_url": "https://huggingface.co/mlx-community/Qwen3.5-0.8B-4bit/tree/da28692b5f139cb0ec58a356b437486b7dac7462",
+      "weights_loaded_during_header_audit": false
+    }
+  ],
+  "sampling_protocol": "docs/PHASE2_QUALITY_PROTOCOL.md",
+  "runtime_tokenizer_evidence": "Explicit thinkingTrue/False9B/draft template token IDs match; template file hashes differ in default thinking branch",
+  "no_private_paths": true,
+  "sampling_presets": {
+    "shared_qwen35_non_thinking": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "presence_penalty": 1.5,
+      "presence_history": "full_prompt_and_output",
+      "seed": 42,
+      "enable_thinking": false
+    },
+    "qwen3_official_non_thinking": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "presence_penalty": 0,
+      "seed": 42,
+      "enable_thinking": false
+    },
+    "default": {
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 0,
+      "presence_penalty": 0,
+      "enable_thinking": false
+    }
+  }
+}

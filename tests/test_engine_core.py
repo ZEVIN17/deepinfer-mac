@@ -50,13 +50,15 @@ def test_request_rejects_unimplemented_modes_and_bounds():
         GenerationRequest()
 
 
-def test_resource_budget_rejects_weights_before_loading():
-    from deepinfer_mac.models import validate_initial_budget
+def test_resource_budget_rejects_weights_before_loading(monkeypatch):
+    from deepinfer_mac.models import get_profile, validate_initial_budget
 
     with pytest.raises(MemoryError, match="Pinned weights"):
         validate_initial_budget("qwen3-4b", memory_limit_bytes=1024**3)
-    with pytest.raises(ValueError, match="compatible draft"):
-        validate_initial_budget("qwen3.8-27b", speculative=True)
+    with monkeypatch.context() as patch:
+        patch.setitem(get_profile("qwen3.5-9b-8bit"), "draft", None)
+        with pytest.raises(ValueError, match="compatible draft"):
+            validate_initial_budget("qwen3.5-9b-8bit", speculative=True)
     assert validate_initial_budget("qwen3-0.6b", memory_limit_bytes=2 * 1024**3) < 2 * 1024**3
 
 

@@ -39,7 +39,7 @@ def test_api_subset_stream_and_error():
         assert '"content": "hello"' in stream.text
         assert stream.text.endswith("data: [DONE]\n\n")
         assert '"finish_reason": "stop"' in stream.text
-        for extra in ({"temperature": 0.7}, {"stop": "!"}, {"tools": []}, {"mode": "dspark"}):
+        for extra in ({"temperature": -0.7}, {"stop": "!"}, {"tools": []}, {"mode": "dspark"}):
             assert client.post("/v1/chat/completions", json={**body, **extra}).status_code == 422
         assert client.post("/v1/chat/completions", json={**body, "model": "unknown"}).status_code == 404
         comparison = client.post("/api/compare", json={"prompt": "hi"})
@@ -141,8 +141,9 @@ def test_candidate_modes_rejected_before_submission():
     app = create_app(FakeEngine)
     with TestClient(app) as client:
         registry = {model["id"]: model for model in client.get("/v1/models").json()["data"]}
-        candidate = registry["qwen3.8-27b"]
-        assert candidate["status"] == "candidate"
+        assert not any("27b" in name for name in registry)
+        candidate = registry["qwen3.5-9b-8bit"]
+        assert candidate["status"] in {"candidate", "quality_review_required", "quality_smoke_verified"}
         assert candidate["supported_modes"] == ["baseline"]
         assert candidate["capabilities"]["speculative"] is False
         body = {"model": candidate["id"], "messages": [{"role": "user", "content": "hi"}]}

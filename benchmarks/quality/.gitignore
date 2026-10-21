@@ -1,0 +1,5 @@
+.cache/
+tasks.json
+responses*.json
+scores*.json
+__pycache__/

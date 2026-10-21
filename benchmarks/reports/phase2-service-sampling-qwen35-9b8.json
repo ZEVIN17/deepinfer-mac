@@ -1,0 +1,465 @@
+{
+  "source": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "7869e4f997ac88296999594e826b63db9b0b77653051afdaac341e74d6f61fea",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "d4b4de5b54325dbb2fd5daa254c3e169cd6a7af005aacb75bd2df6d8014db709",
+      "src/deepinfer_mac/cli.py": "47a885ca636ad03b90c6266e5550c2ea8ea0894590a88dc90f09f29b87d2aeab",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+      "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+      "src/deepinfer_mac/engine.py": "cad36f8e4fd4a6f1fadb88cc37aaf32819da106f613505250cf701139e1d8f7e",
+      "src/deepinfer_mac/hybrid_speculative.py": "4a32f6f920df334206da705726779863cc4f7422e564e27ba9af0f972a8ec835",
+      "src/deepinfer_mac/models.lock.json": "5f452a97cef7d8cbe705a567be93070744c8c6ec1630812c0d43359deadbe4b9",
+      "src/deepinfer_mac/models.py": "89f87f700b8553cbbcbfda7f010511392a57cb4a842c462f885e09e560446f98",
+      "src/deepinfer_mac/policy.py": "25dbbac857e2f7a1fdc0e0956a90b31eca1661b9f0ce1b51b07ab35479313d43",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "a4eaa467c14ead804f987156938567a2f4036a232c92c94d7dc458721e92260f",
+      "src/deepinfer_mac/server/schemas.py": "56af5b1cc7843c841fb725e67a8dbf1a7e86011b9cf4e7998827f33362aade36",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+      "src/deepinfer_mac/state.py": "15a760b974b84ad8733436cafa699e9a78ae83a3c8215c5a718fc23ae50ed0da",
+      "src/deepinfer_mac/web/app.js": "184bb3e91a16bec5288e8a5eba55a139a24e3c4eed83ac32f4e8bbfd52a488f5",
+      "src/deepinfer_mac/web/index.html": "4188c790eba0385b8da141a04a9d12dd46cf22203e6fad44c3e6355927d219bf",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "bc4bbc9d34e6fbb110640bd5829db4a173d25164e309b591a95914a548007791",
+      "uv.lock": "65d76b103c46139eca0f1556efdbde14322125ff7cac03113ba0f9604f202e81",
+      "models.lock.json": "5f452a97cef7d8cbe705a567be93070744c8c6ec1630812c0d43359deadbe4b9",
+      "upstream.lock.json": "8584f3d05ad0cc061e334e87a3a51a56f02b4fec5c08a410ff78ee1f7fae92a3"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "fake_engine": false,
+  "checks": {
+    "model": {
+      "id": "qwen3.5-9b-8bit",
+      "target": {
+        "repo": "mlx-community/Qwen3.5-9B-8bit",
+        "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+      },
+      "draft": {
+        "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+        "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+      },
+      "draft_weight_bytes": 625229487,
+      "experimental_speculation": true,
+      "hybrid_cache": true,
+      "runtime_reserve_bytes": 2147483648,
+      "minimum_memory_bytes": 0,
+      "advisory_memory_estimates": true,
+      "weight_bytes": 10426592423,
+      "text_tensor_bytes": 9514412544,
+      "quantization": "8-bit affine, group size 64",
+      "context_limit": 8192,
+      "supported_modes": [
+        "baseline"
+      ],
+      "status": "quality_review_required",
+      "role": "primary_quality_candidate",
+      "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; broader quality pending. Hybrid speculative/MTP unsupported.",
+      "capabilities": {
+        "cache": true,
+        "speculative": false,
+        "mtp": false
+      },
+      "object": "model",
+      "owned_by": "community"
+    },
+    "non_stream": {
+      "id": "chatcmpl-1f401228fce342a184b0674d14182a06",
+      "object": "chat.completion",
+      "created": 1792560695,
+      "model": "qwen3.5-9b-8bit",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "8"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 48,
+        "completion_tokens": 2,
+        "total_tokens": 50
+      },
+      "deepinfer": {
+        "run_id": "1f401228fce342a184b0674d14182a06",
+        "metrics": {
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "seed": 42
+          },
+          "enable_thinking": false,
+          "load_ms": 1.0347079951316118,
+          "ttft_ms": 217.68537489697337,
+          "total_ms": 253.4051249967888,
+          "prefill_ms": 153.27595791313797,
+          "prompt_tps": 306.6364786748556,
+          "decode_tps": 27.995716577120376,
+          "prompt_tokens": 48,
+          "generation_tokens": 2,
+          "peak_memory_gb": 10.10785037,
+          "peak_memory_bytes": 10107850370,
+          "active_memory_bytes": 10022722428,
+          "rss_bytes": 2766274560,
+          "swap_before_bytes": 5770706944,
+          "swap_after_bytes": 5770706944,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 2170028032,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 416940032,
+          "active_kv_bytes": 59899904,
+          "cache_evictions": 0,
+          "cache_backend": "native",
+          "cache_operations": {
+            "lookups": 1,
+            "hits": 0,
+            "writes": 1,
+            "rejected_writes": 0,
+            "lookup_ms": 0.16974995378404856,
+            "clone_ms": 0.1772079849615693,
+            "write_ms": 0.2162910532206297,
+            "eviction_selection_ms": 0.0
+          },
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false,
+          "adaptive_scheduler": null,
+          "round_diagnostics": true,
+          "speculative_recovery": null
+        }
+      }
+    },
+    "non_stream_result": {
+      "run_id": "1d47da8e4574418bb4643fd17482db67",
+      "mode": "baseline",
+      "profile": "qwen3.5-9b-8bit",
+      "text": "8",
+      "token_ids": [
+        23,
+        248046
+      ],
+      "prompt_tokens": 48,
+      "finish_reason": "stop",
+      "metrics": {
+        "sampling": {
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "presence_penalty": 1.5,
+          "seed": 42
+        },
+        "enable_thinking": false,
+        "load_ms": 1.0347079951316118,
+        "ttft_ms": 217.68537489697337,
+        "total_ms": 253.4051249967888,
+        "prefill_ms": 153.27595791313797,
+        "prompt_tps": 306.6364786748556,
+        "decode_tps": 27.995716577120376,
+        "prompt_tokens": 48,
+        "generation_tokens": 2,
+        "peak_memory_gb": 10.10785037,
+        "peak_memory_bytes": 10107850370,
+        "active_memory_bytes": 10022722428,
+        "rss_bytes": 2766274560,
+        "swap_before_bytes": 5770706944,
+        "swap_after_bytes": 5770706944,
+        "swap_delta_bytes": 0,
+        "swap_measurement_available": true,
+        "estimated_active_kv_bytes": 2170028032,
+        "cache_hit_tokens": 0,
+        "cache_bytes": 416940032,
+        "active_kv_bytes": 59899904,
+        "cache_evictions": 0,
+        "cache_backend": "native",
+        "cache_operations": {
+          "lookups": 1,
+          "hits": 0,
+          "writes": 1,
+          "rejected_writes": 0,
+          "lookup_ms": 0.16974995378404856,
+          "clone_ms": 0.1772079849615693,
+          "write_ms": 0.2162910532206297,
+          "eviction_selection_ms": 0.0
+        },
+        "draft_acceptance": null,
+        "fallback_rate": 0,
+        "cycles": 0,
+        "policy": null,
+        "draft_accepted_tokens": 0,
+        "calibrated_fallback": false,
+        "adaptive_scheduler": null,
+        "round_diagnostics": true,
+        "speculative_recovery": null
+      },
+      "rounds": [],
+      "model": {
+        "target": {
+          "repo": "mlx-community/Qwen3.5-9B-8bit",
+          "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+        },
+        "draft": {
+          "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+          "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+        },
+        "draft_weight_bytes": 625229487,
+        "experimental_speculation": true,
+        "hybrid_cache": true,
+        "runtime_reserve_bytes": 2147483648,
+        "minimum_memory_bytes": 0,
+        "advisory_memory_estimates": true,
+        "weight_bytes": 10426592423,
+        "text_tensor_bytes": 9514412544,
+        "quantization": "8-bit affine, group size 64",
+        "context_limit": 8192,
+        "supported_modes": [
+          "baseline"
+        ],
+        "status": "quality_review_required",
+        "role": "primary_quality_candidate",
+        "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; broader quality pending. Hybrid speculative/MTP unsupported."
+      }
+    },
+    "stream": {
+      "events": [
+        "{\"id\": \"chatcmpl-cfcd9fe540af41608ae14bbf7328a8ad\", \"object\": \"chat.completion.chunk\", \"created\": 1792560695, \"model\": \"qwen3.5-9b-8bit\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\"}, \"finish_reason\": null}]}",
+        "{\"id\": \"chatcmpl-cfcd9fe540af41608ae14bbf7328a8ad\", \"object\": \"chat.completion.chunk\", \"created\": 1792560695, \"model\": \"qwen3.5-9b-8bit\", \"choices\": [{\"index\": 0, \"delta\": {\"content\": \"8\"}, \"finish_reason\": null}]}",
+        "{\"id\": \"chatcmpl-cfcd9fe540af41608ae14bbf7328a8ad\", \"object\": \"chat.completion.chunk\", \"created\": 1792560695, \"model\": \"qwen3.5-9b-8bit\", \"choices\": [{\"index\": 0, \"delta\": {}, \"finish_reason\": \"stop\"}]}",
+        "[DONE]"
+      ],
+      "result": {
+        "run_id": "2b865b5eff934b4a8e077e99dec89581",
+        "mode": "baseline",
+        "profile": "qwen3.5-9b-8bit",
+        "text": "8",
+        "token_ids": [
+          23,
+          248046
+        ],
+        "prompt_tokens": 48,
+        "finish_reason": "stop",
+        "metrics": {
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "seed": 42
+          },
+          "enable_thinking": false,
+          "load_ms": 0.4467089893296361,
+          "ttft_ms": 61.08412507455796,
+          "total_ms": 96.57404199242592,
+          "prefill_ms": 0.007333001121878624,
+          "prompt_tps": 0.0,
+          "decode_tps": 28.177017216305014,
+          "prompt_tokens": 48,
+          "generation_tokens": 2,
+          "peak_memory_gb": 10.025463218,
+          "peak_memory_bytes": 10025463218,
+          "active_memory_bytes": 10022640320,
+          "rss_bytes": 2766422016,
+          "swap_before_bytes": 5770706944,
+          "swap_after_bytes": 5770706944,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 2170028032,
+          "cache_hit_tokens": 47,
+          "cache_bytes": 416940032,
+          "active_kv_bytes": 59899904,
+          "cache_evictions": 0,
+          "cache_backend": "native",
+          "cache_operations": {
+            "lookups": 1,
+            "hits": 1,
+            "writes": 1,
+            "rejected_writes": 0,
+            "lookup_ms": 0.1752499956637621,
+            "clone_ms": 0.15345809515565634,
+            "write_ms": 0.1877499744296074,
+            "eviction_selection_ms": 0.0
+          },
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false,
+          "adaptive_scheduler": null,
+          "round_diagnostics": true,
+          "speculative_recovery": null
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3.5-9B-8bit",
+            "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+            "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+          },
+          "draft_weight_bytes": 625229487,
+          "experimental_speculation": true,
+          "hybrid_cache": true,
+          "runtime_reserve_bytes": 2147483648,
+          "minimum_memory_bytes": 0,
+          "advisory_memory_estimates": true,
+          "weight_bytes": 10426592423,
+          "text_tensor_bytes": 9514412544,
+          "quantization": "8-bit affine, group size 64",
+          "context_limit": 8192,
+          "supported_modes": [
+            "baseline"
+          ],
+          "status": "quality_review_required",
+          "role": "primary_quality_candidate",
+          "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; broader quality pending. Hybrid speculative/MTP unsupported."
+        }
+      },
+      "matches_non_stream": true,
+      "matches_native_control": true
+    },
+    "unsupported_modes": {
+      "adaptive": {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body"
+            ],
+            "msg": "Value error, Speculative modes currently support only greedy sampling with no penalties",
+            "input": {
+              "model": "qwen3.5-9b-8bit",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "A box contains 3 red balls and 2 blue balls. You add 4 blue balls and remove 1 red ball. How many balls remain? Output only the integer."
+                }
+              ],
+              "max_tokens": 128,
+              "temperature": 0.7,
+              "top_p": 0.8,
+              "top_k": 20,
+              "presence_penalty": 1.5,
+              "seed": 42,
+              "mode": "adaptive"
+            },
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      },
+      "compare": {
+        "detail": "Profile qwen3.5-9b-8bit supports baseline/cache only; three-mode comparison is unavailable"
+      }
+    },
+    "disconnect_cancellation": {
+      "id": "a5abd4b105d24fb5a676e1ea5e4ae094",
+      "status": "cancelled",
+      "created_at": 1792560695.41034,
+      "result": null,
+      "error": null,
+      "event_count": 4,
+      "retained_events": 4
+    },
+    "recovered_after_cancel": {
+      "id": "chatcmpl-75be0637f6b84d9a95f52585f604a144",
+      "object": "chat.completion",
+      "created": 1792560695,
+      "model": "qwen3.5-9b-8bit",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "8"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 48,
+        "completion_tokens": 2,
+        "total_tokens": 50
+      },
+      "deepinfer": {
+        "run_id": "75be0637f6b84d9a95f52585f604a144",
+        "metrics": {
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "seed": 42
+          },
+          "enable_thinking": false,
+          "load_ms": 0.3741669934242964,
+          "ttft_ms": 61.04712502565235,
+          "total_ms": 96.5557920280844,
+          "prefill_ms": 0.005792011506855488,
+          "prompt_tps": 0.0,
+          "decode_tps": 28.16213855427207,
+          "prompt_tokens": 48,
+          "generation_tokens": 2,
+          "peak_memory_gb": 10.085625266,
+          "peak_memory_bytes": 10085625266,
+          "active_memory_bytes": 10082802368,
+          "rss_bytes": 2767863808,
+          "swap_before_bytes": 5770706944,
+          "swap_after_bytes": 5770706944,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 2166358016,
+          "cache_hit_tokens": 47,
+          "cache_bytes": 476839936,
+          "active_kv_bytes": 59899904,
+          "cache_evictions": 0,
+          "cache_backend": "native",
+          "cache_operations": {
+            "lookups": 1,
+            "hits": 1,
+            "writes": 1,
+            "rejected_writes": 0,
+            "lookup_ms": 0.18883298616856337,
+            "clone_ms": 0.15479198191314936,
+            "write_ms": 0.18904195167124271,
+            "eviction_selection_ms": 0.0
+          },
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false,
+          "adaptive_scheduler": null,
+          "round_diagnostics": true,
+          "speculative_recovery": null
+        }
+      }
+    }
+  },
+  "base_url": "http://127.0.0.1:8082",
+  "engineering_passed": true,
+  "quality_scope": "Engineering transport and token/cache consistency only; see independent quality matrix for model capability."
+}

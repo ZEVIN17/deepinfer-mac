@@ -1,3 +1,18 @@
+# 0.1.0a2 — experimental candidate, unpublished
+
+- Primary candidate Qwen3.5-9B-8bit with real loading, baseline/sampled API/SSE/cancellation/cache and local UI evidence; final 8bit/4bit/14B quality/efficiency choice remains pending.
+- Retired27B active profiles/unused weights removed; failures/audits retained. No publisheda1 package bytes changed.
+- Executable DeepInfer MTPVarlen-derived scheduler, original C++ oracle, empirical acceptance adapter and complete-cycle cost accounting.
+- Experimental exact hybrid-state recovery and real96-token four-mode equality/24-decision C++ replay control on9B. Public9B API/UI remains baseline-only.
+- Native MLX-LM LRU reuse and deferred draft synchronization are separately attributed baseline improvements.
+- Baseline temperature/top-p/top-k/presence/seed support; speculative modes remain greedy.
+
+**Acceptance remains open:** no demonstrated superiority over tuned fixed decoding or two common frameworks. Small probes, altered compilation warmups and quality smoke are not competitive acceptance. Public subset comparisons and final candidate artifacts require frozen source and independent verification. Reload-related process RSS retention remains known.
+
+[Current evidence](phase2.md) · [DS source mapping](DS_DESIGN_MAPPING.md) · [Reproduction](benchmarking.md)
+
+---
+
 # 0.1.0a1 — experimental alpha
 
 Independent DeepInfer-inspired Apple Silicon inference powered by pinned MLX / MLX-LM. Adds greedy baseline/fixed/adaptive comparisons, exact prefix snapshots with an LRU byte budget, a bounded local API worker, bundled chat/compare UI, CLI diagnostics and real result exports.

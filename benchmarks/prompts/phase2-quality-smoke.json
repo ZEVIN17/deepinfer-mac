@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "scope": "Predeclared 12-task engineering smoke, not reproduction of public benchmarks and not statistical model equivalence. Dev and heldout fixed before first new-model load; no tuning on heldout.",
+  "created_before_model_load": true,
+  "cases": [
+    {
+      "id": "dev-zh-memory",
+      "split": "dev",
+      "kind": "zh_manual",
+      "messages": [
+        {
+          "role": "user",
+          "content": "请用三句话解释统一内存为什么适合本地大语言模型推理。"
+        }
+      ],
+      "rubric": "三句连贯中文，正确说明CPU/GPU共享物理内存和减少数据拷贝；无无关数字/重复。",
+      "max_tokens": 192
+    },
+    {
+      "id": "dev-code-dedupe",
+      "split": "dev",
+      "kind": "code",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Write a Python function dedupe(items) that removes duplicates while preserving order. Return only the function."
+        }
+      ],
+      "function": "dedupe",
+      "tests": [
+        {
+          "args": [
+            []
+          ],
+          "expected": []
+        },
+        {
+          "args": [
+            [
+              3,
+              1,
+              3,
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "args": [
+            [
+              "a",
+              "b",
+              "a"
+            ]
+          ],
+          "expected": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "max_tokens": 256
+    },
+    {
+      "id": "dev-json-person",
+      "split": "dev",
+      "kind": "json",
+      "messages": [
+        {
+          "role": "user",
+          "content": "仅输出有效JSON，不加解释：把名字Alice、年龄30转换为对象，键为name和age，age用数字。"
+        }
+      ],
+      "expected": {
+        "name": "Alice",
+        "age": 30
+      },
+      "max_tokens": 128
+    },
+    {
+      "id": "dev-arithmetic",
+      "split": "dev",
+      "kind": "exact",
+      "messages": [
+        {
+          "role": "user",
+          "content": "只输出计算结果，不要解释：17 × 23 = ?"
+        }
+      ],
+      "expected": "391",
+      "max_tokens": 128
+    },
+    {
+      "id": "dev-conversation",
+      "split": "dev",
+      "kind": "exact",
+      "messages": [
+        {
+          "role": "user",
+          "content": "请记住测试代号是蓝鲸。只回答收到。"
+        },
+        {
+          "role": "assistant",
+          "content": "收到。"
+        },
+        {
+          "role": "user",
+          "content": "测试代号是什么？只回答代号。"
+        }
+      ],
+      "expected": "蓝鲸",
+      "max_tokens": 128
+    },
+    {
+      "id": "dev-long-retrieval",
+      "split": "dev",
+      "kind": "exact",
+      "messages": [
+        {
+          "role": "user",
+          "content": "以下是公开的测试清单。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n设备采用统一内存，资料均在本机处理；这些是无关说明。\n\n清单末尾的测试编号是 K742。请只输出这个测试编号。"
+        }
+      ],
+      "expected": "K742",
+      "max_tokens": 128
+    },
+    {
+      "id": "heldout-zh-cache",
+      "split": "heldout",
+      "kind": "zh_manual",
+      "messages": [
+        {
+          "role": "user",
+          "content": "请用两句话向新手解释KV缓存的作用，以及为什么它不能免费加速全新的不同输入。"
+        }
+      ],
+      "rubric": "两句连贯中文，正确区分重用历史K/V减少重复计算与新输入需prefill；不把缓存说成权重压缩。",
+      "max_tokens": 192
+    },
+    {
+      "id": "heldout-code-fix",
+      "split": "heldout",
+      "kind": "code",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Fix this Python function so that it clamps x to the inclusive range [lo, hi]. lo <= hi. Return only the corrected function.\ndef clamp(x, lo, hi):\n    return max(hi, min(lo, x))"
+        }
+      ],
+      "function": "clamp",
+      "tests": [
+        {
+          "args": [
+            5,
+            0,
+            10
+          ],
+          "expected": 5
+        },
+        {
+          "args": [
+            -2,
+            0,
+            10
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            20,
+            0,
+            10
+          ],
+          "expected": 10
+        },
+        {
+          "args": [
+            3,
+            3,
+            3
+          ],
+          "expected": 3
+        }
+      ],
+      "max_tokens": 256
+    },
+    {
+      "id": "heldout-json-sort",
+      "split": "heldout",
+      "kind": "json",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return only a JSON array containing the unique integers from [4, 1, 4, 3, 1], sorted ascending."
+        }
+      ],
+      "expected": [
+        1,
+        3,
+        4
+      ],
+      "max_tokens": 128
+    },
+    {
+      "id": "heldout-logic",
+      "split": "heldout",
+      "kind": "exact",
+      "messages": [
+        {
+          "role": "user",
+          "content": "A box contains 3 red balls and 2 blue balls. You add 4 blue balls and remove 1 red ball. How many balls remain? Output only the integer."
+        }
+      ],
+      "expected": "8",
+      "max_tokens": 128
+    },
+    {
+      "id": "heldout-conversation",
+      "split": "heldout",
+      "kind": "exact",
+      "messages": [
+        {
+          "role": "user",
+          "content": "My project code is PINE-806. Reply OK."
+        },
+        {
+          "role": "assistant",
+          "content": "OK"
+        },
+        {
+          "role": "user",
+          "content": "Update the code to CEDAR-219. Reply OK."
+        },
+        {
+          "role": "assistant",
+          "content": "OK"
+        },
+        {
+          "role": "user",
+          "content": "Return only the current project code."
+        }
+      ],
+      "expected": "CEDAR-219",
+      "max_tokens": 128
+    },
+    {
+      "id": "heldout-long-retrieval",
+      "split": "heldout",
+      "kind": "json",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Read the public log and return only a JSON object with the last status of task T5.\nevent 0: task T1 is pending.\nevent 1: task T2 is pending.\nevent 2: task T3 is pending.\nevent 3: task T4 is pending.\nevent 4: task T1 is pending.\nevent 5: task T2 is pending.\nevent 6: task T3 is pending.\nevent 7: task T4 is pending.\nevent 8: task T1 is pending.\nevent 9: task T2 is pending.\nevent 10: task T3 is pending.\nevent 11: task T4 is pending.\nevent 12: task T1 is pending.\nevent 13: task T2 is pending.\nevent 14: task T3 is pending.\nevent 15: task T4 is pending.\nevent 16: task T1 is pending.\nevent 17: task T2 is pending.\nevent 18: task T3 is pending.\nevent 19: task T4 is pending.\nevent 20: task T1 is pending.\nevent 21: task T2 is pending.\nevent 22: task T3 is pending.\nevent 23: task T4 is pending.\nevent 24: task T1 is pending.\nevent 25: task T2 is pending.\nevent 26: task T3 is pending.\nevent 27: task T4 is pending.\nevent 28: task T1 is pending.\nevent 29: task T2 is pending.\nevent 30: task T3 is pending.\nevent 31: task T4 is pending.\nevent 32: task T1 is pending.\nevent 33: task T2 is pending.\nevent 34: task T3 is pending.\nevent 35: task T4 is pending.\nevent 36: task T1 is pending.\nevent 37: task T2 is pending.\nevent 38: task T3 is pending.\nevent 39: task T4 is pending.\nevent 40: task T1 is pending.\nevent 41: task T2 is pending.\nevent 42: task T3 is pending.\nevent 43: task T4 is pending.\nevent 44: task T1 is pending.\nevent 45: task T2 is pending.\nevent 46: task T3 is pending.\nevent 47: task T4 is pending.\nevent 48: task T1 is pending.\nevent 49: task T2 is pending.\nevent 50: task T3 is pending.\nevent 51: task T4 is pending.\nevent 52: task T1 is pending.\nevent 53: task T2 is pending.\nevent 54: task T3 is pending.\nevent 55: task T4 is pending.\nevent 56: task T1 is pending.\nevent 57: task T2 is pending.\nevent 58: task T3 is pending.\nevent 59: task T4 is pending.\nevent 60: task T1 is pending.\nevent 61: task T2 is pending.\nevent 62: task T3 is pending.\nevent 63: task T4 is pending.\nevent 64: task T1 is pending.\nevent 65: task T2 is pending.\nevent 66: task T3 is pending.\nevent 67: task T4 is pending.\nevent 68: task T1 is pending.\nevent 69: task T2 is pending.\nevent 70: task T3 is pending.\nevent 71: task T4 is pending.\nevent 72: task T1 is pending.\nevent 73: task T2 is pending.\nevent 74: task T3 is pending.\nevent 75: task T4 is pending.\nevent 76: task T1 is pending.\nevent 77: task T2 is pending.\nevent 78: task T3 is pending.\nevent 79: task T4 is pending.\nevent 80: task T1 is pending.\nevent 81: task T2 is pending.\nevent 82: task T3 is pending.\nevent 83: task T4 is pending.\nevent 84: task T1 is pending.\nevent 85: task T2 is pending.\nevent 86: task T3 is pending.\nevent 87: task T4 is pending.\nevent 88: task T1 is pending.\nevent 89: task T2 is pending.\nevent 90: task T3 is pending.\nevent 91: task T4 is pending.\nevent 92: task T1 is pending.\nevent 93: task T2 is pending.\nevent 94: task T3 is pending.\nevent 95: task T4 is pending.\nevent 96: task T1 is pending.\nevent 97: task T2 is pending.\nevent 98: task T3 is pending.\nevent 99: task T4 is pending.\nevent 100: task T1 is pending.\nevent 101: task T2 is pending.\nevent 102: task T3 is pending.\nevent 103: task T4 is pending.\nevent 104: task T1 is pending.\nevent 105: task T2 is pending.\nevent 106: task T3 is pending.\nevent 107: task T4 is pending.\nevent 108: task T1 is pending.\nevent 109: task T2 is pending.\nevent 110: task T3 is pending.\nevent 111: task T4 is pending.\nevent 112: task T1 is pending.\nevent 113: task T2 is pending.\nevent 114: task T3 is pending.\nevent 115: task T4 is pending.\nevent 116: task T1 is pending.\nevent 117: task T2 is pending.\nevent 118: task T3 is pending.\nevent 119: task T4 is pending.\ntask T5 status=ready\ntask T5 status=complete\nThe key must be status."
+        }
+      ],
+      "expected": {
+        "status": "complete"
+      },
+      "max_tokens": 128
+    }
+  ]
+}

@@ -1,0 +1,462 @@
+{
+  "schema_version": 1,
+  "seed": "deepinfer-phase2-quality-v1",
+  "selection_before_model_outputs": true,
+  "selection": "IFEval first hash-ranked eligible task per supported family plus one; MMLU first hash-ranked ID per category; LCB first two easy and first two medium stdin tasks in test6 file order; alternating dev/heldout within each benchmark; repair follows its source task heldout split.",
+  "sources": {
+    "ifeval": {
+      "repo": "google/IFEval",
+      "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+      "file": "ifeval_input_data.jsonl",
+      "local": "ifeval.jsonl",
+      "license": "Apache-2.0",
+      "sha256": "6a85310ca8ce15eff755aa08a3a4ff931c7e273e7515ebb3c492ea85fd8288f2"
+    },
+    "mmlu": {
+      "repo": "TIGER-Lab/MMLU-Pro",
+      "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+      "file": "data/test-00000-of-00001.parquet",
+      "local": "mmlu.parquet",
+      "license": "MIT",
+      "sha256": "0e24a191921c2f453518a537a8b2117bd137e7714d4ef1565e9ba06c1ecb9ad8"
+    },
+    "lcb": {
+      "repo": "livecodebench/code_generation_lite",
+      "revision": "0fe84c3912ea0c4d4a78037083943e8f0c4dd505",
+      "file": "test6.jsonl",
+      "local": "lcb-v6.jsonl",
+      "license": "dataset metadata: cc (variant unspecified); original problem rights retained",
+      "sha256": "bb4c364f71921c4495a6ad15abe1a927350b720009f4933e2e71f8af0f6fd1f5"
+    }
+  },
+  "tasks": [
+    {
+      "id": "ifeval:3743",
+      "benchmark": "ifeval",
+      "split": "dev",
+      "source": {
+        "repo": "google/IFEval",
+        "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+        "file": "ifeval_input_data.jsonl",
+        "license": "Apache-2.0",
+        "sample_id": "3743"
+      },
+      "metadata": {},
+      "max_tokens": 768
+    },
+    {
+      "id": "ifeval:2591",
+      "benchmark": "ifeval",
+      "split": "heldout",
+      "source": {
+        "repo": "google/IFEval",
+        "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+        "file": "ifeval_input_data.jsonl",
+        "license": "Apache-2.0",
+        "sample_id": "2591"
+      },
+      "metadata": {},
+      "max_tokens": 768
+    },
+    {
+      "id": "ifeval:3557",
+      "benchmark": "ifeval",
+      "split": "dev",
+      "source": {
+        "repo": "google/IFEval",
+        "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+        "file": "ifeval_input_data.jsonl",
+        "license": "Apache-2.0",
+        "sample_id": "3557"
+      },
+      "metadata": {},
+      "max_tokens": 768
+    },
+    {
+      "id": "ifeval:3690",
+      "benchmark": "ifeval",
+      "split": "heldout",
+      "source": {
+        "repo": "google/IFEval",
+        "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+        "file": "ifeval_input_data.jsonl",
+        "license": "Apache-2.0",
+        "sample_id": "3690"
+      },
+      "metadata": {},
+      "max_tokens": 768
+    },
+    {
+      "id": "ifeval:2602",
+      "benchmark": "ifeval",
+      "split": "dev",
+      "source": {
+        "repo": "google/IFEval",
+        "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+        "file": "ifeval_input_data.jsonl",
+        "license": "Apache-2.0",
+        "sample_id": "2602"
+      },
+      "metadata": {},
+      "max_tokens": 768
+    },
+    {
+      "id": "ifeval:2825",
+      "benchmark": "ifeval",
+      "split": "heldout",
+      "source": {
+        "repo": "google/IFEval",
+        "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+        "file": "ifeval_input_data.jsonl",
+        "license": "Apache-2.0",
+        "sample_id": "2825"
+      },
+      "metadata": {},
+      "max_tokens": 768
+    },
+    {
+      "id": "ifeval:2268",
+      "benchmark": "ifeval",
+      "split": "dev",
+      "source": {
+        "repo": "google/IFEval",
+        "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+        "file": "ifeval_input_data.jsonl",
+        "license": "Apache-2.0",
+        "sample_id": "2268"
+      },
+      "metadata": {},
+      "max_tokens": 768
+    },
+    {
+      "id": "ifeval:1220",
+      "benchmark": "ifeval",
+      "split": "heldout",
+      "source": {
+        "repo": "google/IFEval",
+        "revision": "966cd89545d6b6acfd7638bc708b98261ca58e84",
+        "file": "ifeval_input_data.jsonl",
+        "license": "Apache-2.0",
+        "sample_id": "1220"
+      },
+      "metadata": {},
+      "max_tokens": 768
+    },
+    {
+      "id": "mmlu:3271",
+      "benchmark": "mmlu",
+      "split": "dev",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "3271"
+      },
+      "metadata": {
+        "category": "biology"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:636",
+      "benchmark": "mmlu",
+      "split": "heldout",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "636"
+      },
+      "metadata": {
+        "category": "business"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:3849",
+      "benchmark": "mmlu",
+      "split": "dev",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "3849"
+      },
+      "metadata": {
+        "category": "chemistry"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:10731",
+      "benchmark": "mmlu",
+      "split": "heldout",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "10731"
+      },
+      "metadata": {
+        "category": "computer science"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:7609",
+      "benchmark": "mmlu",
+      "split": "dev",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "7609"
+      },
+      "metadata": {
+        "category": "economics"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:11845",
+      "benchmark": "mmlu",
+      "split": "heldout",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "11845"
+      },
+      "metadata": {
+        "category": "engineering"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:6338",
+      "benchmark": "mmlu",
+      "split": "dev",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "6338"
+      },
+      "metadata": {
+        "category": "health"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:5033",
+      "benchmark": "mmlu",
+      "split": "heldout",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "5033"
+      },
+      "metadata": {
+        "category": "history"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:1471",
+      "benchmark": "mmlu",
+      "split": "dev",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "1471"
+      },
+      "metadata": {
+        "category": "law"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:8882",
+      "benchmark": "mmlu",
+      "split": "heldout",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "8882"
+      },
+      "metadata": {
+        "category": "math"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:5747",
+      "benchmark": "mmlu",
+      "split": "dev",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "5747"
+      },
+      "metadata": {
+        "category": "other"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:11124",
+      "benchmark": "mmlu",
+      "split": "heldout",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "11124"
+      },
+      "metadata": {
+        "category": "philosophy"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:9423",
+      "benchmark": "mmlu",
+      "split": "dev",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "9423"
+      },
+      "metadata": {
+        "category": "physics"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "mmlu:2586",
+      "benchmark": "mmlu",
+      "split": "heldout",
+      "source": {
+        "repo": "TIGER-Lab/MMLU-Pro",
+        "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "file": "data/test-00000-of-00001.parquet",
+        "license": "MIT",
+        "sample_id": "2586"
+      },
+      "metadata": {
+        "category": "psychology"
+      },
+      "max_tokens": 1024
+    },
+    {
+      "id": "lcb:abc387_b",
+      "benchmark": "lcb",
+      "split": "dev",
+      "source": {
+        "repo": "livecodebench/code_generation_lite",
+        "revision": "0fe84c3912ea0c4d4a78037083943e8f0c4dd505",
+        "file": "test6.jsonl",
+        "license": "dataset metadata: cc (variant unspecified); original problem rights retained",
+        "sample_id": "abc387_b"
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "contest_date": "2025-01-04T00:00:00",
+        "question_title": "9x9 Sum"
+      },
+      "max_tokens": 2048
+    },
+    {
+      "id": "lcb:abc387_a",
+      "benchmark": "lcb",
+      "split": "heldout",
+      "source": {
+        "repo": "livecodebench/code_generation_lite",
+        "revision": "0fe84c3912ea0c4d4a78037083943e8f0c4dd505",
+        "file": "test6.jsonl",
+        "license": "dataset metadata: cc (variant unspecified); original problem rights retained",
+        "sample_id": "abc387_a"
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "contest_date": "2025-01-04T00:00:00",
+        "question_title": "Happy New Year 2025"
+      },
+      "max_tokens": 2048
+    },
+    {
+      "id": "lcb:abc387_c",
+      "benchmark": "lcb",
+      "split": "dev",
+      "source": {
+        "repo": "livecodebench/code_generation_lite",
+        "revision": "0fe84c3912ea0c4d4a78037083943e8f0c4dd505",
+        "file": "test6.jsonl",
+        "license": "dataset metadata: cc (variant unspecified); original problem rights retained",
+        "sample_id": "abc387_c"
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "contest_date": "2025-01-04T00:00:00",
+        "question_title": "Snake Numbers"
+      },
+      "max_tokens": 2048
+    },
+    {
+      "id": "lcb:abc388_d",
+      "benchmark": "lcb",
+      "split": "heldout",
+      "source": {
+        "repo": "livecodebench/code_generation_lite",
+        "revision": "0fe84c3912ea0c4d4a78037083943e8f0c4dd505",
+        "file": "test6.jsonl",
+        "license": "dataset metadata: cc (variant unspecified); original problem rights retained",
+        "sample_id": "abc388_d"
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "contest_date": "2025-01-11T00:00:00",
+        "question_title": "Coming of Age Celebration"
+      },
+      "max_tokens": 2048
+    },
+    {
+      "id": "lcb:abc387_a:repair",
+      "benchmark": "auxiliary_repair",
+      "split": "heldout",
+      "source": {
+        "repo": "livecodebench/code_generation_lite",
+        "revision": "0fe84c3912ea0c4d4a78037083943e8f0c4dd505",
+        "file": "test6.jsonl",
+        "license": "dataset metadata: cc (variant unspecified); original problem rights retained",
+        "sample_id": "abc387_a:repair"
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "contest_date": "2025-01-04T00:00:00",
+        "question_title": "Happy New Year 2025",
+        "modification": "Project-authored bug injection; derived from LCB task; excluded from LCB generation aggregate."
+      },
+      "max_tokens": 1024
+    }
+  ],
+  "task_file_sha256": "0ec76d1676ef5e75b40fba75b5bcbd7fd3578c5df4207c384162b2cc91185260"
+}

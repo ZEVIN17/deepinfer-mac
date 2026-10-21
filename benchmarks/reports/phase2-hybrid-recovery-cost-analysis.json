@@ -1,0 +1,749 @@
+{
+  "input": "benchmarks/reports/phase2-hybrid-ds-qwen35-9b8-probe.json",
+  "input_sha256": "fb85c1342d9b52c92f5e7e57438bf1cb162ebeb8970e37a3b7c1cc900f9f33ae",
+  "source": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "563f88960474bb44c89536624e46b5f8c62668710d29707dfaee9018988c435b",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+      "src/deepinfer_mac/cli.py": "47a885ca636ad03b90c6266e5550c2ea8ea0894590a88dc90f09f29b87d2aeab",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+      "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+      "src/deepinfer_mac/ds/recovery_cost.py": "899744aaf24652cef5f9cfeb61515fedb0c010526fb80522e5c65b25b5d4a304",
+      "src/deepinfer_mac/engine.py": "0bec1cf62be91f9fe64447f8d0c2ad74c7fbbe5c1888150a87d32e123251fe0e",
+      "src/deepinfer_mac/hybrid_speculative.py": "500d5a37889d6864d7d4f0530b06140c78e154310ed011f5ae0965e2b2d68eb3",
+      "src/deepinfer_mac/models.lock.json": "5f452a97cef7d8cbe705a567be93070744c8c6ec1630812c0d43359deadbe4b9",
+      "src/deepinfer_mac/models.py": "89f87f700b8553cbbcbfda7f010511392a57cb4a842c462f885e09e560446f98",
+      "src/deepinfer_mac/policy.py": "25dbbac857e2f7a1fdc0e0956a90b31eca1661b9f0ce1b51b07ab35479313d43",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "39538b5bb7770bc84d622d7398ae9757d61bd4e15b768cf3d6fa9fbcfe606f42",
+      "src/deepinfer_mac/server/schemas.py": "56af5b1cc7843c841fb725e67a8dbf1a7e86011b9cf4e7998827f33362aade36",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+      "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+      "src/deepinfer_mac/state.py": "15a760b974b84ad8733436cafa699e9a78ae83a3c8215c5a718fc23ae50ed0da",
+      "src/deepinfer_mac/web/app.js": "184bb3e91a16bec5288e8a5eba55a139a24e3c4eed83ac32f4e8bbfd52a488f5",
+      "src/deepinfer_mac/web/index.html": "4188c790eba0385b8da141a04a9d12dd46cf22203e6fad44c3e6355927d219bf",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "344fb14f9a472ce480ca97c575f3c66f584e9b7010d365d698cfa57818ee0cde",
+      "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d",
+      "models.lock.json": "5f452a97cef7d8cbe705a567be93070744c8c6ec1630812c0d43359deadbe4b9",
+      "upstream.lock.json": "8584f3d05ad0cc061e334e87a3a51a56f02b4fec5c08a410ff78ee1f7fae92a3"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "scope": "CPU-only descriptive analysis and off-policy historical feedback-age replay",
+  "predicted_cost_is_measured_performance": false,
+  "performance_gain_claim": false,
+  "counterfactual_runtime": null,
+  "observed_groups": [
+    {
+      "variant": "fixed1",
+      "budget": 1,
+      "count": 55,
+      "accepted_counts": {
+        "1": 41,
+        "0": 14
+      },
+      "mean_full_cycle_ms": 48.41813571243124,
+      "median_full_cycle_ms": 39.98716699425131,
+      "mean_recovery_ms": 7.967537205496972,
+      "median_recovery_ms": 0.001374981366097927,
+      "mean_produced": 1.7454545454545454,
+      "descriptive_yield_over_cost": 0.03604960248410399,
+      "comparison_limit": "single prompt/order and differing histories; not controlled speed evidence"
+    },
+    {
+      "variant": "fixed2",
+      "budget": 2,
+      "count": 41,
+      "accepted_counts": {
+        "2": 27,
+        "0": 13,
+        "1": 1
+      },
+      "mean_full_cycle_ms": 55.54355595192713,
+      "median_full_cycle_ms": 43.78312500193715,
+      "mean_recovery_ms": 11.792209289013975,
+      "median_recovery_ms": 0.0016249250620603561,
+      "mean_produced": 2.341463414634146,
+      "descriptive_yield_over_cost": 0.04215544673914431,
+      "comparison_limit": "single prompt/order and differing histories; not controlled speed evidence"
+    },
+    {
+      "variant": "ds",
+      "budget": 0,
+      "count": 2,
+      "accepted_counts": {
+        "0": 2
+      },
+      "mean_full_cycle_ms": 36.148228973615915,
+      "median_full_cycle_ms": 36.148228973615915,
+      "mean_recovery_ms": 0.0008544884622097015,
+      "median_recovery_ms": 0.0008544884622097015,
+      "mean_produced": 1,
+      "descriptive_yield_over_cost": 0.027663872571181452,
+      "comparison_limit": "single prompt/order and differing histories; not controlled speed evidence"
+    },
+    {
+      "variant": "ds",
+      "budget": 1,
+      "count": 3,
+      "accepted_counts": {
+        "1": 2,
+        "0": 1
+      },
+      "mean_full_cycle_ms": 50.68994429893792,
+      "median_full_cycle_ms": 41.58099996857345,
+      "mean_recovery_ms": 10.316986008547246,
+      "median_recovery_ms": 0.001374981366097927,
+      "mean_produced": 1.6666666666666667,
+      "descriptive_yield_over_cost": 0.032879631053403774,
+      "comparison_limit": "single prompt/order and differing histories; not controlled speed evidence"
+    },
+    {
+      "variant": "ds",
+      "budget": 2,
+      "count": 2,
+      "accepted_counts": {
+        "0": 1,
+        "2": 1
+      },
+      "mean_full_cycle_ms": 60.57418748969212,
+      "median_full_cycle_ms": 60.57418748969212,
+      "mean_recovery_ms": 17.27616653079167,
+      "median_recovery_ms": 17.27616653079167,
+      "mean_produced": 2,
+      "descriptive_yield_over_cost": 0.03301736404372471,
+      "comparison_limit": "single prompt/order and differing histories; not controlled speed evidence"
+    },
+    {
+      "variant": "ds",
+      "budget": 3,
+      "count": 3,
+      "accepted_counts": {
+        "3": 2,
+        "1": 1
+      },
+      "mean_full_cycle_ms": 73.23041666919987,
+      "median_full_cycle_ms": 79.52320796903223,
+      "mean_recovery_ms": 22.63005531858653,
+      "median_recovery_ms": 32.458457979373634,
+      "mean_produced": 3,
+      "descriptive_yield_over_cost": 0.04096658378378142,
+      "comparison_limit": "single prompt/order and differing histories; not controlled speed evidence"
+    },
+    {
+      "variant": "ds",
+      "budget": 4,
+      "count": 25,
+      "accepted_counts": {
+        "2": 1,
+        "4": 10,
+        "0": 9,
+        "3": 2,
+        "1": 3
+      },
+      "mean_full_cycle_ms": 72.86240494810045,
+      "median_full_cycle_ms": 85.52079100627452,
+      "mean_recovery_ms": 20.74710995424539,
+      "median_recovery_ms": 34.1736659174785,
+      "mean_produced": 3.04,
+      "descriptive_yield_over_cost": 0.04172247679946027,
+      "comparison_limit": "single prompt/order and differing histories; not controlled speed evidence"
+    }
+  ],
+  "replay": [
+    {
+      "cycle": 1,
+      "historically_executed_budget": 0,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": null
+    },
+    {
+      "cycle": 2,
+      "historically_executed_budget": 0,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": null
+    },
+    {
+      "cycle": 3,
+      "historically_executed_budget": 1,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 1
+    },
+    {
+      "cycle": 4,
+      "historically_executed_budget": 1,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 2
+    },
+    {
+      "cycle": 5,
+      "historically_executed_budget": 1,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 3
+    },
+    {
+      "cycle": 6,
+      "historically_executed_budget": 2,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 4
+    },
+    {
+      "cycle": 7,
+      "historically_executed_budget": 2,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 5
+    },
+    {
+      "cycle": 8,
+      "historically_executed_budget": 3,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 6
+    },
+    {
+      "cycle": 9,
+      "historically_executed_budget": 3,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 7
+    },
+    {
+      "cycle": 10,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 8
+    },
+    {
+      "cycle": 11,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 9
+    },
+    {
+      "cycle": 12,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 10
+    },
+    {
+      "cycle": 13,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 11
+    },
+    {
+      "cycle": 14,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 12
+    },
+    {
+      "cycle": 15,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 13
+    },
+    {
+      "cycle": 16,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 14
+    },
+    {
+      "cycle": 17,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 15
+    },
+    {
+      "cycle": 18,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 16
+    },
+    {
+      "cycle": 19,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 17
+    },
+    {
+      "cycle": 20,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 18
+    },
+    {
+      "cycle": 21,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 19
+    },
+    {
+      "cycle": 22,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 20
+    },
+    {
+      "cycle": 23,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 21
+    },
+    {
+      "cycle": 24,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 22
+    },
+    {
+      "cycle": 25,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 23
+    },
+    {
+      "cycle": 26,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 24
+    },
+    {
+      "cycle": 27,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 25
+    },
+    {
+      "cycle": 28,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 26
+    },
+    {
+      "cycle": 29,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 27
+    },
+    {
+      "cycle": 30,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 28
+    },
+    {
+      "cycle": 31,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 29
+    },
+    {
+      "cycle": 32,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 30
+    },
+    {
+      "cycle": 33,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 31
+    },
+    {
+      "cycle": 34,
+      "historically_executed_budget": 4,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 32
+    },
+    {
+      "cycle": 35,
+      "historically_executed_budget": 3,
+      "hypothetical_proposed_budget": 0,
+      "eligible_known_graphs": [
+        5
+      ],
+      "unknown_graphs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "core_estimated_decision": null,
+      "maximum_cost_feedback_cycle": 33
+    }
+  ],
+  "original_first_startup_curve": [
+    [
+      1,
+      36.14822769165039
+    ],
+    [
+      2,
+      55.244415283203125
+    ],
+    [
+      3,
+      60.574188232421875
+    ],
+    [
+      4,
+      70.08402252197266
+    ],
+    [
+      5,
+      75.23760223388672
+    ]
+  ],
+  "summary": {
+    "replayed_actual_cycles": 35,
+    "complete_cost_curve_available": false,
+    "unknown_graphs": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "estimated_core_decisions": 0,
+    "conclusion": "Historical coverage is insufficient for the opt-in five-sample curve; further real calibration is required, no speed prediction is supported.",
+    "hypothetical_selections_are_executed_work": false,
+    "performance_gain_claim": false
+  }
+}

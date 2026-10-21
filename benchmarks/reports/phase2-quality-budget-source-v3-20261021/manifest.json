@@ -1,0 +1,8 @@
+{
+  "archive": "source.tar.gz",
+  "archive_sha256": "02aa658a12aedcc3f9521518433b7a4744c186212565785f2e3d918947b97184",
+  "tree_sha256": "a7edfb7270c7ae34e95ac002c694f4690bf0a6e524ff1feaf545aa770f47ddff",
+  "runtime_and_locks_identical_to_v2": true,
+  "v2_archive_sha256": "1b928104acee51f742b8be4893b2804cfac59779aa79904395dad13f351a09d4",
+  "changes": "Only protocol documentation, quality CLI task/budget/Qwen3-family controls and release-safe paired comparator. Public tasks are materialized separately, not archived."
+}

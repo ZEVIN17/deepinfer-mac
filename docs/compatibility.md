@@ -2,22 +2,25 @@
 
 | Surface | Status and boundary |
 | --- | --- |
-| Apple M4 Pro / 24 GB / macOS | Initial real verification host; evidence reports identify actual OS and power state |
-| Other Apple Silicon Macs | Expected MLX platform; unverified until a complete community report is supplied |
-| Intel macOS / Linux / Windows | Portable diagnostics, policy, statistics, schemas and mocked service tests only; no Metal generation |
-| Python | 3.12 and 3.13 dependency range; primary local verification on 3.12 |
-| MLX / MLX-LM | 0.32.4 / 0.32.2 locked; upgrades require loop/cache re-audit |
-| Qwen3.8-27B MLX 4-bit | Priority showcase candidate, unverified on this host; text baseline/exact-cache only until measured validation. Hybrid recurrent cache and vocabulary prevent old Qwen3 draft reuse; not default |
-| qwen3-4b target + Qwen3-0.6B draft | Locked 4-bit pair; tokenizer compatibility checked before draft load |
-| qwen3-0.6b | Small standalone baseline; self-draft is a correctness control, not a claimed acceleration |
-| Sampling | Baseline is the safe default; speculation is explicitly selected. Greedy only (temperature=0); full sampled speculative correctness is future work |
-| API | GET /v1/models; POST /v1/chat/completions text-only subset; local compare/run events |
-| API supported input | model, messages(system/user/assistant text), max_tokens, temperature=0, stream, mode, n=1; stop=null |
-| API unsupported | Custom stop, tools, images, response_format, logprobs, n>1 and unknown fields fail validation |
-| Prefix cache | Exact token prefixes, cloning, byte budget and eviction; no disk persistence or approximate replay |
-| Public showcase | Static; does not execute models or automatically connect to localhost |
-| DeepSeek V4.1 / official DSpark | Not implemented or validated by this release |
+| Apple M4 Pro / 24 GiB | Actual development host; per-report resource measurements |
+| Other Apple Silicon | Requires a complete hardware report; not verified by these measurements |
+| Intel macOS / Linux / Windows | Portable logic/diagnostics only, no Metal generation |
+| Python | 3.12/3.13 dependency range; local hardware checks on 3.12 |
+| MLX / MLX-LM | Locked 0.32.4 / 0.32.2; upgrades require sampler/state re-audit |
+| Qwen3.5-9B-8bit | Primary candidate, real baseline/sampling/API/UI checked; final quality/quantization choice pending |
+| Qwen3.5-9B hybrid speculation | Explicit experimental Python/probe entry with locked 0.8B4bit draft; one 96-token real four-mode equality control; public API/UI baseline only |
+| Qwen3.5-9B-4bit / Qwen3-14B-4bit | Quality/efficiency controls in progress; do not infer results from 9B8bit |
+| Qwen3-4B + Qwen3-0.6B draft | Regression pair; fixed/legacy/DS greedy paths; tokenizer identity checks |
+| Qwen3-0.6B | Small standalone baseline; self-draft is a correctness control |
+| Retired Qwen3.8-27B | Removed from active profiles; obsolete weights/chunks cleaned; historical failures preserved |
+| Baseline sampling | temperature 0–2, top_p (0,1], top_k, presence_penalty −2–2, optional seed; explicit enable_thinking |
+| Speculative sampling | Greedy only: temperature=0, top_p=1, top_k=0, presence_penalty=0; unsupported settings fail validation |
+| API | GET /v1/models; POST /v1/chat/completions text n=1, optional SSE; local run/events/cancel |
+| API unsupported | Tools, images, response_format, logprobs, custom stop, n>1 and unknown fields fail validation |
+| Prefix cache | Native LRU for trimmable state; hybrid exact snapshots/suffix replay; cloning, byte budgets and eviction |
+| Public showcase | Static evidence and downloads; no automatic localhost or public inference |
+| Full V4.1 / official DSpark | Unsupported; no trained confidence head or continuous batching |
 
-中文：没有报告的硬件标为未验证；无 Metal CI 只覆盖控制逻辑。服务只实现明确列出的文本 greedy 子集，不能宣称完整 OpenAI 协议兼容。模型许可与代码许可独立。
+The full 9B sampler/native/cache controls passed 15 engineering checks. Same seed is tested at the locked runtime, not promised portable across hardware/library versions. Public model-quality subsets and fair engine performance remain separate acceptance work.
 
-See [27B resource and lower-bit evidence](qwen27.md) for the pinned 4-bit audit and untested 3/2-bit community alternatives. Estimates are budget gates, not measured runtime peaks.
+中文：当前 9B 可在 API/UI 普通或采样生成，实验混合推测不能从公开接口绕过 profile 限制。无报告的模型/硬件不标成已验证；greedy token 一致不等于所有题目正确。详见 [第二阶段证据](phase2.md) 和 [27B 历史](qwen27.md)。

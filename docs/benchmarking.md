@@ -19,7 +19,17 @@ Report model load, TTFT, isolated project prefill where available, decode throug
 
 中文：先完成真实下载，再执行上述单组 GPU 命令。保留失败、回退及完整 token 差异；缓存冷态、权重驻留和系统页缓存分别说明。TTFT、prefill、decode、总时长与内存口径不能混用。样本不足不宣传 p95 或统计显著。只发布匿名标准语料，私人提示词默认不进入公开证据。
 
-## M4 Pro release evidence (2026-10-21)
+## Phase 2 measurement boundary
+
+The primary candidate is now Qwen3.5-9B-8bit. [Phase 2 evidence](phase2.md) separates real loading/API/UI, local quality smoke, executable DS correctness and competitive performance. The historical 4B numbers below remain unchanged and do not describe 9B.
+
+For DS ablations, use `benchmarks/experiments/ds_budget_ablation.py --profile qwen3.5-9b-8bit` after locking development choices, source archive, model/draft/template/sampling/cache budget and GPU/I/O exclusivity. The experimental hybrid entry includes snapshot/replay cost. Native MLX-LM does not support this hybrid speculative target: mark that path unsupported rather than inventing a zero time; retain its real greedy baseline. Same-loop fixed budgets are own ablations, not a second competing framework.
+
+The second service is oMLX at its audited revision. Actual compatibility probes are distinct from fair performance measurement. Compare sequentially with native cache features enabled and the same pinned weights, settings, context, byte budget and request traces. Separate cold load, warm model/cold KV, hot KV, changed tails and real conversation continuation. Keep TTFT, ITL/task time, quality, failures and peak/swap boundaries. Bootstrap by prompt/session cluster, not repeat as independent samples. No two-competitor advantage is established yet.
+
+Public quality subsets use [PHASE2_QUALITY_PROTOCOL.md](PHASE2_QUALITY_PROTOCOL.md) and `benchmarks/quality/README.md`; freeze runtime, runner, scorers, IDs and locks with `scripts/freeze_quality_source.py`. Raw public tasks/generations stay in `results/quality-cache`; publish sanitized summaries with IDs, outcomes, settings and denominators. Small public subsets are not leaderboard reproduction. Initial local 12-task adaptation results changed source during execution and are not a frozen formal comparison.
+
+## Historical v0.1.0a1 M4 Pro evidence (2026-10-21)
 
 `benchmarks/reports/m4-pro-qwen3-4b/summary.json` and `report.md` contain the complete fixed full corpus: 12 prompts, 3 measured repeats plus retained warmups, 64-token cap, greedy, thinking disabled, locked Qwen3-4B/0.6B, fixed lengths 1/2/4, rotating order and empty KV before every run. There are 216 measured runs (288 including warmups), zero failed runs, and 27/36 comparison groups where all six variants have identical complete token sequences. Ordinary baseline matches native MLX-LM on all 36 measured groups; speculative shape differences remain visible.
 

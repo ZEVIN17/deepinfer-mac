@@ -1,0 +1,258 @@
+{
+  "stage": "independent hybrid correctness verification; separate code-quality/anti-pattern review still required",
+  "created_utc": "2026-10-21T05:29:21.705921+00:00",
+  "scope": "CPU verification, installed API audit, independent original-C++ replay, and inspection of previously generated real-Metal/9B evidence. Reviewer did not occupy GPU or rerun Metal.",
+  "runtime_sources_reviewed_sha256": {
+    "src/deepinfer_mac/hybrid_speculative.py": "4a32f6f920df334206da705726779863cc4f7422e564e27ba9af0f972a8ec835",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/policy.py": "25dbbac857e2f7a1fdc0e0956a90b31eca1661b9f0ce1b51b07ab35479313d43",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "tests/test_hybrid_speculative.py": "c2f7da8e15da1004727537c25e7f143831cb1786726b52f1e557c919589ba5f6",
+    "tests/test_hybrid_exit_boundaries.py": "7c8eaf0b916cd06d16f803dea83415975b55e22e19a0feadd04caff3a4189e89",
+    "tests/test_speculative_metal.py": "476987517b7d1c2e29e8c803ea5c5609a6cada642c30e962da75922bec6a26af",
+    "benchmarks/experiments/verify_hybrid_ds_trace.py": "9a6b705ad841d08b7b759aa0d945ca463b326f729bd08b816a414e93f189040e",
+    "benchmarks/experiments/ds_budget_ablation.py": "202d96787dba81f3c981327fa074a5ad687a5992f57381b28e82dc985c1d2909",
+    "tests/reference/vendor/mtp_varlen.hpp": "164f45db4cccd6d6909dd2846e7dfffb57754b108af679443bf4bd71ec33785a"
+  },
+  "locked_dependency": {
+    "mlx-lm": "0.32.2",
+    "mlx": "0.32.4"
+  },
+  "commands": [
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "passed": 109,
+      "skipped": 41,
+      "status": "passed",
+      "scope": "current shared worktree at execution time; not a frozen release artifact"
+    },
+    {
+      "command": ".venv/bin/ruff check src tests scripts benchmarks/experiments",
+      "status": "All checks passed"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_hybrid_exit_boundaries.py",
+      "passed": 5,
+      "status": "passed"
+    },
+    {
+      "command": ".venv/bin/python benchmarks/experiments/verify_hybrid_ds_trace.py",
+      "status": "passed"
+    }
+  ],
+  "state_contract": {
+    "installed_primary_sources": [
+      ".venv/lib/python3.12/site-packages/mlx_lm/models/cache.py:381",
+      ".venv/lib/python3.12/site-packages/mlx_lm/models/cache.py:621"
+    ],
+    "KVCache_state": [
+      "keys",
+      "values",
+      "offset"
+    ],
+    "ArraysCache_state": [
+      "cache",
+      "left_padding",
+      "lengths"
+    ],
+    "restore": "Assign deep-copied .state to original cache instances; target/draft list and cache object identity retained. No recurrent trim or inferred missing setter.",
+    "invariants": [
+      "Full k+1 outputs retain target verified prefix; final corrective output remains unconsumed.",
+      "Full accept leaves final accepted draft input pending, then batches it with the next gold input.",
+      "Partial rejection, length truncation and generator.close restore target then replay old gold plus actual yielded outputs except the final output.",
+      "Draft is retained only when its consumed prefix exactly matches actual outputs; otherwise restore and replay old pending plus actual consumed prefix.",
+      "Zero budget does not execute draft; pending work accumulates until a positive-budget cycle.",
+      "All replay state tensors are mx.eval-ed before complete-cycle timing closes; snapshots, output consumer and recovery cost are included.",
+      "A positive-budget pre-yield forward or profiling-hook error restores available snapshots and aborts incomplete DS schedule state without invented acceptance feedback.",
+      "Zero-budget pre-yield device failure has no snapshot; request-local mutable caches are discarded by engine. No successful request/cache continuation is claimed after a failed forward.",
+      "Engine checks cancellation on every yielded token and closes generator; adapter itself checks cancellation between cycles. Existing prompt snapshots are cloned and never mutated by a cancelled request."
+    ]
+  },
+  "independent_new_exit_coverage": {
+    "test_file": "tests/test_hybrid_exit_boundaries.py",
+    "exhaustive_small_exit_combinations": 108,
+    "dimensions": {
+      "budget": [
+        1,
+        2,
+        4
+      ],
+      "draft_rejection": [
+        null,
+        0,
+        1,
+        3
+      ],
+      "close_after_output": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "additional": [
+      "Cancellation between completed cycles prevents another model forward",
+      "Consumer exception during output closes and retains teacher prefix",
+      "Verification callback exception restores snapshots and aborts policy state",
+      "Trimmable all-accept stream gathers steady costs and reaches actual DS schedule"
+    ],
+    "oracle_boundary": "Stateful portable teacher executes one input at a time; it is distinct from adapter snapshot/replay control flow. Installed Metal/9B evidence is separately required.",
+    "not_newly_verified_in_metal": [
+      "Non-null ArraysCache.left_padding/lengths transitions",
+      "Consumer/profiling callback failure",
+      "Cancellation/pre-yield exception"
+    ]
+  },
+  "natural_draft_lag_regression": {
+    "current_expression": "max(0, len(draft_y) - 2)",
+    "status": "already correct when independent review began; no runtime fix required",
+    "behavior_test": "test_trimmable_all_accept_collects_steady_costs_and_enters_ds_schedule",
+    "in_memory_mutation": {
+      "change": "len(draft_y)-2 to len(draft_y)-1",
+      "current": "passed",
+      "mutant": "assertion_failed",
+      "files_or_historical_reports_modified": false
+    },
+    "hybrid_logging_boundary": "rounds.catchup_tokens is raw pending count; DS observe excludes max(0,pending-1). The new trace verifier explicitly converts this boundary instead of treating historical raw records as normalized costs."
+  },
+  "real_hardware_evidence_inspected": {
+    "source_report": "benchmarks/reports/phase2-hybrid-ds-qwen35-9b8-probe.json",
+    "source_report_sha256": "fb85c1342d9b52c92f5e7e57438bf1cb162ebeb8970e37a3b7c1cc900f9f33ae",
+    "variants_recomputed": {
+      "baseline": {
+        "output_tokens": 96,
+        "exact_to_baseline": true,
+        "raw_total_ms": 4553.9653749438
+      },
+      "fixed1": {
+        "output_tokens": 96,
+        "exact_to_baseline": true,
+        "raw_total_ms": 3013.560000108555
+      },
+      "fixed2": {
+        "output_tokens": 96,
+        "exact_to_baseline": true,
+        "raw_total_ms": 2362.8935830201954
+      },
+      "ds": {
+        "output_tokens": 96,
+        "exact_to_baseline": true,
+        "raw_total_ms": 2473.4382909955457
+      }
+    },
+    "hybrid_core_source_matches_probe": true,
+    "prior_real_metal_tests": {
+      "test": "tests/test_speculative_metal.py::test_hybrid_actual_arrays_and_kv_cache_recovery",
+      "cases": 6,
+      "result": "reported passed by implementation owner and DS_DESIGN_MAPPING; not independently rerun by this CPU reviewer",
+      "coverage": "Actual ArraysCache recurrent tensors + KVCache offsets/content, three reject settings, full/early close"
+    },
+    "sample_limitations": "Single prompt, 96-token truncation, different initial compile/warmup states; this is mechanism/equality evidence, not complete code-task success, model quality or speed superiority.",
+    "divergence_diagnostic": null,
+    "no_invented_logit_explanation": true
+  },
+  "independent_original_cpp_real_trace": {
+    "cycles": 35,
+    "decisions": 24,
+    "matches": true,
+    "history_errors": [],
+    "actual_seqlens_q": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      4
+    ],
+    "expected_seqlens_q": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      4
+    ],
+    "method": "unchanged C++ oracle; chronological actual runtime feedback",
+    "source_report": "benchmarks/reports/phase2-hybrid-ds-qwen35-9b8-probe.json",
+    "catchup_boundary": "raw pending length minus natural one-input draft lag"
+  },
+  "tokenizer_compatibility": {
+    "evidence": "artifacts/phase2-model-audit/hybrid-draft/compatibility.json",
+    "tokenizer_file_sha256": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+    "verified_0_8b": "Complete tokenizer, added tokens, special IDs and 248320 output vocabulary match target. Standalone jinja default differs; explicit thinking True and False match. Engine always tokenizes with target once.",
+    "not_inferred": "2B standalone jinja is unaudited and its weights are not run; its metadata match is not runtime compatibility evidence."
+  },
+  "ablation_harness_review": {
+    "file": "benchmarks/experiments/ds_budget_ablation.py",
+    "fairness_present": [
+      "Native greedy retains target-only prefill; same-loop fixed0 prefill includes draft and is labeled own control",
+      "Hybrid native speculation rejected by installed MLX-LM; marked unsupported with no invented zero timing",
+      "Development-only exact-to-greedy candidate selection freezes tuned budget before heldout",
+      "All raw outputs and first divergences retained",
+      "Variant order rotates; prompt-cluster bootstrap does not treat repetitions as independent tasks",
+      "Any unequal output makes the overall equivalent-speed claim false; exact-only subcomparisons labeled",
+      "Runtime source/lock manifest checked at start/end; changed source disables formal equality-speed claim",
+      "Second competitor claim remains false"
+    ],
+    "formal_run_preconditions_still_required": [
+      "Freeze source and archive it with harness hash; no edits/import drift during run",
+      "GPU and model-download I/O exclusivity; separate full warmup for every relevant shape and output path",
+      "Report all mismatch denominators and quality outcomes beside exact-only ratios",
+      "Complete 2K/4K/8K cache, branch and real session workloads with appropriate output budgets",
+      "Run second mature service with equal model/template/sampling/cache budget and real capability checks"
+    ]
+  },
+  "superiority": {
+    "DS_vs_best_fixed_proven": false,
+    "two_competitor_advantage_proven": false,
+    "raw_single_prompt_latencies_must_not_be_divided_for_speedup_claim": true,
+    "reason": "Formal heldout main-model performance distribution and second-engine comparison pending; single probe is not acceptance of competitive target."
+  },
+  "files_changed_by_this_review": [
+    "tests/test_hybrid_exit_boundaries.py",
+    "benchmarks/experiments/verify_hybrid_ds_trace.py",
+    "docs/evidence/phase2-hybrid-verification.json"
+  ],
+  "runtime_files_modified_by_this_review": []
+}

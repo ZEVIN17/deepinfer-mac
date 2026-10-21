@@ -25,11 +25,18 @@ def parser():
         sub.add_argument("--thinking", action="store_true")
         sub.add_argument("--prefill-step-size", type=int, default=512)
         sub.add_argument("--cache-budget-mb", type=int, default=512)
+        sub.add_argument("--adaptive-scheduler", choices=("legacy", "ds"), default="legacy")
+        sub.add_argument("--cache-backend", choices=("native", "exact"), default="native")
         if command == "run":
             sub.add_argument("prompt", nargs="?", help="Prompt text; omit to read stdin")
             sub.add_argument("--mode", choices=("baseline", "fixed_speculative", "adaptive"), default="baseline")
             sub.add_argument("--draft-tokens", type=int, default=3)
             sub.add_argument("--no-cache", action="store_true")
+            sub.add_argument("--temperature", type=float, default=0)
+            sub.add_argument("--top-p", type=float, default=1)
+            sub.add_argument("--top-k", type=int, default=0)
+            sub.add_argument("--presence-penalty", type=float, default=0)
+            sub.add_argument("--seed", type=int)
             sub.add_argument("--json", action="store_true", help="Print complete result instead of streaming text")
         else:
             sub.add_argument("--suite", choices=("quick", "full"), default="quick")
@@ -78,10 +85,16 @@ def main(argv=None):
             raise ValueError("cache-budget-mb must be non-negative")
         request = GenerationRequest(profile=args.profile, prompt=prompt, max_tokens=args.max_tokens,
                                     enable_thinking=args.thinking, prefill_step_size=args.prefill_step_size,
+                                    temperature=args.temperature if args.command == "run" else 0,
+                                    top_p=args.top_p if args.command == "run" else 1,
+                                    top_k=args.top_k if args.command == "run" else 0,
+                                    presence_penalty=args.presence_penalty if args.command == "run" else 0,
+                                    seed=args.seed if args.command == "run" else None,
                                     mode=args.mode if args.command == "run" else "baseline",
                                     num_draft_tokens=args.draft_tokens if args.command == "run" else 3,
                                     use_cache=not args.no_cache if args.command == "run" else False)
-        engine = InferenceEngine(cache_budget_bytes=args.cache_budget_mb * 1024**2)
+        engine = InferenceEngine(cache_budget_bytes=args.cache_budget_mb * 1024**2,
+                                 adaptive_scheduler=args.adaptive_scheduler, cache_backend=args.cache_backend)
         try:
             if args.command == "run":
                 from .benchmark.export import jsonable

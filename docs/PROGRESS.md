@@ -1,43 +1,56 @@
-# DeepInfer-Mac — resume here
+# DeepInfer-Mac — current continuation
 
-Updated 2026-10-21, Asia/Shanghai. User chose small-model validation first; Qwen3.8-27B remains a separate, non-default candidate. Existing untracked work was preserved; initial pytest had no tests. First usable alpha is complete and published. Source/docs/site, local and Linux CI verification, Pages deployment and alpha artifact checks all passed. No further experiment or recurring build is running.
+Updated2026-10-21. Read `PHASE2_EXECUTION_PLAN.md`, `PHASE2_MODEL_SELECTION.md`, `DS_DESIGN_MAPPING.md`. Preserve the uncommitted work. User authorized continuous implementation and precise removal of unused model weights; checkpoints report evidence, not approval gates.
 
-## Current result
-- Real MLX engine, byte-budget exact prefix cache, bounded local API/UI and CLI are implemented. Default is baseline; fixed/adaptive require explicit selection. No official DSpark/full V4.1 port.
-- Final checks passed:21 portable tests,14 skipped;14 explicit Metal controls; Ruff;7-page/109-link site; wheel/sdist resource+license+privacy validation. Final4B API smoke and installed-wheel4B CLI passed. No background GPU/server/download job.
-- Clean-wheel real4B CLI ran outside checkout with no PYTHONPATH, default baseline,32 output tokens and zero observed swap delta. Evidence: `benchmarks/reports/clean-wheel-qwen3-4b.json` + `.meta.json`.
-- Formal Qwen3-4B full corpus:216 measured/288 including warmups, zero failures, full all-variant token equality27/36, baseline/native36/36. Adaptive did not beat tuned fixed; no equivalent speculative speedup claimed.
-- Exact-cache evidence: warm model,1740-token prompt,2 output tokens including EOS;1739 hot-hit tokens. Three cold/hot pairs2097–2174/36.7–38.3ms, full tokens/text equal. Eight512-prefix branches match, active+6KiB/RSS+0.26MiB, observed request swap0;1KiB admission refusal/recompute matches. This is narrow repeated-prefill evidence.
-- Isolated-residency control:18 OS-process blocks,54measured+54warmups, zero failures/swap delta.6/9 all-variant groups match; native/baseline/adaptive9/9. Earlier same-process24MemoryErrors remain. Close frees Metalactive~2.6GB→8B/cache0, but native/Rust RSS retention across reloads remains unresolved; frequent switches should restart/use isolated processes.
-- Static site:7 pages,109 checked links/resources, real full benchmark/cache JSON, source archive,4B recorded UI demo; desktop and actual390×844 browser viewport checked. No public inference or automatic localhost calls.
+## Current acceptance status
 
-## Commands
+The joint goal remains **DS-derived executable methods + fair superiority over two common frameworks**. It is not complete: no competitive superiority has been established. Native parity or model-selection quality gains do not satisfy that goal. Alpha v0.1.0a1 is historical and its published package bytes must remain immutable.
+
+## Model choice and cleanup
+
+- Primary candidate9B8bit: `mlx-community/Qwen3.5-9B-8bit@16daa4818c54ce5f5436f929d52542eb65bbed9d`; both shards and all1260tensor headers SHA verified. Total weights10,426,592,423B; text9,514,412,544B; vision912,020,960B; no MTP keys.
+- Same-model4bit control `8b2b98c00a6b4d291155e4890773ca8f769aee53`;14B4bit fallback `a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4`. 9B4bit both shards/full1260headers are SHA verified (text5,038,041,600B,vision912,020,960B), not loaded yet.14B4bit two shards/full1007headers also SHA verified (8,307,898,514B); all downloads complete, 9B4bit first actual baseline load succeeded and public comparison is running;14B not loaded yet. Actual quality/performance comparison remains pending.
+- Explicitly retired27B profiles no longer appear in active API/UI. Six exact old27B HF-cache/chunk directories removed:19,177,137,641 logical B (17.86GiB), allocated19,361,185,792B. Original reports/audit metadata and4B/0.6B retained. All unrelated models untouched.
+- Completed9B8bit range chunks (10,426,592,423B) removed after SHA-verified cache assembly. Cleanup/PID/path evidence: `artifacts/phase2-model-audit/model-cleanup-20261021.json`.
+- DS adaptation draft0.8B4bit `da28692b5f139cb0ec58a356b437486b7dac7462` downloaded, single625,229,487B shard SHA verified. Complete vocabulary/special IDs match9B. Template files differ in default thinking branch; explicitTrue/False render equal target tokens. No public speculative mode until validation. Evidence: `artifacts/phase2-model-audit/hybrid-draft/`.
+
+## Actual9B8bit evidence
+
+- Fixed12task dev/heldout smoke ×4 settings completed48cases. Greedy engine/native10/12, full12/12token equality; official non-thinking11/12; thinking9/12 at1024 minimum cap (3unfinished). All failures retained: greedy ball arithmetic wrong, non-thinking Chinese HBM claim wrong, greedy capacity overclaim. Not a full benchmark or statistical equivalence.
+- `benchmarks/reports/quality-qwen3.5-9b-8bit.json`: raw prompts, IDs, settings, seed42, outputs, manual rubrics, resources. Initial adaptation run overlaps source review edits; source_start/end differ. Formal subsequent runs must use frozen source.
+- First load2.43s; pre-load-reset Metal peak9,514,412,552B; observed system swap+387,317,760B. This is not a no-swap acceptance claim. Request peaks/RSS/swap reported separately.
+- Real API nonstream/SSE/cache token equality, unsupported-mode422, stream-disconnect cancellation and recovery passed: `benchmarks/reports/phase2-service-qwen3.5-9b-8bit.json`.
+- Actual Safari UI fixed clamp repair completed, matches direct engine IDs; TTFT939.62ms,total1834.24ms,decode27.94tok/s,request swap0. One interactive request, not a benchmark. `benchmarks/reports/phase2-ui-qwen35-9b8.json`; screenshot `docs/evidence/phase2-local-ui-qwen35-9b8.png`. Temporary browser tab and API process21136 closed.
+
+## DS and verification
+
+- Real MTPVarlen-derived scheduler with empirical acceptance implemented; original C++ oracle + independent invariant/replay tests. Production4B probe96tokens/42cycles made31core decisions: `benchmarks/reports/phase2-ds-engine-smoke-qwen3-4b.json`. No claim of27B/9B acceleration from this.
+- Review fixed native full-prompt replay on cache hit, failed speculative-cycle policy drift, and duplicated snapshot bytes in explicit memory budgets. Hybrid snapshot/restore/replay for9B passed baseline/fixed1/fixed2/DS96token exact equality on one real prompt; DS made24core decisions. These are correctness controls with unequal warmup, not speed evidence.
+- Latest root portable check115passed/41Metal skipped; root independently ran `.venv/bin/python -m pytest -q --run-metal -m metal`:41passed,137deselected,1.33s. This predates subsequent opt-in message-checkpoint additions. Ruff passed. Site candidate8pages/152links and isolateda2package verification independently passed; alpha artifacts unchanged.
+
+## Active work / next commands
+
+- At this checkpoint GPU owner=`phase2_quality`,9B4 public comparison execsession56865;public8bit18133 completed54/54 and all downloads complete (14B83761,9B4 96080 exit0). Redundant completed range chunks removed. All three compatibility servers closed; no API server remains. Confirm process/owner before any GPU run. Ownership is handed back explicitly, not inferred from stale documentation.
+- Baseline/native sampling support added (temperature/top_p/top_k/presence/seed/thinking), strict greedy-only speculative gates retained; same-seed/cache/native15/15checks passed, plus1Metal full-history penalty. CLI and actualAPI/SSE official sampling return8 on the ball task; cancel/recovery passed. Public8bit formal run is complete,8K resource probe completed (8300+256,peak10.827GB,swap+2.794GB); formal8K service group remains deferred.9B4bit public comparison is running,14B follows and fair nativeMLX/oMLX benchmarks. Public raw tasks/reports stay excluded in `results/quality-cache`; publish sanitized summary only.
+- Formal quality sourcev2: `benchmarks/reports/phase2-quality-source-v2-20261021/source.tar.gz`, SHA `1b928104acee51f742b8be4893b2804cfac59779aa79904395dad13f351a09d4`;47files inclruntime/locks/runner/scorers/licenses, extracted `/tmp/deepinfer-phase2-quality-source-v2-20261021`. Public data is copied locally outside the archive. Checkouta2/version/cache experiments do not alter this frozen runtime.
+- Public27greedy results complete: IFEval6/8,MMLU-Pro11/14,LCBpublic-tests2/4,auxiliaryrepair1/1. All3MMLUunparseable failures reached1024cap; bothLCBfailures reached2048cap. They are finite-budget completion failures, not demonstrated intrinsic inability. Official production sampling complete: IFEval7/8,MMLU9/14,LCB3/4,repair1/1;5MMLU+1LCB failures hit the same caps. Sampling helps some instructions/code but completes fewer MMLU tasks at this budget. No final model selection/quantization-equivalence claim yet. Sanitized `benchmarks/reports/public-quality-qwen35-9b8-v2-summary.json`. Raw `results/quality-cache/quality-public-qwen35-9b8-v2.json`, log `/tmp/deepinfer-public-quality-qwen35-9b8-v2.log`.
+- Public corpus27: IFEval8, MMLU-Pro14, LCBv6 public-tests smoke4, auxiliaryrepair1. Sources/licenses/fixed IDs: `benchmarks/quality/README.md` +manifest. This is not leaderboard reproduction. `PHASE2_QUALITY_PROTOCOL.md` defines the local smoke and sampling.
+
 ```sh
-uv sync --frozen --extra mlx --extra dev
-uv run deepinfer-mac doctor
-uv run deepinfer-mac run --profile qwen3-4b '用中文解释 KV 缓存。'
-uv run deepinfer-mac serve
-uv run pytest -q
-uv run pytest -q --run-metal -m metal
-uv run deepinfer-mac bench --profile qwen3-4b --suite full --repeats 3 --max-tokens 64 --fixed-lengths 1 2 4 --output results/reproduction
-python3 site/build.py && python3 site/check.py
-uv build && python3 scripts/verify_artifacts.py
+.venv/bin/python -m pytest -q
+.venv/bin/python -m pytest -q --run-metal -m metal
+.venv/bin/ruff check src tests scripts benchmarks/experiments benchmarks/quality
+# Formal public run: use the frozenv2 working directory/PYTHONPATH and repositoryvenv.
+#9B4 public comparison56865is active: inspect it before starting a duplicate.
+PYTHONPATH=src .venv/bin/python benchmarks/experiments/context_resource_probe.py --input-tokens 8300 --max-tokens 256 --experimental-context-limit 9216
+.venv/bin/python benchmarks/quality/runner.py summary --responses results/quality-cache/quality-public-qwen35-9b8-v2.json --output benchmarks/reports/public-quality-qwen35-9b8-v2-summary.json
+PYTHONPATH=src .venv/bin/python -m deepinfer_mac.cli serve --port 8876
+PYTHONPATH=src .venv/bin/python benchmarks/experiments/phase2_service_probe.py
 ```
 
-## Evidence
-- `docs/evidence.md` is the public index; `docs/benchmarking.md` defines measurement boundaries.
-- `benchmarks/reports/m4-pro-qwen3-4b/`: full raw JSON/CSV/JSONL/report, immutable measured source snapshot+28-file SHA manifest; digest d6de01beb2dbe1fe4434036326d6c17d7872668b5090b25be3d5d00409a43c1e. Runtime had no Git commit; archive was verified byte-for-byte.
-- `benchmarks/reports/cache-qwen3-4b.json`, `resident-process-ablation-qwen3-4b.json`, `unload-resource-check.json`, `metal-service-smoke*.json`: cache, residency and actual service evidence.
-- `benchmarks/reports/local-ui-demo-qwen3-4b.json` and `local-ui-demo.json`: actual4B/0.6B UI exports; screenshots in `docs/evidence/`. Single interactive requests, not benchmark claims.
-- `upstream.lock.json`, `models.lock.json`, `uv.lock`; exact reference-header source/license audit in `docs/architecture.md`.
-- `docs/evidence/source-manifest.json`: final release source after safe defaults, explicitly distinct from frozen benchmark source. Regenerate only if runtime/locks change.
-- Existing clean environment `/private/tmp/deepinfer-clean-install/bin/python` has44 dependencies; installation/doctor previously passed. Reuse it, do not download dependencies again. Verified wheel path `dist/deepinfer_mac-0.1.0a1-py3-none-any.whl`; companion sdist in the same directory. Final build is complete; preserve these bytes for upload/checksums.
+The quality command above must run from a frozen copy for formal evidence; use `scripts/freeze_quality_source.py`, setPYTHONPATH to its `src`, and materialize public tasks locally outside the source archive. `scripts/audit_model_snapshot.py` checks local shard SHA/tensor identity. Existing4B regression and0.6B weights remain ready.
 
-## 27B checkpoint and remaining external steps
-- `docs/qwen27.md`, `qwen27.manifest.json`, `qwen27-alternatives.json` and `scripts/probe_qwen27.py` contain pinned audit, preflight and resume commands.4-bit2K/4K estimates17.92/18.05GiB available vs observed8.06/8.26GiB; blocked before load, not OOM/peak. Clean3-bit/affine2-bit candidates estimate15.21/11.79GiB; neither downloaded/quality-tested. No silent replacement.
-- Paused27B4-bit transfer:88/1274 first-shard chunks(~367MiB), `/tmp/deepinfer-download-chunks/Qwen3.8-27B-4bit/`. Check existing processes before resuming; `/tmp` may be cleaned across reboots. No download/GPU job currently required for small-model release.
-- Published canonical release source: `9cda996b98a3967eb6395da520cf83ce5b7287a0`; tree `6c8f67ded02c06c5f495c39067bf76e519ec7d54` exactly matches142-file locally verified source. Original local7643... remains preserved. Official Git Data API was used after Git transport failure; no force update.
-- Live website: https://zevin17.github.io/deepinfer-mac/ . Deploy workflow39540322347 succeeded;9 live pages/assets/JSON endpoints returned200 and matched local production bytes exactly (`docs/evidence/live-site-check.json`). Portable CI39540162708 succeeded on canonical source; initial pre-enablement Pages failure was resolved by enabling workflow Pages and dispatching deployment.
-- Public alpha: https://github.com/ZEVIN17/deepinfer-mac/releases/tag/v0.1.0a1 ; prerelease=true, not latest, tag targets exact canonical source. Wheel, sdist, complete static ZIP and SHA256SUMS uploaded; GitHub returned matching digests. No credentials were printed or persisted.
-- SHA256 wheel `c2fef578a8f5d654276822d59785f12509c585784d6ff9b81b747a4fdef31010`; sdist `b13994a95217fa3a862aade4b2f08950281f574845a36f564874f0d495a91bb1`; site ZIP `88f5df1fa842580966934ddec82683978bf43730f4e04b5555c4c1292cae7e39`. Published package bytes are final; do not rebuild them merely for this publication-log update.
-- Remaining limits are hardware/experimental scope, not release blockers:27B not loaded, speculative numeric divergence/no adaptive gain, and reload RSS retention. Read the specific evidence before extending claims.
+## Historical references
+
+- Original alpha/publication log preserved verbatim in `history/PROGRESS_ALPHA_20261021.md`; prior phase audit=`PHASE1_AUDIT.md`.
+- Historical alpha release: https://github.com/ZEVIN17/deepinfer-mac/releases/tag/v0.1.0a1 ; site https://zevin17.github.io/deepinfer-mac/ . Neither is currentPhase2 completion evidence.
