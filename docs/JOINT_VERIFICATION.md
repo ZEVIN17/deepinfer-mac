@@ -1,6 +1,7 @@
 # Experimental joint budget and variable-length verification
 
-This opt-in Python mechanism is separate from the public continuous worker. Each tick can supply a new complete
+This opt-in Python mechanism also has a separate explicit experimental service entry
+(described below); the default serial and baseline continuous services are unchanged. Each tick can supply a new complete
 cost key for dynamic batch membership; strategy and identity mismatches reject even
 when forced lengths are used. It
 has no pretrained-model, hybrid-batch, quality or comparative speed acceptance.
@@ -104,3 +105,68 @@ histories agreed; independent token-by-token reconstruction kept the next argmax
 but had nonzero logits differences. These are separately recorded diagnostics,
 not grounds to relax exact-token acceptance or discard the failing case. Reports
 keep their original source hashes; later contract guards do not relabel those runs.
+
+## Experimental service entry (independent acceptance required)
+
+The explicit service opt-in connects the joint executor to the existing bounded
+queue, admission, UID/slot-generation lifecycle and SSE transport. Default serial
+and ordinary continuous services retain their existing behavior. A configured
+custom ModelSpec must contain distinct target and draft sources (local content
+identity or pinned repository commits); both resolve through the existing pair
+snapshot/tokenizer and combined weight/runtime preload checks. Dense `KVCache`
+only is accepted by this service, independently of the mechanism's isolated
+hybrid tests. Example configuration does not constitute model acceptance.
+
+```sh
+# Only after checking available memory; use a free port, not an existing service.
+.venv/bin/python -m deepinfer_mac.cli serve --port 8876 \
+  --model-config examples/models/research-smollm2-pair.local.json \
+  --experimental-joint-verification --joint-profile research-smollm2-pair \
+  --joint-depth 3 --max-active 2 --batch-context-tokens 4096
+```
+
+Python uses `create_app(experimental_joint_verification=True,
+ joint_config=JointServiceConfig(profile=...), model_registry=registry,
+ continuous_config=ContinuousConfig(...))`. The registered pair receives greedy
+`mode="baseline"` requests; results explicitly record `requested_mode=baseline`
+and `effective_mode=joint_experimental`. Unsupported sampling, profiles, modes
+and comparison reject with 422; there is no silent promotion or fallback. Model
+metadata lists this experimental capability separately with `verified=false`.
+CLI opt-in cannot combine with `--execution-backend continuous`.
+
+Admission includes both models, both contexts, conservative target/draft
+snapshot/copy/replay scratch and longest-row padded verification memory. Both
+models reload through the combined preload guard for each new drained group;
+this deliberately sacrifices warm group reuse. Prefix reuse is cold. Prompt
+prefill runs synchronously in bounded chunks; a new prefill cannot be preempted
+by an existing decoder. `tick_token_budget`, upstream continuous prefill batches
+and adaptive chunk policy do not bound joint ticks. They are omitted from joint
+result metrics. The first tail is the last prompt token; both caches initially
+contain exactly `prompt[:-1]`. Completed rounds leave the final emitted token
+pending in both caches. EOS and remaining output limits release the row.
+
+Only a committed verification round creates token events. Cancellation during
+prefill discards its private state without failing existing requests. Cancellation
+during joint verification is observed at the completed-round boundary; remaining
+events for a cancelled request are suppressed and its caches discarded. A failed
+joint round terminates affected requests after the executor rolls back, then the
+worker rebuilds the session. No completed cache is exported or reused. Exact
+serial-native agreement remains unvalidated: shape-dependent near-tie differences
+remain part of the experimental boundary.
+
+Without `--joint-cost-file`, all available draft work is allocated; empirical
+history is not a trained or calibrated confidence head. An optional JSON cost
+file must contain `scope: complete_cycle`, `partition: development`, exact `depth`,
+`mlx_lm_version`, and `source_sha256` from `joint_service.runtime_source_hashes()`.
+Each `curves` entry has a complete `CostKey` under `key` and actual `measurements`
+containing `total_q` and `full_cycle_ms` for every legal total budget. The loader
+computes medians; it does not synthesize missing costs. Pair, quantization,
+strategy, calibration, active count and exact consumed context must match. A
+missing dynamic key uses full budget and reports `cost_curve_available=false`.
+These provenance checks cannot certify the truth of caller-supplied measurements;
+independent measurement and held-out evaluation are still required.
+
+Portable service contract checks: `python -m pytest -q tests/test_joint_service.py`.
+Their controlled session fixtures test lifecycle/API contracts only and are never
+model, language-quality, latency or throughput evidence. Real service acceptance
+must be recorded separately before capability promotion.

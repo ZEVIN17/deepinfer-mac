@@ -249,3 +249,20 @@ The direct control inserts four rows together at fixed chunk32 and is not an
 arrival/shape-trajectory replay. Independent actual API/SSE cancellation/recovery
 also passes (four completed streams, 50 events each); verification and all report
 hashes are in `docs/evidence/phase3-tick-verification.json`.
+
+### Experimental joint service boundary
+
+`joint_service.MLXJointBatchSession` connects the actual separate target/draft
+executor to `JointInferenceWorker`, reusing bounded request ownership, admission,
+slot generations and terminal-state handling. The explicit service opt-in keeps
+public default serial and baseline continuous behavior unchanged. It is limited
+to custom exact-identity dense pairs and greedy requests. Both original cache
+states, snapshots, copies, replay/catch-up and padded verification are reserved.
+New-request prefill cancellation is isolated; verification-round failures roll
+back and invalidate that affected group. SSE only receives verified output tokens.
+Public round metadata is an allowlist of aggregate counters, never another row's
+output or confidence observations. Native serial token equality, trained
+confidence, automatic cost calibration and competitive performance are not
+accepted by this integration. Without an independently measured exact-key curve,
+the executor uses full budget. See `JOINT_VERIFICATION.md` for entry commands,
+non-preemptible prefill and experimental shape-dependent output boundaries.

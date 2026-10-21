@@ -26,6 +26,10 @@ class PendingQueue:
         return not self.items
 
 
+class RequestInsertionCancelled(InterruptedError):
+    """Backend certifies cancellation left existing batch state unchanged."""
+
+
 class BatchInsertionError(RuntimeError):
     """Insertion may have mutated upstream state; discard the whole batch."""
 
@@ -73,6 +77,11 @@ class ContinuousInferenceWorker(InferenceWorker):
         self.thread = threading.Thread(target=self._run, name="deepinfer-continuous-worker", daemon=True)
         self.thread.start()
 
+    backend_name = "continuous"
+
+    def decorate_result(self, result):
+        return result
+
     def submit(self, request, compare=False):
         job = Job(uuid.uuid4().hex, request, compare)
         with self.wakeup:
@@ -83,7 +92,7 @@ class ContinuousInferenceWorker(InferenceWorker):
             self.jobs[job.id] = job
             self.queue.items.append(job)
             job.emit({"type": "status", "stage": "queued", "run_id": job.id,
-                      "execution_backend": "continuous", "eligible_for_batch": batch_eligible(request, compare)})
+                      "execution_backend": self.backend_name, "eligible_for_batch": batch_eligible(request, compare)})
             self._trim_history()
             self.wakeup.notify_all()
         return job
@@ -162,7 +171,12 @@ class ContinuousInferenceWorker(InferenceWorker):
             self.slot_generations[slot] += 1
             job.slot, job.slot_generation = slot, self.slot_generations[slot]
             try:
-                uid = self.session.insert(prepared, job.request)
+                uid = (self.session.insert_request(prepared, job.request, job)
+                       if hasattr(self.session, "insert_request") else self.session.insert(prepared, job.request))
+            except RequestInsertionCancelled:
+                self.free_slots.append(slot)
+                self._finish_cancel(job)
+                return True
             except Exception as exc:
                 self.free_slots.append(slot)
                 self._fail(job, exc)
@@ -227,7 +241,7 @@ class ContinuousInferenceWorker(InferenceWorker):
             "prompt_tokens": len(active.prepared.tokens), "finish_reason": response.finish_reason,
             "model": active.prepared.metadata, "rounds": [],
             "metrics": {
-                "execution_backend": "continuous", "continuous_policy": self.config.policy,
+                "execution_backend": self.backend_name, "continuous_policy": self.config.policy,
                 "experimental": True, "cache_hit_tokens": 0, "cache_reuse": "cold",
                 "use_cache_requested": active.job.request.use_cache, "use_cache_effective": False,
                 "model_identity": active.prepared.identity,
@@ -251,6 +265,7 @@ class ContinuousInferenceWorker(InferenceWorker):
             self._release(active)
             self._finish_cancel(job)
             return
+        job.result = self.decorate_result(job.result)
         job.status = "completed"
         job.transition("finished")
         self._release(active)

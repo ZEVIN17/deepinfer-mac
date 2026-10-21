@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "approved",
+  "approved": true,
+  "review_scope": "Explicit experimental joint service source quality and portable lifecycle contracts; no model/performance acceptance",
+  "review_mode": "Independent frozen-source review, CPU only; no Metal/weights/network",
+  "base_commit": "0b1d834ae1dd52d17076b709032faba3bc399200",
+  "source_sha256": {
+    "src/deepinfer_mac/joint_service.py": "3aa522efe7094a91f01e62dce7875113e4988165942b7c2d84663e73611bf5c6",
+    "src/deepinfer_mac/server/joint_worker.py": "429634ae3a08199448b455bba19db451b13ded140468802273890396a2f99d16",
+    "src/deepinfer_mac/server/continuous_worker.py": "a30d2204c76e1e019560c986800b89f449ff818b3d9c62c621a1fc6d557c95d0",
+    "src/deepinfer_mac/server/app.py": "b865ea8c6aec37b32363720959827ddcfaa5618cc932a41c068782a72b11b0d0",
+    "src/deepinfer_mac/cli.py": "49fd07ff106aca8721a474575730c841bacf4251806b3a3e524e0aa2d35fdb14",
+    "src/deepinfer_mac/varlen_verify.py": "2b5e42a11ecea37c6cf5403675f1ecd73dbac595a1beea633e45c4fb5c796b27",
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "tests/test_joint_service.py": "eb8aa3519123b6f8ff052ea328c668156c9e0e1e6ea4e27a3254900e2f9df74d",
+    "examples/models/research-smollm2-pair.local.json": "e1757d5395dc5944b9ed32a76ccc48d47ac4d36c87a81901a97153d2715a5f04",
+    "examples/models/research-smollm2-pair.repo.json": "0d09863fc977e3641f9463dd96008ed397ebd39af513cf5563a47ad2945c28fd",
+    "docs/JOINT_VERIFICATION.md": "0c429d4e14289271d2595fb1848409e4fc92deef461a437500ab4b1979c66d79",
+    "docs/DS_DESIGN_MAPPING.md": "4f1e4a33e3f1461633692c7670b4026fc53587ac8027630752f931e7f0e95c08"
+  },
+  "verification": {
+    "command": ".venv/bin/python -m pytest -q tests/test_joint_service.py tests/test_continuous_worker.py tests/test_continuous_backend.py tests/test_joint_budget.py tests/test_service.py",
+    "passed": 63,
+    "failed": 0,
+    "duration_seconds": 0.68,
+    "ruff": "passed for joint service/worker, continuous worker, app, CLI and joint tests"
+  },
+  "open_findings": [],
+  "resolved_findings": [
+    {
+      "severity": "P1",
+      "description": "Full joint round outputs exposed foreign concurrent request token IDs in API metadata. Independently reproduced; fixed with aggregate allowlists at session and worker boundaries and two-request result/event JSON regression."
+    },
+    {
+      "severity": "P2",
+      "description": "Raw joint_experimental backend string bypassed explicit flag boundary. Rejected before lifespan; constructor regression passes."
+    },
+    {
+      "severity": "P2",
+      "description": "Cancelled newcomer prefill triggered batch insertion failure and failed unrelated active requests. Backend-certified local cancellation now terminates only newcomer; isolation regression passes."
+    },
+    {
+      "severity": "P3",
+      "description": "Inherited continuous tick budget/policy metrics did not describe joint execution. Removed from joint result; non-preemptible synchronous prefill documented."
+    }
+  ],
+  "reviewed_invariants": [
+    "Distinct exact-identity pair configuration uses new files; audited target-only configurations remain unchanged",
+    "Cold combined target/draft weight and runtime guard executes before model loading; context and scratch reserve cover both models and padded verification",
+    "Only configured profile and greedy baseline requests accepted; effective joint mode is explicit and default baseline capability is not promoted",
+    "Both target and draft start with prompt minus pending tail; verifier commits emitted prefix and leaves last output pending",
+    "Only verified committed outputs reach multi-token event loop; terminal completion, cancellation between events, newcomer cancellation, slot generation and reservation release covered",
+    "No curve means full budget; current-source complete-cycle development curves require all legal q observations and exact pair/strategy/context identity",
+    "Public round fields contain aggregate allowlist only; no foreign output tokens or per-row observations"
+  ],
+  "limits": [
+    "CPU contract controls do not establish actual model service acceptance, serial equivalence, quality or speed advantage",
+    "Joint prefill is synchronous and non-preemptible; round cancellation is observed at verified-round boundary",
+    "No automatic cost calibration or trained confidence head; caller-supplied provenance cannot certify measurement truth",
+    "Source-bound approval applies only to listed hashes"
+  ]
+}

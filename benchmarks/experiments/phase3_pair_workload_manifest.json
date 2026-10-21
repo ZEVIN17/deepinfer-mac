@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "workload_sha256": "d2817da479ad7a5d9f1d48d4984d21332e84deacf3e7015ba5afedc25cc85b61",
+  "raw_workload_public": false,
+  "scope": "Fixed small mechanism workloads; not a quality suite or representative benchmark. Raw prompts remain in private artifacts. No held-out tuning.",
+  "splits": {
+    "development": [
+      {
+        "id": "dev-science",
+        "prompt_sha256": "49d4827116d47ddf7b1122acae8f65f7c92c2b8714ed5b122a337537cd118007",
+        "context_tokens": 128
+      },
+      {
+        "id": "dev-code",
+        "prompt_sha256": "c540e6152c88d60db379c3c899332640b019d9de264f5d82b050a94182ce7e18",
+        "context_tokens": 128
+      }
+    ],
+    "heldout": [
+      {
+        "id": "heldout-explanation",
+        "prompt_sha256": "5c8d86365a2d1214aba0fae6e993cbb645782c66dd15199335603cec38ac44aa",
+        "context_tokens": 256
+      },
+      {
+        "id": "heldout-chinese",
+        "prompt_sha256": "6ac1b55ad3b5d15930ab6e69bba8a68ad40464da9ebf9eb49a24a30953dd4b68",
+        "context_tokens": 256
+      }
+    ]
+  },
+  "output_tokens": 32,
+  "depth": 3,
+  "batch_size": 2,
+  "context_bucket": 512,
+  "development_repetitions": 2
+}

@@ -55,6 +55,12 @@ def parser():
     serve.add_argument("--queue-size", type=int, default=4)
     serve.add_argument("--execution-backend", choices=("serial", "continuous"), default="serial",
                        help="Experimental continuous: same-model greedy baseline ticks; other modes run exclusively")
+    serve.add_argument("--experimental-joint-verification", action="store_true")
+    serve.add_argument("--joint-profile", help="Registered exact-identity ModelSpec containing target and draft")
+    serve.add_argument("--joint-depth", type=int, default=3)
+    serve.add_argument("--joint-strategy", choices=("bucket", "padded_control", "shared_cap"), default="bucket")
+    serve.add_argument("--joint-cost-file", type=Path)
+    serve.add_argument("--joint-calibration-identity", default="uncalibrated")
     serve.add_argument("--continuous-policy", choices=("upstream", "interactive"), default="interactive")
     serve.add_argument("--max-active", type=int, default=4)
     serve.add_argument("--tick-token-budget", type=int, default=512)
@@ -96,14 +102,23 @@ def main(argv=None):
             from .server.app import create_app
             if args.host not in ("127.0.0.1", "localhost", "::1") and not (args.token or os.getenv("DEEPINFER_MAC_TOKEN")):
                 raise ValueError("A bearer token is required when binding outside localhost")
+            from .joint_service import JointServiceConfig
+            if args.experimental_joint_verification and not args.joint_profile:
+                raise ValueError("--experimental-joint-verification requires --joint-profile")
+            if not args.experimental_joint_verification and (args.joint_profile or args.joint_cost_file):
+                raise ValueError("Joint options require --experimental-joint-verification")
+            joint = JointServiceConfig(args.joint_profile, args.joint_depth, args.joint_strategy,
+                                       str(args.joint_cost_file) if args.joint_cost_file else None,
+                                       args.joint_calibration_identity) if args.experimental_joint_verification else None
             continuous = ContinuousConfig(
                 max_active=args.max_active, tick_token_budget=args.tick_token_budget,
                 prefill_chunk=args.batch_prefill_chunk, max_context_tokens=args.batch_context_tokens,
                 memory_budget_bytes=args.batch_memory_mb * 1024**2 if args.batch_memory_mb is not None else None,
                 policy=args.continuous_policy,
-            ) if args.execution_backend == "continuous" else None
+            ) if args.execution_backend == "continuous" or args.experimental_joint_verification else None
             uvicorn.run(create_app(queue_size=args.queue_size, token=args.token, model_registry=registry,
-                                   execution_backend=args.execution_backend, continuous_config=continuous), host=args.host, port=args.port)
+                                   execution_backend=args.execution_backend, continuous_config=continuous,
+                                   experimental_joint_verification=args.experimental_joint_verification, joint_config=joint), host=args.host, port=args.port)
             return 0
         from .engine import InferenceEngine
         from .state import GenerationRequest

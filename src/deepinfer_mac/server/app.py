@@ -48,12 +48,23 @@ def create_app(
     engine_factory=None, queue_size=4, token: str | None = None,
     experimental_hybrid_speculation=False, model_registry=None,
     execution_backend="serial", continuous_config=None, batch_session_factory=None,
+    experimental_joint_verification=False, joint_config=None,
 ):
     from ..adapters import ModelRegistry
     registry_source = model_registry or ModelRegistry()
-    if execution_backend not in ("serial", "continuous"):
+    if execution_backend == "joint_experimental":
+        raise ValueError("Joint backend requires explicit experimental_joint_verification opt-in")
+    if experimental_joint_verification:
+        if execution_backend != "serial" or joint_config is None:
+            raise ValueError("Joint opt-in requires joint_config and cannot combine with another backend")
+        if experimental_hybrid_speculation:
+            raise ValueError("Joint service does not support experimental hybrid speculation")
+        execution_backend = "joint_experimental"
+    elif joint_config is not None:
+        raise ValueError("joint_config requires experimental_joint_verification=True")
+    if execution_backend not in ("serial", "continuous", "joint_experimental"):
         raise ValueError("execution_backend must be serial or continuous")
-    if execution_backend == "continuous":
+    if execution_backend in ("continuous", "joint_experimental"):
         from ..continuous import ContinuousConfig
         continuous_config = continuous_config or ContinuousConfig()
     access_token = token or os.getenv("DEEPINFER_MAC_TOKEN")
@@ -70,10 +81,15 @@ def create_app(
             default_engine_factory, experimental_hybrid_speculation=experimental_hybrid_speculation, model_registry=model_registry,
             memory_limit_bytes=continuous_config.memory_budget_bytes if continuous_config else None,
         )
-        if execution_backend == "continuous":
+        if execution_backend in ("continuous", "joint_experimental"):
             from .continuous_worker import ContinuousInferenceWorker
-            app.state.worker = ContinuousInferenceWorker(factory, queue_size=queue_size,
-                                                        config=continuous_config, session_factory=batch_session_factory)
+            if execution_backend == "joint_experimental":
+                from .joint_worker import JointInferenceWorker
+                app.state.worker = JointInferenceWorker(factory, queue_size=queue_size, config=continuous_config,
+                                                        joint_config=joint_config, session_factory=batch_session_factory)
+            else:
+                app.state.worker = ContinuousInferenceWorker(factory, queue_size=queue_size,
+                                                            config=continuous_config, session_factory=batch_session_factory)
         else:
             app.state.worker = InferenceWorker(factory, queue_size=queue_size)
         try:
@@ -87,6 +103,8 @@ def create_app(
     def submit(request, compared=False):
         try:
             return app.state.worker.submit(request, compare=compared)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
         except QueueFull as exc:
             raise HTTPException(429, str(exc), headers={"Retry-After": "2"}) from exc
 
@@ -117,6 +135,14 @@ def create_app(
 
     def registered_models():
         registry = registry_source.list()
+        if experimental_joint_verification:
+            registry = deepcopy(registry)
+            for model in registry:
+                if model["id"] == joint_config.profile:
+                    model["experimental_joint"] = {"enabled": True, "verified": False,
+                        "effective_mode": "joint_experimental", "greedy_only": True,
+                        "trained_confidence": False, "depth": joint_config.depth,
+                        "strategy": joint_config.strategy}
         if not experimental_hybrid_speculation:
             return registry
         # This explicit experimental service advertises its own local view.
@@ -156,9 +182,9 @@ def create_app(
         return {"status": "ok", "model_loaded": worker.engine is not None,
                 "active_run": worker.active.id if worker.active else None, "queued": worker.queue.qsize(),
                 "execution_backend": execution_backend,
-                "active_requests": len(getattr(worker, "active_requests", {})) if execution_backend == "continuous" else int(worker.active is not None),
+                "active_requests": len(getattr(worker, "active_requests", {})) if execution_backend in ("continuous", "joint_experimental") else int(worker.active is not None),
                 "continuous_policy": continuous_config.policy if continuous_config else None,
-                "preparing_run": worker.preparing.id if execution_backend == "continuous" and worker.preparing else None,
+                "preparing_run": worker.preparing.id if execution_backend in ("continuous", "joint_experimental") and worker.preparing else None,
                 "cleanup_error_count": len(getattr(worker, "cleanup_errors", [])),
                 "experimental_hybrid_speculation": experimental_hybrid_speculation}
 

@@ -1,0 +1,7 @@
+{
+  "id": "research-smollm2-360m-6bit",
+  "source": "mlx-community/SmolLM2-360M-Instruct-6bit",
+  "context_limit": 2048,
+  "runtime_reserve_bytes": 2147483648,
+  "revision": "642affd1f9e387d1b56c745894afc83795aebe1d"
+}

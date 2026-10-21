@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "audited_at_utc": "2026-10-21T09:53:09.322645+00:00",
+  "status": "downloaded_integrity_and_cpu_pair_checks_passed_runtime_pending",
+  "scope": "Authorized exact selected target downloaded once to ignored results/phase3-models; official content hashes and CPU snapshot/tokenizer checks passed. No GPU/model execution. Mechanism validation only, not 9B product replacement or speedup evidence.",
+  "local_inventory": {
+    "compatible_smollm_target_present": true,
+    "existing_draft": "results/phase3-models/smollm2-135m-instruct-8bit",
+    "other_cached_families": [
+      "Qwen3",
+      "Qwen3.5"
+    ],
+    "note": "Existing other-family models are not tokenizer-compatible with SmolLM2 draft."
+  },
+  "target": {
+    "repo": "mlx-community/SmolLM2-360M-Instruct-6bit",
+    "revision": "642affd1f9e387d1b56c745894afc83795aebe1d",
+    "license": "apache-2.0",
+    "license_evidence": "Hugging Face API cardData; no standalone LICENSE in file listing",
+    "weight_bytes": 294135171,
+    "weight_sha256_remote_lfs": "e1d91f0b07639d97eda9ca1a2028c2030391e4c8dd50f2293db8884879ad5058",
+    "all_repository_file_bytes": 298985211,
+    "architecture": [
+      "LlamaForCausalLM"
+    ],
+    "model_type": "llama",
+    "quantization": {
+      "group_size": 64,
+      "bits": 6
+    },
+    "vocab_size_config": 49152,
+    "tie_word_embeddings": true,
+    "output_vocab_tensor_header_verified": true,
+    "geometry": {
+      "num_hidden_layers": 32,
+      "hidden_size": 960,
+      "num_attention_heads": 15,
+      "num_key_value_heads": 5,
+      "max_position_embeddings": 8192
+    },
+    "content_sha256": "40e44f0e35876a3e846c856f830ecca4208db73319256ff4f493434d2723950d",
+    "embedding_output_header": {
+      "model.embed_tokens.weight": {
+        "data_offsets": [
+          129477120,
+          164866560
+        ],
+        "dtype": "U32",
+        "shape": [
+          49152,
+          180
+        ]
+      }
+    },
+    "public_ungated": true
+  },
+  "draft": {
+    "repo": "mlx-community/SmolLM2-135M-Instruct-8bit",
+    "revision": "0f0d9b8218915bc34d401e1a340b8c049d300d5e",
+    "weight_bytes": 143030401,
+    "vocab_size": 49152
+  },
+  "tokenizer": {
+    "content_identity_checks": [
+      {
+        "file": "merges.txt",
+        "local_draft_git_blob": "69503b13f727ba3812b6803e97442a6de05ef5eb",
+        "remote_target_git_blob": "69503b13f727ba3812b6803e97442a6de05ef5eb",
+        "identical": true,
+        "local_sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+      },
+      {
+        "file": "special_tokens_map.json",
+        "local_draft_git_blob": "44719d2e365acac0637fd25a3acf46494ca45940",
+        "remote_target_git_blob": "44719d2e365acac0637fd25a3acf46494ca45940",
+        "identical": true,
+        "local_sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+      },
+      {
+        "file": "tokenizer.json",
+        "local_draft_git_blob": "a7d434dcaa7ae62910bed536fb292282905c9b44",
+        "remote_target_git_blob": "a7d434dcaa7ae62910bed536fb292282905c9b44",
+        "identical": true,
+        "local_sha256": "7d27c493c729a66ecefc837280b05d948b1ed50d130eebdbf911b1b36cf38ed7"
+      },
+      {
+        "file": "vocab.json",
+        "local_draft_git_blob": "0ad5ecc2035b7031b88afb544ee95e2d49baa484",
+        "remote_target_git_blob": "0ad5ecc2035b7031b88afb544ee95e2d49baa484",
+        "identical": true,
+        "local_sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+      }
+    ],
+    "tokenizer_config_differences": {
+      "model_max_length": {
+        "draft": 2048,
+        "target": 8192
+      },
+      "extra_special_tokens": {
+        "draft": "absent",
+        "target": {}
+      }
+    },
+    "chat_template_identical": true,
+    "special_token_ids_identical": true,
+    "recommended_probe": "Render once with existing draft tokenizer and feed identical token IDs to both networks; initially cap total context at 2048."
+  },
+  "mlx_static_compatibility": {
+    "installed_mlx_lm": "0.32.2",
+    "architecture_supported_by": "mlx_lm/models/llama.py",
+    "tied_output_uses_embedding_projection": true,
+    "runtime_load_verified": false,
+    "note": "6bit group64 quantized MLX checkpoint; actual weight header validation and load remain mandatory."
+  },
+  "alternatives": {
+    "preferred_360m_8bit": "Not found in public mlx-community SmolLM2-360M search; direct name returned HTTP 401 (not proof of nonexistence).",
+    "unquantized": {
+      "repo": "mlx-community/SmolLM2-360M-Instruct",
+      "revision": "5d5e6fee5beb5d4d4d85e2203ef23e1230a9aac7",
+      "weight_bytes": 723674815,
+      "all_tokenizer_files_blob_identical_to_draft": true
+    }
+  },
+  "resource_estimate": {
+    "kind": "Analytic estimate, not measured admission or benchmark",
+    "pair_weight_bytes": 437165572,
+    "dense_fp16_kv_bytes_per_token_per_request": 128000,
+    "dense_fp16_kv_bytes_at_2048_per_request": 262144000,
+    "pair_weights_plus_one_2048_kv_bytes": 699309572,
+    "conservative_with_two_gib_runtime_reserve_bytes": 2846793220,
+    "excludes": "Allocator fragmentation, replay snapshots, draft verification workspaces, batch count and temporary logits. Run existing resource guard before any actual load; do not lower reserve to force admission."
+  },
+  "sources": [
+    {
+      "url": "https://huggingface.co/api/models/mlx-community/SmolLM2-360M-Instruct-6bit?blobs=true",
+      "sha256": "9c994b5116f33b16e8e13076513d53ae2df46366ba7438e55b7e2d5c541d2fb0"
+    },
+    {
+      "url": "https://huggingface.co/mlx-community/SmolLM2-360M-Instruct-6bit/resolve/642affd1f9e387d1b56c745894afc83795aebe1d/config.json",
+      "sha256": "2e43003af7a83b8d4e422ea97e9a98e89b75057c83d1c85b9070ee3c90399209"
+    },
+    {
+      "url": "https://huggingface.co/mlx-community/SmolLM2-360M-Instruct-6bit/resolve/642affd1f9e387d1b56c745894afc83795aebe1d/tokenizer_config.json",
+      "sha256": "7b85619980209ca801effcd87e5df7084a21abc3d8b8d27003a6b4ffcce170ef"
+    },
+    {
+      "url": "https://huggingface.co/api/models/mlx-community/SmolLM2-360M-Instruct-6bit/revision/642affd1f9e387d1b56c745894afc83795aebe1d?blobs=true",
+      "sha256": "9c994b5116f33b16e8e13076513d53ae2df46366ba7438e55b7e2d5c541d2fb0"
+    }
+  ],
+  "next_gate": [
+    "Use existing memory admission and GPU baton; compare actual target-native output token IDs to distinct target/draft path.",
+    "Measure draft acceptance and synchronized target/draft cost without presuming speedup."
+  ],
+  "download": {
+    "selected_file_bytes": 298983692,
+    "all_selected_files_official_hash_verified": true,
+    "model_weight_sha256_verified": true,
+    "disk_preflight_free_bytes": 569344000000,
+    "disk_guard": "free >= 2 * selected_bytes + 1 GiB",
+    "weights_loaded": false,
+    "duplicate_weight_copies_created": false,
+    "local_path": "results/phase3-models/smollm2-360m-instruct-6bit"
+  },
+  "cpu_checks": {
+    "inspect_snapshot": "passed",
+    "verify_pair": {
+      "explicit_thinking_template_tokens_equal": {
+        "false": true,
+        "true": true
+      },
+      "template_text_sha256": [
+        "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788",
+        "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+      ],
+      "vocab_size": 49152,
+      "tokenizer_sha256": "7d27c493c729a66ecefc837280b05d948b1ed50d130eebdbf911b1b36cf38ed7",
+      "eos_token_ids": 2,
+      "special_token_ids": [
+        1,
+        2,
+        0
+      ]
+    },
+    "weight_array_loading": false
+  }
+}
