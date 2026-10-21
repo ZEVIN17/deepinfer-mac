@@ -65,5 +65,11 @@
     "src/deepinfer_mac/web/index.html": "c98d420e307145cfb2fb1c500e6fd4bc58aa7dd619767f952ae29a7d6f9607e5",
     "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6"
   },
-  "publication": "Repository CI and Pages results recorded separately after push; no PyPI upload implied"
+  "publication": "Repository CI and Pages results recorded separately after push; no PyPI upload implied",
+  "cpu_only_install": {
+    "passed": 362,
+    "skipped": 2,
+    "mlx_installed": false,
+    "scope": "Clean base wheel + pytest/httpx; two tokenizer-dependent checks skip without optional model dependencies"
+  }
 }

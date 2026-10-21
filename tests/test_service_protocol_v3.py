@@ -88,7 +88,11 @@ def test_prepared_variants_use_real_flags_and_disclose_additional_draft(monkeypa
         "--resource-approved-lengths", "2048", "4096", "--total-context-cap", "8192",
         "--variants", "baseline", "ds-original", "ds-lagged", "--message-checkpoints",
         "--own-prefill-step-size", "128", "--ds-lagged-prefill-step-size", "256", "--native-prefill-step-size", "1024"])
-    module("prepare_service_compare").main()
+    preparer = module("prepare_service_compare")
+    # This configuration test must not launch host-specific interpreter probes.
+    # Real environment capture remains exercised by the benchmark harness.
+    monkeypatch.setattr(preparer, "environment", lambda executable, helper: {"test_fixture": True})
+    preparer.main()
     configuration = json.loads((root / "configuration.json").read_text())
     own, original, lagged, native, omlx = configuration["engines"]
     assert own["request_options"]["mode"] == "baseline" and own["additional_draft"] is None

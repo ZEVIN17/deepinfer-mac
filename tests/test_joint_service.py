@@ -73,21 +73,29 @@ def test_api_experimental_metadata_rejection_and_sse():
         assert client.post("/api/compare", json={"profile": "qwen3-4b", "prompt": "x"}).status_code == 422
 
 
-def test_source_bound_cost_measurements(tmp_path):
+def test_source_bound_cost_measurements(tmp_path, monkeypatch):
     import json
-    from importlib.metadata import version
 
+    from deepinfer_mac import joint_service
     from deepinfer_mac.joint_service import read_cost_curves, runtime_source_hashes
+
+    # Parser-only fixture: CPU CI has no MLX distribution metadata.
+    monkeypatch.setattr(joint_service, "version", lambda name: "parser-fixture-version")
     key = {"model_identity": "target", "draft_identity": "draft", "quantization": "q",
            "batch_size": 1, "context_bucket": 10, "execution_strategy": "bucket"}
     # Explicit synthetic parser fixture, not a model benchmark or stored curve.
     payload = {"scope": "complete_cycle", "partition": "development", "depth": 1,
-               "source_sha256": runtime_source_hashes(), "mlx_lm_version": version("mlx-lm"),
+               "source_sha256": runtime_source_hashes(), "mlx_lm_version": "parser-fixture-version",
                "curves": [{"key": key, "measurements": [{"total_q": 1, "full_cycle_ms": 1},
                                                           {"total_q": 2, "full_cycle_ms": 2}]}]}
     path = tmp_path / "parser-control.json"
     path.write_text(json.dumps(payload))
     assert read_cost_curves(path, 1)[0][1] == [(1, 1), (2, 2)]
+    payload["mlx_lm_version"] = "other-version"
+    path.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="current-source"):
+        read_cost_curves(path, 1)
+    payload["mlx_lm_version"] = "parser-fixture-version"
     payload["source_sha256"] = {}
     path.write_text(json.dumps(payload))
     with pytest.raises(ValueError, match="current-source"):
