@@ -119,6 +119,9 @@ def test_runner_warms_every_approved_shape_per_variant_without_scoring_warmups(m
     monkeypatch.setattr(runner.subprocess, "Popen", lambda *args, **kwargs: type("Process", (), {"pid": 1, "poll": lambda self: 0})())
     monkeypatch.setattr(runner, "await_ready", lambda *args: {})
     monkeypatch.setattr(runner, "stop", lambda process: None)
+    # Test-only resource placeholder: this mocked runner never starts a process
+    # and must not query host swap APIs or create real performance observations.
+    monkeypatch.setattr(runner, "resource_sample", lambda *args: {})
     monkeypatch.setattr(runner, "measure", lambda url, model, case, **kwargs: {
         "case": case, "error": None, "quality_pass": False, "total_ms": None,
     })

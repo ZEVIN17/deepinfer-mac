@@ -70,14 +70,32 @@
       "text_tensor_bytes": 9514412544,
       "vision_tensor_bytes": 912020960,
       "mtp_keys": [],
-      "quality_scope": "Initial12smoke and fixed27public subset measured; finite-budget completion failures retained. See public-quality-qwen35-9b8-v2-summary.json; not full benchmark or equivalence.",
+      "quality_scope": "Fixed public27subsets and local12\u00d74smoke measured; known failures retained, no full-benchmark capability guarantee or quantization equivalence.",
       "metadata_sha256": {
         "config.json": "19082a0ef21dee3840a8bab56ee5325ead177085285c63ea47e79a204a566a53",
         "tokenizer.json": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
         "tokenizer_config.json": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182",
         "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
       },
-      "tensor_count": 1260
+      "tensor_count": 1260,
+      "baseline_runtime_verified": true,
+      "quality_evidence": {
+        "public_subset": "benchmarks/reports/public-quality-qwen35-9b8-v2-summary.json",
+        "local_smoke": "benchmarks/reports/quality-qwen3.5-9b-8bit.json",
+        "greedy_native_full_token_equal_tasks": 12,
+        "independent_human_annotation": false
+      },
+      "development_budget_control": {
+        "tasks": 3,
+        "output_cap": 4096,
+        "greedy_strict_passed": 3,
+        "shared_sampling_strict_passed": 2,
+        "original_scores_unchanged": true,
+        "all_original_output_prefixes_equal": true,
+        "evidence": "benchmarks/reports/public-quality-dev4096-budget-sensitivity.json"
+      },
+      "selection_role": "retained_main_text_baseline",
+      "api_sse_ui_verified": true
     },
     {
       "repo": "mlx-community/Qwen3.5-9B-4bit",
@@ -109,7 +127,24 @@
         "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
       },
       "tensor_count": 1260,
-      "quality_scope": "Fixed27public subset\u00d72shared settings measured with finite-budget failures retained. See public-quality-qwen35-9b4-v2-summary.json; lower footprint does not establish quality equivalence."
+      "quality_scope": "Fixed public27subsets and local12\u00d74smoke measured; known failures retained, no full-benchmark capability guarantee or quantization equivalence.",
+      "baseline_runtime_verified": true,
+      "quality_evidence": {
+        "public_subset": "benchmarks/reports/public-quality-qwen35-9b4-v2-summary.json",
+        "local_smoke": "benchmarks/reports/quality-qwen35-9b4-smoke-v3-1.json",
+        "greedy_native_full_token_equal_tasks": 12,
+        "independent_human_annotation": false
+      },
+      "development_budget_control": {
+        "tasks": 3,
+        "output_cap": 4096,
+        "greedy_strict_passed": 0,
+        "shared_sampling_strict_passed": 2,
+        "original_scores_unchanged": true,
+        "all_original_output_prefixes_equal": true,
+        "evidence": "benchmarks/reports/public-quality-dev4096-budget-sensitivity.json"
+      },
+      "selection_role": "efficiency_quality_control_not_established_equivalent"
     },
     {
       "repo": "mlx-community/Qwen3-14B-4bit",
@@ -140,7 +175,26 @@
         "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
       },
       "tensor_count": 1007,
-      "quality_scope": "Shared27public subset\u00d72 measured; local12\u00d74official-family smoke and12/12greedy/native full-token equality measured. Separate native official public control pending. See public-quality-qwen3-14b-v2-1-summary.json; no cross-protocol aggregate ranking."
+      "quality_scope": "Fixed public27subsets and local12\u00d74smoke measured; known failures retained, no full-benchmark capability guarantee or quantization equivalence.",
+      "baseline_runtime_verified": true,
+      "quality_evidence": {
+        "public_subset": "benchmarks/reports/public-quality-qwen3-14b-v2-1-summary.json",
+        "local_smoke": "benchmarks/reports/quality-qwen3-14b-smoke-v3-1.json",
+        "greedy_native_full_token_equal_tasks": 12,
+        "independent_human_annotation": false
+      },
+      "development_budget_control": {
+        "tasks": 3,
+        "output_cap": 4096,
+        "greedy_strict_passed": 0,
+        "shared_sampling_strict_passed": 0,
+        "original_scores_unchanged": true,
+        "all_original_output_prefixes_equal": true,
+        "evidence": "benchmarks/reports/public-quality-dev4096-budget-sensitivity.json"
+      },
+      "selection_role": "fallback_and_future_ds_control",
+      "official_native_public_evidence": "benchmarks/reports/public-quality-qwen3-14b-official-v3-1-summary.json",
+      "answer_format_sensitivity_evidence": "benchmarks/reports/public-quality-mmlu-format-sensitivity.json"
     },
     {
       "repo": "mlx-community/Qwen3.5-0.8B-4bit",
@@ -185,7 +239,8 @@
       "experimental_speculation": true,
       "draft_status": "tokenizer_compatible_initial_real96token_snapshot_replay_exact_baseline_fixed1_fixed2_ds",
       "draft_correctness_evidence": "benchmarks/reports/phase2-hybrid-ds-qwen35-9b8-probe.json",
-      "draft_formal_performance_validated": false
+      "draft_formal_performance_validated": false,
+      "baseline_runtime_verified": true
     },
     "qwen3.5-9b-4bit": {
       "target": "mlx-community/Qwen3.5-9B-4bit",
@@ -195,12 +250,14 @@
         "baseline"
       ],
       "experimental_speculation": true,
-      "draft_status": "tokenizer_compatible_pending_real_snapshot_replay_validation"
+      "draft_status": "tokenizer_compatible_pending_real_snapshot_replay_validation",
+      "baseline_runtime_verified": true
     },
     "qwen3-14b": {
       "target": "mlx-community/Qwen3-14B-4bit",
       "draft": "mlx-community/Qwen3-0.6B-4bit",
-      "status": "quality_review_required"
+      "status": "quality_review_required",
+      "baseline_runtime_verified": true
     }
   },
   "tokenizer_compatibility": "Full vocabulary and special IDs checked at runtime before draft load; same tokenizer.json content digest in both repositories",
@@ -295,5 +352,6 @@
       "quality_status": "smoke_failed; native MLX reproduces Chinese and code outputs exactly",
       "status": "retired_weights_removed"
     }
-  ]
+  ],
+  "quality_policy": "quality_review_required denotes known failures/limited fixed-subset scope, separate from verified loading/baseline runtime. No all-task capability or independent-human quality guarantee."
 }

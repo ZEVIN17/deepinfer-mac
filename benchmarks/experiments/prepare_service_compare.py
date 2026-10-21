@@ -6,7 +6,11 @@ import json
 import sys
 from pathlib import Path
 
+from omlx_dflash_protocol import pinned_draft, resource_admission
+from omlx_dflash_protocol import settings as dflash_settings
+from service_dev_selection import bind as bind_dev_selection
 from service_resource_selection import resource_selection
+from service_resources import RESOURCE_POLICY
 from service_source_freeze import digest, environment, freeze
 
 
@@ -29,7 +33,26 @@ def main():
     parser.add_argument("--message-checkpoints", action="store_true")
     parser.add_argument("--variants", nargs="+", choices=("baseline", "ds-original", "ds-lagged"), default=["baseline"])
     parser.add_argument("--omlx-python", type=Path, default=Path("/tmp/deepinfer-omlx-venv/bin/python"))
+    parser.add_argument("--omlx-memory-guard", choices=("balanced", "aggressive"), default="balanced",
+                        help="One explicit official tier shared by baseline and all DFlash candidates; guard is never disabled")
+    parser.add_argument("--omlx-dflash-draft-snapshot", type=Path)
+    parser.add_argument("--omlx-dflash-grid", action="store_true", help="Dev-only bounded Q4/group64 block4/5 x adaptive/full candidates")
+    parser.add_argument("--omlx-control", choices=("baseline", "dflash", "both"))
+    parser.add_argument("--omlx-dflash-block-size", type=int, choices=(4, 5), default=5)
+    parser.add_argument("--omlx-dflash-verify-mode", choices=("adaptive", "dflash"), default="adaptive")
+    parser.add_argument("--omlx-dflash-resource-report", type=Path)
+    parser.add_argument("--dev-selection-report", type=Path)
+    parser.add_argument("--dev-raw-report", type=Path, help="Immutable actual dev raw; summary SHA and recomputed selected settings must match")
+    parser.add_argument("--dev-source-bridge-note")
     args = parser.parse_args()
+    args.root = args.root.resolve()
+    if args.omlx_dflash_grid and not args.dev_tuning_grid:
+        parser.error("--omlx-dflash-grid requires --dev-tuning-grid; heldout tuning is forbidden")
+    control = args.omlx_control or ("both" if args.omlx_dflash_draft_snapshot else "baseline")
+    if args.omlx_dflash_grid and control != "both":
+        parser.error("The dev DFlash grid must retain the default baseline via --omlx-control both")
+    if (args.omlx_dflash_grid or control != "baseline") and not args.omlx_dflash_draft_snapshot:
+        parser.error("DFlash candidates require the exact SHA-verified trained draft snapshot")
     workspace = args.workspace.resolve()
     snapshot = args.snapshot.resolve()
     revision = "16daa4818c54ce5f5436f929d52542eb65bbed9d"
@@ -189,10 +212,44 @@ def main():
             item["command"][item["command"].index("--prefill-step-size") + 1] = str(size)
         variants.append(item)
     engines = variants + engines
+    runtime_files = [{"path": str(settings_path.resolve()), "sha256": hashlib.sha256(settings_path.read_bytes()).hexdigest(),
+                      "kind": "official_omlx_model_settings"}]
+    dflash_resource = None
+    if args.omlx_dflash_draft_snapshot and control != "baseline":
+        draft = pinned_draft(args.omlx_dflash_draft_snapshot, experiments / "omlx_dflash_9b.manifest.json")
+        runtime_files.extend({"path": item["path"], "sha256": item["sha256"], "kind": "pinned_trained_draft"}
+                             for item in draft["verified_files"])
+        dflash_resource = resource_admission(args.omlx_dflash_resource_report, args.omlx_memory_guard)
+        if args.omlx_dflash_resource_report:
+            runtime_files.append({"path": str(args.omlx_dflash_resource_report.resolve()),
+                                  "sha256": dflash_resource["sha256"], "kind": "actual_dflash_resource_admission"})
+        original = next(engine for engine in engines if engine["id"] == "omlx")
+        choices = [(block, mode) for block in (4, 5) for mode in ("adaptive", "dflash")] if args.omlx_dflash_grid else [
+            (args.omlx_dflash_block_size, args.omlx_dflash_verify_mode)]
+        for block, mode in choices:
+            candidate = json.loads(json.dumps(original))
+            candidate.update(id=f"omlx-dflash-q4-b{block}-{mode}", tuning_group="omlx",
+                             additional_draft=draft, dflash_execution_required={"draft_snapshot": draft["snapshot"],
+                             "model_id": model_id, "block_size": block, "verify_mode": mode},
+                             resource_admission=dflash_resource, diagnostics_enabled=False)
+            candidate_base = args.root / candidate["id"]
+            candidate_base.mkdir(exist_ok=True)
+            candidate_settings = json.loads(json.dumps(settings))
+            candidate_settings["models"][model_id].update(dflash_settings(draft, block, mode))
+            candidate_path = candidate_base / "model_settings.json"
+            if candidate_path.exists() and json.loads(candidate_path.read_text()) != candidate_settings:
+                raise ValueError("Existing DFlash candidate settings differ; use a fresh root")
+            candidate_path.write_text(json.dumps(candidate_settings, indent=2) + "\n")
+            runtime_files.append({"path": str(candidate_path.resolve()), "sha256": hashlib.sha256(candidate_path.read_bytes()).hexdigest(),
+                                  "kind": "official_omlx_dflash_settings"})
+            candidate["command"][candidate["command"].index("--base-path") + 1] = str(candidate_base)
+            engines.append(candidate)
+        if control == "dflash":
+            engines = [engine for engine in engines if engine["id"] != "omlx"]
     if args.dev_tuning_grid:
         candidates = []
         for engine in engines:
-            if engine["id"] == "omlx":
+            if engine["id"].startswith("omlx"):
                 candidates.append(engine)
                 continue
             for size in (128, 256, 512, 1024):
@@ -202,8 +259,38 @@ def main():
                 candidates.append(candidate)
         engines = candidates
     for engine in engines:
+        engine["tuning_group"] = engine.get("tuning_group", engine.get("tuning_parent", engine["id"]))
+        engine["framework"] = "omlx" if engine["id"].startswith("omlx") else "mlx-lm" if engine["id"].startswith("native-mlx-lm") else "deepinfer"
+        if engine["framework"] == "omlx":
+            engine["command"] += ["--memory-guard", args.omlx_memory_guard]
+            engine["memory_guard"] = args.omlx_memory_guard
         engine["environment"] = engine.get("environment", {}) | {"PYTHONPATH": str(source_root / "src")}
         engine["cwd"] = str(source_root)
+    interpreter_environments = {
+        executable: environment(executable, experiments / "service_source_freeze.py")
+        for executable in sorted({engine["command"][0] for engine in engines})
+    }
+    approved_selection = resource_selection(json.loads(manifest.read_bytes()), args.resource_approved_lengths,
+                                            args.total_context_cap) if args.resource_approved_lengths else None
+    selection_binding = None
+    if args.dev_selection_report:
+        if not args.dev_raw_report:
+            parser.error("--dev-selection-report requires --dev-raw-report for actual evidence validation")
+        summary = json.loads(args.dev_selection_report.read_text())
+        raw_sha256 = hashlib.sha256(args.dev_raw_report.read_bytes()).hexdigest()
+        if summary.get("raw_report_sha256") != raw_sha256:
+            raise ValueError("Actual dev raw bytes differ from summary SHA256")
+        selection_binding = bind_dev_selection(json.loads(args.dev_raw_report.read_text()), summary, engines,
+                                              json.loads(manifest.read_text()), frozen["sha256"], interpreter_environments, args.dev_source_bridge_note,
+                                              {"resource_selection": approved_selection, "total_context_cap_tokens": args.total_context_cap,
+                                               "resource_policy": RESOURCE_POLICY})
+        selection_binding.update(path=str(args.dev_selection_report.resolve()),
+                                 sha256=hashlib.sha256(args.dev_selection_report.read_bytes()).hexdigest(), raw_sha256=raw_sha256)
+        selection_binding["raw_path"] = str(args.dev_raw_report.resolve())
+        runtime_files.append({"path": str(args.dev_selection_report.resolve()),
+                              "sha256": hashlib.sha256(args.dev_selection_report.read_bytes()).hexdigest(),
+                              "kind": "dev_selected_candidates"})
+        runtime_files.append({"path": str(args.dev_raw_report.resolve()), "sha256": raw_sha256, "kind": "actual_dev_raw"})
     result = {
         "manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
         "manifest_canonical_sha256": digest(json.loads(manifest.read_bytes())),
@@ -215,6 +302,11 @@ def main():
         "total_context_cap_tokens": args.total_context_cap,
         "resource_probe_required_above_cap": True,
         "dev_tuning_grid": args.dev_tuning_grid,
+        "omlx_dflash_grid": args.omlx_dflash_grid,
+        "omlx_dflash_resource_admission": dflash_resource,
+        "resource_policy": RESOURCE_POLICY,
+        "runtime_files": runtime_files,
+        "dev_selection_report": selection_binding,
         "tuning_protocol": {
             "split": "dev only; never choose parameters using heldout outputs",
             "candidates": [128, 256, 512, 1024],
@@ -233,9 +325,7 @@ def main():
         ],
     }
     if args.resource_approved_lengths:
-        result["resource_selection"] = resource_selection(
-            json.loads(manifest.read_bytes()), args.resource_approved_lengths, args.total_context_cap
-        )
+        result["resource_selection"] = approved_selection
     result["project_source_at_preparation"] = {"source_tree_sha256": frozen["sha256"], "files": frozen["files"],
                                                 "scope": "complete frozen runtime, harness, helper, manifest and lock extraction"}
     names = ("prepare_service_compare.py", "rotate_service_compare.py", "http_service_compare.py",
@@ -244,10 +334,7 @@ def main():
     result["harness_sources_at_preparation"] = {
         name: hashlib.sha256((experiments / name).read_bytes()).hexdigest() for name in names
     }
-    result["interpreter_environments"] = {
-        executable: environment(executable, experiments / "service_source_freeze.py")
-        for executable in sorted({engine["command"][0] for engine in engines})
-    }
+    result["interpreter_environments"] = interpreter_environments
     destination = args.root / "configuration.json"
     destination.write_text(json.dumps(result, indent=2) + "\n")
     print(destination)

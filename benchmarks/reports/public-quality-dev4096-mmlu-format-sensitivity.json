@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "scope": "Post-observation offline format sensitivity, uniformly applied to every retained MMLU response; not a new generation or replacement official benchmark score.",
+  "normalization": "Delete only Markdown emphasis/code delimiter characters *, _, and backtick before the unchanged answer regex.",
+  "input_response_count": 18,
+  "mmlu_response_count": 12,
+  "other_benchmark_responses_unmodified": 6,
+  "limitations": [
+    "The task requested an exact final-answer format; strict format failures remain failures in the primary report.",
+    "This isolates parser/format sensitivity from answer-letter correctness; no cross-protocol aggregate ranking."
+  ],
+  "summaries": [
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "tasks": 2,
+      "strict_passed": 2,
+      "markdown_normalized_passed": 2,
+      "changed_task_ids": []
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "tasks": 2,
+      "strict_passed": 1,
+      "markdown_normalized_passed": 1,
+      "changed_task_ids": []
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "tasks": 2,
+      "strict_passed": 0,
+      "markdown_normalized_passed": 0,
+      "changed_task_ids": []
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "tasks": 2,
+      "strict_passed": 1,
+      "markdown_normalized_passed": 1,
+      "changed_task_ids": []
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "tasks": 2,
+      "strict_passed": 0,
+      "markdown_normalized_passed": 1,
+      "changed_task_ids": [
+        "mmlu:1471"
+      ]
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "tasks": 2,
+      "strict_passed": 0,
+      "markdown_normalized_passed": 0,
+      "changed_task_ids": []
+    }
+  ],
+  "results": [
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 981,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 824,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 2851,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 3720,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "length",
+      "output_tokens": 4096,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 4096,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 1439,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 1071,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 677,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 507,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 762,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "qwen35",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 861,
+      "max_tokens": 4096,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    }
+  ],
+  "raw_report_sha256": [
+    "4dd3b7b169ce0cd88de00b0857350a53b63a826282009e2bb4095af790365e69",
+    "347c55957ee9a8f8c13e88feda15e2719def17dfaa10b3e3bc4509ab92c103e1",
+    "d3d5b0aa4425e001f080de8f68a73b01383a387f4414dd339973e7b54e613edc"
+  ],
+  "scorer_sha256": "3b63b64685ab61b4fa4aa4c80310db3e033939ac8c5e256afe60e7042700ccd2",
+  "analysis_script_sha256": "8d4d592aac4efb68aa8cdd2fdab52e2d1151a77ece13195a5aef55c9bf5707f0"
+}

@@ -110,6 +110,14 @@ def check(configuration, *, bind=False):
     archive = Path(frozen["archive"])
     if not archive.is_file() or hashlib.sha256(archive.read_bytes()).hexdigest() != frozen["archive_sha256"]:
         errors.append("source archive drift")
+    for item in configuration.get("runtime_files", []):
+        path = Path(item["path"])
+        if not path.is_file():
+            errors.append("pinned runtime settings/draft/resource evidence drift")
+            continue
+        with path.open("rb") as handle:
+            if hashlib.file_digest(handle, "sha256").hexdigest() != item["sha256"]:
+                errors.append("pinned runtime settings/draft/resource evidence drift")
     if bind:
         expected_runner = root / "benchmarks/experiments/rotate_service_compare.py"
         expected_manifest = root / frozen["manifest_relative_path"]
@@ -131,7 +139,8 @@ def check(configuration, *, bind=False):
                 errors.append("service cwd is not frozen")
         if Path(__file__).resolve().parent != expected_runner.parent:
             errors.append("source checker helper was imported from outside frozen scripts")
-        for name in ("http_service_compare", "public_service_report", "service_inventory", "service_resource_selection"):
+        for name in ("http_service_compare", "public_service_report", "service_inventory", "service_resource_selection",
+                     "omlx_dflash_protocol", "service_resources", "service_dev_selection"):
             module = sys.modules.get(name)
             if module is not None and Path(module.__file__).resolve() != expected_runner.parent / f"{name}.py":
                 errors.append(f"{name} helper import is not frozen")

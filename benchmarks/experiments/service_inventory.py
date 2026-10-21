@@ -4,6 +4,7 @@ import math
 
 from http_service_compare import request_body
 from service_resource_selection import selected_sessions
+from service_resources import eligibility as resource_eligibility
 from service_source_freeze import digest
 
 
@@ -105,10 +106,23 @@ def audit(raw):
             checks = block.get("source_checks", {})
             if any(not source_evidence(configuration, checks.get(phase, {})) for phase in ("before", "after")):
                 errors.append(f"block {index}: missing/failed per-block source checks")
+            if configuration.get("resource_policy"):
+                resource = resource_eligibility(block.get("resource_samples", {}), configuration["resource_policy"], len(block.get("records", [])))
+                if resource != block.get("resource_eligibility") or resource["valid"] is not True:
+                    errors.append(f"block {index}: resource eligibility failed or differs from recorded samples")
+            if engine.get("dflash_execution_required") and any(
+                block.get(key, {}).get("valid") is not True for key in ("dflash_warmup_execution", "dflash_execution")
+            ):
+                errors.append(f"block {index}: actual official DFlash execution not proven")
         if any(not source_evidence(configuration, raw.get("source_checks", {}).get(phase, {})) for phase in ("initial", "final")):
             errors.append("missing/failed initial/final source checks")
         if raw.get("status") != "completed":
             errors.append("run did not complete")
+        if split == "heldout" and configuration.get("resource_policy"):
+            from service_dev_selection import portable_formal_evidence
+
+            if not portable_formal_evidence(configuration, raw.get("dev_selection_check") or {}):
+                errors.append("missing/incoherent actual dev winner binding for formal report")
         return {"valid": not errors, "errors": errors, "expected_blocks": len(expected_blocks),
                 "expected_requests_per_block": len(expected_cases), "expected_warmups_per_block": len(warms)}
     except (KeyError, TypeError, ValueError, IndexError) as error:

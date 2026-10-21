@@ -1,0 +1,84 @@
+{
+  "freeze": {
+    "provided": true,
+    "matches": true,
+    "formal_validity": true,
+    "manifest_name": "ds-source-manifest.json",
+    "manifest_sha256": "e166f9bdc95c97df4bc0a6937e07f30035924e989c73d8e40ebb9340b409f7af",
+    "tree_sha256": "21a0fee62d428cf7f2f86611c2a3ca8c45ef235bf25bf560a2bb6150db7e6832",
+    "archive_name": "source.tar.gz",
+    "archive_sha256": "f48d430d2433194f4680896e699760a8e0a9602505a320833c02fbbefabe60ab",
+    "internal_manifest_sha256": "ec95dec26ef71b5f0e00994767cfeec7f2c53cd7c59f18b5edf3f37914ca500d",
+    "executing_harness_sha256": "5e910651566c0a104404eb5acd84abb6ae64b47a74a170a66bf86aa673ce7506",
+    "files": 47,
+    "errors": [],
+    "mismatches": [],
+    "missing_runtime_or_harness_files": []
+  },
+  "coverage_plan": {
+    "variants": [
+      "fixed0",
+      "fixed1",
+      "fixed2",
+      "fixed4",
+      "legacy",
+      "ds",
+      "ds_lagged_mean",
+      "native_greedy",
+      "tuned_fixed"
+    ],
+    "warmup_groups": 1,
+    "development_groups": 3,
+    "heldout_groups": 18,
+    "warmup_calls": 9,
+    "development_calls": 27,
+    "heldout_calls": 162,
+    "total_generation_calls": 198,
+    "max_generated_token_cap_sum": 19008,
+    "no_gpu_imported": true
+  },
+  "status": "cpu_ready_gpu_not_started",
+  "reviewer": "independent commit_publish verification agent",
+  "recorded_at_utc": "2026-10-21T07:19:07.707712+00:00",
+  "gpu_imported_or_loaded": false,
+  "new_archive_created": false,
+  "frozen_source_archive": "benchmarks/reports/phase2-ds-source-v1-20261021/source.tar.gz",
+  "execution_template": {
+    "working_directory": "<EXTRACTED_F48D_SOURCE>",
+    "environment": {
+      "PYTHONPATH": "<EXTRACTED_F48D_SOURCE>/src",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "interpreter": "<REPOSITORY_VENV>/bin/python",
+    "argv": [
+      "benchmarks/experiments/ds_budget_ablation.py",
+      "--profile",
+      "qwen3.5-9b-8bit",
+      "--repeats",
+      "3",
+      "--max-tokens",
+      "96",
+      "--freeze-manifest",
+      "ds-source-manifest.json",
+      "--freeze-archive",
+      "<REPOSITORY>/benchmarks/reports/phase2-ds-source-v1-20261021/source.tar.gz",
+      "--output",
+      "<REPOSITORY>/benchmarks/reports/phase2-ds-budget-qwen35-9b8-v1.json"
+    ]
+  },
+  "cpu_checks": [
+    "Invoked original frozen freeze_record with executed_harness_path equal actual archived ablation file and explicit genuine archive_path.",
+    "47file archive/member map/internal manifest/source/executed-harness hashes all match; zero mismatches/errors.",
+    "Parsed full non-smoke protocol on CPU; output file is fresh.",
+    "Verified importing frozen harness and verifying provenance does not load mlx in sys.modules.",
+    "The old tuple/list bug is confined to the separate lagged probe verifier; actual ablation does not call that helper."
+  ],
+  "interpretation": {
+    "groups": "1warmup+3development+18heldout; each9variants;198actual generation calls total,162heldout calls.",
+    "tuned_fixed": "Choose fixed0/1/2/4 on development exact-to-native outputs only; lock for heldout. Independent adaptive variants retain their own online policies as preregistered.",
+    "native_hybrid_speculation": "Native MLX fixed speculation unsupported by this recurrent cache and is not assigned fake failure/zero time; native_greedy remains target-only prefill control.",
+    "claim_gate": "Complete exact outputs and frozen execution permit interpreting paired ratios; an equivalence-validity flag alone does not establish an improvement. Second mature framework remains pending.",
+    "duration_planning": "Prior separate44-input/128-output diagnostic requests took3.56s and5.16s. Scaling only their token component gives roughly9-13minutes for the theoretical19008-token cap. This omits fixed-budget recovery, longer prefill, EOS and host variation; reserve20-40minutes. This is scheduling guidance, not a performance result or ETA guarantee."
+  },
+  "launch_gate": "No GPU start until quality owner explicitly releases the GPU and root provides the baton."
+}

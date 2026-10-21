@@ -6,6 +6,8 @@ import random
 import statistics
 from pathlib import Path
 
+from public_service_report import public_report
+from service_dev_selection import select as select_dev_candidates
 from service_inventory import audit
 
 
@@ -29,6 +31,7 @@ def summarize(raw, candidate, draws=10000, seed=20261021):
         "scope": "Task correctness matched; SSE text TTFT and total time, not decode-token speedup",
         "candidate": candidate,
         "protocol_inventory": inventory,
+        "dev_candidate_selection": select_dev_candidates(raw),
         "resource_selection": raw.get("configuration", {}).get("resource_selection"),
         "coverage_note": "Deferred groups remain unmeasured, not zero-scored; six clusters pooled across lengths do not establish six-cluster evidence per length.",
         "engines": {},
@@ -92,6 +95,7 @@ def summarize(raw, candidate, draws=10000, seed=20261021):
                     row["ci95"] = [percentile(distribution, 0.025), percentile(distribution, 0.975)]
                     row["engineering_target_met"] = (
                         inventory["valid"]
+                        and raw.get("split") == "heldout"
                         and len(clusters) >= 6
                         and len(good_keys) == len(all_keys)
                         and row["latency_reduction"] >= 0.15
@@ -115,9 +119,13 @@ def main():
     parser.add_argument("--candidate", default="deepinfer-native-cache")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    args.output.write_text(
-        json.dumps(summarize(json.loads(args.raw.read_text()), args.candidate), indent=2) + "\n"
-    )
+    import hashlib
+
+    raw = json.loads(args.raw.read_text())
+    result = summarize(raw, args.candidate)
+    result["raw_report_sha256"] = hashlib.sha256(args.raw.read_bytes()).hexdigest()
+    result = public_report({"configuration": raw.get("configuration", {}), "summary": result})["summary"]
+    args.output.write_text(json.dumps(result, indent=2) + "\n")
 
 
 if __name__ == "__main__":

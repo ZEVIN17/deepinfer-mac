@@ -17,9 +17,13 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from http_service_compare import measure
+from omlx_dflash_protocol import execution_evidence
 from public_service_report import public_report
+from service_dev_selection import verify_formal
 from service_inventory import warmup_cases
 from service_resource_selection import selected_sessions
+from service_resources import eligibility as resource_eligibility
+from service_resources import sample as resource_sample
 from service_source_freeze import check as source_check
 from service_source_freeze import digest
 
@@ -91,6 +95,14 @@ def run(configuration, manifest, output, repeats, split):
     sessions = selected_sessions(configuration, manifest, split)
     if not sessions:
         raise ValueError("Selected manifest split has no sessions")
+    if (any(engine.get("dflash_execution_required") for engine in engines)
+        and any(case.get("prompt_tokens", 0) >= 4096 for session in sessions for case in session["cases"])
+        and not (configuration.get("omlx_dflash_resource_admission") or {}).get("verified")):
+        raise ValueError("Actual4204+256 trained-DFlash resource admission is required before4K comparison; target-only4K and2K DFlash compatibility are insufficient")
+    dev_selection_check = None
+    if split == "heldout" and configuration.get("resource_policy"):
+        verify_formal(configuration)
+        dev_selection_check = {"verified": True, "binding_sha256": digest(configuration["dev_selection_report"])}
     if "total_context_cap_tokens" in configuration:
         cap = configuration["total_context_cap_tokens"]
         blocked = [
@@ -117,6 +129,7 @@ def run(configuration, manifest, output, repeats, split):
         "scope": "Exclusive server processes; warm-model session workload; no cold-KV assumption",
         "cache_scope_note": "seed_cold_kv is a historical request-kind label, not proof of zero cache hits. Only actual engine metrics establish cold KV; unknown remains unknown.",
         "blocks": [],
+        "dev_selection_check": dev_selection_check,
     }
     output.mkdir(parents=True, exist_ok=True)
     checkpoint = output / "raw.json"
@@ -129,6 +142,8 @@ def run(configuration, manifest, output, repeats, split):
         snapshot = next((e["model"] for e in engines if e["id"] == "native-mlx-lm"), None)
         public = public_report(report, snapshot=snapshot)
         public["configuration_sha256"] = digest(public["configuration"])
+        if public.get("dev_selection_check"):
+            public["dev_selection_check"]["binding_sha256"] = digest(public["configuration"]["dev_selection_report"])
         checkpoint.write_text(json.dumps(public, ensure_ascii=False, indent=2) + "\n")
 
     if configuration.get("frozen_source") and not report["source_checks"]["initial"]["verified"]:
@@ -147,6 +162,7 @@ def run(configuration, manifest, output, repeats, split):
                     "records": [],
                     "error": None,
                     "status": "running",
+                    "resource_samples": {"before_start": resource_sample(), "after_requests": []},
                 }
                 report["blocks"].append(block)
                 log_path = private_root / f"block-{len(report['blocks']) - 1}.log"
@@ -160,6 +176,7 @@ def run(configuration, manifest, output, repeats, split):
                     block["executed_command"] = engine["command"]
                     block["execution_cwd"] = engine.get("cwd")
                     with log_path.open("w") as log:
+                        block["resource_samples"]["before_start"] = resource_sample()
                         process = subprocess.Popen(
                             engine["command"],
                             stdin=subprocess.DEVNULL,
@@ -171,6 +188,7 @@ def run(configuration, manifest, output, repeats, split):
                         )
                         block["pid"] = process.pid
                         block["models_response"] = await_ready(process, engine["url"], 180)
+                        block["resource_samples"]["after_ready"] = resource_sample(process.pid)
                         block["readiness_ms"] = (time.perf_counter() - launched) * 1000
                         options = engine.get("request_options", {})
                         block["warmups"] = []
@@ -180,11 +198,17 @@ def run(configuration, manifest, output, repeats, split):
                             save()
                             if warmup["error"]:
                                 raise RuntimeError(f"Warmup protocol failed: {warmup['error']}")
+                        block["resource_samples"]["after_warmup"] = resource_sample(process.pid)
+                        if engine.get("dflash_execution_required"):
+                            block["dflash_warmup_execution"] = execution_evidence(log_path.read_text(errors="replace"), engine["dflash_execution_required"])
+                            if not block["dflash_warmup_execution"]["valid"]:
+                                raise RuntimeError("Official DFlash execution not proven after warmup; refuse timing a soft fallback")
                         for session in sessions:
                             for case in session["cases"]:
                                 record = measure(engine["url"], engine["model"], case, request_options=options)
                                 record.update(session_id=session["id"], split=split, repetition=repetition)
                                 block["records"].append(record)
+                                block["resource_samples"]["after_requests"].append(resource_sample(process.pid))
                                 save()
                                 print(
                                     engine["id"],
@@ -201,7 +225,11 @@ def run(configuration, manifest, output, repeats, split):
                     block["status"] = "failed"
                 finally:
                     if process is not None:
+                        block["resource_samples"]["before_stop"] = resource_sample(process.pid)
                         stop(process)
+                    block["resource_samples"]["after_stop"] = resource_sample()
+                    if configuration.get("resource_policy"):
+                        block["resource_eligibility"] = resource_eligibility(block["resource_samples"], configuration["resource_policy"], len(block["records"]))
                     block["process_stopped"] = process is None or process.poll() is not None
                     if block["status"] == "running":
                         block["status"] = "interrupted"
@@ -210,6 +238,11 @@ def run(configuration, manifest, output, repeats, split):
                         block["status"] = "failed"
                         block["error"] = (block.get("error") or "") + " Source/environment drift after block"
                     if log_path.exists():
+                        if engine.get("dflash_execution_required"):
+                            block["dflash_execution"] = execution_evidence(log_path.read_text(errors="replace"), engine["dflash_execution_required"])
+                            if not block["dflash_execution"]["valid"]:
+                                block["status"] = "failed"
+                                block["error"] = (block.get("error") or "") + " Official DFlash execution evidence failed"
                         block["private_log"] = {"alias": f"<PRIVATE_RESULTS>/{output.name}/{log_path.name}",
                                                 "sha256": hashlib.sha256(log_path.read_bytes()).hexdigest(),
                                                 "bytes": log_path.stat().st_size}

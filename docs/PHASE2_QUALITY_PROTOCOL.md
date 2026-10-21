@@ -83,8 +83,8 @@ universal gain is claimed. The sanitized report retains per-task decisions,
 Wilson intervals, timing and finish reasons; excluded raw data retains full
 responses. The runtime source hashes before/after execution are identical.
 
-Before observing9B4bit or14B outputs, an additional **development-only budget
-control** is fixed: `mmlu:1471`, `mmlu:9423`, `lcb:abc387_c`; all three profiles,
+Before all additional4096-token runs, an additional **development-only budget
+control** is fixed using exactly the initial9B8development cap-failure rule: `mmlu:1471`, `mmlu:9423`, `lcb:abc387_c`; all three profiles,
 settings `greedy_engine` and `official_engine` under the common Qwen3.5 sampling
 protocol,4096output tokens each, thinking disabled, seed42. These are exactly
 the development tasks that hit the initial9B8bit budget in either setting.

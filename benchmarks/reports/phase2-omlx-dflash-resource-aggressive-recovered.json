@@ -1,0 +1,130 @@
+{
+  "scope": "Instrumented actual dev compatibility; no speedup, throughput or memory-peak ratio claim",
+  "target_repo": "mlx-community/Qwen3.5-9B-8bit",
+  "target_revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d",
+  "draft_repo": "z-lab/Qwen3.5-9B-DFlash",
+  "draft_revision": "5fc3b3d474760f18c516db87d84c37edbfd3ede6",
+  "manifest_sha256": "16750b5d512df3d88a0d9086f1b2070dc5ebacffb047cc2f512cda35af03deb7",
+  "actual_harness_sha256": {
+    "omlx_dflash_compat_probe.py": "d440b6e7fc1060104614265b709faeb0d1a394e2a00e7ddfb5059847e93a3a39",
+    "omlx_dflash_audit_server.py": "9dc20134c4cf5b28347360e514a3c7c7feb8d956d212fd1eabe021a370685be0",
+    "http_service_compare.py": "d37e99df3164bc4f968785d775f07765b7dfe351059bceab9598a2a813ab3a2f",
+    "public_service_report.py": "b5c2d431ee6b108501ccb3f25136c9f822e8f918c61d2cc2d5c0e202cb3c6ea5"
+  },
+  "results": [
+    {
+      "variant": "q4-b5-dflash",
+      "strict_passes": 3,
+      "strict_attempts": 3,
+      "all_strict_passed": true,
+      "actual_dflash_execution_proven": true,
+      "official_loaded_log": true,
+      "soft_fallback": false,
+      "server_exit_code": -15,
+      "cases": [
+        {
+          "id": "authored-multiply",
+          "quality_pass": true,
+          "error": null,
+          "protocol_complete": true,
+          "text": "{\"answer\": 42}",
+          "system_after": {
+            "available_bytes": 4761632768,
+            "used_bytes": 18587746304,
+            "system_swap_used_bytes": 7845576704
+          },
+          "actual_prompt": [
+            {
+              "prompt_tokens": 39,
+              "token_ids_sha256_le_u32": "01d16791016d50a689e115637a45123d51027b701fa1786a7aeb0b66e5eb70f2"
+            }
+          ]
+        },
+        {
+          "id": "authored-squares",
+          "quality_pass": true,
+          "error": null,
+          "protocol_complete": true,
+          "text": "[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225]",
+          "system_after": {
+            "available_bytes": 4746739712,
+            "used_bytes": 18634817536,
+            "system_swap_used_bytes": 7828799488
+          },
+          "actual_prompt": [
+            {
+              "prompt_tokens": 40,
+              "token_ids_sha256_le_u32": "f63b589e9bb3694dfa8e50cb7361fe47e1a2ab1ad102b34cdd069a19ab645be4"
+            }
+          ]
+        },
+        {
+          "id": "public-ledger-03-zh:multiturn_continuation",
+          "quality_pass": true,
+          "error": null,
+          "protocol_complete": true,
+          "text": "{\"P0004\":{\"cost\":251,\"owner\":\"R07\"},\"P0075\":{\"cost\":178,\"owner\":\"R10\"},\"P0112\":{\"cost\":647,\"owner\":\"R13\"},\"P0219\":{\"cost\":106,\"owner\":\"R01\"}}",
+          "system_after": {
+            "available_bytes": 4786667520,
+            "used_bytes": 18579226624,
+            "system_swap_used_bytes": 7669350400
+          },
+          "actual_prompt": [
+            {
+              "prompt_tokens": 4204,
+              "token_ids_sha256_le_u32": "6cbba44020d5810f08f9c62ede5261889b52e83618ecb4573bae468793cff158"
+            }
+          ]
+        }
+      ],
+      "paired_baseline": null,
+      "draft": {
+        "attached_identity": true,
+        "decode_enabled": true,
+        "engine_property_identity": true,
+        "block_size": 5,
+        "adaptive": false,
+        "window": 4096,
+        "owned_parameter_storage_bytes": 726780928,
+        "owned_module_classes": {
+          "DFlashDraftModel": 1,
+          "RoPE": 1,
+          "RMSNorm": 26,
+          "DFlashDecoderLayer": 6,
+          "Qwen3MLP": 6,
+          "QuantizedLinear": 43,
+          "DFlashAttention": 6
+        }
+      },
+      "draft_forward_invocations": 35,
+      "completed_verify_cycles": 30,
+      "accepted_draft_positions": 113,
+      "examined_draft_positions": 115,
+      "system_swap_delta_bytes": 845152256,
+      "maximum_observed_metal_peak_bytes": 12480428568,
+      "metal_peak_coverage": "post-cleanup snapshots for completed requests",
+      "environment": {
+        "mlx": "0.32.4",
+        "mlx-lm": "0.31.4.dev132+g94cdcae13",
+        "mlx-vlm": "0.7.8",
+        "transformers": "5.17.0"
+      },
+      "upstream_hook_sources_sha256": {
+        "batch_generator.py": "20c9363a078d9546a99ca3ae1abca4688ff1cb8217a06b39579c87365419e113"
+      }
+    }
+  ],
+  "limitations": [
+    "Authored greedy nonthinking dev attempts only; successes, failures and any paired baseline text/prompt checks are listed per run. Generated output IDs were not captured.",
+    "Diagnostic I/O and wrappers may influence adaptive budget choices; do not use observed choices or times as formal performance tuning.",
+    "Accepted/examined draft positions excludes generated proposals that were never examined; it is not an overall generation speedup.",
+    "System-wide swap changed during the DFlash block; the change is not exclusively attributable to that process.",
+    "Resource coverage is labeled per variant; the original baseline observer lacks complete final-request Metal-peak coverage.",
+    "Server processes deliberately received SIGTERM after attempts; official private lifecycle logs are retained. No server remained on8084."
+  ],
+  "immutable_private_report_sha256": "c78da10213119f6d4dff209d3ccf38845a6bcd16ada16117bec5b3b13d424035",
+  "frozen_actual_harness_archive": "benchmarks/reports/phase2-omlx-dflash-resource-aggressive-recovered-source-v1.tar.gz",
+  "frozen_actual_harness_archive_sha256": "f6f723999f8c1995b5f55077bf68020a52a870fb3cd065b90b7176695d8a9cd6",
+  "frozen_project_source_sha256": "558fece31a27aa7a5fe2f9b4e0e4beddd69bbcbf6221ddef9b34352bad8b5492",
+  "post_run_frozen_source_bytes_verified": true
+}

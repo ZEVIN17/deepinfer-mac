@@ -1,0 +1,185 @@
+{
+  "scope": "Instrumented actual dev compatibility; no speedup, throughput or memory-peak ratio claim",
+  "target_repo": "mlx-community/Qwen3.5-9B-8bit",
+  "target_revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d",
+  "draft_repo": "z-lab/Qwen3.5-9B-DFlash",
+  "draft_revision": "5fc3b3d474760f18c516db87d84c37edbfd3ede6",
+  "manifest_sha256": "f891ff522edc120731781f5a0e8f3b211774b4dfea696af1690ec8f4c5d81ad5",
+  "actual_harness_sha256": {
+    "omlx_dflash_compat_probe.py": "82730c0ebe4f58dfa7760a2aeaedc277b3e02a629796eb80ac20a6d4119d7811",
+    "omlx_dflash_audit_server.py": "e05f1d18e3bbc04bb7576ad1d3e879e4e481861a60e154a85896223e056897a6",
+    "http_service_compare.py": "d37e99df3164bc4f968785d775f07765b7dfe351059bceab9598a2a813ab3a2f",
+    "public_service_report.py": "9eb9c924546b4214dcce43a89bad14c997b05d1902672bd63317d8abb7518b82"
+  },
+  "results": [
+    {
+      "variant": "baseline",
+      "strict_passes": 3,
+      "strict_attempts": 3,
+      "all_strict_passed": true,
+      "actual_dflash_execution_proven": false,
+      "official_loaded_log": false,
+      "soft_fallback": false,
+      "server_exit_code": -15,
+      "cases": [
+        {
+          "id": "authored-multiply",
+          "quality_pass": true,
+          "protocol_complete": true,
+          "text": "{\"answer\": 42}",
+          "actual_prompt": [
+            {
+              "prompt_tokens": 39,
+              "token_ids_sha256_le_u32": "01d16791016d50a689e115637a45123d51027b701fa1786a7aeb0b66e5eb70f2"
+            }
+          ]
+        },
+        {
+          "id": "authored-squares",
+          "quality_pass": true,
+          "protocol_complete": true,
+          "text": "[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225]",
+          "actual_prompt": [
+            {
+              "prompt_tokens": 40,
+              "token_ids_sha256_le_u32": "f63b589e9bb3694dfa8e50cb7361fe47e1a2ab1ad102b34cdd069a19ab645be4"
+            }
+          ]
+        },
+        {
+          "id": "public-ledger-00-en:seed",
+          "quality_pass": true,
+          "protocol_complete": true,
+          "text": "{\"P0003\": {\"cost\": 211, \"owner\": \"R03\"}, \"P0035\": {\"cost\": 495, \"owner\": \"R01\"}, \"P0053\": {\"cost\": 261, \"owner\": \"R02\"}, \"P0105\": {\"cost\": 385, \"owner\": \"R03\"}}",
+          "actual_prompt": [
+            {
+              "prompt_tokens": 2048,
+              "token_ids_sha256_le_u32": "5819a7353d39ee2709a24097caf931d9acef6c7072458213f4ac1a9209142133"
+            }
+          ]
+        }
+      ],
+      "paired_baseline": null,
+      "draft": null,
+      "draft_forward_invocations": 0,
+      "completed_verify_cycles": 0,
+      "accepted_draft_positions": 0,
+      "examined_draft_positions": 0,
+      "system_swap_delta_bytes": 0,
+      "maximum_observed_metal_peak_bytes": 9758824836,
+      "metal_peak_coverage": "startup/pre-request only; lower bound, final ledger peak not observed",
+      "environment": {
+        "mlx": "0.32.4",
+        "mlx-lm": "0.31.4.dev132+g94cdcae13",
+        "mlx-vlm": "0.7.8",
+        "transformers": "5.17.0"
+      }
+    },
+    {
+      "variant": "q4-b5-adaptive",
+      "strict_passes": 3,
+      "strict_attempts": 3,
+      "all_strict_passed": true,
+      "actual_dflash_execution_proven": true,
+      "official_loaded_log": true,
+      "soft_fallback": false,
+      "server_exit_code": -15,
+      "cases": [
+        {
+          "id": "authored-multiply",
+          "quality_pass": true,
+          "protocol_complete": true,
+          "text": "{\"answer\": 42}",
+          "actual_prompt": [
+            {
+              "prompt_tokens": 39,
+              "token_ids_sha256_le_u32": "01d16791016d50a689e115637a45123d51027b701fa1786a7aeb0b66e5eb70f2"
+            }
+          ]
+        },
+        {
+          "id": "authored-squares",
+          "quality_pass": true,
+          "protocol_complete": true,
+          "text": "[0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225]",
+          "actual_prompt": [
+            {
+              "prompt_tokens": 40,
+              "token_ids_sha256_le_u32": "f63b589e9bb3694dfa8e50cb7361fe47e1a2ab1ad102b34cdd069a19ab645be4"
+            }
+          ]
+        },
+        {
+          "id": "public-ledger-00-en:seed",
+          "quality_pass": true,
+          "protocol_complete": true,
+          "text": "{\"P0003\": {\"cost\": 211, \"owner\": \"R03\"}, \"P0035\": {\"cost\": 495, \"owner\": \"R01\"}, \"P0053\": {\"cost\": 261, \"owner\": \"R02\"}, \"P0105\": {\"cost\": 385, \"owner\": \"R03\"}}",
+          "actual_prompt": [
+            {
+              "prompt_tokens": 2048,
+              "token_ids_sha256_le_u32": "5819a7353d39ee2709a24097caf931d9acef6c7072458213f4ac1a9209142133"
+            }
+          ]
+        }
+      ],
+      "paired_baseline": [
+        {
+          "case_id": "authored-multiply",
+          "text_equal": true,
+          "prompt_ids_equal": true
+        },
+        {
+          "case_id": "authored-squares",
+          "text_equal": true,
+          "prompt_ids_equal": true
+        },
+        {
+          "case_id": "public-ledger-00-en:seed",
+          "text_equal": true,
+          "prompt_ids_equal": true
+        }
+      ],
+      "draft": {
+        "attached_identity": true,
+        "decode_enabled": true,
+        "engine_property_identity": true,
+        "block_size": 5,
+        "adaptive": true,
+        "window": 4096,
+        "owned_parameter_storage_bytes": 726780928,
+        "owned_module_classes": {
+          "DFlashDraftModel": 1,
+          "RoPE": 1,
+          "RMSNorm": 26,
+          "DFlashDecoderLayer": 6,
+          "Qwen3MLP": 6,
+          "QuantizedLinear": 43,
+          "DFlashAttention": 6
+        }
+      },
+      "draft_forward_invocations": 51,
+      "completed_verify_cycles": 45,
+      "accepted_draft_positions": 117,
+      "examined_draft_positions": 121,
+      "system_swap_delta_bytes": 517996544,
+      "maximum_observed_metal_peak_bytes": 12480428568,
+      "metal_peak_coverage": "load attachment and each request's completed verify stats",
+      "environment": {
+        "mlx": "0.32.4",
+        "mlx-lm": "0.31.4.dev132+g94cdcae13",
+        "mlx-vlm": "0.7.8",
+        "transformers": "5.17.0"
+      }
+    }
+  ],
+  "limitations": [
+    "Three greedy nonthinking dev cases only; complete actual prompt IDs and output text matched. Generated output IDs were not captured.",
+    "Diagnostic I/O and wrappers may influence adaptive budget choices; do not use observed choices or times as formal performance tuning.",
+    "Accepted/examined draft positions excludes generated proposals that were never examined; it is not an overall generation speedup.",
+    "System-wide swap changed during the DFlash block; the change is not exclusively attributable to that process.",
+    "Original baseline observer lacks complete final-request Metal-peak coverage. Future repaired observers must use fresh source hashes.",
+    "Servers deliberately received SIGTERM after requests; official private logs show complete shutdown/unload. No server remained on8084."
+  ],
+  "immutable_private_report_sha256": "445754dcb3928e13d3c6787ebcdcad8fdc40f0abc469bf8553843558f5c4854f",
+  "frozen_actual_harness_archive": "benchmarks/reports/phase2-omlx-dflash-compat-source-v1.tar.gz"
+}

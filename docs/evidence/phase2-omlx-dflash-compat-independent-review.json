@@ -1,0 +1,183 @@
+{
+  "status": "approved_actual_compatibility_and_current_observer_cpu_scope",
+  "reviewer": "independent commit_publish verification agent",
+  "recorded_at_utc": "2026-10-21T07:16:32.915758+00:00",
+  "gpu_loaded_by_reviewer": false,
+  "network_used": false,
+  "performance_claim": false,
+  "source_sha256": {
+    "benchmarks/experiments/omlx_dflash_compat_probe.py": "1c593320a2a162b45e854595f0864be61a9ea7771162ec651dec85cb8695b7d9",
+    "benchmarks/experiments/omlx_dflash_audit_server.py": "9dc20134c4cf5b28347360e514a3c7c7feb8d956d212fd1eabe021a370685be0",
+    "benchmarks/experiments/http_service_compare.py": "d37e99df3164bc4f968785d775f07765b7dfe351059bceab9598a2a813ab3a2f",
+    "benchmarks/experiments/public_service_report.py": "9eb9c924546b4214dcce43a89bad14c997b05d1902672bd63317d8abb7518b82",
+    "benchmarks/experiments/summarize_omlx_dflash_compat.py": "d99c5ba8ef515a7937bd1b2b55f65454b82a0cfededc89b7dacc757bc6513b7b"
+  },
+  "immutable_actual_artifact_sha256": {
+    "benchmarks/reports/phase2-omlx-dflash-compat-source-v1.tar.gz": "e72a2fc2d764d335fe40eec7c39411654fe81dd2d932092cb75acccf869179f2",
+    "<PRIVATE_RAW_COMPAT_REPORT>": "445754dcb3928e13d3c6787ebcdcad8fdc40f0abc469bf8553843558f5c4854f"
+  },
+  "actual_recomputation": {
+    "raw_report_sha256": "445754dcb3928e13d3c6787ebcdcad8fdc40f0abc469bf8553843558f5c4854f",
+    "source_archive_sha256": "e72a2fc2d764d335fe40eec7c39411654fe81dd2d932092cb75acccf869179f2",
+    "results": [
+      {
+        "engine": "baseline",
+        "event_counts": {
+          "audit_started": 1,
+          "request_prompt": 3
+        },
+        "cases": [
+          {
+            "case_id": "authored-multiply",
+            "prompt_tokens": 39,
+            "prompt_ids_sha256": "01d16791016d50a689e115637a45123d51027b701fa1786a7aeb0b66e5eb70f2",
+            "strict_json_recomputed": true,
+            "completion_tokens": 7,
+            "text_sha256": "f85ee2859e7757b5bcf33d720ead3c508e04e0d997845cfab9bf5aebe6569086"
+          },
+          {
+            "case_id": "authored-squares",
+            "prompt_tokens": 40,
+            "prompt_ids_sha256": "f63b589e9bb3694dfa8e50cb7361fe47e1a2ab1ad102b34cdd069a19ab645be4",
+            "strict_json_recomputed": true,
+            "completion_tokens": 66,
+            "text_sha256": "d1ecd6af0892d769d82534de9571098eb62653822985417dfa69793658e91662"
+          },
+          {
+            "case_id": "public-ledger-00-en:seed",
+            "prompt_tokens": 2048,
+            "prompt_ids_sha256": "5819a7353d39ee2709a24097caf931d9acef6c7072458213f4ac1a9209142133",
+            "strict_json_recomputed": true,
+            "completion_tokens": 92,
+            "text_sha256": "d9f0f59b521de40c8326d57475b83f3ce415c89e88a4fa0efadf64b334f0c571"
+          }
+        ],
+        "system_swap_delta_bytes": 0,
+        "max_sampled_metal_peak_bytes": 9758824836,
+        "max_sampled_process_rss_bytes": 4282433536
+      },
+      {
+        "engine": "q4-b5-adaptive",
+        "event_counts": {
+          "audit_started": 1,
+          "drafter_attached": 1,
+          "request_prompt": 3,
+          "draft_batched_completed": 51,
+          "verify_chain_completed": 45,
+          "upstream_verify_stats": 3
+        },
+        "cases": [
+          {
+            "case_id": "authored-multiply",
+            "prompt_tokens": 39,
+            "prompt_ids_sha256": "01d16791016d50a689e115637a45123d51027b701fa1786a7aeb0b66e5eb70f2",
+            "strict_json_recomputed": true,
+            "completion_tokens": 7,
+            "text_sha256": "f85ee2859e7757b5bcf33d720ead3c508e04e0d997845cfab9bf5aebe6569086"
+          },
+          {
+            "case_id": "authored-squares",
+            "prompt_tokens": 40,
+            "prompt_ids_sha256": "f63b589e9bb3694dfa8e50cb7361fe47e1a2ab1ad102b34cdd069a19ab645be4",
+            "strict_json_recomputed": true,
+            "completion_tokens": 66,
+            "text_sha256": "d1ecd6af0892d769d82534de9571098eb62653822985417dfa69793658e91662"
+          },
+          {
+            "case_id": "public-ledger-00-en:seed",
+            "prompt_tokens": 2048,
+            "prompt_ids_sha256": "5819a7353d39ee2709a24097caf931d9acef6c7072458213f4ac1a9209142133",
+            "strict_json_recomputed": true,
+            "completion_tokens": 92,
+            "text_sha256": "d9f0f59b521de40c8326d57475b83f3ce415c89e88a4fa0efadf64b334f0c571"
+          }
+        ],
+        "system_swap_delta_bytes": 517996544,
+        "max_sampled_metal_peak_bytes": 12480428568,
+        "max_sampled_process_rss_bytes": 1766719488
+      }
+    ],
+    "verified_position_accepts": 117,
+    "examined_position_denominator": 121,
+    "examined_position_acceptance": 0.9669421487603306,
+    "quantized_linear_count": 43,
+    "draft_owned_parameter_storage_bytes": 726780928,
+    "original_jsonl_and_public_alias_projection_exact": true,
+    "source_archive_matches_all_recorded_harnesses": true,
+    "scope": "Three authored dev cases, prompt IDs and full text equal; no output token-ID sequence available and no timing conclusion"
+  },
+  "installed_source_integrity": {
+    "omlx": {
+      "version": "0.7.1",
+      "record_verified_python_files": 571,
+      "mismatches": 0
+    },
+    "mlx-vlm": {
+      "version": "0.7.8",
+      "record_verified_python_files": 1591,
+      "mismatches": 0
+    },
+    "actual_recorded_batch_generator_sha256": "20c9363a078d9546a99ca3ae1abca4688ff1cb8217a06b39579c87365419e113",
+    "scope": "Disk source files match installation RECORD and recorded relevant hook digests; runtime observers intentionally wrap original methods in process."
+  },
+  "observer_cpu_contract": {
+    "fixture_sha256": "21dca3f777fe51900119ffa2497015d39848ecced41312a7dc265d2898bda7cb",
+    "no_gpu_or_mlx_import": true,
+    "controls_passed": [
+      "Each original method called exactly once per invocation; original object returns and mutations preserved",
+      "Original upstream exceptions propagated; failed draft/verify have no completed-success event",
+      "No-op original attach emits false binding identity rather than inventing successful attachment",
+      "Target shared embedding/head parameters excluded from draft-owned storage; quant bits/group come from actual supplied module attributes",
+      "No eval, async_eval, array or synchronize executed by observer",
+      "Request-ID hash equals exact little-endian uint32 ID buffer",
+      "New cleanup event occurs only after original method succeeds and finished-ID set is nonempty"
+    ],
+    "commands": [
+      ".venv/bin/python <TEMPORARY_OBSERVER_CONTROL_FIXTURE>",
+      ".venv/bin/python -m py_compile benchmarks/experiments/omlx_dflash_audit_server.py benchmarks/experiments/omlx_dflash_compat_probe.py",
+      ".venv/bin/ruff check benchmarks/experiments/omlx_dflash_audit_server.py benchmarks/experiments/omlx_dflash_compat_probe.py"
+    ],
+    "fixture_note": "Independent temporary CPU fixture stubs upstream contracts; its values are not model measurements or performance evidence."
+  },
+  "findings": [
+    {
+      "id": "DFLASH-OBSERVER-DOC",
+      "priority": "P3",
+      "status": "resolved_and_cpu_reviewed",
+      "finding": "Earlier observer wording promised unchanged decisions even though diagnostic Python/file-I/O overhead may affect the adaptive cost controller.",
+      "resolution": "Current doc says decoding/acceptance algorithms are not replaced and explicitly warns adaptive budget decisions may change. Original report/archive remain byte-identical."
+    },
+    {
+      "id": "DFLASH-BASELINE-PEAK-COVERAGE",
+      "priority": "P2",
+      "status": "historical_limitation_preserved_future_hook_cpu_verified",
+      "finding": "Original baseline only samples startup and pre-request resources; its final long-prefill peak is not observed.",
+      "resolution": "Do not compute baseline-vs-DFlash peak ratios. Current new cleanup hook is contract-tested, not real-model executed by this reviewer. Historical observed baseline peak is only a lower bound."
+    },
+    {
+      "id": "DFLASH-PUBLIC-LOCAL-PATHS",
+      "priority": "P2",
+      "status": "resolved_derived_summary_independently_recomputed",
+      "finding": "Original full compatibility report contains local temporary executable, audit/log and draft-snapshot paths. It must not be treated as the sanitized public artifact.",
+      "resolution": "Full original report moved unchanged to excluded private-service results; accidental public copy removed. Compact derived summary is byte-identical to independent recomputation, contains no local paths/argv/log fields, retains original SHA and relative source archive binding."
+    }
+  ],
+  "anti_pattern_checks": {
+    "http_200_is_not_execution_proof": "Actual original attach identity + decode flag + nonempty successful draft calls + upstream verification counters recomputed; baseline negative control has no DFlash events.",
+    "fake_acceptance": "117 accepts divided by sum(depth_drafted)=121. Installed upstream increments examined positions until first rejection; 51 complete draft calls and 45 verification cycles are separate counts.",
+    "no_output_token_identity_claim": "Only full prompt IDs and response text are available. Equal completion counts and full text do not independently prove identical output-token ID sequences.",
+    "quantization_identity": "43 observed QuantizedLinear modules all report4bit/group64; checkpoint remains BF16 on disk and load-time conversion is explicitly distinguished.",
+    "resource_honesty": "DFlash system-swap delta517996544B; observed cumulative Metal peak12480428568B, shared memory/RSS not added, no no-swap or stress claim.",
+    "selection_scope": "Only baseline and q4-block5-adaptive on3authored dev cases measured; BF16/other blocks/heldout and formal superiority remain unmeasured.",
+    "no_speedup_from_diagnostic": "Usage contains real times but startup order and hooks invalidate performance interpretation; no diagnostic latency ratio accepted."
+  },
+  "limits": [
+    "No new model loading, generation, endpoint operation, or GPU replay was performed by this reviewer.",
+    "Source archive exactly matches the original four recorded harness digests and V2 manifest; the later observer correction is separately identified.",
+    "Small dev compatibility does not establish full quality equivalence, optimal configuration, competitive superiority or complete Phase2."
+  ],
+  "public_derived_report_sha256": {
+    "benchmarks/reports/phase2-omlx-dflash-compat-summary.json": "61e3bd4d1a89559501d36995605e03506107f40a03085651bfd52b8cc48bcc2b"
+  },
+  "public_distribution_scope": "Only reviewed compact summary, relative-path source archive and independent reviews; raw local report stays excluded."
+}

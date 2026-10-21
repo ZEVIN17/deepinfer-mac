@@ -18,7 +18,7 @@ PYTHONPATH=src .venv/bin/python benchmarks/experiments/message_checkpoint_valida
 
 只用v2的首个2K dev session，分别验证greedy(seed0)与官方non-thinking(seed42)；每种10请求，共20请求，预计约2–3分钟，实际耗时以运行记录为准。`--sampler official`减为10请求，约1–2分钟。比较关闭/开启检查点时cache=false、冷缓存、热缓存、改尾的完整真实生成IDs，保留失败。输出默认`benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json`。这是正确性验证，不计算竞争速度比。
 
-正式dev配置示例（CPU准备，不加载模型；目标仍为质量更稳的9B8bit，不以较低质量4bit替换）：
+原17候选baseline-only dev配置示例（CPU准备，不加载模型；完整DFlash主要对照改用末节21候选入口，目标仍为9B8bit）：
 
 ```sh
 .venv/bin/python benchmarks/experiments/prepare_service_compare.py --root /tmp/deepinfer-service-v3-frozen-dev --python "$PWD/.venv/bin/python" --manifest benchmarks/experiments/cache_sessions.v3.json --resource-approved-lengths 2048 4096 --total-context-cap 8192 --variants baseline ds-original ds-lagged --dev-tuning-grid --snapshot "$HOME/.cache/huggingface/hub/models--mlx-community--Qwen3.5-9B-8bit/snapshots/16daa4818c54ce5f5436f929d52542eb65bbed9d"
@@ -114,4 +114,47 @@ Portable控制覆盖关闭/cache=false原shape、nontrimmable target+draft精确
 
 正式实验必须同模型repo/revision/量化、模板、采样、缓存预算、请求与并发；dev调优后冻结。每引擎独占GPU热身、轮换完整block，冷加载/暖模型/热KV分开，额外审查开关关闭。bootstrap以session为单位，保留全部质量失败和缺失；重复次数不是独立题。≥15%为待验目标，需DS开关贡献及两个主要对照共同支持，通用缓存改进不能单独完成目标。
 
-oMLX优化能力另需核验：安装的官方0.7.1源码明确支持Qwen3.5-family DFlash，默认关闭；需要匹配目标hidden-state/layer配置的训练draft checkpoint，经已安装mlx-vlm loader绑定，不等同于普通0.8B自回归草稿。它只读取显式repo/path或target内`dflash/`，锁定9B8bit仓库没有捆绑draft；本次本地源码审查尚未核实公开9B训练checkpoint的pin/大小。证据与下一步见`docs/evidence/phase2-omlx-dflash-source-audit.json`。应先核公开候选metadata/license，再协调下载和真实dev质量/资源/速度；可用优化应纳入oMLX主要对照或另列，不得以default baseline对比概括其完整能力，也不给未验证优化记零分。
+oMLX DFlash已通过真实2K dev兼容验证，见下节；它属于必须独立调优的主要对照候选。不能用默认baseline的结果概括oMLX完整优化能力，也不能给未准入的优化或长度虚构零分。
+
+
+## DFlash 实际兼容、资源条件与独立 dev 选择
+
+官方训练draft为`z-lab/Qwen3.5-9B-DFlash@5fc3b3d474760f18c516db87d84c37edbfd3ede6`，Apache-2.0声明；单文件2,583,816,465 bytes，SHA256`0a42274b32554f48de1faa0d42824e9c2ceda649c30ae0a731cddf410dd698c7`。它是6层block diffusion checkpoint，非普通0.8B自回归LM；69个BF16 tensors及完整SHA已核验。官方load-time4bit/group64生成43个QuantizedLinear，实际独立draft参数存储726,780,928 bytes，共享目标embedding/lm_head。原checkpoint未改写，完整已完成的617个range分块精确删除。公开证据为`phase2-omlx-dflash-availability.json`及`phase2-omlx-dflash-compat-summary.json`，完整本机日志/路径只留excluded private results。
+
+9B8 baseline与DFlash q4/block5/adaptive各3个固定greedy nonthinking dev请求（真实39/40/2048 prompt tokens）全部严格JSON及SSE通过，实际prompt IDs与最终文本一致；没有捕获生成output IDs。DFlash成功绑定、51次真实draft forward、45个verify cycles、117/121 accepted/examined draft positions均有独立证据，121不包含从未被检查的proposals。诊断wrappers的I/O可能改变自适应预算，所有时间与预算选择均不当作正式性能调参。原baseline末次请求的Metal peak未完整观测，禁止作内存峰值比；DFlash观察到12,480,428,568B全局Metal peak及系统swap净增长517,996,544B，不宣称零swap。
+
+4K资源预检独立于2K兼容：先用最大验证宽度的q4/block5/full进行两个短暖身和4204输入+256输出continuation，共3请求，不重复8K、不截断输入。一次默认balanced在加载前被官方dynamic guard以507拒绝（估计10.50GB、大于当时9.31GB dynamic ceiling），这是admission拒绝，非OOM实测。一次显式aggressive完成3/3严格任务和真实DFlash执行，但系统swap净增3,254,255,616B，资源准入失败；原始负结果必须保留。一次在内存恢复条件下的独立重试，实际启动available为13,008,224,256B，3/3严格任务仍通过，但swap仍净增845,152,256B；资源准入同样失败。三份独立报告保留，不覆盖失败或修改gate。正式准入只接受同pin、q4/group64、B5/full、同一guard tier、4204+256真实完成且系统swap不增长的资源报告；它只为共同load/window/max-proposal几何提供保守准入，各mode的暂态仍按每block资源实测检查。
+
+预检命令（明确GPU交接后，使用新冻结extraction；`--memory-guard`取已预注册的官方tier）：
+
+```sh
+.venv/bin/python "$FROZEN/benchmarks/experiments/omlx_dflash_compat_probe.py" --root "$RESOURCE_ROOT" --manifest "$FROZEN/benchmarks/experiments/cache_sessions.v3.json" --variants q4-b5-dflash --ledger-length 4096 --ledger-kind multiturn_continuation --memory-guard aggressive --output "$RESOURCE_ROOT/resource-report.json" --run
+```
+
+`aggressive`仍开启官方guard、保留Apple默认Metal cap，不关闭其他应用、不调用sudo或修改框架；需要对baseline和全部DFlash dev候选使用相同显式tier。正式perf使用普通`omlx_service_server.py`且不加token/runtime audit；外部解析官方成功load、精确path/block/mode/layers、43个q4/group64量化层、engine attachment和实际MTP verify stats，warmup后不满足即拒绝记录该软回退为DFlash性能。官方自适应合法选择depth0或暂时回退不等于load软失败。loader的`toggle ignored`只要出现便不通过。
+
+实际4K资源报告通过后，再准备完整dev配置：
+
+```sh
+.venv/bin/python benchmarks/experiments/prepare_service_compare.py --root "$DEV_ROOT" --python "$PWD/.venv/bin/python" --manifest benchmarks/experiments/cache_sessions.v3.json --resource-approved-lengths 2048 4096 --total-context-cap 8192 --variants baseline ds-original ds-lagged --message-checkpoints --dev-tuning-grid --snapshot "$TARGET_SNAPSHOT" --omlx-dflash-draft-snapshot "$DFLASH_SNAPSHOT" --omlx-control both --omlx-dflash-grid --omlx-memory-guard aggressive --omlx-dflash-resource-report "$RESOURCE_REPORT"
+PYTHONPATH="$DEV_ROOT/source/src" .venv/bin/python "$DEV_ROOT/source/benchmarks/experiments/rotate_service_compare.py" --configuration "$DEV_ROOT/configuration.json" --manifest "$DEV_ROOT/source/benchmarks/experiments/cache_sessions.v3.json" --verify-only
+```
+
+目前代码可CPU准备pending配置并核验源码，但未通过4K资源gate时实际runner会拒绝4K启动。新增4个有界候选为Q4/group64×block4/5×adaptive/full，使用官方MLX量化模型建议`block<=5`；不是照搬B200/SGLang模型卡的8/16。与原17候选合计21，最短完整dev探索`--split dev --repeats 1`共336请求（168为独立暖身），不是平衡顺序竞争证据；3重复则1008请求。2K-only探索为168请求，不能把其选择用于2K+4K正式比较。
+
+每个block在启动前、ready后、暖身后、每个计分请求后、停止前后读取真实系统available/swap及进程RSS，全部在请求timing之外；每个计分请求必须恰有一份资源样本。RSS不与Metal相加，普通竞品进程的Metal peak不可观测时明确为null，离散RSS样本也不称连续峰值。统一预注册`warm-scored-no-new-swap-v1`：计分窗口相对暖身后新增swap>0、available<1GiB、样本缺失/多出或生命周期不完整，使该block不具备工程目标资格；冷加载/暖身swap另列，所有失败及时间保留，不记零分或事后删任务。系统swap不专属归因某一进程。
+
+所有组独立先筛严格计分/暖身质量、协议、源码/环境、执行及资源，再最小化dev平均task total、TTFT同分决胜；默认oMLX与4个DFlash候选同属`omlx`选择组。即使其他候选失败，完整有效候选仍可探索选优，负结果保留。选择不代表≥15%目标或DS归因。
+
+从**private实际raw**生成可公开、无路径的summary，保存其原始字节SHA；正式prepare须同时接收该private raw和public summary：
+
+```sh
+.venv/bin/python benchmarks/experiments/summarize_service_compare.py "$DEV_PRIVATE_RAW" --candidate deepinfer-ds-lagged-chunk512 --output "$DEV_SUMMARY"
+```
+
+正式prepare去掉grid，用各组实际winner的chunk、checkpoint开关、draft/block/mode和guard，传`--dev-selection-report "$DEV_SUMMARY" --dev-raw-report "$DEV_PRIVATE_RAW"`。若DFlash胜出，正式`--omlx-control dflash`；若默认baseline胜出，选baseline，不能丢弃更快且质量/资源合格的DFlash winner来扩大优势。程序会从原始dev重新计算选择，绑定manifest、准入length/total cap/资源政策、模型pin/量化、cache、sampler、每个formal组的实际winner配置、服务flags、完整源码及解释器环境字节。源码或环境变化必须在同一新版本重新dev调优，普通bridge note不能绕过。source archive、官方settings、训练draft文件、资源报告与dev原始证据SHA均在执行前后复查。public raw重新计算alias后的coherence digest，private原始execution digest保持完整；缺失/不一致的dev绑定也禁止portable summary标记工程目标。
+
+正式5组winner配置应以5次重复完成完整顺序轮换（若实际variant数改变，重复数也需为其整数倍）。独立六heldout session clusters、完整质量覆盖与两框架≥15%要求不变；当前仍未验证竞争目标。
+
+
+当前CPU交接（均未运行GPU benchmark）：`docs/evidence/phase2-dflash-dev-preparation.json`记录完整2K+4K与2K-only两份21候选配置的实际source/environment/weight hash核验；最终source `7b61955105d883f8a6616154dd64609ba08b33fdf8b518e53c4839e3cb4d1988`、archive SHA `5208f06eac2dc088efbedcf758a9b2064fcb6cfa1a9f349276891b5ea618e1dc`。2K-only声明cap2412、4K/8K全部保留为deferred，最短1rep168请求（84warmup），只有3个独立heldout clusters，不能满足六cluster门槛或外推2K+4K选择。完整配置的4K gate负控见`phase2-dflash-4k-admission-cpu-proof.json`，证明在Popen前拒绝，未生成模型/性能数据。独立复核257 passed、41 Metal skipped，三份review证据为`phase2-dflash-protocol-{verification,code-review,anti-pattern-check}.json`；通过的是CPU协议/完整性，不是硬件准入或竞争加速。

@@ -1,0 +1,30 @@
+{
+  "scope": "Installed official-source inspection only; no GPU, network lookup, download, or compatible public 9B draft claim",
+  "omlx_version": "0.7.1",
+  "omlx_commit": "bd1e9b112474862ebed550a9c83b4316038a1d74",
+  "source_sha256": {
+    "omlx/model_settings.py": "6e4f071f218f0c75e46d382af8b5bad34954fcf81537b61a933548a608cda7a8",
+    "omlx/utils/model_loading.py": "f86817c578a12f50d095236b2589c9cdb089360b44dbd526a9540ba5b12681f1",
+    "omlx/speculative/dflash/__init__.py": "2a191bbd3056ae67b69da411c6daebc8172f52632e317d7b0644eb86aeb1be5d",
+    "omlx/speculative/dflash/drafter.py": "5ab0c88c8fc6fea20b2eef8e9aaa81a73a86d95f90aba3e731781156d5a77e7b",
+    "mlx_vlm/speculative/drafters/dflash2/dflash2.py": "19287b0e436c6750ccabfcdfb1388dea4123d6da506adea511ce16269a95e8f0",
+    "mlx_vlm/speculative/drafters/qwen3_dflash/parity_check.py": "1712776c25dbeb045190397e3bc683d68f072ecc81c543457f432a033a68b77f"
+  },
+  "findings": {
+    "family_support": "dflash_batched_supported explicitly includes qwen3_5/qwen3_5_moe for batched and vlm engines; installed target family can use DFlash when a trained matching checkpoint is provided",
+    "defaults": {
+      "dflash_enabled": false,
+      "dflash_draft_model": null,
+      "dflash_verify_mode": null,
+      "resolved_verify_default": "adaptive"
+    },
+    "discovery": "Only an explicitly configured dflash_draft_model or target/dflash directory containing config.json and safetensors; no automatic compatible public 9B repo selection",
+    "locked_9b_target_bundles_dflash": false,
+    "loader": "omlx.speculative.dflash.load_dflash_drafter -> mlx_vlm.speculative.drafters.load_drafter(kind=dflash), bind trained target hidden-state capture layers and shared embeddings/lm_head; DFlash2 validates target compatibility",
+    "ordinary_0_8b_draft": "Ordinary Qwen3.5-0.8B next-token draft is not evidence of a trained DFlash checkpoint",
+    "dependencies": "Existing full oMLX environment contains mlx-vlm loader and DFlash/DFlash2 implementations; optional mask_embedding.pt BF16 bytes and trained config/layer IDs must match",
+    "local_example": "mlx-vlm parity_check default is z-lab/Qwen3.5-4B-DFlash; this is not a 9B compatibility claim",
+    "public_9b_checkpoint_pin_size": "Not verified by this bounded installed-source audit; do not invent pin/size or score unsupported"
+  },
+  "next_action": "Audit official/Hugging Face public 9B-trained DFlash candidate model card/config/license/revision/tensor bytes, coordinate quality owner for exact pinned download, then real bind/load + dev quality/resource and latency before freezing optimized oMLX primary control. Keep default baseline and disclose baseline-only claim scope until this is resolved."
+}

@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "recorded_at_utc": "2026-10-21T07:47:12.270826+00:00",
+  "command": ".venv/bin/python -m pytest -q --run-metal -m metal",
+  "result": {
+    "passed": 41,
+    "deselected": 257,
+    "elapsed_seconds": 1.05,
+    "exit_code": 0
+  },
+  "source_after_run": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "868d995c295f9fbf338f0bf81ff184f1cd1263e13ebd7c92eb4087b7b23b2031",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+      "src/deepinfer_mac/cli.py": "47a885ca636ad03b90c6266e5550c2ea8ea0894590a88dc90f09f29b87d2aeab",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+      "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+      "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+      "src/deepinfer_mac/engine.py": "dce5e20bfd130b3110c38e3515487e9c0d29aa94daa9f29d02857a770dc8af53",
+      "src/deepinfer_mac/hybrid_speculative.py": "500d5a37889d6864d7d4f0530b06140c78e154310ed011f5ae0965e2b2d68eb3",
+      "src/deepinfer_mac/models.lock.json": "eb547e463a336aeded0499070cde26beabff4aee2bd43bccd0e1f2dc92cb904a",
+      "src/deepinfer_mac/models.py": "d63034aa76278cb17aa352bb0acfcf48b85033533475b114cec0b96210492dfb",
+      "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "8c76382db195dcf4fa8fbc0700fa6d08830268bc724b024c864b9c62a9a6d8d0",
+      "src/deepinfer_mac/server/schemas.py": "56af5b1cc7843c841fb725e67a8dbf1a7e86011b9cf4e7998827f33362aade36",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+      "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+      "src/deepinfer_mac/state.py": "15a760b974b84ad8733436cafa699e9a78ae83a3c8215c5a718fc23ae50ed0da",
+      "src/deepinfer_mac/web/app.js": "184bb3e91a16bec5288e8a5eba55a139a24e3c4eed83ac32f4e8bbfd52a488f5",
+      "src/deepinfer_mac/web/index.html": "4188c790eba0385b8da141a04a9d12dd46cf22203e6fad44c3e6355927d219bf",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "344fb14f9a472ce480ca97c575f3c66f584e9b7010d365d698cfa57818ee0cde",
+      "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d",
+      "models.lock.json": "eb547e463a336aeded0499070cde26beabff4aee2bd43bccd0e1f2dc92cb904a",
+      "upstream.lock.json": "8584f3d05ad0cc061e334e87a3a51a56f02b4fec5c08a410ff78ee1f7fae92a3"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "scope": "Small deterministic Metal control-flow/cache correctness regression on current runtime and updated model metadata. No large model was loaded; not a performance benchmark.",
+  "limits": [
+    "Real-model diagnostics retain their separately frozen source records.",
+    "This run does not establish superiority over MLX-LM or oMLX."
+  ]
+}

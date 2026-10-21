@@ -36,7 +36,7 @@ PROFILES = {
         "weight_bytes": 10426592423, "text_tensor_bytes": 9514412544, "quantization": "8-bit affine, group size 64",
         "context_limit": 8192, "supported_modes": ["baseline"], "status": "quality_review_required",
         "role": "primary_quality_candidate",
-        "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; Public27subset measured with finite-budget failures retained. Hybrid speculation has initial96token exact controls behind an experimental flag; public modes remain baseline, no formal speed claim.",
+        "limitations": "Text baseline/API/SSE/UI verified; fixed public/local/dev subsets retain failures. No full-benchmark capability guarantee. HybridDS explicit experimental correctness only; no competitive speed claim.",
     },
     "qwen3.5-9b-4bit": {
         "target": {"repo": "mlx-community/Qwen3.5-9B-4bit", "revision": "8b2b98c00a6b4d291155e4890773ca8f769aee53"},
@@ -45,7 +45,7 @@ PROFILES = {
         "weight_bytes": 5950221072, "quantization": "4-bit affine, group size 64",
         "context_limit": 8192, "supported_modes": ["baseline"], "status": "quality_review_required",
         "role": "same_model_efficiency_control",
-        "limitations": "Text baseline/public27shared-protocol comparison measured; local Chinese/thinking smoke pending. Hybrid speculation remains experimental and unverified for this quantization.",
+        "limitations": "Baseline/native public27 and local12x4 measured; lower memory does not establish quality equivalence. Hybrid speculation remains experimental and unverified for this quantization.",
     },
     "qwen3-14b": {
         "target": {"repo": "mlx-community/Qwen3-14B-4bit", "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4"},
@@ -54,7 +54,7 @@ PROFILES = {
         "weight_bytes": 8307898514, "quantization": "4-bit affine, group size 64",
         "context_limit": 8192, "supported_modes": ["baseline"], "status": "quality_review_required",
         "role": "engineering_fallback",
-        "limitations": "Text baseline/public27shared comparison and12task native consistency measured; separate official public control pending. Draft pairing unvalidated; baseline only.",
+        "limitations": "Baseline/native fixed subsets and separate official public control measured; Markdown affects strict answer parsing. Draft tokenizer compatible, DS execution unverified; baseline only.",
     },
 }
 

@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-21",
+  "reviewer": "dflash_protocol_review",
+  "base_commit": "65b2ce1c3e7cea361bcde5e873f12640a700a210",
+  "status": "approved_after_fixes",
+  "reviewed_source_and_tests_sha256": {
+    "benchmarks/experiments/prepare_service_compare.py": "c324c7ea1648caa1240ee628c787b2677cf7dd4e4e960dcafb72794216cb9fdc",
+    "benchmarks/experiments/rotate_service_compare.py": "03b5cafdd818b1ca333be1973966ed5b48b1caf1ee0dca969224f2c43e415f57",
+    "benchmarks/experiments/service_inventory.py": "bc81091a0a7976436eb22f23f17da8730c5a3eaa8c0c7b739f0d37ae9231c070",
+    "benchmarks/experiments/service_source_freeze.py": "02d5ba0445376b5d4faf1bea32d1b4be3eecb82b52c562ee08bde3bc979270ed",
+    "benchmarks/experiments/summarize_service_compare.py": "770384ebdee2cfa44632bf04aed4ff7f7eb5671f24f4de7b1b3b4ae99ba8b310",
+    "benchmarks/experiments/public_service_report.py": "b5c2d431ee6b108501ccb3f25136c9f822e8f918c61d2cc2d5c0e202cb3c6ea5",
+    "benchmarks/experiments/service_dev_selection.py": "de2be77ca7e424acecbde5c843b1b8597fde2d52df1f8d300c33a10500179815",
+    "benchmarks/experiments/service_resources.py": "23c1fd484b891a38aee7ff4516b66bc5359e2bac5bc6626bded04dca54e3aff8",
+    "benchmarks/experiments/omlx_dflash_protocol.py": "249024af7b61c1967e38e3db11623d7f261d14e0ad54ae0f0b36c6b90eacb2c0",
+    "benchmarks/experiments/omlx_dflash_audit_server.py": "9dc20134c4cf5b28347360e514a3c7c7feb8d956d212fd1eabe021a370685be0",
+    "benchmarks/experiments/omlx_dflash_compat_probe.py": "d440b6e7fc1060104614265b709faeb0d1a394e2a00e7ddfb5059847e93a3a39",
+    "benchmarks/experiments/summarize_omlx_dflash_compat.py": "e346fe89a9af4c3090287bd3fe880d4866ff7e0238f7eb4355d52b44c45e6000",
+    "tests/test_omlx_dflash_protocol.py": "334598a636f3fd51e082252bb1e2c20cdea425edb7d427a5a615bd316c426c90",
+    "tests/test_service_dev_binding.py": "25f080b91a99fb2bc21b75fe752e718f9d9fde8e26a9c64831170828bfd67847",
+    "tests/test_service_protocol_v3.py": "3823df2e8a2b444b1aa578348931d0adb01df5ef00050ea760b02439c15b96d8"
+  },
+  "approval_scope": "CPU implementation, source/configuration provenance and fail-closed measurement gates. This does not approve4K DFlash resource admission or establish any speed superiority.",
+  "gpu_executed_by_reviewer": false,
+  "checks": {
+    "performance_data_simulation_in_product_harness": false,
+    "diagnostic_dflash_probe_used_as_performance": false,
+    "silent_fallback_accepted_as_dflash_execution": false,
+    "raw_logs_or_private_execution_paths_published_by_protocol": false,
+    "heldout_outputs_used_for_dev_selection": false,
+    "failed_candidates_removed_or_zero_scored": false,
+    "bootstrap_repeats_treated_as_independent_sessions": false,
+    "8k_swap_failure_reclassified_or_retested_by_reviewer": false,
+    "rss_added_to_metal_allocation": false,
+    "sse_chunk_intervals_labeled_token_itl": false,
+    "resource_guard_disabled_or_framework_forked_for_comparison": false,
+    "source_or_environment_drift_allowed_by_free_text_note": false
+  },
+  "qualification": "Static review and CPU rejection controls establish measurement integrity only. Three measured resource probes remain negative; no framework speedup is claimed.",
+  "known_limits": [
+    "Independent hardware diagnostic observer evidence is separate from ordinary performance runs.",
+    "Discrete outside-timing process/system samples are not continuous Metal or physical-memory peak measurements.",
+    "Strict ledger-task quality is not a complete model ability benchmark.",
+    "Concurrency2/4 and formal two-framework competitive performance remain pending."
+  ]
+}
