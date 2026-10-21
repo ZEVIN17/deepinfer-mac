@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "source_repository": "https://github.com/ZEVIN17/deepinfer-mac",
+  "source_commit": "66ae444f535c63b43003ba6febeb42228d4d607a",
+  "source_tree": "bfe1c16058038bfb2867fcadf8e59f2f47b39150",
+  "scope": "Exact curated report and screenshot bytes from the published Phase2 commit. Each report retains its own historical execution revision and measurement scope. This bundle is independent of the checkout runtime.",
+  "files": {
+    "benchmarks/reports/phase2-ui-qwen35-9b8.json": {
+      "sha256": "04b7a2f0a2f599986b5ee9a9c4d30dca5612e5f4d379869358645495a1006fe8",
+      "bytes": 6917,
+      "source_path": "benchmarks/reports/phase2-ui-qwen35-9b8.json"
+    },
+    "benchmarks/reports/phase2-service-qwen3.5-9b-8bit.json": {
+      "sha256": "f9507563fea2eceb0d0e79d7c249ad7a793272a31da548833525e6bf0226b15f",
+      "bytes": 33223,
+      "source_path": "benchmarks/reports/phase2-service-qwen3.5-9b-8bit.json"
+    },
+    "benchmarks/reports/phase2-service-sampling-qwen35-9b8.json": {
+      "sha256": "7388a5fb9e601c2e5c839f5c00a9695acddfd1dec0f6beed2a30fed5bbd3832c",
+      "bytes": 18362,
+      "source_path": "benchmarks/reports/phase2-service-sampling-qwen35-9b8.json"
+    },
+    "benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json": {
+      "sha256": "03ee0e1ab61c8e27b3dfc127e89f32057db25a43d070c61e41873fca0d66317f",
+      "bytes": 115938,
+      "source_path": "benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json"
+    },
+    "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8.json": {
+      "sha256": "51c4b6e7744129fcfe55c69644d6d6129f021f255987058a8427223161be2060",
+      "bytes": 774934,
+      "source_path": "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8.json"
+    },
+    "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json": {
+      "sha256": "d687d958894afaa8b22d9d3801ea3cdef22a3d70230666446ef4e9dbf85380ed",
+      "bytes": 11353,
+      "source_path": "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json"
+    },
+    "benchmarks/reports/phase2-experimental-api-qwen35-9b8.json": {
+      "sha256": "ff8eb638ee2b5fcadce833a45d889e973bc1ab07a0e30a0d3874f7d454421f93",
+      "bytes": 145368,
+      "source_path": "benchmarks/reports/phase2-experimental-api-qwen35-9b8.json"
+    },
+    "benchmarks/reports/context-4204-256-qwen35-9b8.json": {
+      "sha256": "df628d7db06c5269800f4784295ad728a58637457ebcf6aa27454ed4423de95a",
+      "bytes": 100742,
+      "source_path": "benchmarks/reports/context-4204-256-qwen35-9b8.json"
+    },
+    "docs/evidence/phase2-local-ui-qwen35-9b8.png": {
+      "sha256": "7a6bb3196622d653dacc66941dd8393aac8aea932e22f38bf833fe4136203109",
+      "bytes": 344863,
+      "source_path": "docs/evidence/phase2-local-ui-qwen35-9b8.png"
+    }
+  }
+}

@@ -26,7 +26,7 @@ for page in DIST.rglob("*.html"):
             errors.append(f"{page.name}: missing or escaping asset: {link}")
         count += 1
 assert not errors, "\n".join(errors)
-assert len(list(DIST.glob("*.html"))) == 7
+assert len(list(DIST.glob("*.html"))) == 8
 assert (DIST / ".nojekyll").exists()
 assert not list(DIST.rglob("*.map"))
-print(f"PASS: {count} local resource/document links, 7 pages, relocatable /deepinfer-mac/ artifact")
+print(f"PASS: {count} local resource/document links, 8 pages, relocatable /deepinfer-mac/ artifact")
