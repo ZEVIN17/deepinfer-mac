@@ -61,7 +61,7 @@ curl http://127.0.0.1:8765/v1/chat/completions \
 
 ## 实验接口：接入其他模型
 
-新的能力适配接口已实现本地模型目录或精确 repo revision 注册，仍在进行第三阶段真实模型验收。已有完整 MLX 模型目录时可使用：
+能力适配接口支持本地模型目录或精确 repo revision 注册。SmolLM2-135M-Instruct-8bit 已通过真实 baseline/native token 一致性、Dense 缓存复用、CLI 生成、API 与 SSE 验收，验证了新模型家族通过统一接口接入；其它自定义模型仍需独立验收。已有完整 MLX 模型目录时可使用：
 
 ```sh
 uv run deepinfer-mac run --model /path/to/complete-mlx-model \
@@ -69,6 +69,8 @@ uv run deepinfer-mac run --model /path/to/complete-mlx-model \
 ```
 
 模型按进程显式注册；自定义模型初始为未验证的 baseline 兼容性，不支持的优化会被拒绝。JSON 配置可让 CLI、Python、API 使用同一 ID。[适配器文档](docs/MODEL_ADAPTERS.md)说明身份、资源保护及显式回退。
+
+[SmolLM2 acceptance / 验收报告](https://github.com/ZEVIN17/deepinfer-mac/blob/43d967652683817daf7eff0b7553ae5d5293739e/benchmarks/reports/phase3-model-adapter-integration.json) · [Weight identity / 权重核验](https://github.com/ZEVIN17/deepinfer-mac/blob/43d967652683817daf7eff0b7553ae5d5293739e/benchmarks/reports/phase3-smollm2-weight-audit.json)
 
 ## 模型与执行能力
 
@@ -80,7 +82,7 @@ uv run deepinfer-mac run --model /path/to/complete-mlx-model \
 | Qwen3.5-9B-4bit | 已验证 baseline / native 控制 | 公开入口未开启 | 同模型质量 / 内存对照 |
 | Qwen3-14B-4bit | 已验证 baseline / native 控制 | 待验证 | Dense 工程对照 |
 | Qwen3-4B | 已验证回归路径 | 实验 fixed / adaptive | 较小的 Dense 回归模型 |
-| 可配置模型 / 缓存适配器 | 实验接口已实现 · 真实模型验收中 | 按能力开放 baseline | 路径 / repo 注册、透明 baseline 回退 |
+| 可配置模型 / 缓存适配器 | SmolLM2-135M-8bit baseline / 缓存 / CLI / API / SSE 已验证 | 按能力开放 baseline | 路径 / repo 注册、透明 baseline 回退 |
 | 跨请求预算 / 状态流水 | 第三阶段构建中 | — | 尚非当前默认服务能力 |
 
 公开 9B API/UI 仍只开放 baseline。混合推测限定 greedy，通过 [DS 方法映射](docs/DS_DESIGN_MAPPING.md) 中的显式实验入口使用。模型成功加载、任务质量与优化验证分别记录。参见[模型选择](docs/PHASE2_MODEL_SELECTION.md)、[兼容说明](docs/compatibility.md)及不可变 [模型锁](models.lock.json)。

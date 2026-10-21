@@ -199,3 +199,53 @@ hybrid reports are not relabeled current-source optimized-path acceptance.
 See `benchmarks/reports/phase3-model-adapter-integration.json` and
 `docs/evidence/phase3-adapter-checkpoint.json`. This validates a replaceable model
 boundary; it provides no new speed comparison or broad architecture-support claim.
+
+## Phase3 section 3: request ticks and platform work admission
+
+`continuous.py` and `server/continuous_worker.py` connect the API/CLI opt-in
+backend to locked MLX-LM 0.32.2 `BatchGenerator.next`, including pure prefill
+ticks. This is upstream greedy baseline batching. MLX-LM owns decode-first
+ordering, cache merge/filter/extract, and batched forwards; these are not new DS
+methods. Single-row dense KVCache is checked through its actual merge into a
+batch cache, rather than incorrectly requiring batch methods on single-row KV.
+
+The new Mac worker separates stable request/generation lifecycle, bounded work
+queue, total active UID/context limits, future KV and longest-row padding,
+extraction/scratch reserve, cancellation cleanup, and group fairness. Its
+interactive policy adapts prefill chunk size to measured whole-tick latency and
+ages waiting work. These platform resource/work policies follow the DS separation
+of scheduling and cache capacity. They do not yet invoke DS cross-request
+confidence ranking or variable-length verification. Existing single-request DS
+MTPVarlen, two-generation history and exact hybrid recovery remain on the guarded
+exclusive serial path.
+
+One prefill row currently means an existing decode progresses alongside a long
+prefill, while a newly arriving short prefill waits for that prompt slot. A tick
+returns to the scheduler; decode output still waits for that tick's prefill
+synchronization. No prefill preemption, vector verification cap, zero-sync ZOS
+or performance advantage is asserted. Completed cache boundaries come from real
+upstream Responses and are discarded, with continuous prefix reuse explicitly
+cold. Model/cache protocol checks do not promote public capabilities.
+
+See [CONTINUOUS_EXECUTION.md](CONTINUOUS_EXECUTION.md) for exact controls, ownership,
+resource accounting and source-attributed ablations. Portable tests cover the
+state/control contracts only. The opt-in actual small-model probe
+`benchmarks/experiments/phase3_verify_continuous.py --execute` preserves native
+output mismatches and both arrival directions.
+
+Actual frozen Smol runs now observe real decode/prefill interleaving, both arrival
+directions and prefill/decode cancellation with recovery, but **do not fully pass
+section 3**. Both interactive and upstream policies match serial-native full
+tokens on 12/13 completed outputs; the same Chinese B4 request diverges at index
+39, token 27830 versus 179. Direct locked native BatchGenerator B4 reproduces all
+four wrapper outputs exactly, while Chinese B1 matches the serial 48 tokens. This
+is an observed upstream batch/shape-path boundary, not proof of a floating-point
+root cause. The strict serial gate stays false; no case/tolerance is changed.
+See `benchmarks/reports/phase3-continuous-{interactive,upstream}.json` and
+`phase3-continuous-upstream-diagnosis.json`. Both policy probes have zero system
+swap growth, but supply no stable speed claim. Batch-native agreement is separate
+diagnostic evidence, never a replacement for the original strict control.
+The direct control inserts four rows together at fixed chunk32 and is not an
+arrival/shape-trajectory replay. Independent actual API/SSE cancellation/recovery
+also passes (four completed streams, 50 events each); verification and all report
+hashes are in `docs/evidence/phase3-tick-verification.json`.

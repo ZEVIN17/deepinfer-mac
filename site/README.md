@@ -25,7 +25,7 @@ The architecture is attributed to its actual components: MLX/MLX-LM execution an
 The product entry now presents an Apple Silicon inference framework with MLX as
 its execution backend; 9B remains the verified demonstration, not the product
 definition. Both homepages and the run guide include the same capability matrix.
-The adapter interface is labelled experimental / acceptance in progress;
+SmolLM2-135M-Instruct-8bit has passed real baseline/native, cache, CLI, API and SSE acceptance. Its separate milestone links to commit `43d967652683817daf7eff0b7553ae5d5293739e` for the integration report, weight audit and adapter guide. Other custom models require independent acceptance;
 cross-request/pipeline entries remain labelled building until their separate
 acceptance completes. Existing real milestones and the recorded
 SSE replay retain their frozen source bytes and attribution.

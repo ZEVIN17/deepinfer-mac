@@ -25,8 +25,11 @@ class GenerationRequest:
     presence_penalty: float = 0.0
     seed: int | None = None
     fallback_to_baseline: bool = False
+    priority: str = "interactive"
 
     def __post_init__(self):
+        if self.priority not in ("interactive", "background"):
+            raise ValueError("priority must be interactive or background")
         if not math.isfinite(self.temperature) or not 0 <= self.temperature <= 2:
             raise ValueError("temperature must be finite and between0 and2")
         if not math.isfinite(self.top_p) or not 0 < self.top_p <= 1:

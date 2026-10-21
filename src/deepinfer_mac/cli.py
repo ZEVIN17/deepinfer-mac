@@ -53,6 +53,14 @@ def parser():
     serve.add_argument("--host", default="127.0.0.1")
     serve.add_argument("--port", type=int, default=8765)
     serve.add_argument("--queue-size", type=int, default=4)
+    serve.add_argument("--execution-backend", choices=("serial", "continuous"), default="serial",
+                       help="Experimental continuous: same-model greedy baseline ticks; other modes run exclusively")
+    serve.add_argument("--continuous-policy", choices=("upstream", "interactive"), default="interactive")
+    serve.add_argument("--max-active", type=int, default=4)
+    serve.add_argument("--tick-token-budget", type=int, default=512)
+    serve.add_argument("--batch-prefill-chunk", type=int, default=256)
+    serve.add_argument("--batch-context-tokens", type=int, default=32768)
+    serve.add_argument("--batch-memory-mb", type=int)
     serve.add_argument("--model-config", type=Path, action="append", default=[])
     serve.add_argument("--token", help="Bearer token; DEEPINFER_MAC_TOKEN is preferred to avoid shell history")
     return root
@@ -84,10 +92,18 @@ def main(argv=None):
         if args.command == "serve":
             import uvicorn
 
+            from .continuous import ContinuousConfig
             from .server.app import create_app
             if args.host not in ("127.0.0.1", "localhost", "::1") and not (args.token or os.getenv("DEEPINFER_MAC_TOKEN")):
                 raise ValueError("A bearer token is required when binding outside localhost")
-            uvicorn.run(create_app(queue_size=args.queue_size, token=args.token, model_registry=registry), host=args.host, port=args.port)
+            continuous = ContinuousConfig(
+                max_active=args.max_active, tick_token_budget=args.tick_token_budget,
+                prefill_chunk=args.batch_prefill_chunk, max_context_tokens=args.batch_context_tokens,
+                memory_budget_bytes=args.batch_memory_mb * 1024**2 if args.batch_memory_mb is not None else None,
+                policy=args.continuous_policy,
+            ) if args.execution_backend == "continuous" else None
+            uvicorn.run(create_app(queue_size=args.queue_size, token=args.token, model_registry=registry,
+                                   execution_backend=args.execution_backend, continuous_config=continuous), host=args.host, port=args.port)
             return 0
         from .engine import InferenceEngine
         from .state import GenerationRequest

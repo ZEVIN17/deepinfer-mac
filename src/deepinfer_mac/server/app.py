@@ -20,20 +20,42 @@ from .schemas import ChatRequest, CompareRequest
 from .worker import InferenceWorker, QueueFull
 
 
-def default_engine_factory(experimental_hybrid_speculation=False, model_registry=None):
+class RunStreamingResponse(StreamingResponse):
+    """Always release an unfinished request, including disconnect during send."""
+    def __init__(self, content, *, worker, job, **kwargs):
+        super().__init__(content, **kwargs)
+        self.worker, self.job = worker, job
+
+    async def __call__(self, scope, receive, send):
+        try:
+            await super().__call__(scope, receive, send)
+        finally:
+            if not self.job.done.is_set():
+                self.worker.cancel_job(self.job.id)
+
+
+def default_engine_factory(experimental_hybrid_speculation=False, model_registry=None, memory_limit_bytes=None):
     from ..engine import InferenceEngine
     options = {"experimental_hybrid_speculation": experimental_hybrid_speculation}
     if model_registry is not None:
         options["model_registry"] = model_registry
+    if memory_limit_bytes is not None:
+        options["memory_limit_bytes"] = memory_limit_bytes
     return InferenceEngine(**options)
 
 
 def create_app(
     engine_factory=None, queue_size=4, token: str | None = None,
     experimental_hybrid_speculation=False, model_registry=None,
+    execution_backend="serial", continuous_config=None, batch_session_factory=None,
 ):
     from ..adapters import ModelRegistry
     registry_source = model_registry or ModelRegistry()
+    if execution_backend not in ("serial", "continuous"):
+        raise ValueError("execution_backend must be serial or continuous")
+    if execution_backend == "continuous":
+        from ..continuous import ContinuousConfig
+        continuous_config = continuous_config or ContinuousConfig()
     access_token = token or os.getenv("DEEPINFER_MAC_TOKEN")
     bearer = HTTPBearer(auto_error=False)
 
@@ -46,10 +68,18 @@ def create_app(
     async def lifespan(app):
         factory = engine_factory or partial(
             default_engine_factory, experimental_hybrid_speculation=experimental_hybrid_speculation, model_registry=model_registry,
+            memory_limit_bytes=continuous_config.memory_budget_bytes if continuous_config else None,
         )
-        app.state.worker = InferenceWorker(factory, queue_size=queue_size)
-        yield
-        await asyncio.to_thread(app.state.worker.close)
+        if execution_backend == "continuous":
+            from .continuous_worker import ContinuousInferenceWorker
+            app.state.worker = ContinuousInferenceWorker(factory, queue_size=queue_size,
+                                                        config=continuous_config, session_factory=batch_session_factory)
+        else:
+            app.state.worker = InferenceWorker(factory, queue_size=queue_size)
+        try:
+            yield
+        finally:
+            await asyncio.to_thread(app.state.worker.close)
 
     app = FastAPI(title="DeepInfer-Mac", version=__version__, lifespan=lifespan)
     security = [Depends(authorize)]
@@ -125,6 +155,11 @@ def create_app(
         worker = app.state.worker
         return {"status": "ok", "model_loaded": worker.engine is not None,
                 "active_run": worker.active.id if worker.active else None, "queued": worker.queue.qsize(),
+                "execution_backend": execution_backend,
+                "active_requests": len(getattr(worker, "active_requests", {})) if execution_backend == "continuous" else int(worker.active is not None),
+                "continuous_policy": continuous_config.policy if continuous_config else None,
+                "preparing_run": worker.preparing.id if execution_backend == "continuous" and worker.preparing else None,
+                "cleanup_error_count": len(getattr(worker, "cleanup_errors", [])),
                 "experimental_hybrid_speculation": experimental_hybrid_speculation}
 
     @app.get("/v1/models", dependencies=security)
@@ -143,16 +178,17 @@ def create_app(
                                        temperature=body.temperature, top_p=body.top_p, top_k=body.top_k,
                                        presence_penalty=body.presence_penalty, seed=body.seed,
                                        enable_thinking=body.enable_thinking, use_cache=body.use_cache,
+                                       priority=body.priority,
                                        fallback_to_baseline=body.fallback_to_baseline)
         job = submit(generation)
         created = int(time.time())
         if not body.stream:
             async for _ in event_iterator(job, request):
                 pass
-            if job.status == "cancelled":
+            if job.cancel.is_set() or job.status == "cancelled":
                 raise HTTPException(409, "Generation cancelled")
             if job.error:
-                raise HTTPException(500, job.error)
+                raise HTTPException(job.error_status, job.error)
             result = job.result
             return {"id": f"chatcmpl-{job.id}", "object": "chat.completion", "created": created,
                     "model": body.model, "choices": [{"index": 0, "message": {"role": "assistant", "content": result["text"]},
@@ -162,18 +198,24 @@ def create_app(
                     "deepinfer": {"run_id": job.id, "metrics": result["metrics"]}}
         async def stream():
             base = {"id": f"chatcmpl-{job.id}", "object": "chat.completion.chunk", "created": created, "model": body.model}
-            yield "data: " + json.dumps({**base, "choices": [{"index": 0, "delta": {"role": "assistant"}, "finish_reason": None}]}) + "\n\n"
-            async for event in event_iterator(job, request):
-                if event["type"] == "token" and event.get("text"):
-                    yield "data: " + json.dumps({**base, "choices": [{"index": 0, "delta": {"content": event["text"]}, "finish_reason": None}]}, ensure_ascii=False) + "\n\n"
-                elif event["type"] == "error":
-                    yield "data: " + json.dumps({"error": {"message": event["message"], "type": "inference_error"}}) + "\n\n"
-            if job.status == "completed":
-                yield "data: " + json.dumps({**base, "choices": [{"index": 0, "delta": {}, "finish_reason": job.result["finish_reason"]}]}) + "\n\n"
-            if job.status == "cancelled":
-                yield "data: " + json.dumps({"error": {"message": "Generation cancelled", "type": "cancelled"}}) + "\n\n"
-            yield "data: [DONE]\n\n"
-        return StreamingResponse(stream(), media_type="text/event-stream", headers={"X-Run-ID": job.id, "Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+            try:
+                yield "data: " + json.dumps({**base, "choices": [{"index": 0, "delta": {"role": "assistant"}, "finish_reason": None}]}) + "\n\n"
+                async for event in event_iterator(job, request):
+                    if event["type"] == "token" and event.get("text"):
+                        yield "data: " + json.dumps({**base, "choices": [{"index": 0, "delta": {"content": event["text"]}, "finish_reason": None}]}, ensure_ascii=False) + "\n\n"
+                    elif event["type"] == "error":
+                        yield "data: " + json.dumps({"error": {"message": event["message"], "type": "inference_error"}}) + "\n\n"
+                if job.status == "completed":
+                    yield "data: " + json.dumps({**base, "choices": [{"index": 0, "delta": {}, "finish_reason": job.result["finish_reason"]}]}) + "\n\n"
+                if job.status == "cancelled":
+                    yield "data: " + json.dumps({"error": {"message": "Generation cancelled", "type": "cancelled"}}) + "\n\n"
+                yield "data: [DONE]\n\n"
+            finally:
+                # Disconnect can occur at the role-only first chunk, before
+                # event_iterator was ever entered. Its finally cannot cover it.
+                if not job.done.is_set():
+                    app.state.worker.cancel_job(job.id)
+        return RunStreamingResponse(stream(), worker=app.state.worker, job=job, media_type="text/event-stream", headers={"X-Run-ID": job.id, "Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
 
     @app.post("/api/compare", status_code=202, dependencies=security)
     async def compare(body: CompareRequest):
@@ -197,7 +239,7 @@ def create_app(
         async def stream():
             async for event in event_iterator(job, request):
                 yield "data: " + json.dumps(event, ensure_ascii=False) + "\n\n"
-        return StreamingResponse(stream(), media_type="text/event-stream", headers={"Cache-Control": "no-cache"})
+        return RunStreamingResponse(stream(), worker=app.state.worker, job=job, media_type="text/event-stream", headers={"Cache-Control": "no-cache"})
 
     web = str(files("deepinfer_mac").joinpath("web"))
     app.mount("/assets", StaticFiles(directory=web), name="assets")

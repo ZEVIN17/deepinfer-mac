@@ -1,0 +1,306 @@
+{
+  "schema": 1,
+  "scope": "independent CPU specification, no production scheduler import",
+  "source_commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9",
+  "device_oracle_executed": false,
+  "metal_executed": false,
+  "fixed_cases": [
+    {
+      "name": "empty_cpu_only",
+      "cumulative": [],
+      "lengths": [],
+      "contract_valid": true
+    },
+    {
+      "name": "no_draft_positions_cpu_only",
+      "cumulative": [
+        [],
+        []
+      ],
+      "lengths": [
+        1,
+        1
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "zero_ties",
+      "cumulative": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "lengths": [
+        3,
+        1
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "one_ties",
+      "cumulative": [
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "conditional_not_cumulative",
+      "cumulative": [
+        [
+          0.5,
+          0.25
+        ],
+        [
+          0.30000001192092896,
+          0.0
+        ]
+      ],
+      "lengths": [
+        2,
+        2
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "cross_request_rank",
+      "cumulative": [
+        [
+          0.8999999761581421,
+          0.08999999612569809
+        ],
+        [
+          0.800000011920929,
+          0.64000004529953
+        ]
+      ],
+      "lengths": [
+        2,
+        3
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "fresh_is_zero_not_excluded",
+      "cumulative": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "lengths": [
+        2,
+        1
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "fresh_after_positive",
+      "cumulative": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.5,
+          0.25
+        ]
+      ],
+      "lengths": [
+        1,
+        3
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "remap_reorders_rows",
+      "cumulative": [
+        [
+          0.800000011920929,
+          0.64000004529953
+        ],
+        [
+          0.8999999761581421,
+          0.08999999612569809
+        ]
+      ],
+      "lengths": [
+        3,
+        2
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "golden_only",
+      "cumulative": [
+        [
+          0.8999999761581421,
+          0.809999942779541
+        ],
+        [
+          0.800000011920929,
+          0.64000004529953
+        ]
+      ],
+      "lengths": [
+        1,
+        1
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "full_budget",
+      "cumulative": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "lengths": [
+        3,
+        3
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "single_request",
+      "cumulative": [
+        [
+          0.4000000059604645,
+          0.20000000298023224,
+          0.12000000476837158
+        ]
+      ],
+      "lengths": [
+        3
+      ],
+      "contract_valid": true
+    },
+    {
+      "name": "under_budget_raw_kernel_saturates",
+      "cumulative": [
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "lengths": [
+        1,
+        1
+      ],
+      "contract_valid": false
+    },
+    {
+      "name": "over_budget_raw_kernel_saturates",
+      "cumulative": [
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "lengths": [
+        3,
+        3
+      ],
+      "contract_valid": false
+    }
+  ],
+  "exhaustive_sort_comparisons": 2025,
+  "invalid_probability_checks": 4,
+  "identity_remap": [
+    1,
+    -1,
+    -1
+  ],
+  "censoring": {
+    "budget_or_eos_truncation": [
+      true,
+      true,
+      null,
+      null
+    ],
+    "observed_rejection": [
+      true,
+      true,
+      false,
+      null
+    ]
+  },
+  "double_cumprod_changes_allocation": true,
+  "sources": [
+    {
+      "path": "tests/reference/phase3_vendor/schedule_mtp_varlen.py.txt",
+      "sha256": "c4814812966ae3bd69ed4b4078f6a9c3a183c0a9625144b72bf092dbc7b357bb",
+      "git_blob_sha": "34f0d7f852dfe552965c40e817a3841be515a219",
+      "matches_user_source_audit": true
+    },
+    {
+      "path": "tests/reference/phase3_vendor/dflash.py.txt",
+      "sha256": "12ebfb9c793062844d40e0fab17164d5365d965c318f8b9f0f4adf51b3afb684",
+      "git_blob_sha": "c8f59022682c1a34956e022b26fa61edae50d934",
+      "matches_user_source_audit": true
+    },
+    {
+      "path": "tests/reference/vendor/mtp_varlen.hpp",
+      "sha256": "164f45db4cccd6d6909dd2846e7dfffb57754b108af679443bf4bd71ec33785a",
+      "git_blob_sha": "09af680aa42b724fe86315007a160d5012a1fde9",
+      "matches_user_source_audit": true
+    }
+  ],
+  "cpp_oracle": {
+    "executed": true,
+    "backend": "unchanged C++ header, existing CPU Sequence shim",
+    "row_lengths": [
+      [
+        3,
+        3
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    "total_q_sums": [
+      6,
+      2,
+      5
+    ]
+  },
+  "performance_validated": false,
+  "production_integration": false
+}

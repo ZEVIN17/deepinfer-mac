@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "scope": "Fresh independent CPU-only anti-pattern review of Phase3 section 3, CPU budget reference and product adapter acceptance",
+  "status": "static_and_cpu_review_passed_strict_model_gate_failed",
+  "accepted": false,
+  "base_commit": "43d967652683817daf7eff0b7553ae5d5293739e",
+  "source_sha256": {
+    "src/deepinfer_mac/continuous.py": "55b4c7b6f37050d0d907c59f17ca7a460e7a19653017f7dec3e99899c753333e",
+    "src/deepinfer_mac/server/continuous_worker.py": "d363b75525cda5318e6c2a2e7bdbdb76798b36e7e2029a6edeb77e1ebdca21cf",
+    "src/deepinfer_mac/server/worker.py": "7ce9ba42ae69ba45f298c9f1bb6aef2ddaf4138b5d3bb0397a6575c1c5505d90",
+    "src/deepinfer_mac/server/app.py": "b60ce81ec8d770ad863c532a94842165b1c3f8d5c8778f4ef692de190a81c1b5",
+    "src/deepinfer_mac/server/schemas.py": "87080294b40b3733f5e43493a1bdd25bb9dc8215b1521c25003fc268535ee256",
+    "src/deepinfer_mac/cli.py": "ff1814a555795380ffbbd064f3993ff7eb61a94b26f7ab50bf769a158346a910",
+    "src/deepinfer_mac/state.py": "d77e5d97484bd3dcdae324d6ee31830480bb7baafb1907bc10da7200fd17b096",
+    "benchmarks/experiments/phase3_verify_continuous.py": "65ae65d72befa4b90bae416ea2efbe36ad9669cc8c8536edeb3e2349b24a8e34",
+    "tests/test_continuous_backend.py": "2726fca46a9d3b3417d26e4e3ae86dec6bcc375f62a1fe96d4d0845fb5c2a0ef",
+    "tests/test_continuous_worker.py": "15602bb6443b992258c16e86af806f8d1e1d0fe174dfbae1a99cc1a32f20bdf4",
+    "tests/reference/phase3_budget_replay.py": "10e49a778e6404e0ca5895cbf644f2e6a72337c8a1dc653649545f072419f693",
+    "tests/reference/phase3_budget_cases.json": "c3683045c70737425efa5101579d348757a34e9464fa8e42c5a6495f0faf215d",
+    "docs/CONTINUOUS_EXECUTION.md": "cda1598e6616417b5f352c4c3d816c288fbed6e900627bf47ed147d903552c60",
+    "docs/PHASE3_BUDGET_REFERENCE.md": "1fed25ca305dc2bc471c49e308ef6c98212ba7999c68b5061bb3ecd0009560ab",
+    "docs/DS_DESIGN_MAPPING.md": "02af2a4ee355eb1e445a140a052d2d0edba9bd97d4868829c2945cafd922bc56",
+    "README.md": "900ce54148400c51d36de4de56518f85248dc5b53767e1b9c8ac1b488a572b10",
+    "README.zh-CN.md": "8f89d67527155b249ad54095ad71b0060622951ee6602d0964db157d49aaa274",
+    "site/build.py": "6556b91f538ce7d9a11370a964314a606ada6d9fece47da0cb8cf837b6fa200a",
+    "site/README.md": "6ceeb442b81f4158c1b90c558dc50065e6ca30a92d52838158c3f6f073319b88",
+    "tests/reference/phase3_vendor/schedule_mtp_varlen.py.txt": "c4814812966ae3bd69ed4b4078f6a9c3a183c0a9625144b72bf092dbc7b357bb",
+    "tests/reference/phase3_vendor/dflash.py.txt": "12ebfb9c793062844d40e0fab17164d5365d965c318f8b9f0f4adf51b3afb684",
+    "tests/reference/phase3_vendor/README.md": "ceb94683cf826263e376cb6b0554d99a5b998e5e0755375dad8dbb57b8708c89",
+    "docs/PROGRESS.md": "a8c6d520deef393376eb11eba5c0239d8638247eaa001d88eb564a08c6564fd2"
+  },
+  "commands": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_continuous_backend.py tests/test_continuous_worker.py",
+      "exit_code": 0,
+      "result": "23 passed; device-free stubs, not model/performance evidence"
+    },
+    {
+      "command": ".venv/bin/python tests/reference/phase3_budget_replay.py --cpp-oracle --output /tmp/phase3-antipattern-budget.json",
+      "exit_code": 0,
+      "result": "14 fixed, 2025 exhaustive sort comparisons, 4 invalid checks; unchanged C++ oracle executed; no device oracle or production integration"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "clean"
+    },
+    {
+      "command": "Read installed mlx_lm/generate.py source signatures without import",
+      "result": "BatchGenerator.next, insert_segments(max_tokens), remove(return_prompt_caches), prompt_cache_nbytes and prefill step fields present in locked source"
+    }
+  ],
+  "checks": {
+    "real_single_tick": true,
+    "no_next_generated_swallowing_prefill": true,
+    "output_limit_not_claimed_as_verification_cap": true,
+    "upstream_decode_first_attributed": true,
+    "identity_uses_request_and_slot_generation": true,
+    "owner_thread_device_operations": true,
+    "bounded_admission_and_future_memory_reservations": true,
+    "rss_not_added_to_metal": true,
+    "cold_cache_explicit": true,
+    "no_short_prefill_preemption_claim": true,
+    "no_speed_or_trained_confidence_claim": true,
+    "cpu_reference_not_performance": true,
+    "upstream_reference_blob_checks_pass": true,
+    "historical_evidence_unchanged": true,
+    "product_links_fixed_43d9676": true,
+    "product_model_acceptance_scope_explicit": true,
+    "tracked_weight_files": [],
+    "private_path_or_token_pattern_hits": [],
+    "sdist_allowlist_excludes_artifacts_and_results": true,
+    "public_actual_reports_no_raw_prompts_text_or_token_arrays": true,
+    "public_actual_reports_no_private_user_paths_or_credentials": true,
+    "strict_gate_retained_false": true,
+    "direct_upstream_b4_not_arrival_replay": true,
+    "numerical_root_cause_not_claimed": true,
+    "no_overall_acceptance_substituted": true
+  },
+  "findings": [],
+  "limitations": [
+    "No model or Metal execution was performed by this anti-pattern reviewer; independently generated actual reports and their exact source/report hashes were checked.",
+    "Static/CPU anti-pattern review passing does not establish full section3 acceptance; strict serial-native token gate remains false.",
+    "No statistical speed, hybrid batching, DS cross-request verification or ZOS acceptance.",
+    "Private artifacts directories remain untracked; commit must use explicit public file allowlist, never git add -A."
+  ],
+  "static_review_passed": true,
+  "strict_serial_native_token_gate": false,
+  "verification_evidence": {
+    "path": "docs/evidence/phase3-tick-verification.json",
+    "sha256": "ed2abcac24599af7736dac46a41bddf254f583a492c6b6c7af2e10e88c9b39f5",
+    "accepted": false,
+    "source_hashes_all_match": true,
+    "reports_sha256": {
+      "benchmarks/reports/phase3-continuous-api.json": "c58bb360bbca2451fe04db9c3d866979ed4d3dbabfcbce211f1847fa5b53dca0",
+      "benchmarks/reports/phase3-continuous-interactive.json": "663dcd92d4eabd05f2b2fc6203cbfbdfef115d4b4fb1959c729b3b3b64f8a7e4",
+      "benchmarks/reports/phase3-continuous-upstream-diagnosis.json": "91fb0ffed2c32a9f9bfe8c397c97c4ca2f6399edbe0835d4a3717ab2f7e172c5",
+      "benchmarks/reports/phase3-continuous-upstream.json": "b806893b41a65f8de12cd000a03915af6c7448a10bf87dd10bef50de9536a6bf"
+    },
+    "reports_hashes_all_match": true
+  },
+  "observed_unresolved_behavior": [
+    "Each policy completed seven cases / thirteen requests, with twelve exact serial-native matches and one Chinese B4 divergence at zero-based token index39.",
+    "Direct native B4 reproduces four batch outputs; B1 Chinese matches serial. This diagnostic is not equal-arrival/shape replay and does not prove floating-point root cause.",
+    "Actual ASGI and cleanup checks are separate accepted scopes; strict full-model gate remains false."
+  ],
+  "documentation_freeze_confirmed": true
+}

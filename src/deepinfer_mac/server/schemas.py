@@ -29,6 +29,7 @@ class ChatRequest(BaseModel):
     fallback_to_baseline: bool = False
     stream: bool = False
     mode: Mode = "baseline"
+    priority: Literal["interactive", "background"] = "interactive"
     stop: str | list[str] | None = None
     n: Literal[1] = 1
 

@@ -1,0 +1,81 @@
+{
+  "cases": [
+    {
+      "name": "chinese_single",
+      "rows": [
+        {
+          "input_index": 2,
+          "equals_native_serial": true,
+          "first_difference": null,
+          "output_tokens": 48,
+          "output_sha256": "0192bbdee54572455b25cf4e6baea7e235d43107ace868d38479be599e61bfa0"
+        }
+      ]
+    },
+    {
+      "name": "native_batch_four",
+      "rows": [
+        {
+          "input_index": 0,
+          "equals_native_serial": true,
+          "first_difference": null,
+          "output_tokens": 48,
+          "output_sha256": "6151e89b5e9c9b9c3103f4e2166a33e429b8e33b45d17c0b67b1c8f59cab3d9f"
+        },
+        {
+          "input_index": 1,
+          "equals_native_serial": true,
+          "first_difference": null,
+          "output_tokens": 24,
+          "output_sha256": "317155dea90dfa6ebf0b097d9706cacc98052dee76eac628326e47858de23e20"
+        },
+        {
+          "input_index": 2,
+          "equals_native_serial": false,
+          "first_difference": 39,
+          "output_tokens": 48,
+          "output_sha256": "c9e146a1217bc9464f53b7501e0bfcacc16944e989d90d472224804fd5b77525"
+        },
+        {
+          "input_index": 3,
+          "equals_native_serial": true,
+          "first_difference": null,
+          "output_tokens": 48,
+          "output_sha256": "c0aca556278cb69a96a7171fe54d11244b7430ac358a59dbf6eb0bc5e3a8c8a9"
+        }
+      ]
+    }
+  ],
+  "private_raw_sha256": "924378fcbd4e2d229b8d1f46784f62299ec61946d902e9a36a59a4a3d202db84",
+  "harness_sha256": "c7dfb374c11f10d91db9f6d6d823ddf4c56559adc0da5d0ccb5c12276c5f7fb2",
+  "scope": "Direct locked MLX-LM BatchGenerator; single Chinese control and four-row batch; no scheduling wrapper",
+  "performance_claim": false,
+  "harness_location": "private diagnostic harness, source hash retained",
+  "wrapper_comparisons": {
+    "interactive": {
+      "complete_case_count": 7,
+      "complete_request_count": 13,
+      "serial_native_matches": 12,
+      "serial_native_mismatches": 1,
+      "direct_upstream_b4_matches": 4,
+      "per_prompt_direct_control_matches": 13,
+      "arrival_schedule_replay": false,
+      "source_still_frozen": true,
+      "swap_delta_bytes": 0,
+      "strict_functional_gate": false
+    },
+    "upstream": {
+      "complete_case_count": 7,
+      "complete_request_count": 13,
+      "serial_native_matches": 12,
+      "serial_native_mismatches": 1,
+      "direct_upstream_b4_matches": 4,
+      "per_prompt_direct_control_matches": 13,
+      "arrival_schedule_replay": false,
+      "source_still_frozen": true,
+      "swap_delta_bytes": 0,
+      "strict_functional_gate": false
+    }
+  },
+  "interpretation": "The same Chinese divergence is reproduced by direct upstream B4; B1 matches serial. This localizes the observed difference to batch execution, but does not prove floating-point cause without logits analysis. Other per-prompt agreements are not identical arrival/shape replay."
+}

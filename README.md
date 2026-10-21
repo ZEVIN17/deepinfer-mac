@@ -61,7 +61,7 @@ The service implements a documented chat API subset, bounded queuing, cancellati
 
 ## Experimental: register another model
 
-The new capability adapter interface is implemented for local model directories or exact repository revisions. It is still undergoing Phase 3 real-model acceptance. For an existing complete MLX model directory:
+The capability adapter accepts local model directories or exact repository revisions. SmolLM2-135M-Instruct-8bit has passed real baseline/native token matching, dense cache reuse, CLI generation, API and SSE acceptance. This verifies a new model family through the shared interface; other custom models require their own acceptance. For an existing complete MLX model directory:
 
 ```sh
 uv run deepinfer-mac run --model /path/to/complete-mlx-model \
@@ -69,6 +69,8 @@ uv run deepinfer-mac run --model /path/to/complete-mlx-model \
 ```
 
 Registration is explicit and per process; custom models start with unverified baseline compatibility, with unsupported optimizations rejected. A JSON configuration can register the same ID for CLI, Python and API. [Adapter reference](docs/MODEL_ADAPTERS.md) explains identity, resource guards and explicit fallback.
+
+[SmolLM2 acceptance / 验收报告](https://github.com/ZEVIN17/deepinfer-mac/blob/43d967652683817daf7eff0b7553ae5d5293739e/benchmarks/reports/phase3-model-adapter-integration.json) · [Weight identity / 权重核验](https://github.com/ZEVIN17/deepinfer-mac/blob/43d967652683817daf7eff0b7553ae5d5293739e/benchmarks/reports/phase3-smollm2-weight-audit.json)
 
 ## Model and execution capabilities
 
@@ -80,7 +82,7 @@ Registration is explicit and per process; custom models start with unverified ba
 | Qwen3.5-9B-4bit | Verified: baseline / native controls | Not enabled publicly | Same-model quality / memory control |
 | Qwen3-14B-4bit | Verified: baseline / native controls | Validation pending | Dense engineering control |
 | Qwen3-4B | Verified regression path | Experimental fixed / adaptive | Smaller dense regression model |
-| Configurable model / cache adapters | Experimental implementation · real-model acceptance in progress | Capability-gated baseline | Model path/repo registration and transparent baseline fallback |
+| Configurable model / cache adapters | SmolLM2-135M-8bit baseline / cache / CLI / API / SSE verified | Capability-gated baseline | Model path/repo registration and transparent baseline fallback |
 | Cross-request budgets / state pipeline | Building in Phase 3 | — | Not part of the current default service |
 
 Public 9B API/UI modes remain baseline. Hybrid speculation is greedy and uses the explicit experimental entry in [DS method mapping](docs/DS_DESIGN_MAPPING.md). Model loading is distinct from task quality and optimization validation. See [model selection](docs/PHASE2_MODEL_SELECTION.md), [compatibility](docs/compatibility.md) and immutable [model locks](models.lock.json).

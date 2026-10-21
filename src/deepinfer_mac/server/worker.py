@@ -23,18 +23,41 @@ class Job:
     request: object
     compare: bool
     created_at: float = field(default_factory=time.time)
+    submitted_at: float = field(default_factory=time.perf_counter)
+    scheduled_at: float | None = None
     status: str = "queued"
     result: dict | None = None
     error: str | None = None
+    error_status: int = 500
     events: collections.deque = field(default_factory=lambda: collections.deque(maxlen=2048))
     event_count: int = 0
     cancel: threading.Event = field(default_factory=threading.Event)
     condition: threading.Condition = field(default_factory=threading.Condition)
     done: threading.Event = field(default_factory=threading.Event)
+    lifecycle: str = "queued"
+    slot: int | None = None
+    slot_generation: int | None = None
+
+    def transition(self, state):
+        allowed = {
+            "queued": {"prefill", "cancelled", "failed"},
+            "prefill": {"decode", "draining", "cancelled", "failed"},
+            "decode": {"draining", "cancelled", "failed"},
+            "draining": {"finished", "cancelled", "failed"},
+            "finished": set(), "cancelled": set(), "failed": set(),
+        }
+        if state == self.lifecycle:
+            return
+        if state not in allowed[self.lifecycle]:
+            raise RuntimeError(f"Invalid request transition: {self.lifecycle} -> {state}")
+        self.lifecycle = state
+        self.emit({"type": "lifecycle", "stage": state, "run_id": self.id,
+                   "slot": self.slot, "slot_generation": self.slot_generation,
+                   "elapsed_ms": (time.perf_counter() - self.submitted_at) * 1000})
 
     def emit(self, event):
         with self.condition:
-            if self.cancel.is_set() and event.get("type") not in ("cancelled", "error"):
+            if self.cancel.is_set() and event.get("type") not in ("cancelled", "error", "lifecycle"):
                 return
             self.events.append({**event, "sequence": self.event_count})
             self.event_count += 1
@@ -48,6 +71,7 @@ class Job:
 
     def snapshot(self):
         return {"id": self.id, "status": self.status, "created_at": self.created_at,
+                "lifecycle": self.lifecycle, "slot": self.slot, "slot_generation": self.slot_generation,
                 "result": self.result, "error": self.error, "event_count": self.event_count,
                 "retained_events": len(self.events)}
 
@@ -100,6 +124,7 @@ class InferenceWorker:
                 job.cancel.set()
                 if job.status == "queued":
                     job.status = "cancelled"
+                    job.transition("cancelled")
                     job.emit({"type": "cancelled"})
                     job.done.set()
             return job
@@ -117,6 +142,7 @@ class InferenceWorker:
                         continue
                     self.active = job
                     job.status = "running"
+                    job.transition("prefill")
                 try:
                     if job.cancel.is_set() or self.stopping.is_set():
                         raise InterruptedError("Request cancelled")
@@ -133,14 +159,18 @@ class InferenceWorker:
                     if job.cancel.is_set():
                         raise InterruptedError("Request cancelled")
                     job.status = "completed"
+                    job.transition("draining")
+                    job.transition("finished")
                     job.emit({"type": "complete", "result": job.result,
                               "worker_ms": (time.perf_counter() - start) * 1000})
                 except InterruptedError:
                     job.status = "cancelled"
+                    job.transition("cancelled")
                     job.result = None
                     job.emit({"type": "cancelled"})
                 except Exception as exc:  # noqa: BLE001 — isolate arbitrary model/backend failures
                     job.status = "failed"
+                    job.transition("failed")
                     job.error = str(exc)
                     job.emit({"type": "error", "message": job.error})
                 finally:
@@ -165,6 +195,7 @@ class InferenceWorker:
                     job.cancel.set()
                     if job is not self.active:
                         job.status = "cancelled"
+                        job.transition("cancelled")
                         job.emit({"type": "cancelled"})
                         job.done.set()
         self.thread.join(timeout=30)
