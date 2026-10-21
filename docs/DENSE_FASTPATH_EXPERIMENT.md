@@ -88,3 +88,66 @@ The first private report and all 36 measured source files are preserved under
   artifacts/phase3-dense-fastpath/development-depth3-first.json \
   /tmp/phase3-dense-first-export.json
 ```
+
+## V2 development selection
+
+After preserving the first checkpoint, v2 ran depths **1, 2, 3 once each in that
+predeclared order**, adding native `mlx_lm.generate.BatchGenerator` with batch two,
+prefill batch two and chunk 256. Both model weights remained resident; both
+requests arrived at time zero. Empty KV state, input IDs, greedy sampling and
+17/32-token budgets were equal. EOS is ignored uniformly here; this protocol is
+not suitable for an oMLX comparison that cannot disable EOS.
+
+Across the three development processes, all 60 internal request outputs and six
+native-batch outputs matched native serial output. All 120 next-token argmax and
+offset checks passed, but **0/120** whole-prefix next-logit allclose checks passed.
+The strict numerical gate remains false. No process grew swap. These are three
+different-depth development runs, not three repetitions of one final configuration.
+
+The prospective minimum full-task wall-time rule selected depth three, batched
+draft, dense trim and bucket execution. Its development task time was 231.04 ms,
+versus 315.47 ms for same-process old serial draft / replay and 136.14 ms for native
+batch. Thus internal overhead decreased in this observation, while native batching
+remained faster. Depth-one native batch took 256.05 ms, and depth-two native batch
+136.92 ms; all observations remain visible. Warm-up is only four tokens per model,
+so first-use batched compilation/cache effects are included, not silently discarded.
+
+Selection, all candidates, report hashes and explicit gate counts are frozen in
+[the v2 development evidence](evidence/phase3-dense-fastpath-development-v2.json).
+The new held-out split remains unused. No performance acceptance or release
+promotion follows from this development selection.
+
+## Frozen held-out diagnostic
+
+Exactly three new processes ran the reserved held-out split with the chosen depth
+three/batched draft/dense trim/bucket configuration, the old serial/replay control
+and native same-batch control. Their order rotated across processes. No held-out
+parameter selection or extra favourable-result run occurred. All 18 request
+outputs matched the native target at their exact budgets, with zero added swap.
+
+Median paired-task time was 180.52 ms for native batch, 367.56 ms for old replay
+and 279.13 ms for fast trim. The native engine remains faster in this bounded
+scope. The [summary](../benchmarks/reports/phase3-dense-heldout-summary.json)
+retains every process plus per-prompt completion, TTFT and ITL observations;
+tokens/cycles are not treated as independent samples. Two prompts do not establish
+broad serving performance or statistical significance.
+
+A second, untimed oracle replays the exact per-row consumed chunks from each
+speculative cycle. The old replay control passes all 12 numerical checks against
+that oracle, while fast trim passes 0/12. Whole-prefix checks pass 0/24 across both
+controls. Both oracle groups match all next-token argmax values and logical cache
+offsets. This separates the original whole-prefix recomputation sensitivity from
+the remaining fast-path numerical differences; it does not hide them or establish
+float16 state equivalence. Strict acceptance remains false at unchanged tolerance.
+[Source-bound verification](evidence/phase3-dense-heldout-verification.json)
+records the commands and logs. No runtime or release capability was promoted.
+
+CPU-only reproduction of the public export:
+
+```sh
+.venv/bin/python benchmarks/experiments/phase3_dense_heldout_export.py \
+  --inputs artifacts/phase3-dense-fastpath/heldout-round0.json \
+  artifacts/phase3-dense-fastpath/heldout-round1.json \
+  artifacts/phase3-dense-fastpath/heldout-round2.json \
+  --output-dir /tmp/deepinfer-heldout-export
+```

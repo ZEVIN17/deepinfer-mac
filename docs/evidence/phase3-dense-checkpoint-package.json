@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "kind": "isolated fixed-commit dense-fastpath experimental package validation",
+  "source": {
+    "commit": "d3c6ae1320f09f0d21813931c6df488cf4b4909b",
+    "tree": "df3cad3499bb1548307abd4feba54a9c4c574d9a",
+    "method": "git archive of exact commit, extracted to fresh temporary source directory; no working-tree source used",
+    "version": "0.1.0a2",
+    "git_archive_sha256": "c3b0724f5971adb3989c3447215b3d1413da18f38cff8ee033842360140ea606"
+  },
+  "candidate_directory": "dist/candidates/v0.1.0a2-d3c6ae1",
+  "artifacts": {
+    "deepinfer-mac-site-d3c6ae1.tar.gz": {
+      "bytes": 474130,
+      "sha256": "0efbe2864864371618deb64d54c26e29f312463c852f0fd7d16c55864658c0ad"
+    },
+    "deepinfer_mac-0.1.0a2-py3-none-any.whl": {
+      "bytes": 108879,
+      "sha256": "891d2ad4fa962df15d3ba270add3192da11ec487dff414ef1b5d44439e2bc303"
+    },
+    "deepinfer_mac-0.1.0a2.tar.gz": {
+      "bytes": 4084718,
+      "sha256": "c91ae13259480729e07e358b9677cf416f243825187b38540d13bf10a88467df"
+    }
+  },
+  "commands": [
+    "git archive d3c6ae1320f09f0d21813931c6df488cf4b4909b | tar -x -C \"$ISOLATED_SOURCE\"",
+    "cd \"$ISOLATED_SOURCE\"; PYTHONPATH=\"$CACHED_HATCHLING:$CACHED_PATHSPEC:$CACHED_TROVE_CLASSIFIERS\" \"$PYTHON312\" -c 'from hatchling.build import build_sdist, build_wheel; import os; print(build_sdist(os.environ[\"CANDIDATE_DIR\"])); print(build_wheel(os.environ[\"CANDIDATE_DIR\"]))'",
+    "\"$PYTHON312\" -m venv \"$ISOLATED_VENV\"",
+    "\"$ISOLATED_VENV/bin/python\" -m pip install --no-cache-dir --no-index --find-links \"$CACHED_DEPENDENCY_WHEELHOUSE\" \"$CANDIDATE_DIR/deepinfer_mac-0.1.0a2-py3-none-any.whl\" httpx",
+    "\"$ISOLATED_VENV/bin/python\" -m pip check",
+    "\"$ISOLATED_VENV/bin/deepinfer-mac\" --help",
+    "\"$ISOLATED_VENV/bin/deepinfer-mac\" models --model-config \"$ISOLATED_SOURCE/examples/models/research-smollm2-pair.repo.json\" --json",
+    "\"$PYTHON312\" \"$ISOLATED_SOURCE/site/build.py\"",
+    "\"$PYTHON312\" \"$ISOLATED_SOURCE/site/check.py\""
+  ],
+  "build": {
+    "backend": "hatchling 1.32.4",
+    "python": "3.12.12",
+    "offline": true,
+    "sdist_and_wheel_built": true,
+    "fallback": "First backend invocation in fresh venv lacked pluggy and built nothing. Retried cached hatchling backend using existing project Python dependencies, still against exact archived source, with no network or installation.",
+    "backend_python": "existing project Python 3.12.12; build backend dependencies only; source exclusively exact git archive"
+  },
+  "installation": {
+    "fresh_venv": true,
+    "system_site_packages": false,
+    "dependencies": {
+      "httpx": {
+        "version": "0.28.1",
+        "wheel": "httpx-0.28.1-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "idna": {
+        "version": "3.20",
+        "wheel": "idna-3.20-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "httpcore": {
+        "version": "1.0.9",
+        "wheel": "httpcore-1.0.9-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "h11": {
+        "version": "0.16.0",
+        "wheel": "h11-0.16.0-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "certifi": {
+        "version": "2026.10.19",
+        "wheel": "certifi-2026.10.19-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "anyio": {
+        "version": "4.15.1",
+        "wheel": "anyio-4.15.1-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "typing-extensions": {
+        "version": "4.16.0",
+        "wheel": "typing_extensions-4.16.0-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "psutil": {
+        "version": "7.2.2",
+        "wheel": "psutil-7.2.2-cp36-abi3-macosx_11_0_arm64.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "huggingface-hub": {
+        "version": "2.2.0",
+        "wheel": "huggingface_hub-2.2.0-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "tqdm": {
+        "version": "4.70.1",
+        "wheel": "tqdm-4.70.1-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "pyyaml": {
+        "version": "6.0.3",
+        "wheel": "pyyaml-6.0.3-cp312-cp312-macosx_11_0_arm64.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "packaging": {
+        "version": "26.3",
+        "wheel": "packaging-26.3-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "httpx2": {
+        "version": "2.15.1",
+        "wheel": "httpx2-2.15.1-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "truststore": {
+        "version": "0.10.5",
+        "wheel": "truststore-0.10.5-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "httpcore2": {
+        "version": "2.15.1",
+        "wheel": "httpcore2-2.15.1-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "hf-xet": {
+        "version": "1.7.0",
+        "wheel": "hf_xet-1.7.0-cp38-abi3-macosx_11_0_arm64.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "fsspec": {
+        "version": "2026.9.0",
+        "wheel": "fsspec-2026.9.0-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "filelock": {
+        "version": "4.2.4",
+        "wheel": "filelock-4.2.4-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "click": {
+        "version": "8.5.0",
+        "wheel": "click-8.5.0-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "uvicorn": {
+        "version": "0.54.0",
+        "wheel": "uvicorn-0.54.0-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "fastapi": {
+        "version": "0.156.4",
+        "wheel": "fastapi-0.156.4-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "opentelemetry-api": {
+        "version": "1.45.1",
+        "wheel": "opentelemetry_api-1.45.1-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "annotated-doc": {
+        "version": "0.0.5",
+        "wheel": "annotated_doc-0.0.5-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "typing-inspection": {
+        "version": "0.4.4",
+        "wheel": "typing_inspection-0.4.4-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "pydantic": {
+        "version": "2.14.1",
+        "wheel": "pydantic-2.14.1-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "pydantic-core": {
+        "version": "2.50.1",
+        "wheel": "pydantic_core-2.50.1-cp312-cp312-macosx_11_0_arm64.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "annotated-types": {
+        "version": "0.8.0",
+        "wheel": "annotated_types-0.8.0-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      },
+      "starlette": {
+        "version": "1.9.0",
+        "wheel": "starlette-1.9.0-py3-none-any.whl",
+        "source": "existing uv unpacked wheel cache; bytes repacked without source changes"
+      }
+    },
+    "dependency_preparation": "Reused prior temporary Python-3.12-compatible wheelhouse described in phase3-checkpoint-package.json; installed into a new venv with --no-index. No download or system environment change.",
+    "pip_check": "No broken requirements found.",
+    "cli_help_exit_code": 0,
+    "cli_revision_registration_exit_code": 0,
+    "smoke": {
+      "version": "0.1.0a2",
+      "imports_installed_wheel_only": true,
+      "mlx_imported": false,
+      "api": {
+        "serial": {
+          "health": {
+            "status": "ok",
+            "model_loaded": false,
+            "active_run": null,
+            "queued": 0,
+            "execution_backend": "serial",
+            "active_requests": 0,
+            "continuous_policy": null,
+            "preparing_run": null,
+            "cleanup_error_count": 0,
+            "experimental_hybrid_speculation": false
+          },
+          "registered_model_found": true,
+          "bundled_ui_status": 200
+        },
+        "continuous": {
+          "health": {
+            "status": "ok",
+            "model_loaded": false,
+            "active_run": null,
+            "queued": 0,
+            "execution_backend": "continuous",
+            "active_requests": 0,
+            "continuous_policy": "interactive",
+            "preparing_run": null,
+            "cleanup_error_count": 0,
+            "experimental_hybrid_speculation": false
+          },
+          "registered_model_found": true,
+          "bundled_ui_status": 200
+        },
+        "joint_experimental": {
+          "health": {
+            "status": "ok",
+            "model_loaded": false,
+            "active_run": null,
+            "queued": 0,
+            "execution_backend": "joint_experimental",
+            "active_requests": 0,
+            "continuous_policy": "interactive",
+            "preparing_run": null,
+            "cleanup_error_count": 0,
+            "experimental_hybrid_speculation": false
+          },
+          "registered_model_found": true,
+          "bundled_ui_status": 200
+        }
+      }
+    },
+    "wheel_source_match": {
+      "python_modules": 32,
+      "all_equal_exact_archive": true,
+      "sha256": {
+        "deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+        "deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+        "deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+        "deepinfer_mac/cli.py": "49fd07ff106aca8721a474575730c841bacf4251806b3a3e524e0aa2d35fdb14",
+        "deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+        "deepinfer_mac/continuous.py": "55b4c7b6f37050d0d907c59f17ca7a460e7a19653017f7dec3e99899c753333e",
+        "deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+        "deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+        "deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+        "deepinfer_mac/joint_service.py": "3aa522efe7094a91f01e62dce7875113e4988165942b7c2d84663e73611bf5c6",
+        "deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+        "deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+        "deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+        "deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+        "deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+        "deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+        "deepinfer_mac/state.py": "d77e5d97484bd3dcdae324d6ee31830480bb7baafb1907bc10da7200fd17b096",
+        "deepinfer_mac/varlen_verify.py": "a006535e63d8f51cbeacf020977c7ddc77df7e8f4a81b0d90901ff90f8b85686",
+        "deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+        "deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+        "deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+        "deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+        "deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+        "deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+        "deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+        "deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "deepinfer_mac/server/app.py": "b865ea8c6aec37b32363720959827ddcfaa5618cc932a41c068782a72b11b0d0",
+        "deepinfer_mac/server/continuous_worker.py": "a30d2204c76e1e019560c986800b89f449ff818b3d9c62c621a1fc6d557c95d0",
+        "deepinfer_mac/server/joint_worker.py": "429634ae3a08199448b455bba19db451b13ded140468802273890396a2f99d16",
+        "deepinfer_mac/server/schemas.py": "87080294b40b3733f5e43493a1bdd25bb9dc8215b1521c25003fc268535ee256",
+        "deepinfer_mac/server/worker.py": "7ce9ba42ae69ba45f298c9f1bb6aef2ddaf4138b5d3bb0397a6575c1c5505d90"
+      }
+    },
+    "smoke_protocol": [
+      "Import installed adapters/continuous/engine/varlen_verify/joint_service/continuous_worker/joint_worker and assert all imported paths are inside fresh venv.",
+      "Use TestClient lifecycle for serial, continuous and explicit joint_experimental configurations; an engine factory raises if constructed.",
+      "Assert /health, /v1/models and bundled / return 200, model_loaded=false, correct backend and registered profile.",
+      "Assert no mlx or mlx.* modules imported. No model execution or listening socket."
+    ],
+    "private_smoke_script_sha256": "7ce8a026040e4f617acac077eff7636590a77a55772ee51a0b90307c25727ab6"
+  },
+  "archive_audit": {
+    "deepinfer_mac-0.1.0a2.tar.gz": {
+      "members": 453,
+      "forbidden_members": [],
+      "private_path_members": [
+        "deepinfer_mac-0.1.0a2/docs/evidence/phase3-adapter-anti-pattern-check.json",
+        "deepinfer_mac-0.1.0a2/docs/evidence/phase3-checkpoint-package.json"
+      ],
+      "runtime_modules": [
+        "deepinfer_mac-0.1.0a2/benchmarks/experiments/phase3_verify_continuous.py",
+        "deepinfer_mac-0.1.0a2/benchmarks/experiments/phase3_verify_joint_service.py",
+        "deepinfer_mac-0.1.0a2/benchmarks/experiments/phase3_verify_model_adapters.py",
+        "deepinfer_mac-0.1.0a2/src/deepinfer_mac/adapters.py",
+        "deepinfer_mac-0.1.0a2/src/deepinfer_mac/continuous.py",
+        "deepinfer_mac-0.1.0a2/src/deepinfer_mac/joint_service.py",
+        "deepinfer_mac-0.1.0a2/src/deepinfer_mac/varlen_verify.py",
+        "deepinfer_mac-0.1.0a2/src/deepinfer_mac/ds/joint_budget.py",
+        "deepinfer_mac-0.1.0a2/src/deepinfer_mac/server/continuous_worker.py",
+        "deepinfer_mac-0.1.0a2/src/deepinfer_mac/server/joint_worker.py",
+        "deepinfer_mac-0.1.0a2/tests/test_continuous_worker.py",
+        "deepinfer_mac-0.1.0a2/tests/test_joint_budget.py",
+        "deepinfer_mac-0.1.0a2/tests/test_joint_service.py",
+        "deepinfer_mac-0.1.0a2/tests/test_model_adapters.py"
+      ],
+      "examples": [
+        "deepinfer_mac-0.1.0a2/examples/models/research-smollm2-pair.local.json",
+        "deepinfer_mac-0.1.0a2/examples/models/research-smollm2-pair.repo.json",
+        "deepinfer_mac-0.1.0a2/examples/models/smollm2-135m-8bit.local.json",
+        "deepinfer_mac-0.1.0a2/examples/models/smollm2-135m-8bit.repo.json"
+      ],
+      "licenses": [
+        "deepinfer_mac-0.1.0a2/LICENSE",
+        "deepinfer_mac-0.1.0a2/NOTICE",
+        "deepinfer_mac-0.1.0a2/third_party/licenses/DeepInfer.txt",
+        "deepinfer_mac-0.1.0a2/third_party/licenses/MLX-LM.txt"
+      ],
+      "private_path_scan_review": {
+        "actual_private_paths": [],
+        "generic_rule_text_only": true,
+        "matched_lines": {
+          "deepinfer_mac-0.1.0a2/docs/evidence/phase3-adapter-anti-pattern-check.json": [
+            "      \"result\": \"New adapter docs, examples and public phase3 reports/evidence contain no /Users/, /home/ or /private/var/folders absolute paths. Local model paths are repository-relative; frontend metadata/results redact private local paths. Raw private artifacts and model weights are absent from inspected sdist.\""
+          ],
+          "deepinfer_mac-0.1.0a2/docs/evidence/phase3-checkpoint-package.json": [
+            "        \"reviewed_text\": \"New adapter docs, examples and public phase3 reports/evidence contain no /Users/, /home/ or /private/var/folders absolute paths.\""
+          ]
+        }
+      }
+    },
+    "deepinfer_mac-0.1.0a2-py3-none-any.whl": {
+      "members": 45,
+      "forbidden_members": [],
+      "private_path_members": [],
+      "runtime_modules": [
+        "deepinfer_mac/adapters.py",
+        "deepinfer_mac/continuous.py",
+        "deepinfer_mac/joint_service.py",
+        "deepinfer_mac/varlen_verify.py",
+        "deepinfer_mac/ds/joint_budget.py",
+        "deepinfer_mac/server/continuous_worker.py",
+        "deepinfer_mac/server/joint_worker.py"
+      ],
+      "examples": [],
+      "licenses": [
+        "deepinfer_mac-0.1.0a2.dist-info/licenses/LICENSE",
+        "deepinfer_mac-0.1.0a2.dist-info/licenses/NOTICE",
+        "deepinfer_mac-0.1.0a2.dist-info/licenses/third_party/licenses/DeepInfer.txt",
+        "deepinfer_mac-0.1.0a2.dist-info/licenses/third_party/licenses/MLX-LM.txt"
+      ]
+    },
+    "deepinfer-mac-site-d3c6ae1.tar.gz": {
+      "members": 28,
+      "forbidden_members": [],
+      "private_path_members": []
+    }
+  },
+  "site": {
+    "pages": 8,
+    "local_links": 138,
+    "relocatable_repository_prefix": true,
+    "deployed": false
+  },
+  "limitations": [
+    "Experimental local candidate only; no release, tag, deployment, or performance claim.",
+    "Only CPU packaging, metadata and ASGI checks ran here; no inference or GPU activity. Prior runtime correctness/numerical failures are unchanged.",
+    "The wheel includes joint service and dense fastpath runtime, but dense batched-draft/direct-trim options remain Python opt-ins and are not enabled by the public joint service.",
+    "The strict dense next-logit gate remains false; 20/20 development outputs and 40/40 next-argmax/offset checks in historical evidence do not imply general bit identity or superiority to native MLX-LM/oMLX.",
+    "Current uncommitted v2 diagnostic harness, v2 reports and small competitor readiness audit are excluded by exact commit archive; future changes require a new candidate.",
+    "Example configs are in sdist/source, not wheel; wheel-only users must obtain configs from matching source or sdist.",
+    "Candidate version remains 0.1.0a2 under existing project metadata; commit-specific directory/manifest disambiguate it from earlier alpha candidates."
+  ],
+  "status": {
+    "fixed_source_package_build": "passed",
+    "isolated_cpu_install": "passed",
+    "archive_no_model_weights_or_raw_results": "passed",
+    "actual_private_path_scan": "passed_after_manual_generic_rule_review",
+    "wheel_examples": "not_included_by_existing_configuration",
+    "strict_continuous_gate": "failed_preserved",
+    "release_ready": false,
+    "tag_created": false,
+    "published": false,
+    "port_8765_touched": false,
+    "strict_dense_numeric_gate": "failed_preserved",
+    "old_candidate_preserved": true,
+    "experimental_dense_flags_enabled_by_service": false
+  }
+}

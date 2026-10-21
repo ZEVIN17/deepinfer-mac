@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "independent_cpu_anti_pattern_review",
+  "status": "passed",
+  "static_check_passed": true,
+  "strict_runtime_accepted": false,
+  "performance_advantage_proven": false,
+  "scope": "Read-only CPU evidence review; no MLX imports, GPU execution, model loading, or service operations.",
+  "source_sha256": {
+    "benchmarks/experiments/phase3_dense_fastpath_v2.py": "e0d3362dff7f87b36d83cfbbad3b8b9d5a72fa2b7c0c7def82f065e132a90cee",
+    "benchmarks/experiments/phase3_dense_export_v2.py": "f8c200cb647c903fdb2414111753377bdf7d2773b630f5343cbba743cd510003",
+    "benchmarks/experiments/phase3_dense_export.py": "fb8b4857eb79a23916b1b1008ea845bf8c3a72bdea9177bb0d99190912e8cd0b",
+    "benchmarks/experiments/phase3_dense_development_v2_protocol.json": "6a1fa4223456e7ff246fa7a0c39cb2b520781820cd9d2a70eaa3dbdaece1d476",
+    "docs/DENSE_FASTPATH_EXPERIMENT.md": "ddac9c300b78244fade979f4636dda1dcd724d6ea5b6232b94aba119b30a601b",
+    "docs/evidence/phase3-dense-fastpath-development-v2.json": "0b18e71b896b90aded9994581f69434fdba80eb1e1e4b413e335b3bbf6d2b9d1",
+    "benchmarks/reports/phase3-dense-fastpath-development-depth1-v2.json": "7a1dd79ae760b9d658a14142c1e7934526e3679d93d5292daaa3b42aa677a53a",
+    "benchmarks/reports/phase3-dense-fastpath-development-depth2-v2.json": "87f7a18dd917d8b5dead649ac46cbdffab09cdc24b47f84eb3930f12ea276c50",
+    "benchmarks/reports/phase3-dense-fastpath-development-depth3-v2.json": "561e8a8bcf82176a624c5cd7f36d082ba03229a7ad45eba9fe2f0485737fb497"
+  },
+  "checks": [
+    {
+      "name": "actual counts and export integrity",
+      "result": "passed",
+      "detail": "Recomputed coverage from private token arrays; regenerated each public export exactly; raw and public hashes match. Fixed ten-control assertion is an expected protocol shape, not fabricated coverage."
+    },
+    {
+      "name": "all runs and selection",
+      "result": "passed",
+      "detail": "All 24 full-allocation candidates retained; independent minimum reproduces frozen depth-three batched/dense-trim/bucket choice. Native batch is reported and faster; not eligible as internal optimization choice. No heldout execution route in harness."
+    },
+    {
+      "name": "numerical failures",
+      "result": "passed",
+      "detail": "0/120 strict 1e-5 allclose checks retained, including legacy controls; 120 argmax/offset checks pass. accepted=false and performance_claim=false in every report."
+    },
+    {
+      "name": "historical sources and privacy",
+      "result": "passed",
+      "detail": "Frozen v1 harness/report/workload identical to HEAD; all three v2 source maps match private snapshot. Reviewed public scope contains no raw prompt/token arrays or private absolute user paths."
+    },
+    {
+      "name": "baseline and measurement scope",
+      "result": "passed",
+      "detail": "Native BatchGenerator batch-two simultaneous requests and fixed output budgets retained. Ignored EOS, minimal warm-up, first-use compilation and distinct-depth single observations explicitly disclosed; no mature-engine superiority claimed."
+    },
+    {
+      "name": "final export metadata and error redaction",
+      "result": "passed",
+      "detail": "Final CPU-only exporter refresh preserves measured raw bytes, includes resident load/warmup/input counts; synthetic failure with private path and prompt exports only exception type plus hashed detail."
+    }
+  ],
+  "observed_runs": [
+    {
+      "depth": 1,
+      "completed_controls": 10,
+      "native_matched_requests": 20,
+      "observed_output_tokens": 490,
+      "numerical_checks": 40,
+      "numerical_passed": 0,
+      "raw_sha256": "50bc3e2c95451498ae80000453eab8982a352ed8c291bce65fafc2d5c0c1f906"
+    },
+    {
+      "depth": 2,
+      "completed_controls": 10,
+      "native_matched_requests": 20,
+      "observed_output_tokens": 490,
+      "numerical_checks": 40,
+      "numerical_passed": 0,
+      "raw_sha256": "0f84b8614f3f962eb7504901ce443e57e1cab99e6c884d3b86aa9965fd016c00"
+    },
+    {
+      "depth": 3,
+      "completed_controls": 10,
+      "native_matched_requests": 20,
+      "observed_output_tokens": 490,
+      "numerical_checks": 40,
+      "numerical_passed": 0,
+      "raw_sha256": "14683884491125e79958eb53a5af9169c07f61c212d9140d88a5394f4d9f0b00"
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "Private workload hashes do not provide standalone public corpus reproducibility.",
+    "Prospective protocol intent is documented; filesystem review alone cannot independently certify wall-clock creation chronology.",
+    "Single observations with fixed control order and minimal batch warm-up cannot support performance significance.",
+    "Exporter trusts observed summary fields; review recomputed actual frozen artifacts independently. Future malformed or failed reports require separate validation."
+  ]
+}

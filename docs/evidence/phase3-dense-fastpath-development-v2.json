@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "status": "development_selection_frozen_strict_numeric_gate_failed",
+  "accepted": false,
+  "performance_claim": false,
+  "protocol": "benchmarks/experiments/phase3_dense_development_v2_protocol.json",
+  "protocol_sha256": "6a1fa4223456e7ff246fa7a0c39cb2b520781820cd9d2a70eaa3dbdaece1d476",
+  "runs": [
+    {
+      "depth": 1,
+      "report": "benchmarks/reports/phase3-dense-fastpath-development-depth1-v2.json",
+      "report_sha256": "7a1dd79ae760b9d658a14142c1e7934526e3679d93d5292daaa3b42aa677a53a",
+      "coverage": {
+        "completed_controls": 10,
+        "native_matched_requests": 20,
+        "observed_output_tokens": 490
+      },
+      "numeric_checks": 40,
+      "numeric_passed": 0,
+      "output_and_boundary_checks_pass": true,
+      "native_batch_ms": 256.0476250946522,
+      "native_batch_matches": [
+        true,
+        true
+      ],
+      "metal_peak_bytes": 801475388,
+      "swap_growth_bytes": 0
+    },
+    {
+      "depth": 2,
+      "report": "benchmarks/reports/phase3-dense-fastpath-development-depth2-v2.json",
+      "report_sha256": "87f7a18dd917d8b5dead649ac46cbdffab09cdc24b47f84eb3930f12ea276c50",
+      "coverage": {
+        "completed_controls": 10,
+        "native_matched_requests": 20,
+        "observed_output_tokens": 490
+      },
+      "numeric_checks": 40,
+      "numeric_passed": 0,
+      "output_and_boundary_checks_pass": true,
+      "native_batch_ms": 136.91529200877994,
+      "native_batch_matches": [
+        true,
+        true
+      ],
+      "metal_peak_bytes": 834964284,
+      "swap_growth_bytes": 0
+    },
+    {
+      "depth": 3,
+      "report": "benchmarks/reports/phase3-dense-fastpath-development-depth3-v2.json",
+      "report_sha256": "561e8a8bcf82176a624c5cd7f36d082ba03229a7ad45eba9fe2f0485737fb497",
+      "coverage": {
+        "completed_controls": 10,
+        "native_matched_requests": 20,
+        "observed_output_tokens": 490
+      },
+      "numeric_checks": 40,
+      "numeric_passed": 0,
+      "output_and_boundary_checks_pass": true,
+      "native_batch_ms": 136.1380839953199,
+      "native_batch_matches": [
+        true,
+        true
+      ],
+      "metal_peak_bytes": 827640636,
+      "swap_growth_bytes": 0
+    }
+  ],
+  "selected_internal_configuration": {
+    "depth": 3,
+    "draft_execution": "batched",
+    "recovery": "dense_trim",
+    "strategy": "bucket",
+    "complete_task_ms": 231.0393750667572
+  },
+  "selection_rule": "Among full-allocation internal controls with exact native output, complete budgets, next argmax and offsets passing, select lowest complete paired-task wall time across declared depths and draft/recovery modes; retain strict numerical gate independently. Native batch baseline is never eligible as selected internal configuration. No heldout promotion while numerical gate unresolved.",
+  "all_eligible_candidates": [
+    {
+      "depth": 1,
+      "draft_execution": "serial",
+      "recovery": "exact_replay",
+      "strategy": "bucket",
+      "complete_task_ms": 412.5930839218199
+    },
+    {
+      "depth": 1,
+      "draft_execution": "serial",
+      "recovery": "exact_replay",
+      "strategy": "shared_cap",
+      "complete_task_ms": 367.59716598317027
+    },
+    {
+      "depth": 1,
+      "draft_execution": "batched",
+      "recovery": "exact_replay",
+      "strategy": "bucket",
+      "complete_task_ms": 368.6342079890892
+    },
+    {
+      "depth": 1,
+      "draft_execution": "batched",
+      "recovery": "exact_replay",
+      "strategy": "shared_cap",
+      "complete_task_ms": 365.0309999939054
+    },
+    {
+      "depth": 1,
+      "draft_execution": "serial",
+      "recovery": "dense_trim",
+      "strategy": "bucket",
+      "complete_task_ms": 282.8529580729082
+    },
+    {
+      "depth": 1,
+      "draft_execution": "serial",
+      "recovery": "dense_trim",
+      "strategy": "shared_cap",
+      "complete_task_ms": 276.32874995470047
+    },
+    {
+      "depth": 1,
+      "draft_execution": "batched",
+      "recovery": "dense_trim",
+      "strategy": "bucket",
+      "complete_task_ms": 280.85779200773686
+    },
+    {
+      "depth": 1,
+      "draft_execution": "batched",
+      "recovery": "dense_trim",
+      "strategy": "shared_cap",
+      "complete_task_ms": 279.4787500752136
+    },
+    {
+      "depth": 2,
+      "draft_execution": "serial",
+      "recovery": "exact_replay",
+      "strategy": "bucket",
+      "complete_task_ms": 331.7659159656614
+    },
+    {
+      "depth": 2,
+      "draft_execution": "serial",
+      "recovery": "exact_replay",
+      "strategy": "shared_cap",
+      "complete_task_ms": 325.6188329542056
+    },
+    {
+      "depth": 2,
+      "draft_execution": "batched",
+      "recovery": "exact_replay",
+      "strategy": "bucket",
+      "complete_task_ms": 308.7215420091525
+    },
+    {
+      "depth": 2,
+      "draft_execution": "batched",
+      "recovery": "exact_replay",
+      "strategy": "shared_cap",
+      "complete_task_ms": 309.781999909319
+    },
+    {
+      "depth": 2,
+      "draft_execution": "serial",
+      "recovery": "dense_trim",
+      "strategy": "bucket",
+      "complete_task_ms": 256.7182920174673
+    },
+    {
+      "depth": 2,
+      "draft_execution": "serial",
+      "recovery": "dense_trim",
+      "strategy": "shared_cap",
+      "complete_task_ms": 250.6034589605406
+    },
+    {
+      "depth": 2,
+      "draft_execution": "batched",
+      "recovery": "dense_trim",
+      "strategy": "bucket",
+      "complete_task_ms": 243.3078329777345
+    },
+    {
+      "depth": 2,
+      "draft_execution": "batched",
+      "recovery": "dense_trim",
+      "strategy": "shared_cap",
+      "complete_task_ms": 238.16112498752773
+    },
+    {
+      "depth": 3,
+      "draft_execution": "serial",
+      "recovery": "exact_replay",
+      "strategy": "bucket",
+      "complete_task_ms": 315.46608405187726
+    },
+    {
+      "depth": 3,
+      "draft_execution": "serial",
+      "recovery": "exact_replay",
+      "strategy": "shared_cap",
+      "complete_task_ms": 308.4738749312237
+    },
+    {
+      "depth": 3,
+      "draft_execution": "batched",
+      "recovery": "exact_replay",
+      "strategy": "bucket",
+      "complete_task_ms": 286.4854170475155
+    },
+    {
+      "depth": 3,
+      "draft_execution": "batched",
+      "recovery": "exact_replay",
+      "strategy": "shared_cap",
+      "complete_task_ms": 286.60187497735023
+    },
+    {
+      "depth": 3,
+      "draft_execution": "serial",
+      "recovery": "dense_trim",
+      "strategy": "bucket",
+      "complete_task_ms": 246.15404102951288
+    },
+    {
+      "depth": 3,
+      "draft_execution": "serial",
+      "recovery": "dense_trim",
+      "strategy": "shared_cap",
+      "complete_task_ms": 244.5847080089152
+    },
+    {
+      "depth": 3,
+      "draft_execution": "batched",
+      "recovery": "dense_trim",
+      "strategy": "bucket",
+      "complete_task_ms": 231.0393750667572
+    },
+    {
+      "depth": 3,
+      "draft_execution": "batched",
+      "recovery": "dense_trim",
+      "strategy": "shared_cap",
+      "complete_task_ms": 233.43470809049904
+    }
+  ],
+  "heldout_executed": false,
+  "limits": [
+    "Three different-depth development processes are not three fixed-configuration performance repetitions.",
+    "Ignored EOS is uniform within this protocol; not an oMLX-compatible fair EOS protocol.",
+    "Native BatchGenerator has both target/draft weights resident and fixed simultaneous arrivals.",
+    "Only four-token per-model warm-up is performed; first-use batch compilation/cache effects remain measured.",
+    "Strict whole-prefix next-logit criterion unchanged; 0/120 passed across all controls, including baseline."
+  ]
+}

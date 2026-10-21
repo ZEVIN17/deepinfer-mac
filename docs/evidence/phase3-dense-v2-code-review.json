@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "review": "fresh_read_only_v2_code_protocol_report_review",
+  "status": "passed_no_open_findings",
+  "gpu_executed": false,
+  "source_sha256": {
+    "benchmarks/experiments/phase3_dense_fastpath_v2.py": "e0d3362dff7f87b36d83cfbbad3b8b9d5a72fa2b7c0c7def82f065e132a90cee",
+    "benchmarks/experiments/phase3_dense_export_v2.py": "f8c200cb647c903fdb2414111753377bdf7d2773b630f5343cbba743cd510003",
+    "benchmarks/experiments/phase3_dense_development_v2_protocol.json": "6a1fa4223456e7ff246fa7a0c39cb2b520781820cd9d2a70eaa3dbdaece1d476",
+    "docs/evidence/phase3-dense-fastpath-development-v2.json": "0b18e71b896b90aded9994581f69434fdba80eb1e1e4b413e335b3bbf6d2b9d1",
+    "docs/DENSE_FASTPATH_EXPERIMENT.md": "ddac9c300b78244fade979f4636dda1dcd724d6ea5b6232b94aba119b30a601b"
+  },
+  "checks": [
+    "Read current Phase 3 plan and dense protocol; heldout unavailable in harness and reported unused.",
+    "Inspected installed MLX-LM BatchGenerator: default greedy sampler; no EOS stop sequences; length-final response includes final token, consumed correctly.",
+    "Same input arrays, output limits, simultaneous arrival and resident pair weights used for native batch and internal controls; no service latency claim.",
+    "Verified all three public report hashes, all measured repository source hashes, protocol hash and prospective harness hash.",
+    "Independently derived each run: 10 controls, 20 matched request outputs, 40 next-state checks, 0 strict numerical passes.",
+    "Selected configuration is minimum complete task time among all 24 listed full-allocation internal candidates.",
+    "Strict acceptance/performance claims remain false; warm-up/order limitations and absence of repeated final-configuration runs disclosed.",
+    "Scanned current public reports: no raw token arrays, prompts or private absolute paths.",
+    "Final CPU recheck: all three exports exactly reproduced from unchanged raw reports, added scalar fields match raw values, summary report hashes match, and synthetic private path/prompt failure detail exports only its SHA256."
+  ],
+  "limits": [
+    "Review confirms observed development data and bounded mechanism protocol, not performance acceptance.",
+    "Whole-prefix numerical criterion remains unresolved and no heldout promotion is approved by this evidence."
+  ],
+  "previous_source_sha256": {
+    "benchmarks/experiments/phase3_dense_fastpath_v2.py": "e0d3362dff7f87b36d83cfbbad3b8b9d5a72fa2b7c0c7def82f065e132a90cee",
+    "benchmarks/experiments/phase3_dense_export_v2.py": "32b45ad1757fc3e0566471cdd5c5958dd3a16a9bb148ea315ff160c336d70b3f",
+    "benchmarks/experiments/phase3_dense_development_v2_protocol.json": "6a1fa4223456e7ff246fa7a0c39cb2b520781820cd9d2a70eaa3dbdaece1d476",
+    "docs/evidence/phase3-dense-fastpath-development-v2.json": "820fbe49a5550197eb4ee68760da9d80e66bc301462d87a5fc8579c6bca61949",
+    "docs/DENSE_FASTPATH_EXPERIMENT.md": "ddac9c300b78244fade979f4636dda1dcd724d6ea5b6232b94aba119b30a601b"
+  },
+  "resolved_findings": [
+    {
+      "priority": "low",
+      "file": "benchmarks/experiments/phase3_dense_export_v2.py",
+      "issue": "Public reports omit resident_pair_load_ms, warmup_ms and input_token_counts present in private raw report; protocol requests separate load/warm-up reporting.",
+      "recommendation": "Expose these scalar/list fields in v2 export and regenerate public reports plus evidence hashes without device execution.",
+      "resolution": "Implemented and independently CPU verified against unchanged raw reports; synthetic private failure detail remains hashed only."
+    },
+    {
+      "priority": "low",
+      "file": "benchmarks/experiments/phase3_dense_export_v2.py",
+      "issue": "Inherited failure-detail passthrough could expose private paths on future failing reports; current reports have empty failures.",
+      "recommendation": "Sanitize failure detail or export type and detail digest only.",
+      "resolution": "Implemented and independently CPU verified against unchanged raw reports; synthetic private failure detail remains hashed only."
+    }
+  ],
+  "findings": []
+}

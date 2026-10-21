@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "status": "three_process_diagnostic_complete_strict_numeric_gate_failed",
+  "accepted": false,
+  "performance_claim": false,
+  "summary": "benchmarks/reports/phase3-dense-heldout-summary.json",
+  "summary_sha256": "53d232a413cffe3af11b689273d02459df51994b301da7437fa791fa6c89e3cb",
+  "source_sha256": {
+    "benchmarks/experiments/phase3_dense_heldout.py": "59adda9dc8e95a80e5686afe4faed7f7464f57b42173bf81a8fd92243faad6c4",
+    "benchmarks/experiments/phase3_dense_fastpath_v2.py": "e0d3362dff7f87b36d83cfbbad3b8b9d5a72fa2b7c0c7def82f065e132a90cee",
+    "benchmarks/experiments/phase3_dense_heldout_protocol.json": "2ed08b84600843bbd63245c9e13ee1a7e9ccd58efac058289d8f8874a29261f2",
+    "benchmarks/experiments/phase3_dense_workload_manifest.json": "119c5278b0c1d4f2b3252cee523c718eba50e0ce9bced75cf791765d9e6b2bd5",
+    "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+    "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+    "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+    "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+    "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+    "src/deepinfer_mac/cli.py": "49fd07ff106aca8721a474575730c841bacf4251806b3a3e524e0aa2d35fdb14",
+    "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+    "src/deepinfer_mac/continuous.py": "55b4c7b6f37050d0d907c59f17ca7a460e7a19653017f7dec3e99899c753333e",
+    "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+    "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/joint_service.py": "3aa522efe7094a91f01e62dce7875113e4988165942b7c2d84663e73611bf5c6",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+    "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+    "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+    "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/server/app.py": "b865ea8c6aec37b32363720959827ddcfaa5618cc932a41c068782a72b11b0d0",
+    "src/deepinfer_mac/server/continuous_worker.py": "a30d2204c76e1e019560c986800b89f449ff818b3d9c62c621a1fc6d557c95d0",
+    "src/deepinfer_mac/server/joint_worker.py": "429634ae3a08199448b455bba19db451b13ded140468802273890396a2f99d16",
+    "src/deepinfer_mac/server/schemas.py": "87080294b40b3733f5e43493a1bdd25bb9dc8215b1521c25003fc268535ee256",
+    "src/deepinfer_mac/server/worker.py": "7ce9ba42ae69ba45f298c9f1bb6aef2ddaf4138b5d3bb0397a6575c1c5505d90",
+    "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/state.py": "d77e5d97484bd3dcdae324d6ee31830480bb7baafb1907bc10da7200fd17b096",
+    "src/deepinfer_mac/varlen_verify.py": "a006535e63d8f51cbeacf020977c7ddc77df7e8f4a81b0d90901ff90f8b85686"
+  },
+  "processes": [
+    {
+      "round": 0,
+      "command": ".venv/bin/python benchmarks/experiments/phase3_dense_heldout.py --execute --round 0 --output artifacts/phase3-dense-fastpath/heldout-round0.json",
+      "exit_code": 1,
+      "reason": "strict_numeric_gate_failed",
+      "log_sha256": "9b3e291a40877c504a6fe6ddef0b5ac2601dd4d5f8389b8cf41032bd7e129a1e"
+    },
+    {
+      "round": 1,
+      "command": ".venv/bin/python benchmarks/experiments/phase3_dense_heldout.py --execute --round 1 --output artifacts/phase3-dense-fastpath/heldout-round1.json",
+      "exit_code": 1,
+      "reason": "strict_numeric_gate_failed",
+      "log_sha256": "9b3e291a40877c504a6fe6ddef0b5ac2601dd4d5f8389b8cf41032bd7e129a1e"
+    },
+    {
+      "round": 2,
+      "command": ".venv/bin/python benchmarks/experiments/phase3_dense_heldout.py --execute --round 2 --output artifacts/phase3-dense-fastpath/heldout-round2.json",
+      "exit_code": 1,
+      "reason": "strict_numeric_gate_failed",
+      "log_sha256": "9b3e291a40877c504a6fe6ddef0b5ac2601dd4d5f8389b8cf41032bd7e129a1e"
+    }
+  ],
+  "gpu_baton_returned": true,
+  "interpretation": [
+    "18/18 request outputs match serial target at exact budgets across three rotated independent processes.",
+    "Whole-prefix numerical allclose passes0/24. Cycle-partition oracle passes12/24: old replay12/12, fast trim0/12. Every next-token argmax and logical offset remains equal.",
+    "Cycle-partition reference removes old replay recomputation-shape differences; fast trim still has numerical differences from independent cycle replay. Tiny float32 semantic tests remain distinct evidence; this does not establish float16 equivalence.",
+    "Native same-batch remains faster than the selected fast internal path in all three observed processes. No release promotion."
+  ]
+}

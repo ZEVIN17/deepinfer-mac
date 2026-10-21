@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "passed_no_open_findings",
+  "gpu_executed": false,
+  "source_sha256": {
+    "benchmarks/experiments/phase3_dense_heldout.py": "59adda9dc8e95a80e5686afe4faed7f7464f57b42173bf81a8fd92243faad6c4",
+    "benchmarks/experiments/phase3_dense_heldout_protocol.json": "2ed08b84600843bbd63245c9e13ee1a7e9ccd58efac058289d8f8874a29261f2",
+    "benchmarks/experiments/phase3_dense_heldout_export.py": "8fcf66b0f59b0a2bec016e10bc6bb9eb1d6debcd46bdc7761a63777c5337b17f",
+    "benchmarks/reports/phase3-dense-heldout-summary.json": "53d232a413cffe3af11b689273d02459df51994b301da7437fa791fa6c89e3cb",
+    "docs/evidence/phase3-dense-heldout-verification.json": "bdb58cc1148ff8274a3df504dc868681a0b99c81b3ac7e53e0d32631498e0c9c",
+    "docs/evidence/phase3-dense-checkpoint-package.json": "2eaf33a7b89f4ac817df095963a039024e29fb4424f41e4205ab28c4b1beb13e"
+  },
+  "findings": [],
+  "checks": [
+    "Pre-device frozen harness/runtime identities and three distinct rotated orders verified; fixed depth3 and heldout split cannot be selected by CLI.",
+    "Same input IDs, output budgets, greedy decoding, EOS policy, resident model pair and cold KV; BatchGenerator final length token handled correctly.",
+    "Dual-oracle next-state history bookkeeping reviewed; actual probe clones original cache; numerical tolerance remains 1e-5.",
+    "All three public reports exactly independently re-exported from private raw bytes; summary exactly regenerated; report/log/source hashes match.",
+    "Derived 18/18 output matches; every budget complete; no swap growth; strict accepted remains false in all three reports.",
+    "Whole-prefix 0/24 allclose; cycle-partition old replay12/12 and fast combined path0/12. All 48 oracle next-argmax/offset checks pass.",
+    "Per-prompt arrival/completion observations preserved across processes; zero within-cycle ITL not suppressed; no token-as-independent-sample statistics.",
+    "Public raw tokens and failure details hashed; synthetic private-path failure redaction passes.",
+    "Package d3c6ae1 source tree and three artifact sizes/SHA verified; wheel varlen_verify bytes match exact committed source and v2/heldout files remain outside package."
+  ],
+  "limits": [
+    "Three process launches are recorded in validation evidence; identical stdout log hashes reflect identical aggregate gate summaries, not proof of process identity by themselves.",
+    "Combined fast path changes both batch shape and recovery; diagnostic does not isolate a trim defect or establish float16 equivalence.",
+    "Native same-batch remains faster; strict gate false prevents release/performance promotion.",
+    "Only bounded small dense pair and two prompts; no oMLX/general-serving comparison."
+  ]
+}

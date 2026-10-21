@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "stage": "development",
+  "depth_order": [
+    1,
+    2,
+    3
+  ],
+  "repetitions_per_depth": 1,
+  "harness_sha256": "e0d3362dff7f87b36d83cfbbad3b8b9d5a72fa2b7c0c7def82f065e132a90cee",
+  "workload_sha256": "e51e37a4aff49b23c31ec1541c9e289cf4d570a356d87f129eb41432593eb413",
+  "selection_rule": "Among full-allocation internal controls with exact native output, complete budgets, next argmax and offsets passing, select lowest complete paired-task wall time across declared depths and draft/recovery modes; retain strict numerical gate independently. Native batch baseline is never eligible as selected internal configuration. No heldout promotion while numerical gate unresolved.",
+  "scope": "Bounded development, ignored EOS uniformly, not oMLX protocol or performance acceptance. All runs and differences retained."
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "independent_cpu_heldout_anti_pattern_review",
+  "status": "passed",
+  "strict_runtime_accepted": false,
+  "performance_advantage_proven": false,
+  "source_sha256": {
+    "benchmarks/experiments/phase3_dense_heldout.py": "59adda9dc8e95a80e5686afe4faed7f7464f57b42173bf81a8fd92243faad6c4",
+    "benchmarks/experiments/phase3_dense_heldout_protocol.json": "2ed08b84600843bbd63245c9e13ee1a7e9ccd58efac058289d8f8874a29261f2",
+    "benchmarks/experiments/phase3_dense_heldout_export.py": "8fcf66b0f59b0a2bec016e10bc6bb9eb1d6debcd46bdc7761a63777c5337b17f",
+    "benchmarks/reports/phase3-dense-heldout-summary.json": "53d232a413cffe3af11b689273d02459df51994b301da7437fa791fa6c89e3cb",
+    "docs/evidence/phase3-dense-checkpoint-package.json": "2eaf33a7b89f4ac817df095963a039024e29fb4424f41e4205ab28c4b1beb13e",
+    "benchmarks/reports/phase3-dense-heldout-round0.json": "5eba9d97942deb9edd7feee98b0d5a860b428ceb66a702129c28a7cd049ce682",
+    "benchmarks/reports/phase3-dense-heldout-round1.json": "59047dffcd6cd15b60c16731f6ac0a4a44c58ba632e94a3bc79adee8e54aff24",
+    "benchmarks/reports/phase3-dense-heldout-round2.json": "b2fa278ae786730db8572ebc60e7692e043119d10f7ede0a3cc496cc1137591e"
+  },
+  "checks": [
+    {
+      "name": "raw/public/source binding",
+      "result": "passed",
+      "detail": "Regenerated all three public exports and summary exactly from private raw reports; all measured source maps equal current frozen files, protocol harness hash matches."
+    },
+    {
+      "name": "coverage and unhidden failures",
+      "result": "passed",
+      "detail": "Independently counted 18/18 equal complete outputs, 24/24 argmax/offset checks per oracle; whole-prefix 0/24 strict numerical matches, cycle-partition old 12/12 versus fast 0/12. All failed acceptance gates retained, zero swap growth."
+    },
+    {
+      "name": "statistics and comparisons",
+      "result": "passed",
+      "detail": "All three rotated control orders and per-process times retained; medians reproduce directly. TTFT and ITL retain prompt/process grouping including zero within-cycle delivery. No inference of independent token samples, significance or mature-engine superiority."
+    },
+    {
+      "name": "scope and privacy",
+      "result": "passed",
+      "detail": "No raw generated token arrays, prompt text or private absolute paths in reviewed public reports. Full-cycle oracle fixes per-row consumed chunks but does not isolate batch shape, speculative q or cache extraction as root cause."
+    },
+    {
+      "name": "candidate package binding",
+      "result": "passed",
+      "detail": "Independently verified three candidate artifact byte sizes/hashes and all 32 wheel Python module bytes against exact d3c6ae1 Git source. Wheel excludes weights/raw artifact members. Candidate evidence explicitly excludes subsequent diagnostics and does not claim release acceptance."
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "Two heldout prompt clusters and short fixed ignored-EOS budgets do not establish general performance or serving advantage.",
+    "Measured protocol/script hashes are bound; filesystem evidence alone cannot prove external process independence or pre-execution chronology.",
+    "Current reports independently validated; exporter trusts some supplied summary fields and requires fresh review for future inputs.",
+    "No GPU operations or model imports were performed by this reviewer."
+  ]
+}
