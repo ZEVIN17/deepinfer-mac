@@ -1,0 +1,133 @@
+{
+  "verified_date": "2026-10-21",
+  "scope": "Community-produced quantizations, no independent quality or speed claims",
+  "models": [
+    {
+      "variant": "2bit",
+      "repo": "keXjos/Qwen3.8-27B-mlx-2Bit",
+      "revision": "39d5487ad4442961b64098e15aa11ce05e6f9976",
+      "source": "https://huggingface.co/keXjos/Qwen3.8-27B-mlx-2Bit/tree/39d5487ad4442961b64098e15aa11ce05e6f9976",
+      "base_model": "Qwen/Qwen3.8-27B",
+      "license": "Apache-2.0 (repository metadata; see original Qwen LICENSE)",
+      "model_type": "qwen3_5",
+      "quantization_default": {
+        "group_size": 64,
+        "bits": 2,
+        "mode": "affine"
+      },
+      "quantization_override_counts": {},
+      "files": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "size_bytes": 5368605230,
+          "sha256": "ceab9bd44532b67b9478bb09cf04ac76da3541af97461e5043013af500175cc6"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "size_bytes": 3041100053,
+          "sha256": "fb2d5433b4b9ad1a1fa784b23d4b0921da9d0e263adad99f3386a8455d7acf54"
+        }
+      ],
+      "main_weight_download_bytes": 8409705283,
+      "optional_mtp_download_bytes": 0,
+      "text_tensor_bytes": 8409463808,
+      "text_bytes_basis": "index contains only text",
+      "config_sha256": "ab12427bd7c384aa76a0540bcaf08a99bf0ed659cc39911ea5a41446d5fd3aa2",
+      "resource_budget_4k_conversation_bytes": 12657048576,
+      "runtime_audit": "Installed MLX 0.32.4 supports affine 2/3/4/8 with group64; MLX-LM0.32.2 supports qwen3_5 and per-module quantization. Source audit only; no weight load or quality measurement.",
+      "verified_weights_loaded": false
+    },
+    {
+      "variant": "3bit",
+      "repo": "leonsarmiento/Qwen3.8-27B-3bit-mlx",
+      "revision": "5fc234d9e6080b8388a11286380e801b7c9f535c",
+      "source": "https://huggingface.co/leonsarmiento/Qwen3.8-27B-3bit-mlx/tree/5fc234d9e6080b8388a11286380e801b7c9f535c",
+      "base_model": "Qwen/Qwen3.8-27B",
+      "license": "Apache-2.0 (repository metadata; see original Qwen LICENSE)",
+      "model_type": "qwen3_5",
+      "quantization_default": {
+        "group_size": 64,
+        "bits": 3,
+        "mode": "affine"
+      },
+      "quantization_override_counts": {
+        "affine/8bit/group64": 84,
+        "affine/4bit/group64": 2,
+        "affine/3bit/group64": 496
+      },
+      "files": [
+        {
+          "path": "model-00001-of-00003.safetensors",
+          "size_bytes": 5366375264,
+          "sha256": "bf2fa4c6c41876acab1977b17f62c4fe445a76f4e06d6e0e4107544b394fbccd"
+        },
+        {
+          "path": "model-00002-of-00003.safetensors",
+          "size_bytes": 5343228770,
+          "sha256": "f30b8cd3280fcc91fdcd52f6909bb07c1307be63abc55f5f8f5b71be0565c473"
+        },
+        {
+          "path": "model-00003-of-00003.safetensors",
+          "size_bytes": 1996749947,
+          "sha256": "e9218b7cdb33ff8c9d823bba4ef7ce7920ee5c276b1f4b8f2270824f54a432bc"
+        }
+      ],
+      "main_weight_download_bytes": 12706353981,
+      "optional_mtp_download_bytes": 0,
+      "text_tensor_bytes": 12088982528,
+      "text_bytes_basis": "sum language_model offsets in all 3 safetensors headers, excluding vision_tower",
+      "config_sha256": "f697eed7465bf42ed4926d9352ba2e108a807cfed9dfee12e8b6590e818c540f",
+      "resource_budget_4k_conversation_bytes": 16336567296,
+      "runtime_audit": "Installed MLX 0.32.4 supports affine 2/3/4/8 with group64; MLX-LM0.32.2 supports qwen3_5 and per-module quantization. Source audit only; no weight load or quality measurement.",
+      "verified_weights_loaded": false
+    },
+    {
+      "variant": "mixed3.5bpw",
+      "repo": "rapid-mlx/Qwen3.8-27B-mixed-3.5bpw-MLX",
+      "revision": "052cd9bad54ba78ef98b07ae01048bad90f26786",
+      "source": "https://huggingface.co/rapid-mlx/Qwen3.8-27B-mixed-3.5bpw-MLX/tree/052cd9bad54ba78ef98b07ae01048bad90f26786",
+      "base_model": "Qwen/Qwen3.8-27B",
+      "license": "Apache-2.0 (repository metadata; see original Qwen LICENSE)",
+      "model_type": "qwen3_5",
+      "quantization_default": {
+        "group_size": 64,
+        "bits": 4,
+        "mode": "affine"
+      },
+      "quantization_override_counts": {
+        "affine/3bit/group64": 257,
+        "affine/2bit/group64": 9
+      },
+      "files": [
+        {
+          "path": "model-00001-of-00003.safetensors",
+          "size_bytes": 5368226965,
+          "sha256": "0fd85c63f385ea9c001cf661701147d3b5f792f69b0cacdff9ed4eefbbfef785"
+        },
+        {
+          "path": "model-00002-of-00003.safetensors",
+          "size_bytes": 5342267585,
+          "sha256": "852f4956cf8389c17e32a1e459771887a2b942c7d846428a44cbfca647d0e939"
+        },
+        {
+          "path": "model-00003-of-00003.safetensors",
+          "size_bytes": 3198378661,
+          "sha256": "9604ccb1057923ad325d97a8c7d3923263edeb2d7f8ce52ca31a04631574c60a"
+        },
+        {
+          "path": "mtp/model.safetensors",
+          "size_bytes": 849400403,
+          "sha256": "4468f39621de68a19ffd0bcb2e2e2f352205def7436a625b3427e3752866c287"
+        }
+      ],
+      "main_weight_download_bytes": 13908873211,
+      "optional_mtp_download_bytes": 849400403,
+      "text_tensor_bytes": 13453841408,
+      "text_bytes_basis": "sum language_model offsets in all 3 safetensors headers, excluding vision_tower",
+      "config_sha256": "82eb3a40d289d363b3f5f7c1cda54b2fc6186db09e95045116d37e287aa9e2ba",
+      "resource_budget_4k_conversation_bytes": 17701426176,
+      "runtime_audit": "Installed MLX 0.32.4 supports affine 2/3/4/8 with group64; MLX-LM0.32.2 supports qwen3_5 and per-module quantization. Source audit only; no weight load or quality measurement.",
+      "verified_weights_loaded": false
+    }
+  ]
+}

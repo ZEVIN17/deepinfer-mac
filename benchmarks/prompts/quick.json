@@ -1,0 +1,91 @@
+[
+  {
+    "id": "zh-cache",
+    "category": "chinese",
+    "split": "validation",
+    "prompt": "用三句话向初学者解释缓存，并举一个日常例子。"
+  },
+  {
+    "id": "code-fib",
+    "category": "code",
+    "split": "validation",
+    "prompt": "Write a Python function returning the first n Fibonacci numbers. Include one test."
+  },
+  {
+    "id": "en-short",
+    "category": "short_qa",
+    "split": "validation",
+    "prompt": "Why is the ocean salty? Answer in two sentences."
+  },
+  {
+    "id": "agent-followup",
+    "category": "multi_turn",
+    "split": "validation",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a concise programming assistant. Explain assumptions and keep answers under 100 words."
+      },
+      {
+        "role": "user",
+        "content": "Design a Python cache with a 60-second TTL."
+      },
+      {
+        "role": "assistant",
+        "content": "Store each value with a monotonic expiry timestamp. On get, remove and return no value if the timestamp has passed."
+      },
+      {
+        "role": "user",
+        "content": "How should I test expiry without waiting in real time?"
+      }
+    ]
+  },
+  {
+    "id": "zh-sort",
+    "category": "chinese",
+    "split": "development",
+    "prompt": "用三句话解释快速排序的工作原理。"
+  },
+  {
+    "id": "code-sql",
+    "category": "code",
+    "split": "development",
+    "prompt": "Write SQL to select the three highest distinct salaries from an employees table."
+  },
+  {
+    "id": "en-tree",
+    "category": "short_qa",
+    "split": "development",
+    "prompt": "Describe a binary search tree in three sentences."
+  },
+  {
+    "id": "code-bug",
+    "category": "code",
+    "split": "development",
+    "prompt": "Explain why a mutable list as a Python default argument causes bugs. Give a fix."
+  },
+  {
+    "id": "zh-moon",
+    "category": "chinese",
+    "split": "development",
+    "prompt": "月相变化是地球影子造成的吗？简短解释。"
+  },
+  {
+    "id": "math-ratio",
+    "category": "short_qa",
+    "split": "validation",
+    "prompt": "A recipe uses 3 cups of flour for 12 cookies. How much flour for 20 cookies?"
+  },
+  {
+    "id": "prefix-a",
+    "category": "long_prefix",
+    "split": "development",
+    "prompt": "Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Summarize the cancellation rule in one sentence."
+  },
+  {
+    "id": "prefix-b",
+    "category": "long_prefix",
+    "split": "validation",
+    "prompt": "Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. Service handbook. Requests execute serially. A cache entry is reusable only if model revision, tokenizer, template and exact token prefix match. Cancellation must not publish partial cache state. Memory budgets evict inactive entries before rejecting a request. What must match before a cache entry can be reused?"
+  }
+]

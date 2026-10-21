@@ -1,0 +1,351 @@
+{
+  "profile": "qwen3-4b",
+  "checks": {
+    "non_stream": {
+      "id": "chatcmpl-1905d776f9014210ba524e956b00bb34",
+      "object": "chat.completion",
+      "created": 1792553485,
+      "model": "qwen3-4b",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "缓存是临时存储 frequently accessed 数据的机制，以加快后续访问速度。"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 18,
+        "completion_tokens": 18,
+        "total_tokens": 36
+      },
+      "deepinfer": {
+        "run_id": "1905d776f9014210ba524e956b00bb34",
+        "metrics": {
+          "load_ms": 441.07149995397776,
+          "ttft_ms": 527.23291690927,
+          "total_ms": 706.5402920125052,
+          "prefill_ms": 69.70170803833753,
+          "prompt_tps": 243.89646220218322,
+          "decode_tps": 94.80926253151797,
+          "prompt_tokens": 18,
+          "generation_tokens": 18,
+          "peak_memory_gb": 2.423815528,
+          "peak_memory_bytes": 2423815528,
+          "active_memory_bytes": 2344323358,
+          "rss_bytes": 2602516480,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 81690624,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 37748736,
+          "active_kv_bytes": 37748736,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        }
+      }
+    },
+    "stream": {
+      "events": 40,
+      "done": true
+    },
+    "disconnect_cancellation": {
+      "id": "d8aaba208c4d44b3bb75681cf2915475",
+      "status": "cancelled",
+      "created_at": 1792553486.922642,
+      "result": null,
+      "error": null,
+      "event_count": 6,
+      "retained_events": 6
+    },
+    "comparison_after_cancellation": {
+      "id": "1a10db0f1b24412dbee53edcf3362ea2",
+      "status": "completed",
+      "created_at": 1792553487.074274,
+      "result": {
+        "results": [
+          {
+            "run_id": "f4f8b17822ec48a383ffb8b8f191c4eb",
+            "mode": "baseline",
+            "profile": "qwen3-4b",
+            "text": "The sum of 2 and 2",
+            "token_ids": [
+              785,
+              2629,
+              315,
+              220,
+              17,
+              323,
+              220,
+              17
+            ],
+            "prompt_tokens": 20,
+            "finish_reason": "length",
+            "metrics": {
+              "load_ms": 0.3379170084372163,
+              "ttft_ms": 60.42695906944573,
+              "total_ms": 133.89962504152209,
+              "prefill_ms": 42.93762496672571,
+              "prompt_tps": 442.50235113665354,
+              "decode_tps": 95.27352665629942,
+              "prompt_tokens": 20,
+              "generation_tokens": 8,
+              "peak_memory_gb": 2.511928692,
+              "peak_memory_bytes": 2511928692,
+              "active_memory_bytes": 2419496234,
+              "rss_bytes": 2603499520,
+              "swap_before_bytes": 360841216,
+              "swap_after_bytes": 360841216,
+              "swap_delta_bytes": 0,
+              "swap_measurement_available": true,
+              "estimated_active_kv_bytes": 79626240,
+              "cache_hit_tokens": 0,
+              "cache_bytes": 113246208,
+              "active_kv_bytes": 37748736,
+              "cache_evictions": 0,
+              "draft_acceptance": null,
+              "fallback_rate": 0,
+              "cycles": 0,
+              "policy": null,
+              "draft_accepted_tokens": 0,
+              "calibrated_fallback": false
+            },
+            "rounds": [],
+            "model": {
+              "target": {
+                "repo": "mlx-community/Qwen3-4B-4bit",
+                "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+              },
+              "draft": {
+                "repo": "mlx-community/Qwen3-0.6B-4bit",
+                "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+              },
+              "minimum_memory_bytes": 4831838208,
+              "weight_bytes": 2263022529
+            },
+            "variant": "baseline"
+          },
+          {
+            "run_id": "ad6a841275c3437cae3f0b6df35315cd",
+            "mode": "fixed_speculative",
+            "profile": "qwen3-4b",
+            "text": "The sum of 2 and 2",
+            "token_ids": [
+              785,
+              2629,
+              315,
+              220,
+              17,
+              323,
+              220,
+              17
+            ],
+            "prompt_tokens": 20,
+            "finish_reason": "length",
+            "metrics": {
+              "load_ms": 744.9565411079675,
+              "ttft_ms": 833.8302500778809,
+              "total_ms": 900.9090410545468,
+              "prefill_ms": 63.56291600968689,
+              "prompt_tps": 298.91643103825555,
+              "decode_tps": 104.35489218097305,
+              "prompt_tokens": 20,
+              "generation_tokens": 8,
+              "peak_memory_gb": 2.937666928,
+              "peak_memory_bytes": 2937666928,
+              "active_memory_bytes": 2848963680,
+              "rss_bytes": 3016015872,
+              "swap_before_bytes": 360841216,
+              "swap_after_bytes": 360841216,
+              "swap_delta_bytes": 0,
+              "swap_measurement_available": true,
+              "estimated_active_kv_bytes": 141557760,
+              "cache_hit_tokens": 0,
+              "cache_bytes": 180355072,
+              "active_kv_bytes": 67108864,
+              "cache_evictions": 0,
+              "draft_acceptance": 0.45454545454545453,
+              "fallback_rate": 0.0,
+              "cycles": 4,
+              "policy": null,
+              "draft_accepted_tokens": 5,
+              "calibrated_fallback": false
+            },
+            "rounds": [
+              {
+                "budget": 3,
+                "accepted": 0,
+                "produced": 1,
+                "fallback": false
+              },
+              {
+                "budget": 3,
+                "accepted": 0,
+                "produced": 1,
+                "fallback": false
+              },
+              {
+                "budget": 3,
+                "accepted": 3,
+                "produced": 4,
+                "fallback": false
+              },
+              {
+                "budget": 2,
+                "accepted": 2,
+                "produced": 2,
+                "fallback": false
+              }
+            ],
+            "model": {
+              "target": {
+                "repo": "mlx-community/Qwen3-4B-4bit",
+                "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+              },
+              "draft": {
+                "repo": "mlx-community/Qwen3-0.6B-4bit",
+                "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+              },
+              "minimum_memory_bytes": 4831838208,
+              "weight_bytes": 2263022529
+            },
+            "variant": "fixed_speculative"
+          },
+          {
+            "run_id": "02d24e12d54b4b5e8526c6ad0a93b38d",
+            "mode": "adaptive",
+            "profile": "qwen3-4b",
+            "text": "The sum of 2 and 2",
+            "token_ids": [
+              785,
+              2629,
+              315,
+              220,
+              17,
+              323,
+              220,
+              17
+            ],
+            "prompt_tokens": 20,
+            "finish_reason": "length",
+            "metrics": {
+              "load_ms": 0.16245897859334946,
+              "ttft_ms": 13.091332977637649,
+              "total_ms": 77.08158297464252,
+              "prefill_ms": 0.01695798709988594,
+              "prompt_tps": 0.0,
+              "decode_tps": 109.39166514160583,
+              "prompt_tokens": 20,
+              "generation_tokens": 8,
+              "peak_memory_gb": 2.858275072,
+              "peak_memory_bytes": 2858275072,
+              "active_memory_bytes": 2848029708,
+              "rss_bytes": 3016146944,
+              "swap_before_bytes": 360841216,
+              "swap_after_bytes": 360841216,
+              "swap_delta_bytes": 0,
+              "swap_measurement_available": true,
+              "estimated_active_kv_bytes": 141557760,
+              "cache_hit_tokens": 19,
+              "cache_bytes": 180355072,
+              "active_kv_bytes": 67108864,
+              "cache_evictions": 0,
+              "draft_acceptance": 1.0,
+              "fallback_rate": 0.4,
+              "cycles": 5,
+              "policy": {
+                "cycle_ms_per_token": {
+                  "0": 11.90918794600293,
+                  "1": 7.9871460038702935,
+                  "2": 10.049958538729697
+                },
+                "acceptance_by_position": {
+                  "0": 1.0,
+                  "1": 1.0
+                }
+              },
+              "draft_accepted_tokens": 4,
+              "calibrated_fallback": false
+            },
+            "rounds": [
+              {
+                "budget": 0,
+                "accepted": 0,
+                "produced": 1,
+                "draft_ms": 0.0006249174475669861,
+                "verify_ms": 12.21616705879569,
+                "fallback": true
+              },
+              {
+                "budget": 0,
+                "accepted": 0,
+                "produced": 1,
+                "draft_ms": 0.0004169996827840805,
+                "verify_ms": 11.60116691607982,
+                "fallback": true
+              },
+              {
+                "budget": 1,
+                "accepted": 1,
+                "produced": 2,
+                "draft_ms": 4.104375024326146,
+                "verify_ms": 12.23408302757889,
+                "fallback": false
+              },
+              {
+                "budget": 1,
+                "accepted": 1,
+                "produced": 2,
+                "draft_ms": 3.3834590576589108,
+                "verify_ms": 12.226666905917227,
+                "fallback": false
+              },
+              {
+                "budget": 2,
+                "accepted": 2,
+                "produced": 2,
+                "draft_ms": 6.405667052604258,
+                "verify_ms": 13.694250024855137,
+                "fallback": false
+              }
+            ],
+            "model": {
+              "target": {
+                "repo": "mlx-community/Qwen3-4B-4bit",
+                "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+              },
+              "draft": {
+                "repo": "mlx-community/Qwen3-0.6B-4bit",
+                "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+              },
+              "minimum_memory_bytes": 4831838208,
+              "weight_bytes": 2263022529
+            },
+            "variant": "adaptive"
+          }
+        ],
+        "comparison": {
+          "token_ids_equal": true,
+          "all_runs_succeeded": true,
+          "speedups": {}
+        },
+        "timing_semantics": "Interactive load/cache state may differ across modes; not a benchmark"
+      },
+      "error": null,
+      "event_count": 33,
+      "retained_events": 33
+    }
+  },
+  "fake_engine": false,
+  "ok": true,
+  "server_exit_code": -15
+}

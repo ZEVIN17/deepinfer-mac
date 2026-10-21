@@ -1,0 +1,474 @@
+{
+  "profile": "qwen3-0.6b",
+  "prompt_token_ids": [
+    151644,
+    872,
+    198,
+    7985,
+    264,
+    13027,
+    729,
+    429,
+    4675,
+    279,
+    9334,
+    315,
+    458,
+    7546,
+    13,
+    151645,
+    198,
+    151644,
+    77091,
+    198,
+    151667,
+    271,
+    151668,
+    271
+  ],
+  "baseline": {
+    "run_id": "159a288cd7a04420ac623280ec189165",
+    "mode": "baseline",
+    "profile": "qwen3-0.6b",
+    "text": "Here's a simple Python function that returns the square of an integer:\n\n```python\ndef square_of_integer(x):\n    return x * x\n```\n\n### Example Usage:\n```python\nprint(square_of_integer(5))  # Output",
+    "token_ids": [
+      8420,
+      594,
+      264,
+      4285,
+      13027,
+      729,
+      429,
+      4675,
+      279,
+      9334,
+      315,
+      458,
+      7546,
+      1447,
+      73594,
+      12669,
+      198,
+      750,
+      9334,
+      3575,
+      31725,
+      2075,
+      982,
+      262,
+      470,
+      856,
+      353,
+      856,
+      198,
+      13874,
+      19324,
+      14374,
+      13383,
+      24567,
+      510,
+      73594,
+      12669,
+      198,
+      1350,
+      86344,
+      3575,
+      31725,
+      7,
+      20,
+      593,
+      220,
+      671,
+      9258
+    ],
+    "prompt_tokens": 24,
+    "finish_reason": "length",
+    "metrics": {
+      "load_ms": 440.74087496846914,
+      "ttft_ms": 498.9815839799121,
+      "total_ms": 631.4843749860302,
+      "prefill_ms": 50.642082933336496,
+      "prompt_tps": 454.16773299543013,
+      "decode_tps": 354.70950946104875,
+      "prompt_tokens": 24,
+      "generation_tokens": 48,
+      "peak_memory_gb": 0.579567964,
+      "peak_memory_bytes": 579567964,
+      "active_memory_bytes": 381951802,
+      "rss_bytes": 655097856,
+      "cache_hit_tokens": 0,
+      "cache_bytes": 0,
+      "active_kv_bytes": 29360128,
+      "cache_evictions": 0,
+      "draft_acceptance": null,
+      "fallback_rate": 0,
+      "cycles": 0,
+      "policy": null,
+      "draft_accepted_tokens": 0,
+      "calibrated_fallback": false
+    },
+    "rounds": [],
+    "model": {
+      "target": {
+        "repo": "mlx-community/Qwen3-0.6B-4bit",
+        "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+      },
+      "draft": {
+        "repo": "mlx-community/Qwen3-0.6B-4bit",
+        "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+      },
+      "minimum_memory_bytes": 1610612736
+    }
+  },
+  "upstream_fixed": [
+    {
+      "num_draft_tokens": 1,
+      "token_ids": [
+        8420,
+        594,
+        264,
+        4285,
+        13027,
+        729,
+        429,
+        4675,
+        279,
+        9334,
+        315,
+        458,
+        7546,
+        1447,
+        73594,
+        12669,
+        198,
+        750,
+        9334,
+        3575,
+        31725,
+        2075,
+        982,
+        262,
+        470,
+        856,
+        353,
+        856,
+        271,
+        2,
+        13383,
+        10431,
+        510,
+        1350,
+        86344,
+        3575,
+        31725,
+        7,
+        20,
+        593,
+        220,
+        671,
+        9258,
+        25,
+        220,
+        17,
+        20,
+        198
+      ],
+      "mismatches": [
+        {
+          "position": 28,
+          "baseline": 198,
+          "upstream": 271
+        },
+        {
+          "position": 29,
+          "baseline": 13874,
+          "upstream": 2
+        },
+        {
+          "position": 30,
+          "baseline": 19324,
+          "upstream": 13383
+        },
+        {
+          "position": 31,
+          "baseline": 14374,
+          "upstream": 10431
+        },
+        {
+          "position": 32,
+          "baseline": 13383,
+          "upstream": 510
+        },
+        {
+          "position": 33,
+          "baseline": 24567,
+          "upstream": 1350
+        },
+        {
+          "position": 34,
+          "baseline": 510,
+          "upstream": 86344
+        },
+        {
+          "position": 35,
+          "baseline": 73594,
+          "upstream": 3575
+        },
+        {
+          "position": 36,
+          "baseline": 12669,
+          "upstream": 31725
+        },
+        {
+          "position": 37,
+          "baseline": 198,
+          "upstream": 7
+        },
+        {
+          "position": 38,
+          "baseline": 1350,
+          "upstream": 20
+        },
+        {
+          "position": 39,
+          "baseline": 86344,
+          "upstream": 593
+        },
+        {
+          "position": 40,
+          "baseline": 3575,
+          "upstream": 220
+        },
+        {
+          "position": 41,
+          "baseline": 31725,
+          "upstream": 671
+        },
+        {
+          "position": 42,
+          "baseline": 7,
+          "upstream": 9258
+        },
+        {
+          "position": 43,
+          "baseline": 20,
+          "upstream": 25
+        },
+        {
+          "position": 44,
+          "baseline": 593,
+          "upstream": 220
+        },
+        {
+          "position": 45,
+          "baseline": 220,
+          "upstream": 17
+        },
+        {
+          "position": 46,
+          "baseline": 671,
+          "upstream": 20
+        },
+        {
+          "position": 47,
+          "baseline": 9258,
+          "upstream": 198
+        }
+      ]
+    },
+    {
+      "num_draft_tokens": 3,
+      "token_ids": [
+        8420,
+        594,
+        264,
+        4285,
+        13027,
+        729,
+        429,
+        4675,
+        279,
+        9334,
+        315,
+        458,
+        7546,
+        1447,
+        73594,
+        12669,
+        198,
+        750,
+        9334,
+        3575,
+        31725,
+        2075,
+        982,
+        262,
+        470,
+        856,
+        353,
+        856,
+        271,
+        2,
+        13383,
+        10431,
+        510,
+        1350,
+        86344,
+        3575,
+        31725,
+        7,
+        20,
+        593,
+        220,
+        671,
+        9258,
+        25,
+        220,
+        17,
+        20,
+        198
+      ],
+      "mismatches": [
+        {
+          "position": 28,
+          "baseline": 198,
+          "upstream": 271
+        },
+        {
+          "position": 29,
+          "baseline": 13874,
+          "upstream": 2
+        },
+        {
+          "position": 30,
+          "baseline": 19324,
+          "upstream": 13383
+        },
+        {
+          "position": 31,
+          "baseline": 14374,
+          "upstream": 10431
+        },
+        {
+          "position": 32,
+          "baseline": 13383,
+          "upstream": 510
+        },
+        {
+          "position": 33,
+          "baseline": 24567,
+          "upstream": 1350
+        },
+        {
+          "position": 34,
+          "baseline": 510,
+          "upstream": 86344
+        },
+        {
+          "position": 35,
+          "baseline": 73594,
+          "upstream": 3575
+        },
+        {
+          "position": 36,
+          "baseline": 12669,
+          "upstream": 31725
+        },
+        {
+          "position": 37,
+          "baseline": 198,
+          "upstream": 7
+        },
+        {
+          "position": 38,
+          "baseline": 1350,
+          "upstream": 20
+        },
+        {
+          "position": 39,
+          "baseline": 86344,
+          "upstream": 593
+        },
+        {
+          "position": 40,
+          "baseline": 3575,
+          "upstream": 220
+        },
+        {
+          "position": 41,
+          "baseline": 31725,
+          "upstream": 671
+        },
+        {
+          "position": 42,
+          "baseline": 7,
+          "upstream": 9258
+        },
+        {
+          "position": 43,
+          "baseline": 20,
+          "upstream": 25
+        },
+        {
+          "position": 44,
+          "baseline": 593,
+          "upstream": 220
+        },
+        {
+          "position": 45,
+          "baseline": 220,
+          "upstream": 17
+        },
+        {
+          "position": 46,
+          "baseline": 671,
+          "upstream": 20
+        },
+        {
+          "position": 47,
+          "baseline": 9258,
+          "upstream": 198
+        }
+      ]
+    }
+  ],
+  "shape_probe": {
+    "position": 28,
+    "scalar": {
+      "tokens": [
+        198,
+        271,
+        220,
+        1406,
+        871
+      ],
+      "logits": [
+        24.375,
+        24.125,
+        19.875,
+        17.625,
+        16.75
+      ],
+      "top2_gap": 0.25
+    },
+    "batched": {
+      "tokens": [
+        198,
+        271,
+        220,
+        1406,
+        871
+      ],
+      "logits": [
+        24.5,
+        24.125,
+        20.0,
+        17.75,
+        16.875
+      ],
+      "top2_gap": 0.375
+    },
+    "max_abs_logit_diff": 0.25
+  },
+  "evidence_stage": "Preliminary real-checkpoint check; before final text-flush fixes and runtime source manifest. Performance values are observations, not benchmark claims."
+}

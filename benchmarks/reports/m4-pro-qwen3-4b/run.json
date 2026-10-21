@@ -1,0 +1,15 @@
+{
+  "pid": 4335,
+  "started_at_unix": 1792552632.64412,
+  "status": "completed",
+  "profile": "qwen3-4b",
+  "suite": "full",
+  "repeats": 3,
+  "max_tokens": 64,
+  "fixed_lengths": [
+    1,
+    2,
+    4
+  ],
+  "ended_at_unix": 1792552875.157495
+}

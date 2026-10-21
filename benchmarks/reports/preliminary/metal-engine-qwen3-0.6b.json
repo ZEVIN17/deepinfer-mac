@@ -1,0 +1,2087 @@
+{
+  "profile": "qwen3-0.6b",
+  "correctness": [
+    {
+      "prompt": "Answer with only the number: 1 + 1 =",
+      "equal": true,
+      "results": [
+        {
+          "run_id": "6cc1379d519e46f0a19e22c01ece4834",
+          "mode": "native_mlx",
+          "profile": "qwen3-0.6b",
+          "text": "1 + 1 = 2",
+          "token_ids": [
+            16,
+            488,
+            220,
+            16,
+            284,
+            220,
+            17,
+            151645
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 382.1125829126686,
+            "ttft_ms": 1534.5075000077486,
+            "total_ms": 1558.7230829987675,
+            "prefill_ms": null,
+            "prompt_tps": null,
+            "decode_tps": 289.07005883757455,
+            "prompt_tokens": 24,
+            "generation_tokens": 8,
+            "peak_memory_gb": 0.579567968,
+            "peak_memory_bytes": 579567968,
+            "active_memory_bytes": 335691784,
+            "rss_bytes": 652525568,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 0,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 0,
+            "cycles": 0,
+            "policy": null,
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": false
+          },
+          "rounds": [],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "45452af8678046f69828cec86dee3a9a",
+          "mode": "baseline",
+          "profile": "qwen3-0.6b",
+          "text": "1 + 1 = 2",
+          "token_ids": [
+            16,
+            488,
+            220,
+            16,
+            284,
+            220,
+            17,
+            151645
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.39491697680205107,
+            "ttft_ms": 13.466125004924834,
+            "total_ms": 30.33391700591892,
+            "prefill_ms": 9.325999999418855,
+            "prompt_tps": 2466.223461444696,
+            "decode_tps": 414.9920748126051,
+            "prompt_tokens": 24,
+            "generation_tokens": 8,
+            "peak_memory_gb": 0.579567968,
+            "peak_memory_bytes": 579567968,
+            "active_memory_bytes": 368905110,
+            "rss_bytes": 652984320,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 29360128,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 0,
+            "cycles": 0,
+            "policy": null,
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": false
+          },
+          "rounds": [],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "4059b73834244fbbbf892d8ed36af025",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-0.6b",
+          "text": "1 + 1 = 2",
+          "token_ids": [
+            16,
+            488,
+            220,
+            16,
+            284,
+            220,
+            17,
+            151645
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 628.2731250394136,
+            "ttft_ms": 703.2183749834076,
+            "total_ms": 725.0134999630973,
+            "prefill_ms": 37.85662504378706,
+            "prompt_tps": 607.5554800090323,
+            "decode_tps": 321.1727396159971,
+            "prompt_tokens": 24,
+            "generation_tokens": 8,
+            "peak_memory_gb": 0.945521,
+            "peak_memory_bytes": 945521000,
+            "active_memory_bytes": 730103920,
+            "rss_bytes": 1062617088,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 58720256,
+            "cache_evictions": 0,
+            "draft_acceptance": 1.0,
+            "fallback_rate": 0.0,
+            "cycles": 4,
+            "policy": null,
+            "draft_accepted_tokens": 4,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "c6f6c14b3522467db7b3ef3c63789445",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-0.6b",
+          "text": "1 + 1 = 2",
+          "token_ids": [
+            16,
+            488,
+            220,
+            16,
+            284,
+            220,
+            17,
+            151645
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.17337501049041748,
+            "ttft_ms": 37.595084053464234,
+            "total_ms": 49.882000079378486,
+            "prefill_ms": 16.93720801267773,
+            "prompt_tps": 1357.9569892974207,
+            "decode_tps": 569.711714903589,
+            "prompt_tokens": 24,
+            "generation_tokens": 8,
+            "peak_memory_gb": 0.945521,
+            "peak_memory_bytes": 945521000,
+            "active_memory_bytes": 730710128,
+            "rss_bytes": 1062879232,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 58720256,
+            "cache_evictions": 0,
+            "draft_acceptance": 1.0,
+            "fallback_rate": 0.0,
+            "cycles": 2,
+            "policy": null,
+            "draft_accepted_tokens": 6,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "ae4e98be8d33498bb6e6f9151cbadbe3",
+          "mode": "adaptive",
+          "profile": "qwen3-0.6b",
+          "text": "1 + 1 = 2",
+          "token_ids": [
+            16,
+            488,
+            220,
+            16,
+            284,
+            220,
+            17,
+            151645
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.16883399803191423,
+            "ttft_ms": 19.822958041913807,
+            "total_ms": 57.456416077911854,
+            "prefill_ms": 16.20458299294114,
+            "prompt_tps": 1419.351550732222,
+            "decode_tps": 186.0046980881798,
+            "prompt_tokens": 24,
+            "generation_tokens": 8,
+            "peak_memory_gb": 0.945521,
+            "peak_memory_bytes": 945521000,
+            "active_memory_bytes": 729481324,
+            "rss_bytes": 1062895616,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 58720256,
+            "cache_evictions": 0,
+            "draft_acceptance": 1.0,
+            "fallback_rate": 0.4,
+            "cycles": 5,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 3.198832448106259,
+                "1": 5.966646014712751,
+                "2": 3.4133606823161244
+              },
+              "acceptance_by_position": {
+                "0": 1.0,
+                "1": 1.0
+              }
+            },
+            "draft_accepted_tokens": 4,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0005409820005297661,
+              "verify_ms": 3.162332926876843,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.000500003807246685,
+              "verify_ms": 3.234290983527899,
+              "fallback": true
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "draft_ms": 13.20925005711615,
+              "verify_ms": 3.556624986231327,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "draft_ms": 3.586041973903775,
+              "verify_ms": 3.5146670415997505,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "draft_ms": 6.4925410551950336,
+              "verify_ms": 3.7475409917533398,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        }
+      ]
+    },
+    {
+      "prompt": "用一句话解释统一内存。",
+      "equal": true,
+      "results": [
+        {
+          "run_id": "e259032d8ab34810a8ea173ecd77247f",
+          "mode": "native_mlx",
+          "profile": "qwen3-0.6b",
+          "text": "统一内存（Unified Memory）是一种内存管理技术，通过将虚拟内存与物理内存结合，实现对内存的高效管理和优化。",
+          "token_ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            111390,
+            39352,
+            99361,
+            3837,
+            67338,
+            44063,
+            106225,
+            111390,
+            57218,
+            102462,
+            111390,
+            100374,
+            3837,
+            101884,
+            32664,
+            111390,
+            9370,
+            102202,
+            108069,
+            103983,
+            1773,
+            151645
+          ],
+          "prompt_tokens": 18,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.22933294530957937,
+            "ttft_ms": 16.934624989517033,
+            "total_ms": 89.08366702962667,
+            "prefill_ms": null,
+            "prompt_tps": null,
+            "decode_tps": 388.08554082303726,
+            "prompt_tokens": 18,
+            "generation_tokens": 29,
+            "peak_memory_gb": 0.820658468,
+            "peak_memory_bytes": 820658468,
+            "active_memory_bytes": 671072264,
+            "rss_bytes": 1062387712,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 0,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 0,
+            "cycles": 0,
+            "policy": null,
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": false
+          },
+          "rounds": [],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "0b25fe36828d4fc8974a93b3a988d4dd",
+          "mode": "baseline",
+          "profile": "qwen3-0.6b",
+          "text": "统一内存（Unified Memory）是一种内存管理技术，通过将虚拟内存与物理内存结合，实现对内存的高效管理和优化。",
+          "token_ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            111390,
+            39352,
+            99361,
+            3837,
+            67338,
+            44063,
+            106225,
+            111390,
+            57218,
+            102462,
+            111390,
+            100374,
+            3837,
+            101884,
+            32664,
+            111390,
+            9370,
+            102202,
+            108069,
+            103983,
+            1773,
+            151645
+          ],
+          "prompt_tokens": 18,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.16316701658070087,
+            "ttft_ms": 12.559833005070686,
+            "total_ms": 81.69670798815787,
+            "prefill_ms": 8.756167022511363,
+            "prompt_tps": 1941.4887765724936,
+            "decode_tps": 404.9937172724336,
+            "prompt_tokens": 18,
+            "generation_tokens": 29,
+            "peak_memory_gb": 0.861536608,
+            "peak_memory_bytes": 861536608,
+            "active_memory_bytes": 717324606,
+            "rss_bytes": 1062436864,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 29360128,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 0,
+            "cycles": 0,
+            "policy": null,
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": false
+          },
+          "rounds": [],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "dd68b85c36664d25a4a0a46ca9edbf81",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-0.6b",
+          "text": "统一内存（Unified Memory）是一种内存管理技术，通过将虚拟内存与物理内存结合，实现对内存的高效管理和优化。",
+          "token_ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            111390,
+            39352,
+            99361,
+            3837,
+            67338,
+            44063,
+            106225,
+            111390,
+            57218,
+            102462,
+            111390,
+            100374,
+            3837,
+            101884,
+            32664,
+            111390,
+            9370,
+            102202,
+            108069,
+            103983,
+            1773,
+            151645
+          ],
+          "prompt_tokens": 18,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.20120805129408836,
+            "ttft_ms": 22.37395802512765,
+            "total_ms": 108.88070799410343,
+            "prefill_ms": 15.948834014125168,
+            "prompt_tps": 1065.9086416564285,
+            "decode_tps": 323.6741642709007,
+            "prompt_tokens": 18,
+            "generation_tokens": 29,
+            "peak_memory_gb": 0.891076968,
+            "peak_memory_bytes": 891076968,
+            "active_memory_bytes": 730103920,
+            "rss_bytes": 1062436864,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 58720256,
+            "cache_evictions": 0,
+            "draft_acceptance": 1.0,
+            "fallback_rate": 0.0,
+            "cycles": 15,
+            "policy": null,
+            "draft_accepted_tokens": 15,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "ff33c5d3a86945589851cb4832057890",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-0.6b",
+          "text": "统一内存（Unified Memory）是一种内存管理技术，通过将虚拟内存与物理内存结合，实现对内存的高效管理和优化。",
+          "token_ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            111390,
+            39352,
+            99361,
+            3837,
+            67338,
+            44063,
+            106225,
+            111390,
+            57218,
+            102462,
+            111390,
+            100374,
+            3837,
+            101884,
+            32664,
+            111390,
+            9370,
+            102202,
+            108069,
+            103983,
+            1773,
+            151645
+          ],
+          "prompt_tokens": 18,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.17799995839595795,
+            "ttft_ms": 27.650749892927706,
+            "total_ms": 112.9649169743061,
+            "prefill_ms": 15.569042065180838,
+            "prompt_tps": 1091.9104675052172,
+            "decode_tps": 328.1987149132185,
+            "prompt_tokens": 18,
+            "generation_tokens": 29,
+            "peak_memory_gb": 0.891076968,
+            "peak_memory_bytes": 891076968,
+            "active_memory_bytes": 730710128,
+            "rss_bytes": 1062436864,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 58720256,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.9166666666666666,
+            "fallback_rate": 0.0,
+            "cycles": 8,
+            "policy": null,
+            "draft_accepted_tokens": 22,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 1,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "c7a24d4660a6431c89dd7f200fa2da89",
+          "mode": "adaptive",
+          "profile": "qwen3-0.6b",
+          "text": "统一内存（Unified Memory）是一种内存管理技术，通过将虚拟内存与物理内存结合，实现对内存的高效管理和优化。",
+          "token_ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            111390,
+            39352,
+            99361,
+            3837,
+            67338,
+            44063,
+            106225,
+            111390,
+            57218,
+            102462,
+            111390,
+            100374,
+            3837,
+            101884,
+            32664,
+            111390,
+            9370,
+            102202,
+            108069,
+            103983,
+            1773,
+            151645
+          ],
+          "prompt_tokens": 18,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.15966698992997408,
+            "ttft_ms": 25.991500006057322,
+            "total_ms": 126.91970798186958,
+            "prefill_ms": 15.521791996434331,
+            "prompt_tps": 1095.2343649435093,
+            "decode_tps": 277.4249197678243,
+            "prompt_tokens": 18,
+            "generation_tokens": 29,
+            "peak_memory_gb": 0.891076968,
+            "peak_memory_bytes": 891076968,
+            "active_memory_bytes": 729481324,
+            "rss_bytes": 1062469632,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 58720256,
+            "cache_evictions": 0,
+            "draft_acceptance": 1.0,
+            "fallback_rate": 0.6153846153846154,
+            "cycles": 13,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 3.101332113146782,
+                "1": 5.966646014712751,
+                "2": 3.380937171944727,
+                "3": 3.481901134364307,
+                "4": 4.738854197785258
+              },
+              "acceptance_by_position": {
+                "0": 1.0,
+                "1": 1.0,
+                "2": 1.0,
+                "3": 1.0
+              }
+            },
+            "draft_accepted_tokens": 16,
+            "calibrated_fallback": false,
+            "draft_released": true
+          },
+          "rounds": [
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "draft_ms": 6.285750074312091,
+              "verify_ms": 3.759790910407901,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "draft_ms": 9.618332958780229,
+              "verify_ms": 4.360042046755552,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "draft_ms": 9.564292035065591,
+              "verify_ms": 4.312542034313083,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "draft_ms": 12.700791005045176,
+              "verify_ms": 16.76616701297462,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "draft_ms": 13.016458950005472,
+              "verify_ms": 4.905125009827316,
+              "fallback": false
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0006249174475669861,
+              "verify_ms": 3.0731670558452606,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.00029103830456733704,
+              "verify_ms": 3.1010410748422146,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.000250060111284256,
+              "verify_ms": 3.0992079991847277,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.000125030055642128,
+              "verify_ms": 3.002541954629123,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0002080341801047325,
+              "verify_ms": 3.2077080104500055,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 8.405186235904694e-05,
+              "verify_ms": 3.1872920226305723,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.000125030055642128,
+              "verify_ms": 3.262499929405749,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0005409820005297661,
+              "verify_ms": 3.082500072196126,
+              "fallback": true
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        }
+      ]
+    },
+    {
+      "prompt": "Write a Python function that returns the square of an integer.",
+      "equal": false,
+      "results": [
+        {
+          "run_id": "ed3dbe7608034a38bda465f2839debc7",
+          "mode": "native_mlx",
+          "profile": "qwen3-0.6b",
+          "text": "Here's a simple Python function that returns the square of an integer:\n\n```python\ndef square_of_integer(x):\n    return x * x\n```\n\n### Example Usage:\n```python\nprint(square_of_integer(5))  # Output",
+          "token_ids": [
+            8420,
+            594,
+            264,
+            4285,
+            13027,
+            729,
+            429,
+            4675,
+            279,
+            9334,
+            315,
+            458,
+            7546,
+            1447,
+            73594,
+            12669,
+            198,
+            750,
+            9334,
+            3575,
+            31725,
+            2075,
+            982,
+            262,
+            470,
+            856,
+            353,
+            856,
+            198,
+            13874,
+            19324,
+            14374,
+            13383,
+            24567,
+            510,
+            73594,
+            12669,
+            198,
+            1350,
+            86344,
+            3575,
+            31725,
+            7,
+            20,
+            593,
+            220,
+            671,
+            9258
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "length",
+          "metrics": {
+            "load_ms": 0.25762501172721386,
+            "ttft_ms": 16.27545803785324,
+            "total_ms": 135.0269999820739,
+            "prefill_ms": null,
+            "prompt_tps": null,
+            "decode_tps": 395.7843345063813,
+            "prompt_tokens": 24,
+            "generation_tokens": 48,
+            "peak_memory_gb": 0.481427698,
+            "peak_memory_bytes": 481427698,
+            "active_memory_bytes": 335691784,
+            "rss_bytes": 725254144,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 0,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 0,
+            "cycles": 0,
+            "policy": null,
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": false
+          },
+          "rounds": [],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "dbf736e77926405f80652d8a40329bf1",
+          "mode": "baseline",
+          "profile": "qwen3-0.6b",
+          "text": "Here's a simple Python function that returns the square of an integer:\n\n```python\ndef square_of_integer(x):\n    return x * x\n```\n\n### Example Usage:\n```python\nprint(square_of_integer(5))  # Output",
+          "token_ids": [
+            8420,
+            594,
+            264,
+            4285,
+            13027,
+            729,
+            429,
+            4675,
+            279,
+            9334,
+            315,
+            458,
+            7546,
+            1447,
+            73594,
+            12669,
+            198,
+            750,
+            9334,
+            3575,
+            31725,
+            2075,
+            982,
+            262,
+            470,
+            856,
+            353,
+            856,
+            198,
+            13874,
+            19324,
+            14374,
+            13383,
+            24567,
+            510,
+            73594,
+            12669,
+            198,
+            1350,
+            86344,
+            3575,
+            31725,
+            7,
+            20,
+            593,
+            220,
+            671,
+            9258
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "length",
+          "metrics": {
+            "load_ms": 0.17458305228501558,
+            "ttft_ms": 12.930083903484046,
+            "total_ms": 130.16662490554154,
+            "prefill_ms": 9.14041604846716,
+            "prompt_tps": 2516.2968379165936,
+            "decode_tps": 400.89889720624865,
+            "prompt_tokens": 24,
+            "generation_tokens": 48,
+            "peak_memory_gb": 0.575930708,
+            "peak_memory_bytes": 575930708,
+            "active_memory_bytes": 371002262,
+            "rss_bytes": 725614592,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 29360128,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 0,
+            "cycles": 0,
+            "policy": null,
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": false
+          },
+          "rounds": [],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "6aadd3cab4344e4aaa067e0c812e3ffe",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-0.6b",
+          "text": "Here's a simple Python function that returns the square of an integer:\n\n```python\ndef square_of_integer(x):\n    return x * x\n\n# Example usage:\nprint(square_of_integer(5))  # Output: 25\n",
+          "token_ids": [
+            8420,
+            594,
+            264,
+            4285,
+            13027,
+            729,
+            429,
+            4675,
+            279,
+            9334,
+            315,
+            458,
+            7546,
+            1447,
+            73594,
+            12669,
+            198,
+            750,
+            9334,
+            3575,
+            31725,
+            2075,
+            982,
+            262,
+            470,
+            856,
+            353,
+            856,
+            271,
+            2,
+            13383,
+            10431,
+            510,
+            1350,
+            86344,
+            3575,
+            31725,
+            7,
+            20,
+            593,
+            220,
+            671,
+            9258,
+            25,
+            220,
+            17,
+            20,
+            198
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "length",
+          "metrics": {
+            "load_ms": 613.9092500088736,
+            "ttft_ms": 659.0607500402257,
+            "total_ms": 807.8864170238376,
+            "prefill_ms": 38.75995799899101,
+            "prompt_tps": 593.3958958520732,
+            "decode_tps": 315.80574072062086,
+            "prompt_tokens": 24,
+            "generation_tokens": 48,
+            "peak_memory_gb": 0.945521,
+            "peak_memory_bytes": 945521000,
+            "active_memory_bytes": 730103920,
+            "rss_bytes": 1187545088,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 58720256,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.96,
+            "fallback_rate": 0.0,
+            "cycles": 25,
+            "policy": null,
+            "draft_accepted_tokens": 24,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "7e498ba29f5e4ebfa7b9d2b7eebeb9e7",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-0.6b",
+          "text": "Here's a simple Python function that returns the square of an integer:\n\n```python\ndef square_of_integer(x):\n    return x * x\n\n# Example usage:\nprint(square_of_integer(5))  # Output: 25\n",
+          "token_ids": [
+            8420,
+            594,
+            264,
+            4285,
+            13027,
+            729,
+            429,
+            4675,
+            279,
+            9334,
+            315,
+            458,
+            7546,
+            1447,
+            73594,
+            12669,
+            198,
+            750,
+            9334,
+            3575,
+            31725,
+            2075,
+            982,
+            262,
+            470,
+            856,
+            353,
+            856,
+            271,
+            2,
+            13383,
+            10431,
+            510,
+            1350,
+            86344,
+            3575,
+            31725,
+            7,
+            20,
+            593,
+            220,
+            671,
+            9258,
+            25,
+            220,
+            17,
+            20,
+            198
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "length",
+          "metrics": {
+            "load_ms": 0.18229195848107338,
+            "ttft_ms": 28.025042032822967,
+            "total_ms": 174.0129590034485,
+            "prefill_ms": 16.080165980383754,
+            "prompt_tps": 1430.3334945707509,
+            "decode_tps": 321.9444524950442,
+            "prompt_tokens": 24,
+            "generation_tokens": 48,
+            "peak_memory_gb": 0.945521,
+            "peak_memory_bytes": 945521000,
+            "active_memory_bytes": 730710128,
+            "rss_bytes": 1187610624,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 58720256,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.9230769230769231,
+            "fallback_rate": 0.0,
+            "cycles": 13,
+            "policy": null,
+            "draft_accepted_tokens": 36,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 3,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        },
+        {
+          "run_id": "34147e735cda4046b1be0aa8b918790d",
+          "mode": "adaptive",
+          "profile": "qwen3-0.6b",
+          "text": "Here's a simple Python function that returns the square of an integer:\n\n```python\ndef square_of_integer(x):\n    return x * x\n```\n\n### Example Usage:\n```python\nprint(square_of_integer(5))  # Output",
+          "token_ids": [
+            8420,
+            594,
+            264,
+            4285,
+            13027,
+            729,
+            429,
+            4675,
+            279,
+            9334,
+            315,
+            458,
+            7546,
+            1447,
+            73594,
+            12669,
+            198,
+            750,
+            9334,
+            3575,
+            31725,
+            2075,
+            982,
+            262,
+            470,
+            856,
+            353,
+            856,
+            198,
+            13874,
+            19324,
+            14374,
+            13383,
+            24567,
+            510,
+            73594,
+            12669,
+            198,
+            1350,
+            86344,
+            3575,
+            31725,
+            7,
+            20,
+            593,
+            220,
+            671,
+            9258
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "length",
+          "metrics": {
+            "load_ms": 0.17412507440894842,
+            "ttft_ms": 12.523375102318823,
+            "total_ms": 130.61741704586893,
+            "prefill_ms": 8.768416941165924,
+            "prompt_tps": 2623.050449622178,
+            "decode_tps": 397.98790206932176,
+            "prompt_tokens": 24,
+            "generation_tokens": 48,
+            "peak_memory_gb": 0.914948448,
+            "peak_memory_bytes": 914948448,
+            "active_memory_bytes": 716276030,
+            "rss_bytes": 1187708928,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 29360128,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 1.0,
+            "cycles": 1,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 3.101332113146782,
+                "1": 5.966646014712751,
+                "2": 3.380937171944727,
+                "3": 3.481901134364307,
+                "4": 4.738854197785258
+              },
+              "acceptance_by_position": {
+                "0": 1.0,
+                "1": 1.0,
+                "2": 1.0,
+                "3": 1.0
+              }
+            },
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": true
+          },
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 48,
+              "draft_ms": 0,
+              "verify_ms": 118.09404194355011,
+              "fallback": true
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 1610612736
+          }
+        }
+      ]
+    }
+  ],
+  "cache": [
+    {
+      "label": "cold",
+      "equal": true,
+      "result": {
+        "run_id": "587c48cde38348c98745dbfb53d7c77b",
+        "mode": "baseline",
+        "profile": "qwen3-0.6b",
+        "text": "2 + 2 = 4.",
+        "token_ids": [
+          17,
+          488,
+          220,
+          17,
+          284,
+          220,
+          19,
+          13,
+          151645
+        ],
+        "prompt_tokens": 1560,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.4817080227658153,
+          "ttft_ms": 432.77091695927083,
+          "total_ms": 464.2934169387445,
+          "prefill_ms": 387.12387497071177,
+          "prompt_tps": 4027.1347255912533,
+          "decode_tps": 253.78697772097138,
+          "prompt_tokens": 1560,
+          "generation_tokens": 9,
+          "peak_memory_gb": 1.49389546,
+          "peak_memory_bytes": 1493895460,
+          "active_memory_bytes": 1149073726,
+          "rss_bytes": 1055014912,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 264241152,
+          "active_kv_bytes": 205520896,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 1610612736
+        }
+      },
+      "reference": {
+        "run_id": "08d35956a0ff44799ca9b9bad3e2f69e",
+        "mode": "baseline",
+        "profile": "qwen3-0.6b",
+        "text": "2 + 2 = 4.",
+        "token_ids": [
+          17,
+          488,
+          220,
+          17,
+          284,
+          220,
+          19,
+          13,
+          151645
+        ],
+        "prompt_tokens": 1560,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.670083962380886,
+          "ttft_ms": 283.87379203923047,
+          "total_ms": 313.7648750562221,
+          "prefill_ms": 277.1613330114633,
+          "prompt_tps": 5624.88274630834,
+          "decode_tps": 267.6383453705037,
+          "prompt_tokens": 1560,
+          "generation_tokens": 9,
+          "peak_memory_gb": 1.699416356,
+          "peak_memory_bytes": 1699416356,
+          "active_memory_bytes": 1149075774,
+          "rss_bytes": 1055965184,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 264241152,
+          "active_kv_bytes": 205520896,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 1610612736
+        }
+      }
+    },
+    {
+      "label": "hot",
+      "equal": true,
+      "result": {
+        "run_id": "9a68fe4307e348298bbc928b2bc83e88",
+        "mode": "baseline",
+        "profile": "qwen3-0.6b",
+        "text": "2 + 2 = 4.",
+        "token_ids": [
+          17,
+          488,
+          220,
+          17,
+          284,
+          220,
+          19,
+          13,
+          151645
+        ],
+        "prompt_tokens": 1560,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.5559169696643949,
+          "ttft_ms": 7.830457994714379,
+          "total_ms": 33.790042041800916,
+          "prefill_ms": 0.02004194539040327,
+          "prompt_tps": 0.0,
+          "decode_tps": 308.1713476413674,
+          "prompt_tokens": 1560,
+          "generation_tokens": 9,
+          "peak_memory_gb": 1.150012274,
+          "peak_memory_bytes": 1150012274,
+          "active_memory_bytes": 1149079774,
+          "rss_bytes": 1056014336,
+          "cache_hit_tokens": 1559,
+          "cache_bytes": 264241152,
+          "active_kv_bytes": 205520896,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 1610612736
+        }
+      },
+      "reference": {
+        "run_id": "0df1ce37b45d4486ac8cfd1b3e103cfe",
+        "mode": "baseline",
+        "profile": "qwen3-0.6b",
+        "text": "2 + 2 = 4.",
+        "token_ids": [
+          17,
+          488,
+          220,
+          17,
+          284,
+          220,
+          19,
+          13,
+          151645
+        ],
+        "prompt_tokens": 1560,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.85970903839916,
+          "ttft_ms": 284.113208996132,
+          "total_ms": 314.19966695830226,
+          "prefill_ms": 277.39716693758965,
+          "prompt_tps": 5620.10065643804,
+          "decode_tps": 265.9003598914484,
+          "prompt_tokens": 1560,
+          "generation_tokens": 9,
+          "peak_memory_gb": 1.699416356,
+          "peak_memory_bytes": 1699416356,
+          "active_memory_bytes": 1149079866,
+          "rss_bytes": 1056014336,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 264241152,
+          "active_kv_bytes": 205520896,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 1610612736
+        }
+      }
+    },
+    {
+      "label": "branch",
+      "equal": true,
+      "result": {
+        "run_id": "5d37985cb57a4164919f59c15d5172d6",
+        "mode": "baseline",
+        "profile": "qwen3-0.6b",
+        "text": "3 + 3 = 6.",
+        "token_ids": [
+          18,
+          488,
+          220,
+          18,
+          284,
+          220,
+          21,
+          13,
+          151645
+        ],
+        "prompt_tokens": 1560,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.5454579843208194,
+          "ttft_ms": 222.4958339938894,
+          "total_ms": 254.86883404664695,
+          "prefill_ms": 201.0143749648705,
+          "prompt_tps": 5208.582720429695,
+          "decode_tps": 247.11951277183385,
+          "prompt_tokens": 1560,
+          "generation_tokens": 9,
+          "peak_memory_gb": 1.699416356,
+          "peak_memory_bytes": 1699416356,
+          "active_memory_bytes": 1354598714,
+          "rss_bytes": 1055932416,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 469762048,
+          "active_kv_bytes": 205520896,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 1610612736
+        }
+      },
+      "reference": {
+        "run_id": "4cfbaad0a642494f95c664f8280b583c",
+        "mode": "baseline",
+        "profile": "qwen3-0.6b",
+        "text": "3 + 3 = 6.",
+        "token_ids": [
+          18,
+          488,
+          220,
+          18,
+          284,
+          220,
+          21,
+          13,
+          151645
+        ],
+        "prompt_tokens": 1560,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.4672910328954458,
+          "ttft_ms": 284.9529579980299,
+          "total_ms": 315.2737080818042,
+          "prefill_ms": 278.47816701978445,
+          "prompt_tps": 5598.28447839949,
+          "decode_tps": 263.8457154884527,
+          "prompt_tokens": 1560,
+          "generation_tokens": 9,
+          "peak_memory_gb": 1.904937252,
+          "peak_memory_bytes": 1904937252,
+          "active_memory_bytes": 1354600762,
+          "rss_bytes": 1055932416,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 469762048,
+          "active_kv_bytes": 205520896,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 1610612736
+        }
+      }
+    }
+  ],
+  "cancel_recovered": true,
+  "passed": false,
+  "evidence_stage": "Preliminary real-checkpoint check; before final text-flush fixes and runtime source manifest. Performance values are observations, not benchmark claims."
+}

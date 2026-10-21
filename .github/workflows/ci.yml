@@ -1,0 +1,22 @@
+name: Portable checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  logic-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen --extra dev --python 3.12
+      - run: uv run ruff check src tests scripts
+      - run: uv run pytest -q -m 'not metal'
+      - run: python3 site/build.py && python3 site/check.py
+      - run: uv build
+      - run: python3 scripts/verify_artifacts.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: alpha-release-candidates
+          path: |
+            dist/*
+            site/dist/

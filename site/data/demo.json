@@ -1,0 +1,8 @@
+{
+  "kind": "interactive_ui_demo",
+  "recorded_at": "2026-10-21",
+  "profile": "qwen3-4b",
+  "mode": "baseline",
+  "prompt": "用两句话解释 KV 缓存为什么能减少重复长前缀的首字延迟。",
+  "timing_semantics": "Single actual UI request including model loading; not a controlled benchmark or 27B result."
+}

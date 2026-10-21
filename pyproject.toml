@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "deepinfer-mac"
+version = "0.1.0a1"
+description = "DeepInfer-inspired local inference for Apple Silicon, powered by MLX"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "third_party/licenses/*"]
+authors = [{name = "DeepInfer-Mac contributors"}]
+classifiers = ["Development Status :: 3 - Alpha", "Operating System :: MacOS", "Programming Language :: Python :: 3"]
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "huggingface-hub>=1,<3", "psutil>=6,<8"]
+
+[project.optional-dependencies]
+mlx = ["mlx==0.32.4; sys_platform == 'darwin' and platform_machine == 'arm64'", "mlx-lm==0.32.2; sys_platform == 'darwin' and platform_machine == 'arm64'"]
+dev = ["pytest>=8,<10", "httpx>=0.28,<1", "build>=1.2,<2", "ruff>=0.11,<1"]
+
+[project.scripts]
+deepinfer-mac = "deepinfer_mac.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/deepinfer_mac"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/docs", "/benchmarks", "/models.lock.json", "/upstream.lock.json", "/README*", "/LICENSE", "/NOTICE", "/third_party", "/pyproject.toml", "/uv.lock", "/site", "/scripts", "/.github", "/CONTRIBUTING.md"]
+
+[tool.hatch.build]
+exclude = ["docs/CODEX_*", "docs/PROGRESS.md", "site/dist", "benchmark-results", "benchmarks/results", "docs/evidence/*.log"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["metal: requires Apple Silicon Metal and downloaded model weights"]
+
+[tool.ruff]
+line-length = 110

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "model": "mlx-community/Qwen3.8-27B-4bit",
+  "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+  "timestamp_unix": 1792552561.880034,
+  "prompt_tokens_requested": 4096,
+  "max_tokens": 256,
+  "batch_size": 1,
+  "prefill_step_size": 128,
+  "conversation_prompt_budget_tokens": 4480,
+  "preflight": {
+    "memory": {
+      "total_bytes": 25769803776,
+      "available_bytes": 8790654976,
+      "rss_bytes": 23363584,
+      "swap_used_bytes": null,
+      "swap_available": false,
+      "swap_error": "OSError: "
+    },
+    "budget": {
+      "components": {
+        "text_weights_or_full_upper_bound_bytes": 15132802048,
+        "active_kv_upper_estimate_bytes": 335544320,
+        "recurrent_fp32_bytes": 150994944,
+        "convolution_bf16_bytes": 2949120,
+        "retained_cache_budget_bytes": 536870912,
+        "workspace_allowance_bytes": 2147483648,
+        "available_memory_safety_margin_bytes": 1073741824
+      },
+      "required_available_bytes": 19380386816,
+      "weight_basis": "verified_safetensors_headers_text_only",
+      "assumptions": "batch=1; BF16 KV/conv; FP32 recurrent state; workspace is an allowance, not a measured peak; RSS and Metal bytes are not added"
+    },
+    "memory_budget_pass": false,
+    "swap_observable": false,
+    "status": "blocked_before_model_load",
+    "note": "A budget gate, not an OOM experiment; passing does not establish stable performance."
+  },
+  "workload": "zh",
+  "measurements": []
+}

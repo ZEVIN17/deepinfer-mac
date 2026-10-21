@@ -1,0 +1,994 @@
+{
+  "profile": "qwen3-4b",
+  "source": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "baabea5ba8870655d1a0ebb990930f32e1a36c6474292d9e6f2e65e045035c91",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "d8a8d3ec64907957e87e7a1f7f28b4ff433d9ab4d30febc2a9175ff845a4fbc9",
+      "src/deepinfer_mac/cli.py": "721f01faaeb1f401b8136d0648a063aa347d0970cbc6343f5fe12da91956c07f",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/engine.py": "99994bdce288e9818bf0a532426fedbbe50b10e61f29ab27db6a4a7df6cbf691",
+      "src/deepinfer_mac/models.lock.json": "305ca251b793124c3e04970f2dcd72180dbb43b8207853d0c80e5d07a39b03ef",
+      "src/deepinfer_mac/models.py": "8b93cc18fcc3c6e364ba74ebdf1bef7305b20ab6bce54385b621a0fe2f7fd1cc",
+      "src/deepinfer_mac/policy.py": "3e85f40cd937d06d30106c63d59d36dc0a08924d5320fddd1b38b9e29f01274a",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "ab43ba5ea5a24d39b0c9fc9db782df504e43a7b58e7ca030d2ef06436d0fb6c5",
+      "src/deepinfer_mac/server/schemas.py": "c8a2f65b564cc074a53ebdfc639dc20c148c4d9b8a10737a61750169a700a8c4",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/speculative.py": "52e11c490eea7d207ecc2b40fbae8ee165a36a92860f611f52ee15fbcb7e807c",
+      "src/deepinfer_mac/state.py": "da6e31908d54b9c4d593b868676fb1f27d8212d5b6e2ac71add65922d1bca187",
+      "src/deepinfer_mac/web/app.js": "296659c9c5778b8b7de87847ac1ec86a7a0bd1c676c5f0692b31853aab529d59",
+      "src/deepinfer_mac/web/index.html": "77295d5b11018c937615b4f428d83fc6f04d857da4ed5b4ed53b437e5a3eaf52",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "a0822af7a99b993596ef3f98edd5b7c7d0a51974fba085a9b3e256597b5b68f7",
+      "uv.lock": "65d76b103c46139eca0f1556efdbde14322125ff7cac03113ba0f9604f202e81",
+      "models.lock.json": "305ca251b793124c3e04970f2dcd72180dbb43b8207853d0c80e5d07a39b03ef",
+      "upstream.lock.json": "5ad3121447fbe089c9d2e209b902219bf11bc1904babc0470a5c6e024c5ae404"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "script_sha256": "d2e12107ea4d762e91b76110525647631bf9e82835ced9f772f8c250a1442095",
+  "design": "3 repetitions, rotating mode blocks, fresh engine per mode block, each prompt warmed before measurement; no prefix reuse",
+  "blocks": [
+    {
+      "repeat": 1,
+      "variant": "adaptive",
+      "warmup": [
+        {
+          "prompt_id": "zh",
+          "run_id": "9e757b8fc7c3424d81ea0119f6f8b45a",
+          "mode": "adaptive",
+          "profile": "qwen3-4b",
+          "text": "统一内存（Unified Memory）是一种允许CPU和GPU直接共享同一块内存空间的内存管理技术，使得程序可以无需显式数据搬运即可在不同处理器之间高效地访问和操作数据。",
+          "token_ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            31615,
+            33108,
+            49891,
+            101041,
+            101203,
+            102700,
+            99922,
+            111390,
+            101054,
+            9370,
+            111390,
+            39352,
+            99361,
+            3837,
+            104193,
+            74220,
+            73670,
+            106431,
+            99580,
+            28330,
+            20074,
+            112920,
+            104180,
+            18493,
+            99604,
+            111249,
+            101920,
+            102202,
+            29490,
+            104925,
+            33108,
+            40090,
+            20074,
+            1773,
+            151645
+          ],
+          "prompt_tokens": 18,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 1049.6099170995876,
+            "ttft_ms": 1135.94175002072,
+            "total_ms": 1651.8318749731407,
+            "prefill_ms": 73.62229097634554,
+            "prompt_tps": 230.90832646680354,
+            "decode_tps": 81.41268453989804,
+            "prompt_tokens": 18,
+            "generation_tokens": 43,
+            "peak_memory_gb": 2.808642916,
+            "peak_memory_bytes": 2808642916,
+            "active_memory_bytes": 2667183184,
+            "rss_bytes": 2989522944,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 155713536,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 67108864,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.3333333333333333,
+            "fallback_rate": 0.5588235294117647,
+            "cycles": 34,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 11.788084055297077,
+                "1": 15.721125062555075,
+                "2": 15.120999800274149,
+                "3": 17.723062502530713,
+                "4": 21.784631302580237
+              },
+              "acceptance_by_position": {
+                "0": 0.4666666666666667,
+                "1": 0.3333333333333333,
+                "2": 0.0,
+                "3": 0.0
+              }
+            },
+            "draft_accepted_tokens": 9,
+            "calibrated_fallback": false,
+            "draft_released": true
+          },
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.00037509016692638397,
+              "verify_ms": 12.242084019817412,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.00024994369596242905,
+              "verify_ms": 11.77687500603497,
+              "fallback": true
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "draft_ms": 4.014332895167172,
+              "verify_ms": 12.35500001348555,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "draft_ms": 3.4667090512812138,
+              "verify_ms": 12.31875002849847,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 1,
+              "produced": 2,
+              "draft_ms": 6.595707964152098,
+              "verify_ms": 13.618124998174608,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 6.260000052861869,
+              "verify_ms": 13.875083066523075,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 2,
+              "produced": 3,
+              "draft_ms": 9.39200003631413,
+              "verify_ms": 17.2476249281317,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 9.36499994713813,
+              "verify_ms": 17.201250069774687,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 12.468790984712541,
+              "verify_ms": 20.253540948033333,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "draft_ms": 12.748208013363183,
+              "verify_ms": 19.79258400388062,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 3.440333064645529,
+              "verify_ms": 12.280791997909546,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 3.350166021846235,
+              "verify_ms": 12.425791006535292,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "draft_ms": 3.3575419802218676,
+              "verify_ms": 12.457916978746653,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "draft_ms": 3.589125000871718,
+              "verify_ms": 12.518665986135602,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 3.5174170043319464,
+              "verify_ms": 12.339208042249084,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 4.014167003333569,
+              "verify_ms": 12.369832955300808,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 3.501291968859732,
+              "verify_ms": 12.415707926265895,
+              "fallback": false
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0005420297384262085,
+              "verify_ms": 11.550249997526407,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.00037509016692638397,
+              "verify_ms": 11.903000064194202,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.00016600824892520905,
+              "verify_ms": 11.65104191750288,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0002919696271419525,
+              "verify_ms": 11.682874988764524,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.000125030055642128,
+              "verify_ms": 11.75945799332112,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0002080341801047325,
+              "verify_ms": 11.814499972388148,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.00024994369596242905,
+              "verify_ms": 11.70899998396635,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.00012491364032030106,
+              "verify_ms": 11.754250037483871,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0002080341801047325,
+              "verify_ms": 11.814083089120686,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 8.300412446260452e-05,
+              "verify_ms": 11.781209032051265,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.00016600824892520905,
+              "verify_ms": 11.862040963023901,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0002080341801047325,
+              "verify_ms": 11.869832989759743,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.000125030055642128,
+              "verify_ms": 11.796207982115448,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.000333995558321476,
+              "verify_ms": 11.787750059738755,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.0002919696271419525,
+              "verify_ms": 11.583334067836404,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 0.000125030055642128,
+              "verify_ms": 11.606000014580786,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "draft_ms": 8.393544703722e-05,
+              "verify_ms": 11.564708082005382,
+              "fallback": true
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        },
+        {
+          "prompt_id": "code",
+          "run_id": "40125735cd64495d94825cb6a0dbb1c8",
+          "mode": "adaptive",
+          "profile": "qwen3-4b",
+          "text": "Sure! Here's a simple Python function that takes an integer as input and returns its square:\n\n```python\ndef square(n):\n    return n ** 2\n```\n\n### Example usage:\n\n```python\nresult = square(5)\nprint(result)  # Output: 25\n```\n\nThis function works",
+          "token_ids": [
+            39814,
+            0,
+            5692,
+            594,
+            264,
+            4285,
+            13027,
+            729,
+            429,
+            4990,
+            458,
+            7546,
+            438,
+            1946,
+            323,
+            4675,
+            1181,
+            9334,
+            1447,
+            73594,
+            12669,
+            198,
+            750,
+            9334,
+            1445,
+            982,
+            262,
+            470,
+            308,
+            3070,
+            220,
+            17,
+            198,
+            13874,
+            19324,
+            14374,
+            13383,
+            10431,
+            1447,
+            73594,
+            12669,
+            198,
+            1382,
+            284,
+            9334,
+            7,
+            20,
+            340,
+            1350,
+            4456,
+            8,
+            220,
+            671,
+            9258,
+            25,
+            220,
+            17,
+            20,
+            198,
+            13874,
+            19324,
+            1986,
+            729,
+            4278
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "length",
+          "metrics": {
+            "load_ms": 0.29929098673164845,
+            "ttft_ms": 57.35966702923179,
+            "total_ms": 730.1625420805067,
+            "prefill_ms": 42.01204201672226,
+            "prompt_tps": 547.4620822012221,
+            "decode_tps": 93.638125424477,
+            "prompt_tokens": 24,
+            "generation_tokens": 64,
+            "peak_memory_gb": 2.465332608,
+            "peak_memory_bytes": 2465332608,
+            "active_memory_bytes": 2306594102,
+            "rss_bytes": 2649423872,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 88473600,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 37748736,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 1.0,
+            "cycles": 1,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 11.788084055297077,
+                "1": 15.721125062555075,
+                "2": 15.120999800274149,
+                "3": 17.723062502530713,
+                "4": 21.784631302580237
+              },
+              "acceptance_by_position": {
+                "0": 0.4666666666666667,
+                "1": 0.3333333333333333,
+                "2": 0.0,
+                "3": 0.0
+              }
+            },
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": true
+          },
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 64,
+              "draft_ms": 0,
+              "verify_ms": 672.8028750512749,
+              "fallback": true
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        },
+        {
+          "prompt_id": "short",
+          "run_id": "f73c684721d04333bdd6a9d8538ae3f2",
+          "mode": "adaptive",
+          "profile": "qwen3-4b",
+          "text": "2",
+          "token_ids": [
+            17,
+            151645
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.2984999446198344,
+            "ttft_ms": 60.50174997653812,
+            "total_ms": 70.9549579769373,
+            "prefill_ms": 45.50441598985344,
+            "prompt_tps": 505.44544962687866,
+            "decode_tps": 95.66441229924952,
+            "prompt_tokens": 24,
+            "generation_tokens": 2,
+            "peak_memory_gb": 2.465332608,
+            "peak_memory_bytes": 2465332608,
+            "active_memory_bytes": 2306400566,
+            "rss_bytes": 2649980928,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 88473600,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 37748736,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 1.0,
+            "cycles": 1,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 11.788084055297077,
+                "1": 15.721125062555075,
+                "2": 15.120999800274149,
+                "3": 17.723062502530713,
+                "4": 21.784631302580237
+              },
+              "acceptance_by_position": {
+                "0": 0.4666666666666667,
+                "1": 0.3333333333333333,
+                "2": 0.0,
+                "3": 0.0
+              }
+            },
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": true
+          },
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 2,
+              "draft_ms": 0,
+              "verify_ms": 10.453208000399172,
+              "fallback": true
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        }
+      ],
+      "measured": [
+        {
+          "prompt_id": "zh",
+          "run_id": "1ab96b08ad3f462ea1ef6f6f545890fd",
+          "mode": "adaptive",
+          "profile": "qwen3-4b",
+          "text": "统一内存（Unified Memory）是一种允许程序在不显式管理内存分配和传输的情况下，直接访问和操作内存的技术，它将CPU和GPU的内存统一管理，实现数据在两者之间的高效传输与共享。",
+          "token_ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            74220,
+            18493,
+            16530,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            33108,
+            107468,
+            104248,
+            3837,
+            101041,
+            104925,
+            33108,
+            40090,
+            111390,
+            105535,
+            3837,
+            99652,
+            44063,
+            31615,
+            33108,
+            49891,
+            9370,
+            111390,
+            103967,
+            39352,
+            3837,
+            101884,
+            20074,
+            18493,
+            107051,
+            104186,
+            102202,
+            107468,
+            57218,
+            101203,
+            1773,
+            151645
+          ],
+          "prompt_tokens": 18,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.22433290723711252,
+            "ttft_ms": 60.06304093170911,
+            "total_ms": 558.29320801422,
+            "prefill_ms": 45.13975000008941,
+            "prompt_tps": 376.6082000889754,
+            "decode_tps": 94.33391052014807,
+            "prompt_tokens": 18,
+            "generation_tokens": 48,
+            "peak_memory_gb": 2.42381554,
+            "peak_memory_bytes": 2423815540,
+            "active_memory_bytes": 2306344234,
+            "rss_bytes": 2650341376,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 87588864,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 37748736,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 1.0,
+            "cycles": 1,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 11.788084055297077,
+                "1": 15.721125062555075,
+                "2": 15.120999800274149,
+                "3": 17.723062502530713,
+                "4": 21.784631302580237
+              },
+              "acceptance_by_position": {
+                "0": 0.4666666666666667,
+                "1": 0.3333333333333333,
+                "2": 0.0,
+                "3": 0.0
+              }
+            },
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": true
+          },
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 48,
+              "draft_ms": 0,
+              "verify_ms": 498.2301670825109,
+              "fallback": true
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        },
+        {
+          "prompt_id": "code",
+          "run_id": "46d7f1ddb49b46adb94a604bca5df3ed",
+          "mode": "adaptive",
+          "profile": "qwen3-4b",
+          "text": "Sure! Here's a simple Python function that takes an integer as input and returns its square:\n\n```python\ndef square(n):\n    return n ** 2\n```\n\n### Example usage:\n\n```python\nresult = square(5)\nprint(result)  # Output: 25\n```\n\nThis function works",
+          "token_ids": [
+            39814,
+            0,
+            5692,
+            594,
+            264,
+            4285,
+            13027,
+            729,
+            429,
+            4990,
+            458,
+            7546,
+            438,
+            1946,
+            323,
+            4675,
+            1181,
+            9334,
+            1447,
+            73594,
+            12669,
+            198,
+            750,
+            9334,
+            1445,
+            982,
+            262,
+            470,
+            308,
+            3070,
+            220,
+            17,
+            198,
+            13874,
+            19324,
+            14374,
+            13383,
+            10431,
+            1447,
+            73594,
+            12669,
+            198,
+            1382,
+            284,
+            9334,
+            7,
+            20,
+            340,
+            1350,
+            4456,
+            8,
+            220,
+            671,
+            9258,
+            25,
+            220,
+            17,
+            20,
+            198,
+            13874,
+            19324,
+            1986,
+            729,
+            4278
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "length",
+          "metrics": {
+            "load_ms": 0.34133298322558403,
+            "ttft_ms": 61.05995795223862,
+            "total_ms": 728.5281249787658,
+            "prefill_ms": 45.16570793930441,
+            "prompt_tps": 509.23590151422786,
+            "decode_tps": 94.38652375087153,
+            "prompt_tokens": 24,
+            "generation_tokens": 64,
+            "peak_memory_gb": 2.465332608,
+            "peak_memory_bytes": 2465332608,
+            "active_memory_bytes": 2306295094,
+            "rss_bytes": 2650537984,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 88473600,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 37748736,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 1.0,
+            "cycles": 1,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 11.788084055297077,
+                "1": 15.721125062555075,
+                "2": 15.120999800274149,
+                "3": 17.723062502530713,
+                "4": 21.784631302580237
+              },
+              "acceptance_by_position": {
+                "0": 0.4666666666666667,
+                "1": 0.3333333333333333,
+                "2": 0.0,
+                "3": 0.0
+              }
+            },
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": true
+          },
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 64,
+              "draft_ms": 0,
+              "verify_ms": 667.4681670265272,
+              "fallback": true
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        },
+        {
+          "prompt_id": "short",
+          "run_id": "844e603615c448e281177f9eacd35f57",
+          "mode": "adaptive",
+          "profile": "qwen3-4b",
+          "text": "2",
+          "token_ids": [
+            17,
+            151645
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.34383300226181746,
+            "ttft_ms": 60.91783300507814,
+            "total_ms": 71.52395800221711,
+            "prefill_ms": 45.05762504413724,
+            "prompt_tps": 510.45744149785565,
+            "decode_tps": 94.28514186564385,
+            "prompt_tokens": 24,
+            "generation_tokens": 2,
+            "peak_memory_gb": 2.465332608,
+            "peak_memory_bytes": 2465332608,
+            "active_memory_bytes": 2306229558,
+            "rss_bytes": 2650619904,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 88473600,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 37748736,
+            "cache_evictions": 0,
+            "draft_acceptance": null,
+            "fallback_rate": 1.0,
+            "cycles": 1,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 11.788084055297077,
+                "1": 15.721125062555075,
+                "2": 15.120999800274149,
+                "3": 17.723062502530713,
+                "4": 21.784631302580237
+              },
+              "acceptance_by_position": {
+                "0": 0.4666666666666667,
+                "1": 0.3333333333333333,
+                "2": 0.0,
+                "3": 0.0
+              }
+            },
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": true
+          },
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 2,
+              "draft_ms": 0,
+              "verify_ms": 10.606124997138977,
+              "fallback": true
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        }
+      ]
+    }
+  ]
+}

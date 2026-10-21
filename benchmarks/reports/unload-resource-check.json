@@ -1,0 +1,86 @@
+[
+  {
+    "label": "0-loaded",
+    "active": 2600074248,
+    "cache": 4660,
+    "rss": 2974334976,
+    "available": 7215022080
+  },
+  {
+    "label": "0-closed",
+    "active": 8,
+    "cache": 0,
+    "rss": 317636608,
+    "available": 8549384192
+  },
+  {
+    "label": "0-gc-cleared",
+    "active": 8,
+    "cache": 0,
+    "rss": 307298304,
+    "available": 8549711872
+  },
+  {
+    "label": "1-loaded",
+    "active": 2600074248,
+    "cache": 4660,
+    "rss": 3152953344,
+    "available": 7268990976
+  },
+  {
+    "label": "1-closed",
+    "active": 8,
+    "cache": 0,
+    "rss": 493109248,
+    "available": 8606285824
+  },
+  {
+    "label": "1-gc-cleared",
+    "active": 8,
+    "cache": 0,
+    "rss": 482623488,
+    "available": 8606285824
+  },
+  {
+    "label": "2-loaded",
+    "active": 2600074248,
+    "cache": 4660,
+    "rss": 3298263040,
+    "available": 7065010176
+  },
+  {
+    "label": "2-closed",
+    "active": 8,
+    "cache": 0,
+    "rss": 640516096,
+    "available": 8768569344
+  },
+  {
+    "label": "2-gc-cleared",
+    "active": 8,
+    "cache": 0,
+    "rss": 626884608,
+    "available": 8768782336
+  },
+  {
+    "label": "3-loaded",
+    "active": 2600074248,
+    "cache": 4660,
+    "rss": 3435266048,
+    "available": 7160004608
+  },
+  {
+    "label": "3-closed",
+    "active": 8,
+    "cache": 0,
+    "rss": 777519104,
+    "available": 8496234496
+  },
+  {
+    "label": "3-gc-cleared",
+    "active": 8,
+    "cache": 0,
+    "rss": 767049728,
+    "available": 8501821440
+  }
+]

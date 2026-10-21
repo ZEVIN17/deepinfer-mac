@@ -1,0 +1,1289 @@
+{
+  "profile": "qwen3-4b",
+  "repeats": 3,
+  "warmup": {
+    "run_id": "5581983e58234307b0a24fdcf5ed9277",
+    "mode": "baseline",
+    "profile": "qwen3-4b",
+    "text": "4",
+    "token_ids": [
+      19,
+      151645
+    ],
+    "prompt_tokens": 1740,
+    "finish_reason": "stop",
+    "metrics": {
+      "load_ms": 433.13820799812675,
+      "ttft_ms": 2615.1367500424385,
+      "total_ms": 2627.9352919664234,
+      "prefill_ms": 2130.4114169906825,
+      "prompt_tps": 816.2742586389386,
+      "decode_tps": 78.13390040360514,
+      "prompt_tokens": 1740,
+      "generation_tokens": 2,
+      "peak_memory_gb": 3.163849876,
+      "peak_memory_bytes": 3163849876,
+      "active_memory_bytes": 2884873942,
+      "rss_bytes": 2588114944,
+      "swap_before_bytes": 360841216,
+      "swap_after_bytes": 360841216,
+      "swap_delta_bytes": 0,
+      "swap_measurement_available": true,
+      "estimated_active_kv_bytes": 334430208,
+      "cache_hit_tokens": 0,
+      "cache_bytes": 339738624,
+      "active_kv_bytes": 264241152,
+      "cache_evictions": 0,
+      "draft_acceptance": null,
+      "fallback_rate": 0,
+      "cycles": 0,
+      "policy": null,
+      "draft_accepted_tokens": 0,
+      "calibrated_fallback": false
+    },
+    "rounds": [],
+    "model": {
+      "target": {
+        "repo": "mlx-community/Qwen3-4B-4bit",
+        "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+      },
+      "draft": {
+        "repo": "mlx-community/Qwen3-0.6B-4bit",
+        "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+      },
+      "minimum_memory_bytes": 4831838208,
+      "weight_bytes": 2263022529
+    }
+  },
+  "pairs": [
+    {
+      "repeat": 0,
+      "cold": {
+        "run_id": "02e9b91bcf6f44b793e8db5c58a26599",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "4",
+        "token_ids": [
+          19,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.9937920151278377,
+          "ttft_ms": 2084.6787079935893,
+          "total_ms": 2096.9927080441266,
+          "prefill_ms": 2062.7970829373226,
+          "prompt_tps": 843.0300849193313,
+          "decode_tps": 81.20838037160539,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.163849876,
+          "peak_memory_bytes": 3163849876,
+          "active_memory_bytes": 2884873942,
+          "rss_bytes": 2588557312,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "hot": {
+        "run_id": "37b6db98b4144a8bb2fa437471a29fb0",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "4",
+        "token_ids": [
+          19,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.69291696511209,
+          "ttft_ms": 25.169583037495613,
+          "total_ms": 37.24275005515665,
+          "prefill_ms": 0.028542010113596916,
+          "prompt_tps": 0.0,
+          "decode_tps": 82.82830830859594,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 2.88746188,
+          "peak_memory_bytes": 2887461880,
+          "active_memory_bytes": 2884873130,
+          "rss_bytes": 2588721152,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 1739,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "branch": {
+        "run_id": "7cc3f8bfe2694fc4ad04f2db8a03f26b",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "6",
+        "token_ids": [
+          21,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 2.1658330224454403,
+          "ttft_ms": 1539.5620840135962,
+          "total_ms": 1551.9460840150714,
+          "prefill_ms": 1515.9683750243858,
+          "prompt_tps": 809.3836390091334,
+          "decode_tps": 80.74935399554889,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884873942,
+          "rss_bytes": 2587836416,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 1,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "branch_reference": {
+        "run_id": "52ae6ddbea684fd6a11b9303d6b2ea9c",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "6",
+        "token_ids": [
+          21,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.7528750468045473,
+          "ttft_ms": 2110.6214579194784,
+          "total_ms": 2122.8536249836907,
+          "prefill_ms": 2091.5038749808446,
+          "prompt_tps": 831.459133689593,
+          "decode_tps": 81.7516630332582,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.432809644,
+          "peak_memory_bytes": 3432809644,
+          "active_memory_bytes": 2884873942,
+          "rss_bytes": 2587901952,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 1,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "hot_equal": true,
+      "branch_equal": true
+    },
+    {
+      "repeat": 1,
+      "cold": {
+        "run_id": "c1c30bf56f014d2f99e3afdee2e6952a",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "4",
+        "token_ids": [
+          19,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.6391249373555183,
+          "ttft_ms": 2118.708209018223,
+          "total_ms": 2132.5748339295387,
+          "prefill_ms": 2096.676832996309,
+          "prompt_tps": 829.4077430687486,
+          "decode_tps": 72.11560177011485,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.163849876,
+          "peak_memory_bytes": 3163849876,
+          "active_memory_bytes": 2884873942,
+          "rss_bytes": 2588049408,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 1,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "hot": {
+        "run_id": "e68897019ee04b16bcad7d28f89dda1b",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "4",
+        "token_ids": [
+          19,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 2.376166987232864,
+          "ttft_ms": 26.24533395282924,
+          "total_ms": 38.32616691943258,
+          "prefill_ms": 0.0315000070258975,
+          "prompt_tps": 0.0,
+          "decode_tps": 82.77574921898463,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 2.88746188,
+          "peak_memory_bytes": 2887461880,
+          "active_memory_bytes": 2884873130,
+          "rss_bytes": 2588082176,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 1739,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 1,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "branch": {
+        "run_id": "def5f1d1d29445419fe2ced0915441d4",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "6",
+        "token_ids": [
+          21,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 2.70041695330292,
+          "ttft_ms": 1564.5541249541566,
+          "total_ms": 1576.7062079394236,
+          "prefill_ms": 1541.7005420895293,
+          "prompt_tps": 795.8744039468243,
+          "decode_tps": 82.29041895223898,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884873942,
+          "rss_bytes": 2588196864,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 2,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "branch_reference": {
+        "run_id": "6173ae85b3f747e7854969a0c2c10d41",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "6",
+        "token_ids": [
+          21,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.6825830098241568,
+          "ttft_ms": 2164.1249581007287,
+          "total_ms": 2176.1439580004662,
+          "prefill_ms": 2144.975917064585,
+          "prompt_tps": 810.7317131932344,
+          "decode_tps": 83.20159816473893,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.432809644,
+          "peak_memory_bytes": 3432809644,
+          "active_memory_bytes": 2884873942,
+          "rss_bytes": 2588246016,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 2,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "hot_equal": true,
+      "branch_equal": true
+    },
+    {
+      "repeat": 2,
+      "cold": {
+        "run_id": "510ed93c65254b13957a1b4350d2a267",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "4",
+        "token_ids": [
+          19,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.7219999572262168,
+          "ttft_ms": 2161.9575830409303,
+          "total_ms": 2174.199208035134,
+          "prefill_ms": 2140.555459074676,
+          "prompt_tps": 812.4059540843378,
+          "decode_tps": 81.68850136101307,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.163849876,
+          "peak_memory_bytes": 3163849876,
+          "active_memory_bytes": 2884873942,
+          "rss_bytes": 2588377088,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 2,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "hot": {
+        "run_id": "fb2b8167406c44b6a5853d8767c98dea",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "4",
+        "token_ids": [
+          19,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.685666968114674,
+          "ttft_ms": 24.791833013296127,
+          "total_ms": 36.715042078867555,
+          "prefill_ms": 0.022458028979599476,
+          "prompt_tps": 0.0,
+          "decode_tps": 83.8700382171043,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 2.88746188,
+          "peak_memory_bytes": 2887461880,
+          "active_memory_bytes": 2884873130,
+          "rss_bytes": 2588442624,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 1739,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 2,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "branch": {
+        "run_id": "d6d739f7b4df400db84ce4738eb4dbaa",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "6",
+        "token_ids": [
+          21,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 2.137749921530485,
+          "ttft_ms": 1614.9896249407902,
+          "total_ms": 1628.9423329290003,
+          "prefill_ms": 1589.8171669105068,
+          "prompt_tps": 771.7868604881342,
+          "decode_tps": 71.67067502917682,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884880086,
+          "rss_bytes": 2588590080,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 3,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "branch_reference": {
+        "run_id": "2bea8080d18b4b85bea1bd09a11c3762",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "6",
+        "token_ids": [
+          21,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 2.4242090294137597,
+          "ttft_ms": 2176.9800420152023,
+          "total_ms": 2188.941749976948,
+          "prefill_ms": 2157.053209026344,
+          "prompt_tps": 806.192444731094,
+          "decode_tps": 83.60010152380204,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.432809644,
+          "peak_memory_bytes": 3432809644,
+          "active_memory_bytes": 2884857846,
+          "rss_bytes": 2588721152,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 3,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "hot_equal": true,
+      "branch_equal": true
+    }
+  ],
+  "multi_round": [
+    {
+      "round": 0,
+      "result": {
+        "run_id": "5f583840f70d462abed75323d34c42fe",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "4",
+        "token_ids": [
+          19,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.6987500712275505,
+          "ttft_ms": 1607.6796659035608,
+          "total_ms": 1619.5599159691483,
+          "prefill_ms": 1585.906166001223,
+          "prompt_tps": 773.6901629519573,
+          "decode_tps": 84.17331238646376,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884857846,
+          "rss_bytes": 2588770304,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 4,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "equal": true
+    },
+    {
+      "round": 1,
+      "result": {
+        "run_id": "3ba47a27cca8434da912dc0f2518a890",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "6",
+        "token_ids": [
+          21,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.6786250052973628,
+          "ttft_ms": 1609.0684159426019,
+          "total_ms": 1621.1954159662127,
+          "prefill_ms": 1587.4226249288768,
+          "prompt_tps": 772.9510596177718,
+          "decode_tps": 82.46062489098964,
+          "prompt_tokens": 1740,
+          "generation_tokens": 2,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884857846,
+          "rss_bytes": 2588852224,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 5,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "equal": true
+    },
+    {
+      "round": 2,
+      "result": {
+        "run_id": "19f9c9a8d88e4784928fef56470370c7",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "16",
+        "token_ids": [
+          16,
+          21,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.6821250319480896,
+          "ttft_ms": 1605.3102909354493,
+          "total_ms": 1630.5590409319848,
+          "prefill_ms": 1582.5666669989005,
+          "prompt_tps": 775.3227877134685,
+          "decode_tps": 79.21184218127357,
+          "prompt_tokens": 1740,
+          "generation_tokens": 3,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884857846,
+          "rss_bytes": 2588884992,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 6,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "equal": true
+    },
+    {
+      "round": 3,
+      "result": {
+        "run_id": "97fe6005366b48d99c5e51cd51cb382a",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "10",
+        "token_ids": [
+          16,
+          15,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 2.082000020891428,
+          "ttft_ms": 1591.4517500204965,
+          "total_ms": 1615.3420410118997,
+          "prefill_ms": 1569.330166094005,
+          "prompt_tps": 781.8622406615365,
+          "decode_tps": 83.71601671656879,
+          "prompt_tokens": 1740,
+          "generation_tokens": 3,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884863990,
+          "rss_bytes": 2588966912,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 7,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "equal": true
+    },
+    {
+      "round": 4,
+      "result": {
+        "run_id": "661ae4cbadc040629b972323905bb8fb",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "12",
+        "token_ids": [
+          16,
+          17,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.8004999728873372,
+          "ttft_ms": 1600.1654580468312,
+          "total_ms": 1624.27887506783,
+          "prefill_ms": 1578.3423751126975,
+          "prompt_tps": 777.3978696557451,
+          "decode_tps": 82.94137650662793,
+          "prompt_tokens": 1740,
+          "generation_tokens": 3,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884863990,
+          "rss_bytes": 2588983296,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 8,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "equal": true
+    },
+    {
+      "round": 5,
+      "result": {
+        "run_id": "71147341b9f347e7b07189f1dd303937",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "14",
+        "token_ids": [
+          16,
+          19,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.691542100161314,
+          "ttft_ms": 1591.8739589396864,
+          "total_ms": 1616.076499922201,
+          "prefill_ms": 1570.0990409823135,
+          "prompt_tps": 781.4793640230124,
+          "decode_tps": 82.63595138398571,
+          "prompt_tokens": 1740,
+          "generation_tokens": 3,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884863990,
+          "rss_bytes": 2588983296,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 9,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "equal": true
+    },
+    {
+      "round": 6,
+      "result": {
+        "run_id": "dbddac371453421d968baf223404ac05",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "16",
+        "token_ids": [
+          16,
+          21,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.7107080202549696,
+          "ttft_ms": 1635.2361669996753,
+          "total_ms": 1663.4920000797138,
+          "prefill_ms": 1612.0348329422995,
+          "prompt_tps": 761.1498057771303,
+          "decode_tps": 70.78184509140935,
+          "prompt_tokens": 1740,
+          "generation_tokens": 3,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884863990,
+          "rss_bytes": 2588999680,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 10,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "equal": true
+    },
+    {
+      "round": 7,
+      "result": {
+        "run_id": "edd3ff03fb7845d0bf475b7243d3ae43",
+        "mode": "baseline",
+        "profile": "qwen3-4b",
+        "text": "18",
+        "token_ids": [
+          16,
+          23,
+          151645
+        ],
+        "prompt_tokens": 1740,
+        "finish_reason": "stop",
+        "metrics": {
+          "load_ms": 1.654291059821844,
+          "ttft_ms": 1591.128500062041,
+          "total_ms": 1615.172625053674,
+          "prefill_ms": 1569.534208974801,
+          "prompt_tps": 781.7605968597908,
+          "decode_tps": 83.18040272607011,
+          "prompt_tokens": 1740,
+          "generation_tokens": 3,
+          "peak_memory_gb": 3.428091028,
+          "peak_memory_bytes": 3428091028,
+          "active_memory_bytes": 2884863990,
+          "rss_bytes": 2589032448,
+          "swap_before_bytes": 360841216,
+          "swap_after_bytes": 360841216,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 334430208,
+          "cache_hit_tokens": 512,
+          "cache_bytes": 339738624,
+          "active_kv_bytes": 264241152,
+          "cache_evictions": 11,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3-4B-4bit",
+            "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3-0.6B-4bit",
+            "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+          },
+          "minimum_memory_bytes": 4831838208,
+          "weight_bytes": 2263022529
+        }
+      },
+      "equal": true
+    }
+  ],
+  "source": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "d6de01beb2dbe1fe4434036326d6c17d7872668b5090b25be3d5d00409a43c1e",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "d8a8d3ec64907957e87e7a1f7f28b4ff433d9ab4d30febc2a9175ff845a4fbc9",
+      "src/deepinfer_mac/cli.py": "2713a3f134374885bb2e86cc5dbbb4bae3db250279b654a8b4b2109fe60455c1",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/engine.py": "85ce285c34d2488389d6b535cf68de5d54dc068d73c22e054cdcac68565a71b9",
+      "src/deepinfer_mac/models.lock.json": "58754c3b8ab53af0cdd84439270574da1fc8a0e6f2b8c3b91f17236c413107a0",
+      "src/deepinfer_mac/models.py": "c55b5ca049498301561362497f5cd9426119245c7dd734d2fc8d307c62faf25d",
+      "src/deepinfer_mac/policy.py": "3e85f40cd937d06d30106c63d59d36dc0a08924d5320fddd1b38b9e29f01274a",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "ab43ba5ea5a24d39b0c9fc9db782df504e43a7b58e7ca030d2ef06436d0fb6c5",
+      "src/deepinfer_mac/server/schemas.py": "878519f94b594f0788b66ee35d8144537411a9e32c26722312eb857bc1a5406c",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/speculative.py": "52e11c490eea7d207ecc2b40fbae8ee165a36a92860f611f52ee15fbcb7e807c",
+      "src/deepinfer_mac/state.py": "2c4ddb423575981917e0fab3f79b6687c51d8d3363cd33e2f6f9df0c76d874af",
+      "src/deepinfer_mac/web/app.js": "296659c9c5778b8b7de87847ac1ec86a7a0bd1c676c5f0692b31853aab529d59",
+      "src/deepinfer_mac/web/index.html": "3efa63d9009b1ee02ddeb46611f7fb6db3e2c9ccbf7e1996bb03f3e57d173ab3",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "a0822af7a99b993596ef3f98edd5b7c7d0a51974fba085a9b3e256597b5b68f7",
+      "uv.lock": "65d76b103c46139eca0f1556efdbde14322125ff7cac03113ba0f9604f202e81",
+      "models.lock.json": "58754c3b8ab53af0cdd84439270574da1fc8a0e6f2b8c3b91f17236c413107a0",
+      "upstream.lock.json": "5ad3121447fbe089c9d2e209b902219bf11bc1904babc0470a5c6e024c5ae404"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "eviction": {
+    "result": {
+      "run_id": "23aa80b69b4642189f6a9aa3ed707802",
+      "mode": "baseline",
+      "profile": "qwen3-4b",
+      "text": "4",
+      "token_ids": [
+        19,
+        151645
+      ],
+      "prompt_tokens": 1740,
+      "finish_reason": "stop",
+      "metrics": {
+        "load_ms": 1.6376250423491001,
+        "ttft_ms": 2173.52870805189,
+        "total_ms": 2185.8825830277056,
+        "prefill_ms": 2154.307416989468,
+        "prompt_tps": 807.2199846158268,
+        "decode_tps": 80.94626195891182,
+        "prompt_tokens": 1740,
+        "generation_tokens": 2,
+        "peak_memory_gb": 3.09307102,
+        "peak_memory_bytes": 3093071020,
+        "active_memory_bytes": 2545125366,
+        "rss_bytes": 2589048832,
+        "swap_before_bytes": 360841216,
+        "swap_after_bytes": 360841216,
+        "swap_delta_bytes": 0,
+        "swap_measurement_available": true,
+        "estimated_active_kv_bytes": 334430208,
+        "cache_hit_tokens": 0,
+        "cache_bytes": 0,
+        "active_kv_bytes": 264241152,
+        "cache_evictions": 11,
+        "draft_acceptance": null,
+        "fallback_rate": 0,
+        "cycles": 0,
+        "policy": null,
+        "draft_accepted_tokens": 0,
+        "calibrated_fallback": false
+      },
+      "rounds": [],
+      "model": {
+        "target": {
+          "repo": "mlx-community/Qwen3-4B-4bit",
+          "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+        },
+        "draft": {
+          "repo": "mlx-community/Qwen3-0.6B-4bit",
+          "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+        },
+        "minimum_memory_bytes": 4831838208,
+        "weight_bytes": 2263022529
+      }
+    },
+    "equal": true,
+    "resident_bytes": 0
+  },
+  "passed": true
+}

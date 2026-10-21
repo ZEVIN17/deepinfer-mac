@@ -1,0 +1,1040 @@
+{
+  "profile": "qwen3-4b",
+  "source": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "baabea5ba8870655d1a0ebb990930f32e1a36c6474292d9e6f2e65e045035c91",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "d8a8d3ec64907957e87e7a1f7f28b4ff433d9ab4d30febc2a9175ff845a4fbc9",
+      "src/deepinfer_mac/cli.py": "721f01faaeb1f401b8136d0648a063aa347d0970cbc6343f5fe12da91956c07f",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/engine.py": "99994bdce288e9818bf0a532426fedbbe50b10e61f29ab27db6a4a7df6cbf691",
+      "src/deepinfer_mac/models.lock.json": "305ca251b793124c3e04970f2dcd72180dbb43b8207853d0c80e5d07a39b03ef",
+      "src/deepinfer_mac/models.py": "8b93cc18fcc3c6e364ba74ebdf1bef7305b20ab6bce54385b621a0fe2f7fd1cc",
+      "src/deepinfer_mac/policy.py": "3e85f40cd937d06d30106c63d59d36dc0a08924d5320fddd1b38b9e29f01274a",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "ab43ba5ea5a24d39b0c9fc9db782df504e43a7b58e7ca030d2ef06436d0fb6c5",
+      "src/deepinfer_mac/server/schemas.py": "c8a2f65b564cc074a53ebdfc639dc20c148c4d9b8a10737a61750169a700a8c4",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/speculative.py": "52e11c490eea7d207ecc2b40fbae8ee165a36a92860f611f52ee15fbcb7e807c",
+      "src/deepinfer_mac/state.py": "da6e31908d54b9c4d593b868676fb1f27d8212d5b6e2ac71add65922d1bca187",
+      "src/deepinfer_mac/web/app.js": "296659c9c5778b8b7de87847ac1ec86a7a0bd1c676c5f0692b31853aab529d59",
+      "src/deepinfer_mac/web/index.html": "77295d5b11018c937615b4f428d83fc6f04d857da4ed5b4ed53b437e5a3eaf52",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "a0822af7a99b993596ef3f98edd5b7c7d0a51974fba085a9b3e256597b5b68f7",
+      "uv.lock": "65d76b103c46139eca0f1556efdbde14322125ff7cac03113ba0f9604f202e81",
+      "models.lock.json": "305ca251b793124c3e04970f2dcd72180dbb43b8207853d0c80e5d07a39b03ef",
+      "upstream.lock.json": "5ad3121447fbe089c9d2e209b902219bf11bc1904babc0470a5c6e024c5ae404"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "script_sha256": "d2e12107ea4d762e91b76110525647631bf9e82835ced9f772f8c250a1442095",
+  "design": "3 repetitions, rotating mode blocks, fresh engine per mode block, each prompt warmed before measurement; no prefix reuse",
+  "blocks": [
+    {
+      "repeat": 0,
+      "variant": "fixed_speculative:4",
+      "warmup": [
+        {
+          "prompt_id": "zh",
+          "run_id": "c99cac4808c74b37a5c7307dab95d464",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-4b",
+          "text": "统一内存（Unified Memory）是一种允许CPU和GPU共享同一块内存空间的内存管理技术，使得程序可以无需显式管理内存分配，从而简化编程并提高性能。",
+          "token_ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            31615,
+            33108,
+            49891,
+            101203,
+            102700,
+            99922,
+            111390,
+            101054,
+            9370,
+            111390,
+            39352,
+            99361,
+            3837,
+            104193,
+            74220,
+            73670,
+            106431,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            3837,
+            101982,
+            110487,
+            110569,
+            62926,
+            100627,
+            102111,
+            1773,
+            151645
+          ],
+          "prompt_tokens": 18,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 1059.8357919370756,
+            "ttft_ms": 1158.8862090138718,
+            "total_ms": 1698.9480840275064,
+            "prefill_ms": 68.65274999290705,
+            "prompt_tps": 247.62300128918912,
+            "decode_tps": 70.36230802079973,
+            "prompt_tokens": 18,
+            "generation_tokens": 39,
+            "peak_memory_gb": 2.808642916,
+            "peak_memory_bytes": 2808642916,
+            "active_memory_bytes": 2668706900,
+            "rss_bytes": 2983051264,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 155713536,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 67108864,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.27631578947368424,
+            "fallback_rate": 0.0,
+            "cycles": 19,
+            "policy": null,
+            "draft_accepted_tokens": 21,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 4,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        },
+        {
+          "prompt_id": "code",
+          "run_id": "a7676d4180544132bc528ddbc815f789",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-4b",
+          "text": "Sure! Here's a simple Python function that takes an integer as input and returns its square:\n\n```python\ndef square(n):\n    return n ** 2\n```\n\n### Example usage:\n\n```python\nresult = square(5)\nprint(result)  # Output: 25\n```\n\nThis function works",
+          "token_ids": [
+            39814,
+            0,
+            5692,
+            594,
+            264,
+            4285,
+            13027,
+            729,
+            429,
+            4990,
+            458,
+            7546,
+            438,
+            1946,
+            323,
+            4675,
+            1181,
+            9334,
+            1447,
+            73594,
+            12669,
+            198,
+            750,
+            9334,
+            1445,
+            982,
+            262,
+            470,
+            308,
+            3070,
+            220,
+            17,
+            198,
+            13874,
+            19324,
+            14374,
+            13383,
+            10431,
+            1447,
+            73594,
+            12669,
+            198,
+            1382,
+            284,
+            9334,
+            7,
+            20,
+            340,
+            1350,
+            4456,
+            8,
+            220,
+            671,
+            9258,
+            25,
+            220,
+            17,
+            20,
+            198,
+            13874,
+            19324,
+            1986,
+            729,
+            4278
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "length",
+          "metrics": {
+            "load_ms": 0.43216696940362453,
+            "ttft_ms": 82.80774997547269,
+            "total_ms": 552.2033330053091,
+            "prefill_ms": 51.97254102677107,
+            "prompt_tps": 442.5413794594475,
+            "decode_tps": 134.21515301305146,
+            "prompt_tokens": 24,
+            "generation_tokens": 64,
+            "peak_memory_gb": 2.857450876,
+            "peak_memory_bytes": 2857450876,
+            "active_memory_bytes": 2667805804,
+            "rss_bytes": 2983346176,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 157286400,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 67108864,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.7230769230769231,
+            "fallback_rate": 0.0,
+            "cycles": 17,
+            "policy": null,
+            "draft_accepted_tokens": 47,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        },
+        {
+          "prompt_id": "short",
+          "run_id": "dbebe4b2f0644690afd908371fcddc8c",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-4b",
+          "text": "2",
+          "token_ids": [
+            17,
+            151645
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.29624998569488525,
+            "ttft_ms": 82.06741604954004,
+            "total_ms": 111.8634999729693,
+            "prefill_ms": 51.60704196896404,
+            "prompt_tps": 445.675611747559,
+            "decode_tps": 33.56145735694079,
+            "prompt_tokens": 24,
+            "generation_tokens": 2,
+            "peak_memory_gb": 2.85730342,
+            "peak_memory_bytes": 2857303420,
+            "active_memory_bytes": 2668706924,
+            "rss_bytes": 2983395328,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 157286400,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 67108864,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.125,
+            "fallback_rate": 0.0,
+            "cycles": 2,
+            "policy": null,
+            "draft_accepted_tokens": 1,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        }
+      ],
+      "measured": [
+        {
+          "prompt_id": "zh",
+          "run_id": "238089cdde86404281a7b53a9d662621",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-4b",
+          "text": "统一内存（Unified Memory）是一种允许CPU和GPU共享同一块内存空间的内存管理技术，使得程序可以无需显式管理内存分配，从而简化编程并提高性能。",
+          "token_ids": [
+            103967,
+            111390,
+            9909,
+            85379,
+            13850,
+            7552,
+            101158,
+            102496,
+            31615,
+            33108,
+            49891,
+            101203,
+            102700,
+            99922,
+            111390,
+            101054,
+            9370,
+            111390,
+            39352,
+            99361,
+            3837,
+            104193,
+            74220,
+            73670,
+            106431,
+            99580,
+            28330,
+            39352,
+            111390,
+            104675,
+            3837,
+            101982,
+            110487,
+            110569,
+            62926,
+            100627,
+            102111,
+            1773,
+            151645
+          ],
+          "prompt_tokens": 18,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.21254201419651508,
+            "ttft_ms": 81.58833300694823,
+            "total_ms": 619.6988329757005,
+            "prefill_ms": 51.21004197280854,
+            "prompt_tps": 331.96614072346676,
+            "decode_tps": 70.6174661193317,
+            "prompt_tokens": 18,
+            "generation_tokens": 39,
+            "peak_memory_gb": 2.808642916,
+            "peak_memory_bytes": 2808642916,
+            "active_memory_bytes": 2668706900,
+            "rss_bytes": 2983428096,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 155713536,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 67108864,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.27631578947368424,
+            "fallback_rate": 0.0,
+            "cycles": 19,
+            "policy": null,
+            "draft_accepted_tokens": 21,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 4,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        },
+        {
+          "prompt_id": "code",
+          "run_id": "ed9f8b5b6f38406986ee5ee37b00df52",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-4b",
+          "text": "Sure! Here's a simple Python function that takes an integer as input and returns its square:\n\n```python\ndef square(n):\n    return n ** 2\n```\n\n### Example usage:\n\n```python\nresult = square(5)\nprint(result)  # Output: 25\n```\n\nThis function works",
+          "token_ids": [
+            39814,
+            0,
+            5692,
+            594,
+            264,
+            4285,
+            13027,
+            729,
+            429,
+            4990,
+            458,
+            7546,
+            438,
+            1946,
+            323,
+            4675,
+            1181,
+            9334,
+            1447,
+            73594,
+            12669,
+            198,
+            750,
+            9334,
+            1445,
+            982,
+            262,
+            470,
+            308,
+            3070,
+            220,
+            17,
+            198,
+            13874,
+            19324,
+            14374,
+            13383,
+            10431,
+            1447,
+            73594,
+            12669,
+            198,
+            1382,
+            284,
+            9334,
+            7,
+            20,
+            340,
+            1350,
+            4456,
+            8,
+            220,
+            671,
+            9258,
+            25,
+            220,
+            17,
+            20,
+            198,
+            13874,
+            19324,
+            1986,
+            729,
+            4278
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "length",
+          "metrics": {
+            "load_ms": 0.22466597147285938,
+            "ttft_ms": 82.63299998361617,
+            "total_ms": 551.6119999811053,
+            "prefill_ms": 52.077332977205515,
+            "prompt_tps": 441.65088120137034,
+            "decode_tps": 134.3343731816079,
+            "prompt_tokens": 24,
+            "generation_tokens": 64,
+            "peak_memory_gb": 2.85730342,
+            "peak_memory_bytes": 2857303420,
+            "active_memory_bytes": 2667805804,
+            "rss_bytes": 2983444480,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 157286400,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 67108864,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.7230769230769231,
+            "fallback_rate": 0.0,
+            "cycles": 17,
+            "policy": null,
+            "draft_accepted_tokens": 47,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        },
+        {
+          "prompt_id": "short",
+          "run_id": "2c3ae1330e69446d9abdbe4962f1e5ef",
+          "mode": "fixed_speculative",
+          "profile": "qwen3-4b",
+          "text": "2",
+          "token_ids": [
+            17,
+            151645
+          ],
+          "prompt_tokens": 24,
+          "finish_reason": "stop",
+          "metrics": {
+            "load_ms": 0.17137499526143074,
+            "ttft_ms": 81.64716698229313,
+            "total_ms": 111.46329191979021,
+            "prefill_ms": 51.538791973143816,
+            "prompt_tps": 446.26579551932446,
+            "decode_tps": 33.53889890441092,
+            "prompt_tokens": 24,
+            "generation_tokens": 2,
+            "peak_memory_gb": 2.85730342,
+            "peak_memory_bytes": 2857303420,
+            "active_memory_bytes": 2668706924,
+            "rss_bytes": 2983444480,
+            "swap_before_bytes": 360841216,
+            "swap_after_bytes": 360841216,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 157286400,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 0,
+            "active_kv_bytes": 67108864,
+            "cache_evictions": 0,
+            "draft_acceptance": 0.125,
+            "fallback_rate": 0.0,
+            "cycles": 2,
+            "policy": null,
+            "draft_accepted_tokens": 1,
+            "calibrated_fallback": false
+          },
+          "rounds": [
+            {
+              "budget": 4,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 1,
+              "produced": 1,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3-4B-4bit",
+              "revision": "4dcb3d101c2a062e5c1d4bb173588c54ea6c4d25"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3-0.6B-4bit",
+              "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+            },
+            "minimum_memory_bytes": 4831838208,
+            "weight_bytes": 2263022529
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "kind": "diagnostic only, not a stability/performance benchmark",
+  "command": "PYTHONPATH=src .venv/bin/python tests/metal_unload_check.py",
+  "script_sha256": "88b75f0b49e9d668c8ce99640847aef0461c2c13b8525e6478cb1cd89b284e77",
+  "source_manifest_recorded": false,
+  "notes": "Original diagnostic measured the engine before explicit garbage collection was integrated into close(). It showed Metal active allocations already returned to 8 bytes after close; an additional gc.collect reduced RSS by about 10 MiB. Repeating this script against final close() includes that GC earlier. Repeated model/tokenizer reloads can retain CPU/Rust allocator arenas; steady-state same-model cache stability is reported separately."
+}

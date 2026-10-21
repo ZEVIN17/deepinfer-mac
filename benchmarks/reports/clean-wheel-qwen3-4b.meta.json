@@ -1,0 +1,10 @@
+{
+  "command": "/private/tmp/deepinfer-clean-install/bin/deepinfer-mac run --profile qwen3-4b --max-tokens 32 --json '用一句话解释 KV 缓存。'",
+  "cwd": "/private/tmp (outside the checkout)",
+  "installation": "existing clean environment, wheel installed without reinstalling dependencies",
+  "wheel": "deepinfer_mac-0.1.0a1-py3-none-any.whl",
+  "wheel_sha256": "c2fef578a8f5d654276822d59785f12509c585784d6ff9b81b747a4fdef31010",
+  "release_source_tree_sha256": "ed42df453b38070d9c4201b0b53a0a7f9a469d72c136ebc0ea84a9e6a91d25da",
+  "result_sha256": "ebf4fcd6b4a0e936258d57e8a755938ecc66b7f2b01e1dac4405873bf87a4a81",
+  "validated": "Real MLX target generation, default baseline mode, exact max32 token bound, Chinese text, swap delta zero. One smoke observation, not a performance benchmark."
+}

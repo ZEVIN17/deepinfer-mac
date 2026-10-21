@@ -1,0 +1,319 @@
+{
+  "profile": "qwen3-0.6b",
+  "checks": {
+    "non_stream": {
+      "id": "chatcmpl-1f64ba2fc08e44dd8ea38aff34ab135f",
+      "object": "chat.completion",
+      "created": 1792552106,
+      "model": "qwen3-0.6b",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "缓存是一种存储数据并快速访问的机制，用于提高应用程序性能。"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 18,
+        "completion_tokens": 17,
+        "total_tokens": 35
+      },
+      "deepinfer": {
+        "run_id": "1f64ba2fc08e44dd8ea38aff34ab135f",
+        "metrics": {
+          "load_ms": 319.3672919878736,
+          "ttft_ms": 355.0399160012603,
+          "total_ms": 396.18158305529505,
+          "prefill_ms": 29.871750040911138,
+          "prompt_tps": 569.0995665375309,
+          "decode_tps": 388.90013812483267,
+          "prompt_tokens": 18,
+          "generation_tokens": 17,
+          "peak_memory_gb": 0.5261561,
+          "peak_memory_bytes": 526156100,
+          "active_memory_bytes": 400362362,
+          "rss_bytes": 675004416,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 29360128,
+          "active_kv_bytes": 29360128,
+          "cache_evictions": 0,
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false
+        }
+      }
+    },
+    "stream": {
+      "events": 38,
+      "done": true
+    },
+    "disconnect_cancellation": {
+      "id": "273f41841fa4402590307a901f1752bd",
+      "status": "cancelled",
+      "created_at": 1792552107.510963,
+      "result": null,
+      "error": null,
+      "event_count": 8,
+      "retained_events": 8
+    },
+    "comparison_after_cancellation": {
+      "id": "645efe880fca4d63b6591ab6975ba229",
+      "status": "completed",
+      "created_at": 1792552107.5438988,
+      "result": {
+        "results": [
+          {
+            "run_id": "668f5cbde379410b86ddca1f8fd6e856",
+            "mode": "baseline",
+            "profile": "qwen3-0.6b",
+            "text": "2 + 2 = 4.",
+            "token_ids": [
+              17,
+              488,
+              220,
+              17,
+              284,
+              220,
+              19,
+              13
+            ],
+            "prompt_tokens": 20,
+            "finish_reason": "length",
+            "metrics": {
+              "load_ms": 0.19920803606510162,
+              "ttft_ms": 13.404832920059562,
+              "total_ms": 30.263207969255745,
+              "prefill_ms": 8.96787503734231,
+              "prompt_tps": 2118.6735899958276,
+              "decode_tps": 415.2238860253476,
+              "prompt_tokens": 20,
+              "generation_tokens": 8,
+              "peak_memory_gb": 0.587235668,
+              "peak_memory_bytes": 587235668,
+              "active_memory_bytes": 458558358,
+              "rss_bytes": 676282368,
+              "cache_hit_tokens": 0,
+              "cache_bytes": 88080384,
+              "active_kv_bytes": 29360128,
+              "cache_evictions": 0,
+              "draft_acceptance": null,
+              "fallback_rate": 0,
+              "cycles": 0,
+              "policy": null,
+              "draft_accepted_tokens": 0,
+              "calibrated_fallback": false
+            },
+            "rounds": [],
+            "model": {
+              "target": {
+                "repo": "mlx-community/Qwen3-0.6B-4bit",
+                "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+              },
+              "draft": {
+                "repo": "mlx-community/Qwen3-0.6B-4bit",
+                "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+              },
+              "minimum_memory_bytes": 1610612736
+            },
+            "variant": "baseline"
+          },
+          {
+            "run_id": "41b3fa9c4de546099d5999f75b1d3f48",
+            "mode": "fixed_speculative",
+            "profile": "qwen3-0.6b",
+            "text": "2 + 2 = 4.",
+            "token_ids": [
+              17,
+              488,
+              220,
+              17,
+              284,
+              220,
+              19,
+              13
+            ],
+            "prompt_tokens": 20,
+            "finish_reason": "length",
+            "metrics": {
+              "load_ms": 641.8472500517964,
+              "ttft_ms": 685.9562499448657,
+              "total_ms": 698.4809169080108,
+              "prefill_ms": 29.944957932457328,
+              "prompt_tps": 634.4974684170755,
+              "decode_tps": 558.897096473549,
+              "prompt_tokens": 20,
+              "generation_tokens": 8,
+              "peak_memory_gb": 0.997114216,
+              "peak_memory_bytes": 997114216,
+              "active_memory_bytes": 877527152,
+              "rss_bytes": 1087406080,
+              "cache_hit_tokens": 0,
+              "cache_bytes": 146800640,
+              "active_kv_bytes": 58720256,
+              "cache_evictions": 0,
+              "draft_acceptance": 1.0,
+              "fallback_rate": 0.0,
+              "cycles": 2,
+              "policy": null,
+              "draft_accepted_tokens": 6,
+              "calibrated_fallback": false
+            },
+            "rounds": [
+              {
+                "budget": 3,
+                "accepted": 3,
+                "produced": 4,
+                "fallback": false
+              },
+              {
+                "budget": 3,
+                "accepted": 3,
+                "produced": 4,
+                "fallback": false
+              }
+            ],
+            "model": {
+              "target": {
+                "repo": "mlx-community/Qwen3-0.6B-4bit",
+                "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+              },
+              "draft": {
+                "repo": "mlx-community/Qwen3-0.6B-4bit",
+                "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+              },
+              "minimum_memory_bytes": 1610612736
+            },
+            "variant": "fixed_speculative"
+          },
+          {
+            "run_id": "09c59ada8665406bba734d44cef1fa0d",
+            "mode": "adaptive",
+            "profile": "qwen3-0.6b",
+            "text": "2 + 2 = 4.",
+            "token_ids": [
+              17,
+              488,
+              220,
+              17,
+              284,
+              220,
+              19,
+              13
+            ],
+            "prompt_tokens": 20,
+            "finish_reason": "length",
+            "metrics": {
+              "load_ms": 0.1760829472914338,
+              "ttft_ms": 4.71300003118813,
+              "total_ms": 32.46983396820724,
+              "prefill_ms": 0.013708020560443401,
+              "prompt_tps": 0.0,
+              "decode_tps": 252.19014588923073,
+              "prompt_tokens": 20,
+              "generation_tokens": 8,
+              "peak_memory_gb": 0.881356988,
+              "peak_memory_bytes": 881356988,
+              "active_memory_bytes": 876281868,
+              "rss_bytes": 1087455232,
+              "cache_hit_tokens": 19,
+              "cache_bytes": 146800640,
+              "active_kv_bytes": 58720256,
+              "cache_evictions": 0,
+              "draft_acceptance": 1.0,
+              "fallback_rate": 0.4,
+              "cycles": 5,
+              "policy": {
+                "cycle_ms_per_token": {
+                  "0": 3.52750055026263,
+                  "1": 3.551187488483265,
+                  "2": 5.088353995233774
+                },
+                "acceptance_by_position": {
+                  "0": 1.0,
+                  "1": 1.0
+                }
+              },
+              "draft_accepted_tokens": 4,
+              "calibrated_fallback": false
+            },
+            "rounds": [
+              {
+                "budget": 0,
+                "accepted": 0,
+                "produced": 1,
+                "draft_ms": 0.0008749775588512421,
+                "verify_ms": 3.9016669616103172,
+                "fallback": true
+              },
+              {
+                "budget": 0,
+                "accepted": 0,
+                "produced": 1,
+                "draft_ms": 0.00037509016692638397,
+                "verify_ms": 3.152084071189165,
+                "fallback": true
+              },
+              {
+                "budget": 1,
+                "accepted": 1,
+                "produced": 2,
+                "draft_ms": 4.1566669242456555,
+                "verify_ms": 3.4204170806333423,
+                "fallback": false
+              },
+              {
+                "budget": 1,
+                "accepted": 1,
+                "produced": 2,
+                "draft_ms": 3.3225410152226686,
+                "verify_ms": 3.3051249338313937,
+                "fallback": false
+              },
+              {
+                "budget": 2,
+                "accepted": 2,
+                "produced": 2,
+                "draft_ms": 6.391540984623134,
+                "verify_ms": 3.7851670058444142,
+                "fallback": false
+              }
+            ],
+            "model": {
+              "target": {
+                "repo": "mlx-community/Qwen3-0.6B-4bit",
+                "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+              },
+              "draft": {
+                "repo": "mlx-community/Qwen3-0.6B-4bit",
+                "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+              },
+              "minimum_memory_bytes": 1610612736
+            },
+            "variant": "adaptive"
+          }
+        ],
+        "comparison": {
+          "token_ids_equal": true,
+          "all_runs_succeeded": true,
+          "speedups": {
+            "baseline": 0.9320407366076431,
+            "fixed_speculative": 21.51168735854722
+          }
+        }
+      },
+      "error": null,
+      "event_count": 33,
+      "retained_events": 33
+    }
+  },
+  "fake_engine": false,
+  "ok": true,
+  "server_exit_code": -15,
+  "evidence_stage": "Preliminary real-checkpoint check; before final text-flush fixes and runtime source manifest. Performance values are observations, not benchmark claims."
+}
