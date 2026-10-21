@@ -1,0 +1,102 @@
+{
+  "version": "0.1.0a3",
+  "verified_runtime_commit": "faa0a88a8d469fd3de74ab8281bd3aa2499887b4",
+  "remote_branches_verified": [
+    "main",
+    "codex/phase2-core"
+  ],
+  "ci_runs": [
+    {
+      "id": 39597953637,
+      "conclusion": "success",
+      "url": "https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39597953637"
+    },
+    {
+      "id": 39597954419,
+      "conclusion": "success",
+      "url": "https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39597954419"
+    }
+  ],
+  "pages": {
+    "id": 39597954394,
+    "conclusion": "success",
+    "url": "https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39597954394",
+    "site": "https://zevin17.github.io/deepinfer-mac/"
+  },
+  "artifact": {
+    "id": 12344676403,
+    "name": "alpha-release-candidates",
+    "bytes": 4866617,
+    "sha256": "d36cb43a90af363db8f0baae6aeb46fceb220d0ee7e82b9fd9be59fc4b41c3db",
+    "contains": "CI wheel/source build and site output",
+    "expired_at_verification": false
+  },
+  "live_files": {
+    "architecture.html": {
+      "matches_build": true,
+      "sha256": "afa14d0e8614e3abee3eb78a71df890c83a00fdfe08a52bc98a35a6597dfa39a",
+      "bytes": 11631
+    },
+    "benchmarks.html": {
+      "matches_build": true,
+      "sha256": "5adfce53c94d030d4d75bcc94f199b1a7d9ca4cb7709965515be95d336b7fc06",
+      "bytes": 8605
+    },
+    "compatibility.html": {
+      "matches_build": true,
+      "sha256": "0a89dd080c0fb9d24d7df3a267683ece8859cc53ff46f912d196b1e15d2b696c",
+      "bytes": 6519
+    },
+    "contribute.html": {
+      "matches_build": true,
+      "sha256": "6c71295563b72787316dc989530a9fdac4ec6bdc07a6a195cccd58e3b3a84520",
+      "bytes": 3811
+    },
+    "index.html": {
+      "matches_build": true,
+      "sha256": "02422c762ef930940c6d65d92dea5ac4a21dc03f34d4a1a85bd40a96f319078b",
+      "bytes": 15241
+    },
+    "phase2.html": {
+      "matches_build": true,
+      "sha256": "2856d54133eec96d8ec74928122a279a38d5cc2e79259ea4d64ae3590e96302a",
+      "bytes": 6007
+    },
+    "qwen27.html": {
+      "matches_build": true,
+      "sha256": "8dc5e6748b26f4c81371226a66fec8406dfbb2f1cff8f79c9f3dc0114e06c95e",
+      "bytes": 4850
+    },
+    "zh.html": {
+      "matches_build": true,
+      "sha256": "6c64ba60c91bf66032c156e5ed241e50e7535c252ee55f4e59e59c90850684f9",
+      "bytes": 14756
+    },
+    "assets/style.css": {
+      "matches_build": true,
+      "sha256": "823b7c0fc4043b6a3fdc8f354a9877014059731f66637ebd0435e278c40db326",
+      "bytes": 16135
+    },
+    "assets/showcase.js": {
+      "matches_build": true,
+      "sha256": "abb0aaceabb10649a3bef4e2e71549ce40d1f00ee745f60e45ee82778daccf0a",
+      "bytes": 6124
+    },
+    "data/native-runtime/manifest.json": {
+      "matches_build": true,
+      "sha256": "ec4c6dc8bd4aa3323fac2155a79f0026556bc54735b055a84a37b339180974f8",
+      "bytes": 508
+    },
+    "data/native-runtime/phase4-allocated-draft-summary.json": {
+      "matches_build": true,
+      "sha256": "7b6154dd2a5aafd5eb6417a1a0d3f1423301576b6e2546434a18adc1174bfacd",
+      "bytes": 1036
+    },
+    "data/native-runtime/phase4-service-verification.json": {
+      "matches_build": true,
+      "sha256": "eec553f098873e3672e8306a466c42494c8f576366aa0003ba95d6b62a4e6a30",
+      "bytes": 6227
+    }
+  },
+  "scope": "Runtime and website verified before this documentation-only evidence commit; historical first failed CPU CI retained, tests fixed without changing runtime. No PyPI upload or GitHub release tag created."
+}

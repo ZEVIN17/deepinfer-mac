@@ -24,7 +24,7 @@ The local model example requires existing audited weights; [release guide](RELEA
 
 ## Publication and next work
 
-User authorized repository push and build/deployment verification. Final commit and remote run evidence are recorded in `docs/evidence/release-publication.json` after verification. No PyPI upload or external community message is implied. Archive/model weights/private raw reports remain local under `artifacts/` and `results/`.
+Runtime commit `faa0a88` is pushed to both main and the work branch. Both portable CI runs and Pages passed; the CI artifact is uploaded. All 8 pages, CSS/JS and 3 new evidence files match the local build byte-for-byte (13/13). [Publication evidence](evidence/release-publication.json) records exact commits, run URLs and hashes. No PyPI upload or external community message is implied. Archive/model weights/private raw reports remain local under `artifacts/` and `results/`.
 
 First-version functionality is complete; future work is a separate iteration: native prefix reuse, fair multi-engine arrival traces, broader model/quality coverage and cost-calibrated automatic strategy selection. See [technical scope](RELEASE.md), not a blocker to this usable release.
 
