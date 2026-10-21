@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "stage": "phase3",
+  "repo": "mlx-community/SmolLM2-135M-Instruct-8bit",
+  "revision": "0f0d9b8218915bc34d401e1a340b8c049d300d5e",
+  "source": "https://huggingface.co/mlx-community/SmolLM2-135M-Instruct-8bit/tree/0f0d9b8218915bc34d401e1a340b8c049d300d5e",
+  "license": {
+    "spdx": "Apache-2.0",
+    "official_api_card": "apache-2.0",
+    "pinned_model_card_declares_license": true,
+    "license_file_present": false,
+    "evidence": "Pinned official model card and official HF API card; no standalone LICENSE file is published in this snapshot."
+  },
+  "architecture": [
+    "LlamaForCausalLM"
+  ],
+  "model_type": "llama",
+  "quantization": {
+    "group_size": 64,
+    "bits": 8
+  },
+  "hidden_size": 576,
+  "layers": 30,
+  "attention_heads": 9,
+  "kv_heads": 3,
+  "head_dim": 64,
+  "vocab_size": 49152,
+  "native_context_limit": 8192,
+  "example_context_limit": 4096,
+  "download": {
+    "destination": "results/phase3-models/smollm2-135m-instruct-8bit",
+    "global_hf_cache_modified": false,
+    "gitignored": true,
+    "required_files": 9,
+    "total_bytes": 147875570,
+    "weight_bytes": 143030401,
+    "maximum_allowed_weight_bytes": 500000000,
+    "all_official_lfs_or_git_blob_hashes_verified": true,
+    "files": [
+      {
+        "path": "README.md",
+        "size_bytes": 965,
+        "sha256": "791e1fe2d85f7a5ac40517a2f553f9f132d6e6ba883303012116217d6bcad87d",
+        "official_git_blob": "1ebbdf6d12c36165f3c291974a8e296562039c3c",
+        "official_lfs_sha256": null
+      },
+      {
+        "path": "config.json",
+        "size_bytes": 1097,
+        "sha256": "5da91905efdfde905f566d76d4031e6ca7c4cb2a01dc4e3812a70b855188fc73",
+        "official_git_blob": "3fc6789433d2493046392d99ca3fe5249e2d1f90",
+        "official_lfs_sha256": null
+      },
+      {
+        "path": "merges.txt",
+        "size_bytes": 466391,
+        "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+        "official_git_blob": "69503b13f727ba3812b6803e97442a6de05ef5eb",
+        "official_lfs_sha256": null
+      },
+      {
+        "path": "model.safetensors",
+        "size_bytes": 143030401,
+        "sha256": "ec569c771e56424636be99625aba9031abc525a68a5f4ab16d678eca96fef12c",
+        "official_git_blob": "660883a59c5fb9e652ee7c2d9772ff5b928e4abd",
+        "official_lfs_sha256": "ec569c771e56424636be99625aba9031abc525a68a5f4ab16d678eca96fef12c"
+      },
+      {
+        "path": "model.safetensors.index.json",
+        "size_bytes": 48979,
+        "sha256": "d016e7514e8bfed162eb9d0716c73244c1b73792db3143e92e54138c1772db44",
+        "official_git_blob": "dcae9bf3e7a3071a0229270951adeff679fbe3e6",
+        "official_lfs_sha256": null
+      },
+      {
+        "path": "special_tokens_map.json",
+        "size_bytes": 655,
+        "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+        "official_git_blob": "44719d2e365acac0637fd25a3acf46494ca45940",
+        "official_lfs_sha256": null
+      },
+      {
+        "path": "tokenizer.json",
+        "size_bytes": 3522656,
+        "sha256": "7d27c493c729a66ecefc837280b05d948b1ed50d130eebdbf911b1b36cf38ed7",
+        "official_git_blob": "a7d434dcaa7ae62910bed536fb292282905c9b44",
+        "official_lfs_sha256": null
+      },
+      {
+        "path": "tokenizer_config.json",
+        "size_bytes": 3764,
+        "sha256": "a27f638bd2831f5c3dea654a75838930f2b11fbe550c4d4e1d5d7bd07157b2ee",
+        "official_git_blob": "76b6b266c3d0a53828e0fdd281dd9bb76d0bed78",
+        "official_lfs_sha256": null
+      },
+      {
+        "path": "vocab.json",
+        "size_bytes": 800662,
+        "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+        "official_git_blob": "0ad5ecc2035b7031b88afb544ee95e2d49baa484",
+        "official_lfs_sha256": null
+      }
+    ]
+  },
+  "safetensors": {
+    "tensor_count": 694,
+    "tensor_bytes": 142955136,
+    "header_bytes": 75257,
+    "all_tensor_shapes_match_dtype_offsets": true,
+    "index_exact_coverage": true,
+    "data_regions_contiguous_nonoverlapping": true,
+    "file_end_exact": true,
+    "content_identity_sha256": "a4f7f71502edccf61c70717a7edb5368266a104f0c45cc1c0ed72cfb7ea27981",
+    "mtp_keys": []
+  },
+  "tokenizer": {
+    "vocab_size": 49152,
+    "special_ids": {
+      "bos_token": 1,
+      "eos_token": 2,
+      "pad_token": 2,
+      "unk_token": 0
+    },
+    "chat_template_sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788",
+    "fixtures": [
+      {
+        "fixture": "english",
+        "prompt_tokens": 36,
+        "rendered_prompt_sha256": "91a8d59969550d84301416e5ef3a8d9bf019960b9a918fdbbd5cb93f4894c62a",
+        "token_ids_sha256": "5fdf592976b04116b7051f1dcf6764f41f69671f4c57552067df328cc085642a",
+        "roundtrip_equal": true
+      },
+      {
+        "fixture": "chinese",
+        "prompt_tokens": 47,
+        "rendered_prompt_sha256": "995606f394d1b0453db7e85cd08f8aa0938b7f1388bc1051c902394e62765b17",
+        "token_ids_sha256": "57f12738e58fad98474d4306a379a1ee04c0f162b5bdc4ba0d04baafe089902f",
+        "roundtrip_equal": true
+      }
+    ],
+    "trust_remote_code": false
+  },
+  "resource_estimate": {
+    "weights_bytes": 143030401,
+    "kv_dtype_assumption": "float16/bfloat16, 2 bytes per scalar",
+    "kv_bytes_per_token": 23040,
+    "kv_4096_bytes": 94371840,
+    "runtime_reserve_bytes": 2147483648,
+    "estimate_includes_weights_full_4096_kv_and_reserve_bytes": 2384885889,
+    "measured_metal_peak": null,
+    "scope": "Planning estimate, not a measured peak or resource-admission guarantee."
+  },
+  "verification": {
+    "weights_loaded": false,
+    "mlx_imported": false,
+    "metal_invoked": false,
+    "baseline_runtime_verified": false,
+    "performance_measured": false,
+    "scope": "Official identity, integrity, CPU tokenizer and metadata preflight only.",
+    "local_and_repo_cli_registration_verified": true
+  },
+  "reproduce": {
+    "cwd": "repository root",
+    "local_registration": "examples/models/smollm2-135m-8bit.local.json",
+    "remote_identity_registration": "examples/models/smollm2-135m-8bit.repo.json",
+    "audit_command": ".venv/bin/python scripts/audit_model_snapshot.py --snapshot results/phase3-models/smollm2-135m-instruct-8bit --api artifacts/phase3-model-audit/smollm2-135m-8bit-api.json --output artifacts/phase3-model-audit/smollm2-header-audit.json",
+    "local_model_list_command": ".venv/bin/python -m deepinfer_mac.cli models --model-config examples/models/smollm2-135m-8bit.local.json",
+    "notes": "Local source paths resolve from current working directory. Local identity derives from complete content SHA; remote example is commit-pinned and registration does not download."
+  }
+}

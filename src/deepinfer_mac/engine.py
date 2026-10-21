@@ -3,15 +3,15 @@
 from __future__ import annotations
 
 import gc
-import hashlib
 import json
 import threading
 import time
 import uuid
 from dataclasses import asdict
 
+from .adapters import ModelAdapter, ModelRegistry, inspect_snapshot
 from .cache import NativePromptCacheStore, PromptCacheStore, cache_bytes
-from .models import download_models, get_profile, validate_initial_budget, verify_pair
+from .models import download_models, validate_initial_budget
 from .policy import AdaptivePolicy, DSAdaptivePolicy, FixedPolicy
 from .sampling import generation_sampling, sampling_parameters
 from .state import GenerationResult
@@ -34,13 +34,7 @@ def read_swap_bytes():
 
 def attention_config(config):
     """Resolve actual attention KV geometry for flat or hybrid text metadata."""
-    text = dict(config.get("text_config", config))
-    if text.get("model_type") == "qwen3_5_text" or config.get("model_type") == "qwen3_5":
-        if "layer_types" in text:
-            text["num_hidden_layers"] = sum(kind == "full_attention" for kind in text["layer_types"])
-        else:
-            text["num_hidden_layers"] //= text["full_attention_interval"]
-    return text
+    return ModelAdapter({}).attention_config(config)
 
 
 class InferenceEngine:
@@ -51,6 +45,7 @@ class InferenceEngine:
         experimental_hybrid_speculation=False,
         message_checkpoints=False,
         hybrid_cost_adapter="original",
+        model_registry=None,
     ):
         if checkpoint_interval_tokens < 0:
             raise ValueError("checkpoint_interval_tokens must be nonnegative")
@@ -82,6 +77,9 @@ class InferenceEngine:
         self.model = self.draft_model = self.tokenizer = None
         self.profile = None
         self.paths = {}
+        self.model_registry = model_registry or ModelRegistry()
+        self.resolved_identity = None
+        self._snapshot_signatures = {}
         self.lock = threading.Lock()
         self.policies = {}
         self.disabled_draft = {}
@@ -114,8 +112,10 @@ class InferenceEngine:
         import psutil
         from mlx_lm import load
 
-        spec = get_profile(profile)
-        validate_initial_budget(profile, self.memory_limit_bytes, speculative)
+        spec = self.model_registry.get(profile)
+        custom = spec.get("custom_model", False)
+        if not custom:
+            validate_initial_budget(profile, self.memory_limit_bytes, speculative)
         if self.memory_limit_bytes is not None:
             # MLX documents this as an allocator guideline, not a hard cap.
             mx.set_memory_limit(self.memory_limit_bytes)
@@ -123,6 +123,8 @@ class InferenceEngine:
             self.clear_cache()
             self.model = self.draft_model = self.tokenizer = None
             self.profile = profile
+            self.resolved_identity = None
+            self._snapshot_signatures = {}
             gc.collect()
             mx.clear_cache()
         if self.model is None:
@@ -130,35 +132,66 @@ class InferenceEngine:
                 raise MemoryError(
                     "Insufficient available unified memory for this profile; close apps or use qwen3-0.6b"
                 )
-            self.paths = download_models(profile, include_draft=speculative)
+            self.paths = (download_models(profile, include_draft=speculative, registry=self.model_registry)
+                          if custom else download_models(profile, include_draft=speculative))
+            if custom:
+                self._audit_custom_snapshots(spec, speculative)
             self.model, self.tokenizer = load(self.paths["target"], trust_remote_code=False)
             mx.eval(self.model.parameters())
         if speculative and self.draft_model is None:
-            self.paths.update(download_models(profile, include_draft=True))
-            verify_pair(self.paths["target"], self.paths["draft"])
+            self.paths.update(download_models(profile, include_draft=True, registry=self.model_registry)
+                              if custom else download_models(profile, include_draft=True))
+            if custom:
+                self._audit_custom_snapshots(spec, True)
+            self.model_registry.adapter(profile).draft.verify(self.paths["target"], self.paths["draft"])
             self.draft_model, _ = load(self.paths["draft"], trust_remote_code=False)
             mx.eval(self.draft_model.parameters())
 
+    def _audit_custom_snapshots(self, spec, speculative):
+        from pathlib import Path
+
+        import psutil
+
+        audits = {}
+        for kind in ("target", "draft") if speculative else ("target",):
+            audit = inspect_snapshot(self.paths[kind])
+            ModelAdapter(spec).attention_config(audit["config"])
+            expected = spec.get(f"{kind}_content_sha256")
+            if expected and audit["content_sha256"] != expected:
+                raise ValueError("Local model content changed after registration; register a fresh ModelSpec")
+            audits[kind] = audit
+            self._snapshot_signatures[kind] = {
+                name: ((Path(self.paths[kind]) / name).stat().st_size,
+                       (Path(self.paths[kind]) / name).stat().st_mtime_ns)
+                for name in audit["files"]
+            }
+        if speculative:
+            ModelAdapter(spec).draft.verify(self.paths["target"], self.paths["draft"])
+        required = sum(a["weight_bytes"] for a in audits.values()) + spec["runtime_reserve_bytes"]
+        if self.memory_limit_bytes is not None and required > self.memory_limit_bytes:
+            raise MemoryError(f"Resolved weights and runtime reserve need {required} bytes; explicit budget is {self.memory_limit_bytes}")
+        if self.model is None and required > psutil.virtual_memory().available * 0.85:
+            raise MemoryError(f"Resolved weights and reserve need {required} bytes; insufficient available memory")
+        self.resolved_identity = {kind: audit["content_sha256"] for kind, audit in audits.items()}
+        self.model_registry.bind_snapshots(spec["id"], audits)
+
+    def _check_snapshot_unchanged(self):
+        from pathlib import Path
+
+        for kind, signatures in self._snapshot_signatures.items():
+            for name, signature in signatures.items():
+                file = Path(self.paths[kind]) / name
+                if not file.is_file() or (file.stat().st_size, file.stat().st_mtime_ns) != signature:
+                    self.clear_cache()
+                    raise ValueError("Loaded model files changed; close engine and register a fresh ModelSpec")
+
     def _tokens(self, request):
-        messages = request.messages or [{"role": "user", "content": request.prompt}]
-        messages = [m if isinstance(m, dict) else m.model_dump() for m in messages]
-        return list(
-            self.tokenizer.apply_chat_template(
-                messages, tokenize=True, add_generation_prompt=True, enable_thinking=request.enable_thinking
-            )
-        )
+        return self.model_registry.adapter(request.profile).tokenize(self.tokenizer, request)
 
     def _identity(self, request, speculative):
-        spec = get_profile(request.profile)
-        data = {
-            "target": spec["target"],
-            "draft": spec["draft"] if speculative else None,
-            "template": self.tokenizer.chat_template,
-            "thinking": request.enable_thinking,
-            "quantization": spec.get("quantization", "4-bit, group size 64"),
-            "kv": "exact",
-        }
-        return hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()
+        return self.model_registry.adapter(request.profile).identity(
+            self.tokenizer, request, speculative, self.resolved_identity,
+        )
 
     def generate(self, request, emit=None, cancel=None):
         with self.lock:
@@ -270,21 +303,25 @@ class InferenceEngine:
 
         start = time.perf_counter()
         cache_timings_before = asdict(self.cache.timings) if hasattr(self.cache, "timings") else {}
-        spec = get_profile(request.profile)
-        supported_modes = spec.get("supported_modes", ["baseline", "fixed_speculative", "adaptive"])
+        spec = self.model_registry.get(request.profile)
+        requested_mode = request.mode
         experimental_hybrid = (
             self.experimental_hybrid_speculation and spec.get("experimental_speculation", False)
             and request.mode in ("adaptive", "fixed_speculative")
         )
-        if request.mode != "native_mlx" and request.mode not in supported_modes and not experimental_hybrid:
-            raise ValueError(
-                f"{request.profile} supports only {supported_modes}; compatible draft/MTP unavailable"
-            )
+        selected_mode, capability_fallback = ModelAdapter(spec).select_mode(
+            request.mode, fallback=request.fallback_to_baseline, experimental=experimental_hybrid,
+        )
+        if selected_mode != request.mode:
+            from dataclasses import replace
+            request = replace(request, mode=selected_mode)
+        self._check_snapshot_unchanged()
         swap_before = read_swap_bytes()
         if cancel is not None and cancel.is_set():
             raise InterruptedError("Request cancelled")
         load_start = time.perf_counter()
         self._load(request.profile, False)
+        spec = self.model_registry.get(request.profile)
         tokens = self._tokens(request)
         hybrid_cost_applicable = (
             request.mode == "adaptive" and spec.get("hybrid_cache", False)
@@ -327,25 +364,11 @@ class InferenceEngine:
         text_cfg = cfg.get("text_config", cfg)
         if request.top_k and request.top_k >= text_cfg["vocab_size"]:
             raise ValueError("top_k must be smaller than the model vocabulary")
-        cfg = attention_config(cfg)
-        kv_estimate = (
-            (len(tokens) + request.max_tokens + 512)
-            * cfg["num_hidden_layers"]
-            * cfg["num_key_value_heads"]
-            * cfg["head_dim"]
-            * 4
-        )
+        adapter = self.model_registry.adapter(request.profile)
+        kv_estimate = adapter.memory_estimate(cfg, len(tokens) + request.max_tokens + 512)
         if speculative:
-            draft_cfg = attention_config(json.loads((Path(self.paths["draft"]) / "config.json").read_text()))
-            kv_estimate += (
-                (len(tokens) + request.max_tokens + 512)
-                * draft_cfg["num_hidden_layers"]
-                * draft_cfg["num_key_value_heads"]
-                * draft_cfg["head_dim"]
-                * 4
-            )
-        if text_cfg.get("model_type") == "qwen3_5_text":
-            kv_estimate += 2 * 1024**3
+            draft_cfg = json.loads((Path(self.paths["draft"]) / "config.json").read_text())
+            kv_estimate += adapter.memory_estimate(draft_cfg, len(tokens) + request.max_tokens + 512)
         if (
             self.memory_limit_bytes is not None
             # Retained snapshot arrays already belong to MLX active memory.
@@ -415,7 +438,7 @@ class InferenceEngine:
                         tokens[-1:], self.model, self.draft_model, target_cache, draft_cache,
                         hybrid_policy, request.max_tokens, rounds, cancel,
                         memory_pressure=lambda: psutil.virtual_memory().available < 2 * 1024**3,
-                        diagnostics=self.round_diagnostics,
+                        diagnostics=self.round_diagnostics, cache_adapter=adapter.cache,
                     )
                 elif request.mode == "adaptive" and speculative:
                     generator = adaptive_generate_step(
@@ -533,6 +556,11 @@ class InferenceEngine:
         swap_after = read_swap_bytes()
         metrics = {
             "sampling": sampling_parameters(request),
+            "requested_mode": requested_mode,
+            "effective_mode": request.mode,
+            "capability_fallback": capability_fallback,
+            "model_identity": identity,
+            "cache_capabilities": adapter.cache.capabilities(caches) if caches and spec.get("custom_model") else {},
             "enable_thinking": request.enable_thinking,
             "load_ms": load_ms,
             "ttft_ms": (first_at - start) * 1000 if first_at else None,
@@ -597,5 +625,5 @@ class InferenceEngine:
             finish,
             metrics,
             rounds,
-            get_profile(request.profile),
+            self.model_registry.public_metadata(self.model_registry.get(request.profile)),
         )

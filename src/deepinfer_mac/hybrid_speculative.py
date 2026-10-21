@@ -28,7 +28,7 @@ def restore_cache(caches, snapshot):
 def hybrid_generate_step(
     prompt, model, draft_model, model_cache, draft_cache, policy, max_tokens,
     rounds, cancel=None, memory_pressure=None, diagnostics=True,
-    verification_hook=None,
+    verification_hook=None, cache_adapter=None,
 ):
     """Yield (token, accepted) while keeping the final output token unconsumed.
 
@@ -43,6 +43,8 @@ def hybrid_generate_step(
         raise ValueError("Hybrid adapter expects one unconsumed prompt-tail token")
     if hasattr(policy, "capture_replay"):
         policy.capture_replay = diagnostics
+    take_snapshot = cache_adapter.snapshot if cache_adapter is not None else snapshot_cache
+    apply_snapshot = cache_adapter.restore if cache_adapter is not None else restore_cache
     y = int(prompt[0])
     pending = []
     emitted = 0
@@ -68,7 +70,7 @@ def hybrid_generate_step(
             target_snapshot = draft_snapshot = None
             begin = time.perf_counter()
             if budget:
-                target_snapshot, draft_snapshot = snapshot_cache(model_cache), snapshot_cache(draft_cache)
+                target_snapshot, draft_snapshot = take_snapshot(model_cache), take_snapshot(draft_cache)
             snapshot_ms = (time.perf_counter() - begin) * 1000
             begin = time.perf_counter()
             draft_arrays = []
@@ -124,7 +126,7 @@ def hybrid_generate_step(
                     # Target verified old_y + all proposed drafts. Only keep it
                     # when that is precisely the already-consumed prefix.
                     if len(actual) != budget + 1:
-                        restore_cache(model_cache, target_snapshot)
+                        apply_snapshot(model_cache, target_snapshot)
                         replay(model, model_cache, consumed)
                         restored_target = len(consumed)
                     if len(actual) == budget:
@@ -135,7 +137,7 @@ def hybrid_generate_step(
                         # by the draft model. Batch it into the next first step.
                         pending = draft[-1:]
                     else:
-                        restore_cache(draft_cache, draft_snapshot)
+                        apply_snapshot(draft_cache, draft_snapshot)
                         replay(draft_model, draft_cache, [*old_pending, *consumed])
                         restored_draft = len(old_pending) + len(consumed)
                         pending = []
@@ -165,8 +167,8 @@ def hybrid_generate_step(
             # Snapshot restoration preserves container identity. The engine
             # discards request-local caches; no invented acceptance is recorded.
             if target_snapshot is not None:
-                restore_cache(model_cache, target_snapshot)
+                apply_snapshot(model_cache, target_snapshot)
             if draft_snapshot is not None:
-                restore_cache(draft_cache, draft_snapshot)
+                apply_snapshot(draft_cache, draft_snapshot)
             if hasattr(policy, "abort_cycle"):
                 policy.abort_cycle()

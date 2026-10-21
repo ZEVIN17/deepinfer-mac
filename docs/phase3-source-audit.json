@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-21",
+  "scope": "Read-only source inspection for planning; no dependency upgrade or performance validation",
+  "files": [
+    {
+      "path": "deepinfer/model_executor/layers/tilelang_ops/cuda/schedule_mtp_varlen.py",
+      "blob_sha": "34f0d7f852dfe552965c40e817a3841be515a219",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9"
+    },
+    {
+      "path": "deepinfer/model_executor/models/mtp/dflash.py",
+      "blob_sha": "c8f59022682c1a34956e022b26fa61edae50d934",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9"
+    },
+    {
+      "path": "deepinfer/worker/worker.py",
+      "blob_sha": "fdf47ad841a719a5a6aff407479fc6ea932bc0ff",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9"
+    },
+    {
+      "path": "csrc/engine/zos.cpp",
+      "blob_sha": "949b5e14a7abc4ce83ef2928036976229ce74283",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9"
+    },
+    {
+      "path": "csrc/engine/scheduler.hpp",
+      "blob_sha": "ed6e897fa06a71c7823b8aaf0cfa4efcfb005510",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9"
+    },
+    {
+      "path": "csrc/engine/block_manager.hpp",
+      "blob_sha": "51b92aa81ead541d790dbb3ef9b317d574a37d2c",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9"
+    },
+    {
+      "path": "deepinfer/model_executor/models/v4_modules/yoco.py",
+      "blob_sha": "806ed4e83003e5cc04851fffd09cee319f7cc0ff",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9"
+    },
+    {
+      "path": "deepinfer/worker/cache_engine.py",
+      "blob_sha": "c21a5351fd462da8eb73c8e87f9f77899f2a3385",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9"
+    },
+    {
+      "path": "deepinfer/model_executor/eplb/policy.py",
+      "blob_sha": "25e7877054e4604f1e3635f23a3e47bfd3246ecd",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9"
+    },
+    {
+      "path": "src/mlx_dspark/calibrate.py",
+      "blob_sha": "d2421908b42798c7cca49972ea0f01fcc8a087bd",
+      "repository": "ARahim3/mlx-dspark",
+      "commit": "d6042f38f0aa7dd3e03a2a406111d725056d45a3"
+    },
+    {
+      "path": "src/mlx_dspark/batch_engine.py",
+      "blob_sha": "eb64eefe4d8fe4c8d2cab9cd9198d3d257f59e60",
+      "repository": "ARahim3/mlx-dspark",
+      "commit": "d6042f38f0aa7dd3e03a2a406111d725056d45a3"
+    },
+    {
+      "path": "src/mlx_dspark/generate.py",
+      "blob_sha": "405ccbb5935184a76e593ebc420dae365b049580",
+      "repository": "ARahim3/mlx-dspark",
+      "commit": "d6042f38f0aa7dd3e03a2a406111d725056d45a3"
+    },
+    {
+      "path": "csrc/engine/mtp_varlen.hpp",
+      "blob_sha": "09af680aa42b724fe86315007a160d5012a1fde9",
+      "repository": "deepseek-ai/DeepInfer",
+      "commit": "9bd9cf243fc53ef9afbf8f04d391d989117d6ab9",
+      "note": "Matches existing phase2 vendor blob"
+    }
+  ]
+}

@@ -25,7 +25,7 @@ deepinfer-mac = "deepinfer_mac.cli:main"
 packages = ["src/deepinfer_mac"]
 
 [tool.hatch.build.targets.sdist]
-include = ["/src", "/tests", "/docs", "/benchmarks", "/models.lock.json", "/upstream.lock.json", "/README*", "/LICENSE", "/NOTICE", "/third_party", "/pyproject.toml", "/uv.lock", "/site", "/scripts", "/.github", "/CONTRIBUTING.md"]
+include = ["/src", "/tests", "/docs", "/benchmarks", "/examples", "/models.lock.json", "/upstream.lock.json", "/README*", "/LICENSE", "/NOTICE", "/third_party", "/pyproject.toml", "/uv.lock", "/site", "/scripts", "/.github", "/CONTRIBUTING.md"]
 
 [tool.hatch.build]
 exclude = ["docs/CODEX_*", "docs/PROGRESS.md", "site/dist", "benchmark-results", "benchmarks/results", "docs/evidence/*.log", "results", "**/quality-cache/**", "**/*.safetensors", "**/*.gguf"]

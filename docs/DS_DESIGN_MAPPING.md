@@ -173,3 +173,29 @@ portable回归通过真实hybrid与trimmable生成器分别验证：legacy/DS/la
 ```
 
 同档案的API入口已冻结，可从对应提取目录、以原venv解释器及`PYTHONPATH=src`运行 `benchmarks/experiments/deepinfer_service_server.py --port 8082 --experimental-hybrid-speculation --adaptive-scheduler ds --hybrid-cost-adapter lagged_mean --prefill-step-size 512`，默认diagnostics关闭，公共registry门槛不变。该服务runtime不依赖此次离线verifier修复；未来内存核验probe须用包含修复的新档案。硬件执行仍由root统一分配。
+
+
+## Phase3 section 2: accepted model capability interfaces
+
+The config-driven `ModelSpec`, `ModelRegistry`, `ModelAdapter`, `CacheAdapter` and
+`DraftProvider` contracts are **Mac platform capability/integration layers**, not
+new DeepInfer algorithms or upstream MLX APIs. MLX-LM remains responsible for
+model execution, tokenization, sampling and native cache machinery. Local file
+identity, exact repo registration, metadata redaction, resource guards and explicit
+baseline fallback are framework engineering. No trained DS ConfidenceHead, batch
+rank/remap allocator, true variable-length verifier or ZOS overlap is added here.
+
+The adapter separates chat/vocabulary/geometry, cache trim versus audited exact
+snapshot/restore, and draft compatibility from existing DS scheduling. The
+DeepInfer-derived expected-yield/cost core and its two-generation history semantics
+remain unchanged; the new cache interface guards existing Mac hybrid recovery.
+Probe method availability never enables an unverified optimized mode.
+
+Accepted real execution is limited to SmolLM2-135M-Instruct 8bit dense baseline:
+9 integration steps cover native full-token equality, cache branches, cancellation,
+exact KV snapshot/restore logits and consistent Python/CLI/API/SSE identity.
+273 portable checks and 41 tiny real-Metal regressions pass; historical pretrained
+hybrid reports are not relabeled current-source optimized-path acceptance.
+See `benchmarks/reports/phase3-model-adapter-integration.json` and
+`docs/evidence/phase3-adapter-checkpoint.json`. This validates a replaceable model
+boundary; it provides no new speed comparison or broad architecture-support claim.

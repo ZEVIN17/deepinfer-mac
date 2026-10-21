@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "review_type": "fresh_anti_pattern_check",
+  "phase": "phase3-section2-model-adapters-and-product-candidate",
+  "reviewer": "phase3_adapter_antipattern",
+  "status": "passed",
+  "findings": [],
+  "source_sha256": {
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/cli.py": "aaa4b3b2f1211f0daf76cdaaad01c3f38ed65bf6012f5efda5f7ec2dba5d22f7",
+    "src/deepinfer_mac/state.py": "649cfc41f5792e6b5b786c964aa6c6adf8f32340d43603b848e533a99928ab26",
+    "src/deepinfer_mac/server/app.py": "8ad4a3241c9aec48ae8c6e57cc94dda12b984075887f6216d4fe850bb070c40e",
+    "src/deepinfer_mac/server/schemas.py": "624e618c20fc2c9f7500c5835849f2092fcdbabbcc7fa2910d317cf795bf86bd",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "tests/test_model_adapters.py": "a39f7de9f2f0fbb33245e72e950c985a828329f88646ead7ea839140e1c231da",
+    "docs/MODEL_ADAPTERS.md": "41af1223b86d68378df185ef6c2dba6304601e5a47faf66177386130dd51c535",
+    "README.md": "a923863d0f9d2bc92ee379383f25e5b2abde67d11677cff6a98fcf735f2819dc",
+    "README.zh-CN.md": "6ae046986c41aee01aa70ecf27876145a0a5a3798d50fa278df52a684c76e798",
+    "site/README.md": "c6358aba6ae585a925924e27d15566f061c50683c17a856cc418ec9c5d2537b6",
+    "site/build.py": "938c2872f9063c3e444b3a813ba47e1cfe5c61f91f74fe18562db2f0ad76c399",
+    "site/assets/style.css": "823b7c0fc4043b6a3fdc8f354a9877014059731f66637ebd0435e278c40db326",
+    "site/assets/showcase.js": "abb0aaceabb10649a3bef4e2e71549ce40d1f00ee745f60e45ee82778daccf0a",
+    "examples/models/smollm2-135m-8bit.local.json": "0e116c3dea793a84869bde87938feb4a8f0d708a7f047dbf42dbe3a9560e229a",
+    "examples/models/smollm2-135m-8bit.repo.json": "2203ef24ce274eb6f7b9b8a07053f10e87d06bcfb158ab88b0c7e2f3670eeef1",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+    "benchmarks/experiments/phase3_verify_model_adapters.py": "0ba5315f7147cbbaf7bd004cf75efebbec9b68024d515e74f569e28de4b99dba",
+    "benchmarks/reports/phase3-model-adapter-integration.json": "1359347135a206a432edc4a5eff1b702b5a2bd11e1b72e57c928faadac6183c4",
+    "benchmarks/reports/phase3-smollm2-weight-audit.json": "cfa67f1581862b41c25e418934bea9d18aa3ed9c5ba4db2bb06c40c7373e3fb0",
+    "docs/evidence/phase3-adapter-verification.json": "131c65ff2d5702799a70bdd9ec15aa4320fdc4ffb4dd70cd3ed83b4ed8386fc9",
+    "docs/phase3-source-audit.json": "6f643fa8f7888d7f82b6136f640dfdb01b0fb2622e8b04c3fab8492acad9820f"
+  },
+  "constraints": {
+    "reviewer_mlx_or_metal_execution": false,
+    "reviewer_loaded_weights": false,
+    "implementation_or_frontend_modified": false,
+    "deployed": false,
+    "committed": false,
+    "only_written_output": "docs/evidence/phase3-adapter-anti-pattern-check.json"
+  },
+  "checks": [
+    {
+      "topic": "Actual upstream loader and APIs",
+      "result": "No fabricated MLX API. Project contracts are explicitly named project interfaces; actual mlx_lm.load remains trust_remote_code=False. Independently inspected locked MLX-LM 0.32.2 utils.py:449-455 model*.safetensors glob. Corrected audit covers that exact file set and rejects indexed set mismatches."
+    },
+    {
+      "topic": "Resource protection",
+      "result": "Custom registration inspects metadata/weights without materializing arrays. Actual resolved weight bytes plus runtime reserve are checked before load; future KV check remains before prefill; no silent prompt truncation or removed memory guard. Hybrid draft reserve policy change is documented."
+    },
+    {
+      "topic": "No fake trim, batch, confidence or optimized support",
+      "result": "CacheAdapter restricts exact snapshot/restore to audited KVCache/ArraysCache state setters. Batch protocol probes are diagnostic, varlen remains false. Custom unsupported modes reject before load, or explicitly requested fallback reports requested/effective modes and reason. No softmax maximum is relabeled trained acceptance confidence."
+    },
+    {
+      "topic": "Real integration source/evidence binding",
+      "result": "Current accepted real report pins 30 files with zero current SHA mismatches; run reports no source changes. Evidence source map equals report map and evidence report SHA matches current bytes. All 9 real integration steps passed, including dense full-next-logit restoration. This reviewer did not rerun Metal."
+    },
+    {
+      "topic": "Metrics and capability claims",
+      "result": "README English/Chinese and site candidate distinguish implemented, unverified compatibility, experimental adaptive and building cross-request/pipeline work. Existing milestones are scoped correctness/resource evidence. No new comparative speed claim, global model-family support claim or concurrency execution claim."
+    },
+    {
+      "topic": "Demonstration provenance",
+      "result": "Browser allocation inputs explicitly hand-set conditional probabilities; cumulative prefix survival ranking and tie handling are labeled mechanism illustration with no inference or latency claim. Historical recorded 9B SSE playback remains labeled recording."
+    },
+    {
+      "topic": "Frozen historical data",
+      "result": "No diff in historical Phase2 benchmark reports, evidence, locks or site/data. site.verify_bundle() independently validates all 9 curated report/image members and source identity remains 66ae444f535c63b43003ba6febeb42228d4d607a."
+    },
+    {
+      "topic": "Public content and privacy",
+      "result": "New adapter docs, examples and public phase3 reports/evidence contain no /Users/, /home/ or /private/var/folders absolute paths. Local model paths are repository-relative; frontend metadata/results redact private local paths. Raw private artifacts and model weights are absent from inspected sdist."
+    },
+    {
+      "topic": "Source distribution reproducibility",
+      "result": "Inspected built sdist: 366 members, both exact-revision/local registration examples present and byte-identical; adapters.py and pyproject.toml also match current. No weights/results/artifacts members."
+    },
+    {
+      "topic": "Portable import and regression",
+      "result": "Fresh import of adapter, engine, models, CLI, state, API and hybrid modules imports no mlx/mlx.core/mlx_lm. Independently ran adapter tests: 16 passed in 0.29s; scoped Ruff: all checks passed."
+    },
+    {
+      "topic": "Product candidate freeze",
+      "result": "All 6 product source SHA values exactly match owner QA freeze; 8 pages / 138 local links and desktop/mobile interaction QA are owner-produced evidence, not independently rerun by this reviewer."
+    }
+  ],
+  "resolved_prior_findings": [
+    {
+      "id": "P3-ADAPTER-001",
+      "status": "verified_fixed",
+      "evidence": "Actual-loader shard set equality and 3 portable regression tests cover unexpected indexed shards, names ignored by loader and complete unindexed accounting."
+    },
+    {
+      "id": "P3-ADAPTER-002",
+      "status": "verified_fixed",
+      "evidence": "/examples added to sdist include; independent tar inspection confirms both registration configs."
+    }
+  ],
+  "real_model_evidence": {
+    "report": "benchmarks/reports/phase3-model-adapter-integration.json",
+    "sha256": "1359347135a206a432edc4a5eff1b702b5a2bd11e1b72e57c928faadac6183c4",
+    "evidence": "docs/evidence/phase3-adapter-verification.json",
+    "accepted": true,
+    "acceptance_status": "verified_current_source",
+    "source_files": 30,
+    "current_source_mismatches": [],
+    "steps_passed": 9,
+    "overall_system_swap_delta_bytes": 0,
+    "comparative_performance_claim": false
+  },
+  "sdist_inspection": {
+    "path": "/tmp/deepinfer-phase3-adapter-sdist/deepinfer_mac-0.1.0a2.tar.gz",
+    "sha256": "2e8ed089527cef9dc2faba92d7d63cc521a02258c29c14dee641b88ac56a8716",
+    "members": 366,
+    "final_release_candidate": false
+  },
+  "product_candidate": {
+    "qa_path": "/tmp/deepinfer-phase3-product-qa/verification.json",
+    "source_sha256": {
+      "README.md": "a923863d0f9d2bc92ee379383f25e5b2abde67d11677cff6a98fcf735f2819dc",
+      "README.zh-CN.md": "6ae046986c41aee01aa70ecf27876145a0a5a3798d50fa278df52a684c76e798",
+      "site/README.md": "c6358aba6ae585a925924e27d15566f061c50683c17a856cc418ec9c5d2537b6",
+      "site/build.py": "938c2872f9063c3e444b3a813ba47e1cfe5c61f91f74fe18562db2f0ad76c399",
+      "site/assets/style.css": "823b7c0fc4043b6a3fdc8f354a9877014059731f66637ebd0435e278c40db326",
+      "site/assets/showcase.js": "abb0aaceabb10649a3bef4e2e71549ce40d1f00ee745f60e45ee82778daccf0a"
+    },
+    "deployed": false
+  },
+  "acceptance_limits": [
+    "A real SmolLM2-135M dense baseline and exact KV snapshot control are accepted, not a broad architecture or quality ranking.",
+    "The new adapter-mediated hybrid optimized path still requires current-source real execution; historical hybrid evidence and portable regressions are not relabeled as this validation.",
+    "Cross-request ticks, actual variable-length verification, trained confidence heads and ZOS pipeline are later Phase3 work.",
+    "CPU tests and this static review do not establish competitive performance over MLX-LM or oMLX."
+  ],
+  "post_metal_evidence_refresh": {
+    "review_type": "CPU-only evidence-chain refresh; original review hashes retained unchanged",
+    "provenance": "Parent/root reported that sole verification owner appended existing Metal regression results after original review. This reviewer inspected matching owner-produced report/evidence records and current test/runtime source; no independent Metal execution.",
+    "current_report_sha256": {
+      "benchmarks/reports/phase3-model-adapter-integration.json": "0e4f0bd86234e934025e5c501ceb6dd02f0471955c8caaf131a384786efd9787",
+      "docs/evidence/phase3-adapter-verification.json": "8cdadfdaefa8c32a934bb949dd0eac6324d3c52bd4be67e14c0cee33798a21ee"
+    },
+    "original_review_report_sha256": {
+      "benchmarks/reports/phase3-model-adapter-integration.json": "1359347135a206a432edc4a5eff1b702b5a2bd11e1b72e57c928faadac6183c4",
+      "docs/evidence/phase3-adapter-verification.json": "131c65ff2d5702799a70bdd9ec15aa4320fdc4ffb4dd70cd3ed83b4ed8386fc9"
+    },
+    "original_review_source_sha256_preserved": true,
+    "changed_original_review_members": [
+      "benchmarks/reports/phase3-model-adapter-integration.json",
+      "docs/evidence/phase3-adapter-verification.json"
+    ],
+    "runtime_examples_and_product_source_unchanged": true,
+    "real_model_run_source_files": 30,
+    "real_model_run_current_source_mismatches": [],
+    "metal_regression_current_source_mismatches": [],
+    "evidence_source_map_equals_report": true,
+    "evidence_report_sha256_matches_current": true,
+    "current_acceptance": {
+      "report_accepted": true,
+      "evidence_accepted": true,
+      "status": "verified_current_source",
+      "frozen_source_unchanged": true
+    },
+    "owner_metal_regression": {
+      "command": ".venv/bin/python -m pytest -q --run-metal -m metal",
+      "exit_code": 0,
+      "output": ".........................................                                [100%]\n41 passed, 273 deselected in 0.89s",
+      "source_sha256": {
+        "tests/test_sampling_metal.py": "88546f2df60e6eec345b0fad26024bcac686da253a8d861fe571ab2ff787051c",
+        "tests/test_speculative_metal.py": "476987517b7d1c2e29e8c803ea5c5609a6cada642c30e962da75922bec6a26af",
+        "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+        "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083"
+      },
+      "system_swap_delta_bytes": 0,
+      "metal_peak_bytes": null,
+      "scope": "41 tiny actual-array Metal regression tests; not an additional model load, hybrid model integration, quality or competitive performance benchmark."
+    },
+    "reviewer_reran_model_or_tests": false,
+    "status": "passed"
+  }
+}

@@ -24,6 +24,7 @@ class GenerationRequest:
     top_k: int = 0
     presence_penalty: float = 0.0
     seed: int | None = None
+    fallback_to_baseline: bool = False
 
     def __post_init__(self):
         if not math.isfinite(self.temperature) or not 0 <= self.temperature <= 2:

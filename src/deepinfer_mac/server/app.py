@@ -20,15 +20,20 @@ from .schemas import ChatRequest, CompareRequest
 from .worker import InferenceWorker, QueueFull
 
 
-def default_engine_factory(experimental_hybrid_speculation=False):
+def default_engine_factory(experimental_hybrid_speculation=False, model_registry=None):
     from ..engine import InferenceEngine
-    return InferenceEngine(experimental_hybrid_speculation=experimental_hybrid_speculation)
+    options = {"experimental_hybrid_speculation": experimental_hybrid_speculation}
+    if model_registry is not None:
+        options["model_registry"] = model_registry
+    return InferenceEngine(**options)
 
 
 def create_app(
     engine_factory=None, queue_size=4, token: str | None = None,
-    experimental_hybrid_speculation=False,
+    experimental_hybrid_speculation=False, model_registry=None,
 ):
+    from ..adapters import ModelRegistry
+    registry_source = model_registry or ModelRegistry()
     access_token = token or os.getenv("DEEPINFER_MAC_TOKEN")
     bearer = HTTPBearer(auto_error=False)
 
@@ -40,7 +45,7 @@ def create_app(
     @asynccontextmanager
     async def lifespan(app):
         factory = engine_factory or partial(
-            default_engine_factory, experimental_hybrid_speculation=experimental_hybrid_speculation,
+            default_engine_factory, experimental_hybrid_speculation=experimental_hybrid_speculation, model_registry=model_registry,
         )
         app.state.worker = InferenceWorker(factory, queue_size=queue_size)
         yield
@@ -81,8 +86,7 @@ def create_app(
                 app.state.worker.cancel_job(job.id)
 
     def registered_models():
-        from ..models import list_models
-        registry = list_models()
+        registry = registry_source.list()
         if not experimental_hybrid_speculation:
             return registry
         # This explicit experimental service advertises its own local view.
@@ -105,12 +109,12 @@ def create_app(
             )
         return registry
 
-    def validate_model(name, mode=None, compared=False):
+    def validate_model(name, mode=None, compared=False, fallback=False):
         model = next((item for item in registered_models() if item["id"] == name), None)
         if model is None:
             raise HTTPException(404, f"Unknown model profile: {name}")
         supported = model["supported_modes"]
-        if mode is not None and mode not in supported:
+        if mode is not None and mode not in supported and not fallback:
             raise HTTPException(422, f"Profile {name} supports only {supported}; {mode} is not verified")
         if compared and not {"baseline", "fixed_speculative", "adaptive"}.issubset(supported):
             raise HTTPException(422, f"Profile {name} supports baseline/cache only; three-mode comparison is unavailable")
@@ -131,14 +135,15 @@ def create_app(
     @app.post("/v1/chat/completions", dependencies=security)
     async def chat(body: ChatRequest, request: Request):
         from ..state import GenerationRequest
-        model = validate_model(body.model, mode=body.mode)
-        if body.top_k and body.top_k >= model["vocab_size"]:
+        model = validate_model(body.model, mode=body.mode, fallback=body.fallback_to_baseline)
+        if body.top_k and model.get("vocab_size") and body.top_k >= model["vocab_size"]:
             raise HTTPException(422, "top_k must be smaller than the model vocabulary")
         generation = GenerationRequest(messages=[message.model_dump() for message in body.messages],
                                        max_tokens=body.max_tokens, mode=body.mode, profile=body.model,
                                        temperature=body.temperature, top_p=body.top_p, top_k=body.top_k,
                                        presence_penalty=body.presence_penalty, seed=body.seed,
-                                       enable_thinking=body.enable_thinking, use_cache=body.use_cache)
+                                       enable_thinking=body.enable_thinking, use_cache=body.use_cache,
+                                       fallback_to_baseline=body.fallback_to_baseline)
         job = submit(generation)
         created = int(time.time())
         if not body.stream:

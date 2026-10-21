@@ -26,6 +26,7 @@ class ChatRequest(BaseModel):
     seed: int | None = Field(default=None, ge=0, le=2**32-1, strict=True)
     enable_thinking: bool = False
     use_cache: bool = True
+    fallback_to_baseline: bool = False
     stream: bool = False
     mode: Mode = "baseline"
     stop: str | list[str] | None = None

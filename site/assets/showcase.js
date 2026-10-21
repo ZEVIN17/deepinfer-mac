@@ -84,3 +84,41 @@ if (play) {
     if (document.hidden && playing) { stop(); status.textContent = 'Recording paused'; }
   });
 }
+
+// Phase 3 allocation illustration only. Inputs are hand-set probabilities, not measured data.
+const budgetInput = document.getElementById('budget-q');
+if (budgetInput) {
+  const conditional = [[0.95, 0.90, 0.85], [0.80, 0.60, 0.40], [0.60, 0.50, 0.30]];
+  const candidates = conditional.flatMap((row, request) => {
+    let survival = 1;
+    return row.map((probability, position) => ({request, position, score: survival *= probability}));
+  }).sort((a, b) => b.score - a.score || a.request - b.request || a.position - b.position);
+  function showBudget() {
+    const budget = Number(budgetInput.value);
+    const selected = new Set(candidates.slice(0, budget).map(item => `${item.request}:${item.position}`));
+    const depths = conditional.map((row, request) => row.filter((_, position) => selected.has(`${request}:${position}`)).length);
+    document.getElementById('budget-value').textContent = `${budget} / 9`;
+    const container = document.getElementById('budget-rows');
+    container.replaceChildren();
+    for (const [request, row] of conditional.entries()) {
+      const line = document.createElement('div');
+      line.className = 'budget-row';
+      const title = document.createElement('strong');
+      title.textContent = `Request ${String.fromCharCode(65 + request)}`;
+      line.append(title);
+      let survival = 1;
+      for (const [position, probability] of row.entries()) {
+        survival *= probability;
+        const cell = document.createElement('span');
+        cell.className = selected.has(`${request}:${position}`) ? 'budget-cell selected' : 'budget-cell';
+        cell.textContent = `${position + 1} · ${survival.toFixed(3)}`;
+        cell.setAttribute('aria-label', `Position ${position + 1}, prefix survival ${survival.toFixed(3)}, ${selected.has(`${request}:${position}`) ? 'selected' : 'not selected'}`);
+        line.append(cell);
+      }
+      container.append(line);
+    }
+    document.getElementById('budget-summary').textContent = `Illustrative candidate depths: A=${depths[0]}, B=${depths[1]}, C=${depths[2]}. Selected ${budget} candidate positions. Target/golden-token work is outside this illustration.`;
+  }
+  budgetInput.addEventListener('input', showBudget);
+  showBudget();
+}

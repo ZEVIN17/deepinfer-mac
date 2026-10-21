@@ -18,9 +18,15 @@ def parser():
     models.add_argument("--download", metavar="PROFILE")
     models.add_argument("--target-only", action="store_true", help="Download target without draft")
     models.add_argument("--json", action="store_true")
+    models.add_argument("--model-config", type=Path, action="append", default=[])
     for command in ("run", "bench"):
         sub = commands.add_parser(command, help="Generate text" if command == "run" else "Run actual rotating-order measurements")
         sub.add_argument("--profile", default="qwen3-4b")
+        sub.add_argument("--model", help="Local MLX directory or Hugging Face repo")
+        sub.add_argument("--revision", help="Exact repo commit; omit for local directories")
+        sub.add_argument("--model-id", default="custom-model")
+        sub.add_argument("--model-config", type=Path, action="append", default=[])
+        sub.add_argument("--fallback-to-baseline", action="store_true")
         sub.add_argument("--max-tokens", type=int, default=128 if command == "run" else 64)
         sub.add_argument("--thinking", action="store_true")
         sub.add_argument("--prefill-step-size", type=int, default=512)
@@ -47,6 +53,7 @@ def parser():
     serve.add_argument("--host", default="127.0.0.1")
     serve.add_argument("--port", type=int, default=8765)
     serve.add_argument("--queue-size", type=int, default=4)
+    serve.add_argument("--model-config", type=Path, action="append", default=[])
     serve.add_argument("--token", help="Bearer token; DEEPINFER_MAC_TOKEN is preferred to avoid shell history")
     return root
 
@@ -54,18 +61,24 @@ def parser():
 def main(argv=None):
     args = parser().parse_args(argv)
     try:
+        from .adapters import ModelRegistry, ModelSpec
+        registry = ModelRegistry(ModelSpec.from_json(path) for path in getattr(args, "model_config", []))
+        if getattr(args, "model", None):
+            args.profile = registry.register(ModelSpec(id=args.model_id, source=args.model, revision=args.revision))
+        if getattr(args, "revision", None) and not getattr(args, "model", None):
+            raise ValueError("--revision requires --model")
         if args.command == "doctor":
             from .doctor import print_diagnostics
             return 0 if print_diagnostics(args.json) else 1
         if args.command == "models":
-            from .models import download_models, list_models
+            from .models import download_models
             if args.download:
-                result = download_models(args.download, include_draft=not args.target_only)
+                result = download_models(args.download, include_draft=not args.target_only, registry=registry)
                 print(json.dumps(result, indent=2, default=str))
             elif args.json:
-                print(json.dumps(list_models(), indent=2))
+                print(json.dumps(registry.list(), indent=2))
             else:
-                for model in list_models():
+                for model in registry.list():
                     print(json.dumps(model, ensure_ascii=False))
             return 0
         if args.command == "serve":
@@ -74,7 +87,7 @@ def main(argv=None):
             from .server.app import create_app
             if args.host not in ("127.0.0.1", "localhost", "::1") and not (args.token or os.getenv("DEEPINFER_MAC_TOKEN")):
                 raise ValueError("A bearer token is required when binding outside localhost")
-            uvicorn.run(create_app(queue_size=args.queue_size, token=args.token), host=args.host, port=args.port)
+            uvicorn.run(create_app(queue_size=args.queue_size, token=args.token, model_registry=registry), host=args.host, port=args.port)
             return 0
         from .engine import InferenceEngine
         from .state import GenerationRequest
@@ -83,7 +96,7 @@ def main(argv=None):
             raise ValueError("Prompt must not be empty")
         if args.cache_budget_mb < 0:
             raise ValueError("cache-budget-mb must be non-negative")
-        request = GenerationRequest(profile=args.profile, prompt=prompt, max_tokens=args.max_tokens,
+        request = GenerationRequest(profile=args.profile, fallback_to_baseline=args.fallback_to_baseline, prompt=prompt, max_tokens=args.max_tokens,
                                     enable_thinking=args.thinking, prefill_step_size=args.prefill_step_size,
                                     temperature=args.temperature if args.command == "run" else 0,
                                     top_p=args.top_p if args.command == "run" else 1,
@@ -94,7 +107,7 @@ def main(argv=None):
                                     num_draft_tokens=args.draft_tokens if args.command == "run" else 3,
                                     use_cache=not args.no_cache if args.command == "run" else False)
         engine = InferenceEngine(cache_budget_bytes=args.cache_budget_mb * 1024**2,
-                                 adaptive_scheduler=args.adaptive_scheduler, cache_backend=args.cache_backend)
+                                 adaptive_scheduler=args.adaptive_scheduler, cache_backend=args.cache_backend, model_registry=registry)
         try:
             if args.command == "run":
                 from .benchmark.export import jsonable

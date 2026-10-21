@@ -19,3 +19,24 @@ The build is self-contained under `site/`: `site/data/phase2/manifest.json` bind
 The architecture is attributed to its actual components: MLX/MLX-LM execution and native LRU, DeepInfer-derived scheduling, and the Mac hybrid recovery/service adaptations. Milestones describe correctness and a specific local resource workload; they are not competitor throughput comparisons.
 
 `site/dist` is generated and excluded from Git. The GitHub Actions workflow uploads its contents as the deployable artifact. Building locally does not deploy the website. Historical alpha release artifacts and `site/data/` source bytes stay untouched. An optional `--report <schema-2-summary.json>` retains an explicitly supplied historical report as downloadable data.
+
+## Phase 3 product presentation (local candidate)
+
+The product entry now presents an Apple Silicon inference framework with MLX as
+its execution backend; 9B remains the verified demonstration, not the product
+definition. Both homepages and the run guide include the same capability matrix.
+The adapter interface is labelled experimental / acceptance in progress;
+cross-request/pipeline entries remain labelled building until their separate
+acceptance completes. Existing real milestones and the recorded
+SSE replay retain their frozen source bytes and attribution.
+
+`architecture.html#joint-budget` adds a browser-only allocation illustration.
+Its three conditional-probability arrays are hand-set teaching inputs, explicitly
+labelled **mechanism illustration**, not model predictions or measurements. The
+slider selects candidate positions by cumulative prefix survival with stable
+request/position ties. It does not implement cost-based total-budget selection,
+target/golden-token accounting, real verification, or state recovery. It is not a
+performance animation and does not announce Phase 3 execution as complete.
+
+Build and link checks remain the commands above. Local source changes and a
+successful build do not update the deployed website or publish a release.

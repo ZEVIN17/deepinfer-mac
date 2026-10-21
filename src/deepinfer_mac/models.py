@@ -111,15 +111,18 @@ def list_models():
     ]
 
 
-def download_models(profile="qwen3-4b", include_draft=True):
+def download_models(profile="qwen3-4b", include_draft=True, registry=None):
     from huggingface_hub import snapshot_download
 
-    spec = get_profile(profile)
+    spec = registry.get(profile) if registry else get_profile(profile)
     out = {}
     if include_draft and spec["draft"] is None:
         raise ValueError("This profile has no verified compatible draft; use baseline")
     for kind in ("target", "draft") if include_draft else ("target",):
         model = spec[kind]
+        if "path" in model:
+            out[kind] = model["path"]
+            continue
         try:
             cached = Path(snapshot_download(model["repo"], revision=model["revision"], local_files_only=True))
             index_path = cached / "model.safetensors.index.json"

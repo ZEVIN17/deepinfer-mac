@@ -1,50 +1,128 @@
 # DeepInfer-Mac
 
-**由 MLX 驱动、面向 Apple Silicon 的本地推理，并实际实现来自 DeepInfer 的可执行方法。** 独立社区项目 · Apache-2.0 · 实验性 alpha。
+**让本地模型，更懂你的 Mac。** 以 MLX 为执行后端、以 DeepInfer 方法驱动自适应调度的 Apple Silicon 本地推理框架。
 
-[English](README.md) · [第二阶段证据](docs/phase2.md) · [架构与归属](docs/architecture.md) · [复现基准](docs/benchmarking.md) · [兼容矩阵](docs/compatibility.md)
+[English](README.md) · [展示站](https://zevin17.github.io/deepinfer-mac/zh.html) · [真实回放](https://zevin17.github.io/deepinfer-mac/phase2.html) · [兼容说明](docs/compatibility.md) · [参与贡献](CONTRIBUTING.md)
 
-当前首选候选为 **Qwen3.5-9B-8bit**。24 GiB M4 Pro 已实测加载、普通/采样生成、API/SSE、取消恢复、缓存一致性和本地 UI。相同模型 4bit 及 14B 后备的质量/效率对照仍在进行，尚未完成最终模型验收。不再使用的 27B 权重已经清理，失败实验及来源记录保留。
+在终端运行模型，接入流式聊天 API，或打开内置浏览器工作台。探索根据草稿、验证与恢复的完整实测成本进行决策的执行方式。Qwen3.5-9B 是首要演示载体；模型与缓存能力才是框架的接口边界。
 
-DeepInfer MTPVarlen 派生调度已进入真实执行路径，使用经验接受率，并对照原始 C++ 验证。混合状态快照/恢复/重放适配在一个真实 9B 提示上取得 baseline、fixed1、fixed2、DS 各 96 token 一致。**尚未证明优于调优后的固定预算或两个常用框架，第二阶段联合目标仍未完成。**
+[![真实本地 9B 代码修复交互](docs/evidence/phase2-local-ui-qwen35-9b8.png)](https://zevin17.github.io/deepinfer-mac/phase2.html)
 
-## 安装与运行
+*真实 Qwen3.5-9B-8bit 请求，M4 Pro / 24 GiB。[查看录制的 SSE 响应回放](https://zevin17.github.io/deepinfer-mac/phase2.html)；展示站不执行模型推理。*
 
-需要 Apple Silicon、Metal、Python 3.12/3.13；模型权重单独下载，需为活跃状态、快照和系统预留内存。
+- **连贯的本地工作流。** CLI、Python、兼容 OpenAI 的聊天 API 子集与本地 UI 共用引擎。
+- **可以接续的上下文。** 限额缓存、原生 MLX-LM LRU 与精确混合状态快照共同管理已消费前缀。
+- **可以核查的调度。** 实验自适应路径将经验接受率、完整周期成本连接到 DeepInfer 派生预算决策，并由原始 C++ 参考核验。
+
+## 快速上手
+
+需要支持 Metal 的 Apple Silicon Mac、Python 3.12/3.13 与 [uv](https://docs.astral.sh/uv/)。权重按锁定 revision 单独下载，为权重、活跃状态、快照及 macOS 预留内存。
 
 ```sh
-git clone https://github.com/ZEVIN17/deepinfer-mac.git
+git clone --branch codex/phase2-core --single-branch https://github.com/ZEVIN17/deepinfer-mac.git
 cd deepinfer-mac
-uv sync --frozen --extra mlx --extra dev
+uv sync --frozen --extra mlx
 uv run deepinfer-mac doctor
 uv run deepinfer-mac models --download qwen3.5-9b-8bit --target-only
 uv run deepinfer-mac run --profile qwen3.5-9b-8bit --mode baseline '用中文解释统一内存。'
 uv run deepinfer-mac serve
 ```
 
-打开 `http://127.0.0.1:8765`，选择 9B 候选。默认 profile 仍为较小的 Qwen3-4B 回归模型。公开展示站是静态页面，不会连接访客 localhost。当前不假设 PyPI 已发布；[v0.1.0a1](https://github.com/ZEVIN17/deepinfer-mac/releases/tag/v0.1.0a1) 为历史版本，工作树准备 0.1.0a2 实验更新。
+打开 **http://127.0.0.1:8765**，选择 `qwen3.5-9b-8bit`。默认 profile 是较小的 `qwen3-4b` 回归模型。baseline 支持 temperature、top-p、top-k、presence penalty 与 seed。运行 `uv run deepinfer-mac models --json` 查看 profile 元数据。
 
-baseline 现支持 temperature、top-p、top-k、presence penalty 与 seed；推测模式仍严格限定 greedy。
+命令使用实验源码分支。已有 checkout 可执行 `git switch codex/phase2-core`、`git pull --ff-only`，再运行 `uv sync --frozen --extra mlx`；更新前保留本地修改。[v0.1.0a1](https://github.com/ZEVIN17/deepinfer-mac/releases/tag/v0.1.0a1) 是已发布的历史版本，0.1.0a2 仍为候选包，当前不假设 PyPI 已发布。
+
+## 接入引擎
+
+```python
+from deepinfer_mac.engine import InferenceEngine
+from deepinfer_mac.state import GenerationRequest
+
+engine = InferenceEngine()
+try:
+    result = engine.generate(GenerationRequest(
+        profile="qwen3.5-9b-8bit", prompt="Explain unified memory.",
+        mode="baseline", max_tokens=128,
+    ))
+    print(result.text)
+finally:
+    engine.close()
+```
+
+启动 `serve` 后调用流式 API：
 
 ```sh
-uv run deepinfer-mac run --profile qwen3.5-9b-8bit --temperature 0.7 --top-p 0.8 --top-k 20 --presence-penalty 1.5 --seed 42 --json '本地模型如何帮助开发者？'
-uv run deepinfer-mac run --profile qwen3-4b --mode adaptive --adaptive-scheduler ds --no-cache --json '写一个 Python 二分查找。'
+curl http://127.0.0.1:8765/v1/chat/completions \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"qwen3.5-9b-8bit","messages":[{"role":"user","content":"Hello"}],"max_tokens":128,"temperature":0,"stream":true}'
+```
+
+服务提供约定的聊天 API 子集、有界排队、取消与流式输出。当前生产服务由单一推理 owner 执行；并发执行准入及 DS 跨请求预算属于第三阶段工作。
+
+## 实验接口：接入其他模型
+
+新的能力适配接口已实现本地模型目录或精确 repo revision 注册，仍在进行第三阶段真实模型验收。已有完整 MLX 模型目录时可使用：
+
+```sh
+uv run deepinfer-mac run --model /path/to/complete-mlx-model \
+  --model-id my-local-model --max-tokens 32 'Hello'
+```
+
+模型按进程显式注册；自定义模型初始为未验证的 baseline 兼容性，不支持的优化会被拒绝。JSON 配置可让 CLI、Python、API 使用同一 ID。[适配器文档](docs/MODEL_ADAPTERS.md)说明身份、资源保护及显式回退。
+
+## 模型与执行能力
+
+“已验证”仅对应表中具体路径，不外推到 MLX-LM 支持的全部模型与优化。
+
+| 模型 / 路径 | 本地 baseline | 自适应路径 | 验证范围 |
+|---|---|---|---|
+| Qwen3.5-9B-8bit | 已验证 CLI / API / UI、采样 | 实验功能，显式开启 | 首要文本演示；混合状态 |
+| Qwen3.5-9B-4bit | 已验证 baseline / native 控制 | 公开入口未开启 | 同模型质量 / 内存对照 |
+| Qwen3-14B-4bit | 已验证 baseline / native 控制 | 待验证 | Dense 工程对照 |
+| Qwen3-4B | 已验证回归路径 | 实验 fixed / adaptive | 较小的 Dense 回归模型 |
+| 可配置模型 / 缓存适配器 | 实验接口已实现 · 真实模型验收中 | 按能力开放 baseline | 路径 / repo 注册、透明 baseline 回退 |
+| 跨请求预算 / 状态流水 | 第三阶段构建中 | — | 尚非当前默认服务能力 |
+
+公开 9B API/UI 仍只开放 baseline。混合推测限定 greedy，通过 [DS 方法映射](docs/DS_DESIGN_MAPPING.md) 中的显式实验入口使用。模型成功加载、任务质量与优化验证分别记录。参见[模型选择](docs/PHASE2_MODEL_SELECTION.md)、[兼容说明](docs/compatibility.md)及不可变 [模型锁](models.lock.json)。
+
+## 已验证的工程成绩
+
+| 真实工作负载 | 结果 | 证据 |
+|---|---|---|
+| 9B 自适应开发轨迹 | 28/28 次成熟决策与原始 C++ 一致；128 个输出 token 与 baseline 一致 | [补充核验](benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json) |
+| 9B 上下文复用 | 20 次请求；两种采样设置下 16/16 项完整 token 检查通过 | [缓存报告](benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json) |
+| M4 Pro / 24 GiB 上的 9B baseline | 4,204 输入 + 256 输出；该次运行未观测到 swap 增量 | [资源检查](benchmarks/reports/context-4204-256-qwen35-9b8.json) |
+
+上述为正确性与资源成绩。尚未确立相对原生 MLX-LM、oMLX 的稳定性能优势，竞争性能目标延续至第三阶段。[基准协议](docs/benchmarking.md)和[二阶段完整记录](docs/phase2.md)保留条件、失败样本与历史结论。
+
+## 自适应执行如何协作
+
+```text
+CLI / Python / 聊天 API / 本地 UI
+                  │
+            模型 + 缓存能力
+                  │
+          MLX / MLX-LM 执行
+                  │
+        草稿 → 目标验证 → 精确恢复
+          ↑    接受率 + 完整成本 │
+          └── DeepInfer 派生预算 ┘
+```
+
+当前自适应实现调度单个请求。第三阶段将其扩展为跨请求预算、真实变长验证与经过时间线验证的状态重叠。构建[本地展示站](site/README.md)即可查看交互式预算图：明确标为机制示意，与实测轨迹分开。
+
+MLX / MLX-LM 提供模型执行、采样和原生 LRU；DeepInfer 提供参考调度方法；混合状态恢复与服务集成属于 Mac 适配。本项目为独立社区实现。[架构](docs/architecture.md) · [源码映射](docs/DS_DESIGN_MAPPING.md) · [第三方归属](NOTICE) · [Apache-2.0](LICENSE)。
+
+## 开发与复现
+
+```sh
+uv sync --frozen --extra mlx --extra dev
 uv run pytest -q
 uv run pytest -q --run-metal -m metal
 python3 site/build.py
 python3 site/check.py
-uv build --out-dir dist/v0.1.0a2
-python3 scripts/verify_artifacts.py --dist dist/v0.1.0a2
 ```
 
-公开 9B API/UI 仅开放 baseline，混合推测使用 [DS 对应文档](docs/DS_DESIGN_MAPPING.md) 中的显式实验 Python 入口。没有专用 Confidence Head、完整 DSpark、连续批处理或完整 DeepSeek V4.1。
+[贡献指南](CONTRIBUTING.md) · [版本说明](docs/release-notes.md) · [证据索引](docs/evidence.md) · [第三阶段执行方案](docs/PHASE3_EXECUTION_PLAN.md)
 
-## 实验结论与限制
-
-实际 9B UI 的 clamp 修复请求总耗时 1834.24ms、TTFT 939.62ms、decode 27.94tok/s。这是单次交互，不能当竞争基准。固定 12 题本地质量 smoke 保留了事实/算术失败；greedy 引擎与 native 在全部 12 题 token 一致。公开子集及量化比较使用冻结源码，发布脱敏汇总，不分发受限题目正文。
-
-历史 alpha Qwen3-4B 有 216 次正式运行，baseline/native 为 36/36 一致，所有模式为 27/36 一致；自适应未优于调优固定预算，不能宣称等价加速。这些数字不代表新 9B。
-
-可 trim 模型复用 MLX-LM 原生 LRU，混合模型保留精确快照与后缀重放。缓存改进属于独立优化/平台适配，不算 DS 核心贡献。统一内存 RSS 与 Metal allocator 不能相加。频繁重载模型的进程 RSS 驻留仍待解决；此类基准使用独立进程。
-
-[模型锁](models.lock.json) · [证据索引](docs/evidence.md) · [版本说明](docs/release-notes.md) · [第三方归属](NOTICE) · [贡献指南](CONTRIBUTING.md)
+后续实现顺序为：能力适配器 → 请求 tick 与资源准入 → 跨请求验证预算 → 时间线驱动重叠 → 两框架公平对照。二阶段报告及冻结产物保持原样。
