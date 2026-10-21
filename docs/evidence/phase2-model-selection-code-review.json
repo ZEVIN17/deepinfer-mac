@@ -1,0 +1,64 @@
+{
+  "recorded_at_utc": "2026-10-21T07:49:18.325818+00:00",
+  "reviewer": "fresh independent commit_publish verification agent",
+  "gpu_used": false,
+  "model_weights_read": false,
+  "network_used": false,
+  "source_sha256": {
+    "benchmarks/quality/dev_budget_sensitivity.py": "0e94eb5ad1cb14d7c2da62beddc2be5951212421b7254f3988e279d0ad94be98",
+    "tests/test_dev_budget_sensitivity.py": "53ccde683fadff84a1d0455c2c31b5023d69f78f4dec5952e648d8194533fe49",
+    "src/deepinfer_mac/models.py": "d63034aa76278cb17aa352bb0acfcf48b85033533475b114cec0b96210492dfb",
+    "models.lock.json": "eb547e463a336aeded0499070cde26beabff4aee2bd43bccd0e1f2dc92cb904a",
+    "src/deepinfer_mac/models.lock.json": "eb547e463a336aeded0499070cde26beabff4aee2bd43bccd0e1f2dc92cb904a",
+    "docs/PHASE2_MODEL_SELECTION.md": "fb3f9a0bc9de778b7f5734bf19406cd380c30dd466a98b6be55d7e5002798a02",
+    "docs/PHASE2_QUALITY_PROTOCOL.md": "e7d85c4f86fa7fecbd28819790b8ab5603223a87515ffeda8b33eb6abfa0d7a2",
+    "docs/PROGRESS.md": "36180c8d234d95c49e731d0ad066fb82b4cd536db609ea9693356989bc8744c6",
+    "benchmarks/reports/public-quality-dev4096-budget-sensitivity.json": "e6d2aa5356f96b26154c387961f5fa27b11493e76b620fcc2022a1d51d96e927",
+    "benchmarks/reports/public-quality-dev4096-mmlu-format-sensitivity.json": "fdd38784643323f840b892be5b08dbfec7e26cbee4d9f2e6fcc1156bc72221f9"
+  },
+  "status": "approved_after_metadata_wording_fixes",
+  "scope": "dev_budget_sensitivity source/tests, metadata-only model status/locks and model-selection prose",
+  "findings": [
+    {
+      "id": "MODEL-SWAP-P2-001",
+      "priority": "P2",
+      "status": "resolved_and_independently_recomputed",
+      "finding": "PROGRESS said all18request swap deltas were0; actual data has9negative and9zero observations.",
+      "fix": "Now says18/18no positive system-swap increase; negative values remain, with no attribution exclusively to this process. Raw report and numeric summary values unchanged.",
+      "observed": {
+        "min_bytes": -241893376,
+        "max_bytes": 0,
+        "negative": 9,
+        "zero": 9,
+        "positive": 0
+      }
+    },
+    {
+      "id": "MODEL-CHRONOLOGY-P2-002",
+      "priority": "P2",
+      "status": "resolved_with_provable_scope",
+      "finding": "Artifacts cannot independently prove selection before observing9B4partial output: first9B4public run began05:57:34UTC; V3archive was created06:00:41UTC.",
+      "fix": "Current analyzer limitation/model selection/protocol state exactly the initial9B8development cap-failure rule fixed before all additional4096runs. All18numeric result rows and raw input SHA bindings are unchanged.",
+      "verified_chronology": {
+        "v3_archive_created_utc": "2026-10-21T06:00:41UTC",
+        "first_14b_public_started_utc": "2026-10-21T06:19:18UTC",
+        "first_additional4096_started_utc": "2026-10-21T07:07:50UTC"
+      },
+      "historical_archives": "Original archived protocol wording and GPU raw bytes remain immutable; correction is separate current metadata."
+    }
+  ],
+  "controls": [
+    "Exactly three distinct matching profiles; exact six predeclared task/setting pairs per profile, with no duplicates/missing pairs.",
+    "One shared runtime/corpus and one extended frozen source; initial/end source stability checked.",
+    "Only4096budget may differ; same model/revision/prompt IDs/messages/sampler/seed/nonthinking/dev split preserved.",
+    "Divergent prefixes are disclosed rather than silently removed; current actual18prefixes all exact.",
+    "models.py AST identical to checkpoint65b2ce1 after replacing only limitations-string values; no runtime policy/default behavior changed.",
+    "Both model locks byte-identical; original pins, weight/config hashes, generation policy, supported modes and historical records unchanged.",
+    "Baseline remains the public mode for selected hybrid candidates, with explicit experimental DS correctness and no formal advantage claim."
+  ],
+  "remaining_blockers_in_review_scope": [],
+  "limitations": [
+    "The six tasks-by-setting groups reuse three development tasks and cannot establish held-out generalization.",
+    "Elapsed seconds are task/budget diagnostics with total completion costs retained, not controlled framework latency gains."
+  ]
+}

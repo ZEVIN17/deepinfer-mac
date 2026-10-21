@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "accepted": true,
+  "scope": "Local-only product candidate; no deployment, tag or runtime changes",
+  "evidence_source_commit": "d54f09ec709b3cb65513057e0d6f1eb54e13a1ae",
+  "changed_source_sha256": {
+    "README.md": "fb963d0700fbf1152a977bf8ee54503dcba1652bb6a2325e7d6d6055045523b0",
+    "README.zh-CN.md": "a523e853c3b5505e3a61b2010c2107febe430b132354439531f9e75640b6257c",
+    "site/build.py": "f8e09ceaed5477cbf39e44dfdf86a7f645a4cbabca5f0dc68af76f62592fcbc9",
+    "site/README.md": "12edbea885dc0c2a64267e8fb3ea658ed441bfe48119b27702f598b3acaedfbd"
+  },
+  "evidence_sha256": {
+    "benchmarks/reports/phase3-joint-service.json": "4e6becd36c91e674a7882dfe76893a5c6802fa5cc038d5879136b6a199617563",
+    "docs/evidence/phase3-joint-service-verification.json": "5f97947f04256f4654dfdc1385172ac6413f0ecc1e3a9eb9e584002c0e32fae3",
+    "docs/JOINT_VERIFICATION.md": "0c429d4e14289271d2595fb1848409e4fc92deef461a437500ab4b1979c66d79"
+  },
+  "checks": {
+    "build": "8 pages",
+    "local_links": 138,
+    "local_fragment_targets": 21,
+    "desktop": "CUA 1280px Chinese joint-service card visually checked; three immutable links verified",
+    "mobile": "CUA 390px iframe card visually checked, all evidence links wrap and remain readable; no numeric overflow assertion",
+    "install_anchor": "actual CTA click reached #install",
+    "copy_button": "actual click returned 已复制命令",
+    "phase2_bundle_unchanged": true,
+    "user_port_8765_touched": false,
+    "owned_preview_stopped": true,
+    "temporary_tab_closed": true
+  },
+  "screenshots": [
+    "/tmp/deepinfer-phase3-joint-product-desktop.png",
+    "/tmp/deepinfer-phase3-joint-product-mobile.png"
+  ],
+  "claims": {
+    "service_checks": "35/35 distinct 360M target / 135M draft real-model functional checks",
+    "tests": "330 portable + 48 real Metal at pinned checkpoint",
+    "primary_demo": "Qwen3.5-9B-8bit",
+    "default": "baseline",
+    "joint": "explicit experimental opt-in",
+    "comparative_performance_claim": false,
+    "general_serial_equivalence_claim": false,
+    "trained_confidence_claim": false
+  },
+  "notes": [
+    "System Python 3.9 build failed pairwise import; .venv Python build passed.",
+    "Preview bind required sandbox escalation, approved; only owned localhost 8097 used."
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "accepted": true,
+  "scope": "Independent CPU-only anti-pattern and evidence accounting audit; no GPU, deployment or runtime edits",
+  "source_sha256": {
+    "src/deepinfer_mac/varlen_verify.py": "efaf49f08def4a6742add79a27c5762c2c868dbafe4f78908c355de96e7d91c4",
+    "benchmarks/experiments/phase3_pair_cost.py": "220e4ec71be43f6a91c3d264af4c45545a987fd66e5ca8d6f7f390abdedf64f2",
+    "tests/test_stage_profile.py": "264f6f7548d18ed4dd70a35e947581981e26706999a8e579851a331a632b6910",
+    "tests/test_varlen_metal.py": "19b940df58a7921662ce73e66a8f1bb1aafaf8b83afd152a7607cb00c93e84b0",
+    "docs/PAIR_COST_EXPERIMENT.md": "6fcea595372c2d070943335d0aec3d7e79a89028feaec3f5cc155dc5acb31207",
+    "README.md": "fb963d0700fbf1152a977bf8ee54503dcba1652bb6a2325e7d6d6055045523b0",
+    "README.zh-CN.md": "a523e853c3b5505e3a61b2010c2107febe430b132354439531f9e75640b6257c",
+    "site/build.py": "f8e09ceaed5477cbf39e44dfdf86a7f645a4cbabca5f0dc68af76f62592fcbc9",
+    "site/README.md": "12edbea885dc0c2a64267e8fb3ea658ed441bfe48119b27702f598b3acaedfbd"
+  },
+  "measured_source_sha256": {
+    "benchmarks/experiments/phase3_pair_cost.py": "d2367826416ae649f5c8cb1af888e85b1caae4879075ca178d760d41a8ad4585",
+    "benchmarks/experiments/phase3_pair_workload_manifest.json": "f355eb44cdeedb8d02ad90b3fe1963503afd95c71d0913e8c7b27967aeef7bed",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/varlen_verify.py": "efaf49f08def4a6742add79a27c5762c2c868dbafe4f78908c355de96e7d91c4",
+    "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d"
+  },
+  "raw_artifact_sha256": "b6b1ecaea9f8ff4d1e4f15c38c6ec30d7fc781e01016303c93eba96af2765ed4",
+  "checks": {
+    "independent_tick_count": 25,
+    "full_cycle_total_ms": 752.8925000224262,
+    "full_cycle_partition_tolerance_ms": 1e-09,
+    "residual_sum_ms": 0.07562700193375349,
+    "nested_verification_contained_not_added": true,
+    "model_calls_and_token_products_recomputed": true,
+    "public_aggregates_equal_raw": true,
+    "raw_hash_and_measurement_sources_match_verification": true,
+    "profiling_default_off": true,
+    "no_added_device_synchronization": true,
+    "calibration_guard_cpu_tests": "4 passed",
+    "historical_reports_site_bundle_model_locks_history_unchanged": true,
+    "product_scope": "35/35 functional checks on 360M target / 135M draft; 9B primary remains baseline; immutable d54f09ec evidence links",
+    "performance_claim": false,
+    "final_code_review_accepted": true
+  },
+  "interpretation": {
+    "draft_wall_fraction": 0.4241110142372254,
+    "target_replay_wall_fraction": 0.1931041475713318,
+    "meaning": "Single development process host wall attribution at existing eval boundaries; neither GPU kernel attribution nor end-to-end improvement; nested target replay already included in verification_total."
+  },
+  "provenance_note": "Actual measurement remains bound to measured_source_sha256. Subsequent calibration input guard and CPU tests change current harness/test hashes without rerunning inference; no claim that the final guard harness produced the prior measurement. Original held-out artifacts remain unchanged.",
+  "privacy": "Raw prompts and output tokens stay in private artifacts; public audit contains aggregate timing, source identities and relative paths only. Synthetic timing exists only in explicitly labelled timer/validator contract tests, never performance reports.",
+  "findings": [],
+  "code_review_sha256": "b83b167ce876f8a389697074d98a958027a88e5e00aac2f7325c610d3dd3b3cf",
+  "measured_harness_snapshot": {
+    "path": "artifacts/phase3-pair-cost/source-profile/phase3_pair_cost.py",
+    "sha256": "d2367826416ae649f5c8cb1af888e85b1caae4879075ca178d760d41a8ad4585",
+    "recovery": "Recovered from the current file by reversing only the subsequent calibration guard change; byte SHA256 exactly equals the actual measurement source."
+  }
+}

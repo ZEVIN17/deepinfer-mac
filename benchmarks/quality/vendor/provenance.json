@@ -1,0 +1,38 @@
+{
+  "source_url": "https://github.com/google-research/google-research/blob/master/instruction_following_eval/instructions.py",
+  "retrieved_utc_date": "2026-10-21",
+  "source_sha256": "60e086f5342a03ce8e18b64bbcccf86308f523c08aa826707a562150a52f3edf",
+  "license": "Apache-2.0",
+  "copyright": "2026 The Google Research Authors",
+  "classes": {
+    "PlaceholderChecker": {
+      "unmodified_class": true,
+      "sha256": "6d7786dc6bc33452085639311b6b4b5f84d17df8ff663e9364a3b1de19f2945a"
+    },
+    "BulletListChecker": {
+      "unmodified_class": true,
+      "sha256": "0f8d62d02bf5bbecf2d2b31b820a1b181a05938561ff4de9f86f04bc5541ff56"
+    },
+    "KeywordChecker": {
+      "unmodified_class": true,
+      "sha256": "6827bbea9e6868a706527b6578c7c6e6b0651bc038dc223c0820632ea005c141"
+    },
+    "JsonFormat": {
+      "unmodified_class": true,
+      "sha256": "e12201c0aac0e31a15a6d0f11d922d6a2a4eb1dfce3df4ee3dfc7cd63d8508e1"
+    },
+    "EndChecker": {
+      "unmodified_class": true,
+      "sha256": "622f012d0a7dc535a166d8e1fd7db658703340308b8648fa1bd733f35fff6d91"
+    },
+    "TitleChecker": {
+      "unmodified_class": true,
+      "sha256": "114ac68ac189c70cb8e8d3183764bc1d0c641abc78abde269cb0f77c769cd387"
+    },
+    "CommaChecker": {
+      "unmodified_class": true,
+      "sha256": "2795293aa1dd4768320431ebf6c2b5f268982315ca36d0c1d8f08c885ce2e389"
+    }
+  },
+  "adaptation": "Base interface stub and constants supplied locally; seven original subclass bodies unchanged; only explicit deterministic dataset kwargs used."
+}

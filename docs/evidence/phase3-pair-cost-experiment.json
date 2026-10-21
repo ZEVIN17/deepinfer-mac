@@ -1,0 +1,56 @@
+{
+  "scope": "One frozen development process followed by one held-out process, 2 tasks, 32 tokens/task. Descriptive observations only; no significant speed advantage established.",
+  "strict_heldout_native_matches": {
+    "matched": 10,
+    "total": 10,
+    "expected_comparisons": 10,
+    "expected_cases": 5,
+    "observed_cases": 5,
+    "complete_cases": 5,
+    "native_complete": true,
+    "missing_policies": [],
+    "unexpected_policies": [],
+    "duplicate_policy": false,
+    "coverage_complete": true,
+    "strict_pass": true
+  },
+  "swap_delta_bytes": 0,
+  "metal_peak_bytes": 809765692,
+  "native_serial_two_tasks_ms": 252.37762602046132,
+  "cost_bucket_two_tasks_ms": 576.5425829449669,
+  "fixed_full_bucket_two_tasks_ms": 563.5712499497458,
+  "cost_bucket_vs_fixed_latency_change_percent": 2.3016314257297,
+  "cost_bucket_vs_native_latency_ratio": 2.2844441166834026,
+  "bucket_padded": {
+    "bucket_verify_positions": 76,
+    "padded_verify_positions": 109,
+    "bucket_decode_all_model_input_positions": 333,
+    "padded_decode_all_model_input_positions": 366,
+    "bucket_complete_task_ms": 912.6580419251695,
+    "padded_complete_task_ms": 912.235791911371,
+    "outputs_equal": true
+  },
+  "cost_bucket_profile_ms": {
+    "prefill_setup": 93.06387498509139,
+    "full_cycle_sum": 481.9943750044331,
+    "verify_recovery_host_sum": 200.1339583657682,
+    "scheduler_snapshot_allocation_sum": 10.986540233716369,
+    "draft_catchup_and_remaining_host_residual": 270.87387640494853
+  },
+  "limits": [
+    "Timing partitions are nested wall intervals, not GPU kernel profiling. Residual includes draft/catch-up/statistics, not isolated kernel cost.",
+    "Forced-q development costs omit ordinary JointBudget.choose and MLX rank; held-out executes and times both.",
+    "No trained confidence head; sparse observed prefixes produce diagnostic Brier only.",
+    "This does not supersede earlier failed serial equality reports or establish broader quality equivalence."
+  ],
+  "reports": {
+    "development": {
+      "path": "benchmarks/reports/phase3-pair-cost-development.json",
+      "sha256": "686e85bbdc83b455eb694fa47c7b98a9ecb6079e23520ae6124bdf3c38ff225d"
+    },
+    "heldout": {
+      "path": "benchmarks/reports/phase3-pair-cost-heldout.json",
+      "sha256": "d5fef81c4c84e7c1f730739194f194fc492a0d5a8c84981b6c74421bfd686bf6"
+    }
+  }
+}

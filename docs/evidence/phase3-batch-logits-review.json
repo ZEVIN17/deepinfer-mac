@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "status": "approved",
+  "approved": true,
+  "scope": "Independent CPU-only audit of fixed-history diagnostic harness, sanitized report and complete retained raw logits; no MLX/Metal execution",
+  "reviewed_source_sha256": {
+    "benchmarks/experiments/phase3_diagnose_batch_logits.py": "29c5bba55a2b7d224e468253046f115d177efcf7f8a94f1dd43914a0481ebaca",
+    "benchmarks/reports/phase3-batch-logits-diagnosis.json": "ead91aeb81f903ec1ca2ed105efad6e7af5b91dd4f273a30496fcc79ca41ed6e"
+  },
+  "verified_artifact_sha256": {
+    "input_report_sha256": "2118e2651dd00353b43d95e0e0f212b169ae8696b279986ff2547a14e76e9a2d",
+    "raw_sha256": "333592da23ef992c0a0e891c61a460ce2075184778418cf32e5dbe7ce1cd83f5",
+    "logits_npz_sha256": "08d4d8c620d32c4f63514a96a372a3d830f4b86d8fc24af3cd4f4da88e910414"
+  },
+  "verified_upstream_source_sha256": {
+    "generate.py": "9d46803799f99d6fc7c35fff2d4357c79b1a25ae98cc63efeaaebeb50a7b5f33",
+    "models/cache.py": "c96cb169fd5e0ec4584a162dd61dc62ab08ccdca03a9850f8a491ce6809145e6",
+    "models/llama.py": "dfb656511e6740781cd0563f7994a78b3404c199b9aebaa2fbca28a19e280891"
+  },
+  "checks": {
+    "weights_match_report": true,
+    "all_arrays_shape": [
+      49,
+      49152
+    ],
+    "all_logits_finite": true,
+    "forced_input_history_exact_serial_reference": true,
+    "natural_histories_equal_through_divergence_input": true,
+    "all_cache_target_offsets_equal_57_plus_call_index": true,
+    "all_selected_steps_match_raw": true,
+    "all_top2_and_margins_match_full_logits": true,
+    "all_comparison_differences_recomputed": true,
+    "first_nonidentical_logits_index": 1,
+    "first_argmax_difference_index": 39,
+    "b1_index39_unique_argmax": 27830,
+    "b4_index39_exact_max_tie_tokens": [
+      179,
+      27830
+    ],
+    "b1_token179_logit": 29.90625,
+    "b1_token27830_logit": 29.921875,
+    "b4_both_tied_logits": 29.921875,
+    "public_report_omits_private_paths_and_complete_sequences": true
+  },
+  "indexing_explanation": "Constructor GenerationBatch._step consumes final prompt token and yields output-index 0 logits. Calls 0..47 correspond to reported 48 output positions. Call 48 is upstream lookahead while output 47 is emitted; retained but excluded from output comparisons. Forced calls consume exactly final prompt token followed by all 48 serial-reference tokens. Captured logits precede forced-logit overwrite.",
+  "findings": [],
+  "limitations": [
+    "Instrumentation synchronously materializes float32 copies of float16 logits and monkeypatches GenerationBatch._step in this standalone process; not a performance trace.",
+    "B4 denotes completion capacity, not four active rows each step: divergence shape is [2,1].",
+    "Exact tied raw logits plus actual natural output establish the observed boundary; NumPy argsort tie order alone does not prove MLX tie semantics.",
+    "Target prefix and logical positions are controlled; surrounding rows, padding, cache shape and batch history differ. This does not isolate a kernel or exclude earlier cache transformation issues.",
+    "Single-use private harness refuses its existing output directory; no production runtime edits.",
+    "Original strict serial-native model gate and section 3 full acceptance remain false."
+  ],
+  "strict_original_gate_replaced": false,
+  "model_strict_gate_accepted": false,
+  "performance_claim": false
+}

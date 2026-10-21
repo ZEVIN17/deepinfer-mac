@@ -1,0 +1,8 @@
+{
+  "scope": "CPU-only actual planned configuration negative control; no model/service/timing was generated",
+  "source_sha256": "7b61955105d883f8a6616154dd64609ba08b33fdf8b518e53c4839e3cb4d1988",
+  "configuration_sha256": "2246bc39f631b6a8082019ee8b813597b968c7283ce0d47b9b42c95ff62dd001",
+  "resource_admission_verified": false,
+  "rejected_before_service_launch": true,
+  "reason": "Actual4204+256 trained-DFlash resource admission is required before4K comparison; target-only4K and2K DFlash compatibility are insufficient"
+}

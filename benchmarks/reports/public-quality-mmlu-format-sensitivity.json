@@ -1,0 +1,2119 @@
+{
+  "schema_version": 1,
+  "scope": "Post-observation offline format sensitivity, uniformly applied to every retained MMLU response; not a new generation or replacement official benchmark score.",
+  "normalization": "Delete only Markdown emphasis/code delimiter characters *, _, and backtick before the unchanged answer regex.",
+  "input_response_count": 189,
+  "mmlu_response_count": 98,
+  "other_benchmark_responses_unmodified": 91,
+  "limitations": [
+    "The task requested an exact final-answer format; strict format failures remain failures in the primary report.",
+    "This isolates parser/format sensitivity from answer-letter correctness; no cross-protocol aggregate ranking."
+  ],
+  "summaries": [
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "tasks": 14,
+      "strict_passed": 11,
+      "markdown_normalized_passed": 11,
+      "changed_task_ids": []
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "tasks": 14,
+      "strict_passed": 9,
+      "markdown_normalized_passed": 9,
+      "changed_task_ids": []
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "tasks": 14,
+      "strict_passed": 8,
+      "markdown_normalized_passed": 8,
+      "changed_task_ids": []
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "tasks": 14,
+      "strict_passed": 8,
+      "markdown_normalized_passed": 8,
+      "changed_task_ids": []
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "tasks": 14,
+      "strict_passed": 10,
+      "markdown_normalized_passed": 11,
+      "changed_task_ids": [
+        "mmlu:1471"
+      ]
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "tasks": 14,
+      "strict_passed": 9,
+      "markdown_normalized_passed": 11,
+      "changed_task_ids": [
+        "mmlu:11845",
+        "mmlu:11124"
+      ]
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "tasks": 14,
+      "strict_passed": 8,
+      "markdown_normalized_passed": 11,
+      "changed_task_ids": [
+        "mmlu:3849",
+        "mmlu:8882",
+        "mmlu:11124"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3271",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 734,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:636",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3849",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 814,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:10731",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 727,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:7609",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 490,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11845",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 730,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:6338",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 554,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5033",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 556,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 981,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:8882",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5747",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 630,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11124",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 694,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 824,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:2586",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3271",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 787,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:636",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3849",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 917,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:10731",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 615,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:7609",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 468,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11845",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 661,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:6338",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 565,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5033",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 607,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:8882",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5747",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 473,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11124",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 941,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-8bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:2586",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3271",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 739,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:636",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3849",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:10731",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 927,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:7609",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 518,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11845",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 710,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:6338",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 658,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5033",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 493,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:8882",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5747",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 629,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11124",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 885,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:2586",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 690,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3271",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 936,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:636",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3849",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:10731",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 684,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:7609",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 584,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11845",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 687,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:6338",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 546,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5033",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 581,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:8882",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5747",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 773,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11124",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 816,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3.5-9b-4bit",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:2586",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3271",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 548,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:636",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3849",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 539,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:10731",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 178,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:7609",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 437,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11845",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 412,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:6338",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 426,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5033",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 179,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 677,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:8882",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 347,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5747",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 461,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11124",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 393,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 507,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "greedy_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:2586",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0,
+        "presence_penalty": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3271",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 577,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:636",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:3849",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 540,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:10731",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 513,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:7609",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 328,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11845",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 480,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:6338",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 404,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5033",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 129,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 762,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:8882",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 620,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:5747",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 415,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:11124",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 402,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 861,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_engine",
+      "sampling_family": "shared_qwen35_protocol",
+      "task_id": "mmlu:2586",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 727,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 1.5,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:3271",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 655,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:636",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:3849",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 518,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:10731",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 462,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:7609",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 338,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:11845",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 425,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:6338",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 448,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:5033",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 331,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:1471",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "unparseable_answer",
+      "finish_reason": "length",
+      "output_tokens": 1024,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:8882",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 922,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:5747",
+      "split": "dev",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 441,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:11124",
+      "split": "heldout",
+      "strict_pass": false,
+      "strict_status": "unparseable_answer",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 491,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:9423",
+      "split": "dev",
+      "strict_pass": false,
+      "strict_status": "wrong_answer",
+      "markdown_normalized_pass": false,
+      "markdown_normalized_status": "wrong_answer",
+      "finish_reason": "stop",
+      "output_tokens": 527,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    },
+    {
+      "profile": "qwen3-14b",
+      "setting": "official_non_thinking",
+      "sampling_family": "qwen3",
+      "task_id": "mmlu:2586",
+      "split": "heldout",
+      "strict_pass": true,
+      "strict_status": "pass",
+      "markdown_normalized_pass": true,
+      "markdown_normalized_status": "pass",
+      "finish_reason": "stop",
+      "output_tokens": 663,
+      "max_tokens": 1024,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "presence_penalty": 0,
+        "presence_context_size": 0
+      },
+      "seed": 42
+    }
+  ],
+  "raw_report_sha256": [
+    "3cc2606ef883a66d5b6a826ba4f9435cda5a6a1b043e38376d943ca711c4621c",
+    "8442257058adcc5382798f56e1a219a67e77a1b9db9b85b9fc851c61c589c3a7",
+    "710e51d6613f9909f10c6b7202ebc75b70072469d9ae81e1071791d5e7b6d1fa",
+    "fea61aaa06793bd3b3dc70335b4d889824faf67c050bb1aefd4ed1bb750f59f2"
+  ],
+  "scorer_sha256": "3b63b64685ab61b4fa4aa4c80310db3e033939ac8c5e256afe60e7042700ccd2",
+  "analysis_script_sha256": "8d4d592aac4efb68aa8cdd2fdab52e2d1151a77ece13195a5aef55c9bf5707f0"
+}

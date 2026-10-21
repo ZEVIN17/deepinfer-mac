@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "accepted": true,
+  "scope": "Independent CPU-only review of final product claim accuracy and technical-document consistency; no new runtime or benchmark acceptance",
+  "reviewed_source_sha256": {
+    "README.md": "63b80f37dd83197874fcafa1f6b453f2bb9fadfbfb6e63c6c9aceb10421fd4d4",
+    "README.zh-CN.md": "cfd1e2bc98efd245ad4347b50b0d16d17ef4028f5403e27648a11b286c1c6bd9",
+    "docs/release-notes.md": "c5833d4d3092879dbf8f89cd14fecb1cd764fd47ac9e561ad6a1053fc8d0dcf2",
+    "site/README.md": "739bbadb67074bf3505b9322ae71c7756112d553dc7b0b6753dae3300eafc600",
+    "site/build.py": "12702d6a3818f19e828ba02f27d45565c974f5769998be2d0256085d14b7e6c2",
+    "docs/evidence/phase3-product-finish-acceptance.json": "9316f864427e29f8e67430145a567ae4efad996d33abb60396ce3bc94a3e18ad"
+  },
+  "technical_docs_link_checked_sha256": {
+    "docs/PHASE3_DELIVERY.md": "3a9007b029c8a5583b5bf29ed04903f5a9f805a105254a55c5d53eba92cbe1fc",
+    "docs/DS_DESIGN_MAPPING.md": "d07ad541023eeee19a9b079c2b565381bb189875aca8134765629b1a32266e75"
+  },
+  "evidence_sha256": {
+    "docs/evidence/phase3-dense-fastpath-verification-first.json": "fef423be108312822b7885d5161e8786944e974e70fcc811d305c6bf454c1521",
+    "docs/evidence/phase3-dense-heldout-verification.json": "bdb58cc1148ff8274a3df504dc868681a0b99c81b3ac7e53e0d32631498e0c9c",
+    "benchmarks/reports/phase3-dense-heldout-summary.json": "53d232a413cffe3af11b689273d02459df51994b301da7437fa791fa6c89e3cb",
+    "docs/evidence/phase3-dense-checkpoint-package.json": "2eaf33a7b89f4ac817df095963a039024e29fb4424f41e4205ab28c4b1beb13e",
+    "docs/evidence/phase3-joint-service-verification.json": "5f97947f04256f4654dfdc1385172ac6413f0ecc1e3a9eb9e584002c0e32fae3"
+  },
+  "checks": [
+    "Final product source hashes match product preview evidence.",
+    "Homepage contains positive implemented capabilities and checkpoint-specific test counts; no competitor speed or complete Phase3 acceptance claim.",
+    "Pinned d3c6ae1 homepage protocol/evidence/lifecycle targets exist in that exact commit.",
+    "Both READMEs retain all three actual diagnostic median times, 18/18 output scope, failed strict numerical gate and explicit experimental boundary.",
+    "Release notes separate installable d3c6ae1 candidate from later diagnostics; no tag, publication or deployment asserted.",
+    "Delivery and DS mapping local links resolve; architecture attribution distinguishes upstream MLX primitives from DeepInfer-derived budgeting and Mac integration."
+  ],
+  "open_findings": [],
+  "limitations": [
+    "Visual preview and build results are independently attributed to product acceptance evidence, not rerun here.",
+    "The two technical documents were authored by this reviewer; root independently reviewed their accuracy.",
+    "This is source/claims review, not verification of eventual deployment or a numerical/performance acceptance."
+  ]
+}

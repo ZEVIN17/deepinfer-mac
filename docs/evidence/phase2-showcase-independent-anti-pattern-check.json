@@ -1,0 +1,29 @@
+{
+  "status": "approved",
+  "date": "2026-10-21",
+  "role": "fresh independent anti-pattern check",
+  "source_sha256": {
+    "site/build.py": "a5098afea6e03c368719b95cfa377021b32d4a5c33f7d5b4f0764354dd45f560",
+    "site/check.py": "2559216f56e11442dbf743d78cec27d398c47e393a3f8b6b9d4c8fd5aa0d3af4",
+    "site/README.md": "0f2f1dd6c47cc2867fa6d1b4df58fee3da4e21fde64079aa171ff8b4452fe818",
+    "site/assets/style.css": "d07705d7e3c50dd2bb8dcf0e50b4aba580eb0c49133e4b8ac1c3494701151346",
+    "site/assets/showcase.js": "44bd77bb34f2987d15bd9e9c0234239943235e429e5e447ac750e2a756e94cd6",
+    "site/data/phase2/manifest.json": "6c1cd9179f6ec16176bc400b8aa49f08fa01f78543f430bc1302be917e165c60"
+  },
+  "checks": {
+    "unsupported_competitive_speed_claim": false,
+    "fake_or_simulated_performance_data": false,
+    "correctness_counts_relabelled_as_performance": false,
+    "quality_responses_relabelled_all_passed": false,
+    "synthetic_stream_or_fabricated_itl": false,
+    "negative_research_record_deleted": false,
+    "presentation_contains_negative_result_or_pending_test_blocks": false,
+    "historical_release_source_overwritten": false,
+    "main_runtime_or_model_locks_required_for_build": false,
+    "private_logs_weights_or_restricted_quality_tasks_bundled": false,
+    "default_browser_calls_local_inference_api": false,
+    "remote_fonts_or_analytics": false
+  },
+  "positive_presentation": "Architecture, concrete implemented capabilities, workload-scoped milestones, real demo and usable installation are the public narrative. Full technical records remain available through immutable documentation links.",
+  "publication_boundary": "Approved artifact is site-only; any deployment must retain reviewed source hashes and9-member bundle, without merging experimental runtime to main."
+}

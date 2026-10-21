@@ -1,0 +1,30 @@
+{
+  "status": "fixed_pending_independent_review",
+  "date_utc": "2026-10-21T06:50:24.568339+00:00",
+  "scope": "exact tuple/list pair schema compatibility in offline independent verifier; no inference/runtime algorithm change",
+  "regression": "Same immutable real 9B8 58-cycle/28-decision report verified in JSON list and runtime tuple pair forms; one nextafter ULP value tampering rejected in both forms. Original bytes checked unchanged.",
+  "validation": [
+    {
+      "command": ".venv/bin/pytest -q tests/test_ds_experiment_harness.py",
+      "result": "14 passed"
+    },
+    {
+      "command": ".venv/bin/pytest -q -m 'not metal'",
+      "result": "230 passed, 41 deselected"
+    },
+    {
+      "command": ".venv/bin/ruff check .",
+      "result": "passed"
+    }
+  ],
+  "supplement": "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json",
+  "source_sha256": {
+    "benchmarks/experiments/verify_lagged_trace.py": "f3b82f112bdc3348647a77ddee4348127ba7182ea9e1429690be5c4244c3b2b6",
+    "tests/test_ds_experiment_harness.py": "ea63af29e2a929136c3bac0e0b7b4606e621e23eb058f6392848dab11614444b",
+    "docs/DS_DESIGN_MAPPING.md": "f9e9ed071f5f330e27743150ba9622ce96d15368e5edcfe82ba0a2eb0e861478"
+  },
+  "gpu_executed": false,
+  "performance_claim": false,
+  "original_raw_accepted_flag_modified": false,
+  "original_archive_modified": false
+}

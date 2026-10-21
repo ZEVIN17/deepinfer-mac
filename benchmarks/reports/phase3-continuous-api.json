@@ -1,0 +1,50 @@
+{
+  "transport": "ASGI TestClient no listener; real Metal continuous worker",
+  "single_then_two_concurrent_sse": true,
+  "all_full_token_ids_equal": true,
+  "prefill_cancel_via_api": true,
+  "recovery": true,
+  "worker_closed": true,
+  "health": {
+    "status": "ok",
+    "model_loaded": true,
+    "active_run": null,
+    "queued": 0,
+    "execution_backend": "continuous",
+    "active_requests": 0,
+    "continuous_policy": "interactive",
+    "preparing_run": null,
+    "cleanup_error_count": 0,
+    "experimental_hybrid_speculation": false
+  },
+  "requests": [
+    {
+      "events": 50,
+      "status": "completed",
+      "sse_done": true,
+      "text_matches": true
+    },
+    {
+      "events": 50,
+      "status": "completed",
+      "sse_done": true,
+      "text_matches": true
+    },
+    {
+      "events": 50,
+      "status": "completed",
+      "sse_done": true,
+      "text_matches": true
+    },
+    {
+      "events": 50,
+      "status": "completed",
+      "sse_done": true,
+      "text_matches": true
+    }
+  ],
+  "performance_claim": false,
+  "harness_sha256": "d31651275d957c83e7abaa28ebfd79f0d340a042207d361b6fa98f0ee3d60da8",
+  "private_raw_sha256": "a6c4151b640127af16abfcfb9c7fa6adb98292fb6cce7b5489d3d28faa5a22c5",
+  "harness_correction": "Initial harness used nonexistent POST /cancel and got 404; corrected to actual DELETE /api/runs/{id}; no runtime edit."
+}

@@ -1,0 +1,55 @@
+{
+  "recorded_at_utc": "2026-10-21T06:06:04.341808+00:00",
+  "reviewer": "independent cache_verification agent",
+  "scope": "message-boundary cache integration; CPU verification only",
+  "source_sha256": {
+    "src/deepinfer_mac/engine.py": "093368bfb85004d93c108dfa3e6d9a489b6181371f64c103535a102d4fe0b401",
+    "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+    "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+    "benchmarks/experiments/message_checkpoint_validation.py": "f25f600a52f2b6cb2bf242cd6d32a1a399bafe5730550e274e4e0abf37e0d576",
+    "benchmarks/experiments/cache_sessions.v2.json": "f891ff522edc120731781f5a0e8f3b211774b4dfea696af1690ec8f4c5d81ad5",
+    "tests/test_engine_message_checkpoints.py": "e0a2f3767fdd243c8ca8b75e104d816397220c0bc8f4ca603275c85a0cf7f894",
+    "tests/test_session_boundaries.py": "31136030ca061df037ab70f300251c75a60c1c4c927737c3119fd318708bbe07",
+    "tests/test_native_cache.py": "b8d5ed8fad6d495429289f088340c40151308be90dabbfef7eddc99656e4f8d0",
+    "tests/test_message_cache_independent_review.py": "11145e531466d0cab0ecca6561d1bec224101fa92954bd606593473346c90bf2"
+  },
+  "prefill_function_ast_sha256": "1e7cca52b8871f914ba27803aed0dfc7ff177706d9f7f4dab4069165cfca2c9a",
+  "gpu_used": false,
+  "status": "passed_with_real_model_gate",
+  "remaining_blockers_in_reviewed_cpu_scope": [],
+  "findings": [
+    {
+      "id": "MCACHE-P2-001",
+      "priority": "P2",
+      "status": "resolved_and_independently_retested",
+      "trigger": "Verified final user message ends at prompt[:-1]; repeated warm hit equals this offset and no new prefill forward occurs",
+      "impact": "Final snapshot overwrote same cache key with assistant eviction priority, losing message priority despite correct token/state contents",
+      "fix": "Keep verified roles for already consumed offsets; choose verified final boundary role for final snapshot; changed-shape metric considers only unconsumed splits",
+      "validation": "Independent original reproduction cold/warm user==user; portable regression and 20 targeted tests pass"
+    },
+    {
+      "id": "MCACHE-P3-002",
+      "priority": "P3",
+      "status": "resolved_source_reviewed",
+      "trigger": "Real-model validator completes with a false token/calibration check",
+      "impact": "Original process exit0 could be confused with passing validation if callers ignore report bools",
+      "fix": "Save validation_failed report in finally, then exit1; source independently inspected; real model still pending"
+    }
+  ],
+  "reviewed_invariants": [
+    "Only token offsets proven identical to real full request prefixes are admitted",
+    "All cache snapshots occur after actual consumed tokens and mx.eval of target plus draft states",
+    "Default and cache=false prefill shapes/writes retain prior behavior",
+    "Full hits always leave one input token, with exact earlier snapshot fallback for nontrimmable recurrent state",
+    "Target/draft cache identity and clone ownership preserve branch isolation",
+    "cache_type forwards into installed upstream category accounting instead of inventing unsupported eviction priorities",
+    "No dummy probe IDs reach model input/cache keys",
+    "Metrics label host intervals and logical bytes accurately",
+    "Native delegated generation bypasses the message chunker; opt-in is explicit, not silently enabled"
+  ],
+  "upstream_observation": {
+    "description": "Installed MLX-LM PromptTrie search ignores a one-token shorter prefix (last_index>0); project inherits a safe cache miss, not invalid reuse",
+    "disposition": "Nonblocking upstream behavior; independent fallback test uses a two-token earlier prefix; no production change made"
+  },
+  "approval_scope": "CPU correctness and source quality only; not approval for default enablement, speed claims or public performance comparison"
+}

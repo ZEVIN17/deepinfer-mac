@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "status": "approved",
+  "scope": "CPU-only independent service V3 protocol and quality V2/V2.1 provenance review",
+  "performance_measurements": false,
+  "gpu_used": false,
+  "network_used": false,
+  "source_sha256": {
+    "benchmarks/experiments/build_cache_manifest.py": "b7a8c8446b4ac25c0c4ce6b40992d2a039ae632d0d2e8115d32f42ddadb44ed2",
+    "benchmarks/experiments/freeze_cache_manifest_v3.py": "59a67a739aa5ba3f1d216f3fe47c57952d81b10132f906ab2f954b17081d7ad8",
+    "benchmarks/experiments/cache_sessions.v3.json": "16750b5d512df3d88a0d9086f1b2070dc5ebacffb047cc2f512cda35af03deb7",
+    "benchmarks/experiments/prepare_service_compare.py": "8d520a9012c88bf6126609d44431aa7b574f969f6ea9503f605005591c651e65",
+    "benchmarks/experiments/rotate_service_compare.py": "e9732993829611ad596b0d6c28d3434b9dddda75976c2b352edd473e73682dba",
+    "benchmarks/experiments/http_service_compare.py": "d37e99df3164bc4f968785d775f07765b7dfe351059bceab9598a2a813ab3a2f",
+    "benchmarks/experiments/summarize_service_compare.py": "b009df56577f5c6cf739df49b260d41eb776d7774f2c1ec81e1e0b3a034a9718",
+    "benchmarks/experiments/service_resource_selection.py": "dae8e324c76f63af2d890aaf0f8c9d3a1c71b240e099cc452315084d361e134f",
+    "benchmarks/experiments/public_service_report.py": "9eb9c924546b4214dcce43a89bad14c997b05d1902672bd63317d8abb7518b82",
+    "benchmarks/quality/compare_models.py": "8e59e7da67f943e5315f1518667184747dd8b48ede1ffc2e194977c882f7c46d",
+    "tests/test_service_protocol_v3.py": "850f07bf74a3ae7924156c864df75ac86c993d93379889217954904b640f0df8",
+    "tests/test_service_compare_harness.py": "df9c8d98f3b248f63cdfadfc4d7fe686f3fc0fff2eb8d136f5c2026fd5918b8b",
+    "tests/test_quality_compare.py": "a3a7c9a1db1e34f2245f981ac0f2f81f1662941e28c65db799e06bd8eaa13027",
+    "docs/PHASE2_CACHE_COMPARISON.md": "1b1e8b892477c0daeb21f0055dfaeda3086e724b304eb0c0522171eaefa66c2e",
+    "benchmarks/experiments/service_inventory.py": "faee816a3b3c4632502f866f5dfdb2c666771622c7cbcaec615ebae205d3823e",
+    "benchmarks/experiments/service_source_freeze.py": "cb7d304a502058213fd1c09a10fb176cfd0729b8e44fe11d17e5ff4c597c797d",
+    "tests/test_service_inventory_integrity.py": "d4c018b4a6727e60c847ca18452550a4885884d74142bdf76f48cad02c125a8b"
+  },
+  "validation": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_service_protocol_v3.py tests/test_service_compare_harness.py tests/test_quality_compare.py",
+      "result": "31 passed"
+    },
+    {
+      "command": "CPU tar member hash maps compared to explicit before/after harness bridge maps",
+      "result": {
+        "before": {
+          "archive_sha256": "1b928104acee51f742b8be4893b2804cfac59779aa79904395dad13f351a09d4",
+          "file_map_matches_bridge": true,
+          "source_files": 47
+        },
+        "after": {
+          "archive_sha256": "d97b48ea15455319a68ecde1b1d3183a565413299894a775d67c0e3bb9d5d62f",
+          "file_map_matches_bridge": true,
+          "source_files": 47
+        }
+      }
+    },
+    {
+      "command": "CPU summary coverage regression reproduction using explicitly constructed test-only records",
+      "result": "A declared 3-engine x 3-repeat report containing only 3 of 9 expected blocks and one request kind still marked all 4 candidate/competitor metric rows engineering_target_met=true. This is a software test fixture, not measured model performance; no fixture timings are exported as benchmark results."
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_service_inventory_integrity.py tests/test_service_protocol_v3.py tests/test_service_compare_harness.py tests/test_quality_compare.py",
+      "result": "57 passed in 2.23s; includes complete test-only control and inventory/source mutations, private-log placement, exact model aliases"
+    },
+    {
+      "command": "Run actual frozen rotate_service_compare.py --verify-only with frozen manifest and independently specified project interpreter",
+      "result": {
+        "exit_code": 0,
+        "verified": true,
+        "errors": [],
+        "source_sha256": "49339c69e16fef9040b9a6efc32fc3075e5fde9bf0968d00d2d03263a7f77d70",
+        "archive_files": 72,
+        "archive_compressed_bytes": 193886,
+        "archive_uncompressed_bytes": 1467660,
+        "configuration_size_note": "Approximately 2.8 MiB; full environment hash maps contain 6,467 project-environment files and 16,487 oMLX-environment files. Local config remains private/excluded, not a model or task dump."
+      }
+    },
+    {
+      "command": "Inspect all actual service archive members and recursively alias actual prepared configuration; audit public complete test fixture",
+      "result": "No private home paths, logs or model weights in service source archive; no home paths in public config; environment digests intact after aliases; complete fixture audit valid with 4 blocks/24 requests/8 warmups per block."
+    },
+    {
+      "command": ".venv/bin/python -m ruff check benchmarks/experiments/service_inventory.py benchmarks/experiments/service_source_freeze.py benchmarks/experiments/prepare_service_compare.py benchmarks/experiments/rotate_service_compare.py benchmarks/experiments/public_service_report.py benchmarks/experiments/summarize_service_compare.py tests/test_service_inventory_integrity.py tests/test_service_protocol_v3.py",
+      "result": "All checks passed"
+    }
+  ],
+  "findings": [
+    {
+      "id": "P1-target-coverage",
+      "priority": "P1",
+      "file": "benchmarks/experiments/summarize_service_compare.py",
+      "line": 89,
+      "problem": "Target flag trusts completed/order metadata and observed-key union. Missing blocks, repetitions or request kinds are not compared to configuration/manifest; duplicate records silently overwrite earlier records at line 24. Actual engine rotation is not audited; absent order balance defaults True.",
+      "required_fix": "Derive exact expected blocks and request inventory from frozen configuration, selected manifest sessions, split and planned repetitions. Reject duplicates, omissions, unexpected blocks/records, mutated cases/requests, failed/interrupted blocks, missing metric coverage and actual order mismatch. Require verified complete balanced positions and complete warmup protocol before target can pass. Retain diagnostic partial summaries with target false.",
+      "status": "resolved",
+      "resolution": "service_inventory.audit reconstructs exact engine/repetition rotation, all selected session/kind records and their sequence, warmups and request payloads from frozen config+manifest. Duplicates, omissions, extras, invalid metrics, failed processes or missing source proof disable target. summarize uses that valid audit. Original incomplete-block fixture now cannot pass; tests retain only explicitly labeled fabricated software-test data."
+    },
+    {
+      "id": "P2-source-freeze",
+      "priority": "P2",
+      "file": "benchmarks/experiments/rotate_service_compare.py",
+      "line": 74,
+      "problem": "Preparation commands point at the live workspace. Runner checks runtime/harness sources once before all blocks and records no per-block/final drift evidence. Helper sources public_service_report.py/prompt_token_audit.py and installed competitor code are not in the current harness hash list. Mid-run edits can produce mixed measured sources while the report remains completed.",
+      "required_fix": "Prepare from a dedicated frozen complete service runtime/harness/manifest extraction with a separate explicit interpreter path, hash all imported helper code, record competitor environment/source provenance, and verify source state before/after every block and final summary; drift must disable target. Update executable docs commands accordingly.",
+      "status": "resolved",
+      "resolution": "prepare freezes all 72 runtime/experiment/helper/manifest/lock files into a dedicated extraction and deterministic archive, while interpreter path is separate. check binds runner/helper/runtime import locations and service command/cwd/PYTHONPATH to extraction. Actual Python executable, package versions and 22,954 installed environment files are hashed. Initial, each block before/after, and final checks are recorded and required by inventory. Real CPU --verify-only independently returned verified=true."
+    },
+    {
+      "id": "P2-private-logs",
+      "priority": "P2",
+      "file": "benchmarks/experiments/rotate_service_compare.py",
+      "line": 162,
+      "problem": "Default documented report directory receives server .log files. Distribution verifier forbids .log files, and server tracebacks may contain private absolute home paths. Only raw JSON gets recursive aliases.",
+      "required_fix": "Keep complete server logs in excluded benchmarks/results/<run>; publish only safe relative audit references and hashes or a separately sanitized text excerpt.",
+      "status": "resolved",
+      "resolution": "Complete logs/private raw now write only excluded benchmarks/results/private-service/<run>; public records contain PRIVATE_RESULTS alias, SHA256 and bytes. Recursive aliases now cover dictionary keys as well as values. Publicizing the actual prepared config removes home paths and preserves both environment digests. Frozen source archive inspected directly: no home paths, log files or model weights."
+    },
+    {
+      "id": "P2-model-alias",
+      "priority": "P2",
+      "file": "benchmarks/experiments/prepare_service_compare.py",
+      "line": 40,
+      "problem": "An existing regular directory at models/Qwen3.5-9B-8bit is accepted without resolving to the pinned snapshot. oMLX can then load different bytes from the native engine while declared identity metadata still matches.",
+      "required_fix": "Reject every preexisting alias unless it is a symlink resolving exactly to the audited snapshot; retain actual model file/hash audit for formal configuration.",
+      "status": "resolved",
+      "resolution": "prepare refuses any existing alias unless it is a symlink resolving exactly to the audited pinned snapshot; wrong symlink and ordinary directory regression tests preserve unrelated user files. Per-block source checks also verify model alias has not changed."
+    }
+  ],
+  "accepted_checks": {
+    "manifest_sha256": "16750b5d512df3d88a0d9086f1b2070dc5ebacffb047cc2f512cda35af03deb7",
+    "all_v2_session_objects_preserved": true,
+    "new_heldout_ledgers": "Two additional distinct seeded input ledgers; no model outcome used in construction",
+    "independent_heldout_clusters": "Six pooled across 2K/4K; each length only three",
+    "warmup": "Two distinct ledgers x four request kinds, outside scored records",
+    "sampling": "All declared targets use pinned 9B8bit nonthinking greedy; DS extra pinned 0.8B explicitly charged",
+    "competitors": "Native cache remains enabled; installed oMLX source confirms official prefill default 2048, hot cache options and scheduler guard; no unsupported feature zero-scoring",
+    "quality_bridge": "Exact three permitted metadata/exception edits only, source maps in both actual tar archives match explicit bridge, all runtime/scorer/lock files unchanged; changed sampling/budgets/scorers are rejected by current tests",
+    "public_quality_summary": "Does not copy raw messages, generations or licensed scoring fixtures; IDs/results remain. Raw quality cache remains excluded."
+  },
+  "limits": [
+    "No model inference, heldout GPU output, resource measurement or real speed comparison was performed by this reviewer. All constructed record controls are software tests, never performance evidence.",
+    "Root reports that the separate frozen 4204+256 actual resource check has completed with zero request swap; whole-load/system swap interpretation and formal admission belong to root and are not approved by this CPU source review.",
+    "8K remains deferred after its actual swap increase. Concurrency 2/4 remains unmeasured. Six independent heldout clusters are pooled across 2K/4K; each length has only three.",
+    "The approved extraction is immutable historical source 49339c69...; later runtime/protocol changes require a new extraction and configuration. Installed environment checks read many package files and must stay outside request timing; resource conditions still require actual monitoring.",
+    "No final public wheel/sdist or website rebuild was performed here. Source archive privacy was inspected directly; final release packaging still requires its usual artifact verifier.",
+    "A valid per-competitor target flag does not establish DS attribution or the project joint goal. Both competitor results, same-loop DS ablations, quality and resource evidence remain necessary."
+  ],
+  "review_revision": 2,
+  "approval_scope": "Four reported service protocol/provenance/privacy blockers resolved by CPU review. Approval authorizes a properly admitted dev run, not a speedup or final release claim."
+}

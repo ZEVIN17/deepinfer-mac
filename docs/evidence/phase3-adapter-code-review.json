@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "review_type": "fresh_code_quality",
+  "phase": "phase3-section2-model-adapters",
+  "reviewer": "phase3_adapter_review",
+  "status": "approved",
+  "scope": [
+    "src/deepinfer_mac/adapters.py",
+    "src/deepinfer_mac/engine.py",
+    "src/deepinfer_mac/models.py",
+    "src/deepinfer_mac/cli.py",
+    "src/deepinfer_mac/state.py",
+    "src/deepinfer_mac/server/app.py",
+    "src/deepinfer_mac/server/schemas.py",
+    "src/deepinfer_mac/hybrid_speculative.py",
+    "tests/test_model_adapters.py",
+    "docs/MODEL_ADAPTERS.md",
+    "pyproject.toml"
+  ],
+  "source_sha256": {
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/cli.py": "aaa4b3b2f1211f0daf76cdaaad01c3f38ed65bf6012f5efda5f7ec2dba5d22f7",
+    "src/deepinfer_mac/state.py": "649cfc41f5792e6b5b786c964aa6c6adf8f32340d43603b848e533a99928ab26",
+    "src/deepinfer_mac/server/app.py": "8ad4a3241c9aec48ae8c6e57cc94dda12b984075887f6216d4fe850bb070c40e",
+    "src/deepinfer_mac/server/schemas.py": "624e618c20fc2c9f7500c5835849f2092fcdbabbcc7fa2910d317cf795bf86bd",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "tests/test_model_adapters.py": "a39f7de9f2f0fbb33245e72e950c985a828329f88646ead7ea839140e1c231da",
+    "docs/MODEL_ADAPTERS.md": "41af1223b86d68378df185ef6c2dba6304601e5a47faf66177386130dd51c535",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732"
+  },
+  "constraints": {
+    "mlx_or_metal_execution": false,
+    "real_weights_loaded": false,
+    "implementation_files_modified": false,
+    "website_and_readme_out_of_scope": true
+  },
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q -m 'not metal'",
+      "result": "270 passed, 41 deselected in 9.80s"
+    },
+    {
+      "command": ".venv/bin/ruff check src/deepinfer_mac/adapters.py src/deepinfer_mac/engine.py src/deepinfer_mac/models.py src/deepinfer_mac/cli.py src/deepinfer_mac/state.py src/deepinfer_mac/server src/deepinfer_mac/hybrid_speculative.py tests/test_model_adapters.py",
+      "result": "All checks passed"
+    },
+    {
+      "check": "Fresh process imports adapters, engine, models, CLI, state, server.app and hybrid_speculative",
+      "result": "mlx, mlx.core and mlx_lm all absent from sys.modules"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q -m 'not metal'",
+      "result": "273 passed, 41 deselected in 7.86s; independent revalidation after fixes"
+    },
+    {
+      "command": ".venv/bin/ruff check src tests scripts benchmarks/experiments benchmarks/quality",
+      "result": "All checks passed; independent revalidation after fixes"
+    },
+    {
+      "check": "Built sdist bytes agree with current fixed source and model registration examples",
+      "result": {
+        "src/deepinfer_mac/adapters.py": true,
+        "tests/test_model_adapters.py": true,
+        "pyproject.toml": true,
+        "examples/models/smollm2-135m-8bit.local.json": true,
+        "examples/models/smollm2-135m-8bit.repo.json": true
+      }
+    }
+  ],
+  "non_blocking_observations": [
+    {
+      "topic": "Adapter factory extension",
+      "assessment": "The config-driven adapter supports ordinary dense and existing hybrid geometry without scheduler edits, meeting the immediate minimum. A third-party adapter factory is not yet a formal contract: registry.adapter plus engine audit/select_mode instantiate ModelAdapter directly. Treat unknown geometry/plugin injection as a documented extension boundary; do not claim an implemented general plugin registration API."
+    },
+    {
+      "topic": "Fallback and sampling",
+      "assessment": "Python request, CLI and API keep the existing strict speculative greedy guard; explicit baseline fallback records requested/effective modes and reason. Sampled speculative requests still reject before fallback as documented, avoiding an accidental sampled speculative execution claim."
+    },
+    {
+      "topic": "Capabilities",
+      "assessment": "New custom entries distinguish unverified baseline compatibility from optimized support; batch, trim, snapshot/replay, varlen, confidence and speculation default false. Concrete cache probes are diagnostic rather than concurrency/speed evidence."
+    },
+    {
+      "topic": "Resource/context semantics",
+      "assessment": "Resolved custom weight bytes and runtime reserve are checked before arrays; resolved config caps context and prompt is not truncated. Future KV admission remains before prefill. Added per-hybrid-draft reserve is explicitly documented as an admission-policy change."
+    }
+  ],
+  "acceptance_limits": [
+    "Portable fixtures prove interfaces/guards only, not model quality/performance.",
+    "Real different-family baseline plus dense/hybrid optimized integration are owned by the sole GPU verifier and are not independently rerun by this review."
+  ],
+  "initial_source_sha256": {
+    "src/deepinfer_mac/adapters.py": "2453e270a4769e92863a70d2ce45665db349788c3c58d2189f4f7ff10ebf4e2e",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/cli.py": "aaa4b3b2f1211f0daf76cdaaad01c3f38ed65bf6012f5efda5f7ec2dba5d22f7",
+    "src/deepinfer_mac/state.py": "649cfc41f5792e6b5b786c964aa6c6adf8f32340d43603b848e533a99928ab26",
+    "src/deepinfer_mac/server/app.py": "8ad4a3241c9aec48ae8c6e57cc94dda12b984075887f6216d4fe850bb070c40e",
+    "src/deepinfer_mac/server/schemas.py": "624e618c20fc2c9f7500c5835849f2092fcdbabbcc7fa2910d317cf795bf86bd",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "tests/test_model_adapters.py": "37f358f3583036d5b528eea4113f64e0665122d6aac48bdc467776f6050b9e1a",
+    "docs/MODEL_ADAPTERS.md": "41af1223b86d68378df185ef6c2dba6304601e5a47faf66177386130dd51c535",
+    "pyproject.toml": "344fb14f9a472ce480ca97c575f3c66f584e9b7010d365d698cfa57818ee0cde"
+  },
+  "current_findings": [],
+  "resolved_findings": [
+    {
+      "id": "P3-ADAPTER-001",
+      "priority": "P2",
+      "file": "src/deepinfer_mac/adapters.py",
+      "line": 145,
+      "title": "Audit the same safetensors set as the MLX-LM loader",
+      "status": "resolved",
+      "problem": "When an index exists, inspect_snapshot audits only its shard values. Locked MLX-LM utils.py:449-455 actually globs and loads every model*.safetensors. A stale unindexed model-extra.safetensors is loaded but omitted from content identity, mutation signatures and pre-load weight-byte admission.",
+      "reproduction": {
+        "method": "CPU-only temporary snapshot with config/tokenizer and one indexed tiny safetensors; inspect, append unindexed model-extra.safetensors, inspect again; compare content identity/weight bytes with Path.glob(\"model*.safetensors\") actual loader set. No MLX import.",
+        "same_content_identity": true,
+        "audited_weight_bytes": 129,
+        "mlx_loader_glob_bytes": 4311
+      },
+      "requested_change": "Align loader and audited file sets; safely reject unexpected or missing loader shards, or audit/hash/account for every loader file. Add a portable regression.",
+      "resolution": {
+        "file": "src/deepinfer_mac/adapters.py",
+        "line": 148,
+        "result": "The audited set now matches actual model*.safetensors glob. Indexed snapshots must match exactly; unindexed snapshots hash/account for every loaded shard. Three portable regressions cover stale extras, loader-ignored indexed files and no-index complete accounting.",
+        "independent_cpu_recheck": {
+          "extra_indexed_shard_rejected": true,
+          "error": "Indexed weight shards must exactly match MLX-LM model*.safetensors files",
+          "no_index_all_files_hashed": true,
+          "no_index_total_weight_bytes": 258,
+          "mlx_imported": false
+        }
+      }
+    },
+    {
+      "id": "P3-ADAPTER-002",
+      "priority": "P2",
+      "file": "pyproject.toml",
+      "line": 29,
+      "title": "Include model registration examples in source distributions",
+      "status": "resolved",
+      "problem": "The sdist include allowlist omits /examples. The new SmolLM2 audit and integration report reproduction commands reference examples/models/smollm2-135m-8bit.local.json and the pinned repo configuration. Source-distribution users cannot reproduce these commands from the packaged source.",
+      "requested_change": "Include /examples in sdist and inspect a built sdist to ensure the local and exact-revision registration examples are present.",
+      "resolution": {
+        "file": "pyproject.toml",
+        "line": 28,
+        "result": "/examples included in sdist allowlist; independently inspected built sdist, both local and revision-pinned repo JSON configurations present, no safetensors/gguf.",
+        "sdist_sha256": "2e8ed089527cef9dc2faba92d7d63cc521a02258c29c14dee641b88ac56a8716",
+        "sdist_members": 366
+      }
+    }
+  ],
+  "findings": []
+}

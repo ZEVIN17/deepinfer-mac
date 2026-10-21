@@ -1,0 +1,3565 @@
+{
+  "schema_version": 1,
+  "stage": "development",
+  "source_sha256": {
+    "benchmarks/experiments/phase3_pair_cost.py": "73b1bc7280fc5dab34c89e0d5ccc2506a3446fcccb9c9aebef4d01cce659c6ac",
+    "benchmarks/experiments/phase3_pair_workload_manifest.json": "f355eb44cdeedb8d02ad90b3fe1963503afd95c71d0913e8c7b27967aeef7bed",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/varlen_verify.py": "2b5e42a11ecea37c6cf5403675f1ecd73dbac595a1beea633e45c4fb5c796b27",
+    "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d"
+  },
+  "model_content_sha256": [
+    "40e44f0e35876a3e846c856f830ecca4208db73319256ff4f493434d2723950d",
+    "a4f7f71502edccf61c70717a7edb5368266a104f0c45cc1c0ed72cfb7ea27981"
+  ],
+  "calibration_identity": "aeab4d7040d5b33ff44d743f4cceaa23060ba5c408dc98f83d437badeaddcc19",
+  "calibration_artifact_sha256": null,
+  "workload_manifest": {
+    "schema_version": 1,
+    "workload_sha256": "d2817da479ad7a5d9f1d48d4984d21332e84deacf3e7015ba5afedc25cc85b61",
+    "raw_workload_public": false,
+    "scope": "Fixed small mechanism workloads; not a quality suite or representative benchmark. Raw prompts remain in private artifacts. No held-out tuning.",
+    "splits": {
+      "development": [
+        {
+          "id": "dev-science",
+          "prompt_sha256": "49d4827116d47ddf7b1122acae8f65f7c92c2b8714ed5b122a337537cd118007",
+          "context_tokens": 128
+        },
+        {
+          "id": "dev-code",
+          "prompt_sha256": "c540e6152c88d60db379c3c899332640b019d9de264f5d82b050a94182ce7e18",
+          "context_tokens": 128
+        }
+      ],
+      "heldout": [
+        {
+          "id": "heldout-explanation",
+          "prompt_sha256": "5c8d86365a2d1214aba0fae6e993cbb645782c66dd15199335603cec38ac44aa",
+          "context_tokens": 256
+        },
+        {
+          "id": "heldout-chinese",
+          "prompt_sha256": "6ac1b55ad3b5d15930ab6e69bba8a68ad40464da9ebf9eb49a24a30953dd4b68",
+          "context_tokens": 256
+        }
+      ]
+    },
+    "output_tokens": 32,
+    "depth": 3,
+    "batch_size": 2,
+    "context_bucket": 512,
+    "development_repetitions": 2
+  },
+  "process_count": 1,
+  "versions": {
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2"
+  },
+  "platform": "27.0",
+  "available_before_bytes": 9715318784,
+  "required_admission_bytes": 2977865220,
+  "swap_before_bytes": 3819372544,
+  "cases": [],
+  "curves": [
+    {
+      "key": {
+        "model_identity": "40e44f0e35876a3e846c856f830ecca4208db73319256ff4f493434d2723950d",
+        "draft_identity": "a4f7f71502edccf61c70717a7edb5368266a104f0c45cc1c0ed72cfb7ea27981",
+        "quantization": "target6bit-g64/draft8bit-g64",
+        "batch_size": 1,
+        "context_bucket": 512,
+        "execution_strategy": "bucket",
+        "calibration_identity": "aeab4d7040d5b33ff44d743f4cceaa23060ba5c408dc98f83d437badeaddcc19"
+      },
+      "samples": [
+        {
+          "total_q": 1,
+          "lengths": [
+            1
+          ],
+          "repetition": 0,
+          "prefill_ms": 26.98620897717774,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 1,
+                "token_ids_sha256": "dd23be6a58f5e7898a48930ac1d84ab7d9a738b28f5d047459cbd949f06eda0c"
+              }
+            ],
+            "outcomes": [
+              [
+                null,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 1,
+            "effective_verified_q": 1,
+            "executed_verify_q": 1,
+            "padded_q": 0,
+            "executed_replay_q": 1,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 6,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 7.198291947133839,
+            "full_cycle_ms": 17.52316695638001,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 6,
+            "scheduler_ms": 0.17049990128725767,
+            "allocator": "mlx",
+            "seqlens_q": [
+              1
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 44.548042002134025
+        },
+        {
+          "total_q": 1,
+          "lengths": [
+            1
+          ],
+          "repetition": 1,
+          "prefill_ms": 26.968459016643465,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 1,
+                "token_ids_sha256": "dd23be6a58f5e7898a48930ac1d84ab7d9a738b28f5d047459cbd949f06eda0c"
+              }
+            ],
+            "outcomes": [
+              [
+                null,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 1,
+            "effective_verified_q": 1,
+            "executed_verify_q": 1,
+            "padded_q": 0,
+            "executed_replay_q": 1,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 6,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 7.33791699167341,
+            "full_cycle_ms": 18.07291596196592,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 6,
+            "scheduler_ms": 0.20633300300687551,
+            "allocator": "mlx",
+            "seqlens_q": [
+              1
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 45.09262496139854
+        },
+        {
+          "total_q": 2,
+          "lengths": [
+            2
+          ],
+          "repetition": 0,
+          "prefill_ms": 26.899916003458202,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 2,
+                "token_ids_sha256": "bcebd872a0e3e596d253ca3c27a200ce84afd5e0356db5ceae3fcb70535d9e48"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 2,
+            "effective_verified_q": 2,
+            "executed_verify_q": 2,
+            "padded_q": 0,
+            "executed_replay_q": 2,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              }
+            ],
+            "model_submissions": 6,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 7.908166036941111,
+            "full_cycle_ms": 18.856250098906457,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 9,
+            "scheduler_ms": 0.256291008554399,
+            "allocator": "mlx",
+            "seqlens_q": [
+              2
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 45.801165979355574
+        },
+        {
+          "total_q": 2,
+          "lengths": [
+            2
+          ],
+          "repetition": 1,
+          "prefill_ms": 26.772249955683947,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 2,
+                "token_ids_sha256": "bcebd872a0e3e596d253ca3c27a200ce84afd5e0356db5ceae3fcb70535d9e48"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 2,
+            "effective_verified_q": 2,
+            "executed_verify_q": 2,
+            "padded_q": 0,
+            "executed_replay_q": 2,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              }
+            ],
+            "model_submissions": 6,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 7.920249947346747,
+            "full_cycle_ms": 18.8852499704808,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 9,
+            "scheduler_ms": 0.1699170097708702,
+            "allocator": "mlx",
+            "seqlens_q": [
+              2
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 45.711582992225885
+        },
+        {
+          "total_q": 3,
+          "lengths": [
+            3
+          ],
+          "repetition": 0,
+          "prefill_ms": 26.913499925285578,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                null
+              ]
+            ],
+            "requested_q": 3,
+            "effective_verified_q": 3,
+            "executed_verify_q": 3,
+            "padded_q": 0,
+            "executed_replay_q": 3,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              }
+            ],
+            "model_submissions": 6,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 8.299499982967973,
+            "full_cycle_ms": 19.357417011633515,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 12,
+            "scheduler_ms": 0.16487494576722383,
+            "allocator": "mlx",
+            "seqlens_q": [
+              3
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 46.30841698963195
+        },
+        {
+          "total_q": 3,
+          "lengths": [
+            3
+          ],
+          "repetition": 1,
+          "prefill_ms": 27.01825008261949,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                null
+              ]
+            ],
+            "requested_q": 3,
+            "effective_verified_q": 3,
+            "executed_verify_q": 3,
+            "padded_q": 0,
+            "executed_replay_q": 3,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              }
+            ],
+            "model_submissions": 6,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 8.19341593887657,
+            "full_cycle_ms": 19.42787505686283,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 12,
+            "scheduler_ms": 0.17504103016108274,
+            "allocator": "mlx",
+            "seqlens_q": [
+              3
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 46.493500005453825
+        },
+        {
+          "total_q": 4,
+          "lengths": [
+            4
+          ],
+          "repetition": 0,
+          "prefill_ms": 26.617208030074835,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                false
+              ]
+            ],
+            "requested_q": 4,
+            "effective_verified_q": 4,
+            "executed_verify_q": 4,
+            "padded_q": 0,
+            "executed_replay_q": 3,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 4,
+                "tokens": 4
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              }
+            ],
+            "model_submissions": 6,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 8.344916044734418,
+            "full_cycle_ms": 19.34691600035876,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 13,
+            "scheduler_ms": 0.17158302944153547,
+            "allocator": "mlx",
+            "seqlens_q": [
+              4
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 46.002791030332446
+        },
+        {
+          "total_q": 4,
+          "lengths": [
+            4
+          ],
+          "repetition": 1,
+          "prefill_ms": 26.956125046126544,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                false
+              ]
+            ],
+            "requested_q": 4,
+            "effective_verified_q": 4,
+            "executed_verify_q": 4,
+            "padded_q": 0,
+            "executed_replay_q": 3,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 4,
+                "tokens": 4
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              }
+            ],
+            "model_submissions": 6,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 8.290208061225712,
+            "full_cycle_ms": 19.512249971739948,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 13,
+            "scheduler_ms": 0.2608329523354769,
+            "allocator": "mlx",
+            "seqlens_q": [
+              4
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 46.520959003828466
+        }
+      ],
+      "points": [
+        [
+          1,
+          17.798041459172964
+        ],
+        [
+          2,
+          18.87075003469363
+        ],
+        [
+          3,
+          19.392646034248173
+        ],
+        [
+          4,
+          19.429582986049354
+        ]
+      ]
+    },
+    {
+      "key": {
+        "model_identity": "40e44f0e35876a3e846c856f830ecca4208db73319256ff4f493434d2723950d",
+        "draft_identity": "a4f7f71502edccf61c70717a7edb5368266a104f0c45cc1c0ed72cfb7ea27981",
+        "quantization": "target6bit-g64/draft8bit-g64",
+        "batch_size": 2,
+        "context_bucket": 512,
+        "execution_strategy": "bucket",
+        "calibration_identity": "aeab4d7040d5b33ff44d743f4cceaa23060ba5c408dc98f83d437badeaddcc19"
+      },
+      "samples": [
+        {
+          "total_q": 2,
+          "lengths": [
+            1,
+            1
+          ],
+          "repetition": 0,
+          "prefill_ms": 52.74116597138345,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 1,
+                "token_ids_sha256": "dd23be6a58f5e7898a48930ac1d84ab7d9a738b28f5d047459cbd949f06eda0c"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                null,
+                null,
+                null
+              ],
+              [
+                null,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 2,
+            "effective_verified_q": 2,
+            "executed_verify_q": 2,
+            "padded_q": 0,
+            "executed_replay_q": 2,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 2,
+                "sequence_length": 1,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 11,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 16.03245793376118,
+            "full_cycle_ms": 37.364750052802265,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 12,
+            "scheduler_ms": 0.40179200004786253,
+            "allocator": "mlx",
+            "seqlens_q": [
+              1,
+              1
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 90.17920796759427
+        },
+        {
+          "total_q": 2,
+          "lengths": [
+            1,
+            1
+          ],
+          "repetition": 1,
+          "prefill_ms": 53.20462503004819,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 1,
+                "token_ids_sha256": "dd23be6a58f5e7898a48930ac1d84ab7d9a738b28f5d047459cbd949f06eda0c"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                null,
+                null,
+                null
+              ],
+              [
+                null,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 2,
+            "effective_verified_q": 2,
+            "executed_verify_q": 2,
+            "padded_q": 0,
+            "executed_replay_q": 2,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 2,
+                "sequence_length": 1,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 11,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 12.971959076821804,
+            "full_cycle_ms": 34.16525002103299,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 12,
+            "scheduler_ms": 0.34787505865097046,
+            "allocator": "mlx",
+            "seqlens_q": [
+              1,
+              1
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 87.43349998258054
+        },
+        {
+          "total_q": 3,
+          "lengths": [
+            2,
+            1
+          ],
+          "repetition": 0,
+          "prefill_ms": 54.361124988645315,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 2,
+                "token_ids_sha256": "bcebd872a0e3e596d253ca3c27a200ce84afd5e0356db5ceae3fcb70535d9e48"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                null,
+                null
+              ],
+              [
+                null,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 3,
+            "effective_verified_q": 3,
+            "executed_verify_q": 3,
+            "padded_q": 0,
+            "executed_replay_q": 3,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 12,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 15.042040962725878,
+            "full_cycle_ms": 36.00600000936538,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 15,
+            "scheduler_ms": 0.3237919881939888,
+            "allocator": "mlx",
+            "seqlens_q": [
+              2,
+              1
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 90.43041698168963
+        },
+        {
+          "total_q": 3,
+          "lengths": [
+            2,
+            1
+          ],
+          "repetition": 1,
+          "prefill_ms": 53.9236250333488,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 2,
+                "token_ids_sha256": "bcebd872a0e3e596d253ca3c27a200ce84afd5e0356db5ceae3fcb70535d9e48"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                null,
+                null
+              ],
+              [
+                null,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 3,
+            "effective_verified_q": 3,
+            "executed_verify_q": 3,
+            "padded_q": 0,
+            "executed_replay_q": 3,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 12,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 14.418624923564494,
+            "full_cycle_ms": 35.473582916893065,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 15,
+            "scheduler_ms": 0.3344999859109521,
+            "allocator": "mlx",
+            "seqlens_q": [
+              2,
+              1
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 89.46283406112343
+        },
+        {
+          "total_q": 4,
+          "lengths": [
+            2,
+            2
+          ],
+          "repetition": 0,
+          "prefill_ms": 53.178624948486686,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 2,
+                "token_ids_sha256": "bcebd872a0e3e596d253ca3c27a200ce84afd5e0356db5ceae3fcb70535d9e48"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                null,
+                null
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 4,
+            "effective_verified_q": 4,
+            "executed_verify_q": 4,
+            "padded_q": 0,
+            "executed_replay_q": 3,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 2,
+                "sequence_length": 2,
+                "tokens": 4
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 11,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 13.310833019204438,
+            "full_cycle_ms": 34.73354107700288,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 16,
+            "scheduler_ms": 0.40683301631361246,
+            "allocator": "mlx",
+            "seqlens_q": [
+              2,
+              2
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 88.00966595299542
+        },
+        {
+          "total_q": 4,
+          "lengths": [
+            2,
+            2
+          ],
+          "repetition": 1,
+          "prefill_ms": 53.37258393410593,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 2,
+                "token_ids_sha256": "bcebd872a0e3e596d253ca3c27a200ce84afd5e0356db5ceae3fcb70535d9e48"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                null,
+                null
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 4,
+            "effective_verified_q": 4,
+            "executed_verify_q": 4,
+            "padded_q": 0,
+            "executed_replay_q": 3,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 2,
+                "sequence_length": 2,
+                "tokens": 4
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 11,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 13.08549998793751,
+            "full_cycle_ms": 34.345541964285076,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 16,
+            "scheduler_ms": 0.32512506004422903,
+            "allocator": "mlx",
+            "seqlens_q": [
+              2,
+              2
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 87.7875000005588
+        },
+        {
+          "total_q": 5,
+          "lengths": [
+            3,
+            2
+          ],
+          "repetition": 0,
+          "prefill_ms": 54.153791978023946,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                null
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 5,
+            "effective_verified_q": 5,
+            "executed_verify_q": 5,
+            "padded_q": 0,
+            "executed_replay_q": 4,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 12,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 15.356916934251785,
+            "full_cycle_ms": 36.83537500910461,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 19,
+            "scheduler_ms": 0.34658308140933514,
+            "allocator": "mlx",
+            "seqlens_q": [
+              3,
+              2
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 91.05329203885049
+        },
+        {
+          "total_q": 5,
+          "lengths": [
+            3,
+            2
+          ],
+          "repetition": 1,
+          "prefill_ms": 54.09041605889797,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                null
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 5,
+            "effective_verified_q": 5,
+            "executed_verify_q": 5,
+            "padded_q": 0,
+            "executed_replay_q": 4,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 2,
+                "tokens": 2
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 12,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 15.509417047724128,
+            "full_cycle_ms": 36.935499985702336,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 19,
+            "scheduler_ms": 0.3244580002501607,
+            "allocator": "mlx",
+            "seqlens_q": [
+              3,
+              2
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 91.0946250660345
+        },
+        {
+          "total_q": 6,
+          "lengths": [
+            3,
+            3
+          ],
+          "repetition": 0,
+          "prefill_ms": 53.07091702707112,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                null
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 6,
+            "effective_verified_q": 6,
+            "executed_verify_q": 6,
+            "padded_q": 0,
+            "executed_replay_q": 4,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 2,
+                "sequence_length": 3,
+                "tokens": 6
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 11,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 14.303333009593189,
+            "full_cycle_ms": 35.65883298870176,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 20,
+            "scheduler_ms": 0.43233297765254974,
+            "allocator": "mlx",
+            "seqlens_q": [
+              3,
+              3
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 88.80329201929271
+        },
+        {
+          "total_q": 6,
+          "lengths": [
+            3,
+            3
+          ],
+          "repetition": 1,
+          "prefill_ms": 53.875249926932156,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                null
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 6,
+            "effective_verified_q": 6,
+            "executed_verify_q": 6,
+            "padded_q": 0,
+            "executed_replay_q": 4,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 2,
+                "sequence_length": 3,
+                "tokens": 6
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 11,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 14.79783293325454,
+            "full_cycle_ms": 36.370125017128885,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 20,
+            "scheduler_ms": 0.3287500003352761,
+            "allocator": "mlx",
+            "seqlens_q": [
+              3,
+              3
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 90.32458299770951
+        },
+        {
+          "total_q": 7,
+          "lengths": [
+            4,
+            3
+          ],
+          "repetition": 0,
+          "prefill_ms": 53.520250017754734,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                false
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 7,
+            "effective_verified_q": 7,
+            "executed_verify_q": 7,
+            "padded_q": 0,
+            "executed_replay_q": 4,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 4,
+                "tokens": 4
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 12,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 16.86333294492215,
+            "full_cycle_ms": 39.37045799102634,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 21,
+            "scheduler_ms": 0.32666593324393034,
+            "allocator": "mlx",
+            "seqlens_q": [
+              4,
+              3
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 92.98366599250585
+        },
+        {
+          "total_q": 7,
+          "lengths": [
+            4,
+            3
+          ],
+          "repetition": 1,
+          "prefill_ms": 53.743791999295354,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                false
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 7,
+            "effective_verified_q": 7,
+            "executed_verify_q": 7,
+            "padded_q": 0,
+            "executed_replay_q": 4,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "verify",
+                "batch": 1,
+                "sequence_length": 4,
+                "tokens": 4
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 12,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 15.874417033046484,
+            "full_cycle_ms": 38.997791009023786,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 21,
+            "scheduler_ms": 0.44304097536951303,
+            "allocator": "mlx",
+            "seqlens_q": [
+              4,
+              3
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 92.81262499280274
+        },
+        {
+          "total_q": 8,
+          "lengths": [
+            4,
+            4
+          ],
+          "repetition": 0,
+          "prefill_ms": 53.3199580386281,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                false
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 8,
+            "effective_verified_q": 8,
+            "executed_verify_q": 8,
+            "padded_q": 0,
+            "executed_replay_q": 4,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 2,
+                "sequence_length": 4,
+                "tokens": 8
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 11,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 15.358165954239666,
+            "full_cycle_ms": 37.48579206876457,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 22,
+            "scheduler_ms": 0.5228749942034483,
+            "allocator": "mlx",
+            "seqlens_q": [
+              4,
+              4
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 90.89587500784546
+        },
+        {
+          "total_q": 8,
+          "lengths": [
+            4,
+            4
+          ],
+          "repetition": 1,
+          "prefill_ms": 53.50304197054356,
+          "prefill_model_calls": [
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "target",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            },
+            {
+              "phase": "prefill",
+              "model": "draft",
+              "batch": 1,
+              "sequence_length": 127,
+              "tokens": 127
+            }
+          ],
+          "tick": {
+            "output_summaries": [
+              {
+                "token_count": 3,
+                "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+              },
+              {
+                "token_count": 1,
+                "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+              }
+            ],
+            "outcomes": [
+              [
+                true,
+                true,
+                false
+              ],
+              [
+                false,
+                null,
+                null
+              ]
+            ],
+            "requested_q": 8,
+            "effective_verified_q": 8,
+            "executed_verify_q": 8,
+            "padded_q": 0,
+            "executed_replay_q": 4,
+            "model_calls": [
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "verify",
+                "batch": 2,
+                "sequence_length": 4,
+                "tokens": 8
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "replay",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 3,
+                "tokens": 3
+              },
+              {
+                "phase": "draft_catchup",
+                "batch": 1,
+                "sequence_length": 1,
+                "tokens": 1
+              }
+            ],
+            "model_submissions": 11,
+            "gpu_kernel_count": null,
+            "verify_recovery_host_ms": 15.283541986718774,
+            "full_cycle_ms": 37.1875410201028,
+            "draft_cost_included": true,
+            "strategy": "bucket",
+            "executed_total_q": 22,
+            "scheduler_ms": 0.4018329782411456,
+            "allocator": "mlx",
+            "seqlens_q": [
+              4,
+              4
+            ],
+            "draft_source": "external_model",
+            "confidence_source": "empirical",
+            "cost_curve_scope": "whole_cycle_once"
+          },
+          "complete_task_ms": 90.76658403500915
+        }
+      ],
+      "points": [
+        [
+          2,
+          35.76500003691763
+        ],
+        [
+          3,
+          35.73979146312922
+        ],
+        [
+          4,
+          34.53954152064398
+        ],
+        [
+          5,
+          36.88543749740347
+        ],
+        [
+          6,
+          36.01447900291532
+        ],
+        [
+          7,
+          39.184124500025064
+        ],
+        [
+          8,
+          37.33666654443368
+        ]
+      ]
+    }
+  ],
+  "failures": [],
+  "accepted": true,
+  "performance_claim": false,
+  "limits": [
+    "One process per stage; not three independent performance repetitions.",
+    "Fixed 32-token budget ignores EOS equally for all controls; not a chat-quality evaluation.",
+    "Cold refers to empty KV caches with resident warmed weights; model load is separate.",
+    "Development forces q: measured cycle includes draft/verify/recovery/catch-up but excludes normal JointBudget.choose and MLX rank allocation; adaptive held-out full_cycle_ms includes both.",
+    "Complete-cycle curve is a representative development estimate for one context bucket; actual shapes are retained.",
+    "Small held-out calibration coverage is diagnostic, not confidence-model acceptance.",
+    "Same draft depth and exact replay/catch-up are used across controls; padded states are discarded."
+  ],
+  "resident_pair_load_ms": 221.44191700499505,
+  "pair_warmup_ms": 75.81399998161942,
+  "pair_warmup_model_calls": [
+    {
+      "phase": "prefill",
+      "model": "target",
+      "batch": 1,
+      "sequence_length": 3,
+      "tokens": 3
+    },
+    {
+      "phase": "prefill",
+      "model": "draft",
+      "batch": 1,
+      "sequence_length": 3,
+      "tokens": 3
+    }
+  ],
+  "input_token_counts": [
+    128,
+    128
+  ],
+  "development_prelude_prefill_calls": [
+    {
+      "phase": "prefill",
+      "model": "target",
+      "batch": 1,
+      "sequence_length": 127,
+      "tokens": 127
+    },
+    {
+      "phase": "prefill",
+      "model": "target",
+      "batch": 1,
+      "sequence_length": 127,
+      "tokens": 127
+    },
+    {
+      "phase": "prefill",
+      "model": "draft",
+      "batch": 1,
+      "sequence_length": 127,
+      "tokens": 127
+    },
+    {
+      "phase": "prefill",
+      "model": "draft",
+      "batch": 1,
+      "sequence_length": 127,
+      "tokens": 127
+    }
+  ],
+  "development_prelude": [
+    {
+      "output_summaries": [
+        {
+          "token_count": 3,
+          "token_ids_sha256": "cec875b64c8840a87969a87f1fb7b43c8c9354db8081681d82b7177668d8c4bf"
+        },
+        {
+          "token_count": 1,
+          "token_ids_sha256": "840d60afcf8aeb607ff32e9b4fba7e3132722c2148136c5f4e4816fec59f4ff3"
+        }
+      ],
+      "outcomes": [
+        [
+          true,
+          true,
+          false
+        ],
+        [
+          false,
+          null,
+          null
+        ]
+      ],
+      "requested_q": 8,
+      "effective_verified_q": 8,
+      "executed_verify_q": 8,
+      "padded_q": 0,
+      "executed_replay_q": 4,
+      "model_calls": [
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "verify",
+          "batch": 2,
+          "sequence_length": 4,
+          "tokens": 8
+        },
+        {
+          "phase": "replay",
+          "batch": 1,
+          "sequence_length": 3,
+          "tokens": 3
+        },
+        {
+          "phase": "replay",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft_catchup",
+          "batch": 1,
+          "sequence_length": 3,
+          "tokens": 3
+        },
+        {
+          "phase": "draft_catchup",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        }
+      ],
+      "model_submissions": 11,
+      "gpu_kernel_count": null,
+      "verify_recovery_host_ms": 59.86454198136926,
+      "full_cycle_ms": 84.44712497293949,
+      "draft_cost_included": true,
+      "strategy": "bucket",
+      "executed_total_q": 22,
+      "scheduler_ms": 1.5928329667076468,
+      "allocator": "mlx",
+      "seqlens_q": [
+        4,
+        4
+      ],
+      "draft_source": "external_model",
+      "confidence_source": "empirical",
+      "cost_curve_scope": "whole_cycle_once"
+    },
+    {
+      "output_summaries": [
+        {
+          "token_count": 4,
+          "token_ids_sha256": "0e2678dc4acb3d6681e0eab76244c1440bb752cb608321e76a998800a2a4260a"
+        },
+        {
+          "token_count": 2,
+          "token_ids_sha256": "8527f3e1a118e3ed0985a251652d9165b4943049ccc32bfa5310a868bf5a0fbc"
+        }
+      ],
+      "outcomes": [
+        [
+          true,
+          true,
+          true
+        ],
+        [
+          true,
+          false,
+          null
+        ]
+      ],
+      "requested_q": 8,
+      "effective_verified_q": 8,
+      "executed_verify_q": 8,
+      "padded_q": 0,
+      "executed_replay_q": 6,
+      "model_calls": [
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "verify",
+          "batch": 2,
+          "sequence_length": 4,
+          "tokens": 8
+        },
+        {
+          "phase": "replay",
+          "batch": 1,
+          "sequence_length": 4,
+          "tokens": 4
+        },
+        {
+          "phase": "replay",
+          "batch": 1,
+          "sequence_length": 2,
+          "tokens": 2
+        },
+        {
+          "phase": "draft_catchup",
+          "batch": 1,
+          "sequence_length": 4,
+          "tokens": 4
+        },
+        {
+          "phase": "draft_catchup",
+          "batch": 1,
+          "sequence_length": 2,
+          "tokens": 2
+        }
+      ],
+      "model_submissions": 11,
+      "gpu_kernel_count": null,
+      "verify_recovery_host_ms": 31.046084011904895,
+      "full_cycle_ms": 52.71787499077618,
+      "draft_cost_included": true,
+      "strategy": "bucket",
+      "executed_total_q": 26,
+      "scheduler_ms": 0.28045906219631433,
+      "allocator": "mlx",
+      "seqlens_q": [
+        4,
+        4
+      ],
+      "draft_source": "external_model",
+      "confidence_source": "empirical",
+      "cost_curve_scope": "whole_cycle_once"
+    },
+    {
+      "output_summaries": [
+        {
+          "token_count": 4,
+          "token_ids_sha256": "2540050d6717663882666a80f18faa17e9f2f3b9eca2b32249354dceeaefd2dd"
+        },
+        {
+          "token_count": 4,
+          "token_ids_sha256": "7bcbe925031caa64bef94696c1f0dc3014f2760289c5a6e116caac07f78cc6de"
+        }
+      ],
+      "outcomes": [
+        [
+          true,
+          true,
+          true
+        ],
+        [
+          true,
+          true,
+          true
+        ]
+      ],
+      "requested_q": 8,
+      "effective_verified_q": 8,
+      "executed_verify_q": 8,
+      "padded_q": 0,
+      "executed_replay_q": 8,
+      "model_calls": [
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "draft",
+          "batch": 1,
+          "sequence_length": 1,
+          "tokens": 1
+        },
+        {
+          "phase": "verify",
+          "batch": 2,
+          "sequence_length": 4,
+          "tokens": 8
+        },
+        {
+          "phase": "replay",
+          "batch": 1,
+          "sequence_length": 4,
+          "tokens": 4
+        },
+        {
+          "phase": "replay",
+          "batch": 1,
+          "sequence_length": 4,
+          "tokens": 4
+        },
+        {
+          "phase": "draft_catchup",
+          "batch": 1,
+          "sequence_length": 4,
+          "tokens": 4
+        },
+        {
+          "phase": "draft_catchup",
+          "batch": 1,
+          "sequence_length": 4,
+          "tokens": 4
+        }
+      ],
+      "model_submissions": 11,
+      "gpu_kernel_count": null,
+      "verify_recovery_host_ms": 16.165500041097403,
+      "full_cycle_ms": 38.395749987103045,
+      "draft_cost_included": true,
+      "strategy": "bucket",
+      "executed_total_q": 30,
+      "scheduler_ms": 0.2988330088555813,
+      "allocator": "mlx",
+      "seqlens_q": [
+        4,
+        4
+      ],
+      "draft_source": "external_model",
+      "confidence_source": "empirical",
+      "cost_curve_scope": "whole_cycle_once"
+    }
+  ],
+  "frozen_confidence": {
+    "counts": [
+      [
+        5,
+        6
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "conditional": [
+      0.75,
+      0.7142857142857143,
+      0.6666666666666666
+    ],
+    "diagnostics": {
+      "kind": "conditional",
+      "model_identity": "40e44f0e35876a3e846c856f830ecca4208db73319256ff4f493434d2723950d",
+      "calibration_identity": "aeab4d7040d5b33ff44d743f4cceaa23060ba5c408dc98f83d437badeaddcc19",
+      "coverage": [
+        6,
+        5,
+        4
+      ],
+      "accepted": [
+        5,
+        4,
+        3
+      ],
+      "prequential_brier": [
+        0.21619803476946334,
+        0.2389444444444445,
+        0.27611111111111114
+      ],
+      "scope": "online diagnostics; not held-out calibration acceptance"
+    }
+  },
+  "source_unchanged": true,
+  "swap_after_bytes": 3819372544,
+  "metal_peak_bytes": 705727316,
+  "rss_snapshot_bytes": 711442432,
+  "available_after_bytes": 9154969600,
+  "calibration_frozen": true,
+  "public_export": {
+    "raw_sha256": "40e015753c656f2639e45ade26cacd0aa8199de46e324627d9801c82ebe538f9",
+    "transformation": "Replace generated token arrays by count and canonical JSON SHA256; preserve original source hashes, measured timing, costs, shapes, outcomes and acceptance. Raw prompts are not in this report.",
+    "accepted_scope": "Bounded experimental calibration/mechanism only; no release or comparative speed acceptance."
+  }
+}

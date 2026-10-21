@@ -1,0 +1,55 @@
+{
+  "finding": "RECOVERY-P2-001",
+  "status": "fixed_pending_independent_reverification",
+  "scope": "Censored partial-cycle feedback in lagged_mean, original DS adapter and legacy; full-cycle algorithms unchanged",
+  "mechanism": "Partial means produced <= accepted: keep actual diagnostics, exclude both shared cycle-cost and acceptance evidence; advance DS process/history age without altering current acceptance estimates",
+  "regression_matrix": {
+    "adapters": [
+      "hybrid exact restore/replay",
+      "trimmable rewind"
+    ],
+    "policies": [
+      "legacy",
+      "original DS",
+      "lagged_mean"
+    ],
+    "termination": [
+      "generator.close after accepted output",
+      "consumer exception followed by close"
+    ],
+    "assertions": [
+      "persistent positions/samples/costs unchanged",
+      "actual partial timing and output count retained",
+      "subsequent missing k4 evidence still explored",
+      "next complete cycle alone contributes p3 acceptance",
+      "N-2 history and schedule/process counts correct"
+    ]
+  },
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_hybrid_speculative.py tests/test_recovery_cost_policy.py tests/test_ds_scheduler.py",
+      "result": "76 passed"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "result": "149 passed, 41 skipped"
+    },
+    {
+      "command": ".venv/bin/ruff check src tests benchmarks/experiments/recovery_cost_replay.py",
+      "result": "All checks passed"
+    }
+  ],
+  "source_sha256": {
+    "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+    "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+    "tests/test_hybrid_speculative.py": "335e115e10cb1a73d6ac14f26425f268c104d7f6cbd19dd3b35e8edd94c04e9b",
+    "tests/test_recovery_cost_policy.py": "00621e894bba976a2ec380fb49efe9d695415ac629451408f720055b0150cb1b",
+    "tests/test_ds_scheduler.py": "04f79cc7c028a5bd343bd1d3d08ee945f55eda038ea2b2f524e7cb8cc2d41739",
+    "tests/reference/vendor/mtp_varlen.hpp": "164f45db4cccd6d6909dd2846e7dfffb57754b108af679443bf4bd71ec33785a"
+  },
+  "limitations": [
+    "No GPU run or performance evidence added",
+    "Old reports and original review finding retained unchanged",
+    "Independent reviewer must verify fix before approval"
+  ]
+}

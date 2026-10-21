@@ -1,0 +1,4448 @@
+{
+  "scope": "Actual explicit experimental API/SSE correctness; two requests, not a performance comparison",
+  "source": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "15c19f7f83d42fb43a3271be44f056664ee99d94f544c7f3ddbe9c45e890f72c",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+      "src/deepinfer_mac/cli.py": "47a885ca636ad03b90c6266e5550c2ea8ea0894590a88dc90f09f29b87d2aeab",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+      "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+      "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+      "src/deepinfer_mac/engine.py": "dce5e20bfd130b3110c38e3515487e9c0d29aa94daa9f29d02857a770dc8af53",
+      "src/deepinfer_mac/hybrid_speculative.py": "500d5a37889d6864d7d4f0530b06140c78e154310ed011f5ae0965e2b2d68eb3",
+      "src/deepinfer_mac/models.lock.json": "df2cb93edf0e057c484fc6dd0cba12e4100e93624d587da180c7dca0ed3b8901",
+      "src/deepinfer_mac/models.py": "4c9cc5e1abc40eac5ed9dbc2ecf355954d51d6970da62c33590aaa219b924969",
+      "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "8c76382db195dcf4fa8fbc0700fa6d08830268bc724b024c864b9c62a9a6d8d0",
+      "src/deepinfer_mac/server/schemas.py": "56af5b1cc7843c841fb725e67a8dbf1a7e86011b9cf4e7998827f33362aade36",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+      "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+      "src/deepinfer_mac/state.py": "15a760b974b84ad8733436cafa699e9a78ae83a3c8215c5a718fc23ae50ed0da",
+      "src/deepinfer_mac/web/app.js": "184bb3e91a16bec5288e8a5eba55a139a24e3c4eed83ac32f4e8bbfd52a488f5",
+      "src/deepinfer_mac/web/index.html": "4188c790eba0385b8da141a04a9d12dd46cf22203e6fad44c3e6355927d219bf",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "344fb14f9a472ce480ca97c575f3c66f584e9b7010d365d698cfa57818ee0cde",
+      "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d",
+      "models.lock.json": "df2cb93edf0e057c484fc6dd0cba12e4100e93624d587da180c7dca0ed3b8901",
+      "upstream.lock.json": "8584f3d05ad0cc061e334e87a3a51a56f02b4fec5c08a410ff78ee1f7fae92a3"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "frozen_tree_sha256": "21a0fee62d428cf7f2f86611c2a3ca8c45ef235bf25bf560a2bb6150db7e6832",
+  "archive_sha256": "f48d430d2433194f4680896e699760a8e0a9602505a320833c02fbbefabe60ab",
+  "manifest_sha256": "16750b5d512df3d88a0d9086f1b2070dc5ebacffb047cc2f512cda35af03deb7",
+  "client_helpers_sha256": {
+    "http_service_compare.py": "d37e99df3164bc4f968785d775f07765b7dfe351059bceab9598a2a813ab3a2f",
+    "public_service_report.py": "9eb9c924546b4214dcce43a89bad14c997b05d1902672bd63317d8abb7518b82"
+  },
+  "records": [
+    {
+      "case": {
+        "kind": "seed_cold_kv",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Extract records from the public project table. Return only a JSON object keyed by project ID, with cost (integer) and owner (string) in each value. The first character must be { and the last character must be }. Do not use Markdown, code fences, a preamble, or an epilogue. Output JSON directly.\nP0000: cost=100; owner=R00.\nP0001: cost=137; owner=R01.\nP0002: cost=174; owner=R02.\nP0003: cost=211; owner=R03.\nP0004: cost=248; owner=R04.\nP0005: cost=285; owner=R05.\nP0006: cost=322; owner=R06.\nP0007: cost=359; owner=R07.\nP0008: cost=396; owner=R08.\nP0009: cost=433; owner=R09.\nP0010: cost=470; owner=R10.\nP0011: cost=507; owner=R11.\nP0012: cost=544; owner=R12.\nP0013: cost=581; owner=R13.\nP0014: cost=618; owner=R14.\nP0015: cost=655; owner=R15.\nP0016: cost=692; owner=R16.\nP0017: cost=729; owner=R00.\nP0018: cost=766; owner=R01.\nP0019: cost=803; owner=R02.\nP0020: cost=840; owner=R03.\nP0021: cost=877; owner=R04.\nP0022: cost=914; owner=R05.\nP0023: cost=951; owner=R06.\nP0024: cost=988; owner=R07.\nP0025: cost=125; owner=R08.\nP0026: cost=162; owner=R09.\nP0027: cost=199; owner=R10.\nP0028: cost=236; owner=R11.\nP0029: cost=273; owner=R12.\nP0030: cost=310; owner=R13.\nP0031: cost=347; owner=R14.\nP0032: cost=384; owner=R15.\nP0033: cost=421; owner=R16.\nP0034: cost=458; owner=R00.\nP0035: cost=495; owner=R01.\nP0036: cost=532; owner=R02.\nP0037: cost=569; owner=R03.\nP0038: cost=606; owner=R04.\nP0039: cost=643; owner=R05.\nP0040: cost=680; owner=R06.\nP0041: cost=717; owner=R07.\nP0042: cost=754; owner=R08.\nP0043: cost=791; owner=R09.\nP0044: cost=828; owner=R10.\nP0045: cost=865; owner=R11.\nP0046: cost=902; owner=R12.\nP0047: cost=939; owner=R13.\nP0048: cost=976; owner=R14.\nP0049: cost=113; owner=R15.\nP0050: cost=150; owner=R16.\nP0051: cost=187; owner=R00.\nP0052: cost=224; owner=R01.\nP0053: cost=261; owner=R02.\nP0054: cost=298; owner=R03.\nP0055: cost=335; owner=R04.\nP0056: cost=372; owner=R05.\nP0057: cost=409; owner=R06.\nP0058: cost=446; owner=R07.\nP0059: cost=483; owner=R08.\nP0060: cost=520; owner=R09.\nP0061: cost=557; owner=R10.\nP0062: cost=594; owner=R11.\nP0063: cost=631; owner=R12.\nP0064: cost=668; owner=R13.\nP0065: cost=705; owner=R14.\nP0066: cost=742; owner=R15.\nP0067: cost=779; owner=R16.\nP0068: cost=816; owner=R00.\nP0069: cost=853; owner=R01.\nP0070: cost=890; owner=R02.\nP0071: cost=927; owner=R03.\nP0072: cost=964; owner=R04.\nP0073: cost=101; owner=R05.\nP0074: cost=138; owner=R06.\nP0075: cost=175; owner=R07.\nP0076: cost=212; owner=R08.\nP0077: cost=249; owner=R09.\nP0078: cost=286; owner=R10.\nP0079: cost=323; owner=R11.\nP0080: cost=360; owner=R12.\nP0081: cost=397; owner=R13.\nP0082: cost=434; owner=R14.\nP0083: cost=471; owner=R15.\nP0084: cost=508; owner=R16.\nP0085: cost=545; owner=R00.\nP0086: cost=582; owner=R01.\nP0087: cost=619; owner=R02.\nP0088: cost=656; owner=R03.\nP0089: cost=693; owner=R04.\nP0090: cost=730; owner=R05.\nP0091: cost=767; owner=R06.\nP0092: cost=804; owner=R07.\nP0093: cost=841; owner=R08.\nP0094: cost=878; owner=R09.\nP0095: cost=915; owner=R10.\nP0096: cost=952; owner=R11.\nP0097: cost=989; owner=R12.\nP0098: cost=126; owner=R13.\nP0099: cost=163; owner=R14.\nP0100: cost=200; owner=R15.\nP0101: cost=237; owner=R16.\nP0102: cost=274; owner=R00.\nP0103: cost=311; owner=R01.\nP0104: cost=348; owner=R02.\nP0105: cost=385; owner=R03.\nP0106: cost=422; owner=R04. x x x x x x x x x x x x x x x"
+          },
+          {
+            "role": "user",
+            "content": "Records: P0003, P0035, P0053, P0105"
+          }
+        ],
+        "max_tokens": 256,
+        "expected_json": {
+          "P0003": {
+            "cost": 211,
+            "owner": "R03"
+          },
+          "P0035": {
+            "cost": 495,
+            "owner": "R01"
+          },
+          "P0053": {
+            "cost": 261,
+            "owner": "R02"
+          },
+          "P0105": {
+            "cost": 385,
+            "owner": "R03"
+          }
+        },
+        "prompt_tokens": 2048,
+        "requested_total_context_tokens": 2304,
+        "initial_4096_total_phase_allowed": true,
+        "current_8192_profile_allowed": true
+      },
+      "request": {
+        "model": "qwen3.5-9b-8bit",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Extract records from the public project table. Return only a JSON object keyed by project ID, with cost (integer) and owner (string) in each value. The first character must be { and the last character must be }. Do not use Markdown, code fences, a preamble, or an epilogue. Output JSON directly.\nP0000: cost=100; owner=R00.\nP0001: cost=137; owner=R01.\nP0002: cost=174; owner=R02.\nP0003: cost=211; owner=R03.\nP0004: cost=248; owner=R04.\nP0005: cost=285; owner=R05.\nP0006: cost=322; owner=R06.\nP0007: cost=359; owner=R07.\nP0008: cost=396; owner=R08.\nP0009: cost=433; owner=R09.\nP0010: cost=470; owner=R10.\nP0011: cost=507; owner=R11.\nP0012: cost=544; owner=R12.\nP0013: cost=581; owner=R13.\nP0014: cost=618; owner=R14.\nP0015: cost=655; owner=R15.\nP0016: cost=692; owner=R16.\nP0017: cost=729; owner=R00.\nP0018: cost=766; owner=R01.\nP0019: cost=803; owner=R02.\nP0020: cost=840; owner=R03.\nP0021: cost=877; owner=R04.\nP0022: cost=914; owner=R05.\nP0023: cost=951; owner=R06.\nP0024: cost=988; owner=R07.\nP0025: cost=125; owner=R08.\nP0026: cost=162; owner=R09.\nP0027: cost=199; owner=R10.\nP0028: cost=236; owner=R11.\nP0029: cost=273; owner=R12.\nP0030: cost=310; owner=R13.\nP0031: cost=347; owner=R14.\nP0032: cost=384; owner=R15.\nP0033: cost=421; owner=R16.\nP0034: cost=458; owner=R00.\nP0035: cost=495; owner=R01.\nP0036: cost=532; owner=R02.\nP0037: cost=569; owner=R03.\nP0038: cost=606; owner=R04.\nP0039: cost=643; owner=R05.\nP0040: cost=680; owner=R06.\nP0041: cost=717; owner=R07.\nP0042: cost=754; owner=R08.\nP0043: cost=791; owner=R09.\nP0044: cost=828; owner=R10.\nP0045: cost=865; owner=R11.\nP0046: cost=902; owner=R12.\nP0047: cost=939; owner=R13.\nP0048: cost=976; owner=R14.\nP0049: cost=113; owner=R15.\nP0050: cost=150; owner=R16.\nP0051: cost=187; owner=R00.\nP0052: cost=224; owner=R01.\nP0053: cost=261; owner=R02.\nP0054: cost=298; owner=R03.\nP0055: cost=335; owner=R04.\nP0056: cost=372; owner=R05.\nP0057: cost=409; owner=R06.\nP0058: cost=446; owner=R07.\nP0059: cost=483; owner=R08.\nP0060: cost=520; owner=R09.\nP0061: cost=557; owner=R10.\nP0062: cost=594; owner=R11.\nP0063: cost=631; owner=R12.\nP0064: cost=668; owner=R13.\nP0065: cost=705; owner=R14.\nP0066: cost=742; owner=R15.\nP0067: cost=779; owner=R16.\nP0068: cost=816; owner=R00.\nP0069: cost=853; owner=R01.\nP0070: cost=890; owner=R02.\nP0071: cost=927; owner=R03.\nP0072: cost=964; owner=R04.\nP0073: cost=101; owner=R05.\nP0074: cost=138; owner=R06.\nP0075: cost=175; owner=R07.\nP0076: cost=212; owner=R08.\nP0077: cost=249; owner=R09.\nP0078: cost=286; owner=R10.\nP0079: cost=323; owner=R11.\nP0080: cost=360; owner=R12.\nP0081: cost=397; owner=R13.\nP0082: cost=434; owner=R14.\nP0083: cost=471; owner=R15.\nP0084: cost=508; owner=R16.\nP0085: cost=545; owner=R00.\nP0086: cost=582; owner=R01.\nP0087: cost=619; owner=R02.\nP0088: cost=656; owner=R03.\nP0089: cost=693; owner=R04.\nP0090: cost=730; owner=R05.\nP0091: cost=767; owner=R06.\nP0092: cost=804; owner=R07.\nP0093: cost=841; owner=R08.\nP0094: cost=878; owner=R09.\nP0095: cost=915; owner=R10.\nP0096: cost=952; owner=R11.\nP0097: cost=989; owner=R12.\nP0098: cost=126; owner=R13.\nP0099: cost=163; owner=R14.\nP0100: cost=200; owner=R15.\nP0101: cost=237; owner=R16.\nP0102: cost=274; owner=R00.\nP0103: cost=311; owner=R01.\nP0104: cost=348; owner=R02.\nP0105: cost=385; owner=R03.\nP0106: cost=422; owner=R04. x x x x x x x x x x x x x x x"
+          },
+          {
+            "role": "user",
+            "content": "Records: P0003, P0035, P0053, P0105"
+          }
+        ],
+        "max_tokens": 256,
+        "temperature": 0,
+        "stream": true,
+        "mode": "baseline"
+      },
+      "events": [
+        {
+          "elapsed_ms": 43.40050008613616,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "role": "assistant"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7433.918542112224,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "{\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7460.924959043041,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "P"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7515.168917016126,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7542.27408405859,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7569.44008404389,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7623.705459060147,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7650.826167082414,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7677.960709086619,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " {\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7704.577416996472,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "cost"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7758.773792069405,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7811.5659590112045,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 2"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7865.771667100489,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7891.097709070891,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7918.00879209768,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7971.307834028266,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7998.4255420276895,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "owner"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8025.523750111461,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8079.645959078334,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8106.793959042989,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "R"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8133.911917102523,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8188.171167043038,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8214.396667084657,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"},"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8241.562584065832,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8268.785459105857,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "P"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8322.168500046246,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8349.277667002752,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8376.374167040922,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8428.784750052728,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8455.902167013846,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8483.006249996834,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " {\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8537.188042071648,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "cost"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8564.266834058799,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8645.512167015113,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 4"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8672.607500106096,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "9"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8699.693834059872,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8752.291542012244,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8779.383542016149,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8806.458500097506,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "owner"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8833.16433406435,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8887.322834110819,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8914.622875046916,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "R"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8941.762750037014,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8994.297459023073,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9021.501792012714,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"},"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9048.65004203748,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9102.876459015533,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "P"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9130.031792097725,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9157.139917020686,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9184.709334047511,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9238.440625020303,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9265.585000044666,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9292.720250086859,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " {\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9346.943292068318,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "cost"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9374.065917101689,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9455.390625051223,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 2"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9482.52554202918,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "6"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9509.595875046216,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9563.938875100575,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9591.065125074238,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9618.201542063616,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "owner"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9644.41354200244,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9698.65087501239,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9725.908334017731,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "R"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9753.043000004254,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9807.249083998613,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "2"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9834.351375000551,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"},"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9861.474459059536,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9915.79887503758,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "P"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9941.007500048727,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 9968.195959110744,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10022.185250069015,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10047.920042066835,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10075.09087503422,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10127.785625052638,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " {\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10154.780209064484,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "cost"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10180.226834025234,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10258.78954201471,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10285.993084078655,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "8"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10340.394375030883,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10365.95633404795,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10393.172084004618,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10447.538709035143,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "owner"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10474.334750091657,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10501.537750009447,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10552.655125036836,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "R"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10579.827917041257,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10605.269084102474,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10659.09695904702,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"}}"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 10686.267834040336,
+          "payload": {
+            "id": "chatcmpl-4507308ec09b415bb7e100c417500777",
+            "object": "chat.completion.chunk",
+            "created": 1792565356,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {},
+                "finish_reason": "stop"
+              }
+            ]
+          }
+        }
+      ],
+      "text": "{\"P0003\": {\"cost\": 211, \"owner\": \"R03\"}, \"P0035\": {\"cost\": 495, \"owner\": \"R01\"}, \"P0053\": {\"cost\": 261, \"owner\": \"R02\"}, \"P0105\": {\"cost\": 385, \"owner\": \"R03\"}}",
+      "error": null,
+      "headers": {
+        "date": "Wed, 21 Oct 2026 06:49:16 GMT",
+        "server": "uvicorn",
+        "x-run-id": "4507308ec09b415bb7e100c417500777",
+        "cache-control": "no-cache",
+        "x-accel-buffering": "no",
+        "content-type": "text/event-stream; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close"
+      },
+      "done_ms": 10686.29037507344,
+      "total_ms": 10686.365292058326,
+      "ttft_text_ms": 7433.918542112224,
+      "protocol_complete": true,
+      "text_chunk_intervals_ms": [
+        27.006416930817068,
+        54.243957973085344,
+        27.105167042464018,
+        27.165999985300004,
+        54.26537501625717,
+        27.120708022266626,
+        27.134542004205287,
+        26.616707909852266,
+        54.19637507293373,
+        52.79216694179922,
+        54.2057080892846,
+        25.326041970402002,
+        26.91108302678913,
+        53.2990419305861,
+        27.117707999423146,
+        27.09820808377117,
+        54.122208966873586,
+        27.147999964654446,
+        27.11795805953443,
+        54.259249940514565,
+        26.225500041618943,
+        27.165916981175542,
+        27.22287504002452,
+        53.38304094038904,
+        27.10916695650667,
+        27.096500038169324,
+        52.41058301180601,
+        27.11741696111858,
+        27.104082982987165,
+        54.18179207481444,
+        27.078791987150908,
+        81.24533295631409,
+        27.09533309098333,
+        27.086333953775465,
+        52.59770795237273,
+        27.092000003904104,
+        27.07495808135718,
+        26.705833966843784,
+        54.15850004646927,
+        27.300040936097503,
+        27.13987499009818,
+        52.53470898605883,
+        27.204332989640534,
+        27.14825002476573,
+        54.22641697805375,
+        27.155333082191646,
+        27.108124922960997,
+        27.56941702682525,
+        53.73129097279161,
+        27.1443750243634,
+        27.135250042192638,
+        54.223041981458664,
+        27.12262503337115,
+        81.32470794953406,
+        27.13491697795689,
+        27.07033301703632,
+        54.343000054359436,
+        27.126249973662198,
+        27.13641698937863,
+        26.211999938823283,
+        54.23733300995082,
+        27.257459005340934,
+        27.134665986523032,
+        54.20608399435878,
+        27.102291001938283,
+        27.123084058985114,
+        54.32441597804427,
+        25.20862501114607,
+        27.1884590620175,
+        53.98929095827043,
+        25.73479199782014,
+        27.17083296738565,
+        52.694750018417835,
+        26.99458401184529,
+        25.44662496075034,
+        78.56270798947662,
+        27.20354206394404,
+        54.40129095222801,
+        25.561959017068148,
+        27.215749956667423,
+        54.36662503052503,
+        26.796041056513786,
+        27.202999917790294,
+        51.117375027388334,
+        27.172792004421353,
+        25.44116706121713,
+        53.82787494454533
+      ],
+      "quality_pass": true,
+      "server_run": {
+        "id": "4507308ec09b415bb7e100c417500777",
+        "status": "completed",
+        "created_at": 1792565356.907847,
+        "result": {
+          "run_id": "43f5ec93dc06464abfc9e71440eb666f",
+          "mode": "baseline",
+          "profile": "qwen3.5-9b-8bit",
+          "text": "{\"P0003\": {\"cost\": 211, \"owner\": \"R03\"}, \"P0035\": {\"cost\": 495, \"owner\": \"R01\"}, \"P0053\": {\"cost\": 261, \"owner\": \"R02\"}, \"P0105\": {\"cost\": 385, \"owner\": \"R03\"}}",
+          "token_ids": [
+            4754,
+            47,
+            15,
+            15,
+            15,
+            18,
+            763,
+            5046,
+            15958,
+            763,
+            220,
+            17,
+            16,
+            16,
+            11,
+            328,
+            7862,
+            763,
+            328,
+            49,
+            15,
+            18,
+            13933,
+            328,
+            47,
+            15,
+            15,
+            18,
+            20,
+            763,
+            5046,
+            15958,
+            763,
+            220,
+            19,
+            24,
+            20,
+            11,
+            328,
+            7862,
+            763,
+            328,
+            49,
+            15,
+            16,
+            13933,
+            328,
+            47,
+            15,
+            15,
+            20,
+            18,
+            763,
+            5046,
+            15958,
+            763,
+            220,
+            17,
+            21,
+            16,
+            11,
+            328,
+            7862,
+            763,
+            328,
+            49,
+            15,
+            17,
+            13933,
+            328,
+            47,
+            15,
+            16,
+            15,
+            20,
+            763,
+            5046,
+            15958,
+            763,
+            220,
+            18,
+            23,
+            20,
+            11,
+            328,
+            7862,
+            763,
+            328,
+            49,
+            15,
+            18,
+            29958,
+            248046
+          ],
+          "prompt_tokens": 2048,
+          "finish_reason": "stop",
+          "metrics": {
+            "sampling": {
+              "temperature": 0.0,
+              "top_p": 1,
+              "top_k": 0,
+              "presence_penalty": 0,
+              "seed": null
+            },
+            "enable_thinking": false,
+            "load_ms": 2278.251666924916,
+            "ttft_ms": 6833.542790962383,
+            "total_ms": 10090.782665996812,
+            "prefill_ms": 4368.305500014685,
+            "prompt_tps": 468.60275683399857,
+            "decode_tps": 28.24477273078562,
+            "prompt_tokens": 2048,
+            "generation_tokens": 93,
+            "peak_memory_gb": 10.39577561,
+            "peak_memory_bytes": 10395775610,
+            "active_memory_bytes": 10083239414,
+            "rss_bytes": 1884897280,
+            "swap_before_bytes": 4719050752,
+            "swap_after_bytes": 4719050752,
+            "swap_delta_bytes": 0,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 2239758336,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 424148992,
+            "active_kv_bytes": 127008768,
+            "cache_evictions": 0,
+            "cache_backend": "native",
+            "message_checkpoints": true,
+            "message_checkpointing": {
+              "experimental": true,
+              "requires_real_model_sampling_validation": true,
+              "boundary_tokenize_ms": 2.803749986924231,
+              "verified_boundaries": [
+                {
+                  "token_offset": 2014,
+                  "message_count": 1,
+                  "role": "system"
+                },
+                {
+                  "token_offset": 2041,
+                  "message_count": 2,
+                  "role": "user"
+                }
+              ],
+              "snapshots": [
+                {
+                  "token_offset": 512,
+                  "cache_type": "assistant",
+                  "stored": true,
+                  "logical_bytes": 68288512
+                },
+                {
+                  "token_offset": 2014,
+                  "cache_type": "system",
+                  "stored": true,
+                  "logical_bytes": 118620160
+                },
+                {
+                  "token_offset": 2041,
+                  "cache_type": "user",
+                  "stored": true,
+                  "logical_bytes": 118620160
+                },
+                {
+                  "token_offset": 2047,
+                  "cache_type": "assistant",
+                  "stored": true,
+                  "logical_bytes": 118620160
+                }
+              ],
+              "snapshot_host_ms": 2.160998876206577,
+              "logical_snapshot_bytes_written": 424148992,
+              "prefill_shapes_changed": true
+            },
+            "cache_operations": {
+              "lookups": 1,
+              "hits": 0,
+              "writes": 4,
+              "rejected_writes": 0,
+              "lookup_ms": 0.0008749775588512421,
+              "clone_ms": 1.6663330607116222,
+              "write_ms": 2.0390419522300363,
+              "eviction_selection_ms": 0.0
+            },
+            "draft_acceptance": null,
+            "fallback_rate": 0,
+            "cycles": 0,
+            "policy": null,
+            "draft_accepted_tokens": 0,
+            "calibrated_fallback": false,
+            "adaptive_scheduler": null,
+            "hybrid_cost_adapter_requested": "lagged_mean",
+            "hybrid_cost_adapter_applicable": false,
+            "hybrid_cost_adapter_effective": null,
+            "round_diagnostics": false,
+            "speculative_recovery": null
+          },
+          "rounds": [],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3.5-9B-8bit",
+              "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+              "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+            },
+            "draft_weight_bytes": 625229487,
+            "vocab_size": 248320,
+            "experimental_speculation": true,
+            "hybrid_cache": true,
+            "runtime_reserve_bytes": 2147483648,
+            "minimum_memory_bytes": 0,
+            "advisory_memory_estimates": true,
+            "weight_bytes": 10426592423,
+            "text_tensor_bytes": 9514412544,
+            "quantization": "8-bit affine, group size 64",
+            "context_limit": 8192,
+            "supported_modes": [
+              "baseline"
+            ],
+            "status": "quality_review_required",
+            "role": "primary_quality_candidate",
+            "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; Public27subset measured with finite-budget failures retained. Hybrid speculation has initial96token exact controls behind an experimental flag; public modes remain baseline, no formal speed claim."
+          }
+        },
+        "error": null,
+        "event_count": 95,
+        "retained_events": 95
+      },
+      "cache_observation": {
+        "cache_hit_tokens": 0,
+        "source": "server_run.result.metrics.cache_hit_tokens",
+        "proven_zero_hit": true,
+        "note": "Unknown is not cold KV; request-kind names do not establish cache state."
+      }
+    },
+    {
+      "case": {
+        "kind": "seed_cold_kv",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Extract records from the public project table. Return only a JSON object keyed by project ID, with cost (integer) and owner (string) in each value. The first character must be { and the last character must be }. Do not use Markdown, code fences, a preamble, or an epilogue. Output JSON directly.\nP0000: cost=100; owner=R00.\nP0001: cost=137; owner=R01.\nP0002: cost=174; owner=R02.\nP0003: cost=211; owner=R03.\nP0004: cost=248; owner=R04.\nP0005: cost=285; owner=R05.\nP0006: cost=322; owner=R06.\nP0007: cost=359; owner=R07.\nP0008: cost=396; owner=R08.\nP0009: cost=433; owner=R09.\nP0010: cost=470; owner=R10.\nP0011: cost=507; owner=R11.\nP0012: cost=544; owner=R12.\nP0013: cost=581; owner=R13.\nP0014: cost=618; owner=R14.\nP0015: cost=655; owner=R15.\nP0016: cost=692; owner=R16.\nP0017: cost=729; owner=R00.\nP0018: cost=766; owner=R01.\nP0019: cost=803; owner=R02.\nP0020: cost=840; owner=R03.\nP0021: cost=877; owner=R04.\nP0022: cost=914; owner=R05.\nP0023: cost=951; owner=R06.\nP0024: cost=988; owner=R07.\nP0025: cost=125; owner=R08.\nP0026: cost=162; owner=R09.\nP0027: cost=199; owner=R10.\nP0028: cost=236; owner=R11.\nP0029: cost=273; owner=R12.\nP0030: cost=310; owner=R13.\nP0031: cost=347; owner=R14.\nP0032: cost=384; owner=R15.\nP0033: cost=421; owner=R16.\nP0034: cost=458; owner=R00.\nP0035: cost=495; owner=R01.\nP0036: cost=532; owner=R02.\nP0037: cost=569; owner=R03.\nP0038: cost=606; owner=R04.\nP0039: cost=643; owner=R05.\nP0040: cost=680; owner=R06.\nP0041: cost=717; owner=R07.\nP0042: cost=754; owner=R08.\nP0043: cost=791; owner=R09.\nP0044: cost=828; owner=R10.\nP0045: cost=865; owner=R11.\nP0046: cost=902; owner=R12.\nP0047: cost=939; owner=R13.\nP0048: cost=976; owner=R14.\nP0049: cost=113; owner=R15.\nP0050: cost=150; owner=R16.\nP0051: cost=187; owner=R00.\nP0052: cost=224; owner=R01.\nP0053: cost=261; owner=R02.\nP0054: cost=298; owner=R03.\nP0055: cost=335; owner=R04.\nP0056: cost=372; owner=R05.\nP0057: cost=409; owner=R06.\nP0058: cost=446; owner=R07.\nP0059: cost=483; owner=R08.\nP0060: cost=520; owner=R09.\nP0061: cost=557; owner=R10.\nP0062: cost=594; owner=R11.\nP0063: cost=631; owner=R12.\nP0064: cost=668; owner=R13.\nP0065: cost=705; owner=R14.\nP0066: cost=742; owner=R15.\nP0067: cost=779; owner=R16.\nP0068: cost=816; owner=R00.\nP0069: cost=853; owner=R01.\nP0070: cost=890; owner=R02.\nP0071: cost=927; owner=R03.\nP0072: cost=964; owner=R04.\nP0073: cost=101; owner=R05.\nP0074: cost=138; owner=R06.\nP0075: cost=175; owner=R07.\nP0076: cost=212; owner=R08.\nP0077: cost=249; owner=R09.\nP0078: cost=286; owner=R10.\nP0079: cost=323; owner=R11.\nP0080: cost=360; owner=R12.\nP0081: cost=397; owner=R13.\nP0082: cost=434; owner=R14.\nP0083: cost=471; owner=R15.\nP0084: cost=508; owner=R16.\nP0085: cost=545; owner=R00.\nP0086: cost=582; owner=R01.\nP0087: cost=619; owner=R02.\nP0088: cost=656; owner=R03.\nP0089: cost=693; owner=R04.\nP0090: cost=730; owner=R05.\nP0091: cost=767; owner=R06.\nP0092: cost=804; owner=R07.\nP0093: cost=841; owner=R08.\nP0094: cost=878; owner=R09.\nP0095: cost=915; owner=R10.\nP0096: cost=952; owner=R11.\nP0097: cost=989; owner=R12.\nP0098: cost=126; owner=R13.\nP0099: cost=163; owner=R14.\nP0100: cost=200; owner=R15.\nP0101: cost=237; owner=R16.\nP0102: cost=274; owner=R00.\nP0103: cost=311; owner=R01.\nP0104: cost=348; owner=R02.\nP0105: cost=385; owner=R03.\nP0106: cost=422; owner=R04. x x x x x x x x x x x x x x x"
+          },
+          {
+            "role": "user",
+            "content": "Records: P0003, P0035, P0053, P0105"
+          }
+        ],
+        "max_tokens": 256,
+        "expected_json": {
+          "P0003": {
+            "cost": 211,
+            "owner": "R03"
+          },
+          "P0035": {
+            "cost": 495,
+            "owner": "R01"
+          },
+          "P0053": {
+            "cost": 261,
+            "owner": "R02"
+          },
+          "P0105": {
+            "cost": 385,
+            "owner": "R03"
+          }
+        },
+        "prompt_tokens": 2048,
+        "requested_total_context_tokens": 2304,
+        "initial_4096_total_phase_allowed": true,
+        "current_8192_profile_allowed": true
+      },
+      "request": {
+        "model": "qwen3.5-9b-8bit",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Extract records from the public project table. Return only a JSON object keyed by project ID, with cost (integer) and owner (string) in each value. The first character must be { and the last character must be }. Do not use Markdown, code fences, a preamble, or an epilogue. Output JSON directly.\nP0000: cost=100; owner=R00.\nP0001: cost=137; owner=R01.\nP0002: cost=174; owner=R02.\nP0003: cost=211; owner=R03.\nP0004: cost=248; owner=R04.\nP0005: cost=285; owner=R05.\nP0006: cost=322; owner=R06.\nP0007: cost=359; owner=R07.\nP0008: cost=396; owner=R08.\nP0009: cost=433; owner=R09.\nP0010: cost=470; owner=R10.\nP0011: cost=507; owner=R11.\nP0012: cost=544; owner=R12.\nP0013: cost=581; owner=R13.\nP0014: cost=618; owner=R14.\nP0015: cost=655; owner=R15.\nP0016: cost=692; owner=R16.\nP0017: cost=729; owner=R00.\nP0018: cost=766; owner=R01.\nP0019: cost=803; owner=R02.\nP0020: cost=840; owner=R03.\nP0021: cost=877; owner=R04.\nP0022: cost=914; owner=R05.\nP0023: cost=951; owner=R06.\nP0024: cost=988; owner=R07.\nP0025: cost=125; owner=R08.\nP0026: cost=162; owner=R09.\nP0027: cost=199; owner=R10.\nP0028: cost=236; owner=R11.\nP0029: cost=273; owner=R12.\nP0030: cost=310; owner=R13.\nP0031: cost=347; owner=R14.\nP0032: cost=384; owner=R15.\nP0033: cost=421; owner=R16.\nP0034: cost=458; owner=R00.\nP0035: cost=495; owner=R01.\nP0036: cost=532; owner=R02.\nP0037: cost=569; owner=R03.\nP0038: cost=606; owner=R04.\nP0039: cost=643; owner=R05.\nP0040: cost=680; owner=R06.\nP0041: cost=717; owner=R07.\nP0042: cost=754; owner=R08.\nP0043: cost=791; owner=R09.\nP0044: cost=828; owner=R10.\nP0045: cost=865; owner=R11.\nP0046: cost=902; owner=R12.\nP0047: cost=939; owner=R13.\nP0048: cost=976; owner=R14.\nP0049: cost=113; owner=R15.\nP0050: cost=150; owner=R16.\nP0051: cost=187; owner=R00.\nP0052: cost=224; owner=R01.\nP0053: cost=261; owner=R02.\nP0054: cost=298; owner=R03.\nP0055: cost=335; owner=R04.\nP0056: cost=372; owner=R05.\nP0057: cost=409; owner=R06.\nP0058: cost=446; owner=R07.\nP0059: cost=483; owner=R08.\nP0060: cost=520; owner=R09.\nP0061: cost=557; owner=R10.\nP0062: cost=594; owner=R11.\nP0063: cost=631; owner=R12.\nP0064: cost=668; owner=R13.\nP0065: cost=705; owner=R14.\nP0066: cost=742; owner=R15.\nP0067: cost=779; owner=R16.\nP0068: cost=816; owner=R00.\nP0069: cost=853; owner=R01.\nP0070: cost=890; owner=R02.\nP0071: cost=927; owner=R03.\nP0072: cost=964; owner=R04.\nP0073: cost=101; owner=R05.\nP0074: cost=138; owner=R06.\nP0075: cost=175; owner=R07.\nP0076: cost=212; owner=R08.\nP0077: cost=249; owner=R09.\nP0078: cost=286; owner=R10.\nP0079: cost=323; owner=R11.\nP0080: cost=360; owner=R12.\nP0081: cost=397; owner=R13.\nP0082: cost=434; owner=R14.\nP0083: cost=471; owner=R15.\nP0084: cost=508; owner=R16.\nP0085: cost=545; owner=R00.\nP0086: cost=582; owner=R01.\nP0087: cost=619; owner=R02.\nP0088: cost=656; owner=R03.\nP0089: cost=693; owner=R04.\nP0090: cost=730; owner=R05.\nP0091: cost=767; owner=R06.\nP0092: cost=804; owner=R07.\nP0093: cost=841; owner=R08.\nP0094: cost=878; owner=R09.\nP0095: cost=915; owner=R10.\nP0096: cost=952; owner=R11.\nP0097: cost=989; owner=R12.\nP0098: cost=126; owner=R13.\nP0099: cost=163; owner=R14.\nP0100: cost=200; owner=R15.\nP0101: cost=237; owner=R16.\nP0102: cost=274; owner=R00.\nP0103: cost=311; owner=R01.\nP0104: cost=348; owner=R02.\nP0105: cost=385; owner=R03.\nP0106: cost=422; owner=R04. x x x x x x x x x x x x x x x"
+          },
+          {
+            "role": "user",
+            "content": "Records: P0003, P0035, P0053, P0105"
+          }
+        ],
+        "max_tokens": 256,
+        "temperature": 0,
+        "stream": true,
+        "mode": "adaptive"
+      },
+      "events": [
+        {
+          "elapsed_ms": 4.825999960303307,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "role": "assistant"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7104.173167026602,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "{\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7185.8086249558255,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "P"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7213.046708959155,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7266.279874951579,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7292.491792002693,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7347.101166960783,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7375.432541943155,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7375.470958999358,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " {\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7429.8424590379,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "cost"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7429.872291977517,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7484.419166925363,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 2"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7537.234999937937,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7537.267833948135,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7564.481084002182,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7564.527874928899,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7618.998916936107,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "owner"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7619.036583928391,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7673.524542013183,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7673.573874984868,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "R"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7673.587749945,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7700.21670893766,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7700.270417029969,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"},"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7700.280125020072,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7754.729209002107,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "P"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7754.772749962285,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7754.78254200425,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7808.937625028193,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7808.98062500637,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7808.989958954044,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7836.77599998191,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " {\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7836.802584002726,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "cost"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7836.810459033586,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7892.138833994977,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 4"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7892.1711249277,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "9"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7946.667584008537,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7946.693041943945,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7946.698167012073,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 7946.706666960381,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "owner"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8000.399042037316,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8000.447541940957,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8000.463749980554,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "R"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8000.468791928142,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8054.910250008106,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8054.95554197114,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"},"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8054.964249953628,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8054.968916927464,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "P"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8082.079499959946,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8082.112416974269,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8082.119708997197,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8082.127667032182,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8135.819333954714,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8135.869791964069,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " {\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8135.882458998822,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "cost"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8135.888000018895,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8190.351583994925,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 2"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8190.388042014092,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "6"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8190.393666969612,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8244.87166700419,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8244.916958967224,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8244.92733401712,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "owner"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8244.937084033154,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8244.94204192888,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8299.316374934278,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "R"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8299.384958925657,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8299.401541939005,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "2"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8299.406750011258,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"},"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8299.411084037274,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8352.589917019941,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "P"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8352.635791990906,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8352.64349996578,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "1"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8352.648166939616,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8352.678666939028,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8404.19974992983,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8404.241667012684,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " {\""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8404.250166960992,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "cost"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8404.254583991133,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8457.519041956402,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " 3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8457.562666968442,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "8"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8457.570541999303,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "5"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8457.574959029444,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": ","
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8457.58545899298,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8510.36929199472,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "owner"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8510.412500007078,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\":"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8510.420958977193,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": " \""
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8510.425542015582,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "R"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8510.439374949783,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "0"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8564.779959036969,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "3"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8564.831249997951,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {
+                  "content": "\"}}"
+                },
+                "finish_reason": null
+              }
+            ]
+          }
+        },
+        {
+          "elapsed_ms": 8618.773750029504,
+          "payload": {
+            "id": "chatcmpl-03f3b9d2e6f14f0c9a94fa5087cc63c2",
+            "object": "chat.completion.chunk",
+            "created": 1792565367,
+            "model": "qwen3.5-9b-8bit",
+            "choices": [
+              {
+                "index": 0,
+                "delta": {},
+                "finish_reason": "stop"
+              }
+            ]
+          }
+        }
+      ],
+      "text": "{\"P0003\": {\"cost\": 211, \"owner\": \"R03\"}, \"P0035\": {\"cost\": 495, \"owner\": \"R01\"}, \"P0053\": {\"cost\": 261, \"owner\": \"R02\"}, \"P0105\": {\"cost\": 385, \"owner\": \"R03\"}}",
+      "error": null,
+      "headers": {
+        "date": "Wed, 21 Oct 2026 06:49:27 GMT",
+        "server": "uvicorn",
+        "x-run-id": "03f3b9d2e6f14f0c9a94fa5087cc63c2",
+        "cache-control": "no-cache",
+        "x-accel-buffering": "no",
+        "content-type": "text/event-stream; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close"
+      },
+      "done_ms": 8618.806959013455,
+      "total_ms": 8618.874834035523,
+      "ttft_text_ms": 7104.173167026602,
+      "protocol_complete": true,
+      "text_chunk_intervals_ms": [
+        81.63545792922378,
+        27.238084003329277,
+        53.23316599242389,
+        26.211917051114142,
+        54.609374958090484,
+        28.331374982371926,
+        0.03841705620288849,
+        54.37150003854185,
+        0.029832939617335796,
+        54.546874947845936,
+        52.81583301257342,
+        0.03283401019871235,
+        27.21325005404651,
+        0.04679092671722174,
+        54.47104200720787,
+        0.03766699228435755,
+        54.4879580847919,
+        0.049332971684634686,
+        0.013874960131943226,
+        26.628958992660046,
+        0.05370809230953455,
+        0.009707990102469921,
+        54.44908398203552,
+        0.0435409601777792,
+        0.009792041964828968,
+        54.15508302394301,
+        0.04299997817724943,
+        0.00933394767343998,
+        27.786041027866304,
+        0.0265840208157897,
+        0.007875030860304832,
+        55.32837496139109,
+        0.0322909327223897,
+        54.49645908083767,
+        0.02545793540775776,
+        0.005125068128108978,
+        0.008499948307871819,
+        53.692375076934695,
+        0.04849990364164114,
+        0.016208039596676826,
+        0.005041947588324547,
+        54.44145807996392,
+        0.045291963033378124,
+        0.008707982487976551,
+        0.00466697383671999,
+        27.110583032481372,
+        0.03291701432317495,
+        0.007292022928595543,
+        0.007958034984767437,
+        53.69166692253202,
+        0.050458009354770184,
+        0.01266703475266695,
+        0.005541020072996616,
+        54.46358397603035,
+        0.03645801916718483,
+        0.005624955520033836,
+        54.478000034578145,
+        0.045291963033378124,
+        0.010375049896538258,
+        0.009750016033649445,
+        0.0049578957259655,
+        54.37433300539851,
+        0.06858399137854576,
+        0.016583013348281384,
+        0.005208072252571583,
+        0.004334026016294956,
+        53.17883298266679,
+        0.045874970965087414,
+        0.007707974873483181,
+        0.00466697383671999,
+        0.030499999411404133,
+        51.521082990802824,
+        0.041917082853615284,
+        0.008499948307871819,
+        0.004417030140757561,
+        53.264457965269685,
+        0.043625012040138245,
+        0.007875030860304832,
+        0.004417030140757561,
+        0.010499963536858559,
+        52.78383300174028,
+        0.043208012357354164,
+        0.008458970114588737,
+        0.00458303838968277,
+        0.013832934200763702,
+        54.34058408718556,
+        0.0512909609824419
+      ],
+      "quality_pass": true,
+      "server_run": {
+        "id": "03f3b9d2e6f14f0c9a94fa5087cc63c2",
+        "status": "completed",
+        "created_at": 1792565367.5974112,
+        "result": {
+          "run_id": "53c0ba9711e6408ba8bd0a925da7aa06",
+          "mode": "adaptive",
+          "profile": "qwen3.5-9b-8bit",
+          "text": "{\"P0003\": {\"cost\": 211, \"owner\": \"R03\"}, \"P0035\": {\"cost\": 495, \"owner\": \"R01\"}, \"P0053\": {\"cost\": 261, \"owner\": \"R02\"}, \"P0105\": {\"cost\": 385, \"owner\": \"R03\"}}",
+          "token_ids": [
+            4754,
+            47,
+            15,
+            15,
+            15,
+            18,
+            763,
+            5046,
+            15958,
+            763,
+            220,
+            17,
+            16,
+            16,
+            11,
+            328,
+            7862,
+            763,
+            328,
+            49,
+            15,
+            18,
+            13933,
+            328,
+            47,
+            15,
+            15,
+            18,
+            20,
+            763,
+            5046,
+            15958,
+            763,
+            220,
+            19,
+            24,
+            20,
+            11,
+            328,
+            7862,
+            763,
+            328,
+            49,
+            15,
+            16,
+            13933,
+            328,
+            47,
+            15,
+            15,
+            20,
+            18,
+            763,
+            5046,
+            15958,
+            763,
+            220,
+            17,
+            21,
+            16,
+            11,
+            328,
+            7862,
+            763,
+            328,
+            49,
+            15,
+            17,
+            13933,
+            328,
+            47,
+            15,
+            16,
+            15,
+            20,
+            763,
+            5046,
+            15958,
+            763,
+            220,
+            18,
+            23,
+            20,
+            11,
+            328,
+            7862,
+            763,
+            328,
+            49,
+            15,
+            18,
+            29958,
+            248046
+          ],
+          "prompt_tokens": 2048,
+          "finish_reason": "stop",
+          "metrics": {
+            "sampling": {
+              "temperature": 0.0,
+              "top_p": 1,
+              "top_k": 0,
+              "presence_penalty": 0,
+              "seed": null
+            },
+            "enable_thinking": false,
+            "load_ms": 1762.2818329837173,
+            "ttft_ms": 7077.36362493597,
+            "total_ms": 8594.048165949062,
+            "prefill_ms": 5124.835541006178,
+            "prompt_tps": 399.4274515974234,
+            "decode_tps": 60.65862578024778,
+            "prompt_tokens": 2048,
+            "generation_tokens": 93,
+            "peak_memory_gb": 11.396841748,
+            "peak_memory_bytes": 11396841748,
+            "active_memory_bytes": 10559420584,
+            "rss_bytes": 1894875136,
+            "swap_before_bytes": 4719050752,
+            "swap_after_bytes": 4736745472,
+            "swap_delta_bytes": 17694720,
+            "swap_measurement_available": true,
+            "estimated_active_kv_bytes": 2274361344,
+            "cache_hit_tokens": 0,
+            "cache_bytes": 445267968,
+            "active_kv_bytes": 174845952,
+            "cache_evictions": 5,
+            "cache_backend": "native",
+            "message_checkpoints": true,
+            "message_checkpointing": {
+              "experimental": true,
+              "requires_real_model_sampling_validation": true,
+              "boundary_tokenize_ms": 2.7026660973206162,
+              "verified_boundaries": [
+                {
+                  "token_offset": 2014,
+                  "message_count": 1,
+                  "role": "system"
+                },
+                {
+                  "token_offset": 2041,
+                  "message_count": 2,
+                  "role": "user"
+                }
+              ],
+              "snapshots": [
+                {
+                  "token_offset": 512,
+                  "cache_type": "assistant",
+                  "stored": true,
+                  "logical_bytes": 94117888
+                },
+                {
+                  "token_offset": 2014,
+                  "cache_type": "system",
+                  "stored": true,
+                  "logical_bytes": 163323904
+                },
+                {
+                  "token_offset": 2041,
+                  "cache_type": "user",
+                  "stored": true,
+                  "logical_bytes": 163323904
+                },
+                {
+                  "token_offset": 2047,
+                  "cache_type": "assistant",
+                  "stored": true,
+                  "logical_bytes": 163323904
+                }
+              ],
+              "snapshot_host_ms": 2.1866238676011562,
+              "logical_snapshot_bytes_written": 584089600,
+              "prefill_shapes_changed": true
+            },
+            "cache_operations": {
+              "lookups": 1,
+              "hits": 0,
+              "writes": 4,
+              "rejected_writes": 0,
+              "lookup_ms": 0.009375042282044888,
+              "clone_ms": 1.1970831546932459,
+              "write_ms": 2.0319160539656878,
+              "eviction_selection_ms": 0.009791925549507141
+            },
+            "draft_acceptance": 0.984375,
+            "fallback_rate": 0.1935483870967742,
+            "cycles": 31,
+            "policy": {
+              "cycle_ms_per_token": {
+                "0": 39.1338745248504,
+                "1": 22.460656240582466,
+                "2": 15.455395992224414,
+                "3": 12.401041749399155,
+                "4": 10.848133405670524
+              },
+              "acceptance_by_position": {
+                "0": 1.0,
+                "1": 1.0,
+                "2": 1.0,
+                "3": 1.0
+              },
+              "partial_cycles_excluded": [
+                {
+                  "budget": 4,
+                  "accepted": 3,
+                  "produced": 3,
+                  "cycle_ms": 92.93483302462846,
+                  "reason": "output closed before the target/golden token"
+                }
+              ],
+              "implementation": "DeepInfer MTPVarlen-derived scheduler with empirical acceptance",
+              "source_commit": "774ce244b87cc0eb8d4b94ab9f5de2ab22049f01",
+              "startup_curve_scope": "estimated rolling mean of measured complete cycles; N-2 feedback",
+              "cycle_ms_by_graph": {
+                "1": 39.1338745248504,
+                "2": 44.92131248116493,
+                "3": 46.366187976673245,
+                "4": 49.60416699759662,
+                "5": 54.24066702835262
+              },
+              "decisions": 31,
+              "refresh_steps": 64,
+              "confidence_head": false,
+              "catchup_cycle_ms": [],
+              "cost_adapter": "opt-in lagged_mean; Mac adaptation, not upstream calibration",
+              "min_samples": 5,
+              "window": 9,
+              "feedback_age": "all cost observations through N-2; latest N-1 withheld",
+              "estimated_cost_ms_by_graph": {
+                "1": 71.80660384862374,
+                "2": 46.745777828618884,
+                "3": 46.294020993324615,
+                "4": 49.57975016441196,
+                "5": 54.2654098632435
+              },
+              "known_samples_by_graph": {
+                "1": 6,
+                "2": 6,
+                "3": 6,
+                "4": 6,
+                "5": 6
+              },
+              "unknown_graphs": [],
+              "runtime_residual": "not used; no residual updates or history resets",
+              "performance_gain_claim": false
+            },
+            "draft_accepted_tokens": 63,
+            "calibrated_fallback": false,
+            "adaptive_scheduler": "ds",
+            "hybrid_cost_adapter_requested": "lagged_mean",
+            "hybrid_cost_adapter_applicable": true,
+            "hybrid_cost_adapter_effective": "lagged_mean",
+            "round_diagnostics": false,
+            "speculative_recovery": "hybrid exact snapshot + consumed-prefix replay"
+          },
+          "rounds": [
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 0,
+              "accepted": 0,
+              "produced": 1,
+              "fallback": true
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 1,
+              "accepted": 1,
+              "produced": 2,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 2,
+              "accepted": 2,
+              "produced": 3,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 3,
+              "accepted": 3,
+              "produced": 4,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 4,
+              "produced": 5,
+              "fallback": false
+            },
+            {
+              "budget": 4,
+              "accepted": 3,
+              "produced": 3,
+              "fallback": false
+            }
+          ],
+          "model": {
+            "target": {
+              "repo": "mlx-community/Qwen3.5-9B-8bit",
+              "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+            },
+            "draft": {
+              "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+              "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+            },
+            "draft_weight_bytes": 625229487,
+            "vocab_size": 248320,
+            "experimental_speculation": true,
+            "hybrid_cache": true,
+            "runtime_reserve_bytes": 2147483648,
+            "minimum_memory_bytes": 0,
+            "advisory_memory_estimates": true,
+            "weight_bytes": 10426592423,
+            "text_tensor_bytes": 9514412544,
+            "quantization": "8-bit affine, group size 64",
+            "context_limit": 8192,
+            "supported_modes": [
+              "baseline"
+            ],
+            "status": "quality_review_required",
+            "role": "primary_quality_candidate",
+            "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; Public27subset measured with finite-budget failures retained. Hybrid speculation has initial96token exact controls behind an experimental flag; public modes remain baseline, no formal speed claim."
+          }
+        },
+        "error": null,
+        "event_count": 95,
+        "retained_events": 95
+      },
+      "cache_observation": {
+        "cache_hit_tokens": 0,
+        "source": "server_run.result.metrics.cache_hit_tokens",
+        "proven_zero_hit": true,
+        "note": "Unknown is not cold KV; request-kind names do not establish cache state."
+      }
+    }
+  ],
+  "status": "verified",
+  "advertised_model": {
+    "id": "qwen3.5-9b-8bit",
+    "target": {
+      "repo": "mlx-community/Qwen3.5-9B-8bit",
+      "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+    },
+    "draft": {
+      "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+      "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+    },
+    "draft_weight_bytes": 625229487,
+    "vocab_size": 248320,
+    "experimental_speculation": true,
+    "hybrid_cache": true,
+    "runtime_reserve_bytes": 2147483648,
+    "minimum_memory_bytes": 0,
+    "advisory_memory_estimates": true,
+    "weight_bytes": 10426592423,
+    "text_tensor_bytes": 9514412544,
+    "quantization": "8-bit affine, group size 64",
+    "context_limit": 8192,
+    "supported_modes": [
+      "baseline",
+      "fixed_speculative",
+      "adaptive"
+    ],
+    "status": "quality_review_required",
+    "role": "primary_quality_candidate",
+    "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; Public27subset measured with finite-budget failures retained. Hybrid speculation has initial96token exact controls behind an experimental flag; public modes remain baseline, no formal speed claim.",
+    "capabilities": {
+      "cache": true,
+      "speculative": true,
+      "mtp": false,
+      "speculative_verified": false,
+      "speculative_status": "experimental"
+    },
+    "verified_supported_modes": [
+      "baseline"
+    ],
+    "experimental": true,
+    "experimental_modes": [
+      "fixed_speculative",
+      "adaptive"
+    ],
+    "object": "model",
+    "owned_by": "community"
+  },
+  "full_token_ids_equal": true,
+  "all_strict_json_quality_pass": true,
+  "all_sse_complete": true,
+  "non_greedy_speculative_status": 422,
+  "source_end": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "15c19f7f83d42fb43a3271be44f056664ee99d94f544c7f3ddbe9c45e890f72c",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+      "src/deepinfer_mac/cli.py": "47a885ca636ad03b90c6266e5550c2ea8ea0894590a88dc90f09f29b87d2aeab",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+      "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+      "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+      "src/deepinfer_mac/engine.py": "dce5e20bfd130b3110c38e3515487e9c0d29aa94daa9f29d02857a770dc8af53",
+      "src/deepinfer_mac/hybrid_speculative.py": "500d5a37889d6864d7d4f0530b06140c78e154310ed011f5ae0965e2b2d68eb3",
+      "src/deepinfer_mac/models.lock.json": "df2cb93edf0e057c484fc6dd0cba12e4100e93624d587da180c7dca0ed3b8901",
+      "src/deepinfer_mac/models.py": "4c9cc5e1abc40eac5ed9dbc2ecf355954d51d6970da62c33590aaa219b924969",
+      "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "8c76382db195dcf4fa8fbc0700fa6d08830268bc724b024c864b9c62a9a6d8d0",
+      "src/deepinfer_mac/server/schemas.py": "56af5b1cc7843c841fb725e67a8dbf1a7e86011b9cf4e7998827f33362aade36",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+      "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+      "src/deepinfer_mac/state.py": "15a760b974b84ad8733436cafa699e9a78ae83a3c8215c5a718fc23ae50ed0da",
+      "src/deepinfer_mac/web/app.js": "184bb3e91a16bec5288e8a5eba55a139a24e3c4eed83ac32f4e8bbfd52a488f5",
+      "src/deepinfer_mac/web/index.html": "4188c790eba0385b8da141a04a9d12dd46cf22203e6fad44c3e6355927d219bf",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "344fb14f9a472ce480ca97c575f3c66f584e9b7010d365d698cfa57818ee0cde",
+      "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d",
+      "models.lock.json": "df2cb93edf0e057c484fc6dd0cba12e4100e93624d587da180c7dca0ed3b8901",
+      "upstream.lock.json": "8584f3d05ad0cc061e334e87a3a51a56f02b4fec5c08a410ff78ee1f7fae92a3"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "checks_pass": true,
+  "server_process_stopped": true,
+  "private_log_sha256": "09482f4d13760b003d4d63dc568b9c585c29d4666f9dc1c2dc7cc091f0fae709"
+}

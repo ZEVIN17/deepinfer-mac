@@ -1,0 +1,101 @@
+{
+  "stage": "independent fresh code-quality review of hybrid state restoration and full-history sampling",
+  "date": "2026-10-21",
+  "scope": "Source/API/dependency audit, portable behavior tests, actual original-C++ replay and temporary artifact build. No GPU/model execution by this reviewer.",
+  "runtime_findings": [],
+  "findings": [
+    {
+      "id": "published-service-report-private-home-path",
+      "severity": "P2",
+      "status": "publish_block_open_owner_notified",
+      "file": "benchmarks/reports/phase2-three-service-compat-qwen35-9b8.json",
+      "evidence": "Temporary source distribution includes a private macOS home path in this report; scripts/verify_artifacts.py fails its privacy assertion. This is the only offending member in the temporary archive scan.",
+      "required_fix": "Report owner must emit repository-relative paths or portable environment aliases in distributable summary/generator, keeping detailed local commands/config in excluded results/quality-cache. Rebuild and rerun verifier after owner change.",
+      "ownership": "Root and phase2_cache_compare owner notified; reviewer did not edit an actively written report."
+    }
+  ],
+  "source_review": {
+    "hybrid_gate": "9B experimental_speculation metadata plus explicit InferenceEngine(experimental_hybrid_speculation=True) permits experimental modes. Published registry/API/UI still advertise baseline-only; no implicit exposure of unverified speculation.",
+    "hybrid_restore": "Locked MLX-LM0.32.2 KVCache.state includes keys/values/offset; ArraysCache.state includes recurrent cache/left_padding/lengths. Snapshot/restore assigns copied state to original instances; no recurrent trim or container replacement.",
+    "exit_prefix": "For partial/short/close exits restore target then replay gold plus emitted outputs except final output. Draft state retained only when its consumed prefix already equals real consumed history; otherwise restore and replay pending plus consumed prefix.",
+    "zero_budget_and_error": "Zero budget avoids draft forward and accumulates actual pending input. Positive-budget pre-yield errors restore snapshots and abort uncompleted persistent policy state. Zero-budget device error discards request-local caches; no guessed successful continuation.",
+    "natural_lag": "Existing trimmable catch-up normalization max(0,len(draft_y)-2) retained. Hybrid raw pending diagnostic differs from normalized policy catch-up by natural one-token lag; independent trace verifier explicitly converts this boundary.",
+    "nested_kv_budget": "attention_config resolves actual nested text metadata and counts only full_attention layers (or validated full_attention_interval) for both target/draft. Recurrent/temporary reserve remains a heuristic rather than physical hard-cap guarantee.",
+    "sampling_history": "Manual baseline prefix tokens[:-1] and cached native prefix tokens[:hit] are prepended to MLX generator-owned suffix/history exactly once. Presence processor uses full context0, matching original locked MLX semantics.",
+    "sampler_and_seed": "Sampler/processor kwargs forwarded in baseline/native. Seed applied after target and optional draft load, before generation. KV identity depends on exact prompt/model/template/quantization, not sampler; prompt snapshot predates output sampling.",
+    "greedy_gate": "GenerationRequest and ChatRequest reject non-default temperature/top_p/top_k/presence_penalty for fixed/adaptive modes. Seed alone is allowed because greedy does not consume sampling randomness.",
+    "transport": "API forbids extra fields; bounded finite sampler values and strict top_k/seed validated. API forwards sampling/cache/thinking fields. CLI uses typed flags and GenerationRequest checks; UI preset explicitly supplies supported baseline settings and disables unsupported modes.",
+    "dependency_boundary": "New runtime modules use stdlib at import time; MLX/sample_utils imports remain lazy and available through pinned mlx-lm extra. Wheel includes hybrid_speculative.py, sampling.py and ds/mtp_varlen.py.",
+    "quality_source": "Frozen quality manifest hashes actual source/harness/scorers/locks; inspected47 frozen files all match. Runner records source_start, source_end and frozen_source; runtime source manifests do not independently hash harness, so frozen archive manifest is required for formal source attribution."
+  },
+  "validation": [
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "result": "109 passed,41 skipped in2.35s",
+      "gpu": false
+    },
+    {
+      "command": ".venv/bin/ruff check src tests scripts benchmarks/experiments",
+      "result": "All checks passed"
+    },
+    {
+      "command": ".venv/bin/python benchmarks/experiments/verify_hybrid_ds_trace.py",
+      "result": "35 actual cycles,24 DS decisions match unchanged original C++ oracle; history_errors=[]",
+      "gpu": false
+    },
+    {
+      "action": "Check frozen quality-source manifest against extracted47 files",
+      "result": "All hashes match",
+      "tree_sha256": "2bbd77aa1172febf0bb93e12cb07183d260caa45e72f633fa84b5656a44df1c4"
+    },
+    {
+      "action": "Temporary nonrelease build with cached existing hatchling build environment",
+      "output": "/tmp/deepinfer-hybrid-code-review-dist",
+      "result": "Wheel and sdist built; published dist untouched. Initial no-isolation attempt lacked local hatchling; reused existing cached build environment without runtime changes/network."
+    },
+    {
+      "command": ".venv/bin/python scripts/verify_artifacts.py --dist /tmp/deepinfer-hybrid-code-review-dist",
+      "result": "FAILED: service compatibility report contains private home path; owner notified."
+    },
+    {
+      "action": "Full temporary archive scan",
+      "result": {
+        "private_home_path_members": [
+          "benchmarks/reports/phase2-three-service-compat-qwen35-9b8.json"
+        ],
+        "forbidden_runtime_or_weight_paths": [],
+        "raw_public_task_records": [],
+        "missing_new_runtime_modules": []
+      }
+    }
+  ],
+  "existing_hardware_evidence_only": {
+    "sampling_report": "benchmarks/reports/phase2-sampling-qwen35-9b8.json",
+    "cases": 15,
+    "all_equal": true,
+    "meaning": "Inspected prior model evidence, not reviewer hardware rerun or statistical quality equivalence."
+  },
+  "limits": [
+    "Reviewer did not run GPU or independently reproduce six hybrid Metal controls, non-null padding/length transitions or fifteen actual sampling cases. Portable checks and previously generated evidence are separate scopes.",
+    "Single96-token probe is mechanism/equality evidence, not completed code-task quality or competitive performance; two-engine advantage remains unproved.",
+    "Experimental hybrid modes remain opt-in Python-only and publicly baseline-only.",
+    "Private-home-path publication blocker must be closed by owner and artifact verifier rerun before publication.",
+    "Frozen source integrity succeeds now; final quality report still needs matching source_start/source_end and sanitized public summary with unchanged corpus/settings."
+  ],
+  "runtime_files_changed_by_this_review": [],
+  "reviewed_source_sha256": {
+    "src/deepinfer_mac/hybrid_speculative.py": "4a32f6f920df334206da705726779863cc4f7422e564e27ba9af0f972a8ec835",
+    "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+    "src/deepinfer_mac/engine.py": "cad36f8e4fd4a6f1fadb88cc37aaf32819da106f613505250cf701139e1d8f7e",
+    "src/deepinfer_mac/state.py": "15a760b974b84ad8733436cafa699e9a78ae83a3c8215c5a718fc23ae50ed0da",
+    "src/deepinfer_mac/server/schemas.py": "56af5b1cc7843c841fb725e67a8dbf1a7e86011b9cf4e7998827f33362aade36",
+    "src/deepinfer_mac/server/app.py": "a4eaa467c14ead804f987156938567a2f4036a232c92c94d7dc458721e92260f",
+    "src/deepinfer_mac/cli.py": "47a885ca636ad03b90c6266e5550c2ea8ea0894590a88dc90f09f29b87d2aeab",
+    "src/deepinfer_mac/web/app.js": "184bb3e91a16bec5288e8a5eba55a139a24e3c4eed83ac32f4e8bbfd52a488f5",
+    "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+    "scripts/freeze_quality_source.py": "cc80bffaf5310e492bedab6f152f7f08e5143d7e793b4841ade7fc430a3c1a9a",
+    "scripts/verify_artifacts.py": "511b63d894b48a6070f7fd1aa36e9b64bdbd26f544f4ba31b580be5b9d363963",
+    "pyproject.toml": "bc4bbc9d34e6fbb110640bd5829db4a173d25164e309b591a95914a548007791",
+    "benchmarks/experiments/phase2_model_quality.py": "6bfad019c72b8656513af4715910c28a3cb7d5d36cdda8d239d1e4820f5212ae"
+  }
+}

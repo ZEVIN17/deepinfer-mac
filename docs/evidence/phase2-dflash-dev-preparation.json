@@ -1,0 +1,89 @@
+{
+  "scope": "Actual CPU configuration/source/environment/weight integrity verification; request counts are planned, not simulated measurements",
+  "configurations": [
+    {
+      "configuration_label": "2k-4k-pending",
+      "configuration_file_sha256": "2246bc39f631b6a8082019ee8b813597b968c7283ce0d47b9b42c95ff62dd001",
+      "source_sha256": "7b61955105d883f8a6616154dd64609ba08b33fdf8b518e53c4839e3cb4d1988",
+      "source_archive_sha256": "5208f06eac2dc088efbedcf758a9b2064fcb6cfa1a9f349276891b5ea618e1dc",
+      "frozen_source_environment_verified": true,
+      "variant_count": 21,
+      "omlx_candidates": [
+        "omlx",
+        "omlx-dflash-q4-b4-adaptive",
+        "omlx-dflash-q4-b4-dflash",
+        "omlx-dflash-q4-b5-adaptive",
+        "omlx-dflash-q4-b5-dflash"
+      ],
+      "shared_omlx_memory_guard": "aggressive",
+      "total_context_cap_tokens": 8192,
+      "one_complete_dev_repetition_requests": 336,
+      "scored_requests": 168,
+      "excluded_warmups": 168,
+      "independent_dev_sessions": 2,
+      "heldout_session_clusters": 6,
+      "deferred_sessions": [
+        "public-ledger-06-en",
+        "public-ledger-07-zh",
+        "public-ledger-08-en"
+      ],
+      "status": "CPU prepared and verified only; no GPU benchmark run",
+      "four_k_dflash_resource_admission": {
+        "verified": false,
+        "memory_guard": "aggressive",
+        "sha256": "c78da10213119f6d4dff209d3ccf38845a6bcd16ada16117bec5b3b13d424035",
+        "reason": "Require actual4204+256 strict Q4/group64/block5/full trained-draft execution with no system swap increase. This admits shared load/window/max-proposal geometry, not all mode-specific transients; every dev candidate's resource samples remain independently checked"
+      },
+      "installed_environment_sha256": [
+        "0615ef69b5a3cb5e2be73cdd429fe78edac601b6a64f9d5e1cb56aedc5cb426a",
+        "f933a1c5ce6a7e70f6a9899f221e21ed33b9bb92cfb33f1331917910068b683f"
+      ]
+    },
+    {
+      "configuration_label": "2k-only",
+      "configuration_file_sha256": "89c872db6f36f001eafc88ede12c74a8d4f4509d7250c4d80646883375791733",
+      "source_sha256": "7b61955105d883f8a6616154dd64609ba08b33fdf8b518e53c4839e3cb4d1988",
+      "source_archive_sha256": "5208f06eac2dc088efbedcf758a9b2064fcb6cfa1a9f349276891b5ea618e1dc",
+      "frozen_source_environment_verified": true,
+      "variant_count": 21,
+      "omlx_candidates": [
+        "omlx",
+        "omlx-dflash-q4-b4-adaptive",
+        "omlx-dflash-q4-b4-dflash",
+        "omlx-dflash-q4-b5-adaptive",
+        "omlx-dflash-q4-b5-dflash"
+      ],
+      "shared_omlx_memory_guard": "aggressive",
+      "total_context_cap_tokens": 2412,
+      "one_complete_dev_repetition_requests": 168,
+      "scored_requests": 84,
+      "excluded_warmups": 84,
+      "independent_dev_sessions": 1,
+      "heldout_session_clusters": 3,
+      "deferred_sessions": [
+        "public-ledger-03-zh",
+        "public-ledger-04-en",
+        "public-ledger-05-zh",
+        "public-ledger-06-en",
+        "public-ledger-07-zh",
+        "public-ledger-08-en",
+        "public-ledger-10-en"
+      ],
+      "status": "CPU prepared and verified only; no GPU benchmark run",
+      "four_k_dflash_resource_admission": {
+        "verified": false,
+        "reason": "Actual4204-input+256-output DFlash resource probe is pending;2K compatibility or target-only4K is insufficient"
+      },
+      "installed_environment_sha256": [
+        "0615ef69b5a3cb5e2be73cdd429fe78edac601b6a64f9d5e1cb56aedc5cb426a",
+        "f933a1c5ce6a7e70f6a9899f221e21ed33b9bb92cfb33f1331917910068b683f"
+      ]
+    }
+  ],
+  "engineering_target_claim": false,
+  "limits": [
+    "All three actual4K DFlash resource preflights failed the unchanged admission gate. Full2K+4K runner is proven to reject before service launch.",
+    "2K-only can be explored after explicit GPU permission, but only three independent2K heldout clusters remain; it cannot meet the six-cluster project target.",
+    "No score, chart, speedup or heldout evidence is manufactured from CPU preparation."
+  ]
+}

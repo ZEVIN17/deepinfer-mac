@@ -1,0 +1,1673 @@
+{
+  "schema_version": 1,
+  "scope": "fixed local subsets; no leaderboard/full-benchmark claim",
+  "settings": {
+    "greedy_engine": {
+      "summary": {
+        "ifeval": {
+          "passed": 7,
+          "scored": 8,
+          "expected": 8,
+          "pass_rate": 0.875,
+          "wilson_95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ],
+          "complete": true
+        },
+        "mmlu": {
+          "passed": 10,
+          "scored": 14,
+          "expected": 14,
+          "pass_rate": 0.7142857142857143,
+          "wilson_95": [
+            0.4535091567010681,
+            0.8827862135542308
+          ],
+          "complete": true
+        },
+        "lcb": {
+          "passed": 2,
+          "scored": 4,
+          "expected": 4,
+          "pass_rate": 0.5,
+          "wilson_95": [
+            0.15003898915214947,
+            0.8499610108478506
+          ],
+          "complete": true
+        },
+        "auxiliary_repair": {
+          "passed": 1,
+          "scored": 1,
+          "expected": 1,
+          "pass_rate": 1.0,
+          "wilson_95": [
+            0.20654931437723745,
+            1
+          ],
+          "complete": true
+        }
+      },
+      "gates": {
+        "all_expected_tasks_scored": true,
+        "no_combined_capability_score": true,
+        "quantization_equivalence_established": false
+      },
+      "results": [
+        {
+          "task_id": "ifeval:3743",
+          "benchmark": "ifeval",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:2591",
+          "benchmark": "ifeval",
+          "split": "heldout",
+          "pass": false,
+          "status": "constraint_failure"
+        },
+        {
+          "task_id": "ifeval:3557",
+          "benchmark": "ifeval",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:3690",
+          "benchmark": "ifeval",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:2602",
+          "benchmark": "ifeval",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:2825",
+          "benchmark": "ifeval",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:2268",
+          "benchmark": "ifeval",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:1220",
+          "benchmark": "ifeval",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:3271",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:636",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": false,
+          "status": "unparseable_answer"
+        },
+        {
+          "task_id": "mmlu:3849",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:10731",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:7609",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:11845",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:6338",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:5033",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:1471",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": false,
+          "status": "unparseable_answer"
+        },
+        {
+          "task_id": "mmlu:8882",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:5747",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:11124",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:9423",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": false,
+          "status": "wrong_answer"
+        },
+        {
+          "task_id": "mmlu:2586",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": false,
+          "status": "unparseable_answer"
+        },
+        {
+          "task_id": "lcb:abc387_b",
+          "benchmark": "lcb",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "lcb:abc387_a",
+          "benchmark": "lcb",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "lcb:abc387_c",
+          "benchmark": "lcb",
+          "split": "dev",
+          "pass": false,
+          "status": "test_failure"
+        },
+        {
+          "task_id": "lcb:abc388_d",
+          "benchmark": "lcb",
+          "split": "heldout",
+          "pass": false,
+          "status": "test_failure"
+        },
+        {
+          "task_id": "lcb:abc387_a:repair",
+          "benchmark": "auxiliary_repair",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        }
+      ],
+      "timings": [
+        {
+          "task_id": "ifeval:3743",
+          "elapsed_seconds": 2.817366792005487,
+          "ttft_seconds": 0.6183177089551464,
+          "finish_reason": "stop",
+          "output_tokens": 66
+        },
+        {
+          "task_id": "ifeval:2591",
+          "elapsed_seconds": 18.56981216708664,
+          "ttft_seconds": 0.44675166707020253,
+          "finish_reason": "stop",
+          "output_tokens": 531
+        },
+        {
+          "task_id": "ifeval:3557",
+          "elapsed_seconds": 12.891335333930328,
+          "ttft_seconds": 0.32838249998167157,
+          "finish_reason": "stop",
+          "output_tokens": 370
+        },
+        {
+          "task_id": "ifeval:3690",
+          "elapsed_seconds": 14.905942582990974,
+          "ttft_seconds": 0.45436016703024507,
+          "finish_reason": "stop",
+          "output_tokens": 423
+        },
+        {
+          "task_id": "ifeval:2602",
+          "elapsed_seconds": 1.9036762079922482,
+          "ttft_seconds": 0.3243132500210777,
+          "finish_reason": "stop",
+          "output_tokens": 46
+        },
+        {
+          "task_id": "ifeval:2825",
+          "elapsed_seconds": 5.045130249927752,
+          "ttft_seconds": 0.37511541694402695,
+          "finish_reason": "stop",
+          "output_tokens": 133
+        },
+        {
+          "task_id": "ifeval:2268",
+          "elapsed_seconds": 2.898205375066027,
+          "ttft_seconds": 0.32601608301047236,
+          "finish_reason": "stop",
+          "output_tokens": 76
+        },
+        {
+          "task_id": "ifeval:1220",
+          "elapsed_seconds": 8.67734087491408,
+          "ttft_seconds": 0.3247509589418769,
+          "finish_reason": "stop",
+          "output_tokens": 244
+        },
+        {
+          "task_id": "mmlu:3271",
+          "elapsed_seconds": 19.975497915991582,
+          "ttft_seconds": 0.9854917080374435,
+          "finish_reason": "stop",
+          "output_tokens": 548
+        },
+        {
+          "task_id": "mmlu:636",
+          "elapsed_seconds": 37.41009979194496,
+          "ttft_seconds": 1.1290622089290991,
+          "finish_reason": "length",
+          "output_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:3849",
+          "elapsed_seconds": 19.773660499951802,
+          "ttft_seconds": 0.9814555839402601,
+          "finish_reason": "stop",
+          "output_tokens": 539
+        },
+        {
+          "task_id": "mmlu:10731",
+          "elapsed_seconds": 6.978544417070225,
+          "ttft_seconds": 0.8483354580821469,
+          "finish_reason": "stop",
+          "output_tokens": 178
+        },
+        {
+          "task_id": "mmlu:7609",
+          "elapsed_seconds": 16.05190349998884,
+          "ttft_seconds": 0.9766577079426497,
+          "finish_reason": "stop",
+          "output_tokens": 437
+        },
+        {
+          "task_id": "mmlu:11845",
+          "elapsed_seconds": 15.027732208021916,
+          "ttft_seconds": 0.8339740419760346,
+          "finish_reason": "stop",
+          "output_tokens": 412
+        },
+        {
+          "task_id": "mmlu:6338",
+          "elapsed_seconds": 15.34191437496338,
+          "ttft_seconds": 0.7009754999307916,
+          "finish_reason": "stop",
+          "output_tokens": 426
+        },
+        {
+          "task_id": "mmlu:5033",
+          "elapsed_seconds": 7.098108583013527,
+          "ttft_seconds": 0.9649115829961374,
+          "finish_reason": "stop",
+          "output_tokens": 179
+        },
+        {
+          "task_id": "mmlu:1471",
+          "elapsed_seconds": 26.388400207972154,
+          "ttft_seconds": 2.5546589998994023,
+          "finish_reason": "stop",
+          "output_tokens": 677
+        },
+        {
+          "task_id": "mmlu:8882",
+          "elapsed_seconds": 13.28961195901502,
+          "ttft_seconds": 1.3627004590816796,
+          "finish_reason": "stop",
+          "output_tokens": 347
+        },
+        {
+          "task_id": "mmlu:5747",
+          "elapsed_seconds": 16.73381479200907,
+          "ttft_seconds": 0.8355769169284031,
+          "finish_reason": "stop",
+          "output_tokens": 461
+        },
+        {
+          "task_id": "mmlu:11124",
+          "elapsed_seconds": 13.922565624932759,
+          "ttft_seconds": 0.5721875409362838,
+          "finish_reason": "stop",
+          "output_tokens": 393
+        },
+        {
+          "task_id": "mmlu:9423",
+          "elapsed_seconds": 17.983511540922336,
+          "ttft_seconds": 0.6946889159735292,
+          "finish_reason": "stop",
+          "output_tokens": 507
+        },
+        {
+          "task_id": "mmlu:2586",
+          "elapsed_seconds": 36.54881291696802,
+          "ttft_seconds": 1.119975374895148,
+          "finish_reason": "length",
+          "output_tokens": 1024
+        },
+        {
+          "task_id": "lcb:abc387_b",
+          "elapsed_seconds": 6.78939766692929,
+          "ttft_seconds": 1.6774395829997957,
+          "finish_reason": "stop",
+          "output_tokens": 151
+        },
+        {
+          "task_id": "lcb:abc387_a",
+          "elapsed_seconds": 2.7525581249501556,
+          "ttft_seconds": 1.0214269580319524,
+          "finish_reason": "stop",
+          "output_tokens": 52
+        },
+        {
+          "task_id": "lcb:abc387_c",
+          "elapsed_seconds": 6.136957457987592,
+          "ttft_seconds": 1.4697322910651565,
+          "finish_reason": "stop",
+          "output_tokens": 138
+        },
+        {
+          "task_id": "lcb:abc388_d",
+          "elapsed_seconds": 45.95004812499974,
+          "ttft_seconds": 2.3587372499750927,
+          "finish_reason": "stop",
+          "output_tokens": 1247
+        },
+        {
+          "task_id": "lcb:abc387_a:repair",
+          "elapsed_seconds": 1.920084625016898,
+          "ttft_seconds": 1.073582874960266,
+          "finish_reason": "stop",
+          "output_tokens": 26
+        }
+      ],
+      "configurations": [
+        {
+          "task_id": "ifeval:3743",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:2591",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:3557",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:3690",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:2602",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:2825",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:2268",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:1220",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "mmlu:3271",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:636",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:3849",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:10731",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:7609",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:11845",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:6338",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:5033",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:1471",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:8882",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:5747",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:11124",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:9423",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:2586",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "lcb:abc387_b",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 2048
+        },
+        {
+          "task_id": "lcb:abc387_a",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 2048
+        },
+        {
+          "task_id": "lcb:abc387_c",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 2048
+        },
+        {
+          "task_id": "lcb:abc388_d",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 2048
+        },
+        {
+          "task_id": "lcb:abc387_a:repair",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0,
+            "presence_penalty": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        }
+      ]
+    },
+    "official_engine": {
+      "summary": {
+        "ifeval": {
+          "passed": 8,
+          "scored": 8,
+          "expected": 8,
+          "pass_rate": 1.0,
+          "wilson_95": [
+            0.6755924351161198,
+            1
+          ],
+          "complete": true
+        },
+        "mmlu": {
+          "passed": 9,
+          "scored": 14,
+          "expected": 14,
+          "pass_rate": 0.6428571428571429,
+          "wilson_95": [
+            0.38764423103907397,
+            0.8365526824644587
+          ],
+          "complete": true
+        },
+        "lcb": {
+          "passed": 2,
+          "scored": 4,
+          "expected": 4,
+          "pass_rate": 0.5,
+          "wilson_95": [
+            0.15003898915214947,
+            0.8499610108478506
+          ],
+          "complete": true
+        },
+        "auxiliary_repair": {
+          "passed": 1,
+          "scored": 1,
+          "expected": 1,
+          "pass_rate": 1.0,
+          "wilson_95": [
+            0.20654931437723745,
+            1
+          ],
+          "complete": true
+        }
+      },
+      "gates": {
+        "all_expected_tasks_scored": true,
+        "no_combined_capability_score": true,
+        "quantization_equivalence_established": false
+      },
+      "results": [
+        {
+          "task_id": "ifeval:3743",
+          "benchmark": "ifeval",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:2591",
+          "benchmark": "ifeval",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:3557",
+          "benchmark": "ifeval",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:3690",
+          "benchmark": "ifeval",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:2602",
+          "benchmark": "ifeval",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:2825",
+          "benchmark": "ifeval",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:2268",
+          "benchmark": "ifeval",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "ifeval:1220",
+          "benchmark": "ifeval",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:3271",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:636",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": false,
+          "status": "unparseable_answer"
+        },
+        {
+          "task_id": "mmlu:3849",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:10731",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:7609",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:11845",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": false,
+          "status": "unparseable_answer"
+        },
+        {
+          "task_id": "mmlu:6338",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:5033",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:1471",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": false,
+          "status": "wrong_answer"
+        },
+        {
+          "task_id": "mmlu:8882",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:5747",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "mmlu:11124",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": false,
+          "status": "unparseable_answer"
+        },
+        {
+          "task_id": "mmlu:9423",
+          "benchmark": "mmlu",
+          "split": "dev",
+          "pass": false,
+          "status": "wrong_answer"
+        },
+        {
+          "task_id": "mmlu:2586",
+          "benchmark": "mmlu",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "lcb:abc387_b",
+          "benchmark": "lcb",
+          "split": "dev",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "lcb:abc387_a",
+          "benchmark": "lcb",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        },
+        {
+          "task_id": "lcb:abc387_c",
+          "benchmark": "lcb",
+          "split": "dev",
+          "pass": false,
+          "status": "test_failure"
+        },
+        {
+          "task_id": "lcb:abc388_d",
+          "benchmark": "lcb",
+          "split": "heldout",
+          "pass": false,
+          "status": "test_failure"
+        },
+        {
+          "task_id": "lcb:abc387_a:repair",
+          "benchmark": "auxiliary_repair",
+          "split": "heldout",
+          "pass": true,
+          "status": "pass"
+        }
+      ],
+      "timings": [
+        {
+          "task_id": "ifeval:3743",
+          "elapsed_seconds": 2.793420000001788,
+          "ttft_seconds": 0.3293756670318544,
+          "finish_reason": "stop",
+          "output_tokens": 73
+        },
+        {
+          "task_id": "ifeval:2591",
+          "elapsed_seconds": 20.420125040924177,
+          "ttft_seconds": 0.44420425000134856,
+          "finish_reason": "stop",
+          "output_tokens": 580
+        },
+        {
+          "task_id": "ifeval:3557",
+          "elapsed_seconds": 14.836199874989688,
+          "ttft_seconds": 0.32360979192890227,
+          "finish_reason": "stop",
+          "output_tokens": 423
+        },
+        {
+          "task_id": "ifeval:3690",
+          "elapsed_seconds": 13.892792208003812,
+          "ttft_seconds": 0.44802450004499406,
+          "finish_reason": "stop",
+          "output_tokens": 389
+        },
+        {
+          "task_id": "ifeval:2602",
+          "elapsed_seconds": 1.9976587920682505,
+          "ttft_seconds": 0.34884225006680936,
+          "finish_reason": "stop",
+          "output_tokens": 49
+        },
+        {
+          "task_id": "ifeval:2825",
+          "elapsed_seconds": 4.580685458960943,
+          "ttft_seconds": 0.33068329200614244,
+          "finish_reason": "stop",
+          "output_tokens": 125
+        },
+        {
+          "task_id": "ifeval:2268",
+          "elapsed_seconds": 2.9115820419974625,
+          "ttft_seconds": 0.3360010840697214,
+          "finish_reason": "stop",
+          "output_tokens": 76
+        },
+        {
+          "task_id": "ifeval:1220",
+          "elapsed_seconds": 7.483239791938104,
+          "ttft_seconds": 0.3312982089119032,
+          "finish_reason": "stop",
+          "output_tokens": 207
+        },
+        {
+          "task_id": "mmlu:3271",
+          "elapsed_seconds": 21.16046120901592,
+          "ttft_seconds": 1.178205749951303,
+          "finish_reason": "stop",
+          "output_tokens": 577
+        },
+        {
+          "task_id": "mmlu:636",
+          "elapsed_seconds": 37.21458374999929,
+          "ttft_seconds": 1.3264984169509262,
+          "finish_reason": "length",
+          "output_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:3849",
+          "elapsed_seconds": 19.85431183304172,
+          "ttft_seconds": 1.0987628330476582,
+          "finish_reason": "stop",
+          "output_tokens": 540
+        },
+        {
+          "task_id": "mmlu:10731",
+          "elapsed_seconds": 18.679489124915563,
+          "ttft_seconds": 0.9351739999838173,
+          "finish_reason": "stop",
+          "output_tokens": 513
+        },
+        {
+          "task_id": "mmlu:7609",
+          "elapsed_seconds": 12.471931750071235,
+          "ttft_seconds": 1.1641762499930337,
+          "finish_reason": "stop",
+          "output_tokens": 328
+        },
+        {
+          "task_id": "mmlu:11845",
+          "elapsed_seconds": 17.54990237497259,
+          "ttft_seconds": 0.9892064169980586,
+          "finish_reason": "stop",
+          "output_tokens": 480
+        },
+        {
+          "task_id": "mmlu:6338",
+          "elapsed_seconds": 14.711327625089325,
+          "ttft_seconds": 0.7994834580458701,
+          "finish_reason": "stop",
+          "output_tokens": 404
+        },
+        {
+          "task_id": "mmlu:5033",
+          "elapsed_seconds": 5.544196583097801,
+          "ttft_seconds": 1.1340714159887284,
+          "finish_reason": "stop",
+          "output_tokens": 129
+        },
+        {
+          "task_id": "mmlu:1471",
+          "elapsed_seconds": 29.638314667041413,
+          "ttft_seconds": 2.729016917059198,
+          "finish_reason": "stop",
+          "output_tokens": 762
+        },
+        {
+          "task_id": "mmlu:8882",
+          "elapsed_seconds": 23.181504374952056,
+          "ttft_seconds": 1.6222008749609813,
+          "finish_reason": "stop",
+          "output_tokens": 620
+        },
+        {
+          "task_id": "mmlu:5747",
+          "elapsed_seconds": 15.273773499997333,
+          "ttft_seconds": 0.9594700830057263,
+          "finish_reason": "stop",
+          "output_tokens": 415
+        },
+        {
+          "task_id": "mmlu:11124",
+          "elapsed_seconds": 14.525004792027175,
+          "ttft_seconds": 0.6244446670170873,
+          "finish_reason": "stop",
+          "output_tokens": 402
+        },
+        {
+          "task_id": "mmlu:9423",
+          "elapsed_seconds": 30.689796291058883,
+          "ttft_seconds": 0.7725558750098571,
+          "finish_reason": "stop",
+          "output_tokens": 861
+        },
+        {
+          "task_id": "mmlu:2586",
+          "elapsed_seconds": 26.60138324997388,
+          "ttft_seconds": 1.338344290968962,
+          "finish_reason": "stop",
+          "output_tokens": 727
+        },
+        {
+          "task_id": "lcb:abc387_b",
+          "elapsed_seconds": 6.855613292078488,
+          "ttft_seconds": 1.7407129590865225,
+          "finish_reason": "stop",
+          "output_tokens": 149
+        },
+        {
+          "task_id": "lcb:abc387_a",
+          "elapsed_seconds": 2.7107997499406338,
+          "ttft_seconds": 0.9597686670022085,
+          "finish_reason": "stop",
+          "output_tokens": 52
+        },
+        {
+          "task_id": "lcb:abc387_c",
+          "elapsed_seconds": 6.309431375004351,
+          "ttft_seconds": 1.5837114170426503,
+          "finish_reason": "stop",
+          "output_tokens": 138
+        },
+        {
+          "task_id": "lcb:abc388_d",
+          "elapsed_seconds": 16.695447416976094,
+          "ttft_seconds": 2.3583953339839354,
+          "finish_reason": "stop",
+          "output_tokens": 412
+        },
+        {
+          "task_id": "lcb:abc387_a:repair",
+          "elapsed_seconds": 1.9309140840778127,
+          "ttft_seconds": 1.0750851250486448,
+          "finish_reason": "stop",
+          "output_tokens": 26
+        }
+      ],
+      "configurations": [
+        {
+          "task_id": "ifeval:3743",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:2591",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:3557",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:3690",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:2602",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:2825",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:2268",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "ifeval:1220",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 768
+        },
+        {
+          "task_id": "mmlu:3271",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:636",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:3849",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:10731",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:7609",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:11845",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:6338",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:5033",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:1471",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:8882",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:5747",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:11124",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:9423",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "mmlu:2586",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        },
+        {
+          "task_id": "lcb:abc387_b",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 2048
+        },
+        {
+          "task_id": "lcb:abc387_a",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 2048
+        },
+        {
+          "task_id": "lcb:abc387_c",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 2048
+        },
+        {
+          "task_id": "lcb:abc388_d",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 2048
+        },
+        {
+          "task_id": "lcb:abc387_a:repair",
+          "model": "mlx-community/Qwen3-14B-4bit",
+          "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+          "quantization": "4-bit affine, group size 64",
+          "sampling": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "presence_penalty": 1.5,
+            "presence_context_size": 0
+          },
+          "seed": 42,
+          "enable_thinking": false,
+          "max_tokens": 1024
+        }
+      ]
+    }
+  },
+  "manifest_sha256": "cf6a0c8d92a5ae9f4503cc7278c9de4f1ffe4a4196581a2eb1aeaf1fddd09249",
+  "provenance": {
+    "profile": "qwen3-14b",
+    "run_status": "measured",
+    "runtime_source_tree_sha256": "7869e4f997ac88296999594e826b63db9b0b77653051afdaac341e74d6f61fea",
+    "runtime_source_unchanged_during_run": true,
+    "frozen_source_tree_sha256": "dee36398e97f115edee1b776998dee65daa95c0034e691b546c9d0be79481586",
+    "public_tasks_sha256": "0ec76d1676ef5e75b40fba75b5bcbd7fd3578c5df4207c384162b2cc91185260",
+    "additional_control": null
+  }
+}

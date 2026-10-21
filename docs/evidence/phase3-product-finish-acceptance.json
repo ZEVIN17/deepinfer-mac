@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "accepted": true,
+  "scope": "Phase 3 product source and local static preview; no deployment or release performed",
+  "source_checkpoint": "d3c6ae1320f09f0d21813931c6df488cf4b4909b",
+  "changed_source_sha256": {
+    "README.md": "63b80f37dd83197874fcafa1f6b453f2bb9fadfbfb6e63c6c9aceb10421fd4d4",
+    "README.zh-CN.md": "cfd1e2bc98efd245ad4347b50b0d16d17ef4028f5403e27648a11b286c1c6bd9",
+    "docs/release-notes.md": "c5833d4d3092879dbf8f89cd14fecb1cd764fd47ac9e561ad6a1053fc8d0dcf2",
+    "site/README.md": "739bbadb67074bf3505b9322ae71c7756112d553dc7b0b6753dae3300eafc600",
+    "site/build.py": "12702d6a3818f19e828ba02f27d45565c974f5769998be2d0256085d14b7e6c2"
+  },
+  "checks": {
+    "build_pages": 8,
+    "local_links": 138,
+    "diff_check": true,
+    "python_compile": true,
+    "desktop": "1280x900 Chinese execution-core card visually checked",
+    "mobile": "390x844 Chinese execution-core card visually checked; all three evidence links readable",
+    "phase2_bundle_unchanged": true,
+    "user_port_8765_touched": false,
+    "owned_preview_port": 8097,
+    "owned_preview_stopped": true,
+    "temporary_tab_closed": true,
+    "viewport_reset": true
+  },
+  "screenshots": [
+    "/tmp/deepinfer-phase3-finish-desktop.png",
+    "/tmp/deepinfer-phase3-finish-mobile.png"
+  ],
+  "claims": {
+    "tests": "338 portable + 76 actual Metal at pinned dense checkpoint",
+    "fastpath": "explicit Python research opt-in only",
+    "primary_demo": "Qwen3.5-9B-8bit",
+    "competitive_speed_claim": false,
+    "phase3_performance_acceptance_claim": false
+  },
+  "technical_disclosure": "Bilingual README and release notes retain internal/native times, strict numerical failure and scope; full raw reports unchanged."
+}

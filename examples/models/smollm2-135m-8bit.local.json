@@ -1,0 +1,6 @@
+{
+  "id": "smollm2-135m-8bit",
+  "source": "results/phase3-models/smollm2-135m-instruct-8bit",
+  "context_limit": 4096,
+  "runtime_reserve_bytes": 2147483648
+}

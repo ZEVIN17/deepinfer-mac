@@ -1,0 +1,54 @@
+{
+  "status": "measured",
+  "scope": "Post-failure correctness diagnostic on two retained completed failures, not a new quality score. Native and project use identical model/prompt/seed/greedy controls.",
+  "raw_report_sha256": "7b3b311ba05dac57620ee0c635c203ae1fecd31b46435f9a6a6d68bf0766b53c",
+  "runtime_source_tree_sha256": "7869e4f997ac88296999594e826b63db9b0b77653051afdaac341e74d6f61fea",
+  "frozen_source_tree_sha256": "a7edfb7270c7ae34e95ac002c694f4690bf0a6e524ff1feaf545aa770f47ddff",
+  "rows": [
+    {
+      "task_id": "mmlu:2586",
+      "setting": "greedy_engine",
+      "finish_reason": "stop",
+      "quality_pass": false,
+      "quality_status": "wrong_answer",
+      "output_tokens": 690,
+      "matches_engine_token_ids": null,
+      "matches_retained_v2_greedy_ids": true,
+      "output_text_sha256": "18da6fa593348883b4587062473482f00a98876a622e07497d8e8a4a94ba3585"
+    },
+    {
+      "task_id": "lcb:abc387_b",
+      "setting": "greedy_engine",
+      "finish_reason": "stop",
+      "quality_pass": false,
+      "quality_status": "test_failure",
+      "output_tokens": 205,
+      "matches_engine_token_ids": null,
+      "matches_retained_v2_greedy_ids": true,
+      "output_text_sha256": "86fb9ab78cee12831766629f18bc495ba1426fd462e4283b87d821f0cca60583"
+    },
+    {
+      "task_id": "mmlu:2586",
+      "setting": "greedy_native",
+      "finish_reason": "stop",
+      "quality_pass": false,
+      "quality_status": "wrong_answer",
+      "output_tokens": 690,
+      "matches_engine_token_ids": true,
+      "matches_retained_v2_greedy_ids": true,
+      "output_text_sha256": "18da6fa593348883b4587062473482f00a98876a622e07497d8e8a4a94ba3585"
+    },
+    {
+      "task_id": "lcb:abc387_b",
+      "setting": "greedy_native",
+      "finish_reason": "stop",
+      "quality_pass": false,
+      "quality_status": "test_failure",
+      "output_tokens": 205,
+      "matches_engine_token_ids": true,
+      "matches_retained_v2_greedy_ids": true,
+      "output_text_sha256": "86fb9ab78cee12831766629f18bc495ba1426fd462e4283b87d821f0cca60583"
+    }
+  ],
+  "conclusion": "Both failures reproduce token-for-token in native MLX and the retained V2 output; not an engine-only failure."
+}

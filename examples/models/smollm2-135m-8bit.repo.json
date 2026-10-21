@@ -1,0 +1,7 @@
+{
+  "id": "smollm2-135m-8bit",
+  "source": "mlx-community/SmolLM2-135M-Instruct-8bit",
+  "revision": "0f0d9b8218915bc34d401e1a340b8c049d300d5e",
+  "context_limit": 4096,
+  "runtime_reserve_bytes": 2147483648
+}

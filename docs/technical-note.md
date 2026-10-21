@@ -1,17 +1,13 @@
-# Measuring speculative decoding on one Mac
+# From DeepInfer methods to one Mac
 
-A draft model can reduce target-model decoding work when accepted tokens amortize drafting and verification. A longer draft is not automatically better: rejected suffixes still cost memory traffic and verification time. A useful local engine therefore needs a trustworthy ordinary baseline, several fixed budgets and complete output comparison before it needs a marketing multiplier.
+DeepInfer-Mac now executes a reimplementation of the pinned DeepInfer MTPVarlen method: runtime medians, expected accepted yield divided by cost, and separate two-generation acceptance histories for total and per-sequence budget decisions. The original unmodified C++ header is an executable test oracle. Production observations are empirical because the trained Confidence Head is unavailable. This is a MTPVarlen-derived scheduler, not official DSpark.
 
-DeepInfer-Mac borrows the idea of scheduling useful verification work from DeepInfer while executing through MLX. Its first alpha adapts the greedy MLX-LM loop behind a narrow boundary. An independent policy observes draft time, verification time and positional acceptance, explores candidate budgets and can select no draft. It has no trained Confidence Head, no official DSpark implementation, and no full DeepSeek V4.1 port.
+The MLX execution boundary adds independent draft cost, host scheduling and cache recovery. Its complete-cycle measurements include those costs. On the primary hybrid Qwen3.5-9B candidate, recurrent state is restored from exact snapshots and consumed inputs replayed after rejection or early exit; generic KV trimming would be incorrect. This recovery mechanism is platform adaptation and must not be credited as original DS code.
 
-The other practical direction is exact context reuse. A repeated system prompt or shared conversation prefix need not be prefilled again when the model identity and token prefix match. The engine stores isolated prompt snapshots, clones them before mutation and evicts within a byte budget. It rejects oversized active contexts instead of claiming efficiency through hidden truncation or swap. Persistent distributed KV and approximate SWA replay solve different problems and are outside this release.
+Real 4B and 9B traces have made decisions that agree with the original C++ scheduler. One 9B prompt also matched all 96 output tokens across baseline/fixed1/fixed2/DS. Compilation states differed, and DS did not beat fixed2 in the raw probe. Correctness correspondence therefore does not establish a speed benefit. Formal heldout, equal-quality measurements against native MLX-LM and a second mature service are still required.
 
-The benchmark keeps native MLX-LM in the comparison, rotates run order, warms models, clears KV between throughput runs and retains every failure. Complete token IDs including EOS are compared. Matrix-shape changes can alter floating point argmax, so elapsed-time ratios with divergent output are labeled as comparisons of different work. Small-corpus bootstrap intervals are descriptive, not evidence of universal significance; RSS and Metal peaks have separate meanings on unified memory.
+Native MLX-LM LRU reuse and deferred device-array synchronization fix gaps in the first alpha. Their origin and ablations remain separate from DS method claims. Likewise, a better model or quantization can improve answers without making this inference framework faster at equal quality.
 
-The release publishes the actual machine-specific data in the evidence index. Adaptive decoding may lose to tuned fixed decoding or ordinary generation. That result is useful: it shifts optimization toward measured controller overhead, verified prefix reuse, and the workloads where drafting has a chance to amortize. A custom Metal kernel should follow a measured hotspot and a numerical reference, rather than precede them.
+Sampling now uses the installed MLX-LM baseline sampler/penalty path, with real seed/native/cache controls. Speculative acceptance remains greedy. Public dataset subsets are fixed before running, measured from frozen sources, and reported with versions/settings/denominators; restricted raw tasks are excluded from release artifacts.
 
-To reproduce, follow [the benchmark tutorial](benchmarking.md). To contribute, provide a full hardware report with locked revisions, settings and every output. This note is a technical explanation; it asserts no unmeasured speed advantage.
-
-## 中文摘要
-
-推测解码是否获益取决于草稿成本、验证成本和接受位置，不能只看接受率或草稿长度。首版用原生 MLX-LM、普通解码、多个固定预算和自适应策略做完整比较，保留所有失败和 token 差异。缓存路线采用精确前缀、身份隔离、克隆及按字节淘汰，不偷换成近似截断。没有自适应收益时，继续依据瓶颈优化策略开销和前缀复用；没有 profiling 与数值证据时不添加 Metal 算子。完整结果以实际证据文件为准。
+中文：方法落地、答案质量和竞争性能是三类证据。当前已有主模型真实正确性控制，尚无两个常用框架上的公平性能优势。失败与数值差异保留；未完成的联合目标不会因原生持平或单题快照而改写成完成。详见 [DS 对应](DS_DESIGN_MAPPING.md)、[证据](phase2.md) 和 [复现](benchmarking.md)。

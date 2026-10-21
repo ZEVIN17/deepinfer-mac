@@ -1,0 +1,32 @@
+{
+  "stage": "preliminary experimental a2 site/package preparation; not final frozen release acceptance",
+  "candidate_version": "0.1.0a2",
+  "published": false,
+  "limitations": [
+    "Final model/quality/competitive measurements remain pending.",
+    "Shared source may change after these preliminary builds; rebuild and reverify final artifacts.",
+    "No two-framework performance superiority established."
+  ],
+  "checks": {
+    "site_pages": 8,
+    "local_resource_document_links": 152,
+    "site_prefix": "/deepinfer-mac/",
+    "service_tests_passed": 6,
+    "ruff": "passed for changed version/API source",
+    "uv_lock_offline_check": "passed; no environment sync",
+    "artifact_verifier": "passed: wheel37/source232 entries, raw public tasks/weights/private paths excluded"
+  },
+  "published_a1_unchanged": {
+    "dist/deepinfer_mac-0.1.0a1-py3-none-any.whl": "c2fef578a8f5d654276822d59785f12509c585784d6ff9b81b747a4fdef31010",
+    "dist/deepinfer_mac-0.1.0a1.tar.gz": "b13994a95217fa3a862aade4b2f08950281f574845a36f564874f0d495a91bb1"
+  },
+  "commands": [
+    ".venv/bin/python site/build.py",
+    ".venv/bin/python site/check.py",
+    "uv lock --check --offline --cache-dir /tmp/deepinfer-uv-cache",
+    "uv build --offline --cache-dir /tmp/deepinfer-uv-cache --out-dir dist/v0.1.0a2",
+    ".venv/bin/python scripts/verify_artifacts.py --dist dist/v0.1.0a2"
+  ],
+  "website_behavior": "Static only; no inference endpoint and no automatic localhost connection.",
+  "artifact_manifest": "dist/v0.1.0a2/manifest.json (generated outside source to avoid self-referential hashes; preliminary shared-tree candidate)"
+}

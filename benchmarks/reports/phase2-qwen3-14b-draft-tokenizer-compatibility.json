@@ -1,0 +1,38 @@
+{
+  "explicit_thinking_template_tokens_equal": {
+    "false": true,
+    "true": true
+  },
+  "template_text_sha256": [
+    "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+    "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5"
+  ],
+  "vocab_size": 151936,
+  "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "eos_token_ids": 151645,
+  "special_token_ids": [
+    151645,
+    151643,
+    151644,
+    151646,
+    151647,
+    151648,
+    151649,
+    151650,
+    151651,
+    151652,
+    151653,
+    151654,
+    151655,
+    151656
+  ],
+  "target": {
+    "repo": "mlx-community/Qwen3-14B-4bit",
+    "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4"
+  },
+  "draft": {
+    "repo": "mlx-community/Qwen3-0.6B-4bit",
+    "revision": "73e3e38d981303bc594367cd910ea6eb48349da8"
+  },
+  "scope": "CPU-only full vocabulary/special/output-vocab/template compatibility; does not establish real draft loading or DS execution correctness"
+}

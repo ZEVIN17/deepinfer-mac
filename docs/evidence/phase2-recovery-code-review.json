@@ -1,0 +1,137 @@
+{
+  "status": "approved_after_fix",
+  "scope": "Independent review of opt-in lagged_mean adapter; message_checkpoints work excluded",
+  "reviewed_sha256": {
+    "src/deepinfer_mac/ds/recovery_cost.py": "899744aaf24652cef5f9cfeb61515fedb0c010526fb80522e5c65b25b5d4a304",
+    "src/deepinfer_mac/hybrid_speculative.py": "500d5a37889d6864d7d4f0530b06140c78e154310ed011f5ae0965e2b2d68eb3",
+    "src/deepinfer_mac/engine.py": "0bec1cf62be91f9fe64447f8d0c2ad74c7fbbe5c1888150a87d32e123251fe0e",
+    "src/deepinfer_mac/policy.py": "25dbbac857e2f7a1fdc0e0956a90b31eca1661b9f0ce1b51b07ab35479313d43",
+    "tests/test_recovery_cost_policy.py": "7789244372181f1c06e9c06f13668da2923a37c04b967626c6d5fa90c31a41b8",
+    "tests/test_ds_scheduler.py": "15338b414670bedcd27b27e8612f18b218d8576554aa800d6637399ad86637eb",
+    "tests/test_hybrid_speculative.py": "fea85a000a6fc5cc071aa97cfb17af4c0db80860e7730130c81c1b5c60ec958a",
+    "benchmarks/experiments/recovery_cost_replay.py": "13c93eec7166ea500611281dd655de8a737692e9dedcce06832a1d0c65f40977",
+    "benchmarks/reports/phase2-hybrid-recovery-cost-analysis.json": "4cf5217a2b1344c39e4f2334c747137f2c8ed34e4bbfc3a6b0e80fc229c1f8c5",
+    "docs/DS_DESIGN_MAPPING.md": "4eb61904c46acfe84c142728153f30b3e76d3e5be2e9568f8c094918a8eb4f13"
+  },
+  "findings": [
+    {
+      "id": "RECOVERY-P2-001",
+      "priority": "P2",
+      "file": "src/deepinfer_mac/ds/recovery_cost.py",
+      "line": 112,
+      "title": "Partial close still contaminates persistent acceptance estimates",
+      "trigger": "Close generator after one accepted output at budget 4 before the correction output. observe_cycle receives budget=4, accepted=1, produced=1.",
+      "observed": "complete_output_cycle=False excludes cost calibration, but AdaptivePolicy.observe counts positions 1 through 3 as failed acceptance even though those outputs were never emitted.",
+      "reproduction_before_positions": {
+        "0": [
+          6,
+          6
+        ],
+        "1": [
+          4,
+          4
+        ],
+        "2": [
+          2,
+          2
+        ],
+        "3": [
+          0,
+          0
+        ]
+      },
+      "reproduction_after_positions": {
+        "0": [
+          7,
+          7
+        ],
+        "1": [
+          4,
+          5
+        ],
+        "2": [
+          2,
+          3
+        ],
+        "3": [
+          0,
+          1
+        ]
+      },
+      "impact": "The policy survives requests, so cancellation/EOS/output truncation can bias later yield and budget decisions. N-2 delay alone does not make the biased evidence valid.",
+      "requested_change": "Keep actual complete-cycle cost and consumed output diagnostics, but exclude partial-cycle acceptance from future decision statistics or represent observed acceptance positions explicitly. Add an assertion that partial close cannot create false rejections.",
+      "status": "resolved_after_independent_reverification"
+    }
+  ],
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_recovery_cost_policy.py tests/test_ds_scheduler.py tests/test_hybrid_speculative.py",
+      "result": "64 passed in 1.84s"
+    },
+    {
+      "command": ".venv/bin/ruff check src/deepinfer_mac/ds/recovery_cost.py src/deepinfer_mac/hybrid_speculative.py tests/test_recovery_cost_policy.py tests/test_ds_scheduler.py tests/test_hybrid_speculative.py benchmarks/experiments/recovery_cost_replay.py",
+      "result": "All checks passed"
+    }
+  ],
+  "confirmed": [
+    "Default hybrid_cost_adapter remains original; original MTPVarlen implementation unchanged.",
+    "Cost curve uses minimum 5, rolling window 9 by default; no unknown graph interpolation.",
+    "Latest whole-cost observation withheld; actual historical replay has zero N-2 feedback cutoff violations.",
+    "Measured cycle includes snapshot, draft/verify, consumer handling and replay; stage sums bounded by cycle.",
+    "Direct empirical curve never receives residual updates; no residual history reset or double-counting.",
+    "Original C++ header checksum matches pinned source. Portable test feeds every mature estimated curve into unchanged C++ scheduler; more than 100 independent budget decisions agree.",
+    "Pre-yield failure path aborts schedule counters and restores snapshots; partial close retains actual consumed cache history.",
+    "Actual descriptive analysis uses 35 historical cycles, has zero mature estimated core decisions, and makes no performance prediction."
+  ],
+  "existing_related_risk": "The same censored-cycle bias in original DS and legacy has now been addressed by the shared minimal gate; full-cycle algorithm unchanged.",
+  "limitations": [
+    "CPU verification only; 41 Metal tests skipped in this run because GPU ownership belongs to another task.",
+    "No new real-model adapter execution or performance conclusion.",
+    "C++ oracle validates supplied curve budget semantics, not empirical cost optimality."
+  ],
+  "review_history": [
+    {
+      "status": "needs_changes",
+      "finding": "RECOVERY-P2-001",
+      "evidence": "Initial reproduction and reviewed_sha256 retained in this document."
+    },
+    {
+      "status": "approved_after_fix",
+      "reviewed_sha256": {
+        "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+        "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+        "src/deepinfer_mac/hybrid_speculative.py": "500d5a37889d6864d7d4f0530b06140c78e154310ed011f5ae0965e2b2d68eb3",
+        "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+        "tests/test_recovery_cost_policy.py": "00621e894bba976a2ec380fb49efe9d695415ac629451408f720055b0150cb1b",
+        "tests/test_ds_scheduler.py": "04f79cc7c028a5bd343bd1d3d08ee945f55eda038ea2b2f524e7cb8cc2d41739",
+        "tests/test_hybrid_speculative.py": "335e115e10cb1a73d6ac14f26425f268c104d7f6cbd19dd3b35e8edd94c04e9b"
+      },
+      "checks": [
+        {
+          "command": ".venv/bin/python -m pytest -q tests/test_recovery_cost_policy.py tests/test_ds_scheduler.py tests/test_hybrid_speculative.py",
+          "result": "76 passed in 1.79s"
+        },
+        {
+          "command": ".venv/bin/python -m pytest -q",
+          "result": "149 passed, 41 skipped in 2.12s"
+        },
+        {
+          "command": ".venv/bin/ruff check src/deepinfer_mac/policy.py src/deepinfer_mac/ds/recovery_cost.py tests/test_recovery_cost_policy.py tests/test_ds_scheduler.py tests/test_hybrid_speculative.py",
+          "result": "All checks passed"
+        },
+        {
+          "command": "Independent direct-policy reproduction across AdaptivePolicy, DSAdaptivePolicy, LaggedMeanRecoveryPolicy",
+          "result": "Partial positions/samples unchanged; actual diagnostics retained; next unknown budget 4 explored; subsequent complete cycle is sole p3 sample; old valid lagged budget-3 sample retained"
+        }
+      ],
+      "confirmed": [
+        "Both full-cost and acceptance feedback now exclude censored cycles; actual work remains in partial_cycles and execution rounds.",
+        "DS process/schedule advance for observed partial cycles. prev_accept_rates takes the prior current rates, while current rates remain unchanged; N-2 yield age is preserved.",
+        "Lagged pending chronology still advances. A prior valid observation is published when old enough, rather than erased; the censored observation itself is never added to available cost samples.",
+        "Old valid acceptance/cost histories are retained; budget with insufficient complete evidence remains eligible for exploration.",
+        "Original DS and legacy receive the same minimal censored-cycle gate; full-cycle update paths retain their behavior.",
+        "Independent unchanged-header C++ oracle tests pass with partial cycles interleaved; adapter/source selection and default remain explicit."
+      ]
+    }
+  ]
+}

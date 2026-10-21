@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "archive": "/tmp/deepinfer-quality-sdist-check/deepinfer_mac-0.1.0a1.tar.gz",
+  "archive_sha256": "74304fbd3d7c8b491ca50519be143318b5c5388b02525bc3ee59757e36a36a4f",
+  "archive_is_temporary_nonrelease": true,
+  "forbidden_paths": [],
+  "manifest_included": true,
+  "official_checker_classes_match_source": 7,
+  "task_file_sha256": "0ec76d1676ef5e75b40fba75b5bcbd7fd3578c5df4207c384162b2cc91185260"
+}

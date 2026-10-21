@@ -1,0 +1,41 @@
+{
+  "recorded_at_utc": "2026-10-21T07:49:18.325818+00:00",
+  "reviewer": "fresh independent commit_publish verification agent",
+  "gpu_used": false,
+  "model_weights_read": false,
+  "network_used": false,
+  "source_sha256": {
+    "benchmarks/quality/dev_budget_sensitivity.py": "0e94eb5ad1cb14d7c2da62beddc2be5951212421b7254f3988e279d0ad94be98",
+    "tests/test_dev_budget_sensitivity.py": "53ccde683fadff84a1d0455c2c31b5023d69f78f4dec5952e648d8194533fe49",
+    "src/deepinfer_mac/models.py": "d63034aa76278cb17aa352bb0acfcf48b85033533475b114cec0b96210492dfb",
+    "models.lock.json": "eb547e463a336aeded0499070cde26beabff4aee2bd43bccd0e1f2dc92cb904a",
+    "src/deepinfer_mac/models.lock.json": "eb547e463a336aeded0499070cde26beabff4aee2bd43bccd0e1f2dc92cb904a",
+    "docs/PHASE2_MODEL_SELECTION.md": "fb3f9a0bc9de778b7f5734bf19406cd380c30dd466a98b6be55d7e5002798a02",
+    "docs/PHASE2_QUALITY_PROTOCOL.md": "e7d85c4f86fa7fecbd28819790b8ab5603223a87515ffeda8b33eb6abfa0d7a2",
+    "docs/PROGRESS.md": "36180c8d234d95c49e731d0ad066fb82b4cd536db609ea9693356989bc8744c6",
+    "benchmarks/reports/public-quality-dev4096-budget-sensitivity.json": "e6d2aa5356f96b26154c387961f5fa27b11493e76b620fcc2022a1d51d96e927",
+    "benchmarks/reports/public-quality-dev4096-mmlu-format-sensitivity.json": "fdd38784643323f840b892be5b08dbfec7e26cbee4d9f2e6fcc1156bc72221f9"
+  },
+  "status": "passed",
+  "scope": "Completed quality selection evidence anti-pattern review",
+  "checks": {
+    "raw_public_tasks_not_released": "OnlyIDs, results, settings, scalar resource/cost data and source hashes in derived public summaries; raw task text/tests/generations remain excluded.",
+    "no_synthetic_performance": "All207public/dev and144smoke counts come from actual retained model reports; CPU controls do not produce model metrics.",
+    "primary_scores_immutable": "Original27subsets remain primary; dev4096 and Markdown sensitivity are explicitly separate, and original raw hashes did not change.",
+    "no_hidden_failure_filter": "All18budget records and all7public settings retained, including wrong answers, completed wrong code,2length stops and higher costs.",
+    "fair_pairing": "18same-model/prompt/seed/sampler pairs; no replacement of14Bshared preset with its separate official control.",
+    "no_quantization_equivalence": "9B4has favorable task cases but measured losses remain and no nonsignificance-based equality claim is made.",
+    "no_overall_capability_rank": "Small IFEval/MMLU/LCB subsets and local smoke remain disaggregated with scope caveats.",
+    "no_framework_speed_claim": "Different models/quantizations/settings/tokens and diagnostic elapsed times are never described as engine speedup.",
+    "resource_accuracy": "18request deltas have0positive,9negative,9zero; negatives retained and system-wide nature disclosed. Standalone4Kno-swap evidence is not generalized to8K,DFlash or concurrency.",
+    "source_identity": "All actual public/dev sources are archive-bound and stable; historical initial9B8smoke instability explicitly retained. Current metadata hashes are not substituted into frozen experiment records.",
+    "defaults_unchanged": "Model pins/default generation/registry operational fields remain unchanged; models.py edit is prose metadata only.",
+    "private_paths": "New derived budget/MMLU summaries and independent evidence have no machine-specific local paths or credentials."
+  },
+  "not_established": [
+    "Two-framework competitive superiority",
+    "Full benchmark ranking or quantization noninferiority",
+    "Independent human annotation",
+    "Long-run stability or universal zero-swap behavior"
+  ]
+}

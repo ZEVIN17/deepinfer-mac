@@ -1,0 +1,940 @@
+{
+  "scope": "Direct locked upstream BatchGenerator, natural and teacher-forced serial token history; same existing 135M weights. No runtime modifications.",
+  "performance_claim": false,
+  "strict_original_gate_replaced": false,
+  "versions": {
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2",
+    "numpy": "2.5.4"
+  },
+  "weight_sha256": {
+    "model.safetensors": "ec569c771e56424636be99625aba9031abc525a68a5f4ab16d678eca96fef12c"
+  },
+  "harness_sha256": "29c5bba55a2b7d224e468253046f115d177efcf7f8a94f1dd43914a0481ebaca",
+  "input_report_sha256": "2118e2651dd00353b43d95e0e0f212b169ae8696b279986ff2547a14e76e9a2d",
+  "raw_sha256": "333592da23ef992c0a0e891c61a460ce2075184778418cf32e5dbe7ce1cd83f5",
+  "logits_npz_sha256": "08d4d8c620d32c4f63514a96a372a3d830f4b86d8fc24af3cd4f4da88e910414",
+  "upstream_source_sha256": {
+    "generate.py": "9d46803799f99d6fc7c35fff2d4357c79b1a25ae98cc63efeaaebeb50a7b5f33",
+    "models/cache.py": "c96cb169fd5e0ec4584a162dd61dc62ab08ccdca03a9850f8a491ce6809145e6",
+    "models/llama.py": "dfb656511e6740781cd0563f7994a78b3404c199b9aebaa2fbca28a19e280891"
+  },
+  "command": ".venv/bin/python benchmarks/experiments/phase3_diagnose_batch_logits.py",
+  "output_behavior": "Refuses to overwrite artifacts/phase3-continuous/logits-diagnosis; preserve this directory before any new diagnostic run. Raw prompts, token sequences and full logits stay private.",
+  "fixed_history_input_tokens_equal": true,
+  "natural_target_matches_serial": {
+    "b1-natural": true,
+    "b4-natural": false
+  },
+  "comparisons": [
+    {
+      "mode": "natural",
+      "compared": 48,
+      "first_nonidentical_logits": 1,
+      "first_argmax_difference": 39,
+      "max_abs_logit_differences": [
+        0.0,
+        0.0460205078125,
+        0.03125,
+        0.0625,
+        0.0439453125,
+        0.06640625,
+        0.03125,
+        0.0625,
+        0.0390625,
+        0.0546875,
+        0.03515625,
+        0.048828125,
+        0.060546875,
+        0.03125,
+        0.0390625,
+        0.046875,
+        0.0361328125,
+        0.046875,
+        0.03125,
+        0.05078125,
+        0.0703125,
+        0.09375,
+        0.0859375,
+        0.03125,
+        0.03125,
+        0.0390625,
+        0.0234375,
+        0.0546875,
+        0.03125,
+        0.0234375,
+        0.046875,
+        0.03515625,
+        0.046875,
+        0.0234375,
+        0.05078125,
+        0.05078125,
+        0.03125,
+        0.03125,
+        0.0546875,
+        0.046875,
+        25.298828125,
+        32.24609375,
+        39.21484375,
+        6.93359375,
+        31.171875,
+        19.4609375,
+        17.04913330078125,
+        9.951171875
+      ]
+    },
+    {
+      "mode": "forced",
+      "compared": 48,
+      "first_nonidentical_logits": 1,
+      "first_argmax_difference": 39,
+      "max_abs_logit_differences": [
+        0.0,
+        0.0460205078125,
+        0.03125,
+        0.0625,
+        0.0439453125,
+        0.06640625,
+        0.03125,
+        0.0625,
+        0.0390625,
+        0.0546875,
+        0.03515625,
+        0.048828125,
+        0.060546875,
+        0.03125,
+        0.0390625,
+        0.046875,
+        0.0361328125,
+        0.046875,
+        0.03125,
+        0.05078125,
+        0.0703125,
+        0.09375,
+        0.0859375,
+        0.03125,
+        0.03125,
+        0.0390625,
+        0.0234375,
+        0.0546875,
+        0.03125,
+        0.0234375,
+        0.046875,
+        0.03515625,
+        0.046875,
+        0.0234375,
+        0.05078125,
+        0.05078125,
+        0.03125,
+        0.03125,
+        0.0546875,
+        0.046875,
+        0.03125,
+        0.056640625,
+        0.07421875,
+        0.03125,
+        0.03125,
+        0.0552215576171875,
+        0.05078125,
+        0.048828125
+      ]
+    }
+  ],
+  "selected_steps": {
+    "b1-natural": [
+      {
+        "index": 0,
+        "shape": [
+          1,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            57
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            58
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          28589,
+          32632
+        ],
+        "top2_logits": [
+          30.453125,
+          30.28125
+        ],
+        "margin": 0.171875
+      },
+      {
+        "index": 1,
+        "shape": [
+          1,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            58
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            59
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          29184,
+          23022
+        ],
+        "top2_logits": [
+          30.15625,
+          25.28125
+        ],
+        "margin": 4.875
+      },
+      {
+        "index": 39,
+        "shape": [
+          1,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            96
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            97
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          27830,
+          179
+        ],
+        "top2_logits": [
+          29.921875,
+          29.90625
+        ],
+        "margin": 0.015625
+      }
+    ],
+    "b4-natural": [
+      {
+        "index": 0,
+        "shape": [
+          1,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            57
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            58
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          28589,
+          32632
+        ],
+        "top2_logits": [
+          30.453125,
+          30.28125
+        ],
+        "margin": 0.171875
+      },
+      {
+        "index": 1,
+        "shape": [
+          3,
+          1
+        ],
+        "row": 2,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            82,
+            1301,
+            58
+          ],
+          "left_padding": [
+            1219,
+            0,
+            1243
+          ],
+          "keys_shape": [
+            3,
+            3,
+            1536,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            3,
+            3,
+            1536,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            83,
+            1302,
+            59
+          ],
+          "left_padding": [
+            1219,
+            0,
+            1243
+          ],
+          "keys_shape": [
+            3,
+            3,
+            1536,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            3,
+            3,
+            1536,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          29184,
+          23022
+        ],
+        "top2_logits": [
+          30.1875,
+          25.296875
+        ],
+        "margin": 4.890625
+      },
+      {
+        "index": 39,
+        "shape": [
+          2,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            96,
+            76
+          ],
+          "left_padding": [
+            0,
+            20
+          ],
+          "keys_shape": [
+            2,
+            3,
+            293,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            2,
+            3,
+            293,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            97,
+            77
+          ],
+          "left_padding": [
+            0,
+            20
+          ],
+          "keys_shape": [
+            2,
+            3,
+            293,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            2,
+            3,
+            293,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          179,
+          27830
+        ],
+        "top2_logits": [
+          29.921875,
+          29.921875
+        ],
+        "margin": 0.0
+      }
+    ],
+    "b1-forced": [
+      {
+        "index": 0,
+        "shape": [
+          1,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            57
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            58
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          28589,
+          32632
+        ],
+        "top2_logits": [
+          30.453125,
+          30.28125
+        ],
+        "margin": 0.171875
+      },
+      {
+        "index": 1,
+        "shape": [
+          1,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            58
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            59
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          29184,
+          23022
+        ],
+        "top2_logits": [
+          30.15625,
+          25.28125
+        ],
+        "margin": 4.875
+      },
+      {
+        "index": 39,
+        "shape": [
+          1,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            96
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            97
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          27830,
+          179
+        ],
+        "top2_logits": [
+          29.921875,
+          29.90625
+        ],
+        "margin": 0.015625
+      }
+    ],
+    "b4-forced": [
+      {
+        "index": 0,
+        "shape": [
+          1,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            57
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            58
+          ],
+          "left_padding": [
+            0
+          ],
+          "keys_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            1,
+            3,
+            256,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          28589,
+          32632
+        ],
+        "top2_logits": [
+          30.453125,
+          30.28125
+        ],
+        "margin": 0.171875
+      },
+      {
+        "index": 1,
+        "shape": [
+          3,
+          1
+        ],
+        "row": 2,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            82,
+            1301,
+            58
+          ],
+          "left_padding": [
+            1219,
+            0,
+            1243
+          ],
+          "keys_shape": [
+            3,
+            3,
+            1536,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            3,
+            3,
+            1536,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            83,
+            1302,
+            59
+          ],
+          "left_padding": [
+            1219,
+            0,
+            1243
+          ],
+          "keys_shape": [
+            3,
+            3,
+            1536,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            3,
+            3,
+            1536,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          29184,
+          23022
+        ],
+        "top2_logits": [
+          30.1875,
+          25.296875
+        ],
+        "margin": 4.890625
+      },
+      {
+        "index": 39,
+        "shape": [
+          2,
+          1
+        ],
+        "row": 0,
+        "cache_before": {
+          "type": "BatchKVCache",
+          "offset": [
+            96,
+            76
+          ],
+          "left_padding": [
+            0,
+            20
+          ],
+          "keys_shape": [
+            2,
+            3,
+            293,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            2,
+            3,
+            293,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "cache_after": {
+          "type": "BatchKVCache",
+          "offset": [
+            97,
+            77
+          ],
+          "left_padding": [
+            0,
+            20
+          ],
+          "keys_shape": [
+            2,
+            3,
+            293,
+            64
+          ],
+          "keys_dtype": "mlx.core.float16",
+          "values_shape": [
+            2,
+            3,
+            293,
+            64
+          ],
+          "values_dtype": "mlx.core.float16"
+        },
+        "top2": [
+          179,
+          27830
+        ],
+        "top2_logits": [
+          29.921875,
+          29.921875
+        ],
+        "margin": 0.0
+      }
+    ]
+  },
+  "resources": {
+    "metal_peak_bytes": 370415450,
+    "swap_before": "vm.swapusage: total = 5120.00M  used = 3682.44M  free = 1437.56M  (encrypted)",
+    "swap_after": "vm.swapusage: total = 5120.00M  used = 3682.44M  free = 1437.56M  (encrypted)",
+    "process_completed": true
+  },
+  "interpretation": "Both modes first differ in logits at output index 1, when the target transitions from standalone prefill completion to a three-row padded decode. First argmax divergence remains index 39 with identical input history. At index 39 actual active shape is [2,1], not four active rows: serial top logits are 29.921875 vs 29.90625, whereas batch ties tokens 179 and 27830 at 29.921875 and greedy argmax selects 179. This proves a numerical logits/tie boundary under the batch trajectory, but does not isolate the responsible kernel or exclude an earlier cache transformation issue. Initial target logits before merge are bit-identical. No tolerance or acceptance gate changed."
+}

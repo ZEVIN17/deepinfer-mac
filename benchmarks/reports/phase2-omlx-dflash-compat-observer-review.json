@@ -1,0 +1,14 @@
+{
+  "scope": "Post-hoc observer coverage audit; original actual report bytes unchanged",
+  "actual_report_sha256": "445754dcb3928e13d3c6787ebcdcad8fdc40f0abc469bf8553843558f5c4854f",
+  "frozen_harness_archive": "benchmarks/reports/phase2-omlx-dflash-compat-source-v1.tar.gz",
+  "frozen_harness_archive_sha256": "e72a2fc2d764d335fe40eec7c39411654fe81dd2d932092cb75acccf869179f2",
+  "archive_matches_actual_recorded_harness_sha256": true,
+  "resource_coverage": {
+    "baseline": "Original observer sampled startup and pre-request only; its maximum observed peak is a lower bound, not a complete baseline peak for the last ledger request. No peak ratio is justified.",
+    "dflash": "Successful attach and completed request verification stats include actual MLX global peak after load and each measured request. Observed maximum is12480428568B.",
+    "swap": "System before/after delta is retained: baseline0B, q4+517996544B. System-wide delta is not exclusively attributable to one process."
+  },
+  "termination": "Both server exit codes-15 reflect deliberate SIGTERM after requests; private official logs show application shutdown, engine.stop and settled1.02KB, with no listener on8084. The original audit_stopped finally hook was not delivered after CLI signal handling.",
+  "planned_observer_repair": "Wrap official Scheduler._cleanup_finished after the original operation to sample memory for nonempty finished request sets. This introduces diagnostic logging only; no extra tensor eval/sync. Future runs use new source hashes, never relabel the existing run."
+}

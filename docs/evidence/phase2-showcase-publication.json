@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-10-21T08:16:31.752389+00:00",
+  "website": {
+    "url": "https://zevin17.github.io/deepinfer-mac/",
+    "chinese_url": "https://zevin17.github.io/deepinfer-mac/zh.html",
+    "deployment_status": "success",
+    "publication_commit": "7b7beb8c9e10c7128c328b9e1bfd1f0f6adace03",
+    "publication_tree": "8561126bc5d310ee9d42a937b373b815bbaf4eb8",
+    "main_parent": "db0eaeb44f81b361e5e4f0db55cd977a1e6d2330",
+    "source_checkpoint": "cbbe35a8ef83101b4a5929d31b7207788030a82a",
+    "curated_evidence_source_commit": "66ae444f535c63b43003ba6febeb42228d4d607a",
+    "source_branch": "codex/phase2-core",
+    "runtime_locks_sha256": "868d995c295f9fbf338f0bf81ff184f1cd1263e13ebd7c92eb4087b7b23b2031"
+  },
+  "scope": {
+    "changed_paths": [
+      "site/README.md",
+      "site/assets/showcase.js",
+      "site/assets/style.css",
+      "site/build.py",
+      "site/check.py",
+      "site/data/phase2/benchmarks/reports/context-4204-256-qwen35-9b8.json",
+      "site/data/phase2/benchmarks/reports/phase2-experimental-api-qwen35-9b8.json",
+      "site/data/phase2/benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json",
+      "site/data/phase2/benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8.json",
+      "site/data/phase2/benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json",
+      "site/data/phase2/benchmarks/reports/phase2-service-qwen3.5-9b-8bit.json",
+      "site/data/phase2/benchmarks/reports/phase2-service-sampling-qwen35-9b8.json",
+      "site/data/phase2/benchmarks/reports/phase2-ui-qwen35-9b8.json",
+      "site/data/phase2/docs/evidence/phase2-local-ui-qwen35-9b8.png",
+      "site/data/phase2/manifest.json"
+    ],
+    "changed_path_count": 15,
+    "all_changes_under_site": true,
+    "non_site_tree_identical_to_main_parent": true,
+    "five_historical_site_data_files_identical": true,
+    "public_author_committer": "ZEVIN17 <222136194+ZEVIN17@users.noreply.github.com>",
+    "push": "normal nonforce fast-forward",
+    "environment_policy_changed": false,
+    "historical_alpha_tag": "9cda996b98a3967eb6395da520cf83ce5b7287a0",
+    "historical_alpha_release_changed": false,
+    "new_package_release_published": false
+  },
+  "workflow": {
+    "commit": "7b7beb8c9e10c7128c328b9e1bfd1f0f6adace03",
+    "observed": true,
+    "id": 39567560655,
+    "html_url": "https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39567560655",
+    "head_sha": "7b7beb8c9e10c7128c328b9e1bfd1f0f6adace03",
+    "head_branch": "main",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-21T08:12:44Z",
+    "updated_at": "2026-10-21T08:13:12Z",
+    "jobs": [
+      {
+        "id": 119113422628,
+        "name": "build",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39567560655/job/119113422628"
+      },
+      {
+        "id": 119113508079,
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39567560655/job/119113508079"
+      }
+    ]
+  },
+  "verification": {
+    "local_build_pages": 8,
+    "local_checked_links": 138,
+    "local_generated_file_count": 28,
+    "main_only_overlay_matches_approved_local_artifact": true,
+    "privacy_and_recursive_archive_scan": "passed",
+    "live_public_file_count": 27,
+    "live_public_files_http_200_and_sha256_equal": 27,
+    "local_control_marker": {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "present_in_local_build": true,
+      "present_in_uploaded_pages_artifact": false,
+      "public_http_status": 404,
+      "note": "The Pages upload artifact omits this local control marker; all uploaded and public files are verified."
+    },
+    "actions_artifact": {
+      "workflow_run_id": 39567560655,
+      "artifact_id": 12329764419,
+      "archive_sha256": "224ab9891d74ba59d4744b787ffb35ef7436fef5af61acbb8a8e7aa436eadab8",
+      "artifact_files_count": 27,
+      "all_uploaded_files_match_frozen_artifact": true,
+      "local_control_marker_not_uploaded": [
+        ".nojekyll"
+      ],
+      "local_build_file_count": 28
+    },
+    "live_files": {
+      "index.html": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 8546,
+        "sha256": "2f043c00414401c2eae7ac50e10f79cbfaeb80dcc42adab37b5c43393a31feb9"
+      },
+      "contribute.html": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 3834,
+        "sha256": "ba858345c3dd339bd5025f09290370d93eada7ba59d6cae4a02255d0ef3d69fd"
+      },
+      "benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 115938,
+        "sha256": "03ee0e1ab61c8e27b3dfc127e89f32057db25a43d070c61e41873fca0d66317f"
+      },
+      "benchmarks/reports/phase2-experimental-api-qwen35-9b8.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 145368,
+        "sha256": "ff8eb638ee2b5fcadce833a45d889e973bc1ab07a0e30a0d3874f7d454421f93"
+      },
+      "benchmarks/reports/phase2-service-qwen3.5-9b-8bit.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 33223,
+        "sha256": "f9507563fea2eceb0d0e79d7c249ad7a793272a31da548833525e6bf0226b15f"
+      },
+      "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 11353,
+        "sha256": "d687d958894afaa8b22d9d3801ea3cdef22a3d70230666446ef4e9dbf85380ed"
+      },
+      "benchmarks/reports/phase2-service-sampling-qwen35-9b8.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 18362,
+        "sha256": "7388a5fb9e601c2e5c839f5c00a9695acddfd1dec0f6beed2a30fed5bbd3832c"
+      },
+      "benchmarks/reports/context-4204-256-qwen35-9b8.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 100742,
+        "sha256": "df628d7db06c5269800f4784295ad728a58637457ebcf6aa27454ed4423de95a"
+      },
+      "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 774934,
+        "sha256": "51c4b6e7744129fcfe55c69644d6d6129f021f255987058a8427223161be2060"
+      },
+      "benchmarks/reports/phase2-ui-qwen35-9b8.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 6917,
+        "sha256": "04b7a2f0a2f599986b5ee9a9c4d30dca5612e5f4d379869358645495a1006fe8"
+      },
+      "zh.html": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 8465,
+        "sha256": "ab2cbbea36973ec7a7cfeca79cb0ee7673fe3146d650e79c155d5afb23d5c6a6"
+      },
+      "architecture.html": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 8918,
+        "sha256": "efddc330730c471562eb31d3458840f92975e81e1604c6f04e10df12f6bd66fe"
+      },
+      "assets/showcase.js": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 3899,
+        "sha256": "44bd77bb34f2987d15bd9e9c0234239943235e429e5e447ac750e2a756e94cd6"
+      },
+      "assets/style.css": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 14430,
+        "sha256": "d07705d7e3c50dd2bb8dcf0e50b4aba580eb0c49133e4b8ac1c3494701151346"
+      },
+      "assets/icon.svg": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 269,
+        "sha256": "bbe7dc6a4dffef1223204f6ee7be5b359c4baac87798b5d53e8637b79e1eaabe"
+      },
+      "assets/phase2-local-ui-qwen35-9b8.png": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 344863,
+        "sha256": "7a6bb3196622d653dacc66941dd8393aac8aea932e22f38bf833fe4136203109"
+      },
+      "data/phase2-source-manifest.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 2812,
+        "sha256": "6c1cd9179f6ec16176bc400b8aa49f08fa01f78543f430bc1302be917e165c60"
+      },
+      "data/recorded-response.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 6457,
+        "sha256": "636fe388d8601efc1aef8b1f96fd83ee60a21e5ba401842c16b15b901005caee"
+      },
+      "data/source.tar.gz": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 61380,
+        "sha256": "784ed67070dddd4326f088a8fccc6cd1aea9628da448bc2abd21a1a4cf8bbfe4"
+      },
+      "data/cache-qwen3-4b.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 43246,
+        "sha256": "61e426ff4c35c62afcab2a83b869ebd28ff0501bc642b7abc13a2c2532c8df09"
+      },
+      "data/showcase-provenance.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 1204,
+        "sha256": "31e65bb0268b59ed83c20879363a5a216e93476b9f92813aa444c21ce9dc1f46"
+      },
+      "data/benchmark.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 1698079,
+        "sha256": "3ba01a74cf79e2be7dd9ca38326ff0ae5517a05c242fd927bb99e3cc0e638a23"
+      },
+      "data/source-manifest.json": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 3163,
+        "sha256": "ca7b9be9d1b292463e2f5e7ed6482cfeefc7c77db17954da02d9e1af94544eea"
+      },
+      "compatibility.html": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 4660,
+        "sha256": "394346894861453d5c8d57c961ce90d0e7ac14e7eee093e6887ec0f254a84d9f"
+      },
+      "benchmarks.html": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 6073,
+        "sha256": "2ba1d02a7fa5be02434637125014ce3fb8afc7797296363c95f8c703edc11c9e"
+      },
+      "qwen27.html": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 4886,
+        "sha256": "0cd38cbf8e66dad97d7d84258159493fea1dea7bc8e9caff5f7b77df47e1950a"
+      },
+      "phase2.html": {
+        "http_status": 200,
+        "curl_exit": 0,
+        "matches_frozen_artifact": true,
+        "bytes": 6051,
+        "sha256": "a93413b7367bcc1d7ee393b99326953c815e0f562b95bdf5fc348ae71acfceb2"
+      }
+    },
+    "independent_chinese_html_check": {
+      "observer": "root",
+      "transport": "curl public GET",
+      "bytes": 8465,
+      "sha256": "ab2cbbea36973ec7a7cfeca79cb0ee7673fe3146d650e79c155d5afb23d5c6a6",
+      "matches_approved_artifact": true,
+      "hero_text_present": true
+    }
+  },
+  "candidate_artifacts": {
+    "directory": "dist/candidates/v0.1.0a2-cbbe35a",
+    "source_commit": "cbbe35a8ef83101b4a5929d31b7207788030a82a",
+    "source_tree": "1a4694d81e5de2c2c6eb4b577a0e3cdab6bf105a",
+    "files": {
+      "deepinfer-site-phase4.zip": {
+        "sha256": "b2679bb10dd0fa85ecd8671c0341b6e08a9a45e9339ccd1e976cabf16f1c0d52",
+        "bytes": 496535
+      },
+      "deepinfer_mac-0.1.0a2-py3-none-any.whl": {
+        "sha256": "151f3ab88acbd244a7f80a56c40f2bb9db457be2ec33ae1c6408dfe7ef5b249a",
+        "bytes": 74595
+      },
+      "deepinfer_mac-0.1.0a2.tar.gz": {
+        "sha256": "c9be2cef9aa98ab126fbe9b039edfced75d16fa91881f8ea3576ae922fed317b",
+        "bytes": 3801035
+      }
+    },
+    "status": "verified local candidates; no new release published"
+  },
+  "published_alpha_artifacts_unchanged": {
+    "deepinfer_mac-0.1.0a1-py3-none-any.whl": "c2fef578a8f5d654276822d59785f12509c585784d6ff9b81b747a4fdef31010",
+    "deepinfer_mac-0.1.0a1.tar.gz": "b13994a95217fa3a862aade4b2f08950281f574845a36f564874f0d495a91bb1"
+  },
+  "performance_scope": "The site presents verified engineering milestones. A fair two-framework performance superiority claim remains unestablished; full GPU comparisons remain deferred under the user current memory constraint."
+}

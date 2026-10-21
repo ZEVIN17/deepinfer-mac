@@ -1,0 +1,6 @@
+{
+  "id": "research-smollm2-360m-6bit",
+  "source": "results/phase3-models/smollm2-360m-instruct-6bit",
+  "context_limit": 2048,
+  "runtime_reserve_bytes": 2147483648
+}

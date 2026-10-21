@@ -1,0 +1,104 @@
+{
+  "status": "passed_cpu_scope_pending_hardware",
+  "gpu_executed": false,
+  "source_sha256": {
+    "src/deepinfer_mac/server/app.py": "8c76382db195dcf4fa8fbc0700fa6d08830268bc724b024c864b9c62a9a6d8d0",
+    "src/deepinfer_mac/engine.py": "dce5e20bfd130b3110c38e3515487e9c0d29aa94daa9f29d02857a770dc8af53",
+    "benchmarks/experiments/deepinfer_service_server.py": "65396207795c430a591c66f432c2ba1d1cfbb9dc235a0ace5ff5df31ed5bf18c",
+    "benchmarks/experiments/ds_budget_ablation.py": "5e910651566c0a104404eb5acd84abb6ae64b47a74a170a66bf86aa673ce7506",
+    "benchmarks/experiments/hybrid_lagged_probe.py": "909429945d9e0ab197efda153e60ac6c62a8e720183ee4f42d8696522b586b15",
+    "benchmarks/experiments/verify_lagged_trace.py": "dac5dfcd531db17a161abbc4dd84ba340e9b23b2779e33c4742160093846bd71",
+    "scripts/freeze_ds_source.py": "f3825430e7148cfc62890c3a7369862e99a38c94feb34406148c624ccb69535d",
+    "tests/test_experimental_service.py": "43cb2d3e1e0d1c8b7c7984f212bd3bc688d398d2aef27dbce97def23f27cf682",
+    "tests/test_ds_experiment_harness.py": "be2830ac98c6c47011985f86d04ca8063bcbee1c49526a844fbcf24a8ceb6da7",
+    "tests/test_execution_failures.py": "be1d460c2242b86478174845ddc92ba94199bdbcaa650b8e7cc21de9ec14d5f8",
+    "docs/DS_DESIGN_MAPPING.md": "2d15e39d10a8dc60e9ea010e1b7c08d5dfed21de23dd153c101e07ec9294e613"
+  },
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_experimental_service.py tests/test_ds_experiment_harness.py tests/test_execution_failures.py tests/test_recovery_cost_policy.py tests/test_hybrid_speculative.py tests/test_ds_scheduler.py tests/test_service.py",
+      "exit_code": 0,
+      "result": "103 passed in 3.39s",
+      "phase": "initial_before_provenance_fix"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "exit_code": 0,
+      "result": "194 passed, 41 skipped in 4.08s",
+      "phase": "initial_before_provenance_fix"
+    },
+    {
+      "command": ".venv/bin/ruff check <all eleven scoped Python source and test files>",
+      "exit_code": 0,
+      "result": "All checks passed",
+      "phase": "initial_before_provenance_fix"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "No whitespace errors",
+      "phase": "initial_before_provenance_fix"
+    },
+    {
+      "command": "Independent temporary loose-manifest and real-archive external-harness CPU repros",
+      "exit_code": 0,
+      "result": "Both false positive formal_validity outcomes confirmed",
+      "phase": "initial_before_provenance_fix"
+    },
+    {
+      "command": "Evaluate current exact held-out summary guard AST with empty coverage",
+      "exit_code": 0,
+      "result": "False positive equivalent_speedup_claim_supported=True confirmed",
+      "phase": "initial_before_provenance_fix"
+    },
+    {
+      "phase": "after_provenance_fix",
+      "command": ".venv/bin/python -m pytest -q tests/test_experimental_service.py tests/test_ds_experiment_harness.py tests/test_execution_failures.py tests/test_recovery_cost_policy.py tests/test_hybrid_speculative.py tests/test_ds_scheduler.py tests/test_service.py",
+      "exit_code": 0,
+      "result": "111 passed in3.27s"
+    },
+    {
+      "phase": "after_provenance_fix",
+      "command": ".venv/bin/python -m pytest -q -m 'not metal'",
+      "exit_code": 0,
+      "result": "228 passed,41 deselected in6.22s"
+    },
+    {
+      "phase": "after_provenance_fix",
+      "command": ".venv/bin/ruff check .",
+      "exit_code": 0,
+      "result": "All checks passed"
+    },
+    {
+      "phase": "after_provenance_fix",
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "No whitespace errors"
+    },
+    {
+      "phase": "after_provenance_fix",
+      "command": "Independent actual47file freezer, original negative repros, explicit legacy archive and extracted-runtime verification",
+      "exit_code": 0,
+      "result": "All controls passed; sanitized details in phase2-ds-freeze-independent-control.json"
+    }
+  ],
+  "notes": [
+    "An initial mistyped test command referenced nonexistent test_recovery_cost.py/test_ds_policy.py and ran no tests; it was corrected before all successful results above.",
+    "No implementation source changed by reviewer; only these review/verification evidence JSON files were written."
+  ],
+  "acceptance": "Four original findings independently resolved. CPU experimental-service/harness changes approved for fresh frozen GPU verification. No new real-model correctness/maturity/performance conclusion.",
+  "initial_verification_source_sha256": {
+    "src/deepinfer_mac/server/app.py": "8c76382db195dcf4fa8fbc0700fa6d08830268bc724b024c864b9c62a9a6d8d0",
+    "src/deepinfer_mac/engine.py": "dce5e20bfd130b3110c38e3515487e9c0d29aa94daa9f29d02857a770dc8af53",
+    "benchmarks/experiments/deepinfer_service_server.py": "65396207795c430a591c66f432c2ba1d1cfbb9dc235a0ace5ff5df31ed5bf18c",
+    "benchmarks/experiments/ds_budget_ablation.py": "bad87df2ce177f159750205afb3dc040fb51583f062dedea2f234e8623353841",
+    "benchmarks/experiments/hybrid_lagged_probe.py": "9ded6e0ccfb8e7239584e68fef6b278a9eb7c45ef8fdc115ea3c6a32e783ecdf",
+    "benchmarks/experiments/verify_lagged_trace.py": "dac5dfcd531db17a161abbc4dd84ba340e9b23b2779e33c4742160093846bd71",
+    "scripts/freeze_ds_source.py": "8c512c80c882ea8e7bebdb2f0847ad3691613150cac39db7c0de3ed2886cdeff",
+    "tests/test_experimental_service.py": "43cb2d3e1e0d1c8b7c7984f212bd3bc688d398d2aef27dbce97def23f27cf682",
+    "tests/test_ds_experiment_harness.py": "63ab47c3b9a7d9e5e74c5b52ad57de625b2c7d9751a46f511e2fab8049ad1ebb",
+    "tests/test_execution_failures.py": "be1d460c2242b86478174845ddc92ba94199bdbcaa650b8e7cc21de9ec14d5f8",
+    "docs/DS_DESIGN_MAPPING.md": "28c8513476c3224b3ffa78ff4c4e27bada090eacaf190404b256365b30f57fc0"
+  },
+  "rereview_date_utc": "2026-10-21T06:41:54.998731+00:00"
+}

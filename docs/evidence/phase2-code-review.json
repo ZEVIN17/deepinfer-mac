@@ -1,0 +1,90 @@
+{
+  "reviewer": "independent fresh code-quality review, post-phase",
+  "date": "2026-10-21",
+  "scope": [
+    "DS scheduler and unchanged original C++ oracle integration",
+    "Persistent policy recovery after forward failure before first yield",
+    "Speculative generator completion/close/abort state transitions",
+    "Native cached-input suffix ownership and active allocator accounting",
+    "Pinned native cache facade: byte budget, private hook, hybrid exact snapshots, tail contract",
+    "Cache timing metric scopes"
+  ],
+  "findings": [],
+  "closed_findings": [
+    {
+      "id": "forward-exception-policy-state",
+      "status": "independently_verified_fixed",
+      "evidence": "tests/test_execution_failures.py::test_failed_forward_does_not_poison_persistent_ds_policy covers target-only and draft-forward failures twice and subsequent recovery; code uses cycle_pending only after choose and abort_cycle only for uncompleted cycles. No guessed cache rewind before first yield."
+    },
+    {
+      "id": "native-cache-prefix-double-consumption",
+      "status": "independently_verified_fixed",
+      "evidence": "Native generator is passed tokens[hit:] with the consumed-prefix cache. Portable direct engine behavior test checks suffix [3] and offset 2 for prompt [1,2,3]."
+    },
+    {
+      "id": "cache-physical-memory-double-count",
+      "status": "independently_verified_fixed",
+      "evidence": "Explicit-budget behavioral test checks active100 + reserve2064 within2168 without adding8 logical snapshot bytes already owned by allocator."
+    },
+    {
+      "id": "native-eviction-timing-scope",
+      "severity": "P2",
+      "reported_by": "parent independent review",
+      "status": "fixed_in_this_review",
+      "before": "eviction_ms measured only CacheOrder.pop, excluding native trie.pop and entry release; field could be mistaken for complete eviction cost.",
+      "after": "Renamed to eviction_selection_ms. CacheTimings documents it as ordering-pop subset; write_ms includes cloning/insertion/complete eviction as an indivisible interval. Existing behavioral assertion updated; no mirror timing test added."
+    }
+  ],
+  "validation": [
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "result": "35 passed,34 skipped in2.03s",
+      "gpu": false
+    },
+    {
+      "command": ".venv/bin/ruff check src tests scripts benchmarks/experiments",
+      "result": "All checks passed"
+    },
+    {
+      "command": ".venv/bin/python benchmarks/experiments/verify_ds_trace.py",
+      "result": "42 actual completed cycles,31 recorded DS decisions match unchanged C++ oracle; history_errors=[]",
+      "gpu": false
+    },
+    {
+      "method": "AST-isolate and execute actual locked cache.py PromptTrieResult/PromptTrie/LRUPromptCache class bodies with host-only state objects; do not import mlx. Exercise facade against actual native trie/eviction implementation, not the test double.",
+      "result": "Common-prefix trim, exact-hit final input, snapshot isolation, logical byte eviction and earlier nontrimmable snapshot replay passed.",
+      "gpu": false
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_native_cache.py tests/test_execution_failures.py tests/test_ds_scheduler.py && .venv/bin/ruff check src tests scripts benchmarks/experiments",
+      "result": "Post metric rename:14 passed in1.39s; All checks passed",
+      "gpu": false
+    }
+  ],
+  "source_and_semantics": {
+    "original_cpp_header_sha256": "164f45db4cccd6d6909dd2846e7dfffb57754b108af679443bf4bd71ec33785a",
+    "oracle_boundary": "shim substitutes Sequence/TORCH_CHECK only; unchanged header determines expected scheduling and runtime-estimator results",
+    "runtime_float_semantics": "Float32 startup curve/rate/expected-yield accumulation; double runtime medians/residuals, strict throughput improvement and sequence-index tie order correspond to original source.",
+    "native_private_api": "_lru.pop hook matches installed pinned MLX-LM0.32.2. Private hook remains a version-coupling limitation; native trie owns pruning and total-budget eviction.",
+    "tail_contract": "At least one input token remains unconsumed; trimmable exact hits rewind1 on a deep-copied request state; nontrimmable full exact hits ask for an earlier snapshot. No hybrid arbitrary trim."
+  },
+  "remaining_limits": [
+    "No GPU or actual-model quality run performed by this reviewer;34 opt-in Metal tests remain outside this independent portable review.",
+    "9B hybrid model DS execution and two-engine performance superiority remain unverified; source correspondence and oracle success are not acceleration evidence.",
+    "Cache byte budget is logical admission accounting; future-KV estimate is conservative reserve, not a hard physical peak guarantee.",
+    "Cache lookup timing contains native clone/trim and write timing contains complete insertion/eviction; these intervals must not be described as separately measured GPU or total eviction times.",
+    "Private native eviction hook depends on locked MLX-LM interface; dependency updates require revalidation."
+  ],
+  "reviewed_file_sha256": {
+    "src/deepinfer_mac/policy.py": "25dbbac857e2f7a1fdc0e0956a90b31eca1661b9f0ce1b51b07ab35479313d43",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/engine.py": "180d7e040e20e7ebc556713cc5e4c567accf14a38649ad462274d343a69a144c",
+    "src/deepinfer_mac/cache.py": "d4b4de5b54325dbb2fd5daa254c3e169cd6a7af005aacb75bd2df6d8014db709",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "tests/test_execution_failures.py": "d3452655f06bdc575d22f709ecf5f388463af4c11f18c2034896629ce8163cd6",
+    "tests/test_speculative_metal.py": "4a7c4fe9c6e4d7d148d99ede920585fb20dcd60e37230d2b7044334713626acf",
+    "tests/test_native_cache.py": "c8d816be535807fa002a2dc6f60ef3b59e0e7535c81f620dc7c9ee75a89dfd3b",
+    "tests/reference/vendor/mtp_varlen.hpp": "164f45db4cccd6d6909dd2846e7dfffb57754b108af679443bf4bd71ec33785a",
+    ".venv/lib/python3.12/site-packages/mlx_lm/models/cache.py": "c96cb169fd5e0ec4584a162dd61dc62ab08ccdca03a9850f8a491ce6809145e6"
+  }
+}

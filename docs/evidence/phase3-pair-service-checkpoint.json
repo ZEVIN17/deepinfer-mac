@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "scope": "Scoped distinct pretrained pair and experimental joint service checkpoint; no general superiority or release acceptance",
+  "base_commit": "0b1d834ae1dd52d17076b709032faba3bc399200",
+  "files_sha256": {
+    "benchmarks/experiments/phase3_pair_cost.py": "73b1bc7280fc5dab34c89e0d5ccc2506a3446fcccb9c9aebef4d01cce659c6ac",
+    "benchmarks/experiments/phase3_pair_export.py": "4035efebb9ac413ffdc307ade05eacdeea244729de30f639c265f46a539c8d84",
+    "benchmarks/experiments/phase3_pair_workload_manifest.json": "f355eb44cdeedb8d02ad90b3fe1963503afd95c71d0913e8c7b27967aeef7bed",
+    "benchmarks/experiments/phase3_verify_joint_service.py": "8cdd70147f4c55ce8d86f118ea2307ed82e6c44987da4705e908a7f04dc9c6e5",
+    "benchmarks/reports/phase3-joint-service.json": "4e6becd36c91e674a7882dfe76893a5c6802fa5cc038d5879136b6a199617563",
+    "benchmarks/reports/phase3-pair-cost-development.json": "686e85bbdc83b455eb694fa47c7b98a9ecb6079e23520ae6124bdf3c38ff225d",
+    "benchmarks/reports/phase3-pair-cost-heldout.json": "d5fef81c4c84e7c1f730739194f194fc492a0d5a8c84981b6c74421bfd686bf6",
+    "docs/DS_DESIGN_MAPPING.md": "4f1e4a33e3f1461633692c7670b4026fc53587ac8027630752f931e7f0e95c08",
+    "docs/JOINT_VERIFICATION.md": "0c429d4e14289271d2595fb1848409e4fc92deef461a437500ab4b1979c66d79",
+    "docs/PAIR_COST_EXPERIMENT.md": "a829fbed38a99d421672cf32934aae2c3988aa978e3fdad47e8894fa670d6ffe",
+    "docs/PROGRESS.md": "544c7e2102b1262861d57c339f1ea7ef2bb55d1e4749387cd56e2ebb31497b9c",
+    "docs/evidence/phase3-joint-service-code-review.json": "6a8b29e39fef8b1b1be7e1e3d00c60f72555135933743c91753c6873867ab6e0",
+    "docs/evidence/phase3-joint-service-verification.json": "5f97947f04256f4654dfdc1385172ac6413f0ecc1e3a9eb9e584002c0e32fae3",
+    "docs/evidence/phase3-pair-cost-experiment.json": "043a179d76a9146ab48b668ca430f06a08a0cba17de213e72fd6bf50de44e97a",
+    "docs/evidence/phase3-pair-export-verification.json": "fc8c771b22fb95f81f697fa688062d10f278639b09be776cdb4dfa634a82eb86",
+    "docs/evidence/phase3-pair-service-anti-pattern-check.json": "1505f4abe820f1a34f73e18496621e1a4c73b0748545bb311fd1de94e027453c",
+    "docs/evidence/phase3-small-pair-audit.json": "f2a764ae644031a12d31493a6758fa34c16db3da8e6f3a85220535e085a71272",
+    "docs/history/PROGRESS_PHASE3_JOINT_20261021.md": "57edd9c0349156512f6ec0916f80ecf0caf0a2e8a5e47d3583aec19c53ac0c50",
+    "examples/models/research-smollm2-360m-6bit.local.json": "7d45869fef650cb86bfb3f1bba8e83d9055a4bc37ba25ca95f449b1665e47246",
+    "examples/models/research-smollm2-360m-6bit.repo.json": "2ec21f6c966061f76496a4cf5e2b065c495129ac18052b46ea6d8d8d67b6e856",
+    "examples/models/research-smollm2-pair.local.json": "e1757d5395dc5944b9ed32a76ccc48d47ac4d36c87a81901a97153d2715a5f04",
+    "examples/models/research-smollm2-pair.repo.json": "0d09863fc977e3641f9463dd96008ed397ebd39af513cf5563a47ad2945c28fd",
+    "src/deepinfer_mac/cli.py": "49fd07ff106aca8721a474575730c841bacf4251806b3a3e524e0aa2d35fdb14",
+    "src/deepinfer_mac/joint_service.py": "3aa522efe7094a91f01e62dce7875113e4988165942b7c2d84663e73611bf5c6",
+    "src/deepinfer_mac/server/app.py": "b865ea8c6aec37b32363720959827ddcfaa5618cc932a41c068782a72b11b0d0",
+    "src/deepinfer_mac/server/continuous_worker.py": "a30d2204c76e1e019560c986800b89f449ff818b3d9c62c621a1fc6d557c95d0",
+    "src/deepinfer_mac/server/joint_worker.py": "429634ae3a08199448b455bba19db451b13ded140468802273890396a2f99d16",
+    "tests/test_joint_service.py": "eb8aa3519123b6f8ff052ea328c668156c9e0e1e6ea4e27a3254900e2f9df74d"
+  },
+  "source_reviews_verified": [
+    "docs/evidence/phase3-joint-service-code-review.json",
+    "docs/evidence/phase3-joint-service-verification.json",
+    "docs/evidence/phase3-pair-service-anti-pattern-check.json"
+  ],
+  "tests": {
+    "portable_passed": 330,
+    "metal_passed": 48,
+    "actual_service_checks_passed": 35,
+    "actual_service_checks_total": 35,
+    "heldout_native_matches": 10,
+    "heldout_native_comparisons": 10,
+    "rerun_at_checkpoint": {
+      "portable": "330 passed, 48 deselected in 9.82s",
+      "ruff": "All checks passed",
+      "metal": "not rerun; source-bound independent evidence retained"
+    }
+  },
+  "gates": {
+    "scoped_service_functional": true,
+    "calibrated_api_curve": false,
+    "competitive_performance": false,
+    "release_ready": false
+  },
+  "sanitization": {
+    "private_paths_absent": true,
+    "generated_token_arrays_absent_from_public_reports": true,
+    "weights_excluded": true
+  },
+  "candidate_source": "766d6e1ac58622712a5e1394962b2bdd254f47cf"
+}

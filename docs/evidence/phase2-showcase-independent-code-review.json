@@ -1,0 +1,31 @@
+{
+  "status": "approved_after_fix",
+  "date": "2026-10-21",
+  "role": "fresh independent code/content review",
+  "source_sha256": {
+    "site/build.py": "a5098afea6e03c368719b95cfa377021b32d4a5c33f7d5b4f0764354dd45f560",
+    "site/check.py": "2559216f56e11442dbf743d78cec27d398c47e393a3f8b6b9d4c8fd5aa0d3af4",
+    "site/README.md": "0f2f1dd6c47cc2867fa6d1b4df58fee3da4e21fde64079aa171ff8b4452fe818",
+    "site/assets/style.css": "d07705d7e3c50dd2bb8dcf0e50b4aba580eb0c49133e4b8ac1c3494701151346",
+    "site/assets/showcase.js": "44bd77bb34f2987d15bd9e9c0234239943235e429e5e447ac750e2a756e94cd6",
+    "site/data/phase2/manifest.json": "6c1cd9179f6ec16176bc400b8aa49f08fa01f78543f430bc1302be917e165c60"
+  },
+  "findings": [
+    {
+      "id": "P2-publication-closure",
+      "status": "resolved",
+      "original": "Builder depended on Phase2 root reports/docs/locks unavailable or stale on alpha main. A site-only deployment would fail or misattribute evidence.",
+      "fix": "Self-contained exact9-member site/data/phase2 bundle; all report/screenshot members independently equal gitshow66ae444; technical documentation uses immutable commit permalinks; standalone main+site-only build matches artifact."
+    }
+  ],
+  "open_findings": [],
+  "checked": [
+    "Every headline uses actual report values:28/28 C++ matches and128-token equality in one development trace;20 requests and16 equality checks in one2K session;4204+256 in one baseline resource check with0 observed system swap increase.",
+    "Prefix512→2014 is token coverage, not measured latency or competitor speedup.",
+    "DeepInfer-derived scheduler attribution separated from MLX execution/nativeLRU and Mac hybrid recovery. Explicit experimental path and default baseline retained.",
+    "Actual baseline SSE content/timestamps extracted verbatim. Replay labelled recording with presentation-speed controls. No fabricated token timing or ITL.",
+    "207 responses are not presented as all passed; no public test-total or framework-superiority claim added.",
+    "Install/API/CLI entry points match experimental branch and actual defaults; no model GPU commands run during review.",
+    "No root engine, lock, research record, original alpha artifact or historical site/data byte altered by the site revision."
+  ]
+}

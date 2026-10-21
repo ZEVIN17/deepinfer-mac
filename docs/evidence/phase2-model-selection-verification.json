@@ -1,0 +1,202 @@
+{
+  "recorded_at_utc": "2026-10-21T07:49:18.325818+00:00",
+  "reviewer": "fresh independent commit_publish verification agent",
+  "gpu_used": false,
+  "model_weights_read": false,
+  "network_used": false,
+  "source_sha256": {
+    "benchmarks/quality/dev_budget_sensitivity.py": "0e94eb5ad1cb14d7c2da62beddc2be5951212421b7254f3988e279d0ad94be98",
+    "tests/test_dev_budget_sensitivity.py": "53ccde683fadff84a1d0455c2c31b5023d69f78f4dec5952e648d8194533fe49",
+    "src/deepinfer_mac/models.py": "d63034aa76278cb17aa352bb0acfcf48b85033533475b114cec0b96210492dfb",
+    "models.lock.json": "eb547e463a336aeded0499070cde26beabff4aee2bd43bccd0e1f2dc92cb904a",
+    "src/deepinfer_mac/models.lock.json": "eb547e463a336aeded0499070cde26beabff4aee2bd43bccd0e1f2dc92cb904a",
+    "docs/PHASE2_MODEL_SELECTION.md": "fb3f9a0bc9de778b7f5734bf19406cd380c30dd466a98b6be55d7e5002798a02",
+    "docs/PHASE2_QUALITY_PROTOCOL.md": "e7d85c4f86fa7fecbd28819790b8ab5603223a87515ffeda8b33eb6abfa0d7a2",
+    "docs/PROGRESS.md": "36180c8d234d95c49e731d0ad066fb82b4cd536db609ea9693356989bc8744c6",
+    "benchmarks/reports/public-quality-dev4096-budget-sensitivity.json": "e6d2aa5356f96b26154c387961f5fa27b11493e76b620fcc2022a1d51d96e927",
+    "benchmarks/reports/public-quality-dev4096-mmlu-format-sensitivity.json": "fdd38784643323f840b892be5b08dbfec7e26cbee4d9f2e6fcc1156bc72221f9"
+  },
+  "status": "passed",
+  "scope": "Completed model-selection evidence and development4096 budget sensitivity; no framework performance validation",
+  "recomputed": {
+    "status": "passed",
+    "public_dev_responses_rescored": 207,
+    "budget_responses": 18,
+    "all_full_old_prefixes_exact": true,
+    "all_pairs_same_prompt_model_sampling_seed": true,
+    "runtime_source_tree_sha256": "7869e4f997ac88296999594e826b63db9b0b77653051afdaac341e74d6f61fea",
+    "all_public_dev_sources_unchanged": true,
+    "all_raw_hashes_unchanged": true,
+    "archive_filemaps_verified": {
+      "41ac6d02ae078c76889a202ceeadddbc6211080b25fc0917b83a287e6eef5c17": {
+        "archive_sha256": "1b928104acee51f742b8be4893b2804cfac59779aa79904395dad13f351a09d4",
+        "files": 47
+      },
+      "dee36398e97f115edee1b776998dee65daa95c0034e691b546c9d0be79481586": {
+        "archive_sha256": "d97b48ea15455319a68ecde1b1d3183a565413299894a775d67c0e3bb9d5d62f",
+        "files": 47
+      },
+      "d9f238c911c364dc429dc4dd134da7a625f71e3502124d3b472511d196da02bd": {
+        "archive_sha256": "9f30bbf882b946e6bfac73d522a94bbd9b42684611d062fac1cf44ebbab6b875",
+        "files": 48
+      }
+    },
+    "development_pass_finish_cost": [
+      {
+        "profile": "qwen3.5-9b-8bit",
+        "setting": "greedy_engine",
+        "tasks": 3,
+        "old_passes": 2,
+        "new_passes": 3,
+        "normal_stops": 3,
+        "length_stops": 0,
+        "total_seconds": 215.44356499996502
+      },
+      {
+        "profile": "qwen3.5-9b-8bit",
+        "setting": "official_engine",
+        "tasks": 3,
+        "old_passes": 1,
+        "new_passes": 2,
+        "normal_stops": 3,
+        "length_stops": 0,
+        "total_seconds": 295.9772076669615
+      },
+      {
+        "profile": "qwen3.5-9b-4bit",
+        "setting": "greedy_engine",
+        "tasks": 3,
+        "old_passes": 0,
+        "new_passes": 0,
+        "normal_stops": 1,
+        "length_stops": 2,
+        "total_seconds": 241.55114733299706
+      },
+      {
+        "profile": "qwen3.5-9b-4bit",
+        "setting": "official_engine",
+        "tasks": 3,
+        "old_passes": 0,
+        "new_passes": 2,
+        "normal_stops": 3,
+        "length_stops": 0,
+        "total_seconds": 131.50281574891414
+      },
+      {
+        "profile": "qwen3-14b",
+        "setting": "greedy_engine",
+        "tasks": 3,
+        "old_passes": 0,
+        "new_passes": 0,
+        "normal_stops": 3,
+        "length_stops": 0,
+        "total_seconds": 52.08133383409586
+      },
+      {
+        "profile": "qwen3-14b",
+        "setting": "official_engine",
+        "tasks": 3,
+        "old_passes": 0,
+        "new_passes": 0,
+        "normal_stops": 3,
+        "length_stops": 0,
+        "total_seconds": 68.62646495795343
+      }
+    ],
+    "dev_swap": {
+      "min_bytes": -241893376,
+      "max_bytes": 0,
+      "negative": 9,
+      "zero": 9,
+      "positive": 0
+    },
+    "smoke_responses": 144,
+    "smoke": [
+      {
+        "profile": "qwen3.5-9b-8bit",
+        "responses": 48,
+        "pass_counts_per12": {
+          "greedy_engine": 10,
+          "greedy_native": 10,
+          "official_non_thinking": 11,
+          "official_thinking": 9
+        },
+        "greedy_native_token_equal_tasks": 12,
+        "unfinished_thinking": 3,
+        "source_unchanged": false,
+        "raw_sha256": "4992b9d5b2fe67ceee1de6403b2133b1dc914b9d89de94af9d139c30be21cee1"
+      },
+      {
+        "profile": "qwen3.5-9b-4bit",
+        "responses": 48,
+        "pass_counts_per12": {
+          "greedy_engine": 11,
+          "greedy_native": 11,
+          "official_non_thinking": 9,
+          "official_thinking": 7
+        },
+        "greedy_native_token_equal_tasks": 12,
+        "unfinished_thinking": 4,
+        "source_unchanged": true,
+        "raw_sha256": "599b89197ce54cb80c26830c1d4ad9b89b825adea22b5320789ced5ff005a130"
+      },
+      {
+        "profile": "qwen3-14b",
+        "responses": 48,
+        "pass_counts_per12": {
+          "greedy_engine": 10,
+          "greedy_native": 10,
+          "official_non_thinking": 10,
+          "official_thinking": 10
+        },
+        "greedy_native_token_equal_tasks": 12,
+        "unfinished_thinking": 0,
+        "source_unchanged": true,
+        "raw_sha256": "45d1a4457dbc1d146ea701616052bc526dae2e18f5f50d217ac3ec05f79f04ab"
+      }
+    ],
+    "models_py_metadata_only": true,
+    "locks_byte_identical": true,
+    "lock_sha256": "eb547e463a336aeded0499070cde26beabff4aee2bd43bccd0e1f2dc92cb904a",
+    "pins_generation_operational_settings_unchanged": true,
+    "tasks_sha256": "0ec76d1676ef5e75b40fba75b5bcbd7fd3578c5df4207c384162b2cc91185260",
+    "raw_report_sha256": [
+      "3cc2606ef883a66d5b6a826ba4f9435cda5a6a1b043e38376d943ca711c4621c",
+      "8442257058adcc5382798f56e1a219a67e77a1b9db9b85b9fc851c61c589c3a7",
+      "710e51d6613f9909f10c6b7202ebc75b70072469d9ae81e1071791d5e7b6d1fa",
+      "4dd3b7b169ce0cd88de00b0857350a53b63a826282009e2bb4095af790365e69",
+      "347c55957ee9a8f8c13e88feda15e2719def17dfaa10b3e3bc4509ab92c103e1",
+      "d3d5b0aa4425e001f080de8f68a73b01383a387f4414dd339973e7b54e613edc",
+      "fea61aaa06793bd3b3dc70335b4d889824faf67c050bb1aefd4ed1bb750f59f2"
+    ],
+    "reviewer_used_gpu": false,
+    "reviewer_read_model_weights": false
+  },
+  "commands": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_dev_budget_sensitivity.py tests/test_quality_compare.py tests/test_model_quality_protocol.py tests/test_mmlu_format_sensitivity.py tests/test_engine_core.py",
+      "result": "36passed in0.12s"
+    },
+    {
+      "command": ".venv/bin/ruff check benchmarks/quality/dev_budget_sensitivity.py tests/test_dev_budget_sensitivity.py src/deepinfer_mac/models.py",
+      "result": "All checks passed"
+    },
+    {
+      "method": "Replayed original frozen CPU scorer for207public/dev responses, independently reconstructed18full token-prefix/control/cost pairs, checked all raw before/after SHA and three source archive member maps.",
+      "result": "207pass/status values match retained scores;18/18full original sequences exact prefixes;no raw mutation"
+    },
+    {
+      "method": "Recount144local smoke records and36greedy/native task pairs; no reannotation of Chinese Codex rubrics",
+      "result": "All documented counts, token equality and3/4/0unfinished thinking records match"
+    },
+    {
+      "method": "Recomputed separate devMMLU format sensitivity on all18new responses",
+      "result": "12MMLU rows and6non-MMLU records match;primary strict scores remain unchanged"
+    }
+  ],
+  "limits": [
+    "Initial9B8smoke source_start and source_end differ; it is historical adaptation evidence, not a frozen cross-model equivalence benchmark. Later9B4/14Bsmokes and all207public/dev source records are stable.",
+    "Chinese pass labels are Codex rubric annotations, not independent human ground truth; this review checks faithful reporting and preserves rubric ambiguities.",
+    "No full model rehash, new generation, throughput comparison, stress proof, capability equivalence or overall ranking performed."
+  ]
+}

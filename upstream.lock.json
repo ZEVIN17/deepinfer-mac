@@ -5,13 +5,40 @@
     "repository": "https://github.com/deepseek-ai/DeepInfer",
     "commit": "774ce244b87cc0eb8d4b94ab9f5de2ab22049f01",
     "license": "Apache-2.0",
-    "use": "design reference; one unchanged reference-only C++ header, not linked or executed",
+    "use": "MTPVarlen design reimplemented in portable Python production scheduler; unchanged C++ header executed only as independent test oracle",
     "files": {
-      "csrc/engine/mtp_varlen.hpp": {"git_blob_sha": "09af680aa42b724fe86315007a160d5012a1fde9", "local": "tests/reference/vendor/mtp_varlen.hpp"},
-      "csrc/engine/sequence.hpp": {"git_blob_sha": "82db540046750a66de40f915240f5423b2148f2f", "local": null, "note": "not vendored; required by reference header; header is not a runnable test"}
+      "csrc/engine/mtp_varlen.hpp": {
+        "git_blob_sha": "09af680aa42b724fe86315007a160d5012a1fde9",
+        "local": "tests/reference/vendor/mtp_varlen.hpp"
+      },
+      "csrc/engine/sequence.hpp": {
+        "git_blob_sha": "82db540046750a66de40f915240f5423b2148f2f",
+        "local": null,
+        "note": "not vendored; independent minimal test-only Sequence boundary in tests/reference/shim/sequence.hpp allows unchanged MTPVarlen oracle compilation"
+      }
     },
-    "documentation": ["doc/inference_deployment_qa.md", "README.md"]
+    "documentation": [
+      "doc/inference_deployment_qa.md",
+      "README.md"
+    ]
   },
-  "mlx": {"repository": "https://github.com/ml-explore/mlx", "version": "0.32.4", "commit": "36969c094354086e15d2a327a9c50feb20b9cf11", "license": "MIT", "use": "runtime dependency"},
-  "mlx_lm": {"repository": "https://github.com/ml-explore/mlx-lm", "version": "0.32.2", "commit": "93e6d4a6447b3080861985947f0820e76fcb957d", "license": "MIT", "use": "runtime dependency and isolated speculative loop adaptation", "reference_files": ["mlx_lm/generate.py", "mlx_lm/models/cache.py", "mlx_lm/utils.py"]}
+  "mlx": {
+    "repository": "https://github.com/ml-explore/mlx",
+    "version": "0.32.4",
+    "commit": "36969c094354086e15d2a327a9c50feb20b9cf11",
+    "license": "MIT",
+    "use": "runtime dependency"
+  },
+  "mlx_lm": {
+    "repository": "https://github.com/ml-explore/mlx-lm",
+    "version": "0.32.2",
+    "commit": "93e6d4a6447b3080861985947f0820e76fcb957d",
+    "license": "MIT",
+    "use": "runtime dependency and isolated speculative loop adaptation",
+    "reference_files": [
+      "mlx_lm/generate.py",
+      "mlx_lm/models/cache.py",
+      "mlx_lm/utils.py"
+    ]
+  }
 }

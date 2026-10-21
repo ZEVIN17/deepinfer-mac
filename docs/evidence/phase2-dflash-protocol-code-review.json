@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-21",
+  "reviewer": "dflash_protocol_review",
+  "base_commit": "65b2ce1c3e7cea361bcde5e873f12640a700a210",
+  "status": "approved_after_fixes",
+  "reviewed_source_and_tests_sha256": {
+    "benchmarks/experiments/prepare_service_compare.py": "c324c7ea1648caa1240ee628c787b2677cf7dd4e4e960dcafb72794216cb9fdc",
+    "benchmarks/experiments/rotate_service_compare.py": "03b5cafdd818b1ca333be1973966ed5b48b1caf1ee0dca969224f2c43e415f57",
+    "benchmarks/experiments/service_inventory.py": "bc81091a0a7976436eb22f23f17da8730c5a3eaa8c0c7b739f0d37ae9231c070",
+    "benchmarks/experiments/service_source_freeze.py": "02d5ba0445376b5d4faf1bea32d1b4be3eecb82b52c562ee08bde3bc979270ed",
+    "benchmarks/experiments/summarize_service_compare.py": "770384ebdee2cfa44632bf04aed4ff7f7eb5671f24f4de7b1b3b4ae99ba8b310",
+    "benchmarks/experiments/public_service_report.py": "b5c2d431ee6b108501ccb3f25136c9f822e8f918c61d2cc2d5c0e202cb3c6ea5",
+    "benchmarks/experiments/service_dev_selection.py": "de2be77ca7e424acecbde5c843b1b8597fde2d52df1f8d300c33a10500179815",
+    "benchmarks/experiments/service_resources.py": "23c1fd484b891a38aee7ff4516b66bc5359e2bac5bc6626bded04dca54e3aff8",
+    "benchmarks/experiments/omlx_dflash_protocol.py": "249024af7b61c1967e38e3db11623d7f261d14e0ad54ae0f0b36c6b90eacb2c0",
+    "benchmarks/experiments/omlx_dflash_audit_server.py": "9dc20134c4cf5b28347360e514a3c7c7feb8d956d212fd1eabe021a370685be0",
+    "benchmarks/experiments/omlx_dflash_compat_probe.py": "d440b6e7fc1060104614265b709faeb0d1a394e2a00e7ddfb5059847e93a3a39",
+    "benchmarks/experiments/summarize_omlx_dflash_compat.py": "e346fe89a9af4c3090287bd3fe880d4866ff7e0238f7eb4355d52b44c45e6000",
+    "tests/test_omlx_dflash_protocol.py": "334598a636f3fd51e082252bb1e2c20cdea425edb7d427a5a615bd316c426c90",
+    "tests/test_service_dev_binding.py": "25f080b91a99fb2bc21b75fe752e718f9d9fde8e26a9c64831170828bfd67847",
+    "tests/test_service_protocol_v3.py": "3823df2e8a2b444b1aa578348931d0adb01df5ef00050ea760b02439c15b96d8"
+  },
+  "approval_scope": "CPU implementation, source/configuration provenance and fail-closed measurement gates. This does not approve4K DFlash resource admission or establish any speed superiority.",
+  "gpu_executed_by_reviewer": false,
+  "unresolved_findings": [],
+  "resolved_findings": [
+    {
+      "id": "P2-DEV-BINDING",
+      "status": "resolved",
+      "problem": "Formal selection originally trusted claimed selected IDs without binding actual dev raw, settings, corpus, admitted lengths or source.",
+      "resolution": "Recompute selection from immutable private raw plus public summary SHA; bind all formal tuning groups including baseline oMLX, full flags/guard/chunk/draft identity, manifest/context/resource policy and unchanged source/environment. A bridge note cannot bypass drift. Missing portable binding disables target."
+    },
+    {
+      "id": "P2-RESOURCE-EVIDENCE",
+      "status": "resolved",
+      "problem": "Resource eligibility accepted incomplete request sample inventories; preflight initially trusted a candidate label rather than effective settings and completion.",
+      "resolution": "Exactly one outside-timing sample per scored request and complete lifecycle are mandatory; preflight requires actual completed no-fallback Q4/group64/B5/full execution, matching guard tier,4204+256 task geometry, no swap growth and headroom. All real negative probes stay rejected."
+    },
+    {
+      "id": "P2-PUBLIC-PRIVATE-BINDING",
+      "status": "resolved",
+      "problem": "Aliasing dev paths could prevent legitimate formal preparation, expose private paths or invalidate public coherence digests.",
+      "resolution": "Private raw plus sanitized summary with raw SHA; selection uses stable path-free identity fields. Exact raw/summary aliases and recomputed public coherence digest preserve private execution bytes. Negative controls cover drift and public transformation."
+    }
+  ],
+  "code_review_checks": [
+    "Ordinary oMLX performance wrapper invokes the official0.7.1 CLI without diagnostic monkeypatch flags.",
+    "Only bounded Q4/group64 block4/5 adaptive/full candidates plus default baseline enter the oMLX dev tuning group; stronger valid winners cannot be dropped before heldout.",
+    "Exact trained checkpoint pin, complete file SHA checks and official quantization/load/attach/verify log evidence prevent silent baseline fallback.",
+    "Source archive/member map, actual frozen helper/import paths, commands/cwd/PYTHONPATH, settings/draft/resource/dev evidence and interpreter bytes are bound and rechecked outside timing.",
+    "Complete inventory and balanced heldout order remain necessary for target flags; dev selection cannot become a competitive result."
+  ],
+  "installed_official_log_formats_checked": [
+    "omlx/speculative/dflash/__init__.py: quantization and successful load",
+    "omlx/engine/batched.py: successful trained-draft attachment",
+    "omlx/patches/mlx_lm_mtp/batch_generator.py: completed actual verify counters",
+    "omlx/engine_pool.py: load exception soft-fallback marker"
+  ]
+}

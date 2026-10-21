@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "dense_fastpath_opt_in_development_checkpoint",
+  "base_commit": "007fe35e24480d1f1d2c924556ff87ccd890a93f",
+  "source_and_evidence_sha256": {
+    "src/deepinfer_mac/varlen_verify.py": "a006535e63d8f51cbeacf020977c7ddc77df7e8f4a81b0d90901ff90f8b85686",
+    "tests/test_dense_fastpath.py": "3a56089c1f62aa2392ff7a3a17debb6b8a1b68ac9d64bd7c0bf57c0949d30c5b",
+    "tests/test_dense_fastpath_metal.py": "6c66035294cd1ff208ee7fa475e8710b20c58d3c4fd7db521940f02cf2c069f7",
+    "docs/JOINT_VERIFICATION.md": "2a85c8f459b42cbe0a54c174482eca95b46b398dacbd7e23e8415ba59be79e85",
+    "benchmarks/experiments/phase3_dense_fastpath.py": "1e2add489e6e59f222d522291484f9b06ce5652722ba957454d9d6e62c00311d",
+    "benchmarks/experiments/phase3_dense_export.py": "fb8b4857eb79a23916b1b1008ea845bf8c3a72bdea9177bb0d99190912e8cd0b",
+    "benchmarks/experiments/phase3_dense_workload_manifest.json": "119c5278b0c1d4f2b3252cee523c718eba50e0ce9bced75cf791765d9e6b2bd5",
+    "docs/DENSE_FASTPATH_EXPERIMENT.md": "0e250991cbd1361f739da79ac32e739444ff77360ef7c449571c99ca8f14b926",
+    "benchmarks/reports/phase3-dense-fastpath-development-first.json": "4dafd3ad498bfa5452b8d2130f9189c7d3d9a11b302890550c7dc433b734e14b",
+    "docs/evidence/phase3-dense-fastpath-code-review.json": "1367fb5ca6c08db38fd4fa450fb56a01d03d5d5d0c3d2a1084687e35b5c7d652",
+    "docs/evidence/phase3-dense-fastpath-verification-first.json": "fef423be108312822b7885d5161e8786944e974e70fcc811d305c6bf454c1521",
+    "docs/evidence/phase3-dense-fastpath-anti-pattern-check.json": "ee85501be64cc416d5ea427d677d670e70f9749dce41ef5f7735d725215c07bd",
+    "docs/PROGRESS.md": "ee7d38d37a1737be0ebdce49985707e290b1d7c887b8c99fac2981afe814d88f",
+    "docs/history/PROGRESS_PHASE3_PROFILE_20261021.md": "d96e510df41557af65860aa472730e8160b4e3db7eccbd9739453a020c050fa3"
+  },
+  "previous_progress_sha256": "d96e510df41557af65860aa472730e8160b4e3db7eccbd9739453a020c050fa3",
+  "source_review_passed": true,
+  "portable_tests_passed": 338,
+  "actual_metal_tests_passed": 76,
+  "native_output_matches": 20,
+  "native_output_total": 20,
+  "argmax_offset_pass": 40,
+  "strict_next_logits_pass": 0,
+  "next_state_total": 40,
+  "strict_runtime_accepted": false,
+  "performance_advantage_proven": false,
+  "release_ready": false,
+  "limits": [
+    "Default off; dense audited KVCache pairs only.",
+    "One development process; native serial is not a same-batch performance control.",
+    "Full-prefix strict numerical check fails all controls including original baseline; tolerance unchanged.",
+    "V2 harness unexecuted and excluded. New heldout requires frozen selection and at least three independent processes.",
+    "No main merge, tag, release, service change or website deployment."
+  ]
+}

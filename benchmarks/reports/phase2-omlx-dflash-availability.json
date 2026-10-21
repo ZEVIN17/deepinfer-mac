@@ -1,0 +1,429 @@
+{
+  "schema_version": 1,
+  "audit_date_utc": "2026-10-21T06:54:45.143687+00:00",
+  "scope": "Official-source availability and on-disk checkpoint audit. No GPU model loading, generation, equivalence, or latency measured in this report.",
+  "status": "downloaded_sha_verified_nominally_compatible_runtime_validation_pending",
+  "draft": {
+    "repo": "z-lab/Qwen3.5-9B-DFlash",
+    "revision": "5fc3b3d474760f18c516db87d84c37edbfd3ede6",
+    "license": "apache-2.0",
+    "declared_base_model": "Qwen/Qwen3.5-9B",
+    "kind": "trained_dflash_block_diffusion_drafter_not_standalone_language_model",
+    "files": [
+      {
+        "path": "README.md",
+        "size_bytes": 6722,
+        "sha256": "6c02a17219438a41b03cdffd8d53c41d9225615b1a9eeefcc24360c79ab0dc99",
+        "git_blob_id": "7a5fccdced819212b44f23c128a08c01c242d15e"
+      },
+      {
+        "path": "config.json",
+        "size_bytes": 1222,
+        "sha256": "e68516cac920c0482d26858f21021a1ddd111069a685aa5aaa60ca2c41101bce",
+        "git_blob_id": "1978b9d9484d7e336501619874b89717aa207593"
+      },
+      {
+        "path": "model.safetensors",
+        "size_bytes": 2583816465,
+        "sha256": "0a42274b32554f48de1faa0d42824e9c2ceda649c30ae0a731cddf410dd698c7",
+        "git_blob_id": "8ce400da8a23e67209e7be540533be8db53abc53"
+      }
+    ],
+    "upstream_model_card_url": "https://huggingface.co/z-lab/Qwen3.5-9B-DFlash/blob/5fc3b3d474760f18c516db87d84c37edbfd3ede6/README.md",
+    "status": "downloaded_sha_verified_not_gpu_loaded",
+    "scope": "Experimental competitor manifest only; not part of product registry or model lock",
+    "config": {
+      "architectures": [
+        "DFlashDraftModel"
+      ],
+      "attention_bias": false,
+      "attention_dropout": 0.0,
+      "auto_map": {
+        "AutoModel": "dflash.DFlashDraftModel"
+      },
+      "bos_token_id": null,
+      "dflash_config": {
+        "block_size": 16,
+        "mask_token_id": 248077,
+        "target_layer_ids": [
+          1,
+          5,
+          9,
+          13,
+          17,
+          21,
+          25,
+          29
+        ]
+      },
+      "dtype": "bfloat16",
+      "eos_token_id": 248044,
+      "head_dim": 128,
+      "hidden_act": "silu",
+      "hidden_size": 4096,
+      "initializer_range": 0.02,
+      "intermediate_size": 12288,
+      "layer_types": [
+        "sliding_attention",
+        "sliding_attention",
+        "sliding_attention",
+        "sliding_attention",
+        "sliding_attention",
+        "full_attention"
+      ],
+      "max_position_embeddings": 262144,
+      "max_window_layers": 6,
+      "model_type": "qwen3",
+      "num_attention_heads": 32,
+      "num_hidden_layers": 6,
+      "num_key_value_heads": 8,
+      "num_target_layers": 32,
+      "pad_token_id": null,
+      "rms_norm_eps": 1e-06,
+      "rope_parameters": {
+        "rope_theta": 10000000,
+        "rope_type": "default"
+      },
+      "sliding_window": 4096,
+      "tie_word_embeddings": false,
+      "transformers_version": "5.7.0",
+      "use_cache": true,
+      "use_sliding_window": true,
+      "vocab_size": 248320
+    },
+    "license_evidence": "Apache-2.0 declared by the fixed model card and Hugging Face API metadata; this revision has no separate LICENSE file. Upstream project code is MIT, a separate license.",
+    "model_card_sha256": "6c02a17219438a41b03cdffd8d53c41d9225615b1a9eeefcc24360c79ab0dc99",
+    "config_sha256": "e68516cac920c0482d26858f21021a1ddd111069a685aa5aaa60ca2c41101bce",
+    "total_parameters_declared": 1291904512,
+    "total_weight_file_bytes": 2583816465,
+    "remote_code_executed": false,
+    "tokenizer_files_in_draft_repo": false
+  },
+  "primary_sources": [
+    {
+      "kind": "author_checkpoint_metadata",
+      "url": "https://huggingface.co/api/models/z-lab/Qwen3.5-9B-DFlash/revision/5fc3b3d474760f18c516db87d84c37edbfd3ede6?blobs=true",
+      "local_capture_sha256": "e209a9c6aad06e7ea076ea7afe3a5e17d22648e9431e511c0035ae7662eef13b"
+    },
+    {
+      "kind": "author_checkpoint_config",
+      "url": "https://huggingface.co/z-lab/Qwen3.5-9B-DFlash/blob/5fc3b3d474760f18c516db87d84c37edbfd3ede6/config.json"
+    },
+    {
+      "kind": "author_model_card",
+      "url": "https://huggingface.co/z-lab/Qwen3.5-9B-DFlash/blob/5fc3b3d474760f18c516db87d84c37edbfd3ede6/README.md"
+    },
+    {
+      "kind": "author_project_mlx_guidance",
+      "url": "https://github.com/z-lab/dflash/blob/07ebd93db9f472af339b644bb70221ad8428328a/README.md",
+      "local_capture_sha256": "e39074de245d5893f1812b18755fd3a232fedeb38ed2608d9dfd0b5b4db8780b"
+    },
+    {
+      "kind": "installed_official_omlx_source",
+      "url": "https://github.com/jundot/omlx/tree/bd1e9b112474862ebed550a9c83b4316038a1d74",
+      "version": "0.7.1",
+      "sha256": {
+        "omlx/model_settings.py": "6e4f071f218f0c75e46d382af8b5bad34954fcf81537b61a933548a608cda7a8",
+        "omlx/engine_pool.py": "2a4446093c92af30285d7cde4ba0df9d174fe3be235d7c2d67dda0923f109148",
+        "omlx/utils/model_loading.py": "f86817c578a12f50d095236b2589c9cdb089360b44dbd526a9540ba5b12681f1",
+        "omlx/speculative/dflash/__init__.py": "2a191bbd3056ae67b69da411c6daebc8172f52632e317d7b0644eb86aeb1be5d",
+        "omlx/speculative/dflash/drafter.py": "5ab0c88c8fc6fea20b2eef8e9aaa81a73a86d95f90aba3e731781156d5a77e7b",
+        "mlx_vlm/utils.py": "d38eabab88d5d6b835d4ab703cdac2e30924fc04463be8134d12ae5406e50b0c",
+        "mlx_vlm/speculative/drafters/__init__.py": "dff4c41e5458eb214bb3ad06c00e3587b2b6a5b1fca0c6d730697bc5955de0ad",
+        "mlx_vlm/speculative/drafters/qwen3_dflash/config.py": "d7ab8dd8742b2232ece0e1240a316e8df5a647f62a6042614cb966fd146ac31e",
+        "mlx_vlm/speculative/drafters/qwen3_dflash/dflash.py": "4e92910a4f364cccab07c2de1c242177bf62dd849896ba80de32279fc7002cb3"
+      }
+    }
+  ],
+  "nominal_target_compatibility": {
+    "target_repo": "mlx-community/Qwen3.5-9B-8bit",
+    "target_revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d",
+    "target_config_sha256": "19082a0ef21dee3840a8bab56ee5325ead177085285c63ea47e79a204a566a53",
+    "target_type": "qwen3_5",
+    "target_hidden_size": 4096,
+    "draft_hidden_size": 4096,
+    "hidden_size_match": true,
+    "target_layer_count": 32,
+    "draft_expected_target_layer_count": 32,
+    "layer_count_match": true,
+    "target_vocab_size": 248320,
+    "draft_vocab_size": 248320,
+    "vocab_size_match": true,
+    "capture_layer_ids_in_range": true,
+    "mask_token_id_in_target_vocab": true,
+    "shared_parameters": "Installed DFlash v1 bind borrows target embed_tokens and lm_head; use the pinned target tokenizer/template and its token IDs. No independent draft tokenizer is loaded.",
+    "ordinary_external_lm_is_dflash": false,
+    "target_embedded_mtp_required": false,
+    "actual_gpu_bind_test_passed": null,
+    "actual_quality_or_token_identity_passed": null,
+    "caveat": "Matching config geometry and a model card for the original 9B establish a valid candidate, not proven correctness/quality or acceptance for the quantized MLX conversion. The installed DFlash v1 bind has no comprehensive target validator."
+  },
+  "official_loader": {
+    "entrypoint": "omlx.speculative.dflash.load_dflash_drafter(path,target_model,tokenizer=...,block_size=5,quant_enabled=True,quant_bits=4,quant_group_size=64,verify_mode=\"adaptive\",window_size=None)",
+    "path": "mlx_vlm.speculative.drafters.load_drafter(kind=\"dflash\") -> installed qwen3_dflash DFlashDraftModel -> bind shared target embeddings/lm_head -> optional official load-time affine quantization -> attach DFlashDrafter to batched Lightning MTP verify/accept/rollback",
+    "quantization": "Official oMLX nn.quantize predicate handles Linear layers with input width divisible by group size; 4-bit/group64 is an explicit supported configuration. Original BF16 checkpoint remains intact. Actual packed parameter bytes and load peak require GPU measurement.",
+    "block_semantics": "Block includes the anchor; block5 gives at most4 proposals, with adaptive mode choosing verified depth. Trained block is16.",
+    "backend_recommendations": "Pinned official project MLX guidance recommends block<=5 for quantized target or draft due to quantized-matmul width efficiency. The model card recommends8/16 for its SGLang B200 backend; those results are not Mac benchmarks.",
+    "verification_modes": {
+      "adaptive": "Official measured-cost and acceptance controller chooses verified depth",
+      "dflash": "Verify full configured block",
+      "off": "Alias for full-block verification; does not disable DFlash"
+    },
+    "new_dependencies_installed": false,
+    "framework_or_weights_modified": false,
+    "fail_soft_gate": "Installed engine_pool catches draft-load exceptions, logs DFlash drafter load raised ... toggle ignored, and continues serving the target. HTTP200 and dflash_enabled=True do not prove DFlash ran. Require successful drafter-loaded log plus set_dflash_drafter / _omlx_drafter and actual draft/verify runtime evidence. Preserve any fallback failure separately."
+  },
+  "resource_preflight_estimates_not_measurements": {
+    "host_unified_memory_bytes": 25769803776,
+    "free_disk_before_download_reported": "534GiB",
+    "target_language_tensor_bytes_from_prior_sha_audit": 9514412544,
+    "draft_bf16_tensor_bytes_expected": 2583809024,
+    "omlx_context_bytes_per_row_formula": "window * 2 * (draft_layers * 2 * kv_heads * head_dim + hidden + captured_layers * hidden)",
+    "window": 4096,
+    "context_per_row_bytes": 402653184,
+    "target_plus_bf16_draft_language_weights_bytes": 12098221568,
+    "admission": "Disk and fixed weight geometry support a bounded dev attempt on24GiB, preferably official4bit load-time draft. Current free memory/load peak/prefill capture transients/target KV and recurrent state/allocator/cache/swap must be measured before formal admission. No zero-swap or no-OOM claim."
+  },
+  "proposed_dev_configuration_not_executed": {
+    "model_settings_json": {
+      "version": 1,
+      "models": {
+        "Qwen3.5-9B-8bit": {
+          "model_type_override": "llm",
+          "enable_thinking": false,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          },
+          "dflash_enabled": true,
+          "dflash_draft_model": "<PINNED_DFLASH_SNAPSHOT>",
+          "dflash_draft_quant_enabled": true,
+          "dflash_draft_quant_weight_bits": 4,
+          "dflash_draft_quant_group_size": 64,
+          "dflash_draft_window_size": null,
+          "dflash_block_size": 5,
+          "dflash_verify_mode": "adaptive"
+        }
+      }
+    },
+    "environment": {
+      "OMLX_HOT_CACHE_ONLY": "true"
+    },
+    "startup_argv": [
+      "<OMLX_PYTHON>",
+      "benchmarks/experiments/omlx_service_server.py",
+      "serve",
+      "--model-dir",
+      "<ISOLATED_MODEL_ALIAS_DIRECTORY>",
+      "--base-path",
+      "<ISOLATED_BASE_WITH_MODEL_SETTINGS_JSON>",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8084",
+      "--hot-cache-max-size",
+      "512MB",
+      "--max-concurrent-requests",
+      "1",
+      "--headless"
+    ],
+    "request": {
+      "model": "Qwen3.5-9B-8bit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Return exactly the integer result of 6 times 7."
+        }
+      ],
+      "max_tokens": 64,
+      "temperature": 0,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      },
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    },
+    "dev_candidates": {
+      "draft_quant_enabled": [
+        true,
+        false
+      ],
+      "draft_quant_enabled_false": "BF16 control, subject to actual memory admission",
+      "draft_quant_bits": [
+        4
+      ],
+      "draft_quant_group_size": [
+        64
+      ],
+      "block_size": [
+        4,
+        5
+      ],
+      "verify_mode": [
+        "adaptive",
+        "dflash"
+      ],
+      "window_size": [
+        null
+      ]
+    },
+    "fairness": "Choose independently on dev only, after strict correctness/template/resource verification. Retain all failures and BF16/4bit memory overhead. Freeze checkpoint, environment, mode and chosen parameters before heldout. Compare both default and optimized oMLX transparently; do not generalize baseline-only results to all oMLX capabilities."
+  },
+  "reproducible_commands": [
+    "HF_HOME=<DFLASH_CACHE> HF_HUB_DISABLE_XET=1 .venv/bin/python scripts/download_manifest.py --manifest benchmarks/experiments/omlx_dflash_9b.manifest.json --chunks-dir <DFLASH_CHUNKS> --workers 16",
+    ".venv/bin/python scripts/audit_model_snapshot.py --snapshot <PINNED_DFLASH_SNAPSHOT> --api artifacts/phase2-competitor-audit/dflash/model-api.json --output artifacts/phase2-competitor-audit/dflash/snapshot-audit.json"
+  ],
+  "required_next_actual_validation": [
+    "Acquire GPU baton and ensure no model server/download competes with measurements.",
+    "Load exact pinned target plus trained draft via existing official oMLX loader; capture load success/failure and actual resident/Metal/process/swap resources.",
+    "Compare pinned target tokenized templates and deterministic dev outputs to non-speculative target; retain divergence and strict quality failures rather than promising bitwise equivalence from speculation theory.",
+    "Exercise greedy plus supported official nonthinking sampled requests with penalties; verify whether oMLX chooses speculative acceptance or documented fallback, using runtime evidence.",
+    "Check cache hits/branch reuse, cancellation, recovery and supported concurrency before frozen formal comparison."
+  ],
+  "not_claimed": [
+    "No local speedup conclusion follows from checkpoint availability.",
+    "Upstream B200 or other Mac published speedups are not local experiment results.",
+    "No need for native MTP tensors does not itself prove this trained draft works."
+  ],
+  "config_parser_audit": {
+    "scope": "CPU execution of unmodified installed DFlashConfig AST only, substituting unused BaseModelConfig base with object to avoid MLX import/GPU. This is a config parser check, not a runtime model load.",
+    "expected_fields_passed": {
+      "hidden_size": 4096,
+      "num_hidden_layers": 6,
+      "block_size": 16,
+      "mask_token_id": 248077,
+      "target_layer_ids": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21,
+        25,
+        29
+      ],
+      "rope_theta": 10000000,
+      "sliding_window": 4096
+    },
+    "normalized_config": {
+      "hidden_size": 4096,
+      "intermediate_size": 12288,
+      "num_hidden_layers": 6,
+      "num_attention_heads": 32,
+      "num_key_value_heads": 8,
+      "head_dim": 128,
+      "rms_norm_eps": 1e-06,
+      "vocab_size": 248320,
+      "max_position_embeddings": 262144,
+      "rope_theta": 10000000,
+      "rope_scaling": {
+        "rope_type": "default"
+      },
+      "attention_bias": false,
+      "tie_word_embeddings": false,
+      "block_size": 16,
+      "mask_token_id": 248077,
+      "target_layer_ids": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21,
+        25,
+        29
+      ],
+      "num_target_layers": 32,
+      "layer_types": [
+        "sliding_attention",
+        "sliding_attention",
+        "sliding_attention",
+        "sliding_attention",
+        "sliding_attention",
+        "full_attention"
+      ],
+      "sliding_window": 4096,
+      "final_logit_softcapping": null,
+      "runtime_block_size": null,
+      "draft_window_size": null,
+      "is_causal": false,
+      "attention_sink_bias": false
+    }
+  },
+  "local_checkpoint_audit": {
+    "repo": "z-lab/Qwen3.5-9B-DFlash",
+    "revision": "5fc3b3d474760f18c516db87d84c37edbfd3ede6",
+    "quantization": null,
+    "files": [
+      {
+        "path": "model.safetensors",
+        "size_bytes": 2583816465,
+        "sha256": "0a42274b32554f48de1faa0d42824e9c2ceda649c30ae0a731cddf410dd698c7",
+        "tensor_count_by_category": {
+          "text": 0,
+          "vision": 0,
+          "mtp": 0,
+          "other": 69
+        },
+        "tensor_bytes_by_category": {
+          "text": 0,
+          "vision": 0,
+          "mtp": 0,
+          "other": 2583809024
+        }
+      }
+    ],
+    "index_present": false,
+    "tensor_count": 69,
+    "tensor_bytes_by_category": {
+      "text": 0,
+      "vision": 0,
+      "mtp": 0,
+      "other": 2583809024
+    },
+    "weight_files_sha256_verified": true,
+    "weights_loaded": false,
+    "mtp_keys": [],
+    "metadata_sha256": {
+      "config.json": "e68516cac920c0482d26858f21021a1ddd111069a685aa5aaa60ca2c41101bce"
+    },
+    "tensor_header_validation": {
+      "scope": "Complete SHA256-verified safetensors file header, tensor shapes/dtypes/contiguous offsets validated without loading arrays.",
+      "header_bytes": 7433,
+      "tensor_count": 69,
+      "dtypes": {
+        "BF16": 69
+      },
+      "tensor_bytes": 2583809024,
+      "parameter_count": 1291904512,
+      "layer_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "fc_weight_shape": [
+        4096,
+        32768
+      ],
+      "embedded_token_embedding_present": false,
+      "embedded_lm_head_present": false,
+      "all_offsets_contiguous_and_bf16_shapes_match": true
+    }
+  },
+  "range_chunks_cleanup": true,
+  "range_chunks_cleanup_details": {
+    "scope": "Only completed DFlash range chunks after full file SHA256 verification",
+    "files_removed": 617,
+    "logical_bytes_removed": 2583816465,
+    "directory_absent": true
+  },
+  "prepared_local_dev_entrypoints_not_executed": {
+    "q4": "OMLX_HOT_CACHE_ONLY=true <OMLX_PYTHON> benchmarks/experiments/omlx_service_server.py serve --model-dir <DFLASH_DEV_ROOT>/models --base-path <DFLASH_DEV_ROOT>/base-q4-b5-adaptive --host 127.0.0.1 --port 8084 --hot-cache-max-size 512MB --max-concurrent-requests 1 --headless",
+    "bf16": "Use the identical q4 command with base-path <DFLASH_DEV_ROOT>/base-bf16-b5-adaptive only after actual memory admission.",
+    "scope": "Both isolated model_settings.json files and the exact pinned target alias are prepared locally. No server was started. These are dev probes, not the frozen formal benchmark configurations."
+  }
+}

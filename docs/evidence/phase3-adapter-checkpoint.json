@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "phase": "phase3-section2-model-adapters",
+  "status": "verified_precommit_checkpoint",
+  "date": "2026-10-21",
+  "base_commit": "5f83f629da84dd5f5b0c1ac4f4da8cab4b682922",
+  "branch": "codex/phase2-core",
+  "publication_scope": "Normal experimental-branch commit/push only; no main/tag/release/deployment changes.",
+  "accepted_scope": "Phase3 section2 new-family dense baseline integration and existing-path regression only; no new optimized hybrid pretrained-model claim.",
+  "acceptance": {
+    "implementation_report_accepted": true,
+    "fresh_verification_accepted": true,
+    "fresh_code_review": "approved",
+    "anti_pattern": "passed",
+    "current_findings": [],
+    "all_current_runtime_example_and_reviewed_source_sha_match": true,
+    "post_metal_review_refresh_sha256": "cd019e9023b42c62069e3c61dd8a33a1fc354684b280fa19104b66bc1c65ce78"
+  },
+  "source_sha256": {
+    "benchmarks/experiments/phase3_verify_model_adapters.py": "0ba5315f7147cbbaf7bd004cf75efebbec9b68024d515e74f569e28de4b99dba",
+    "examples/models/smollm2-135m-8bit.local.json": "0e116c3dea793a84869bde87938feb4a8f0d708a7f047dbf42dbe3a9560e229a",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+    "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+    "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+    "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+    "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+    "src/deepinfer_mac/cli.py": "aaa4b3b2f1211f0daf76cdaaad01c3f38ed65bf6012f5efda5f7ec2dba5d22f7",
+    "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+    "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+    "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+    "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+    "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+    "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/server/app.py": "8ad4a3241c9aec48ae8c6e57cc94dda12b984075887f6216d4fe850bb070c40e",
+    "src/deepinfer_mac/server/schemas.py": "624e618c20fc2c9f7500c5835849f2092fcdbabbcc7fa2910d317cf795bf86bd",
+    "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+    "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/state.py": "649cfc41f5792e6b5b786c964aa6c6adf8f32340d43603b848e533a99928ab26",
+    "tests/test_model_adapters.py": "a39f7de9f2f0fbb33245e72e950c985a828329f88646ead7ea839140e1c231da"
+  },
+  "checkpoint_files_sha256": {
+    "README.md": "a923863d0f9d2bc92ee379383f25e5b2abde67d11677cff6a98fcf735f2819dc",
+    "README.zh-CN.md": "6ae046986c41aee01aa70ecf27876145a0a5a3798d50fa278df52a684c76e798",
+    "docs/CODEX_EXECUTION_PROMPT.md": "8a9f1e20de8c678e337d23620ee9ebd48f806f03f6a4c646b7634b6c7dc05ca0",
+    "docs/PROGRESS.md": "2a8778b61d2dabe5daed302056e9de5c142ddd520b7e06ed101818aa9fd8d778",
+    "docs/DS_DESIGN_MAPPING.md": "47885367bcfd6deb87857565e0c14beaf925e080f15815ed93710f0552a659b6",
+    "docs/history/PROGRESS_PHASE2_20261021.md": "63540d21e9e4626e3d99c726c9f5b083a0ea49680e840199ea8907a22ca2cbb4",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+    "site/README.md": "c6358aba6ae585a925924e27d15566f061c50683c17a856cc418ec9c5d2537b6",
+    "site/assets/showcase.js": "abb0aaceabb10649a3bef4e2e71549ce40d1f00ee745f60e45ee82778daccf0a",
+    "site/assets/style.css": "823b7c0fc4043b6a3fdc8f354a9877014059731f66637ebd0435e278c40db326",
+    "site/build.py": "938c2872f9063c3e444b3a813ba47e1cfe5c61f91f74fe18562db2f0ad76c399",
+    "src/deepinfer_mac/cli.py": "aaa4b3b2f1211f0daf76cdaaad01c3f38ed65bf6012f5efda5f7ec2dba5d22f7",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/server/app.py": "8ad4a3241c9aec48ae8c6e57cc94dda12b984075887f6216d4fe850bb070c40e",
+    "src/deepinfer_mac/server/schemas.py": "624e618c20fc2c9f7500c5835849f2092fcdbabbcc7fa2910d317cf795bf86bd",
+    "src/deepinfer_mac/state.py": "649cfc41f5792e6b5b786c964aa6c6adf8f32340d43603b848e533a99928ab26",
+    "benchmarks/experiments/phase3_verify_model_adapters.py": "0ba5315f7147cbbaf7bd004cf75efebbec9b68024d515e74f569e28de4b99dba",
+    "benchmarks/reports/phase3-model-adapter-integration.json": "0e4f0bd86234e934025e5c501ceb6dd02f0471955c8caaf131a384786efd9787",
+    "benchmarks/reports/phase3-smollm2-weight-audit.json": "cfa67f1581862b41c25e418934bea9d18aa3ed9c5ba4db2bb06c40c7373e3fb0",
+    "docs/MODEL_ADAPTERS.md": "41af1223b86d68378df185ef6c2dba6304601e5a47faf66177386130dd51c535",
+    "docs/PHASE3_EXECUTION_PLAN.md": "70d7f394c22c0e58ed75ae115d34447e2387c569065f929f24937905c9fc3b7d",
+    "docs/evidence/phase3-adapter-anti-pattern-check.json": "cd019e9023b42c62069e3c61dd8a33a1fc354684b280fa19104b66bc1c65ce78",
+    "docs/evidence/phase3-adapter-code-review.json": "e3d9575edad242e763e8e71991e31fe0fcab93a22fdd424a29ded9afb1b6277d",
+    "docs/evidence/phase3-adapter-verification.json": "8cdadfdaefa8c32a934bb949dd0eac6324d3c52bd4be67e14c0cee33798a21ee",
+    "docs/phase3-source-audit.json": "6f643fa8f7888d7f82b6136f640dfdb01b0fb2622e8b04c3fab8492acad9820f",
+    "examples/models/smollm2-135m-8bit.local.json": "0e116c3dea793a84869bde87938feb4a8f0d708a7f047dbf42dbe3a9560e229a",
+    "examples/models/smollm2-135m-8bit.repo.json": "2203ef24ce274eb6f7b9b8a07053f10e87d06bcfb158ab88b0c7e2f3670eeef1",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "tests/test_model_adapters.py": "a39f7de9f2f0fbb33245e72e950c985a828329f88646ead7ea839140e1c231da"
+  },
+  "commit_path_allowlist": [
+    "README.md",
+    "README.zh-CN.md",
+    "docs/CODEX_EXECUTION_PROMPT.md",
+    "docs/PROGRESS.md",
+    "docs/DS_DESIGN_MAPPING.md",
+    "docs/history/PROGRESS_PHASE2_20261021.md",
+    "pyproject.toml",
+    "site/README.md",
+    "site/assets/showcase.js",
+    "site/assets/style.css",
+    "site/build.py",
+    "src/deepinfer_mac/cli.py",
+    "src/deepinfer_mac/engine.py",
+    "src/deepinfer_mac/hybrid_speculative.py",
+    "src/deepinfer_mac/models.py",
+    "src/deepinfer_mac/server/app.py",
+    "src/deepinfer_mac/server/schemas.py",
+    "src/deepinfer_mac/state.py",
+    "benchmarks/experiments/phase3_verify_model_adapters.py",
+    "benchmarks/reports/phase3-model-adapter-integration.json",
+    "benchmarks/reports/phase3-smollm2-weight-audit.json",
+    "docs/MODEL_ADAPTERS.md",
+    "docs/PHASE3_EXECUTION_PLAN.md",
+    "docs/evidence/phase3-adapter-anti-pattern-check.json",
+    "docs/evidence/phase3-adapter-code-review.json",
+    "docs/evidence/phase3-adapter-verification.json",
+    "docs/phase3-source-audit.json",
+    "examples/models/smollm2-135m-8bit.local.json",
+    "examples/models/smollm2-135m-8bit.repo.json",
+    "src/deepinfer_mac/adapters.py",
+    "tests/test_model_adapters.py",
+    "docs/evidence/phase3-adapter-checkpoint.json"
+  ],
+  "history": {
+    "previous_progress_preserved_byte_for_byte": true,
+    "archive": "docs/history/PROGRESS_PHASE2_20261021.md",
+    "archive_sha256": "63540d21e9e4626e3d99c726c9f5b083a0ea49680e840199ea8907a22ca2cbb4",
+    "historical_runtime_freezes_and_quality_reports_rewritten": false,
+    "new_progress_lines": 47
+  },
+  "tests": {
+    "cpu_validation": {
+      "portable_pytest": {
+        "command": ".venv/bin/python -m pytest -q -m \"not metal\"",
+        "passed": 273,
+        "metal_deselected": 41,
+        "output": "........................................................................ [ 26%]\n........................................................................ [ 52%]\n........................................................................ [ 79%]\n.........................................................                [100%]\n273 passed, 41 deselected in 7.63s"
+      },
+      "ruff": {
+        "command": ".venv/bin/ruff check src tests scripts benchmarks/experiments benchmarks/quality",
+        "passed": true,
+        "output": "All checks passed!"
+      }
+    },
+    "existing_metal_regression": {
+      "command": ".venv/bin/python -m pytest -q --run-metal -m metal",
+      "exit_code": 0,
+      "output": ".........................................                                [100%]\n41 passed, 273 deselected in 0.89s",
+      "stderr": "",
+      "elapsed_seconds": 1.0783166885375977,
+      "fixture_audit": "Both metal-marked files inspected: tiny deterministic 16-token transitions / actual ArraysCache+KVCache / sampling arrays; no model load or external weight access.",
+      "source_sha256": {
+        "tests/test_sampling_metal.py": "88546f2df60e6eec345b0fad26024bcac686da253a8d861fe571ab2ff787051c",
+        "tests/test_speculative_metal.py": "476987517b7d1c2e29e8c803ea5c5609a6cada642c30e962da75922bec6a26af",
+        "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+        "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083"
+      },
+      "resources_before": {
+        "available_bytes": 9366552576,
+        "swap_used_bytes": 3945201664
+      },
+      "resources_after": {
+        "available_bytes": 9467969536,
+        "swap_used_bytes": 3945201664
+      },
+      "system_swap_delta_bytes": 0,
+      "child_max_rss_bytes_macos": 116801536,
+      "metal_peak_bytes": null,
+      "metal_peak_note": "pytest child does not export allocator peak; not inferred from RSS",
+      "passed": true
+    },
+    "checkpoint_agent_reran_gpu_or_model": false,
+    "checkpoint_checks": [
+      "Recomputed all current source/evidence/product SHA256 identities",
+      "Checked 9 actual integration steps, accepted chain and source freeze unchanged",
+      "Inspected appended latest 41-test Metal evidence without rerunning it",
+      "git diff --check",
+      "Explicit public path allowlist and private path/weight exclusions"
+    ]
+  },
+  "actual_new_model": {
+    "id": "smollm2-135m-8bit",
+    "nine_integration_steps_passed": true,
+    "overall_system_swap_delta_bytes": 0,
+    "observed_peaks": {
+      "rss_bytes": 448561152,
+      "metal_peak_bytes": 418080804,
+      "metal_active_bytes_after_cleanup": 8,
+      "scope": "RSS is parent 10ms samples plus per-request parent/CLI observations; Metal is maximum per-request peak across Python, CLI and API. Not an absolute OS peak."
+    },
+    "performance_or_broad_model_acceptance_claim": false
+  },
+  "product_candidate_owner_qa": {
+    "status": "local_candidate_frozen",
+    "deployed": false,
+    "pages": 8,
+    "local_links": 138,
+    "readme_local_links_per_language": 23,
+    "commands": [
+      ".venv/bin/python site/build.py",
+      ".venv/bin/python site/check.py",
+      ".venv/bin/ruff check site/build.py",
+      "node --check site/assets/showcase.js",
+      ".venv/bin/python -m deepinfer_mac.cli run --help"
+    ],
+    "browser_qa": {
+      "zh_desktop": {
+        "width": 1280,
+        "horizontal_overflow": false
+      },
+      "zh_mobile": {
+        "width": 390,
+        "horizontal_overflow": false
+      },
+      "en_desktop": {
+        "width": 1280,
+        "horizontal_overflow": false
+      },
+      "budget_mobile": {
+        "width": 390,
+        "horizontal_overflow": false
+      },
+      "budget_slider_actual_states": {
+        "0": [
+          0,
+          0,
+          0
+        ],
+        "5": [
+          3,
+          1,
+          1
+        ],
+        "9": [
+          3,
+          3,
+          3
+        ]
+      },
+      "viewport_override_reset": true,
+      "temporary_tab_closed": true
+    },
+    "sha256": {
+      "README.md": "a923863d0f9d2bc92ee379383f25e5b2abde67d11677cff6a98fcf735f2819dc",
+      "README.zh-CN.md": "6ae046986c41aee01aa70ecf27876145a0a5a3798d50fa278df52a684c76e798",
+      "site/README.md": "c6358aba6ae585a925924e27d15566f061c50683c17a856cc418ec9c5d2537b6",
+      "site/build.py": "938c2872f9063c3e444b3a813ba47e1cfe5c61f91f74fe18562db2f0ad76c399",
+      "site/assets/style.css": "823b7c0fc4043b6a3fdc8f354a9877014059731f66637ebd0435e278c40db326",
+      "site/assets/showcase.js": "abb0aaceabb10649a3bef4e2e71549ce40d1f00ee745f60e45ee82778daccf0a"
+    },
+    "claims": {
+      "adapter": "experimental; real-model acceptance in progress",
+      "cross_request_pipeline": "building",
+      "illustration_inputs": "hand-set conditional probabilities; cumprod; no performance values",
+      "phase2_bundle": "unchanged"
+    }
+  },
+  "product_source_modified_after_qa_freeze": false,
+  "product_wording_handoff": "Frozen product remains conservatively labelled acceptance in progress. A separately checked next product edit may describe accepted Smol dense baseline only; batching and budgets remain building.",
+  "exclusions": [
+    "artifacts/phase2-competitor-audit/",
+    "artifacts/phase2-model-audit/",
+    "artifacts/phase3-model-audit/",
+    "results/",
+    "model weights",
+    "dist/",
+    "raw private quality tasks/tests/generations",
+    "unrelated untracked files"
+  ],
+  "next_step": "Phase3 section3 request lifecycle/ticks, chunked prefill/admission and actual continuous batching; begin portable state-machine tests, then root-coordinated small-model execution.",
+  "constraints": {
+    "no_new_model_load_or_gpu_work": true,
+    "user_port_8765_untouched": true,
+    "no_listening_service_started": true,
+    "large_model_resource_deferral_retained": true,
+    "main_tag_release_and_deployment_untouched": true
+  }
+}

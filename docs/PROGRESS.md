@@ -1,43 +1,40 @@
-# DeepInfer-Mac — resume here
+# DeepInfer-Mac continuation
 
-Updated 2026-10-21, Asia/Shanghai. User chose small-model validation first; Qwen3.8-27B remains a separate, non-default candidate. Existing untracked work was preserved; initial pytest had no tests. First usable alpha is complete and published. Source/docs/site, local and Linux CI verification, Pages deployment and alpha artifact checks all passed. No further experiment or recurring build is running.
+Updated 2026-10-21. Continue [Phase 3 plan](PHASE3_EXECUTION_PLAN.md) on `codex/phase2-core`. Root owns GPU baton; preserve user service port 8765 and memory guards. Checkpoints are evidence, not approval gates. No GPU process remains from this diagnostic.
 
 ## Current result
-- Real MLX engine, byte-budget exact prefix cache, bounded local API/UI and CLI are implemented. Default is baseline; fixed/adaptive require explicit selection. No official DSpark/full V4.1 port.
-- Final checks passed:21 portable tests,14 skipped;14 explicit Metal controls; Ruff;7-page/109-link site; wheel/sdist resource+license+privacy validation. Final4B API smoke and installed-wheel4B CLI passed. No background GPU/server/download job.
-- Clean-wheel real4B CLI ran outside checkout with no PYTHONPATH, default baseline,32 output tokens and zero observed swap delta. Evidence: `benchmarks/reports/clean-wheel-qwen3-4b.json` + `.meta.json`.
-- Formal Qwen3-4B full corpus:216 measured/288 including warmups, zero failures, full all-variant token equality27/36, baseline/native36/36. Adaptive did not beat tuned fixed; no equivalent speculative speedup claimed.
-- Exact-cache evidence: warm model,1740-token prompt,2 output tokens including EOS;1739 hot-hit tokens. Three cold/hot pairs2097–2174/36.7–38.3ms, full tokens/text equal. Eight512-prefix branches match, active+6KiB/RSS+0.26MiB, observed request swap0;1KiB admission refusal/recompute matches. This is narrow repeated-prefill evidence.
-- Isolated-residency control:18 OS-process blocks,54measured+54warmups, zero failures/swap delta.6/9 all-variant groups match; native/baseline/adaptive9/9. Earlier same-process24MemoryErrors remain. Close frees Metalactive~2.6GB→8B/cache0, but native/Rust RSS retention across reloads remains unresolved; frequent switches should restart/use isolated processes.
-- Static site:7 pages,109 checked links/resources, real full benchmark/cache JSON, source archive,4B recorded UI demo; desktop and actual390×844 browser viewport checked. No public inference or automatic localhost calls.
 
-## Commands
+- Implemented model/cache/draft interfaces, CLI/API identity, actual continuous ticks, joint confidence/budget allocation and real variable-length verification buckets. Experimental pair service includes bounded admission, stable slots, cancellation/recovery, API/SSE; actual service acceptance **35/35**. [Service evidence](evidence/phase3-joint-service-verification.json).
+- Dense opt-ins implement batched draft forward and direct KV trim; defaults remain serial draft/exact replay. Only audited dense KVCache is eligible; hybrid/rotating/quantized cache classes reject. Fresh checkpoint tests: **338 portable + 76 actual-Metal passed**. No API capability promotion.
+- Audited real pair: SmolLM2-360M-Instruct-6bit target + 135M-Instruct-8bit draft. V2 development ran depths 1,2,3 once each, then froze depth 3/batched/dense_trim/bucket before heldout. **60/60** internal and **6/6** native-batch outputs matched; **120/120** next-token/offset checks passed, **0/120** strict whole-prefix logits checks passed. [Frozen selection](evidence/phase3-dense-fastpath-development-v2.json).
+- Exactly three independent heldout diagnostic processes rotated native batch/old replay/fast trim. **18/18** request outputs matched native target and exact budgets; swap growth zero, peak Metal **955,583,292 bytes**. Whole-prefix allclose passes **0/24**; cycle-partition replay oracle passes **12/24** (old replay 12/12, fast trim 0/12). Both oracle groups pass every next-token argmax and offset check. Strict numeric acceptance remains **false**, tolerance unchanged. [Verification](evidence/phase3-dense-heldout-verification.json), [three-process report](../benchmarks/reports/phase3-dense-heldout-summary.json).
+- Median paired-task times across those processes: native batch **180.52 ms**, old replay **367.56 ms**, fast trim **279.13 ms**. Internal work improved in this narrow diagnostic; native MLX-LM batching remains faster. No established advantage over native MLX-LM/oMLX, general quality equivalence or release-ready claim.
+- Earlier heterogeneous buckets saved **30.3% verification positions / 9.0% total decode positions**, without measured latency gain; historical failures stay intact. [Earlier cost evidence](PAIR_COST_EXPERIMENT.md).
+
+## Reproduce and artifacts
+
 ```sh
-uv sync --frozen --extra mlx --extra dev
-uv run deepinfer-mac doctor
-uv run deepinfer-mac run --profile qwen3-4b '用中文解释 KV 缓存。'
-uv run deepinfer-mac serve
-uv run pytest -q
-uv run pytest -q --run-metal -m metal
-uv run deepinfer-mac bench --profile qwen3-4b --suite full --repeats 3 --max-tokens 64 --fixed-lengths 1 2 4 --output results/reproduction
-python3 site/build.py && python3 site/check.py
-uv build && python3 scripts/verify_artifacts.py
+.venv/bin/python -m pytest -q -m 'not metal'
+.venv/bin/ruff check src tests scripts benchmarks/experiments benchmarks/quality
+# Explicit root GPU baton required for device commands:
+.venv/bin/python -m pytest -q -m metal --run-metal
+# Each round 0,1,2 is a separate process; exact private workload required.
+.venv/bin/python benchmarks/experiments/phase3_dense_heldout.py --execute --round 0 --output artifacts/phase3-dense-fastpath/fresh-round0.json
+# Existing experimental service entry; do not use port 8765:
+.venv/bin/python -m deepinfer_mac.cli serve --port 8876 --model-config examples/models/research-smollm2-pair.local.json --experimental-joint-verification --joint-profile research-smollm2-pair --joint-depth 3 --max-active 2 --batch-context-tokens 4096
 ```
 
-## Evidence
-- `docs/evidence.md` is the public index; `docs/benchmarking.md` defines measurement boundaries.
-- `benchmarks/reports/m4-pro-qwen3-4b/`: full raw JSON/CSV/JSONL/report, immutable measured source snapshot+28-file SHA manifest; digest d6de01beb2dbe1fe4434036326d6c17d7872668b5090b25be3d5d00409a43c1e. Runtime had no Git commit; archive was verified byte-for-byte.
-- `benchmarks/reports/cache-qwen3-4b.json`, `resident-process-ablation-qwen3-4b.json`, `unload-resource-check.json`, `metal-service-smoke*.json`: cache, residency and actual service evidence.
-- `benchmarks/reports/local-ui-demo-qwen3-4b.json` and `local-ui-demo.json`: actual4B/0.6B UI exports; screenshots in `docs/evidence/`. Single interactive requests, not benchmark claims.
-- `upstream.lock.json`, `models.lock.json`, `uv.lock`; exact reference-header source/license audit in `docs/architecture.md`.
-- `docs/evidence/source-manifest.json`: final release source after safe defaults, explicitly distinct from frozen benchmark source. Regenerate only if runtime/locks change.
-- Existing clean environment `/private/tmp/deepinfer-clean-install/bin/python` has44 dependencies; installation/doctor previously passed. Reuse it, do not download dependencies again. Verified wheel path `dist/deepinfer_mac-0.1.0a1-py3-none-any.whl`; companion sdist in the same directory. Final build is complete; preserve these bytes for upload/checksums.
+- [Dense protocol](DENSE_FASTPATH_EXPERIMENT.md) and `phase3_dense_heldout_protocol.json` freeze source, order, input/output budgets and comparison scope. Raw prompts/outputs and all measured source snapshots remain excluded under `artifacts/phase3-dense-fastpath/`. Public hashes alone are not a downloadable prompt corpus. Export scripts reproduce redaction without GPU.
+- First dense runtime checkpoint **d3c6ae1320f09f0d21813931c6df488cf4b4909b** is pushed to the experimental branch. Candidate `dist/candidates/v0.1.0a2-d3c6ae1/` contains that checkpoint; **v2 development and heldout diagnostics postdate it**. [Package evidence](evidence/phase3-dense-checkpoint-package.json). No new release/tag or runtime merge to main.
+- Research evidence is pushed at `d684205`; product/delivery documentation at `b1a1af0`. Public bilingual site is now website-only main **`1a5b68b25a23fc2b4375dc0370a64cfbd7e21544`**. [Pages run 39586997096](https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39586997096) passed; live EN/ZH homepages and JS/CSS equal the reviewed build byte-for-byte. [Deployment evidence](evidence/phase3-homepage-deployment.json). [Engineering delivery](PHASE3_DELIVERY.md) distinguishes completed implementation from research gates.
 
-## 27B checkpoint and remaining external steps
-- `docs/qwen27.md`, `qwen27.manifest.json`, `qwen27-alternatives.json` and `scripts/probe_qwen27.py` contain pinned audit, preflight and resume commands.4-bit2K/4K estimates17.92/18.05GiB available vs observed8.06/8.26GiB; blocked before load, not OOM/peak. Clean3-bit/affine2-bit candidates estimate15.21/11.79GiB; neither downloaded/quality-tested. No silent replacement.
-- Paused27B4-bit transfer:88/1274 first-shard chunks(~367MiB), `/tmp/deepinfer-download-chunks/Qwen3.8-27B-4bit/`. Check existing processes before resuming; `/tmp` may be cleaned across reboots. No download/GPU job currently required for small-model release.
-- Published canonical release source: `9cda996b98a3967eb6395da520cf83ce5b7287a0`; tree `6c8f67ded02c06c5f495c39067bf76e519ec7d54` exactly matches142-file locally verified source. Original local7643... remains preserved. Official Git Data API was used after Git transport failure; no force update.
-- Live website: https://zevin17.github.io/deepinfer-mac/ . Deploy workflow39540322347 succeeded;9 live pages/assets/JSON endpoints returned200 and matched local production bytes exactly (`docs/evidence/live-site-check.json`). Portable CI39540162708 succeeded on canonical source; initial pre-enablement Pages failure was resolved by enabling workflow Pages and dispatching deployment.
-- Public alpha: https://github.com/ZEVIN17/deepinfer-mac/releases/tag/v0.1.0a1 ; prerelease=true, not latest, tag targets exact canonical source. Wheel, sdist, complete static ZIP and SHA256SUMS uploaded; GitHub returned matching digests. No credentials were printed or persisted.
-- SHA256 wheel `c2fef578a8f5d654276822d59785f12509c585784d6ff9b81b747a4fdef31010`; sdist `b13994a95217fa3a862aade4b2f08950281f574845a36f564874f0d495a91bb1`; site ZIP `88f5df1fa842580966934ddec82683978bf43730f4e04b5555c4c1292cae7e39`. Published package bytes are final; do not rebuild them merely for this publication-log update.
-- Remaining limits are hardware/experimental scope, not release blockers:27B not loaded, speculative numeric divergence/no adaptive gain, and reload RSS retention. Read the specific evidence before extending claims.
+## Remaining gates and next execution
+
+- Separate quantized shape/partition numerical differences from cache-state errors; cycle-matched old replay now passes, fast trim still differs. Keep strict failures and dense-only opt-in scope; do not promote capability based on matching sampled tokens alone.
+- API cost calibration remains unaccepted; no automatic online calibration or trained confidence head. Cross-model/hybrid optimized equivalence, trace-justified ZOS overlap, broad quality/long-context/overload acceptance and competitive performance gates remain incomplete.
+- This ignored-EOS fixed-budget protocol is internal/MLX-only. oMLX needs a newly frozen natural-EOS fair protocol; do not reuse heldout for tuning. Large 9B fairness remains resource-limited; user cannot free RAM, do not ask again or bypass guards.
+- Independent code/export/claim review, explicit public branch synchronization and homepage deployment are complete. Continue the unresolved research gates above without changing historical evidence. Exclude raw artifacts, results, weights, dist and private paths from pushes.
+
+## History
+
+[Previous dense-first continuation](history/PROGRESS_PHASE3_DENSE_FIRST_20261021.md) preserves its exact bytes, including links to all earlier history. Historical measurements and hashes remain unchanged.

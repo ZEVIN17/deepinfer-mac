@@ -1,0 +1,75 @@
+{
+  "recorded_at_utc": "2026-10-21T06:06:04.341808+00:00",
+  "reviewer": "independent cache_verification agent",
+  "scope": "message-boundary cache integration; CPU verification only",
+  "source_sha256": {
+    "src/deepinfer_mac/engine.py": "093368bfb85004d93c108dfa3e6d9a489b6181371f64c103535a102d4fe0b401",
+    "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+    "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+    "benchmarks/experiments/message_checkpoint_validation.py": "f25f600a52f2b6cb2bf242cd6d32a1a399bafe5730550e274e4e0abf37e0d576",
+    "benchmarks/experiments/cache_sessions.v2.json": "f891ff522edc120731781f5a0e8f3b211774b4dfea696af1690ec8f4c5d81ad5",
+    "tests/test_engine_message_checkpoints.py": "e0a2f3767fdd243c8ca8b75e104d816397220c0bc8f4ca603275c85a0cf7f894",
+    "tests/test_session_boundaries.py": "31136030ca061df037ab70f300251c75a60c1c4c927737c3119fd318708bbe07",
+    "tests/test_native_cache.py": "b8d5ed8fad6d495429289f088340c40151308be90dabbfef7eddc99656e4f8d0",
+    "tests/test_message_cache_independent_review.py": "11145e531466d0cab0ecca6561d1bec224101fa92954bd606593473346c90bf2"
+  },
+  "prefill_function_ast_sha256": "1e7cca52b8871f914ba27803aed0dfc7ff177706d9f7f4dab4069165cfca2c9a",
+  "gpu_used": false,
+  "status": "passed_cpu_real_model_validation_pending",
+  "commands": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_engine_message_checkpoints.py tests/test_session_boundaries.py tests/test_native_cache.py tests/test_message_cache_independent_review.py",
+      "exit_code": 0,
+      "result": "20 passed in 0.05s"
+    },
+    {
+      "command": ".venv/bin/ruff check src/deepinfer_mac/engine.py src/deepinfer_mac/cache.py src/deepinfer_mac/session_boundaries.py benchmarks/experiments/message_checkpoint_validation.py tests/test_engine_message_checkpoints.py tests/test_session_boundaries.py tests/test_message_cache_independent_review.py",
+      "exit_code": 0,
+      "result": "All checks passed"
+    },
+    {
+      "command": "PYTHONPATH=src .venv/bin/python benchmarks/experiments/message_checkpoint_validation.py --output /tmp/deepinfer-review-must-not-run.json",
+      "exit_code": 2,
+      "result": "Expected refusal: explicit --run-metal and exclusive GPU ownership required; no inference performed"
+    }
+  ],
+  "independent_controls": [
+    {
+      "control": "unchanged installed upstream pure-Python PromptTrie/LRUPromptCache AST compiled without importing Metal",
+      "result": "passed actual upstream category routing, nbytes totals, exact hybrid fallback, trimmable one-token tail and branch clone independence",
+      "test_file": "tests/test_message_cache_independent_review.py"
+    },
+    {
+      "control": "cancellation after one actually consumed chunk",
+      "result": "InterruptedError; stored snapshot includes consumed prefix only; subsequent mutation of failed request cannot alter stored snapshot"
+    },
+    {
+      "control": "one-generation-tail-token template, repeated warm request",
+      "before_fix": "cold role=user, warm role=assistant",
+      "after_fix": "cold role=user, warm role=user; warm forward chunks empty; state unchanged",
+      "regression": "tests/test_engine_message_checkpoints.py::test_warm_final_message_boundary_preserves_user_priority_without_forward"
+    }
+  ],
+  "manifest": {
+    "sha256": "f891ff522edc120731781f5a0e8f3b211774b4dfea696af1690ec8f4c5d81ad5",
+    "hardcoded_expected_sha256": "f891ff522edc120731781f5a0e8f3b211774b4dfea696af1690ec8f4c5d81ad5",
+    "matches": true,
+    "selected_scope": "first dev session seed/hot/branch; calibrated2048 prompt+256maxoutput=2304 context; greedy seed0 and official nonthinking seed42;20 requests"
+  },
+  "anti_pattern_checks": {
+    "default_off": "InferenceEngine(message_checkpoints=False); exact backend opt-in rejected",
+    "cache_false_unchanged": "No partial tokenization, original chunk grid, no snapshots; portable controls pass",
+    "dummy_tokens": "Empty-user fallback used only to discover exact common prefix; prefill always slices original full real request IDs",
+    "arbitrary_hybrid_trim": "No speculative intermediate recurrent state invented; snapshot only after model consumption and mx.eval; nontrimmable lookup falls back to earlier exact snapshot",
+    "privacy_and_network": "Scoped helper, validation harness and tests contain no hardcoded user-home paths or network operations; published report recursively aliases workspace/home paths",
+    "synthetic_performance": "CPU fixtures assert state/API contracts only; no performance ratios inferred; validation harness scope explicitly says not performance",
+    "sampling_risk": "Opt-in can split cold-prefill shapes; requires_real_model_sampling_validation and prefill_shapes_changed retained; no real numerical equivalence claimed by this record",
+    "metric_semantics": "snapshot_host_ms measures host put interval; logical_snapshot_bytes_written counts accepted logical snapshots and can share MLX arrays; global write_ms includes clone/insert/eviction, eviction_selection_ms only LRU selection; request wall timing remains full-cost"
+  },
+  "not_yet_verified": [
+    "20-request real-model greedy/official/cache cold-hot-branch full-token equivalence",
+    "No competitive speedup or >=15% target verified by this CPU review",
+    "Memory physical allocation and actual GPU numerical effects require real-model run"
+  ],
+  "next_command": "PYTHONPATH=src .venv/bin/python benchmarks/experiments/message_checkpoint_validation.py --run-metal --sampler both"
+}

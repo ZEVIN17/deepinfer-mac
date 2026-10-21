@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "accepted": true,
+  "scope": "Local-only Phase3 product acceptance presentation; no deployment, runtime change, release or performance claim",
+  "evidence_source_commit": "43d967652683817daf7eff0b7553ae5d5293739e",
+  "source_sha256": {
+    "benchmarks/reports/phase3-model-adapter-integration.json": "0e4f0bd86234e934025e5c501ceb6dd02f0471955c8caaf131a384786efd9787",
+    "benchmarks/reports/phase3-smollm2-weight-audit.json": "cfa67f1581862b41c25e418934bea9d18aa3ed9c5ba4db2bb06c40c7373e3fb0",
+    "docs/MODEL_ADAPTERS.md": "41af1223b86d68378df185ef6c2dba6304601e5a47faf66177386130dd51c535"
+  },
+  "changed_source_sha256": {
+    "README.md": "900ce54148400c51d36de4de56518f85248dc5b53767e1b9c8ac1b488a572b10",
+    "README.zh-CN.md": "8f89d67527155b249ad54095ad71b0060622951ee6602d0964db157d49aaa274",
+    "site/build.py": "6556b91f538ce7d9a11370a964314a606ada6d9fece47da0cb8cf837b6fa200a",
+    "site/README.md": "6ceeb442b81f4158c1b90c558dc50065e6ca30a92d52838158c3f6f073319b88"
+  },
+  "checks": {
+    "build": ".venv/bin/python site/build.py: 8 pages",
+    "links": ".venv/bin/python site/check.py: 138 local links passed",
+    "phase2_bundle_unchanged": true,
+    "phase2_source_commit": "66ae444f535c63b43003ba6febeb42228d4d607a",
+    "desktop_qa": "CUA rendered Chinese acceptance card at 1280px; document scrollWidth 1280; three fixed 43d9676 evidence links verified",
+    "mobile_qa": "CUA rendered Chinese acceptance card within 390px iframe viewport; screenshot visually checked. Read-only iframe DOM dimension API unavailable; no numeric mobile overflow assertion.",
+    "screenshots": [
+      "/tmp/deepinfer-phase3-product-acceptance-desktop.png",
+      "/tmp/deepinfer-phase3-product-acceptance-mobile.png"
+    ],
+    "owned_preview_port": 8097,
+    "owned_preview_stopped": true,
+    "user_port_8765_touched": false
+  },
+  "capability_scope": {
+    "verified": "SmolLM2-135M-Instruct-8bit baseline/native, dense cache, CLI, API, SSE",
+    "other_custom_models": "independent acceptance required",
+    "batch_cross_request_pipeline": "building",
+    "primary_demo": "Qwen3.5-9B-8bit"
+  },
+  "notes": [
+    "System python3 is 3.9 and cannot import itertools.pairwise; successful build used repository .venv interpreter.",
+    "No new report bundle: Phase3 evidence uses separate fixed-commit external links."
+  ]
+}

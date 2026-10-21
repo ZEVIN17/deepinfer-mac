@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "status": "prepared_source_audit_only_actual_not_run",
+  "actual_model_load": false,
+  "actual_gpu_or_service_run": false,
+  "performance_claim": null,
+  "environment": {
+    "omlx": "0.7.1",
+    "omlx_release_commit": "bd1e9b112474862ebed550a9c83b4316038a1d74",
+    "mlx": "0.32.4",
+    "mlx_lm": "0.31.4.dev132+g94cdcae13",
+    "provenance": "existing private environment inventory, no installation or upgrade"
+  },
+  "local_source_sha256": {
+    "omlx/request.py": "cc91de71b97725035328ec02e0588be1f38e458f0e1411105725f466a49428a4",
+    "omlx/scheduler.py": "5662a0ad37b1a3f8bd8fb53ecf318d3922684b52530309321598021ee4861631",
+    "omlx/engine/batched.py": "bab0aae328d7fbf6fcf9ce588dbef10f4a4641a0ab5f32e763b6473e8f852017",
+    "omlx/api/openai_models.py": "45d2d5e60fea329eaef58aae3bfece78bec7340458ea52912c84d83d7a200267",
+    "omlx/model_settings.py": "6e4f071f218f0c75e46d382af8b5bad34954fcf81537b61a933548a608cda7a8",
+    "omlx/cli.py": "2d154e946d873c34b19673fc3f5fd95f4847385dedbecc791d19918a6997855b",
+    "mlx_lm/utils.py": "d442babbfd891bfa61ec9c6feead9024e206a333a357c5e4a07554c4ea138965",
+    "mlx_lm/models/llama.py": "dfb656511e6740781cd0563f7994a78b3404c199b9aebaa2fbca28a19e280891",
+    "mlx_lm/generate.py": "4a3bf57f5679dac73791f069268866ab5b9336e58582d436b31133984e4b6971"
+  },
+  "model": {
+    "config": "examples/models/research-smollm2-360m-6bit.local.json",
+    "family": "llama",
+    "quantization": {
+      "bits": 6,
+      "group_size": 64
+    },
+    "readiness": "loader source supports config-driven MLX quantization and Llama; actual load/output verification still required",
+    "dflash": "Installed model-settings source excludes Llama from supported DFlash families. The ordinary 135M autoregressive draft is not a DFlash checkpoint; do not pretend disabling an available trained DFlash advantage."
+  },
+  "protocol": {
+    "endpoint": "/v1/completions",
+    "prompt_schema": "string or list of strings; not token ID array",
+    "input": "Render one exact frozen target chat template once, pass the same rendered string to all frameworks; audit prompt token IDs at scheduler admission and reject mismatches before timing. Do not assume equal strings guarantee equal BOS behavior.",
+    "sampling": {
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 0,
+      "min_p": 0,
+      "repetition_penalty": 1,
+      "presence_penalty": 0,
+      "frequency_penalty": 0,
+      "max_tokens": 128,
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    },
+    "eos": "No ignore_eos or min_tokens field in official CompletionRequest. Scheduler always merges tokenizer/generation EOS; stop=[] does not disable EOS. Use identical natural EOS and max_tokens ceilings for all service arms, report actual emitted token counts. Forced-length DS traces are mechanism evidence, not a directly comparable service speedup.",
+    "fixed_output_length_supported_by_official_http_schema": false,
+    "timing": "Fixed absolute arrival schedule shared across arms, including 1/2/4 concurrency and both long-first/short-first. Measure submission-to-first-token, intertoken arrival, complete task, errors and timeouts. Include queue and SSE transport time."
+  },
+  "configuration": {
+    "candidate_launch": "\"$OMLX_PYTHON\" benchmarks/experiments/omlx_service_server.py serve --model-dir \"$ISOLATED_MODEL_PARENT\" --host 127.0.0.1 --port \"$OWN_FREE_PORT\" --max-concurrent-requests 4 --memory-guard balanced --no-hf-cache --headless",
+    "launch_validation": "Flags verified from installed CLI help captured by prior audit, not executed in this audit. Isolated parent contains only target snapshot; own free port must not be 8765. Settings/cache directories must be isolated before execution.",
+    "cache": "Do not disable cache solely to win. Cold arm uses fresh isolated process/cache and audited actual cached_tokens; warm reuse separately keeps reasonable native cache enabled. --no-cache only disables oMLX paged SSD cache, not internal BatchGenerator KV; if used as mechanism control label it explicitly.",
+    "prefill": "Installed SchedulerConfig prefill_step_size default 2048 and max_num_seqs default 256; CLI max-concurrent-requests exists. No verified CLI prefill-step flag; inspect resulting runtime config instead of inventing one. Allow independent reasonable development tuning under equal total resource caps.",
+    "native_batch": "Use installed BatchGenerator(model, max_tokens=..., stop_tokens=..., completion_batch_size=..., prefill_batch_size=..., prefill_step_size=...) and insert plus next() ticks. Admit the same frozen arrivals at tick boundaries and record lateness; next_generated() may conceal prefill ticks. Service fairness also requires equal HTTP/SSE observation, not direct Python native vs HTTP oMLX."
+  },
+  "resources": {
+    "allocation": "One GPU-owning process at a time; no parallel model services. Preflight available memory before loading, retain balanced guard and system Metal limit.",
+    "kv_estimate": "360M config: 32 layers * 2 K/V * 5 KV heads * 64 head dim * 2 BF16 bytes = 40960 bytes/token, approximately 320 MiB for four 2048-token requests before padding/overhead. Actual cache dtype/allocator must be measured.",
+    "total": "Target weights + KV + activations/logits + framework/runtime reserve, not KV alone; reuse 2 GiB adapter reserve as conservative planning, not measured oMLX requirement. Record available memory, process RSS, actual Metal peak and swap before/during/after, reject resource-contaminated rounds.",
+    "no_current_resource_admission_claim": true
+  },
+  "acceptance_before_comparison": [
+    "Actual small-target oMLX load and deterministic output audit",
+    "Exact target/tokenizer/template/prompt ID identity",
+    "Natural EOS semantics aligned with DeepInfer and native controls",
+    "Version/source/settings hash frozen after development tuning",
+    "At least three independent process rounds with rotating framework order and heldout tasks",
+    "Cold/warm cache separate; failures and resource exclusions retained",
+    "No extrapolation from 360M dense to 9B or hybrid models"
+  ]
+}

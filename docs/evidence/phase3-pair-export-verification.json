@@ -1,0 +1,86 @@
+{
+  "scope": "CPU exporter counterexamples, not additional model measurements",
+  "raw_input_sha256": "beb38d48049062ee64fef5ee18ac0c0084a2f241eb05de4a79dfb675595bb6b3",
+  "exporter_sha256": "4035efebb9ac413ffdc307ade05eacdeea244729de30f639c265f46a539c8d84",
+  "passed": true,
+  "cases": {
+    "actual": {
+      "matched": 10,
+      "total": 10,
+      "expected_comparisons": 10,
+      "expected_cases": 5,
+      "observed_cases": 5,
+      "complete_cases": 5,
+      "native_complete": true,
+      "missing_policies": [],
+      "unexpected_policies": [],
+      "duplicate_policy": false,
+      "coverage_complete": true,
+      "strict_pass": true
+    },
+    "missing_case": {
+      "matched": 8,
+      "total": 8,
+      "expected_comparisons": 10,
+      "expected_cases": 5,
+      "observed_cases": 4,
+      "complete_cases": 4,
+      "native_complete": true,
+      "missing_policies": [
+        "fixed_shared_cap"
+      ],
+      "unexpected_policies": [],
+      "duplicate_policy": false,
+      "coverage_complete": false,
+      "strict_pass": false
+    },
+    "mismatch": {
+      "matched": 9,
+      "total": 10,
+      "expected_comparisons": 10,
+      "expected_cases": 5,
+      "observed_cases": 5,
+      "complete_cases": 5,
+      "native_complete": true,
+      "missing_policies": [],
+      "unexpected_policies": [],
+      "duplicate_policy": false,
+      "coverage_complete": true,
+      "strict_pass": false
+    },
+    "truncated_output": {
+      "matched": 9,
+      "total": 10,
+      "expected_comparisons": 10,
+      "expected_cases": 5,
+      "observed_cases": 5,
+      "complete_cases": 4,
+      "native_complete": true,
+      "missing_policies": [],
+      "unexpected_policies": [],
+      "duplicate_policy": false,
+      "coverage_complete": false,
+      "strict_pass": false
+    },
+    "empty_cases": {
+      "matched": 0,
+      "total": 0,
+      "expected_comparisons": 10,
+      "expected_cases": 5,
+      "observed_cases": 0,
+      "complete_cases": 0,
+      "native_complete": true,
+      "missing_policies": [
+        "cost_bucket",
+        "fixed_full_bucket",
+        "fixed_shared_cap",
+        "heterogeneous_bucket",
+        "heterogeneous_padded"
+      ],
+      "unexpected_policies": [],
+      "duplicate_policy": false,
+      "coverage_complete": false,
+      "strict_pass": false
+    }
+  }
+}

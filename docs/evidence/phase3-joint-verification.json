@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "purpose": "Fresh independent joint-budget and actual variable-length execution verification",
+  "status": "mechanism_controls_verified_pretrained_strict_equivalence_not_accepted",
+  "performance_advantage_proven": false,
+  "production_capability_upgrade": false,
+  "source_sha256": {
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/varlen_verify.py": "2b5e42a11ecea37c6cf5403675f1ecd73dbac595a1beea633e45c4fb5c796b27",
+    "tests/test_joint_budget.py": "24eea9fb3589c00061db89b8eb0df5e9867a01e89c6a982e21e9441f42b9c147",
+    "tests/test_varlen_metal.py": "ca5884e46c47d8949acf08d225ee85095de03f6e5a1c344faa29861e7ad8225c",
+    "benchmarks/experiments/phase3_verify_joint.py": "b4a07db1a5ba63c4bedb6e27eda1dead6627cc88ed28b0a74cde9c6cca20ecb8"
+  },
+  "commands": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_joint_budget.py tests/test_varlen_metal.py --run-metal",
+      "exit_code": 0,
+      "passed": 28,
+      "portable": 21,
+      "actual_metal": 7,
+      "seconds": 0.75
+    },
+    {
+      "command": ".venv/bin/python benchmarks/experiments/phase3_verify_joint.py --execute --output benchmarks/reports/phase3-joint-mechanism-final.json",
+      "exit_code": 1,
+      "reason": "Strict native Chinese greedy equality rejected; expected evidence-preserving failure"
+    }
+  ],
+  "coverage": {
+    "cpu_reference_exhaustive_cases": 2025,
+    "mlx_rank_reference_cases": 193,
+    "probability_contracts": [
+      "conditional cumulative separation",
+      "nonfinite and range guards",
+      "fresh zero tie",
+      "UID generation/remap",
+      "N-2 total and N-1 row allocation",
+      "censored suffix",
+      "immutable confidence",
+      "integer output limits"
+    ],
+    "actual_device": [
+      "dense heterogeneous [B,q] buckets",
+      "padded same-prefix control",
+      "dense cancellation rollback",
+      "distinct tiny random target/draft full cycle",
+      "tiny actual Qwen3.5 ArraysCache+KVCache single-row fallback",
+      "EOS and remaining limits",
+      "target-forward failure and draft-catchup failure restore both caches/history",
+      "dynamic batch 3 to 2, reorder and reused generation",
+      "cost-key strategy mismatch refusal"
+    ],
+    "hybrid_cross_row_batch": false,
+    "trained_confidence_head": false,
+    "sampling_speculation": false
+  },
+  "pretrained_control": {
+    "model": "SmolLM2-135M-Instruct-8bit",
+    "draft": "same-target mechanism_control",
+    "processes_per_report": 1,
+    "cycles_per_case": 3,
+    "cases": 4,
+    "native_strict_accepted": false,
+    "forced_bucket_padded_outputs_equal": true,
+    "english_and_code_native_match": true,
+    "chinese_first_divergence": {
+      "index": 3,
+      "actual_token": 16313,
+      "native_token": 33,
+      "native_top_two_margin": 0.015625
+    },
+    "target_draft_next_logits_exact_all_rows": true,
+    "accepted_history_serial_next_tokens_match_all_rows": true,
+    "accepted_history_serial_logit_max_abs": 0.08203125,
+    "source_unchanged": true,
+    "swap_delta_bytes": 0,
+    "metal_peak_bytes": 306792436
+  },
+  "work_controls": {
+    "forced_lengths": [
+      1,
+      2,
+      4
+    ],
+    "bucket_verify_q_per_cycle": 7,
+    "padded_verify_q_per_cycle": 12,
+    "bucket_full_model_token_work_per_cycle": 30,
+    "padded_full_model_token_work_per_cycle": 35,
+    "interpretation": "Actual token-position work reduction for these fixed controls, not kernel count or latency improvement. Shared-cap emits different lengths and cannot be compared by per-cycle milliseconds as equal-output performance."
+  },
+  "limitations": [
+    "No cost curve is installed in the history case; it runs full budget and does not establish cost-driven adaptation.",
+    "One process with three internal cycles is not three independent benchmark processes.",
+    "Same-target draft is not a realistic acceleration or held-out confidence-calibration claim.",
+    "Quantized shape-dependent Chinese greedy divergence remains and capability flags must not be upgraded.",
+    "Accepted-history next token agreement does not imply bitwise serial state equality; observed logits differ by up to 0.08203125.",
+    "No end-to-end shared-cap advantage, native MLX-LM or oMLX performance advantage is established."
+  ],
+  "retained_reports": {
+    "benchmarks/reports/phase3-joint-mechanism-state-control.json": {
+      "sha256": "9efbf01cfae5c59f8610ee8017ca42c49254bfaac7f015923f30dd772dd58c8d",
+      "accepted": false,
+      "source_identity_preserved": true
+    },
+    "benchmarks/reports/phase3-joint-mechanism-final.json": {
+      "sha256": "529b29f3442d40c6fb7d88f01e4ca45ed6a4d0288ee7504f18f79131322525b7",
+      "accepted": false,
+      "source_identity_preserved": true
+    },
+    "benchmarks/reports/phase3-joint-mechanism-diagnostic.json": {
+      "sha256": "a5764612b30af7961d63bee136aa86c4fc3134f55b28944cf07a2c51f45baf59",
+      "accepted": false,
+      "source_identity_preserved": true
+    },
+    "benchmarks/reports/phase3-joint-mechanism.json": {
+      "sha256": "e8820589e8d713c6f8edab492a629495d9dabcd4bff91d2e31fe2d13288116e5",
+      "accepted": false,
+      "source_identity_preserved": true
+    }
+  },
+  "environment_note": "Initial sandbox MLX import aborted; authorized outside-sandbox actual Metal calls passed. No large weights, downloads or listening services used.",
+  "formatter_only_followup": {
+    "path": "benchmarks/experiments/phase3_verify_joint.py",
+    "actual_execution_harness_sha256": "b4a07db1a5ba63c4bedb6e27eda1dead6627cc88ed28b0a74cde9c6cca20ecb8",
+    "current_formatter_sha256": "73a7729bcbe50488c0584fef850d2ca63f818cb421d9ec3493236a70e21252ca",
+    "description": "Only source-map path formatting made repository-relative. Original execution source hashes remain unchanged; no GPU rerun or rebinding. Four raw report originals retained privately; public reports sanitize keys only."
+  }
+}

@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 DIST = SITE / "dist"
 REPO = "https://github.com/ZEVIN17/deepinfer-mac"
-BRANCH = REPO + "/tree/codex/phase2-core"
+BRANCH = REPO + "/tree/main"
 SOURCE_COMMIT = "66ae444f535c63b43003ba6febeb42228d4d607a"
 ADAPTER_SOURCE_COMMIT = "43d967652683817daf7eff0b7553ae5d5293739e"
 JOINT_SOURCE_COMMIT = "d54f09ec709b3cb65513057e0d6f1eb54e13a1ae"
@@ -107,13 +107,13 @@ def capabilities(zh=False):
 
 def quickstart(zh=False):
     t = lambda en, cn: cn if zh else en
-    command = '''git clone --branch codex/phase2-core --single-branch https://github.com/ZEVIN17/deepinfer-mac.git
+    command = '''git clone --branch main --single-branch https://github.com/ZEVIN17/deepinfer-mac.git
 cd deepinfer-mac
 uv sync --frozen --extra mlx
 uv run deepinfer-mac doctor
 uv run deepinfer-mac models --download qwen3.5-9b-8bit --target-only
 uv run deepinfer-mac serve'''
-    return f'''<section class="section" id="install"><div class="sectionhead"><div><span class="index">GET STARTED</span><h2>{t('Your next inference runs here.', '下一次推理，就在你的 Mac。')}</h2></div><p>{t('Apple Silicon · Python 3.12 / 3.13 · uv. Start the bundled local UI and API with the locked 9B model.', 'Apple Silicon · Python 3.12 / 3.13 · uv。用锁定版本的 9B 模型，启动内置本地 UI 与 API。')}</p></div><div class="install"><div class="code-panel"><div class="code-head"><span>TERMINAL / EXPERIMENTAL BRANCH</span><button class="copy-button" data-copy="install-command">{t('Copy', '复制')}</button></div><pre id="install-command"><code>{html.escape(command)}</code></pre><span class="copy-status" role="status"></span></div><div class="steps"><div class="step"><b>01</b><div><strong>{t('Check your Mac', '检查本机环境')}</strong><p>{t('Doctor reports Metal, Python, available memory and disk.', 'Doctor 检查 Metal、Python、可用内存与磁盘。')}</p></div></div><div class="step"><b>02</b><div><strong>{t('Open the local workspace', '打开本地工作台')}</strong><p>{t('Visit http://127.0.0.1:8765 and select qwen3.5-9b-8bit. The default path is baseline generation.', '访问 http://127.0.0.1:8765，选择 qwen3.5-9b-8bit；默认使用 baseline 生成路径。')}</p></div></div><div class="step"><b>03</b><div><strong>{t('Build on the same engine', '在同一个引擎上开发')}</strong><p>{t('Use CLI, streamed API or the bundled browser UI. Explore the explicit adaptive entry in the architecture guide.', '使用 CLI、流式 API 或内置浏览器 UI；自适应实验入口见架构指南。')}</p></div></div><a class="textlink" href="compatibility.html">{t('Run guide & API example', '运行指南与 API 示例')} ↗</a></div></div></section>'''
+    return f'''<section class="section" id="install"><div class="sectionhead"><div><span class="index">GET STARTED</span><h2>{t('Your next inference runs here.', '下一次推理，就在你的 Mac。')}</h2></div><p>{t('Apple Silicon · Python 3.12 / 3.13 · uv. Start the bundled local UI and API with the locked 9B model.', 'Apple Silicon · Python 3.12 / 3.13 · uv。用锁定版本的 9B 模型，启动内置本地 UI 与 API。')}</p></div><div class="install"><div class="code-panel"><div class="code-head"><span>TERMINAL / MAIN BRANCH</span><button class="copy-button" data-copy="install-command">{t('Copy', '复制')}</button></div><pre id="install-command"><code>{html.escape(command)}</code></pre><span class="copy-status" role="status"></span></div><div class="steps"><div class="step"><b>01</b><div><strong>{t('Check your Mac', '检查本机环境')}</strong><p>{t('Doctor reports Metal, Python, available memory and disk.', 'Doctor 检查 Metal、Python、可用内存与磁盘。')}</p></div></div><div class="step"><b>02</b><div><strong>{t('Open the local workspace', '打开本地工作台')}</strong><p>{t('Visit http://127.0.0.1:8765 and select qwen3.5-9b-8bit. The default path is baseline generation.', '访问 http://127.0.0.1:8765，选择 qwen3.5-9b-8bit；默认使用 baseline 生成路径。')}</p></div></div><div class="step"><b>03</b><div><strong>{t('Build on the same engine', '在同一个引擎上开发')}</strong><p>{t('Use CLI, streamed API or the bundled browser UI. Explore the explicit adaptive entry in the architecture guide.', '使用 CLI、流式 API 或内置浏览器 UI；自适应实验入口见架构指南。')}</p></div></div><a class="textlink" href="compatibility.html">{t('Run guide & API example', '运行指南与 API 示例')} ↗</a></div></div></section>'''
 
 
 

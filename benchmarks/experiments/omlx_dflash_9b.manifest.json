@@ -1,0 +1,30 @@
+{
+  "repo": "z-lab/Qwen3.5-9B-DFlash",
+  "revision": "5fc3b3d474760f18c516db87d84c37edbfd3ede6",
+  "license": "apache-2.0",
+  "declared_base_model": "Qwen/Qwen3.5-9B",
+  "kind": "trained_dflash_block_diffusion_drafter_not_standalone_language_model",
+  "files": [
+    {
+      "path": "README.md",
+      "size_bytes": 6722,
+      "sha256": "6c02a17219438a41b03cdffd8d53c41d9225615b1a9eeefcc24360c79ab0dc99",
+      "git_blob_id": "7a5fccdced819212b44f23c128a08c01c242d15e"
+    },
+    {
+      "path": "config.json",
+      "size_bytes": 1222,
+      "sha256": "e68516cac920c0482d26858f21021a1ddd111069a685aa5aaa60ca2c41101bce",
+      "git_blob_id": "1978b9d9484d7e336501619874b89717aa207593"
+    },
+    {
+      "path": "model.safetensors",
+      "size_bytes": 2583816465,
+      "sha256": "0a42274b32554f48de1faa0d42824e9c2ceda649c30ae0a731cddf410dd698c7",
+      "git_blob_id": "8ce400da8a23e67209e7be540533be8db53abc53"
+    }
+  ],
+  "upstream_model_card_url": "https://huggingface.co/z-lab/Qwen3.5-9B-DFlash/blob/5fc3b3d474760f18c516db87d84c37edbfd3ede6/README.md",
+  "status": "downloaded_sha_verified_not_gpu_loaded",
+  "scope": "Experimental competitor manifest only; not part of product registry or model lock"
+}

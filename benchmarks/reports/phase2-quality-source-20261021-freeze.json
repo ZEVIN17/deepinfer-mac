@@ -1,0 +1,7 @@
+{
+  "archive": "benchmarks/reports/phase2-quality-source-20261021/source.tar.gz",
+  "archive_sha256": "32f200a629fd8ab808ca5eac10c4597c3ea6862e6401130b355a4e7e179cf55d",
+  "tree_sha256": "2bbd77aa1172febf0bb93e12cb07183d260caa45e72f633fa84b5656a44df1c4",
+  "files": 47,
+  "extract": "/tmp/deepinfer-phase2-quality-source-20261021"
+}

@@ -1,0 +1,88 @@
+{
+  "status": "implementation_verified_pending_independent_review",
+  "date": "2026-10-21",
+  "source_sha256": {
+    "site/build.py": "a5098afea6e03c368719b95cfa377021b32d4a5c33f7d5b4f0764354dd45f560",
+    "site/check.py": "2559216f56e11442dbf743d78cec27d398c47e393a3f8b6b9d4c8fd5aa0d3af4",
+    "site/README.md": "0f2f1dd6c47cc2867fa6d1b4df58fee3da4e21fde64079aa171ff8b4452fe818",
+    "site/assets/style.css": "d07705d7e3c50dd2bb8dcf0e50b4aba580eb0c49133e4b8ac1c3494701151346",
+    "site/assets/showcase.js": "44bd77bb34f2987d15bd9e9c0234239943235e429e5e447ac750e2a756e94cd6"
+  },
+  "commands": [
+    {
+      "command": ".venv/bin/python site/build.py",
+      "exit_code": 0,
+      "result": "8 pages; source fields for milestones and recorded replay verified"
+    },
+    {
+      "command": ".venv/bin/python site/check.py",
+      "exit_code": 0,
+      "result": "138 local links/resources; 8 pages; relocatable /deepinfer-mac/ artifact"
+    },
+    {
+      "command": ".venv/bin/ruff check site/build.py site/check.py",
+      "exit_code": 0
+    },
+    {
+      "command": "node --check site/assets/showcase.js",
+      "exit_code": 0
+    }
+  ],
+  "browser_qa": {
+    "tool": "cua_repl IAB",
+    "preview_path": "/deepinfer-mac/",
+    "desktop_viewport": [
+      1280,
+      720
+    ],
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "english_chinese_hero_screenshots_visually_reviewed": true,
+    "all_eight_mobile_pages": {
+      "horizontal_overflow": false,
+      "each_has_one_h1": true
+    },
+    "architecture_click_recover_panel": "passed",
+    "architecture_arrow_right_reuse_tab": "passed",
+    "recorded_sse_replay": "Completed through captured final JSON at explicit 4x playback; output visually verified against source task",
+    "temporary_viewport_override_reset": true,
+    "screenshots": [
+      "phase2-showcase-zh-desktop.png",
+      "phase2-showcase-zh-mobile.png",
+      "phase2-showcase-en-desktop.png",
+      "phase2-showcase-demo-mobile.png"
+    ]
+  },
+  "artifact": {
+    "directory": "site/dist",
+    "pages": 8,
+    "public_source_hashes": "site/dist/data/showcase-provenance.json",
+    "deployed": false
+  },
+  "preserved": {
+    "site/data_byte_changes": false,
+    "research_document_edits": false,
+    "engine_edits": false,
+    "gpu_used": false,
+    "git_commit_or_push": false
+  },
+  "scope": "Presentation implementation and local QA; independent code/content review is separate.",
+  "self_contained_publication": {
+    "source_commit": "66ae444f535c63b43003ba6febeb42228d4d607a",
+    "bundle_manifest": "site/data/phase2/manifest.json",
+    "bundle_manifest_sha256": "6c1cd9179f6ec16176bc400b8aa49f08fa01f78543f430bc1302be917e165c60",
+    "bundle_files": 9,
+    "bundle_bytes": 1551700,
+    "each_bundle_file_equals_published_git_blob": true,
+    "pinned_technical_document_links_exist_in_commit": 15,
+    "isolated_base": "origin/main",
+    "overlay": "site/** only; no root Phase2 engine/docs/reports",
+    "isolated_build_command": "python <MAIN_WITH_SITE_OVERLAY>/site/build.py",
+    "isolated_build_exit_code": 0,
+    "isolated_link_check": "138 passed; 8 pages",
+    "historical_site_data_byte_identical_to_origin_main": 5,
+    "corrupt_bundle_rejected": true
+  }
+}

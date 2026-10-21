@@ -1,0 +1,3 @@
+{"hot_cache_only": true, "hot_cache_max_size": 536870912, "paged_ssd_cache_max_size": 294681544704, "prefill_step_size": 2048, "max_num_seqs": 1, "block_size": null, "block_aware_cache_active": true}
+{"hot_cache_only": true, "hot_cache_max_size": 536870912, "paged_ssd_cache_max_size": 294681544704, "prefill_step_size": 2048, "max_num_seqs": 1, "block_size": null, "block_aware_cache_active": true}
+{"hot_cache_only": true, "hot_cache_max_size": 536870912, "paged_ssd_cache_max_size": 294681544704, "prefill_step_size": 2048, "max_num_seqs": 1, "block_size": null, "block_aware_cache_active": true}

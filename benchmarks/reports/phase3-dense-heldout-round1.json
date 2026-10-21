@@ -1,0 +1,679 @@
+{
+  "schema_version": 1,
+  "stage": "heldout_diagnostic",
+  "round": 1,
+  "source_sha256": {
+    "benchmarks/experiments/phase3_dense_heldout.py": "59adda9dc8e95a80e5686afe4faed7f7464f57b42173bf81a8fd92243faad6c4",
+    "benchmarks/experiments/phase3_dense_fastpath_v2.py": "e0d3362dff7f87b36d83cfbbad3b8b9d5a72fa2b7c0c7def82f065e132a90cee",
+    "benchmarks/experiments/phase3_dense_heldout_protocol.json": "2ed08b84600843bbd63245c9e13ee1a7e9ccd58efac058289d8f8874a29261f2",
+    "benchmarks/experiments/phase3_dense_workload_manifest.json": "119c5278b0c1d4f2b3252cee523c718eba50e0ce9bced75cf791765d9e6b2bd5",
+    "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+    "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+    "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+    "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+    "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+    "src/deepinfer_mac/cli.py": "49fd07ff106aca8721a474575730c841bacf4251806b3a3e524e0aa2d35fdb14",
+    "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+    "src/deepinfer_mac/continuous.py": "55b4c7b6f37050d0d907c59f17ca7a460e7a19653017f7dec3e99899c753333e",
+    "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+    "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/joint_service.py": "3aa522efe7094a91f01e62dce7875113e4988165942b7c2d84663e73611bf5c6",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+    "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+    "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+    "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/server/app.py": "b865ea8c6aec37b32363720959827ddcfaa5618cc932a41c068782a72b11b0d0",
+    "src/deepinfer_mac/server/continuous_worker.py": "a30d2204c76e1e019560c986800b89f449ff818b3d9c62c621a1fc6d557c95d0",
+    "src/deepinfer_mac/server/joint_worker.py": "429634ae3a08199448b455bba19db451b13ded140468802273890396a2f99d16",
+    "src/deepinfer_mac/server/schemas.py": "87080294b40b3733f5e43493a1bdd25bb9dc8215b1521c25003fc268535ee256",
+    "src/deepinfer_mac/server/worker.py": "7ce9ba42ae69ba45f298c9f1bb6aef2ddaf4138b5d3bb0397a6575c1c5505d90",
+    "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/state.py": "d77e5d97484bd3dcdae324d6ee31830480bb7baafb1907bc10da7200fd17b096",
+    "src/deepinfer_mac/varlen_verify.py": "a006535e63d8f51cbeacf020977c7ddc77df7e8f4a81b0d90901ff90f8b85686"
+  },
+  "protocol": {
+    "schema_version": 1,
+    "scope": "Three independent diagnostic processes only; frozen selected depth3 fast bucket versus old replay and native samebatch. Not performance acceptance or release promotion.",
+    "harness_sha256": "59adda9dc8e95a80e5686afe4faed7f7464f57b42173bf81a8fd92243faad6c4",
+    "runtime_source_sha256": {
+      "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d",
+      "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+      "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+      "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+      "src/deepinfer_mac/cli.py": "49fd07ff106aca8721a474575730c841bacf4251806b3a3e524e0aa2d35fdb14",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/continuous.py": "55b4c7b6f37050d0d907c59f17ca7a460e7a19653017f7dec3e99899c753333e",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+      "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+      "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+      "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+      "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+      "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+      "src/deepinfer_mac/joint_service.py": "3aa522efe7094a91f01e62dce7875113e4988165942b7c2d84663e73611bf5c6",
+      "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+      "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "b865ea8c6aec37b32363720959827ddcfaa5618cc932a41c068782a72b11b0d0",
+      "src/deepinfer_mac/server/continuous_worker.py": "a30d2204c76e1e019560c986800b89f449ff818b3d9c62c621a1fc6d557c95d0",
+      "src/deepinfer_mac/server/joint_worker.py": "429634ae3a08199448b455bba19db451b13ded140468802273890396a2f99d16",
+      "src/deepinfer_mac/server/schemas.py": "87080294b40b3733f5e43493a1bdd25bb9dc8215b1521c25003fc268535ee256",
+      "src/deepinfer_mac/server/worker.py": "7ce9ba42ae69ba45f298c9f1bb6aef2ddaf4138b5d3bb0397a6575c1c5505d90",
+      "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+      "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+      "src/deepinfer_mac/state.py": "d77e5d97484bd3dcdae324d6ee31830480bb7baafb1907bc10da7200fd17b096",
+      "src/deepinfer_mac/varlen_verify.py": "a006535e63d8f51cbeacf020977c7ddc77df7e8f4a81b0d90901ff90f8b85686"
+    },
+    "workload_sha256": "e51e37a4aff49b23c31ec1541c9e289cf4d570a356d87f129eb41432593eb413",
+    "split": "heldout",
+    "rounds": [
+      0,
+      1,
+      2
+    ],
+    "control_orders": [
+      [
+        "native_batch",
+        "old_replay",
+        "fast_trim"
+      ],
+      [
+        "old_replay",
+        "fast_trim",
+        "native_batch"
+      ],
+      [
+        "fast_trim",
+        "native_batch",
+        "old_replay"
+      ]
+    ],
+    "selected_internal_configuration": {
+      "depth": 3,
+      "draft_execution": "batched",
+      "recovery": "dense_trim",
+      "strategy": "bucket"
+    },
+    "arrival_schedule_ms": [
+      0,
+      0
+    ],
+    "output_tokens": [
+      17,
+      32
+    ],
+    "input_token_counts": [
+      192,
+      256
+    ],
+    "native_batch": {
+      "completion_batch_size": 2,
+      "prefill_batch_size": 2,
+      "prefill_step_size": 256,
+      "stop_tokens": []
+    },
+    "resident_state": "Both target and draft resident for all controls; empty KV per control.",
+    "warmup": "Four tokens per model, then untimed serial target oracle before timed controls. First-use batch effects remain measured.",
+    "state_oracles": [
+      "whole_prefix recomputation",
+      "same per-row cycle consumption chunks replayed independently from initial prefix"
+    ],
+    "numeric_tolerance": {
+      "atol": 1e-05,
+      "rtol": 1e-05
+    },
+    "eos_policy": "Ignored uniformly, not suitable for oMLX comparison.",
+    "selection_changes_after_execution": "Forbidden; retain all failures and no retries for favourable outcomes.",
+    "summary": "Retain per-process and per-prompt arrival/completion times; aggregate paired values by prompt/session, no token/cycle independent replication. No significance claim from two prompts."
+  },
+  "workload_manifest": {
+    "schema_version": 1,
+    "output_tokens": [
+      17,
+      32
+    ],
+    "development_depth_candidates": [
+      1,
+      2,
+      3
+    ],
+    "workload_sha256": "e51e37a4aff49b23c31ec1541c9e289cf4d570a356d87f129eb41432593eb413",
+    "raw_workload_public": false,
+    "scope": "New bounded mechanism workloads frozen before fastpath device execution. Not a representative quality benchmark. Previous pair-cost heldout is regression-only.",
+    "splits": {
+      "development": [
+        {
+          "id": "dense-dev-order",
+          "context_tokens": 96,
+          "prompt_sha256": "229df9c3a8647d388a54b3e5d1131e614629c35de3529beb00e7f415c6e7f5c6"
+        },
+        {
+          "id": "dense-dev-cloud",
+          "context_tokens": 144,
+          "prompt_sha256": "3b713a9759646da46acb230fd1f86f9fb71890c836741fbba2dbfb992f262bcf"
+        }
+      ],
+      "heldout": [
+        {
+          "id": "dense-hold-navigation",
+          "context_tokens": 192,
+          "prompt_sha256": "6cac78e951e5a852fc20d0d0b5c53efdb4e5bfe2d9eec450c715a7213e92c4ff"
+        },
+        {
+          "id": "dense-hold-chinese",
+          "context_tokens": 256,
+          "prompt_sha256": "87ccea2073341d87a7dc1d3c59e486ae8d9af835dce27b5dcecabc460535498d"
+        }
+      ]
+    }
+  },
+  "models": [
+    {
+      "content_sha256": "40e44f0e35876a3e846c856f830ecca4208db73319256ff4f493434d2723950d",
+      "weight_bytes": 294135171,
+      "quantization": {
+        "group_size": 64,
+        "bits": 6
+      }
+    },
+    {
+      "content_sha256": "a4f7f71502edccf61c70717a7edb5368266a104f0c45cc1c0ed72cfb7ea27981",
+      "weight_bytes": 143030401,
+      "quantization": {
+        "group_size": 64,
+        "bits": 8
+      }
+    }
+  ],
+  "versions": {
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2"
+  },
+  "platform": "27.0",
+  "available_before_bytes": 8462417920,
+  "required_admission_bytes": 2977865220,
+  "swap_before_bytes": 3718709248,
+  "accepted": false,
+  "performance_claim": false,
+  "resident_pair_load_ms": 201.47629105485976,
+  "warmup_ms": 19.111417001113296,
+  "input_token_counts": [
+    192,
+    256
+  ],
+  "source_unchanged": true,
+  "swap_after_bytes": 3718709248,
+  "metal_peak_bytes": 933284668,
+  "available_after_bytes": 5628772352,
+  "gate_counts": {
+    "submitted_requests": 6,
+    "observed_output_requests": 6,
+    "native_matched_requests": 6,
+    "budget_complete_requests": 6,
+    "whole_prefix": {
+      "checked": 8,
+      "allclose_1e5": 0,
+      "argmax_equal": 8,
+      "offsets_equal": 8
+    },
+    "cycle_partition": {
+      "checked": 8,
+      "allclose_1e5": 4,
+      "argmax_equal": 8,
+      "offsets_equal": 8
+    }
+  },
+  "functional_output_pass": true,
+  "serial_quality_oracle": [
+    {
+      "count": 17,
+      "sha256": "fdd37ecb021ef4a9ca42e64330d9ee8308a15eb621d5cc81ec2ca9dd1d8cf727"
+    },
+    {
+      "count": 32,
+      "sha256": "78057412bc9eb1e97016ece7585a752b75c7e020aa0d1633cf390623b548e78e"
+    }
+  ],
+  "failures": [],
+  "cases": [
+    {
+      "control": "old_replay",
+      "arrival_ms": [
+        [
+          123.03699995391071,
+          123.03699995391071,
+          160.28712503612041,
+          160.28712503612041,
+          160.28712503612041,
+          160.28712503612041,
+          197.12970801629126,
+          197.12970801629126,
+          197.12970801629126,
+          197.12970801629126,
+          234.16229092981666,
+          234.16229092981666,
+          234.16229092981666,
+          234.16229092981666,
+          270.76583297457546,
+          270.76583297457546,
+          270.76583297457546
+        ],
+        [
+          123.03699995391071,
+          160.28712503612041,
+          160.28712503612041,
+          197.12970801629126,
+          197.12970801629126,
+          197.12970801629126,
+          197.12970801629126,
+          234.16229092981666,
+          234.16229092981666,
+          234.16229092981666,
+          234.16229092981666,
+          270.76583297457546,
+          270.76583297457546,
+          270.76583297457546,
+          270.76583297457546,
+          289.32966594584286,
+          309.1589160030708,
+          309.1589160030708,
+          309.1589160030708,
+          309.1589160030708,
+          328.4961659228429,
+          328.4961659228429,
+          328.4961659228429,
+          328.4961659228429,
+          347.9644999606535,
+          347.9644999606535,
+          347.9644999606535,
+          347.9644999606535,
+          367.55762493703514,
+          367.55762493703514,
+          367.55762493703514,
+          367.55762493703514
+        ]
+      ],
+      "request_completion_ms": [
+        270.76583297457546,
+        367.55762493703514
+      ],
+      "next_state": [
+        {
+          "request_index": 0,
+          "target": {
+            "whole_prefix": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.04296875
+            },
+            "cycle_partition": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": true,
+              "max_abs_error": 0.0
+            }
+          },
+          "draft": {
+            "whole_prefix": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.03125
+            },
+            "cycle_partition": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": true,
+              "max_abs_error": 0.0
+            }
+          }
+        },
+        {
+          "request_index": 1,
+          "target": {
+            "whole_prefix": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.03125
+            },
+            "cycle_partition": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": true,
+              "max_abs_error": 0.0
+            }
+          },
+          "draft": {
+            "whole_prefix": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.0390625
+            },
+            "cycle_partition": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": true,
+              "max_abs_error": 0.0
+            }
+          }
+        }
+      ],
+      "prefill_ms": 83.15637498162687,
+      "complete_task_ms": 367.5599580164999,
+      "matches_native": [
+        true,
+        true
+      ],
+      "budget_complete": [
+        true,
+        true
+      ],
+      "first_divergence": [
+        null,
+        null
+      ],
+      "outputs": [
+        {
+          "count": 17,
+          "sha256": "fdd37ecb021ef4a9ca42e64330d9ee8308a15eb621d5cc81ec2ca9dd1d8cf727"
+        },
+        {
+          "count": 32,
+          "sha256": "78057412bc9eb1e97016ece7585a752b75c7e020aa0d1633cf390623b548e78e"
+        }
+      ],
+      "cycle_count": 10,
+      "decode_model_input_positions": 203,
+      "decode_model_submissions": 85,
+      "active_batch_sizes": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "control": "fast_trim",
+      "arrival_ms": [
+        [
+          103.24437508825213,
+          103.24437508825213,
+          127.07333406433463,
+          127.07333406433463,
+          127.07333406433463,
+          127.07333406433463,
+          153.57229206711054,
+          153.57229206711054,
+          153.57229206711054,
+          153.57229206711054,
+          177.82495904248208,
+          177.82495904248208,
+          177.82495904248208,
+          177.82495904248208,
+          199.42516705486923,
+          199.42516705486923,
+          199.42516705486923
+        ],
+        [
+          103.24437508825213,
+          127.07333406433463,
+          127.07333406433463,
+          153.57229206711054,
+          153.57229206711054,
+          153.57229206711054,
+          153.57229206711054,
+          177.82495904248208,
+          177.82495904248208,
+          177.82495904248208,
+          177.82495904248208,
+          199.42516705486923,
+          199.42516705486923,
+          199.42516705486923,
+          199.42516705486923,
+          214.1668749973178,
+          230.45825003646314,
+          230.45825003646314,
+          230.45825003646314,
+          230.45825003646314,
+          246.75158399622887,
+          246.75158399622887,
+          246.75158399622887,
+          246.75158399622887,
+          263.13066703733057,
+          263.13066703733057,
+          263.13066703733057,
+          263.13066703733057,
+          279.1276670759544,
+          279.1276670759544,
+          279.1276670759544,
+          279.1276670759544
+        ]
+      ],
+      "request_completion_ms": [
+        199.42516705486923,
+        279.1276670759544
+      ],
+      "next_state": [
+        {
+          "request_index": 0,
+          "target": {
+            "whole_prefix": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.0322265625
+            },
+            "cycle_partition": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.0390625
+            }
+          },
+          "draft": {
+            "whole_prefix": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.0546875
+            },
+            "cycle_partition": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.0556640625
+            }
+          }
+        },
+        {
+          "request_index": 1,
+          "target": {
+            "whole_prefix": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.04248046875
+            },
+            "cycle_partition": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.04296875
+            }
+          },
+          "draft": {
+            "whole_prefix": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.046875
+            },
+            "cycle_partition": {
+              "offsets_equal": true,
+              "argmax_equal": true,
+              "allclose_1e5": false,
+              "max_abs_error": 0.0546875
+            }
+          }
+        }
+      ],
+      "prefill_ms": 80.33900009468198,
+      "complete_task_ms": 279.12987500894815,
+      "matches_native": [
+        true,
+        true
+      ],
+      "budget_complete": [
+        true,
+        true
+      ],
+      "first_divergence": [
+        null,
+        null
+      ],
+      "outputs": [
+        {
+          "count": 17,
+          "sha256": "fdd37ecb021ef4a9ca42e64330d9ee8308a15eb621d5cc81ec2ca9dd1d8cf727"
+        },
+        {
+          "count": 32,
+          "sha256": "78057412bc9eb1e97016ece7585a752b75c7e020aa0d1633cf390623b548e78e"
+        }
+      ],
+      "cycle_count": 10,
+      "decode_model_input_positions": 115,
+      "decode_model_submissions": 50,
+      "active_batch_sizes": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "control": "native_batch",
+      "arrival_ms": [
+        [
+          95.02108301967382,
+          97.2575000487268,
+          99.55470799468458,
+          102.04575001262128,
+          104.49225001502782,
+          107.18529100995511,
+          109.8891660803929,
+          112.63066600076854,
+          115.33462500665337,
+          118.03320806939155,
+          120.74137502349913,
+          123.4783330000937,
+          126.19562505278736,
+          128.97225003689528,
+          131.71824999153614,
+          134.4294580630958,
+          143.35179107729346
+        ],
+        [
+          95.02108301967382,
+          97.2575000487268,
+          99.55470799468458,
+          102.04575001262128,
+          104.49225001502782,
+          107.18529100995511,
+          109.8891660803929,
+          112.63066600076854,
+          115.33462500665337,
+          118.03320806939155,
+          120.74137502349913,
+          123.4783330000937,
+          126.19562505278736,
+          128.97225003689528,
+          131.71824999153614,
+          134.4294580630958,
+          143.35179107729346,
+          147.0182080520317,
+          149.04525002930313,
+          151.29950002301484,
+          153.4625410567969,
+          155.5349580012262,
+          157.79654099605978,
+          160.24225007276982,
+          162.7372910734266,
+          165.2015830622986,
+          167.65000007580966,
+          170.10104097425938,
+          172.5609580753371,
+          174.98633300419897,
+          177.4371659848839,
+          180.06216606590897
+        ]
+      ],
+      "request_completion_ms": [
+        143.35179107729346,
+        180.06216606590897
+      ],
+      "next_state": [],
+      "complete_task_ms": 180.06475002039224,
+      "matches_native": [
+        true,
+        true
+      ],
+      "budget_complete": [
+        true,
+        true
+      ],
+      "first_divergence": [
+        null,
+        null
+      ],
+      "outputs": [
+        {
+          "count": 17,
+          "sha256": "fdd37ecb021ef4a9ca42e64330d9ee8308a15eb621d5cc81ec2ca9dd1d8cf727"
+        },
+        {
+          "count": 32,
+          "sha256": "78057412bc9eb1e97016ece7585a752b75c7e020aa0d1633cf390623b548e78e"
+        }
+      ],
+      "cycle_count": 0,
+      "decode_model_input_positions": null,
+      "decode_model_submissions": null,
+      "active_batch_sizes": []
+    }
+  ],
+  "raw_report_sha256": "d6b32263bb45c60523240e4dd534215835d60c4b5f6da23af8dca723ca71ba87"
+}

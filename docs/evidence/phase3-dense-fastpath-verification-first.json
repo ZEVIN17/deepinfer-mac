@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "strict_numeric_gate_failed",
+  "accepted": false,
+  "gpu_baton_returned": true,
+  "attempts": [
+    {
+      "command": ".venv/bin/python -m pytest -q -m metal --run-metal",
+      "sandbox": "default",
+      "exit_code": 134,
+      "result": "Two failure markers preceded fatal mlx.core import abort; individual first failure details unavailable. Not counted as a passing or attributable runtime test."
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q -m metal --run-metal",
+      "sandbox": "device-enabled",
+      "exit_code": 0,
+      "passed": 76,
+      "deselected": 338,
+      "log_sha256": "da826fbfe2d3afcae29fc422d785a3f6181ab3a298239506ebed8d2e3ba82ce0"
+    }
+  ],
+  "development_report": "benchmarks/reports/phase3-dense-fastpath-development-first.json",
+  "development_report_sha256": "4dafd3ad498bfa5452b8d2130f9189c7d3d9a11b302890550c7dc433b734e14b",
+  "source_sha256": {
+    "benchmarks/experiments/phase3_dense_fastpath.py": "1e2add489e6e59f222d522291484f9b06ce5652722ba957454d9d6e62c00311d",
+    "benchmarks/experiments/phase3_dense_workload_manifest.json": "119c5278b0c1d4f2b3252cee523c718eba50e0ce9bced75cf791765d9e6b2bd5",
+    "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+    "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+    "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+    "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+    "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+    "src/deepinfer_mac/cli.py": "49fd07ff106aca8721a474575730c841bacf4251806b3a3e524e0aa2d35fdb14",
+    "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+    "src/deepinfer_mac/continuous.py": "55b4c7b6f37050d0d907c59f17ca7a460e7a19653017f7dec3e99899c753333e",
+    "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+    "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/joint_service.py": "3aa522efe7094a91f01e62dce7875113e4988165942b7c2d84663e73611bf5c6",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+    "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+    "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+    "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/server/app.py": "b865ea8c6aec37b32363720959827ddcfaa5618cc932a41c068782a72b11b0d0",
+    "src/deepinfer_mac/server/continuous_worker.py": "a30d2204c76e1e019560c986800b89f449ff818b3d9c62c621a1fc6d557c95d0",
+    "src/deepinfer_mac/server/joint_worker.py": "429634ae3a08199448b455bba19db451b13ded140468802273890396a2f99d16",
+    "src/deepinfer_mac/server/schemas.py": "87080294b40b3733f5e43493a1bdd25bb9dc8215b1521c25003fc268535ee256",
+    "src/deepinfer_mac/server/worker.py": "7ce9ba42ae69ba45f298c9f1bb6aef2ddaf4138b5d3bb0397a6575c1c5505d90",
+    "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/state.py": "d77e5d97484bd3dcdae324d6ee31830480bb7baafb1907bc10da7200fd17b096",
+    "src/deepinfer_mac/varlen_verify.py": "a006535e63d8f51cbeacf020977c7ddc77df7e8f4a81b0d90901ff90f8b85686"
+  },
+  "coverage": {
+    "completed_controls": 10,
+    "native_matched_requests": 20,
+    "observed_output_tokens": 490
+  },
+  "findings": [
+    "All 20 request outputs equal native target tokens at exact 17/32-token budgets.",
+    "All 40 target/draft next-state offsets and next-token argmax checks pass.",
+    "Full-prefix recomputed next-logit allclose(1e-5) fails in every control including original serial/exact replay; preserve this as failed numeric gate, do not relax tolerance after observation.",
+    "One development process is not a speed conclusion; native serial is quality/historical control, not a fair native same-batch competitor.",
+    "Next step: separate ordinary quantized full-prefix/step-partition sensitivity from optimization-specific next-state differences using schedule-matched replay controls. No heldout run performed."
+  ]
+}

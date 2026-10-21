@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "review_type": "fresh independent verification",
+  "accepted": false,
+  "strict_serial_native_token_gate": false,
+  "experimental_checkpoint_verified_scope": [
+    "Real dense greedy tick execution and shared decode/prefill ticks",
+    "All 7 planned cases completed under both policies; no incomplete/empty-case acceptance",
+    "Both arrival directions and prefill/decode cancellation with recovery observed",
+    "Direct upstream B4 full outputs agree for all four prompts under both policies",
+    "Real ASGI single/two concurrent SSE requests and API cancellation/recovery",
+    "Resource cleanup and unchanged runtime source"
+  ],
+  "not_accepted": [
+    "Serial native full-token invariance: Chinese B4 diverges at token 39",
+    "No hybrid batching actual-model acceptance",
+    "No competitive performance or DS variable-length verification acceptance"
+  ],
+  "actual_checks": {
+    "interactive": {
+      "complete_case_count": 7,
+      "complete_request_count": 13,
+      "serial_native_matches": 12,
+      "serial_native_mismatches": 1,
+      "direct_upstream_b4_matches": 4,
+      "per_prompt_direct_control_matches": 13,
+      "arrival_schedule_replay": false,
+      "source_still_frozen": true,
+      "swap_delta_bytes": 0,
+      "strict_functional_gate": false
+    },
+    "upstream": {
+      "complete_case_count": 7,
+      "complete_request_count": 13,
+      "serial_native_matches": 12,
+      "serial_native_mismatches": 1,
+      "direct_upstream_b4_matches": 4,
+      "per_prompt_direct_control_matches": 13,
+      "arrival_schedule_replay": false,
+      "source_still_frozen": true,
+      "swap_delta_bytes": 0,
+      "strict_functional_gate": false
+    }
+  },
+  "tests": {
+    "portable": {
+      "command": ".venv/bin/python -m pytest -q -m 'not metal'",
+      "passed": 296,
+      "deselected": 41
+    },
+    "metal": {
+      "command": ".venv/bin/python -m pytest -q --run-metal -m metal",
+      "passed": 41,
+      "deselected": 296,
+      "seconds": 1.17
+    },
+    "ruff": "passed"
+  },
+  "diagnostic_limits": "Direct upstream control fixes prefill chunk32 and inserts all four prompts together. It is not a faithful replay of all wrapper arrival/shape trajectories. No logits margin collected; numerical-cause inference remains unproved. No tolerance substituted for exact gate.",
+  "source_sha256": {
+    "benchmarks/experiments/phase3_verify_continuous.py": "65ae65d72befa4b90bae416ea2efbe36ad9669cc8c8536edeb3e2349b24a8e34",
+    "examples/models/smollm2-135m-8bit.local.json": "0e116c3dea793a84869bde87938feb4a8f0d708a7f047dbf42dbe3a9560e229a",
+    "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+    "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+    "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+    "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+    "src/deepinfer_mac/cli.py": "ff1814a555795380ffbbd064f3993ff7eb61a94b26f7ab50bf769a158346a910",
+    "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+    "src/deepinfer_mac/continuous.py": "55b4c7b6f37050d0d907c59f17ca7a460e7a19653017f7dec3e99899c753333e",
+    "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+    "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+    "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+    "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+    "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/server/app.py": "b60ce81ec8d770ad863c532a94842165b1c3f8d5c8778f4ef692de190a81c1b5",
+    "src/deepinfer_mac/server/continuous_worker.py": "d363b75525cda5318e6c2a2e7bdbdb76798b36e7e2029a6edeb77e1ebdca21cf",
+    "src/deepinfer_mac/server/schemas.py": "87080294b40b3733f5e43493a1bdd25bb9dc8215b1521c25003fc268535ee256",
+    "src/deepinfer_mac/server/worker.py": "7ce9ba42ae69ba45f298c9f1bb6aef2ddaf4138b5d3bb0397a6575c1c5505d90",
+    "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/state.py": "d77e5d97484bd3dcdae324d6ee31830480bb7baafb1907bc10da7200fd17b096"
+  },
+  "reports_sha256": {
+    "benchmarks/reports/phase3-continuous-api.json": "c58bb360bbca2451fe04db9c3d866979ed4d3dbabfcbce211f1847fa5b53dca0",
+    "benchmarks/reports/phase3-continuous-interactive.json": "663dcd92d4eabd05f2b2fc6203cbfbdfef115d4b4fb1959c729b3b3b64f8a7e4",
+    "benchmarks/reports/phase3-continuous-upstream-diagnosis.json": "91fb0ffed2c32a9f9bfe8c397c97c4ca2f6399edbe0835d4a3717ab2f7e172c5",
+    "benchmarks/reports/phase3-continuous-upstream.json": "b806893b41a65f8de12cd000a03915af6c7448a10bf87dd10bef50de9536a6bf"
+  },
+  "resource_preflight": {
+    "available_bytes": 10670014464,
+    "model_weight_bytes": 143030401,
+    "large_models_loaded": false,
+    "downloads": false,
+    "listener_started": false
+  },
+  "cleanup": {
+    "all_owned_exec_processes_exited": true,
+    "api_worker_closed": true,
+    "user_port_8765_untouched": true,
+    "gpu_baton_released": true
+  },
+  "verification_incidents": [
+    "Initial sandbox cannot expose Metal; retried authorized escalated execution",
+    "First Metal command omitted --run-metal and skipped41; rerun actual enabled all41 passed",
+    "Initial API cancellation harness route wrong (404); corrected to documented DELETE route and reran all API checks"
+  ],
+  "performance_claim": false
+}

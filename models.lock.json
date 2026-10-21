@@ -48,6 +48,238 @@
       "verified_weight_sha256": "392e8d466d56100ada00eb82031fb854297fc9e389b7d303eba3af114e87bce2"
     },
     {
+      "repo": "mlx-community/Qwen3.5-9B-8bit",
+      "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d",
+      "license": "Apache-2.0",
+      "weight_files": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "size_bytes": 5339522525,
+          "sha256": "0dcb3cdba0f43743875c861792685da5266aebcb58f7c0e345b9cd090bb0d289"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "size_bytes": 5087069898,
+          "sha256": "5abf861e7a13e7af805105270b2648634b41fda02238ae8ee1bd64628acce9b1"
+        }
+      ],
+      "verified_weights_loaded": true,
+      "status": "quality_review_required",
+      "source": "https://huggingface.co/mlx-community/Qwen3.5-9B-8bit/tree/16daa4818c54ce5f5436f929d52542eb65bbed9d",
+      "weight_files_sha256_verified": true,
+      "text_tensor_bytes": 9514412544,
+      "vision_tensor_bytes": 912020960,
+      "mtp_keys": [],
+      "quality_scope": "Fixed public27subsets and local12\u00d74smoke measured; known failures retained, no full-benchmark capability guarantee or quantization equivalence.",
+      "metadata_sha256": {
+        "config.json": "19082a0ef21dee3840a8bab56ee5325ead177085285c63ea47e79a204a566a53",
+        "tokenizer.json": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+        "tokenizer_config.json": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182",
+        "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+      },
+      "tensor_count": 1260,
+      "baseline_runtime_verified": true,
+      "quality_evidence": {
+        "public_subset": "benchmarks/reports/public-quality-qwen35-9b8-v2-summary.json",
+        "local_smoke": "benchmarks/reports/quality-qwen3.5-9b-8bit.json",
+        "greedy_native_full_token_equal_tasks": 12,
+        "independent_human_annotation": false
+      },
+      "development_budget_control": {
+        "tasks": 3,
+        "output_cap": 4096,
+        "greedy_strict_passed": 3,
+        "shared_sampling_strict_passed": 2,
+        "original_scores_unchanged": true,
+        "all_original_output_prefixes_equal": true,
+        "evidence": "benchmarks/reports/public-quality-dev4096-budget-sensitivity.json"
+      },
+      "selection_role": "retained_main_text_baseline",
+      "api_sse_ui_verified": true
+    },
+    {
+      "repo": "mlx-community/Qwen3.5-9B-4bit",
+      "revision": "8b2b98c00a6b4d291155e4890773ca8f769aee53",
+      "license": "Apache-2.0",
+      "weight_files": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "size_bytes": 5349771222,
+          "sha256": "a68b87558c6ef43f74c2bd63ce7e9092ceddc3101f3def0030774bae5f42aadd"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "size_bytes": 600449850,
+          "sha256": "b0a770bf8469c7f3f18756a0e0283f1c1174344a83e059a4e483f6af4907352d"
+        }
+      ],
+      "verified_weights_loaded": true,
+      "status": "quality_review_required",
+      "source": "https://huggingface.co/mlx-community/Qwen3.5-9B-4bit/tree/8b2b98c00a6b4d291155e4890773ca8f769aee53",
+      "weight_files_sha256_verified": true,
+      "text_tensor_bytes": 5038041600,
+      "vision_tensor_bytes": 912020960,
+      "mtp_keys": [],
+      "metadata_sha256": {
+        "config.json": "a96942cb6a8a1d3f1d17514d81a1925d04362a6a3233b389d13012211baaa9f8",
+        "tokenizer.json": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+        "tokenizer_config.json": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182",
+        "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+      },
+      "tensor_count": 1260,
+      "quality_scope": "Fixed public27subsets and local12\u00d74smoke measured; known failures retained, no full-benchmark capability guarantee or quantization equivalence.",
+      "baseline_runtime_verified": true,
+      "quality_evidence": {
+        "public_subset": "benchmarks/reports/public-quality-qwen35-9b4-v2-summary.json",
+        "local_smoke": "benchmarks/reports/quality-qwen35-9b4-smoke-v3-1.json",
+        "greedy_native_full_token_equal_tasks": 12,
+        "independent_human_annotation": false
+      },
+      "development_budget_control": {
+        "tasks": 3,
+        "output_cap": 4096,
+        "greedy_strict_passed": 0,
+        "shared_sampling_strict_passed": 2,
+        "original_scores_unchanged": true,
+        "all_original_output_prefixes_equal": true,
+        "evidence": "benchmarks/reports/public-quality-dev4096-budget-sensitivity.json"
+      },
+      "selection_role": "efficiency_quality_control_not_established_equivalent"
+    },
+    {
+      "repo": "mlx-community/Qwen3-14B-4bit",
+      "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "license": "Apache-2.0",
+      "weight_files": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "size_bytes": 5354381380,
+          "sha256": "5795efcfc7c96fd273e600562e8b111bfcc427415de9001d0a07e70cd99cff19"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "size_bytes": 2953517134,
+          "sha256": "2814562d654fe2d541fd4682804a0ccaa400e79701872c8e9f5998cf9481fdf8"
+        }
+      ],
+      "verified_weights_loaded": true,
+      "status": "quality_review_required",
+      "source": "https://huggingface.co/mlx-community/Qwen3-14B-4bit/tree/a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
+      "weight_files_sha256_verified": true,
+      "text_tensor_bytes": 8307783680,
+      "vision_tensor_bytes": 0,
+      "mtp_keys": [],
+      "metadata_sha256": {
+        "config.json": "a54ec18ffe24f3c909e9556471dc156ed9b3b61b872008831c7cba9d4768b4a5",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "tensor_count": 1007,
+      "quality_scope": "Fixed public27subsets and local12\u00d74smoke measured; known failures retained, no full-benchmark capability guarantee or quantization equivalence.",
+      "baseline_runtime_verified": true,
+      "quality_evidence": {
+        "public_subset": "benchmarks/reports/public-quality-qwen3-14b-v2-1-summary.json",
+        "local_smoke": "benchmarks/reports/quality-qwen3-14b-smoke-v3-1.json",
+        "greedy_native_full_token_equal_tasks": 12,
+        "independent_human_annotation": false
+      },
+      "development_budget_control": {
+        "tasks": 3,
+        "output_cap": 4096,
+        "greedy_strict_passed": 0,
+        "shared_sampling_strict_passed": 0,
+        "original_scores_unchanged": true,
+        "all_original_output_prefixes_equal": true,
+        "evidence": "benchmarks/reports/public-quality-dev4096-budget-sensitivity.json"
+      },
+      "selection_role": "fallback_and_future_ds_control",
+      "official_native_public_evidence": "benchmarks/reports/public-quality-qwen3-14b-official-v3-1-summary.json",
+      "answer_format_sensitivity_evidence": "benchmarks/reports/public-quality-mmlu-format-sensitivity.json"
+    },
+    {
+      "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+      "revision": "da28692b5f139cb0ec58a356b437486b7dac7462",
+      "license": "Apache-2.0",
+      "weight_files": [
+        {
+          "path": "model.safetensors",
+          "size_bytes": 625229487,
+          "sha256": "f5a0d9dd3efa73510542a8023d610ff26be2b4b020d181cfc4bedaa1fcc5dd9e"
+        }
+      ],
+      "verified_weights_loaded": true,
+      "status": "experimental_draft_tokenizer_compatible",
+      "metadata_sha256": {
+        "config.json": "ba7770da23eae5ebd6827571f086e331956b33f4442a9e876fb4aa10969a6772",
+        "tokenizer.json": "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4",
+        "tokenizer_config.json": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182",
+        "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+      },
+      "tensor_count": 847,
+      "weight_files_sha256_verified": true
+    }
+  ],
+  "profiles": {
+    "qwen3-4b": {
+      "target": "mlx-community/Qwen3-4B-4bit",
+      "draft": "mlx-community/Qwen3-0.6B-4bit"
+    },
+    "qwen3-0.6b": {
+      "target": "mlx-community/Qwen3-0.6B-4bit",
+      "draft": "mlx-community/Qwen3-0.6B-4bit",
+      "note": "Second target smoke test; self-draft is a correctness exercise, not independent pair generalization"
+    },
+    "qwen3.5-9b-8bit": {
+      "target": "mlx-community/Qwen3.5-9B-8bit",
+      "draft": "mlx-community/Qwen3.5-0.8B-4bit",
+      "status": "quality_review_required",
+      "supported_modes": [
+        "baseline"
+      ],
+      "experimental_speculation": true,
+      "draft_status": "tokenizer_compatible_initial_real96token_snapshot_replay_exact_baseline_fixed1_fixed2_ds",
+      "draft_correctness_evidence": "benchmarks/reports/phase2-hybrid-ds-qwen35-9b8-probe.json",
+      "draft_formal_performance_validated": false,
+      "baseline_runtime_verified": true
+    },
+    "qwen3.5-9b-4bit": {
+      "target": "mlx-community/Qwen3.5-9B-4bit",
+      "draft": "mlx-community/Qwen3.5-0.8B-4bit",
+      "status": "quality_review_required",
+      "supported_modes": [
+        "baseline"
+      ],
+      "experimental_speculation": true,
+      "draft_status": "tokenizer_compatible_pending_real_snapshot_replay_validation",
+      "baseline_runtime_verified": true
+    },
+    "qwen3-14b": {
+      "target": "mlx-community/Qwen3-14B-4bit",
+      "draft": "mlx-community/Qwen3-0.6B-4bit",
+      "status": "quality_review_required",
+      "baseline_runtime_verified": true
+    }
+  },
+  "tokenizer_compatibility": "Full vocabulary and special IDs checked at runtime before draft load; same tokenizer.json content digest in both repositories",
+  "weights_policy": "public snapshots in Hugging Face cache, never bundled",
+  "generation": "Baseline/native support deterministic-seed temperature/top_p/top_k/presence sampling; fixed/adaptive remain greedy-only.",
+  "historical_profiles": {
+    "qwen3.8-27b": {
+      "target": "mlx-community/Qwen3.8-27B-4bit",
+      "draft": null,
+      "supported_modes": [
+        "baseline"
+      ],
+      "status": "candidate"
+    },
+    "qwen3.8-27b-2bit": {
+      "target": "keXjos/Qwen3.8-27B-mlx-2Bit",
+      "draft": null,
+      "note": "Real baseline/cache measured; engineering smoke passes, demo quality fails. Not yet a validated main showcase."
+    }
+  },
+  "historical_models": [
+    {
       "repo": "mlx-community/Qwen3.8-27B-4bit",
       "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
       "license": "Apache-2.0",
@@ -87,32 +319,39 @@
       "supported_modes": [
         "baseline"
       ],
-      "status": "candidate",
+      "status": "retired_weights_removed",
       "notes": "Text-only sanitize excludes vision; hybrid ArraysCache is non-trimmable; current available-memory preflight may reject actual load",
       "configured_context_limit": 8192,
       "tested_context_limit": null
+    },
+    {
+      "repo": "keXjos/Qwen3.8-27B-mlx-2Bit",
+      "revision": "39d5487ad4442961b64098e15aa11ce05e6f9976",
+      "license": "Apache-2.0",
+      "quantization": {
+        "group_size": 64,
+        "bits": 2,
+        "mode": "affine"
+      },
+      "weight_files": [
+        {
+          "path": "model-00001-of-00002.safetensors",
+          "size_bytes": 5368605230,
+          "sha256": "ceab9bd44532b67b9478bb09cf04ac76da3541af97461e5043013af500175cc6"
+        },
+        {
+          "path": "model-00002-of-00002.safetensors",
+          "size_bytes": 3041100053,
+          "sha256": "fb2d5433b4b9ad1a1fa784b23d4b0921da9d0e263adad99f3386a8455d7acf54"
+        }
+      ],
+      "text_tensor_bytes": 8409463808,
+      "model_type": "qwen3_5",
+      "verified_weights_loaded": true,
+      "source": "https://huggingface.co/keXjos/Qwen3.8-27B-mlx-2Bit/tree/39d5487ad4442961b64098e15aa11ce05e6f9976",
+      "quality_status": "smoke_failed; native MLX reproduces Chinese and code outputs exactly",
+      "status": "retired_weights_removed"
     }
   ],
-  "profiles": {
-    "qwen3-4b": {
-      "target": "mlx-community/Qwen3-4B-4bit",
-      "draft": "mlx-community/Qwen3-0.6B-4bit"
-    },
-    "qwen3-0.6b": {
-      "target": "mlx-community/Qwen3-0.6B-4bit",
-      "draft": "mlx-community/Qwen3-0.6B-4bit",
-      "note": "Second target smoke test; self-draft is a correctness exercise, not independent pair generalization"
-    },
-    "qwen3.8-27b": {
-      "target": "mlx-community/Qwen3.8-27B-4bit",
-      "draft": null,
-      "supported_modes": [
-        "baseline"
-      ],
-      "status": "candidate"
-    }
-  },
-  "tokenizer_compatibility": "Full vocabulary and special IDs checked at runtime before draft load; same tokenizer.json content digest in both repositories",
-  "weights_policy": "public snapshots in Hugging Face cache, never bundled",
-  "generation": "greedy only; no temperature sampling guarantee"
+  "quality_policy": "quality_review_required denotes known failures/limited fixed-subset scope, separate from verified loading/baseline runtime. No all-task capability or independent-human quality guarantee."
 }

@@ -1,0 +1,4934 @@
+{
+  "source": {
+    "algorithm": "sha256",
+    "source_tree_sha256": "eb7411a118d7a495e40a85afd8dc73147e8a276b585f5fb8edb8cf99032c3a00",
+    "files": {
+      "src/deepinfer_mac/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+      "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+      "src/deepinfer_mac/benchmark/quick.json": "35a89c17cb78900fc38975a8644715308af85122d595f8716a469204864d30ef",
+      "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+      "src/deepinfer_mac/cache.py": "d4b4de5b54325dbb2fd5daa254c3e169cd6a7af005aacb75bd2df6d8014db709",
+      "src/deepinfer_mac/cli.py": "7052488e4d51a7a05ee853a848e8e863afdff2a2c467b375bb303b2cd2abcfcd",
+      "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+      "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+      "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+      "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+      "src/deepinfer_mac/engine.py": "2106457c8a46edc4682c6f73844afa4b81875db9133102198dda96922da65aa6",
+      "src/deepinfer_mac/hybrid_speculative.py": "4a32f6f920df334206da705726779863cc4f7422e564e27ba9af0f972a8ec835",
+      "src/deepinfer_mac/models.lock.json": "5f452a97cef7d8cbe705a567be93070744c8c6ec1630812c0d43359deadbe4b9",
+      "src/deepinfer_mac/models.py": "1e2be5d88a7a622d49516621496eef0d704be58776c3fd81033532db1d6c3b61",
+      "src/deepinfer_mac/policy.py": "25dbbac857e2f7a1fdc0e0956a90b31eca1661b9f0ce1b51b07ab35479313d43",
+      "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+      "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/deepinfer_mac/server/app.py": "ab43ba5ea5a24d39b0c9fc9db782df504e43a7b58e7ca030d2ef06436d0fb6c5",
+      "src/deepinfer_mac/server/schemas.py": "c8a2f65b564cc074a53ebdfc639dc20c148c4d9b8a10737a61750169a700a8c4",
+      "src/deepinfer_mac/server/worker.py": "5a38eb7de053779722308c736d5de37758ff62beba137847c9245ba7fb78a48f",
+      "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+      "src/deepinfer_mac/state.py": "da6e31908d54b9c4d593b868676fb1f27d8212d5b6e2ac71add65922d1bca187",
+      "src/deepinfer_mac/web/app.js": "d1d175345691be029a7be254a9bd28660a58fd9dbf5a7acc118df24837f20ffe",
+      "src/deepinfer_mac/web/index.html": "77295d5b11018c937615b4f428d83fc6f04d857da4ed5b4ed53b437e5a3eaf52",
+      "src/deepinfer_mac/web/style.css": "352588b1892c042a30a78eefaf86106eaa90b305e3024468918d1fb171d522a6",
+      "pyproject.toml": "bc4bbc9d34e6fbb110640bd5829db4a173d25164e309b591a95914a548007791",
+      "uv.lock": "65d76b103c46139eca0f1556efdbde14322125ff7cac03113ba0f9604f202e81",
+      "models.lock.json": "5f452a97cef7d8cbe705a567be93070744c8c6ec1630812c0d43359deadbe4b9",
+      "upstream.lock.json": "8584f3d05ad0cc061e334e87a3a51a56f02b4fec5c08a410ff78ee1f7fae92a3"
+    },
+    "scope": "runtime sources and available checkout locks; paths are repository relative"
+  },
+  "scope": "experimental correctness/integration probe; no speed claim",
+  "prompt": "Write Python dedupe(items) preserving insertion order. Explain complexity and provide three asserts.",
+  "samples": [
+    {
+      "variant": "baseline",
+      "result": {
+        "run_id": "a63f6372df1e4b3b831bb4e009098e03",
+        "mode": "baseline",
+        "profile": "qwen3.5-9b-8bit",
+        "text": "Here is a Python implementation of a deduplication function that preserves insertion order, followed by an explanation of its complexity and three test assertions.\n\n### Implementation\n\n```python\ndef dedupe(items):\n    \"\"\"\n    Remove duplicates from a list while preserving the original insertion order.\n    \n    Args:\n        items (list): The list to deduplicate.\n        \n    Returns:\n        list: A new list with duplicates removed, maintaining order.\n    \"\"\"",
+        "token_ids": [
+          8160,
+          369,
+          264,
+          12654,
+          7873,
+          314,
+          264,
+          7438,
+          446,
+          1633,
+          709,
+          421,
+          72346,
+          34736,
+          1906,
+          11,
+          7854,
+          539,
+          449,
+          15673,
+          314,
+          1141,
+          22373,
+          321,
+          2250,
+          1228,
+          52992,
+          13,
+          271,
+          13962,
+          29806,
+          271,
+          71093,
+          12305,
+          198,
+          727,
+          7438,
+          82525,
+          23573,
+          1590,
+          198,
+          262,
+          4071,
+          198,
+          262,
+          10466,
+          40922,
+          494,
+          264,
+          1103,
+          1345,
+          45328,
+          279,
+          3889,
+          34736,
+          1906,
+          13,
+          198,
+          1031,
+          262,
+          17167,
+          25,
+          198,
+          285,
+          3470,
+          318,
+          1551,
+          1590,
+          561,
+          1103,
+          310,
+          7438,
+          13667,
+          13,
+          198,
+          1726,
+          262,
+          5019,
+          25,
+          198,
+          285,
+          1103,
+          25,
+          357,
+          491,
+          1103,
+          440,
+          40922,
+          6747,
+          11,
+          19720,
+          1906,
+          13,
+          198,
+          262,
+          4071
+        ],
+        "prompt_tokens": 29,
+        "finish_reason": "length",
+        "metrics": {
+          "load_ms": 1.3680841075256467,
+          "ttft_ms": 1207.1602079086006,
+          "total_ms": 4553.9653749438,
+          "prefill_ms": 1017.6577089587227,
+          "prompt_tps": 27.514162918934574,
+          "decode_tps": 28.385279470617252,
+          "prompt_tokens": 29,
+          "generation_tokens": 96,
+          "peak_memory_gb": 10.162010084,
+          "peak_memory_bytes": 10162010084,
+          "active_memory_bytes": 10014109094,
+          "rss_bytes": 1269776384,
+          "swap_before_bytes": 6039207936,
+          "swap_after_bytes": 6039207936,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 2168356864,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 0,
+          "active_kv_bytes": 59899904,
+          "cache_evictions": 0,
+          "cache_backend": "native",
+          "cache_operations": {
+            "lookups": 0,
+            "hits": 0,
+            "writes": 0,
+            "rejected_writes": 0,
+            "lookup_ms": 0.0,
+            "clone_ms": 0.0,
+            "write_ms": 0.0,
+            "eviction_selection_ms": 0.0
+          },
+          "draft_acceptance": null,
+          "fallback_rate": 0,
+          "cycles": 0,
+          "policy": null,
+          "draft_accepted_tokens": 0,
+          "calibrated_fallback": false,
+          "adaptive_scheduler": null,
+          "round_diagnostics": true,
+          "speculative_recovery": null
+        },
+        "rounds": [],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3.5-9B-8bit",
+            "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+            "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+          },
+          "draft_weight_bytes": 625229487,
+          "experimental_speculation": true,
+          "hybrid_cache": true,
+          "runtime_reserve_bytes": 2147483648,
+          "minimum_memory_bytes": 0,
+          "advisory_memory_estimates": true,
+          "weight_bytes": 10426592423,
+          "text_tensor_bytes": 9514412544,
+          "quantization": "8-bit affine, group size 64",
+          "context_limit": 8192,
+          "supported_modes": [
+            "baseline"
+          ],
+          "status": "quality_review_required",
+          "role": "primary_quality_candidate",
+          "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; broader quality pending. Hybrid speculative/MTP unsupported."
+        }
+      },
+      "exact_to_baseline": true,
+      "first_divergence": null
+    },
+    {
+      "variant": "fixed1",
+      "result": {
+        "run_id": "495d8d3b06de411db19fde50a04a300c",
+        "mode": "fixed_speculative",
+        "profile": "qwen3.5-9b-8bit",
+        "text": "Here is a Python implementation of a deduplication function that preserves insertion order, followed by an explanation of its complexity and three test assertions.\n\n### Implementation\n\n```python\ndef dedupe(items):\n    \"\"\"\n    Remove duplicates from a list while preserving the original insertion order.\n    \n    Args:\n        items (list): The list to deduplicate.\n        \n    Returns:\n        list: A new list with duplicates removed, maintaining order.\n    \"\"\"",
+        "token_ids": [
+          8160,
+          369,
+          264,
+          12654,
+          7873,
+          314,
+          264,
+          7438,
+          446,
+          1633,
+          709,
+          421,
+          72346,
+          34736,
+          1906,
+          11,
+          7854,
+          539,
+          449,
+          15673,
+          314,
+          1141,
+          22373,
+          321,
+          2250,
+          1228,
+          52992,
+          13,
+          271,
+          13962,
+          29806,
+          271,
+          71093,
+          12305,
+          198,
+          727,
+          7438,
+          82525,
+          23573,
+          1590,
+          198,
+          262,
+          4071,
+          198,
+          262,
+          10466,
+          40922,
+          494,
+          264,
+          1103,
+          1345,
+          45328,
+          279,
+          3889,
+          34736,
+          1906,
+          13,
+          198,
+          1031,
+          262,
+          17167,
+          25,
+          198,
+          285,
+          3470,
+          318,
+          1551,
+          1590,
+          561,
+          1103,
+          310,
+          7438,
+          13667,
+          13,
+          198,
+          1726,
+          262,
+          5019,
+          25,
+          198,
+          285,
+          1103,
+          25,
+          357,
+          491,
+          1103,
+          440,
+          40922,
+          6747,
+          11,
+          19720,
+          1906,
+          13,
+          198,
+          262,
+          4071
+        ],
+        "prompt_tokens": 29,
+        "finish_reason": "length",
+        "metrics": {
+          "load_ms": 0.25816704146564007,
+          "ttft_ms": 416.8248330242932,
+          "total_ms": 3013.560000108555,
+          "prefill_ms": 349.7769999084994,
+          "prompt_tps": 80.05100394629925,
+          "decode_tps": 36.584400752222464,
+          "prompt_tokens": 29,
+          "generation_tokens": 96,
+          "peak_memory_gb": 10.189897366,
+          "peak_memory_bytes": 10189897366,
+          "active_memory_bytes": 10022236992,
+          "rss_bytes": 1238958080,
+          "swap_before_bytes": 6039207936,
+          "swap_after_bytes": 6039207936,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 2176184320,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 0,
+          "active_kv_bytes": 82583552,
+          "cache_evictions": 0,
+          "cache_backend": "native",
+          "cache_operations": {
+            "lookups": 0,
+            "hits": 0,
+            "writes": 0,
+            "rejected_writes": 0,
+            "lookup_ms": 0.0,
+            "clone_ms": 0.0,
+            "write_ms": 0.0,
+            "eviction_selection_ms": 0.0
+          },
+          "draft_acceptance": 0.7454545454545455,
+          "fallback_rate": 0.0,
+          "cycles": 55,
+          "policy": null,
+          "draft_accepted_tokens": 41,
+          "calibrated_fallback": false,
+          "adaptive_scheduler": null,
+          "round_diagnostics": true,
+          "speculative_recovery": "hybrid exact snapshot + consumed-prefix replay"
+        },
+        "rounds": [
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.16241602133959532,
+            "scheduler_ms": 0.02912490162998438,
+            "draft_ms": 0.0,
+            "verify_ms": 66.25366595108062,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              8160
+            ],
+            "recovery_ms": 0.0015830155462026596,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 66.48724991828203,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.15354191418737173,
+            "scheduler_ms": 0.027333968318998814,
+            "draft_ms": 0.0,
+            "verify_ms": 40.27454205788672,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              264
+            ],
+            "recovery_ms": 0.001625041477382183,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 40.5310420319438,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.15404203440994024,
+            "scheduler_ms": 0.026416964828968048,
+            "draft_ms": 0.0,
+            "verify_ms": 39.80358294211328,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              7873
+            ],
+            "recovery_ms": 0.001374981366097927,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 40.0509579339996,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14712498523294926,
+            "scheduler_ms": 0.02829195000231266,
+            "draft_ms": 0.0,
+            "verify_ms": 39.6087080007419,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              7438
+            ],
+            "recovery_ms": 31.25358303077519,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 71.09383400529623,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14512508641928434,
+            "scheduler_ms": 0.027292058803141117,
+            "draft_ms": 0.0,
+            "verify_ms": 39.34450005181134,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              709
+            ],
+            "recovery_ms": 31.187625019811094,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 70.75708301272243,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.13508298434317112,
+            "scheduler_ms": 0.022875028662383556,
+            "draft_ms": 0.0,
+            "verify_ms": 39.40491599496454,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              446
+            ],
+            "recovery_ms": 0.0011670636013150215,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.616792113520205,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1402089837938547,
+            "scheduler_ms": 0.020083971321582794,
+            "draft_ms": 0.0,
+            "verify_ms": 39.60304206702858,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              709
+            ],
+            "recovery_ms": 0.00100000761449337,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.819166995584965,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14558399561792612,
+            "scheduler_ms": 0.02079200930893421,
+            "draft_ms": 0.0,
+            "verify_ms": 40.25950003415346,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              72346
+            ],
+            "recovery_ms": 0.0018749851733446121,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 40.48816696740687,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1515829935669899,
+            "scheduler_ms": 0.022709020413458347,
+            "draft_ms": 0.0,
+            "verify_ms": 39.75595801603049,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1906
+            ],
+            "recovery_ms": 0.000750063918530941,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.98716699425131,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14391704462468624,
+            "scheduler_ms": 0.018040998838841915,
+            "draft_ms": 0.0,
+            "verify_ms": 39.56854098942131,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              3055
+            ],
+            "recovery_ms": 31.131917028687894,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 70.90862502809614,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.13616704382002354,
+            "scheduler_ms": 0.02033403143286705,
+            "draft_ms": 0.0,
+            "verify_ms": 39.31220795493573,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              539
+            ],
+            "recovery_ms": 0.0012909295037388802,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.527917047962546,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1461249776184559,
+            "scheduler_ms": 0.022916006855666637,
+            "draft_ms": 0.0,
+            "verify_ms": 39.73966697230935,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              15673
+            ],
+            "recovery_ms": 0.001250067725777626,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.96824997011572,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1392079284414649,
+            "scheduler_ms": 0.021166051737964153,
+            "draft_ms": 0.0,
+            "verify_ms": 39.57604197785258,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1141
+            ],
+            "recovery_ms": 0.0013330718502402306,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.78595801163465,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.140791991725564,
+            "scheduler_ms": 0.01937500201165676,
+            "draft_ms": 0.0,
+            "verify_ms": 39.695374900475144,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              321
+            ],
+            "recovery_ms": 0.0011249212548136711,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.91104196757078,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14283403288573027,
+            "scheduler_ms": 0.022541964426636696,
+            "draft_ms": 0.0,
+            "verify_ms": 39.80875003617257,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              3050
+            ],
+            "recovery_ms": 31.823374913074076,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 71.85966696124524,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.15391700435429811,
+            "scheduler_ms": 0.02987496554851532,
+            "draft_ms": 0.0,
+            "verify_ms": 39.49124994687736,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              4886
+            ],
+            "recovery_ms": 31.12837509252131,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 70.86716697085649,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.17595791723579168,
+            "scheduler_ms": 0.028125010430812836,
+            "draft_ms": 0.0,
+            "verify_ms": 39.875834016129375,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              13
+            ],
+            "recovery_ms": 0.001375097781419754,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 40.14804097823799,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.16933400183916092,
+            "scheduler_ms": 0.022582942619919777,
+            "draft_ms": 0.0,
+            "verify_ms": 40.816624998115,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              13962
+            ],
+            "recovery_ms": 0.0018749851733446121,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 41.09724995214492,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.16670802142471075,
+            "scheduler_ms": 0.026667024940252304,
+            "draft_ms": 0.0,
+            "verify_ms": 40.091500035487115,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              271
+            ],
+            "recovery_ms": 0.0015830155462026596,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 40.370792034082115,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1498329220339656,
+            "scheduler_ms": 0.025791930966079235,
+            "draft_ms": 0.0,
+            "verify_ms": 39.709583041258156,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              12305
+            ],
+            "recovery_ms": 0.0015409896150231361,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.950374979525805,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1824999926611781,
+            "scheduler_ms": 0.023875036276876926,
+            "draft_ms": 0.0,
+            "verify_ms": 40.262124966830015,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              727
+            ],
+            "recovery_ms": 0.0016669509932398796,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 40.53650004789233,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.16775005497038364,
+            "scheduler_ms": 0.023292028345167637,
+            "draft_ms": 0.0,
+            "verify_ms": 39.72524998243898,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              13667
+            ],
+            "recovery_ms": 31.840833951719105,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 71.81729201693088,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1907499972730875,
+            "scheduler_ms": 0.03300001844763756,
+            "draft_ms": 0.0,
+            "verify_ms": 40.81041703466326,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              31057
+            ],
+            "recovery_ms": 31.696832971647382,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 72.80708302278072,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.17574999947100878,
+            "scheduler_ms": 0.033084070309996605,
+            "draft_ms": 0.0,
+            "verify_ms": 41.00941598881036,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1590
+            ],
+            "recovery_ms": 0.0015409896150231361,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 41.3041670108214,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.16637507360428572,
+            "scheduler_ms": 0.0237500062212348,
+            "draft_ms": 0.0,
+            "verify_ms": 40.47750006429851,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              262
+            ],
+            "recovery_ms": 0.001708976924419403,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 40.75270798057318,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.15383295249193907,
+            "scheduler_ms": 0.02329191192984581,
+            "draft_ms": 0.0,
+            "verify_ms": 40.76033306773752,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              198
+            ],
+            "recovery_ms": 0.001708976924419403,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 41.016916977241635,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1550000160932541,
+            "scheduler_ms": 0.026999972760677338,
+            "draft_ms": 0.0,
+            "verify_ms": 39.914541062898934,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              5019
+            ],
+            "recovery_ms": 31.091707991436124,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 71.25483395066112,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14183297753334045,
+            "scheduler_ms": 0.026415917091071606,
+            "draft_ms": 0.0,
+            "verify_ms": 39.61545799393207,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              21814
+            ],
+            "recovery_ms": 31.334124971181154,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 71.18454098235816,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1472090370953083,
+            "scheduler_ms": 0.027916044928133488,
+            "draft_ms": 0.0,
+            "verify_ms": 39.486207999289036,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1345
+            ],
+            "recovery_ms": 31.265833997167647,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 70.98729105200619,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14354207087308168,
+            "scheduler_ms": 0.02616702113300562,
+            "draft_ms": 0.0,
+            "verify_ms": 39.33337493799627,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              264
+            ],
+            "recovery_ms": 0.0012080417945981026,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.56866706721485,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1407089876011014,
+            "scheduler_ms": 0.023250002413988113,
+            "draft_ms": 0.0,
+            "verify_ms": 39.58937502466142,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1345
+            ],
+            "recovery_ms": 0.0012919772416353226,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.81274995021522,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14424999244511127,
+            "scheduler_ms": 0.02037500962615013,
+            "draft_ms": 0.0,
+            "verify_ms": 39.58854207303375,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              279
+            ],
+            "recovery_ms": 0.000959029421210289,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.800291997380555,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.13687508180737495,
+            "scheduler_ms": 0.016874982975423336,
+            "draft_ms": 0.0,
+            "verify_ms": 39.61174993310124,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1906
+            ],
+            "recovery_ms": 31.07254207134247,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 70.8840829320252,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14870904851704836,
+            "scheduler_ms": 0.022625084966421127,
+            "draft_ms": 0.0,
+            "verify_ms": 39.32633297517896,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1906
+            ],
+            "recovery_ms": 0.001334003172814846,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.54937506932765,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14162494335323572,
+            "scheduler_ms": 0.0201669754460454,
+            "draft_ms": 0.0,
+            "verify_ms": 39.54154101666063,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              198
+            ],
+            "recovery_ms": 0.001084059476852417,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.74895901046693,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.13950001448392868,
+            "scheduler_ms": 0.016542035154998302,
+            "draft_ms": 0.0,
+            "verify_ms": 39.52716593630612,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              262
+            ],
+            "recovery_ms": 0.0009579816833138466,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.72741705365479,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1397909363731742,
+            "scheduler_ms": 0.01679197885096073,
+            "draft_ms": 0.0,
+            "verify_ms": 39.56741699948907,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              25
+            ],
+            "recovery_ms": 0.0010830117389559746,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.770124945789576,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.13979210052639246,
+            "scheduler_ms": 0.016000005416572094,
+            "draft_ms": 0.0,
+            "verify_ms": 39.50325003825128,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              285
+            ],
+            "recovery_ms": 0.001125037670135498,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.70837499946356,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.15712506137788296,
+            "scheduler_ms": 0.01933402381837368,
+            "draft_ms": 0.0,
+            "verify_ms": 39.58958305884153,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              318
+            ],
+            "recovery_ms": 0.000833999365568161,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.803917054086924,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1348330406472087,
+            "scheduler_ms": 0.01491699367761612,
+            "draft_ms": 0.0,
+            "verify_ms": 39.43754197098315,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1590
+            ],
+            "recovery_ms": 0.000750063918530941,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.62104197125882,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.13641605619341135,
+            "scheduler_ms": 0.012792064808309078,
+            "draft_ms": 0.0,
+            "verify_ms": 39.493166957981884,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1879
+            ],
+            "recovery_ms": 30.97329195588827,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 70.651667076163,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14187500346451998,
+            "scheduler_ms": 0.023458036594092846,
+            "draft_ms": 0.0,
+            "verify_ms": 39.26941694226116,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              314
+            ],
+            "recovery_ms": 31.15245804656297,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 70.63370803371072,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.16533397138118744,
+            "scheduler_ms": 0.028791953809559345,
+            "draft_ms": 0.0,
+            "verify_ms": 39.53358402941376,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              7438
+            ],
+            "recovery_ms": 0.00100000761449337,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.79149996303022,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.15533296391367912,
+            "scheduler_ms": 0.023209024220705032,
+            "draft_ms": 0.0,
+            "verify_ms": 39.60308397654444,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              13
+            ],
+            "recovery_ms": 0.001374981366097927,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.836499956436455,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14575000386685133,
+            "scheduler_ms": 0.020666047930717468,
+            "draft_ms": 0.0,
+            "verify_ms": 39.52791600022465,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1726
+            ],
+            "recovery_ms": 0.0009579816833138466,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.73991598468274,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.13954192399978638,
+            "scheduler_ms": 0.016625039279460907,
+            "draft_ms": 0.0,
+            "verify_ms": 39.557249983772635,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              5019
+            ],
+            "recovery_ms": 0.001125037670135498,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.76037504617125,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14166603796184063,
+            "scheduler_ms": 0.01679197885096073,
+            "draft_ms": 0.0,
+            "verify_ms": 39.505125023424625,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              198
+            ],
+            "recovery_ms": 0.0012080417945981026,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.712458034045994,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14216697309166193,
+            "scheduler_ms": 0.018459046259522438,
+            "draft_ms": 0.0,
+            "verify_ms": 39.49337499216199,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1103
+            ],
+            "recovery_ms": 0.00070908572524786,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.6937089972198,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.13716600369662046,
+            "scheduler_ms": 0.011375057511031628,
+            "draft_ms": 0.0,
+            "verify_ms": 39.84870796557516,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              357
+            ],
+            "recovery_ms": 0.001500011421740055,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 40.05670908372849,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1591669861227274,
+            "scheduler_ms": 0.024999957531690598,
+            "draft_ms": 0.0,
+            "verify_ms": 39.78862497024238,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1103
+            ],
+            "recovery_ms": 0.001249951310455799,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 40.03970907069743,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1454170560464263,
+            "scheduler_ms": 0.022999942302703857,
+            "draft_ms": 0.0,
+            "verify_ms": 39.6905419183895,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              4752
+            ],
+            "recovery_ms": 31.21091693174094,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 71.12629199400544,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.15320803504437208,
+            "scheduler_ms": 0.024875043891370296,
+            "draft_ms": 0.0,
+            "verify_ms": 39.30441604461521,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              6747
+            ],
+            "recovery_ms": 0.0011669471859931946,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.54266698565334,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1461249776184559,
+            "scheduler_ms": 0.020083971321582794,
+            "draft_ms": 0.0,
+            "verify_ms": 39.63366604875773,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              19720
+            ],
+            "recovery_ms": 0.000833999365568161,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.854084025137126,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14649995137006044,
+            "scheduler_ms": 0.020249979570508003,
+            "draft_ms": 0.0,
+            "verify_ms": 39.66541599947959,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              13
+            ],
+            "recovery_ms": 0.0009170034900307655,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.879290969111025,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1397499581798911,
+            "scheduler_ms": 0.01895800232887268,
+            "draft_ms": 0.0,
+            "verify_ms": 39.58945896010846,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              262
+            ],
+            "recovery_ms": 0.00108394306153059,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.79599999729544,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          }
+        ],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3.5-9B-8bit",
+            "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+            "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+          },
+          "draft_weight_bytes": 625229487,
+          "experimental_speculation": true,
+          "hybrid_cache": true,
+          "runtime_reserve_bytes": 2147483648,
+          "minimum_memory_bytes": 0,
+          "advisory_memory_estimates": true,
+          "weight_bytes": 10426592423,
+          "text_tensor_bytes": 9514412544,
+          "quantization": "8-bit affine, group size 64",
+          "context_limit": 8192,
+          "supported_modes": [
+            "baseline"
+          ],
+          "status": "quality_review_required",
+          "role": "primary_quality_candidate",
+          "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; broader quality pending. Hybrid speculative/MTP unsupported."
+        }
+      },
+      "exact_to_baseline": true,
+      "first_divergence": null
+    },
+    {
+      "variant": "fixed2",
+      "result": {
+        "run_id": "33a19749f6a34e19a562e5a71a52696b",
+        "mode": "fixed_speculative",
+        "profile": "qwen3.5-9b-8bit",
+        "text": "Here is a Python implementation of a deduplication function that preserves insertion order, followed by an explanation of its complexity and three test assertions.\n\n### Implementation\n\n```python\ndef dedupe(items):\n    \"\"\"\n    Remove duplicates from a list while preserving the original insertion order.\n    \n    Args:\n        items (list): The list to deduplicate.\n        \n    Returns:\n        list: A new list with duplicates removed, maintaining order.\n    \"\"\"",
+        "token_ids": [
+          8160,
+          369,
+          264,
+          12654,
+          7873,
+          314,
+          264,
+          7438,
+          446,
+          1633,
+          709,
+          421,
+          72346,
+          34736,
+          1906,
+          11,
+          7854,
+          539,
+          449,
+          15673,
+          314,
+          1141,
+          22373,
+          321,
+          2250,
+          1228,
+          52992,
+          13,
+          271,
+          13962,
+          29806,
+          271,
+          71093,
+          12305,
+          198,
+          727,
+          7438,
+          82525,
+          23573,
+          1590,
+          198,
+          262,
+          4071,
+          198,
+          262,
+          10466,
+          40922,
+          494,
+          264,
+          1103,
+          1345,
+          45328,
+          279,
+          3889,
+          34736,
+          1906,
+          13,
+          198,
+          1031,
+          262,
+          17167,
+          25,
+          198,
+          285,
+          3470,
+          318,
+          1551,
+          1590,
+          561,
+          1103,
+          310,
+          7438,
+          13667,
+          13,
+          198,
+          1726,
+          262,
+          5019,
+          25,
+          198,
+          285,
+          1103,
+          25,
+          357,
+          491,
+          1103,
+          440,
+          40922,
+          6747,
+          11,
+          19720,
+          1906,
+          13,
+          198,
+          262,
+          4071
+        ],
+        "prompt_tokens": 29,
+        "finish_reason": "length",
+        "metrics": {
+          "load_ms": 0.20295800641179085,
+          "ttft_ms": 138.70195799972862,
+          "total_ms": 2362.8935830201954,
+          "prefill_ms": 84.97245807666332,
+          "prompt_tps": 329.5185361677782,
+          "decode_tps": 42.712147160038796,
+          "prompt_tokens": 29,
+          "generation_tokens": 96,
+          "peak_memory_gb": 10.18986471,
+          "peak_memory_bytes": 10189864710,
+          "active_memory_bytes": 10022810432,
+          "rss_bytes": 1239334912,
+          "swap_before_bytes": 6039207936,
+          "swap_after_bytes": 6039207936,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 2176184320,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 0,
+          "active_kv_bytes": 82583552,
+          "cache_evictions": 0,
+          "cache_backend": "native",
+          "cache_operations": {
+            "lookups": 0,
+            "hits": 0,
+            "writes": 0,
+            "rejected_writes": 0,
+            "lookup_ms": 0.0,
+            "clone_ms": 0.0,
+            "write_ms": 0.0,
+            "eviction_selection_ms": 0.0
+          },
+          "draft_acceptance": 0.6707317073170732,
+          "fallback_rate": 0.0,
+          "cycles": 41,
+          "policy": null,
+          "draft_accepted_tokens": 55,
+          "calibrated_fallback": false,
+          "adaptive_scheduler": null,
+          "round_diagnostics": true,
+          "speculative_recovery": "hybrid exact snapshot + consumed-prefix replay"
+        },
+        "rounds": [
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.2264169743284583,
+            "scheduler_ms": 0.02258399035781622,
+            "draft_ms": 0.0,
+            "verify_ms": 52.999416016973555,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              8160,
+              369
+            ],
+            "recovery_ms": 0.001291045919060707,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 53.280666936188936,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.15554192941635847,
+            "scheduler_ms": 0.023333006538450718,
+            "draft_ms": 0.0,
+            "verify_ms": 43.24033297598362,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              12654,
+              7873
+            ],
+            "recovery_ms": 0.0014170072972774506,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.48774999380112,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.15166704542934895,
+            "scheduler_ms": 0.022625084966421127,
+            "draft_ms": 0.0,
+            "verify_ms": 43.22741704527289,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              7438,
+              446
+            ],
+            "recovery_ms": 34.566083922982216,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 2,
+            "cycle_ms": 78.02162505686283,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14908297453075647,
+            "scheduler_ms": 0.0290420139208436,
+            "draft_ms": 0.0,
+            "verify_ms": 42.767958948388696,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              709,
+              421
+            ],
+            "recovery_ms": 34.20895803719759,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 77.20008306205273,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1397499581798911,
+            "scheduler_ms": 0.026708003133535385,
+            "draft_ms": 0.0,
+            "verify_ms": 42.67966700717807,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              446,
+              1633
+            ],
+            "recovery_ms": 0.0013329554349184036,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 42.90174995549023,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.15791598707437515,
+            "scheduler_ms": 0.019875005818903446,
+            "draft_ms": 0.0,
+            "verify_ms": 44.17641693726182,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              421,
+              72346
+            ],
+            "recovery_ms": 0.0019579892978072166,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 44.42608403041959,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1682910369709134,
+            "scheduler_ms": 0.025209039449691772,
+            "draft_ms": 0.0,
+            "verify_ms": 44.549333048053086,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1906,
+              11
+            ],
+            "recovery_ms": 0.0019168946892023087,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 44.83158397488296,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1842910423874855,
+            "scheduler_ms": 0.025709043256938457,
+            "draft_ms": 0.0,
+            "verify_ms": 43.54512505233288,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              539,
+              449
+            ],
+            "recovery_ms": 0.0016249250620603561,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.84125000797212,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1602920237928629,
+            "scheduler_ms": 0.025250017642974854,
+            "draft_ms": 0.0,
+            "verify_ms": 43.47445804160088,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              314,
+              1141
+            ],
+            "recovery_ms": 0.0013329554349184036,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.73566701542586,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1634999644011259,
+            "scheduler_ms": 0.021959072910249233,
+            "draft_ms": 0.0,
+            "verify_ms": 43.71541703585535,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              321,
+              2250
+            ],
+            "recovery_ms": 0.0018749851733446121,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.981334078125656,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.15537498984485865,
+            "scheduler_ms": 0.024999957531690598,
+            "draft_ms": 0.0,
+            "verify_ms": 43.67458401247859,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              4886,
+              13
+            ],
+            "recovery_ms": 35.05599999334663,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 2,
+            "cycle_ms": 78.98250001017004,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14545908197760582,
+            "scheduler_ms": 0.029708025977015495,
+            "draft_ms": 0.0,
+            "verify_ms": 43.366999947465956,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              13,
+              271
+            ],
+            "recovery_ms": 0.0016669509932398796,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.614417081698775,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.17062504775822163,
+            "scheduler_ms": 0.024209031835198402,
+            "draft_ms": 0.0,
+            "verify_ms": 43.6161250108853,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              12654,
+              29806
+            ],
+            "recovery_ms": 34.994250047020614,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 2,
+            "cycle_ms": 78.88641708996147,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.15533401165157557,
+            "scheduler_ms": 0.02804200630635023,
+            "draft_ms": 0.0,
+            "verify_ms": 43.18650008644909,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              271,
+              71093
+            ],
+            "recovery_ms": 0.0016660196706652641,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.43687498476356,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14783290680497885,
+            "scheduler_ms": 0.02274999860674143,
+            "draft_ms": 0.0,
+            "verify_ms": 43.54325006715953,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              198,
+              727
+            ],
+            "recovery_ms": 0.0012909295037388802,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.78312500193715,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.18883298616856337,
+            "scheduler_ms": 0.022666994482278824,
+            "draft_ms": 0.0,
+            "verify_ms": 43.42537489719689,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              13667,
+              31057
+            ],
+            "recovery_ms": 35.03808309324086,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 2,
+            "cycle_ms": 78.74462497420609,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.15766697470098734,
+            "scheduler_ms": 0.028749927878379822,
+            "draft_ms": 0.0,
+            "verify_ms": 43.02695801015943,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              31057,
+              18913
+            ],
+            "recovery_ms": 35.28075001668185,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 78.55174993164837,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14383404050022364,
+            "scheduler_ms": 0.029957969672977924,
+            "draft_ms": 0.0,
+            "verify_ms": 42.99074993468821,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1590,
+              198
+            ],
+            "recovery_ms": 0.0015830155462026596,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.24379190802574,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.21891703363507986,
+            "scheduler_ms": 0.027916976250708103,
+            "draft_ms": 0.0,
+            "verify_ms": 43.722458998672664,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              4071,
+              198
+            ],
+            "recovery_ms": 0.0015420373529195786,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 44.04812504071742,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1924589741975069,
+            "scheduler_ms": 0.02429191954433918,
+            "draft_ms": 0.0,
+            "verify_ms": 44.63675001170486,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              5019,
+              264
+            ],
+            "recovery_ms": 35.48329195473343,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 2,
+            "cycle_ms": 80.42583393398672,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.15729200094938278,
+            "scheduler_ms": 0.031249946914613247,
+            "draft_ms": 0.0,
+            "verify_ms": 43.12866693362594,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              21814,
+              3470
+            ],
+            "recovery_ms": 35.00162507407367,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 78.38591595645994,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14783290680497885,
+            "scheduler_ms": 0.028708018362522125,
+            "draft_ms": 0.0,
+            "verify_ms": 42.82133304513991,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1345,
+              45328
+            ],
+            "recovery_ms": 34.49308394920081,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 77.54787500016391,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1367910299450159,
+            "scheduler_ms": 0.030166003853082657,
+            "draft_ms": 0.0,
+            "verify_ms": 42.99833299592137,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              264,
+              1103
+            ],
+            "recovery_ms": 0.0016669509932398796,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.229916016571224,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.17020804807543755,
+            "scheduler_ms": 0.023707980290055275,
+            "draft_ms": 0.0,
+            "verify_ms": 43.45654102507979,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              45328,
+              279
+            ],
+            "recovery_ms": 0.0015830155462026596,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.73412497807294,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1575410133227706,
+            "scheduler_ms": 0.027250032871961594,
+            "draft_ms": 0.0,
+            "verify_ms": 43.29566704109311,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1906,
+              13
+            ],
+            "recovery_ms": 34.68295803759247,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 2,
+            "cycle_ms": 78.22816609404981,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14216697309166193,
+            "scheduler_ms": 0.025499961338937283,
+            "draft_ms": 0.0,
+            "verify_ms": 42.723334045149386,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1906,
+              13
+            ],
+            "recovery_ms": 0.0014579854905605316,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 42.95524989720434,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1437920145690441,
+            "scheduler_ms": 0.024707987904548645,
+            "draft_ms": 0.0,
+            "verify_ms": 43.195624952204525,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1031,
+              262
+            ],
+            "recovery_ms": 0.001250067725777626,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.4171250090003,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14229200314730406,
+            "scheduler_ms": 0.022125081159174442,
+            "draft_ms": 0.0,
+            "verify_ms": 43.15558297093958,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              25,
+              198
+            ],
+            "recovery_ms": 0.001125037670135498,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.380791088566184,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1628330210223794,
+            "scheduler_ms": 0.020541949197649956,
+            "draft_ms": 0.0,
+            "verify_ms": 43.22554194368422,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              3470,
+              318
+            ],
+            "recovery_ms": 0.0011670636013150215,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.46558393444866,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.13933307491242886,
+            "scheduler_ms": 0.01862493809312582,
+            "draft_ms": 0.0,
+            "verify_ms": 43.19075006060302,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1590,
+              357
+            ],
+            "recovery_ms": 31.632125028409064,
+            "target_replay_tokens": 2,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 75.04841696936637,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.15345891006290913,
+            "scheduler_ms": 0.024416949599981308,
+            "draft_ms": 0.0,
+            "verify_ms": 42.90454206056893,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1879,
+              1103
+            ],
+            "recovery_ms": 34.2488749884069,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 77.39483390469104,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14158303383737803,
+            "scheduler_ms": 0.021167099475860596,
+            "draft_ms": 0.0,
+            "verify_ms": 42.69629099871963,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              314,
+              3470
+            ],
+            "recovery_ms": 34.198125009424984,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 77.10350002162158,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14366698451340199,
+            "scheduler_ms": 0.021166051737964153,
+            "draft_ms": 0.0,
+            "verify_ms": 42.73008299060166,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              7438,
+              13667
+            ],
+            "recovery_ms": 0.0012079253792762756,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 42.95579099562019,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14837493654340506,
+            "scheduler_ms": 0.0237500062212348,
+            "draft_ms": 0.0,
+            "verify_ms": 43.23908395599574,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              198,
+              1726
+            ],
+            "recovery_ms": 0.0014579854905605316,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.47462498117238,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1496660988777876,
+            "scheduler_ms": 0.02245896030217409,
+            "draft_ms": 0.0,
+            "verify_ms": 43.18304208572954,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              5019,
+              25
+            ],
+            "recovery_ms": 0.001125037670135498,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.41399995610118,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14833302702754736,
+            "scheduler_ms": 0.020417035557329655,
+            "draft_ms": 0.0,
+            "verify_ms": 43.23512490373105,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              285,
+              1103
+            ],
+            "recovery_ms": 0.0009159557521343231,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.45504206139594,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.13250007759779692,
+            "scheduler_ms": 0.01695798709988594,
+            "draft_ms": 0.0,
+            "verify_ms": 43.07816701475531,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              357,
+              491
+            ],
+            "recovery_ms": 0.001084059476852417,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.27745805494487,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.13883295468986034,
+            "scheduler_ms": 0.019208993762731552,
+            "draft_ms": 0.0,
+            "verify_ms": 43.0533749749884,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              8222,
+              4752
+            ],
+            "recovery_ms": 34.558957908302546,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 2,
+            "cycle_ms": 77.82025006599724,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1443750225007534,
+            "scheduler_ms": 0.02558401320129633,
+            "draft_ms": 0.0,
+            "verify_ms": 42.754000052809715,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              40922,
+              6747
+            ],
+            "recovery_ms": 0.00100000761449337,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 42.97312500420958,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14483300037682056,
+            "scheduler_ms": 0.016417005099356174,
+            "draft_ms": 0.0,
+            "verify_ms": 43.07825001887977,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              19720,
+              1906
+            ],
+            "recovery_ms": 0.00100000761449337,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.29070798121393,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.14283298514783382,
+            "scheduler_ms": 0.01991703175008297,
+            "draft_ms": 0.0,
+            "verify_ms": 43.09970804024488,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              198,
+              262
+            ],
+            "recovery_ms": 0.0008749775588512421,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.308041989803314,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          }
+        ],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3.5-9B-8bit",
+            "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+            "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+          },
+          "draft_weight_bytes": 625229487,
+          "experimental_speculation": true,
+          "hybrid_cache": true,
+          "runtime_reserve_bytes": 2147483648,
+          "minimum_memory_bytes": 0,
+          "advisory_memory_estimates": true,
+          "weight_bytes": 10426592423,
+          "text_tensor_bytes": 9514412544,
+          "quantization": "8-bit affine, group size 64",
+          "context_limit": 8192,
+          "supported_modes": [
+            "baseline"
+          ],
+          "status": "quality_review_required",
+          "role": "primary_quality_candidate",
+          "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; broader quality pending. Hybrid speculative/MTP unsupported."
+        }
+      },
+      "exact_to_baseline": true,
+      "first_divergence": null
+    },
+    {
+      "variant": "ds",
+      "result": {
+        "run_id": "1983606308d643dbbc916a552a935614",
+        "mode": "adaptive",
+        "profile": "qwen3.5-9b-8bit",
+        "text": "Here is a Python implementation of a deduplication function that preserves insertion order, followed by an explanation of its complexity and three test assertions.\n\n### Implementation\n\n```python\ndef dedupe(items):\n    \"\"\"\n    Remove duplicates from a list while preserving the original insertion order.\n    \n    Args:\n        items (list): The list to deduplicate.\n        \n    Returns:\n        list: A new list with duplicates removed, maintaining order.\n    \"\"\"",
+        "token_ids": [
+          8160,
+          369,
+          264,
+          12654,
+          7873,
+          314,
+          264,
+          7438,
+          446,
+          1633,
+          709,
+          421,
+          72346,
+          34736,
+          1906,
+          11,
+          7854,
+          539,
+          449,
+          15673,
+          314,
+          1141,
+          22373,
+          321,
+          2250,
+          1228,
+          52992,
+          13,
+          271,
+          13962,
+          29806,
+          271,
+          71093,
+          12305,
+          198,
+          727,
+          7438,
+          82525,
+          23573,
+          1590,
+          198,
+          262,
+          4071,
+          198,
+          262,
+          10466,
+          40922,
+          494,
+          264,
+          1103,
+          1345,
+          45328,
+          279,
+          3889,
+          34736,
+          1906,
+          13,
+          198,
+          1031,
+          262,
+          17167,
+          25,
+          198,
+          285,
+          3470,
+          318,
+          1551,
+          1590,
+          561,
+          1103,
+          310,
+          7438,
+          13667,
+          13,
+          198,
+          1726,
+          262,
+          5019,
+          25,
+          198,
+          285,
+          1103,
+          25,
+          357,
+          491,
+          1103,
+          440,
+          40922,
+          6747,
+          11,
+          19720,
+          1906,
+          13,
+          198,
+          262,
+          4071
+        ],
+        "prompt_tokens": 29,
+        "finish_reason": "length",
+        "metrics": {
+          "load_ms": 0.20254100672900677,
+          "ttft_ms": 122.07662500441074,
+          "total_ms": 2473.4382909955457,
+          "prefill_ms": 85.417874972336,
+          "prompt_tps": 327.80024098080486,
+          "decode_tps": 40.40212161915808,
+          "prompt_tokens": 29,
+          "generation_tokens": 96,
+          "peak_memory_gb": 10.18986471,
+          "peak_memory_bytes": 10189864710,
+          "active_memory_bytes": 10021155648,
+          "rss_bytes": 1238499328,
+          "swap_before_bytes": 6039207936,
+          "swap_after_bytes": 6039207936,
+          "swap_delta_bytes": 0,
+          "swap_measurement_available": true,
+          "estimated_active_kv_bytes": 2176184320,
+          "cache_hit_tokens": 0,
+          "cache_bytes": 0,
+          "active_kv_bytes": 82583552,
+          "cache_evictions": 0,
+          "cache_backend": "native",
+          "cache_operations": {
+            "lookups": 0,
+            "hits": 0,
+            "writes": 0,
+            "rejected_writes": 0,
+            "lookup_ms": 0.0,
+            "clone_ms": 0.0,
+            "write_ms": 0.0,
+            "eviction_selection_ms": 0.0
+          },
+          "draft_acceptance": 0.5344827586206896,
+          "fallback_rate": 0.05714285714285714,
+          "cycles": 35,
+          "policy": {
+            "cycle_ms_per_token": {
+              "0": 36.09443752793595,
+              "1": 20.685353956650943,
+              "2": 28.766590519808233,
+              "3": 15.594222311240932,
+              "4": 13.28883325913921
+            },
+            "acceptance_by_position": {
+              "0": 0.6666666666666666,
+              "1": 0.5333333333333333,
+              "2": 0.5,
+              "3": 0.4
+            },
+            "implementation": "DeepInfer MTPVarlen-derived scheduler with empirical acceptance",
+            "source_commit": "774ce244b87cc0eb8d4b94ab9f5de2ab22049f01",
+            "startup_curve_scope": "complete draft+verify+host cycle; sampler residual counted once",
+            "cycle_ms_by_graph": {
+              "1": 36.148228973615915,
+              "2": 55.24441646412015,
+              "3": 60.57418748969212,
+              "4": 79.52320796903223,
+              "5": 85.52079100627452
+            },
+            "decisions": 35,
+            "refresh_steps": 64,
+            "confidence_head": false,
+            "catchup_cycle_ms": [
+              41.58099996857345
+            ]
+          },
+          "draft_accepted_tokens": 62,
+          "calibrated_fallback": false,
+          "adaptive_scheduler": "ds",
+          "round_diagnostics": true,
+          "speculative_recovery": "hybrid exact snapshot + consumed-prefix replay"
+        },
+        "rounds": [
+          {
+            "budget": 0,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": true,
+            "snapshot_ms": 8.288770914077759e-05,
+            "scheduler_ms": 0.03491598181426525,
+            "draft_ms": 0.0,
+            "verify_ms": 36.16420808248222,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [],
+            "recovery_ms": 0.0007919734343886375,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 36.22662497218698,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 0,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": true,
+            "snapshot_ms": 0.00016600824892520905,
+            "scheduler_ms": 0.027416041120886803,
+            "draft_ms": 0.0,
+            "verify_ms": 36.024666973389685,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [],
+            "recovery_ms": 0.0009170034900307655,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 36.06983297504485,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.15812506899237633,
+            "scheduler_ms": 0.02474989742040634,
+            "draft_ms": 0.0,
+            "verify_ms": 41.370707913301885,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 2,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              264
+            ],
+            "recovery_ms": 0.001374981366097927,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 41.58099996857345,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.14849996659904718,
+            "scheduler_ms": 0.027416041120886803,
+            "draft_ms": 0.0,
+            "verify_ms": 39.57629203796387,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              7873
+            ],
+            "recovery_ms": 0.0010830117389559746,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 39.80804095044732,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 1,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1480410574004054,
+            "scheduler_ms": 0.026250025257468224,
+            "draft_ms": 0.0,
+            "verify_ms": 39.52291700989008,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              7438
+            ],
+            "recovery_ms": 30.948500032536685,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 70.68079197779298,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.13874995056539774,
+            "scheduler_ms": 0.0249580480158329,
+            "draft_ms": 0.0,
+            "verify_ms": 43.22691704146564,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              709,
+              421
+            ],
+            "recovery_ms": 34.55075004603714,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 77.99858297221363,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 2,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.13779103755950928,
+            "scheduler_ms": 0.03370910417288542,
+            "draft_ms": 0.0,
+            "verify_ms": 42.91879199445248,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              446,
+              1633
+            ],
+            "recovery_ms": 0.0015830155462026596,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 43.14979200717062,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 3,
+            "accepted": 3,
+            "produced": 4,
+            "fallback": false,
+            "snapshot_ms": 0.1533749746158719,
+            "scheduler_ms": 0.029249931685626507,
+            "draft_ms": 0.0,
+            "verify_ms": 57.59645800571889,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              421,
+              72346,
+              34736
+            ],
+            "recovery_ms": 0.0017919810488820076,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 57.848667027428746,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 3,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1533749746158719,
+            "scheduler_ms": 0.029709073714911938,
+            "draft_ms": 0.0,
+            "verify_ms": 46.63662507664412,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              11,
+              3055,
+              440
+            ],
+            "recovery_ms": 35.42991599533707,
+            "target_replay_tokens": 2,
+            "draft_replay_tokens": 3,
+            "cycle_ms": 82.31937501113862,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 2,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.13550010044127703,
+            "scheduler_ms": 0.037624966353178024,
+            "draft_ms": 0.0,
+            "verify_ms": 62.84208397846669,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              539,
+              449,
+              6157,
+              314
+            ],
+            "recovery_ms": 36.15245898254216,
+            "target_replay_tokens": 3,
+            "draft_replay_tokens": 3,
+            "cycle_ms": 99.22983299475163,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.15062501188367605,
+            "scheduler_ms": 0.03779097460210323,
+            "draft_ms": 0.0,
+            "verify_ms": 51.00062501151115,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              314,
+              1141,
+              22373,
+              321
+            ],
+            "recovery_ms": 0.001249951310455799,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 51.24537495430559,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1413749996572733,
+            "scheduler_ms": 0.09054190013557673,
+            "draft_ms": 0.0,
+            "verify_ms": 51.3138750102371,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              3050,
+              52992,
+              13,
+              271
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.7272727272727273,
+                  0.625,
+                  0.5,
+                  0.5
+                ],
+                "prev_accept_rates": [
+                  0.7,
+                  0.5714285714285714,
+                  0.4,
+                  0.3333333333333333
+                ],
+                "has_draft_info": true,
+                "process_cnt": 11,
+                "schedule_cnt": 11
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 34.425957943312824,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 2,
+            "cycle_ms": 86.01649990305305,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.14062493573874235,
+            "scheduler_ms": 0.0624579843133688,
+            "draft_ms": 0.0,
+            "verify_ms": 50.95520801842213,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              4886,
+              13,
+              271,
+              13962
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6666666666666666,
+                  0.5555555555555556,
+                  0.42857142857142855,
+                  0.4
+                ],
+                "prev_accept_rates": [
+                  0.7272727272727273,
+                  0.625,
+                  0.5,
+                  0.5
+                ],
+                "has_draft_info": true,
+                "process_cnt": 12,
+                "schedule_cnt": 12
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 34.1736659174785,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 85.37208300549537,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 3,
+            "produced": 4,
+            "fallback": false,
+            "snapshot_ms": 0.13387505896389484,
+            "scheduler_ms": 0.06204098463058472,
+            "draft_ms": 0.0,
+            "verify_ms": 50.907749915495515,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              13,
+              271,
+              13962,
+              12654
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6153846153846154,
+                  0.5,
+                  0.375,
+                  0.3333333333333333
+                ],
+                "prev_accept_rates": [
+                  0.6666666666666666,
+                  0.5555555555555556,
+                  0.42857142857142855,
+                  0.4
+                ],
+                "has_draft_info": true,
+                "process_cnt": 13,
+                "schedule_cnt": 13
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 32.395999995060265,
+            "target_replay_tokens": 4,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 83.55104096699506,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.13712502550333738,
+            "scheduler_ms": 0.06624998059123755,
+            "draft_ms": 0.0,
+            "verify_ms": 51.04849999770522,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              271,
+              71093,
+              12305,
+              198
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6428571428571429,
+                  0.5454545454545454,
+                  0.4444444444444444,
+                  0.2857142857142857
+                ],
+                "prev_accept_rates": [
+                  0.6153846153846154,
+                  0.5,
+                  0.375,
+                  0.3333333333333333
+                ],
+                "has_draft_info": true,
+                "process_cnt": 14,
+                "schedule_cnt": 14
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 0.001625041477382183,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 51.318584010005,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.15649991109967232,
+            "scheduler_ms": 0.05666702054440975,
+            "draft_ms": 0.0,
+            "verify_ms": 51.52837501373142,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              7438,
+              13667,
+              31057,
+              18913
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6666666666666666,
+                  0.5833333333333334,
+                  0.5,
+                  0.375
+                ],
+                "prev_accept_rates": [
+                  0.6428571428571429,
+                  0.5454545454545454,
+                  0.4444444444444444,
+                  0.2857142857142857
+                ],
+                "has_draft_info": true,
+                "process_cnt": 15,
+                "schedule_cnt": 15
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 35.75433301739395,
+            "target_replay_tokens": 2,
+            "draft_replay_tokens": 3,
+            "cycle_ms": 87.56962500046939,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1388340024277568,
+            "scheduler_ms": 0.06741704419255257,
+            "draft_ms": 0.0,
+            "verify_ms": 51.35012499522418,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              31057,
+              18913,
+              7621,
+              23573
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6875,
+                  0.5384615384615384,
+                  0.45454545454545453,
+                  0.3333333333333333
+                ],
+                "prev_accept_rates": [
+                  0.6666666666666666,
+                  0.5833333333333334,
+                  0.5,
+                  0.375
+                ],
+                "has_draft_info": true,
+                "process_cnt": 16,
+                "schedule_cnt": 16
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 34.87258299719542,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 86.49020898155868,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.14166696928441525,
+            "scheduler_ms": 0.07441604975610971,
+            "draft_ms": 0.0,
+            "verify_ms": 51.03324993979186,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1590,
+              198,
+              262,
+              4071
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6470588235294118,
+                  0.5,
+                  0.4166666666666667,
+                  0.3
+                ],
+                "prev_accept_rates": [
+                  0.6875,
+                  0.5384615384615384,
+                  0.45454545454545453,
+                  0.3333333333333333
+                ],
+                "has_draft_info": true,
+                "process_cnt": 17,
+                "schedule_cnt": 17
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 0.001583946868777275,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 51.31450004409999,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1585830468684435,
+            "scheduler_ms": 0.05670799873769283,
+            "draft_ms": 0.0,
+            "verify_ms": 51.31654196884483,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              262,
+              5019,
+              264,
+              1103
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6666666666666666,
+                  0.5333333333333333,
+                  0.46153846153846156,
+                  0.36363636363636365
+                ],
+                "prev_accept_rates": [
+                  0.6470588235294118,
+                  0.5,
+                  0.4166666666666667,
+                  0.3
+                ],
+                "has_draft_info": true,
+                "process_cnt": 18,
+                "schedule_cnt": 18
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 35.293083055876195,
+            "target_replay_tokens": 2,
+            "draft_replay_tokens": 3,
+            "cycle_ms": 86.88179205637425,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.13704097364097834,
+            "scheduler_ms": 0.05645793862640858,
+            "draft_ms": 0.0,
+            "verify_ms": 51.11929203849286,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              21814,
+              3470,
+              494,
+              264
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6842105263157895,
+                  0.5,
+                  0.42857142857142855,
+                  0.3333333333333333
+                ],
+                "prev_accept_rates": [
+                  0.6666666666666666,
+                  0.5333333333333333,
+                  0.46153846153846156,
+                  0.36363636363636365
+                ],
+                "has_draft_info": true,
+                "process_cnt": 19,
+                "schedule_cnt": 19
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 34.42887496203184,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 85.79616597853601,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.15049998182803392,
+            "scheduler_ms": 0.07166690193116665,
+            "draft_ms": 0.0,
+            "verify_ms": 51.00995802786201,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1345,
+              45328,
+              279,
+              1906
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.65,
+                  0.47058823529411764,
+                  0.4,
+                  0.3076923076923077
+                ],
+                "prev_accept_rates": [
+                  0.6842105263157895,
+                  0.5,
+                  0.42857142857142855,
+                  0.3333333333333333
+                ],
+                "has_draft_info": true,
+                "process_cnt": 20,
+                "schedule_cnt": 20
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 0.0,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 34.497917047701776,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 85.77595790848136,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.13754109386354685,
+            "scheduler_ms": 0.06812496576458216,
+            "draft_ms": 0.0,
+            "verify_ms": 50.91204203199595,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              264,
+              1103,
+              1345,
+              45328
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6190476190476191,
+                  0.4444444444444444,
+                  0.375,
+                  0.2857142857142857
+                ],
+                "prev_accept_rates": [
+                  0.65,
+                  0.47058823529411764,
+                  0.4,
+                  0.3076923076923077
+                ],
+                "has_draft_info": true,
+                "process_cnt": 21,
+                "schedule_cnt": 21
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.1096919419243934,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 0.001500011421740055,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 51.18008388672024,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 1,
+            "produced": 2,
+            "fallback": false,
+            "snapshot_ms": 0.1420000335201621,
+            "scheduler_ms": 0.05716702435165644,
+            "draft_ms": 0.0,
+            "verify_ms": 51.383291953243315,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              3889,
+              1906,
+              13,
+              198
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6363636363636364,
+                  0.47368421052631576,
+                  0.4117647058823529,
+                  0.3333333333333333
+                ],
+                "prev_accept_rates": [
+                  0.6190476190476191,
+                  0.4444444444444444,
+                  0.375,
+                  0.2857142857142857
+                ],
+                "has_draft_info": true,
+                "process_cnt": 22,
+                "schedule_cnt": 22
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.1076711349189283,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 35.39537498727441,
+            "target_replay_tokens": 2,
+            "draft_replay_tokens": 3,
+            "cycle_ms": 87.03900000546128,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.13816705904901028,
+            "scheduler_ms": 0.06762496195733547,
+            "draft_ms": 0.0,
+            "verify_ms": 51.07737495563924,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1906,
+              13,
+              198,
+              1031
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6521739130434783,
+                  0.45,
+                  0.3888888888888889,
+                  0.3125
+                ],
+                "prev_accept_rates": [
+                  0.6363636363636364,
+                  0.47368421052631576,
+                  0.4117647058823529,
+                  0.3333333333333333
+                ],
+                "has_draft_info": true,
+                "process_cnt": 23,
+                "schedule_cnt": 23
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.1096919419243934,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 0.0013329554349184036,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 51.34316603653133,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.14062493573874235,
+            "scheduler_ms": 0.05308398976922035,
+            "draft_ms": 0.0,
+            "verify_ms": 51.859250059351325,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              17167,
+              25,
+              198,
+              285
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6666666666666666,
+                  0.47619047619047616,
+                  0.42105263157894735,
+                  0.35294117647058826
+                ],
+                "prev_accept_rates": [
+                  0.6521739130434783,
+                  0.45,
+                  0.3888888888888889,
+                  0.3125
+                ],
+                "has_draft_info": true,
+                "process_cnt": 24,
+                "schedule_cnt": 24
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.1076711349189283,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 0.0014579854905605316,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 52.12470900733024,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 3,
+            "produced": 4,
+            "fallback": false,
+            "snapshot_ms": 0.17704092897474766,
+            "scheduler_ms": 0.07045804522931576,
+            "draft_ms": 0.0,
+            "verify_ms": 53.15533303655684,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              318,
+              1551,
+              1590,
+              357
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.68,
+                  0.5,
+                  0.45,
+                  0.3888888888888889
+                ],
+                "prev_accept_rates": [
+                  0.6666666666666666,
+                  0.47619047619047616,
+                  0.42105263157894735,
+                  0.35294117647058826
+                ],
+                "has_draft_info": true,
+                "process_cnt": 25,
+                "schedule_cnt": 25
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.0672836446203293,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 32.74420904926956,
+            "target_replay_tokens": 4,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 86.24004200100899,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.16679102554917336,
+            "scheduler_ms": 0.06374996155500412,
+            "draft_ms": 0.0,
+            "verify_ms": 51.19262496009469,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1879,
+              1103,
+              310,
+              7438
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6923076923076923,
+                  0.5217391304347826,
+                  0.47619047619047616,
+                  0.3684210526315789
+                ],
+                "prev_accept_rates": [
+                  0.68,
+                  0.5,
+                  0.45,
+                  0.3888888888888889
+                ],
+                "has_draft_info": true,
+                "process_cnt": 26,
+                "schedule_cnt": 26
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.1076711349189283,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 34.33816600590944,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 85.82716598175466,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.13741711154580116,
+            "scheduler_ms": 0.06891600787639618,
+            "draft_ms": 0.0,
+            "verify_ms": 51.031165989115834,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              314,
+              3470,
+              310,
+              7438
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6666666666666666,
+                  0.5,
+                  0.45454545454545453,
+                  0.35
+                ],
+                "prev_accept_rates": [
+                  0.6923076923076923,
+                  0.5217391304347826,
+                  0.47619047619047616,
+                  0.3684210526315789
+                ],
+                "has_draft_info": true,
+                "process_cnt": 27,
+                "schedule_cnt": 27
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.1096919419243934,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 34.23758293502033,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 85.52079100627452,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.15629094559699297,
+            "scheduler_ms": 0.05991698708385229,
+            "draft_ms": 0.0,
+            "verify_ms": 51.6156250378117,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              7438,
+              13667,
+              13,
+              198
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6428571428571429,
+                  0.48,
+                  0.43478260869565216,
+                  0.3333333333333333
+                ],
+                "prev_accept_rates": [
+                  0.6666666666666666,
+                  0.5,
+                  0.45454545454545453,
+                  0.35
+                ],
+                "has_draft_info": true,
+                "process_cnt": 28,
+                "schedule_cnt": 28
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.1076711349189283,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 0.001750071533024311,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 51.906291977502406,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.15470897778868675,
+            "scheduler_ms": 0.06649992428719997,
+            "draft_ms": 0.0,
+            "verify_ms": 52.59995791129768,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              262,
+              5019,
+              25,
+              198
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6551724137931034,
+                  0.5,
+                  0.4583333333333333,
+                  0.36363636363636365
+                ],
+                "prev_accept_rates": [
+                  0.6428571428571429,
+                  0.48,
+                  0.43478260869565216,
+                  0.3333333333333333
+                ],
+                "has_draft_info": true,
+                "process_cnt": 29,
+                "schedule_cnt": 29
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.0821544446982445,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 0.0017499551177024841,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 52.90770798455924,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.17054099589586258,
+            "scheduler_ms": 0.06566592492163181,
+            "draft_ms": 0.0,
+            "verify_ms": 51.57124996185303,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              1103,
+              25,
+              357,
+              491
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6666666666666666,
+                  0.5185185185185185,
+                  0.48,
+                  0.391304347826087
+                ],
+                "prev_accept_rates": [
+                  0.6551724137931034,
+                  0.5,
+                  0.4583333333333333,
+                  0.36363636363636365
+                ],
+                "has_draft_info": true,
+                "process_cnt": 30,
+                "schedule_cnt": 30
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.0566377544775607,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 0.0015830155462026596,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 51.89445801079273,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.1599160023033619,
+            "scheduler_ms": 0.06716710049659014,
+            "draft_ms": 0.0,
+            "verify_ms": 51.625499967485666,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              8222,
+              4752,
+              5255,
+              303
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6774193548387096,
+                  0.5357142857142857,
+                  0.5,
+                  0.4166666666666667
+                ],
+                "prev_accept_rates": [
+                  0.6666666666666666,
+                  0.5185185185185185,
+                  0.48,
+                  0.391304347826087
+                ],
+                "has_draft_info": true,
+                "process_cnt": 31,
+                "schedule_cnt": 31
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.0417669543996455,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 35.07970797363669,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 2,
+            "cycle_ms": 87.00779208447784,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 0,
+            "produced": 1,
+            "fallback": false,
+            "snapshot_ms": 0.15183305367827415,
+            "scheduler_ms": 0.0689169391989708,
+            "draft_ms": 0.0,
+            "verify_ms": 51.022332976572216,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              4752,
+              5255,
+              303,
+              279
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.65625,
+                  0.5172413793103449,
+                  0.48148148148148145,
+                  0.4
+                ],
+                "prev_accept_rates": [
+                  0.6774193548387096,
+                  0.5357142857142857,
+                  0.5,
+                  0.4166666666666667
+                ],
+                "has_draft_info": true,
+                "process_cnt": 32,
+                "schedule_cnt": 32
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.0566377544775607,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 34.87254201900214,
+            "target_replay_tokens": 1,
+            "draft_replay_tokens": 1,
+            "cycle_ms": 86.17237489670515,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 4,
+            "accepted": 4,
+            "produced": 5,
+            "fallback": false,
+            "snapshot_ms": 0.16087503172457218,
+            "scheduler_ms": 0.07399998139590025,
+            "draft_ms": 0.0,
+            "verify_ms": 51.52666592039168,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 0,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              6747,
+              11,
+              19720,
+              1906
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "accept_rates": [
+                  0.6363636363636364,
+                  0.5,
+                  0.4642857142857143,
+                  0.38461538461538464
+                ],
+                "prev_accept_rates": [
+                  0.65625,
+                  0.5172413793103449,
+                  0.48148148148148145,
+                  0.4
+                ],
+                "has_draft_info": true,
+                "process_cnt": 33,
+                "schedule_cnt": 33
+              },
+              "budget": 4,
+              "runtime_projection": {
+                "forward_slope_ms": 2.0821544446982445,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 0.001459033228456974,
+            "target_replay_tokens": 0,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 51.8348750192672,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          },
+          {
+            "budget": 3,
+            "accepted": 3,
+            "produced": 3,
+            "fallback": false,
+            "snapshot_ms": 0.1509999856352806,
+            "scheduler_ms": 0.060542020946741104,
+            "draft_ms": 0.0,
+            "verify_ms": 46.782666933722794,
+            "timing_scope": "combined_draft_verify",
+            "catchup_tokens": 1,
+            "recovery": "exact snapshot restore + consumed-prefix replay",
+            "draft_token_ids": [
+              198,
+              262,
+              4071
+            ],
+            "scheduler_replay": {
+              "curve": [
+                [
+                  1,
+                  36.14822769165039
+                ],
+                [
+                  2,
+                  55.244415283203125
+                ],
+                [
+                  3,
+                  60.574188232421875
+                ],
+                [
+                  4,
+                  70.08402252197266
+                ],
+                [
+                  5,
+                  75.23760223388672
+                ]
+              ],
+              "state": {
+                "draft_tokens": [
+                  0,
+                  1,
+                  2
+                ],
+                "accept_rates": [
+                  0.6470588235294118,
+                  0.5161290322580645,
+                  0.4827586206896552
+                ],
+                "prev_accept_rates": [
+                  0.6363636363636364,
+                  0.5,
+                  0.4642857142857143
+                ],
+                "has_draft_info": true,
+                "process_cnt": 34,
+                "schedule_cnt": 34
+              },
+              "budget": 3,
+              "runtime_projection": {
+                "forward_slope_ms": 2.0566377544775607,
+                "sampler_ms": 0.0
+              }
+            },
+            "recovery_ms": 32.458457979373634,
+            "target_replay_tokens": 3,
+            "draft_replay_tokens": 0,
+            "cycle_ms": 79.52320796903223,
+            "cycle_scope": "host wall including snapshots, draft/verify, output and restore/replay"
+          }
+        ],
+        "model": {
+          "target": {
+            "repo": "mlx-community/Qwen3.5-9B-8bit",
+            "revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d"
+          },
+          "draft": {
+            "repo": "mlx-community/Qwen3.5-0.8B-4bit",
+            "revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+          },
+          "draft_weight_bytes": 625229487,
+          "experimental_speculation": true,
+          "hybrid_cache": true,
+          "runtime_reserve_bytes": 2147483648,
+          "minimum_memory_bytes": 0,
+          "advisory_memory_estimates": true,
+          "weight_bytes": 10426592423,
+          "text_tensor_bytes": 9514412544,
+          "quantization": "8-bit affine, group size 64",
+          "context_limit": 8192,
+          "supported_modes": [
+            "baseline"
+          ],
+          "status": "quality_review_required",
+          "role": "primary_quality_candidate",
+          "limitations": "Real text baseline/native/API/SSE/UI verified. Initial12-task smoke: greedy10/12, official non-thinking11/12, thinking9/12 at1024-token cap; broader quality pending. Hybrid speculative/MTP unsupported."
+        }
+      },
+      "exact_to_baseline": true,
+      "first_divergence": null
+    }
+  ],
+  "divergence_diagnostic": null,
+  "models": {
+    "profile": "qwen3.5-9b-8bit",
+    "target_path_revision": "16daa4818c54ce5f5436f929d52542eb65bbed9d",
+    "draft_path_revision": "da28692b5f139cb0ec58a356b437486b7dac7462"
+  },
+  "summary": {
+    "exact_counts": {
+      "baseline": true,
+      "fixed1": true,
+      "fixed2": true,
+      "ds": true
+    },
+    "ds_core_decisions": 24,
+    "equivalent_speedup_claim_supported": false,
+    "competitive_advantage_claim_supported": false
+  }
+}

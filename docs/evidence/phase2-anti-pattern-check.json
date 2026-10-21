@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-21",
+  "scope": "Independent portable anti-pattern review of Phase 2 working tree; no GPU or quality-model generation performed by this reviewer.",
+  "outcome": "passed_with_two_confirmed_harness_followups_and_stale_alpha_site_copy; no competitive-performance or main-model-DS acceptance asserted",
+  "checks": {
+    "real_measurements_only": {
+      "status": "passed",
+      "evidence": [
+        "benchmarks/reports/phase2-ds-budget-smoke-qwen3-4b.json",
+        "docs/DS_DESIGN_MAPPING.md",
+        "docs/PHASE2_CACHE_COMPARISON.md"
+      ],
+      "finding": "Actual smoke is labeled correctness-only, nonexclusive/download-I/O timing invalidity retained, one-cluster confidence interval null, competitive_advantage_claim_supported=false. Synthetic session ledger contains inputs and scoring expectations only, never synthesized performance/model responses."
+    },
+    "no_cherry_picking_or_repeat_inflation": {
+      "status": "passed_for_current_evidence",
+      "finding": "DS ablation keeps full outputs and first divergences; exact-token eligible speed ratios are explicitly a separate subset. Bootstrap groups by prompt; HTTP session protocol requires session clusters. Public quality tasks/splits fixed independently of outputs; related LCB generation and repair are explicitly not independent units. Public tests are not represented as hidden-test pass@1, and quantization equivalence remains false."
+    },
+    "DS_attribution": {
+      "status": "passed",
+      "finding": "MTPVarlen-derived scheduler is concrete production Python with separate unchanged C++ oracle. Empirical acceptance and independent draft full-cycle costs are explicit platform adapters. MLX deferred synchronization/native LRU are labeled independent infrastructure optimizations. No Confidence Head/full DSpark/continuous batching/main9B DS benefit claim."
+    },
+    "historical_model_retirement": {
+      "status": "passed",
+      "finding": "Both 27B profiles are in HISTORICAL_PROFILES; get_profile rejects before download. Active model list excludes them, new profiles remain baseline-only/candidate; caches use each profile quantization. Historical report and source metadata are retained, not reactivated."
+    },
+    "cleanup": {
+      "status": "passed",
+      "targets": [
+        {
+          "name": "models--keXjos--Qwen3.8-27B-mlx-2Bit",
+          "exists_now": false
+        },
+        {
+          "name": "models--agnosticeng--Qwen3.8-27B-2bit",
+          "exists_now": false
+        },
+        {
+          "name": "models--mlx-community--Qwen3.8-27B-4bit",
+          "exists_now": false
+        },
+        {
+          "name": "agnostic27b2bit",
+          "exists_now": false
+        },
+        {
+          "name": "Qwen3.8-27B-4bit",
+          "exists_now": false
+        },
+        {
+          "name": "qwen38-2bit",
+          "exists_now": false
+        }
+      ],
+      "evidence": "artifacts/phase2-model-audit/model-cleanup-20261021.json",
+      "retained": [
+        {
+          "name": "models--mlx-community--Qwen3-4B-4bit",
+          "exists_now": true
+        },
+        {
+          "name": "models--mlx-community--Qwen3-0.6B-4bit",
+          "exists_now": true
+        }
+      ]
+    },
+    "prior_reviewer_regression_controls": {
+      "status": "passed",
+      "finding": "Current runtime source hashes match prior independent review after forward-abort recovery/native-cache uncached-tail/memory logical-vs-physical corrections. Portable failure controls pass. Cache timing labels distinguish lookup including clone/trim, write including clone/insert/evict, and eviction ordering subset; no fake separate GPU/eviction time.",
+      "prior_evidence": [
+        "docs/evidence/phase2-core-verification.json",
+        "docs/evidence/phase2-code-review.json"
+      ]
+    },
+    "release_data_boundary": {
+      "status": "passed_current_archives_and_hardened",
+      "finding": "Existing tracked/untracked public candidate report contains only project-authored smoke cases, no public-task messages. Raw public materialization/results remain under ignored root results/quality-cache. Added explicit sdist exclusions and recursive structured raw-public-content checks; original source texts were not copied into this review or site.",
+      "negative_controls": [
+        {
+          "probe": "synthetic raw public-task output inserted into temporary wheel",
+          "correctly_rejected": true
+        },
+        {
+          "probe": "quality-cache path inserted into temporary sdist",
+          "correctly_rejected": true
+        }
+      ]
+    },
+    "IFEval_license": {
+      "status": "attribution_added",
+      "finding": "NOTICE now identifies Google Research seven original checker classes, source provenance/hash file, Apache-2.0 and local adapters. Full Apache-2.0 license remains LICENSE; checker header and provenance retain copyright."
+    }
+  },
+  "confirmed_followups": [
+    {
+      "id": "smoke-disabled-builtin-false-failure",
+      "priority": "P2",
+      "status": "reported_to_orchestrator; scorer not modified during active quality run",
+      "file": "benchmarks/experiments/phase2_model_quality.py",
+      "line": 68,
+      "reproduction": "AST-extract only final_answer and score_smoke, avoiding MLX imports. Valid heldout clamp returning max(lo,min(hi,float(x))) and valid implementation using isinstance(x,int) both return passed:false with NameError because those builtins are removed.",
+      "impact": "Harness-limited valid code can become a false model failure. Existing48-case9Bsmoke report has zero NameError cases, so this exact issue has not affected recorded results. Public runner uses normal Python builtins and does not have this whitelist issue.",
+      "required_action": "Classify references to unavailable Python builtins/annotations as harness-limited inconclusive/pass:null, retaining true unknown-variable model failures. Offline re-score raw outputs after source-isolated harness update; no need to repeat model generation."
+    },
+    {
+      "id": "public-runner-default-raw-report-location",
+      "priority": "P2",
+      "status": "reported_to_orchestrator; runtime runner not modified",
+      "file": "benchmarks/experiments/phase2_model_quality.py",
+      "line": 110,
+      "finding": "--include-public and --public-only retain default output under benchmarks/reports, which the sdist includes. Current owner explicitly uses results/quality-cache, and no current public-task raw report is in benchmarks/reports.",
+      "required_action": "Default public runs to results/quality-cache or enforce an equivalent release-safe boundary. Enhanced artifact verifier now rejects this raw-task structure if accidentally packaged."
+    },
+    {
+      "id": "stale-alpha-homepage-model-selection",
+      "priority": "P2",
+      "status": "reported_for_next_site_revision; existing published alpha preserved",
+      "file": "site/build.py",
+      "finding": "Homepage still calls retired Qwen3.8-27B4bit the priority showcase candidate. It is historicalalpha copy, not current selection evidence.",
+      "required_action": "Before publishing next site, update selection to actual validated Phase2 model/status, preserve oldalpha measurements with source/version labels, and retain unfavorable results."
+    }
+  ],
+  "validation": {
+    "portable": {
+      "command": ".venv/bin/python -m pytest -q",
+      "passed": 35,
+      "skipped_opt_in_metal": 34,
+      "result": "passed"
+    },
+    "lint": {
+      "command": ".venv/bin/ruff check src tests scripts benchmarks/experiments",
+      "result": "passed"
+    },
+    "quality_scorer": {
+      "command": ".venv/bin/python benchmarks/quality/runner.py selftest",
+      "result": "passed; seven official checker families plus MCQ, subprocess pass/fail/timeout/unsupported"
+    },
+    "temporary_build": {
+      "command": "PYTHONPATH=/tmp/deepinfer-uv-cache/archive-v0/9aztxqQCgpzwF3be7Ptsq/lib/python3.12/site-packages .venv/bin/python -m build --no-isolation --outdir /tmp/deepinfer-anti-pattern-dist",
+      "result": "passed; uses existing cached hatchling build dependencies after bare no-isolation reported missing hatchling. No dependency or published dist mutation.",
+      "verification_command": ".venv/bin/python scripts/verify_artifacts.py --dist /tmp/deepinfer-anti-pattern-dist",
+      "wheel_entries": 34,
+      "sdist_entries": 188,
+      "nonrelease": true,
+      "note": "Temporary archive filenames inherit current0.1.0a1 metadata solely for packaging validation. These are not replacement release artifacts and must not be published as that tag. Next actual release requires new version."
+    },
+    "metal": "Not run by this reviewer;34 opt-in controls remain scheduled by GPU owner, not failures."
+  },
+  "published_alpha_immutable": {
+    "deepinfer_mac-0.1.0a1-py3-none-any.whl": {
+      "sha256": "c2fef578a8f5d654276822d59785f12509c585784d6ff9b81b747a4fdef31010",
+      "matches_published": true
+    },
+    "deepinfer_mac-0.1.0a1.tar.gz": {
+      "sha256": "b13994a95217fa3a862aade4b2f08950281f574845a36f564874f0d495a91bb1",
+      "matches_published": true
+    }
+  },
+  "local_changes": [
+    "NOTICE",
+    "pyproject.toml",
+    "scripts/verify_artifacts.py",
+    "docs/evidence/phase2-anti-pattern-check.json"
+  ],
+  "reviewed_runtime_sha256": {
+    "src/deepinfer_mac/policy.py": "25dbbac857e2f7a1fdc0e0956a90b31eca1661b9f0ce1b51b07ab35479313d43",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/cache.py": "d4b4de5b54325dbb2fd5daa254c3e169cd6a7af005aacb75bd2df6d8014db709",
+    "src/deepinfer_mac/engine.py": "180d7e040e20e7ebc556713cc5e4c567accf14a38649ad462274d343a69a144c",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "tests/reference/vendor/mtp_varlen.hpp": "164f45db4cccd6d6909dd2846e7dfffb57754b108af679443bf4bd71ec33785a"
+  },
+  "limits": [
+    "No new actual-model or GPU execution by this reviewer.",
+    "No evidence yet of9B DS production benefit or superiority over two major engines.",
+    "This is a review of a moving working tree. Frozen quality source and recorded per-experiment hashes remain authoritative for measured outputs."
+  ]
+}

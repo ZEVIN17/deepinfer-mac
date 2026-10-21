@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "kind": "independent_static_anti_pattern_check",
+  "status": "passed",
+  "static_check_passed": true,
+  "strict_runtime_accepted": false,
+  "performance_advantage_proven": false,
+  "scope": "CPU-only source, contract, test and retained evidence review of experimental joint budget / variable-length execution. No MLX import, GPU execution, model loading or service changes by reviewer.",
+  "source_sha256": {
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/varlen_verify.py": "2b5e42a11ecea37c6cf5403675f1ecd73dbac595a1beea633e45c4fb5c796b27",
+    "tests/test_joint_budget.py": "24eea9fb3589c00061db89b8eb0df5e9867a01e89c6a982e21e9441f42b9c147",
+    "tests/test_varlen_metal.py": "ca5884e46c47d8949acf08d225ee85095de03f6e5a1c344faa29861e7ad8225c",
+    "benchmarks/experiments/phase3_verify_joint.py": "73a7729bcbe50488c0584fef850d2ca63f818cb421d9ec3493236a70e21252ca",
+    "benchmarks/experiments/phase3_diagnose_batch_logits.py": "29c5bba55a2b7d224e468253046f115d177efcf7f8a94f1dd43914a0481ebaca",
+    "docs/JOINT_VERIFICATION.md": "d2218e41469846a9e6711379f438344c6cf2861d72c15bb14d0b4b77f16a6992",
+    "docs/evidence/phase3-joint-code-review.json": "df72dae82d359e9ad52efb86b3ed14b8c9250c855573e8b1907d6a9faed65438",
+    "docs/evidence/phase3-joint-verification.json": "696e7290738b55cc5c4222d189adc6e45973348cc73d91627d6d4bcd83631dc3",
+    "docs/evidence/phase3-varlen-contract-audit.json": "7b5db2b1e0cc0b869e6c8894f947439651f04eaa0664a319782a57b9a0948371",
+    "docs/evidence/phase3-checkpoint-package.json": "e1b9a88765c88fb5b98622f72a4e078eb0ee62b5c5eb718d7836357edc7a560f",
+    "docs/evidence/phase3-batch-logits-review.json": "fc83e8a1a63e0a1cca53c9c490f4d1cb68035973e4f145c1400ba8dcc423237f",
+    "benchmarks/reports/phase3-batch-logits-diagnosis.json": "ead91aeb81f903ec1ca2ed105efad6e7af5b91dd4f273a30496fcc79ca41ed6e",
+    "benchmarks/reports/phase3-joint-mechanism-diagnostic.json": "a5764612b30af7961d63bee136aa86c4fc3134f55b28944cf07a2c51f45baf59",
+    "benchmarks/reports/phase3-joint-mechanism-final.json": "529b29f3442d40c6fb7d88f01e4ca45ed6a4d0288ee7504f18f79131322525b7",
+    "benchmarks/reports/phase3-joint-mechanism-state-control.json": "9efbf01cfae5c59f8610ee8017ca42c49254bfaac7f015923f30dd772dd58c8d",
+    "benchmarks/reports/phase3-joint-mechanism.json": "e8820589e8d713c6f8edab492a629495d9dabcd4bff91d2e31fe2d13288116e5"
+  },
+  "checks": [
+    {
+      "name": "actual execution API",
+      "result": "passed",
+      "detail": "Real model forwards use equal-q bucket shapes and audited dense cache merge. No invented BatchGenerator vector-cap API. Padded control executes and counts padding; disposable padded state is never committed."
+    },
+    {
+      "name": "budget and confidence semantics",
+      "result": "passed",
+      "detail": "Finite conditional versus cumulative contract, censored suffix, stable UID/generation, two committed histories N-2/N-1, dynamic active batch key, and immutable observations. CPU unit fixtures contain synthetic curves solely as algorithm tests, not benchmark measurements."
+    },
+    {
+      "name": "transactional recovery",
+      "result": "passed",
+      "detail": "Original target and draft states are snapshotted and restored on exceptions/cancel. Success uses exact consumed-prefix replay. Hybrid execution remains single-row; public capability flags remain false and public worker does not import experimental session."
+    },
+    {
+      "name": "complete work accounting",
+      "result": "passed",
+      "detail": "Draft, verify, replay and draft catch-up submissions and model token positions counted. Full-cycle timer includes host/statistical work and synchronized device state; verifier-only timer explicitly excludes draft. Kernel count remains null. 7 versus 12 verify positions and 30 versus 35 complete model-input positions are work controls, not milliseconds or mature-engine advantage."
+    },
+    {
+      "name": "evidence gates",
+      "result": "passed",
+      "detail": "Four complete reports retain failures and strict accepted=false. Same-target draft labelled mechanism control; no trained head, held-out calibration, realistic acceleration or three-process claim. Real history case has no calibrated cost curve, explicitly disclosed."
+    },
+    {
+      "name": "historical identity and privacy",
+      "result": "passed_after_sanitization",
+      "detail": "Independently compared each public report to private raw: only absolute source-map keys normalized, all hash values and measurements identical. Final runtime hashes match current source; harness formatter-only followup separately recorded without rebinding executed hash."
+    },
+    {
+      "name": "related diagnosis / contract / package scope",
+      "result": "passed",
+      "detail": "Logits diagnosis keeps complete raw inputs/logits private and reports numerical boundary without isolating a kernel or relaxing gate. Contract audit is CPU source-only. Package explicitly binds commit 766d6e1, not new joint code, release_ready=false, no publication, no weights/raw data in archives; generic path-rule text is not a private path."
+    }
+  ],
+  "independent_command": {
+    "command": ".venv/bin/python -m pytest -q tests/test_joint_budget.py",
+    "exit_code": 0,
+    "result": "21 passed; 2025 independent reference allocation comparisons included"
+  },
+  "resolved_findings": [
+    {
+      "priority": "P2",
+      "title": "Absolute source paths in public joint reports",
+      "resolution": "Four raw reports retained privately; public source-map keys normalized to repository-relative paths only. Historical execution hashes preserved; future harness formatter fixed and separately identified."
+    }
+  ],
+  "findings": [],
+  "retained_reports": [
+    {
+      "path": "benchmarks/reports/phase3-joint-mechanism-diagnostic.json",
+      "sha256": "a5764612b30af7961d63bee136aa86c4fc3134f55b28944cf07a2c51f45baf59",
+      "raw_sha256": "f6ba5a64b78987fb0dd19aa4920980af5e1955137b6c1c2f9aac4cadfe2813f1",
+      "only_source_path_keys_sanitized": true,
+      "strict_accepted": false
+    },
+    {
+      "path": "benchmarks/reports/phase3-joint-mechanism-final.json",
+      "sha256": "529b29f3442d40c6fb7d88f01e4ca45ed6a4d0288ee7504f18f79131322525b7",
+      "raw_sha256": "6af7928bb7dc0226a22ff4cc874125450a732bdd0d10184e25c48fa21cab6f77",
+      "only_source_path_keys_sanitized": true,
+      "strict_accepted": false
+    },
+    {
+      "path": "benchmarks/reports/phase3-joint-mechanism-state-control.json",
+      "sha256": "9efbf01cfae5c59f8610ee8017ca42c49254bfaac7f015923f30dd772dd58c8d",
+      "raw_sha256": "7c15ef260efd71bbbc184d76a483a954129307ddd80f37a3013623af542be19a",
+      "only_source_path_keys_sanitized": true,
+      "strict_accepted": false
+    },
+    {
+      "path": "benchmarks/reports/phase3-joint-mechanism.json",
+      "sha256": "e8820589e8d713c6f8edab492a629495d9dabcd4bff91d2e31fe2d13288116e5",
+      "raw_sha256": "24865400dbf4eda0593e6968c50629ba3fe1cdb1dc110671d586f05942e8c231",
+      "only_source_path_keys_sanitized": true,
+      "strict_accepted": false
+    }
+  ],
+  "limits": [
+    "Static approval is not full Phase 3 section 4 acceptance.",
+    "Pretrained exact serial-native gate remains false; no tolerance relaxed.",
+    "No cost-calibrated held-out policy acceptance or latency/throughput advantage against MLX-LM/oMLX established.",
+    "No public worker integration, hybrid cross-row batch, sampling speculation, trained confidence head or production capability promotion.",
+    "Package evidence covers preceding fixed commit only."
+  ]
+}

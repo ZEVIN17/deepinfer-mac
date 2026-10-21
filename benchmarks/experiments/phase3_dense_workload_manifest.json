@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "output_tokens": [
+    17,
+    32
+  ],
+  "development_depth_candidates": [
+    1,
+    2,
+    3
+  ],
+  "workload_sha256": "e51e37a4aff49b23c31ec1541c9e289cf4d570a356d87f129eb41432593eb413",
+  "raw_workload_public": false,
+  "scope": "New bounded mechanism workloads frozen before fastpath device execution. Not a representative quality benchmark. Previous pair-cost heldout is regression-only.",
+  "splits": {
+    "development": [
+      {
+        "id": "dense-dev-order",
+        "context_tokens": 96,
+        "prompt_sha256": "229df9c3a8647d388a54b3e5d1131e614629c35de3529beb00e7f415c6e7f5c6"
+      },
+      {
+        "id": "dense-dev-cloud",
+        "context_tokens": 144,
+        "prompt_sha256": "3b713a9759646da46acb230fd1f86f9fb71890c836741fbba2dbfb992f262bcf"
+      }
+    ],
+    "heldout": [
+      {
+        "id": "dense-hold-navigation",
+        "context_tokens": 192,
+        "prompt_sha256": "6cac78e951e5a852fc20d0d0b5c53efdb4e5bfe2d9eec450c715a7213e92c4ff"
+      },
+      {
+        "id": "dense-hold-chinese",
+        "context_tokens": 256,
+        "prompt_sha256": "87ccea2073341d87a7dc1d3c59e486ae8d9af835dce27b5dcecabc460535498d"
+      }
+    ]
+  }
+}

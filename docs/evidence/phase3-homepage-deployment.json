@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "accepted": true,
+  "scope": "website-only deployment; no runtime, numerical or competitive-performance acceptance",
+  "experimental_product_commit": "b1a1af0a14c7809072e48d8e59a248dcc862bf04",
+  "website_commit": "1a5b68b25a23fc2b4375dc0370a64cfbd7e21544",
+  "website_parent": "7b7beb8c9e10c7128c328b9e1bfd1f0f6adace03",
+  "website_only_files": [
+    "site/build.py",
+    "site/README.md",
+    "site/assets/showcase.js",
+    "site/assets/style.css"
+  ],
+  "build": {
+    "python": "repository Python 3.12; CI Python 3.12",
+    "pages": 8,
+    "local_resource_document_links": 138,
+    "result": "passed"
+  },
+  "workflows": [
+    {
+      "id": 39586997096,
+      "name": "Deploy showcase",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39586997096"
+    },
+    {
+      "id": 39586997071,
+      "name": "Portable checks",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39586997071"
+    }
+  ],
+  "live_url": "https://zevin17.github.io/deepinfer-mac/zh.html",
+  "live_bytes_equal_build_sha256": {
+    "zh.html": "57be05353a125573c9c78d2ecbda4f4324069f7264f9739b17975efe3b5e456e",
+    "index.html": "706c59d7d9a96f3b43672e91146d52262a08df0bd699ae252e11b44e2b7ff936",
+    "assets/showcase.js": "abb0aaceabb10649a3bef4e2e71549ce40d1f00ee745f60e45ee82778daccf0a",
+    "assets/style.css": "823b7c0fc4043b6a3fdc8f354a9877014059731f66637ebd0435e278c40db326"
+  },
+  "limits": [
+    "Website claims remain tied to their pinned runtime/evidence checkpoints.",
+    "Candidate package remains d3c6ae1; later documentation and measurements are not retroactively included.",
+    "No runtime merge, tag or release created."
+  ]
+}
