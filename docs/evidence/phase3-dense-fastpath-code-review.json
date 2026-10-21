@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "reviewer": "independent phase3_dense_fastpath_review",
+  "review_type": "source code quality and portable tests; no GPU execution",
+  "base_commit": "007fe35e24480d1f1d2c924556ff87ccd890a93f",
+  "status": "approved_source_review",
+  "findings": [],
+  "source_sha256": {
+    "src/deepinfer_mac/varlen_verify.py": "a006535e63d8f51cbeacf020977c7ddc77df7e8f4a81b0d90901ff90f8b85686",
+    "docs/JOINT_VERIFICATION.md": "2a85c8f459b42cbe0a54c174482eca95b46b398dacbd7e23e8415ba59be79e85",
+    "tests/test_dense_fastpath.py": "3a56089c1f62aa2392ff7a3a17debb6b8a1b68ac9d64bd7c0bf57c0949d30c5b",
+    "tests/test_dense_fastpath_metal.py": "6c66035294cd1ff208ee7fa475e8710b20c58d3c4fd7db521940f02cf2c069f7"
+  },
+  "upstream": {
+    "package": "mlx-lm",
+    "version": "0.32.2",
+    "file": "mlx_lm/models/cache.py",
+    "sha256": "c96cb169fd5e0ec4584a162dd61dc62ab08ccdca03a9850f8a491ce6809145e6"
+  },
+  "resolved_findings": [
+    {
+      "priority": "P2",
+      "issue": "Default serial/exact-replay acquired an extra deepcopy that could inflate historical control cost",
+      "resolution": "Default retains original draft cache execution; private copies only for opt-in policies"
+    },
+    {
+      "priority": "P2",
+      "issue": "Batched draft guard originally checked only draft, allowing an unaccepted hybrid target combination",
+      "resolution": "Both target and draft require exact audited KVCache; mixed direction regression cases added"
+    }
+  ],
+  "reviewed_invariants": [
+    "Historical unprofiled and profiled default identities remain unchanged; 24 strategy/profile/policy combinations are distinct",
+    "Target extracted cache removes historical left padding, then trims actual executed q minus consumed k, including padded-control suffix",
+    "Draft trims D minus k or consumes one final accepted proposal at k=D+1; D=0 consumes old tail",
+    "Original layer objects retain identity; cancellation/exception restores target and draft snapshots; statistics commit after successful execution",
+    "Empty ticks make zero model calls and leave history unchanged; shared-cap empty max guarded",
+    "Nondefault paths reject hybrid, quantized and rotating caches before model calls",
+    "Unused physical KV capacity is excluded by logical offsets; no claim of zero allocation or no copy"
+  ],
+  "verification": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_dense_fastpath.py tests/test_stage_profile.py",
+      "result": "8 passed"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q -m 'not metal'",
+      "result": "338 passed, 76 deselected"
+    },
+    {
+      "command": ".venv/bin/ruff check src/deepinfer_mac/varlen_verify.py tests/test_dense_fastpath.py tests/test_dense_fastpath_metal.py",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "Metal tests were read but not executed by this CPU-only reviewer",
+    "Actual pretrained token/cache acceptance and performance require independent source-bound execution",
+    "No superiority over native MLX-LM or oMLX established by this review"
+  ]
+}

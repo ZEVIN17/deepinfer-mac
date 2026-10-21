@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "independent_cpu_anti_pattern_review",
+  "status": "passed",
+  "static_check_passed": true,
+  "strict_runtime_accepted": false,
+  "performance_advantage_proven": false,
+  "scope": "Source and CPU-only review; reviewer did not import MLX, execute GPU work, load model weights or alter services. Device evidence must be independently bound before final acceptance.",
+  "source_sha256": {
+    "src/deepinfer_mac/varlen_verify.py": "a006535e63d8f51cbeacf020977c7ddc77df7e8f4a81b0d90901ff90f8b85686",
+    "docs/JOINT_VERIFICATION.md": "2a85c8f459b42cbe0a54c174482eca95b46b398dacbd7e23e8415ba59be79e85",
+    "tests/test_dense_fastpath.py": "3a56089c1f62aa2392ff7a3a17debb6b8a1b68ac9d64bd7c0bf57c0949d30c5b",
+    "tests/test_dense_fastpath_metal.py": "6c66035294cd1ff208ee7fa475e8710b20c58d3c4fd7db521940f02cf2c069f7",
+    "benchmarks/experiments/phase3_dense_fastpath.py": "1e2add489e6e59f222d522291484f9b06ce5652722ba957454d9d6e62c00311d",
+    "benchmarks/experiments/phase3_dense_workload_manifest.json": "119c5278b0c1d4f2b3252cee523c718eba50e0ce9bced75cf791765d9e6b2bd5",
+    "docs/DENSE_FASTPATH_EXPERIMENT.md": "0e250991cbd1361f739da79ac32e739444ff77360ef7c449571c99ca8f14b926",
+    "docs/evidence/phase3-dense-fastpath-code-review.json": "1367fb5ca6c08db38fd4fa450fb56a01d03d5d5d0c3d2a1084687e35b5c7d652",
+    "benchmarks/reports/phase3-dense-fastpath-development-first.json": "4dafd3ad498bfa5452b8d2130f9189c7d3d9a11b302890550c7dc433b734e14b",
+    "docs/evidence/phase3-dense-fastpath-verification-first.json": "fef423be108312822b7885d5161e8786944e974e70fcc811d305c6bf454c1521",
+    "benchmarks/experiments/phase3_dense_export.py": "fb8b4857eb79a23916b1b1008ea845bf8c3a72bdea9177bb0d99190912e8cd0b"
+  },
+  "checks": [
+    {
+      "name": "actual batched draft",
+      "result": "passed",
+      "detail": "Actual [B,1] model forward per draft step and BatchKVCache extraction; draft submissions B*D to D while draft input positions remain B*D. No fake vector-cap API or kernel-count assertion."
+    },
+    {
+      "name": "exact prefix recovery",
+      "result": "passed",
+      "detail": "Target trims executed q minus consumed k after extraction; draft trims D-k or consumes one final token. EOS, truncated budget and depth zero use consumed-prefix rule. Physical stale capacity is excluded by logical offset."
+    },
+    {
+      "name": "defaults and cost identity",
+      "result": "passed",
+      "detail": "Historical serial/exact replay executes its original cache path without added deepcopy. All 24 strategy/profile/policy identities distinct; default profiled and unprofiled identities retained."
+    },
+    {
+      "name": "transactional and cache capability boundaries",
+      "result": "passed",
+      "detail": "Target and draft opt-ins require exact audited dense KVCache; hybrid in either direction rejects. Full snapshots restore on failure/cancel; stable UID/generation and statistics commit only after successful tick. Tests cover reorder, reuse and empty tick."
+    },
+    {
+      "name": "prospective protocol and claim scope",
+      "result": "passed",
+      "detail": "Frozen workload separates development and heldout; heldout unavailable in current execution CLI. Native serial is quality control, not fair batch performance control. Three independent processes and frozen configuration required for future speed conclusion. Product source unchanged."
+    },
+    {
+      "name": "first development evidence and retained failures",
+      "result": "passed",
+      "detail": "Independent raw recomputation: 10 controls, 20 native-token matches, 490 emitted tokens; all 40 next-token argmax and offset checks pass, 0/40 strict 1e-5 next-logit checks pass. accepted=false preserved including original serial/replay controls. All call/token accounting derived from individual model_calls matches public totals. Native output hashes, output counts, timing and next-state diagnostics match private report. 36 frozen run-source files match execution hashes. Initial sandbox Metal abort retained separately from successful 76-test device-enabled run."
+    },
+    {
+      "name": "public export privacy",
+      "result": "passed",
+      "detail": "Public first report contains generated-token hashes/counts rather than IDs/text, no private absolute user paths, no raw prompt text. Raw report retained privately. Current failure array empty; future exception messages still require explicit privacy review."
+    }
+  ],
+  "independent_commands": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_dense_fastpath.py tests/test_stage_profile.py",
+      "result": "8 passed",
+      "exit_code": 0
+    }
+  ],
+  "findings": [],
+  "pending": [],
+  "limits": [
+    "Static review does not prove runtime acceptance or acceleration.",
+    "No superiority over native MLX-LM or oMLX established.",
+    "Private prompt hashes do not make the public corpus fully reproducible.",
+    "First pretrained development run fails strict next-logit numerical gate; tolerance not relaxed and failure not hidden.",
+    "One process and serial native scheduling cannot establish comparative acceleration. No heldout execution occurred.",
+    "Evidence applies to first frozen harness/report only; subsequent diagnostic or harness versions require separate verification."
+  ],
+  "retained_report": {
+    "public_path": "benchmarks/reports/phase3-dense-fastpath-development-first.json",
+    "public_sha256": "4dafd3ad498bfa5452b8d2130f9189c7d3d9a11b302890550c7dc433b734e14b",
+    "raw_sha256": "7ec616710d9c9ec233c3722cebd57142a078f3184bdf8ed89cf4cd46394a33c0",
+    "strict_accepted": false,
+    "observed_coverage": {
+      "completed_controls": 10,
+      "native_matched_requests": 20,
+      "observed_output_tokens": 490,
+      "next_state_argmax_and_offset_pass": 40,
+      "strict_next_logits_pass": 0,
+      "next_state_total": 40
+    }
+  },
+  "documentation_refresh": {
+    "path": "docs/DENSE_FASTPATH_EXPERIMENT.md",
+    "previous_sha256": "e206dc0477f92329a77f1ce9662ae85663c07018e87d29d9266622c54f377a4f",
+    "current_sha256": "0e250991cbd1361f739da79ac32e739444ff77360ef7c449571c99ca8f14b926",
+    "review": "First development observation reviewed against frozen public report: exact counts, numerical failure range, memory and timing agree; strict gate remains failed and one-process timings explicitly not speed claims. No v2 claims or execution acceptance added. Runtime, harness and measurement source identities unchanged."
+  }
+}

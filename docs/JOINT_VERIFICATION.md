@@ -43,17 +43,18 @@ the golden/unconsumed tail token. A row provides at least `q−1` proposals. Str
 - `bucket`: equal-q dense rows merge through the real locked MLX-LM KVCache API;
   the target receives `[bucket_size, q]`, so different budgets change actual work.
 - `padded_control`: the target receives `[batch, max(q)]`, while each row observes
-  only its requested prefix. Right-padded temporary cache states are **discarded**;
-  they are never extracted or committed. This is a causal-logit control, not a
-  valid cache-reuse path and not a compute-saving claim.
+  only its requested prefix. Under the default exact-replay control, right-padded temporary cache
+  states are discarded. Under the explicit dense-trim opt-in below, the entire
+  unconsumed suffix (including padding) is removed after row extraction. Padding
+  itself is never a compute-saving claim.
 - `shared_cap`: every row actually verifies `max(q)`, requiring sufficient real
   proposals. It uses the same exact recovery strategy as the bucket path.
 
 Audited recurrent/hybrid caches execute **single rows**, never cross-row hybrid
 microbatches. Every original target cache is snapshotted before the round. All
-verification uses disposable deep-copied state. On success the original single-row
-state is restored and exactly replays `[old_tail, *emitted_tokens[:-1]]`. Even full
-acceptance uses this conservative replay. Rejection, EOS and output truncation
+verification uses disposable deep-copied state. Under the default recovery policy,
+on success the original single-row state is restored and exactly replays `[old_tail, *emitted_tokens[:-1]]`. Even full
+acceptance uses this conservative replay in the default policy. Rejection, EOS and output truncation
 therefore have the same recovery policy across controls. Any exception/cancellation
 restores every original row. No approximate bounded recurrent replay is used.
 
@@ -170,3 +171,59 @@ Portable service contract checks: `python -m pytest -q tests/test_joint_service.
 Their controlled session fixtures test lifecycle/API contracts only and are never
 model, language-quality, latency or throughput evidence. Real service acceptance
 must be recorded separately before capability promotion.
+
+
+## Opt-in dense draft batching and exact prefix trimming
+
+The Python mechanism exposes two independent switches on `JointSpeculativeSession`:
+`draft_execution="serial" | "batched"` and
+`recovery="exact_replay" | "dense_trim"`. Defaults preserve the original serial
+model-call shapes and replay/catch-up path, including its original copying cost.
+No service default or public model capability is promoted by these switches.
+`MLXVariableVerifier.verify(..., recovery="dense_trim")` also exposes recovery
+alone for isolated controls. These are implementation candidates until separately
+accepted by source-bound device and pretrained-pair evidence.
+
+Both opt-ins require exact audited `mlx_lm.models.cache.KVCache` on **both** target
+and draft; hybrid, rotating and quantized cache types reject before execution.
+The default replay path remains available for audited hybrid caches. The installed
+MLX-LM 0.32.2 `KVCache.merge` returns `BatchKVCache` with historical left padding and
+per-row positions. Batched draft makes actual `[active_rows, 1]` forwards for every
+one of the same D draft steps, then extracts each row. It changes model submission
+count from B×D to D, while retaining the same draft token work. This count alone is
+not latency evidence; changed batch shapes may also change near-tie greedy tokens.
+
+For target recovery, each row is extracted from disposable verification state,
+then its single-row `KVCache.trim(executed_q - k)` keeps the exact k consumed tokens
+`[old_tail, *emitted[:-1]]`. The executed q includes padding where applicable;
+using only requested q would corrupt the committed prefix. The last emitted token
+remains unconsumed. Draft recovery trims `D-k` when k≤D; full acceptance k=D+1
+performs one catch-up token. At D=0 this token is the original pending tail.
+EOS and output-budget truncation use the same k rule. Trim changes the logical
+offset; unused physical capacity and stale suffix bytes are not committed context.
+
+All opt-in work uses independent temporary states and retains original target/draft
+snapshots. Row layer object identities are preserved when state is committed. Any
+exception or cancellation restores every row, and only a successful complete tick
+advances confidence/history. Empty ticks make no model calls and leave history
+unchanged. Stable `(uid, generation)` identity continues to separate reused slots.
+
+Build `CostKey.execution_strategy` with
+`execution_identity(strategy, profiling, draft_execution=..., recovery=...)`.
+Every opt-in/profile combination is distinct; old cost curves cannot be reused for
+new combinations. Shared-cap, padded and bucket comparisons must hold draft and
+recovery switches fixed. The independent 2×2 control compares both switches before
+any optimized path is selected. No old calibration report is relabelled.
+
+```sh
+# Portable identity/policy and unchanged legacy guards.
+.venv/bin/python -m pytest -q tests/test_dense_fastpath.py tests/test_stage_profile.py
+# Tiny actual device controls; run only with the exclusive GPU baton.
+.venv/bin/python -m pytest -q tests/test_dense_fastpath_metal.py --run-metal
+```
+
+Device tests separately compare emitted IDs, logical consumed KV prefixes, and the
+next target/draft logits/argmax against independently reconstructed consumed
+prefixes. Small floating-point tolerance in KV/logit diagnostics does not waive
+exact output-token equality. Production speed, quality, and superiority over
+native MLX-LM or oMLX require their own fair comparisons.
