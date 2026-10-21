@@ -26,14 +26,14 @@ Updated 2026-10-21. Continue [Phase 3 plan](PHASE3_EXECUTION_PLAN.md) on `codex/
 
 - [Dense protocol](DENSE_FASTPATH_EXPERIMENT.md) and `phase3_dense_heldout_protocol.json` freeze source, order, input/output budgets and comparison scope. Raw prompts/outputs and all measured source snapshots remain excluded under `artifacts/phase3-dense-fastpath/`. Public hashes alone are not a downloadable prompt corpus. Export scripts reproduce redaction without GPU.
 - First dense runtime checkpoint **d3c6ae1320f09f0d21813931c6df488cf4b4909b** is pushed to the experimental branch. Candidate `dist/candidates/v0.1.0a2-d3c6ae1/` contains that checkpoint; **v2 development and heldout diagnostics postdate it**. [Package evidence](evidence/phase3-dense-checkpoint-package.json). No new release/tag or runtime merge to main.
-- Public bilingual site currently derives from website-only main `7b7beb8`; later local product candidates are separate until deployment is verified.
+- Research evidence is pushed at `d684205`; product/delivery documentation at `b1a1af0`. Public bilingual site is now website-only main **`1a5b68b25a23fc2b4375dc0370a64cfbd7e21544`**. [Pages run 39586997096](https://github.com/ZEVIN17/deepinfer-mac/actions/runs/39586997096) passed; live EN/ZH homepages and JS/CSS equal the reviewed build byte-for-byte. [Deployment evidence](evidence/phase3-homepage-deployment.json). [Engineering delivery](PHASE3_DELIVERY.md) distinguishes completed implementation from research gates.
 
 ## Remaining gates and next execution
 
 - Separate quantized shape/partition numerical differences from cache-state errors; cycle-matched old replay now passes, fast trim still differs. Keep strict failures and dense-only opt-in scope; do not promote capability based on matching sampled tokens alone.
 - API cost calibration remains unaccepted; no automatic online calibration or trained confidence head. Cross-model/hybrid optimized equivalence, trace-justified ZOS overlap, broad quality/long-context/overload acceptance and competitive performance gates remain incomplete.
 - This ignored-EOS fixed-budget protocol is internal/MLX-only. oMLX needs a newly frozen natural-EOS fair protocol; do not reuse heldout for tuning. Large 9B fairness remains resource-limited; user cannot free RAM, do not ask again or bypass guards.
-- Finish independent review/export checks, synchronize explicit public allowlists, then refresh homepage from verified positive implementation evidence. No fake speed claims. Exclude raw artifacts, results, weights, dist and private paths from pushes.
+- Independent code/export/claim review, explicit public branch synchronization and homepage deployment are complete. Continue the unresolved research gates above without changing historical evidence. Exclude raw artifacts, results, weights, dist and private paths from pushes.
 
 ## History
 
