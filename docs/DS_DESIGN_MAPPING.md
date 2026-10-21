@@ -266,3 +266,53 @@ confidence, automatic cost calibration and competitive performance are not
 accepted by this integration. Without an independently measured exact-key curve,
 the executor uses full budget. See `JOINT_VERIFICATION.md` for entry commands,
 non-preemptible prefill and experimental shape-dependent output boundaries.
+
+## Phase3 section 4: joint allocation reaches real execution
+
+`ds/joint_budget.py` implements explicit conditional versus cumulative confidence,
+identity-bound cost curves, `(uid, generation)` history and censored acceptance
+observations. Empirical beta-smoothed estimates are not a trained ConfidenceHead.
+The original MTPVarlen rule selects total work from N−2 history and allocates using
+N−1 history. The MLX allocator translates the audited DS conditional cumprod,
+flat-index rank/tie and fresh remap rules into actual arrays. This is a platform
+translation, not execution of the original CUDA kernel. Independent reference
+coverage is described in [PHASE3_BUDGET_REFERENCE.md](PHASE3_BUDGET_REFERENCE.md).
+
+`varlen_verify.py` connects those lengths to real `[bucket_size, q]` target calls.
+Shared-cap and padded controls remain separate. Dense caches use locked native
+merge/extract primitives; hybrid state uses isolated rows and exact replay rather
+than pretending recurrent caches support arbitrary trim. Transactional target and
+draft recovery, consumed-tail ownership, cancellation and successful-only history
+commit are Mac execution engineering. Full-cycle cost includes draft, verify,
+recovery, catch-up and host work, not just target forward. No independently measured
+matching curve means full budget. [JOINT_VERIFICATION.md](JOINT_VERIFICATION.md)
+and [joint source review](evidence/phase3-joint-code-review.json) define the boundary.
+
+The distinct-pair experiment executed fewer model-input positions (76 versus 109
+verification; 333 versus 366 total decode) without a latency improvement. This
+accepts actual shape/work reduction in that scope, not the plan's speed target or
+trained-confidence calibration. [PAIR_COST_EXPERIMENT.md](PAIR_COST_EXPERIMENT.md)
+preserves the complete control costs and source-bound observations.
+
+## Phase3 sections 5–6: profiling and dense recovery optimization
+
+Default-off wall-stage timing in `varlen_verify.py` observes existing completion
+boundaries without adding device synchronization. Nested verification timings must
+not be summed again into cycle totals. The measured draft/replay/catch-up cost
+motivated two independent opt-ins: `draft_execution="batched"` reduces model
+submissions through real `[B, 1]` draft calls, and `recovery="dense_trim"` commits
+extracted dense cache prefixes after removing the entire unconsumed suffix.
+These are Mac execution optimizations using upstream cache primitives, **not ZOS,
+YoCo, paged copy-on-write or new DeepInfer algorithms**. Defaults stay serial draft
+and exact replay. Unsupported hybrid/rotating/quantized cache classes reject;
+strategy/profiling identity separates calibration curves.
+
+[Three-process heldout verification](evidence/phase3-dense-heldout-verification.json)
+records 18/18 complete token matches but strict numerical acceptance **false**:
+whole-prefix checks 0/24; cycle-matched replay checks old 12/12 versus fast 0/12.
+Next-token argmax and logical offsets match in both groups. Internal task time fell
+in this bounded diagnostic, while native MLX-LM batch remained faster. No optimized
+capability or numerical tolerance is promoted. The source, default behavior and
+first failures remain preserved in [DENSE_FASTPATH_EXPERIMENT.md](DENSE_FASTPATH_EXPERIMENT.md).
+Full ZOS overlap and competitive native/oMLX performance acceptance remain open;
+[PHASE3_DELIVERY.md](PHASE3_DELIVERY.md) summarizes the engineering handoff.

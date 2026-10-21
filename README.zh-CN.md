@@ -98,6 +98,12 @@ uv run deepinfer-mac run --model /path/to/complete-mlx-model \
 
 上述为正确性与资源成绩。尚未确立相对原生 MLX-LM、oMLX 的稳定性能优势，竞争性能目标延续至第三阶段。[基准协议](docs/benchmarking.md)和[二阶段完整记录](docs/phase2.md)保留条件、失败样本与历史结论。
 
+## 第三阶段执行核心
+
+已实现能力适配器、有界请求 tick、联合预算与真实变长验证。实验 Python 入口新增批量草稿调用与 Dense KV 直接裁剪，默认 API 行为保持原样。Dense 检查点通过 **338 项 CPU + 76 项真实 Metal 测试**。
+
+三个独立 heldout 诊断进程的 **18/18 个完整输出与原生目标模型一致**。成对任务耗时中位数：原有 replay 路径 367.56 ms、Dense trim 279.13 ms、原生 MLX-LM batching 180.52 ms。这是特定内部路径的改进，尚非对成熟引擎的速度优势。严格数值验收仍未通过：同周期 replay 对照通过 12/24 项（旧 replay 12/12、trim 0/12），虽下一 token argmax 与偏移均一致，Dense trim 仍保持实验状态。[协议与结果](docs/DENSE_FASTPATH_EXPERIMENT.md) · [三进程证据](benchmarks/reports/phase3-dense-heldout-summary.json)。
+
 ## 自适应执行如何协作
 
 ```text

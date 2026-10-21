@@ -98,6 +98,12 @@ Public 9B API/UI modes remain baseline. Hybrid speculation is greedy and uses th
 
 These are correctness and resource milestones. Stable superiority over native MLX-LM and oMLX is not established; the competitive performance goal carries into Phase 3. [Benchmark protocol](docs/benchmarking.md) and [full Phase 2 record](docs/phase2.md) retain conditions, failed cases and historical results.
 
+## Phase 3 execution core
+
+The engine now combines capability adapters, bounded request ticks, joint budgets and actual variable-length verification. Experimental Python opt-ins add batched draft calls and direct dense KV trimming; default API behavior is unchanged. The dense checkpoint passed **338 portable + 76 real Metal tests**.
+
+Three independent heldout diagnostic processes produced **18/18 complete outputs matching the native target**. Median paired-task times were 367.56 ms for our previous replay path, 279.13 ms for dense trim and 180.52 ms for native MLX-LM batching. This is a narrower internal improvement, not a competitor speed advantage. Strict numerical acceptance remains false: cycle-matched replay passed 12/24 checks (old replay 12/12, trim 0/12), despite matching next-token argmax and offsets. Dense trim stays experimental. [Protocol and results](docs/DENSE_FASTPATH_EXPERIMENT.md) · [Three-process evidence](benchmarks/reports/phase3-dense-heldout-summary.json).
+
 ## How adaptive execution fits together
 
 ```text

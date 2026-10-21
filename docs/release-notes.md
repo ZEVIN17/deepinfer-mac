@@ -1,5 +1,8 @@
 # 0.1.0a2 — experimental candidate, unpublished
 
+- Phase 3 adds capability adapters, bounded continuous request ticks, joint confidence/cost budgets and actual variable-length target verification. An explicit joint service passed 35/35 real-model checks, including SSE and cancellation recovery.
+- Dense Python research opt-ins add batched draft calls and direct KV trimming. The source checkpoint passed 338 portable and 76 actual Metal tests. Three later diagnostic processes matched 18/18 complete outputs; strict numerical acceptance remains false and native MLX-LM batching remains faster. See [dense protocol](DENSE_FASTPATH_EXPERIMENT.md) for scope and exact results.
+- Installable candidate `v0.1.0a2-d3c6ae1` binds runtime checkpoint `d3c6ae1320f09f0d21813931c6df488cf4b4909b`; later v2/heldout reports are separate evidence, not packaged runtime claims. [Package verification](evidence/phase3-dense-checkpoint-package.json).
 - Primary candidate Qwen3.5-9B-8bit with real loading, baseline/sampled API/SSE/cancellation/cache and local UI evidence; final 8bit/4bit/14B quality/efficiency choice remains pending.
 - Retired27B active profiles/unused weights removed; failures/audits retained. No publisheda1 package bytes changed.
 - Executable DeepInfer MTPVarlen-derived scheduler, original C++ oracle, empirical acceptance adapter and complete-cycle cost accounting.

@@ -40,3 +40,5 @@ Build and link checks remain the commands above. Local source changes and a
 successful build do not update the deployed website or publish a release.
 
 The joint-service card appears on both homepages, architecture and milestones. It uses fixed-commit external report links, preserving the historical Phase2 bundle and replay. No new runtime simulation, prerecorded performance, hosted deployment or release is introduced.
+
+The Phase 3 execution-core card links to immutable dense checkpoint `d3c6ae1320f09f0d21813931c6df488cf4b4909b`: 338 portable / 76 actual Metal tests. It describes capability adapters, bounded ticks, real variable-length buckets and explicit Python-only dense experiments. Full numeric and timing results remain in the linked protocol; no competitive speed or broad equivalence claim is made. The self-contained Phase 2 bundle remains unchanged.
