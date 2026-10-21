@@ -70,7 +70,8 @@ quality-run timings are not a competing-framework speed benchmark.
 .venv/bin/python benchmarks/quality/compare_models.py \
   --reports results/quality-cache/quality-public-qwen35-9b8-v2.json \
             results/quality-cache/quality-public-qwen35-9b4-v2.json \
-            results/quality-cache/quality-public-qwen3-14b-v2.json \
+            results/quality-cache/quality-public-qwen3-14b-v2-1.json \
+  --harness-bridge benchmarks/reports/phase2-quality-source-v2-1-20261021/harness-bridge.json \
   --output benchmarks/reports/public-quality-paired-v2.json
 ```
 
@@ -80,3 +81,37 @@ scores without replacing them. Its V3 source retains exactly the V2 runtime and
 locks, adding explicit `--task-ids`, `--output-cap`, and Qwen3 sampling-family
 controls; archive/lineage hashes are in
 `benchmarks/reports/phase2-quality-budget-source-v3-20261021/manifest.json`.
+
+The14B runner first loaded successfully but failed before its first request while
+recording cache types: pure Qwen3 exposes the official `make_prompt_cache` factory
+instead of a model `make_cache` method. That attempt remains local plus a
+release-safe diagnostic. SourceV2.1 changes only this audit and exception-status
+recording; all runtime/locks/scorer/task/generation files and parameters remain
+identical toV2. The explicit bridge contains full before/after runner sources and
+hashes. The comparator checks all file maps and permits only those three exact
+metadata edits; default pairing still refuses different frozen archives. It never
+rewrites the original report hashes.
+
+For an exact V2 baseline replay, extract the committed source archive into a
+local excluded working copy, materialize/copy the fixed public tasks there, and
+force that copy's `src` ahead of the installed editable checkout:
+
+```sh
+task_repo_root="$PWD"
+mkdir -p results/repro-quality-v2
+tar -xzf benchmarks/reports/phase2-quality-source-v2-20261021/source.tar.gz -C results/repro-quality-v2
+mkdir -p results/repro-quality-v2/results/quality-cache
+cp results/quality-cache/tasks.json results/repro-quality-v2/results/quality-cache/tasks.json
+cd results/repro-quality-v2
+PYTHONPATH="$PWD/src" "$task_repo_root/.venv/bin/python" benchmarks/experiments/phase2_model_quality.py \
+  --profile qwen3.5-9b-8bit --public-only --settings greedy_engine official_engine \
+  --output "$task_repo_root/results/quality-cache/quality-public-qwen35-9b8-v2-replay.json"
+```
+
+Use the V2.1 archive for pure Qwen3-14B (`--profile qwen3-14b`), retaining the
+bridge disclosure. `official_engine` in both archives denotes the **shared
+Qwen3.5 sampling protocol**; it is not relabeled Qwen3's official default.
+Additional Qwen3-family or4096-token controls use the V3.1 archive and explicit
+`--sampling-family qwen3` or `--task-ids ... --output-cap 4096` respectively.
+Never run two model processes concurrently. Keep replay raw reports local and
+publish only the release-safe summary/paired outputs.

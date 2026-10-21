@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
 """Build a dependency-free, relocatable static showcase from reviewed evidence."""
 from __future__ import annotations
+
 import argparse
 import html
 import json

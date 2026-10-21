@@ -1,5 +1,6 @@
 """Protect scientific pairing, aggregation, and release-safe evidence boundaries."""
 import copy
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -79,3 +80,53 @@ def test_setting_mismatch_rejected(reports):
     reports[1]['cases'][0]['setting'] = 'official_engine'
     with pytest.raises(ValueError, match='same settings/tasks'):
         compare(reports)
+
+
+@pytest.fixture
+def bridged(reports):
+    before_script = ("    from mlx_lm.generate import generate_step\n"
+                     "        report['cache_types'] = sorted({type(c).__name__ for c in engine.model.make_cache()})\n"
+                     "        report['status'] = 'measured'\n    finally:\n")
+    after_script = _module.metadata_audit_patch(before_script)
+    bridge = {'allowed_file': _module.RUNNER_PATH, 'before_script': before_script, 'after_script': after_script}
+    for prefix, script, report in zip(('before', 'after'), (before_script, after_script), reports):
+        digest = hashlib.sha256(script.encode()).hexdigest()
+        files = {_module.RUNNER_PATH: digest, 'src/runtime.py': 'same', 'benchmarks/quality/runner.py': 'same-scorer'}
+        tree = hashlib.sha256(json.dumps(files, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+        bridge.update({f'{prefix}_files': files, f'{prefix}_tree_sha256': tree, f'{prefix}_script_sha256': digest})
+        report['frozen_source'] = {'files': copy.deepcopy(files), 'tree_sha256': tree}
+    return reports, bridge
+
+
+def test_explicit_exact_metadata_bridge_is_required_and_disclosed(bridged):
+    reports, bridge = bridged
+    with pytest.raises(ValueError, match='verified metadata-only harness bridge'):
+        compare(reports)
+    result = compare(reports, harness_bridge=bridge)
+    assert result['frozen_source_tree_sha256'] is None
+    assert len(result['frozen_source_tree_sha256_values']) == 2
+    assert result['harness_bridge']['before_tree_sha256'] != result['harness_bridge']['after_tree_sha256']
+    assert result['paired'][0]['left_only_pass'] == 1
+
+
+@pytest.mark.parametrize('path', ['src/runtime.py', 'benchmarks/quality/runner.py'])
+def test_bridge_rejects_runtime_or_scorer_changes(bridged, path):
+    reports, bridge = bridged
+    bridge['after_files'][path] = 'changed'
+    with pytest.raises(ValueError, match='runtime, scoring'):
+        compare(reports, harness_bridge=bridge)
+
+
+@pytest.mark.parametrize('extra', ['\ntemperature = .8\n', '\nscore = True\n'])
+def test_bridge_rejects_sampler_or_scoring_edits_inside_runner(bridged, extra):
+    reports, bridge = bridged
+    bridge['after_script'] += extra
+    with pytest.raises(ValueError, match='unapproved generation/sampling/scoring'):
+        compare(reports, harness_bridge=bridge)
+
+
+def test_bridge_cannot_bless_unlisted_report_source(bridged):
+    reports, bridge = bridged
+    reports[1]['frozen_source']['files']['src/runtime.py'] = 'unlisted'
+    with pytest.raises(ValueError, match='outside the verified'):
+        compare(reports, harness_bridge=bridge)

@@ -9,11 +9,12 @@ import json
 from pathlib import Path
 
 
-def build(version=1, rows_by_session=None):
+def build(version=1, rows_by_session=None, record_indices=None, context_targets=None):
     if version not in (1, 2):
         raise ValueError("Unsupported manifest version")
     sessions = []
-    for index, rows in enumerate(rows_by_session or (80, 80, 80, 160, 160, 160, 320, 320, 320)):
+    for position, rows in enumerate(rows_by_session or (80, 80, 80, 160, 160, 160, 320, 320, 320)):
+        index = record_indices[position] if record_indices is not None else position
         language = "zh" if index % 2 else "en"
         table = "\n".join(
             f"P{i:04d}: cost={100 + (i * 37 + index) % 900}; owner=R{(i + index) % 17:02d}."
@@ -75,7 +76,7 @@ def build(version=1, rows_by_session=None):
                 "id": f"public-ledger-{index:02d}-{language}",
                 "split": "dev" if index in (0, 3, 6) else "heldout",
                 "context_rows": rows,
-                "context_target_tokens": (2000, 4000, 8000)[index // 3],
+                "context_target_tokens": context_targets[position] if context_targets is not None else (2000, 4000, 8000)[index // 3],
                 "language": language,
                 "cases": cases,
             }

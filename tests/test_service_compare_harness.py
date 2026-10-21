@@ -55,8 +55,25 @@ def test_sse_json_fragments_and_usage_are_preserved(monkeypatch):
     assert result["events"][-1]["payload"]["usage"]["completion_tokens"] == 5
     assert requests[0]["temperature"] == 0 and requests[0]["stream_options"]["include_usage"]
     assert len(result["text_chunk_intervals_ms"]) == 1
+    assert result["cache_observation"]["cache_hit_tokens"] is None
+    assert not result["cache_observation"]["proven_zero_hit"]
     with pytest.raises(ValueError, match="Only explicit"):
         harness.measure("http://127.0.0.1:1", "fixture-model", case, request_options={"temperature": 1})
+
+
+@pytest.mark.parametrize("hits", [0, 17])
+def test_cache_state_only_uses_explicit_usage_evidence(monkeypatch, hits):
+    harness = module("http_service_compare")
+    first = {"choices": [{"delta": {"content": "{}"}}], "usage": None}
+    usage = {"choices": [], "usage": {"prompt_tokens_details": {"cached_tokens": hits}}}
+    wire = b"".join(b"data: " + json.dumps(event).encode() + b"\n\n" for event in (first, usage))
+    wire += b"data: [DONE]\n\n"
+    monkeypatch.setattr(harness.urllib.request, "build_opener", lambda _: SimpleNamespace(
+        open=lambda request, timeout: Response(wire)))
+    result = harness.measure("http://127.0.0.1:1", "fixture", {"messages": [], "max_tokens": 32, "expected_json": {}})
+    assert result["cache_observation"]["cache_hit_tokens"] == hits
+    assert result["cache_observation"]["proven_zero_hit"] == (hits == 0)
+    assert result["cache_observation"]["source"] == "sse.usage.prompt_tokens_details.cached_tokens"
 
 
 def test_truncated_sse_is_a_failure_even_with_valid_answer(monkeypatch):

@@ -1,0 +1,72 @@
+{
+  "status": "fixed_pending_independent_reverification",
+  "date_utc": "2026-10-21T06:38:11.389615+00:00",
+  "review_source": "docs/evidence/phase2-experimental-service-review.json",
+  "scope": "CPU fixes for four experimental service provenance/coverage findings; old evidence and archives unchanged",
+  "gpu_executed": false,
+  "performance_claim": false,
+  "fixes": [
+    {
+      "finding": "freeze-loose-manifest",
+      "change": "Real tar required, canonical external tree digest + exact internal manifest + complete regular-file member set and per-member content digests. Extracted private archive binding checks archive/internal manifest SHA. Legacy genuine unbound manifests require explicit --freeze-archive."
+    },
+    {
+      "finding": "freeze-executed-harness",
+      "change": "Actual executing __file__ SHA must equal declared required harness member at both boundaries; imported runtime files also match. External modified absolute-path harness cannot borrow cwd hash."
+    },
+    {
+      "finding": "empty-heldout-validity",
+      "change": "Positive repeats/max_tokens rejected before MLX import; exact nonempty expected prompt/repeat/variant coverage, no missing/duplicates/errors, nonempty actual token IDs and valid measured elapsed, equality recalculated from retained IDs."
+    },
+    {
+      "finding": "probe-accepted-provenance",
+      "change": "Raw functionality/oracle flags retained separately; accepted_frozen_probe_pass computed after end archive/manifest/source/harness checks, and false on fatal errors. Boundary digest changes invalidate acceptance even if both boundaries independently claim formal validity."
+    }
+  ],
+  "privacy": "Local extracted archive_binding can resolve an absolute private location, but published freeze records include archive basename and hashes only. Actual CPU probe failure product regression scans nested JSON for home paths and archive_binding.",
+  "validation": [
+    {
+      "command": ".venv/bin/pytest -q tests/test_ds_experiment_harness.py",
+      "result": "12 passed"
+    },
+    {
+      "command": ".venv/bin/pytest -q -m 'not metal'",
+      "result": "202 passed, 41 deselected"
+    },
+    {
+      "command": ".venv/bin/ruff check benchmarks/experiments/ds_budget_ablation.py benchmarks/experiments/hybrid_lagged_probe.py scripts/freeze_ds_source.py tests/test_ds_experiment_harness.py",
+      "result": "passed"
+    },
+    {
+      "command": ".venv/bin/ruff check .",
+      "result": "passed after root-authorized mechanical site/build.py removal of unnecessary UTF-8 cookie and future-import blank line; existing committed style, unrelated to runtime fixes"
+    }
+  ],
+  "actual_cpu_freeze_control": "docs/evidence/phase2-ds-freeze-cpu-control.json",
+  "adversarial_regressions": [
+    "loose wrong digest without archive",
+    "wrong tree bound to genuine archive",
+    "missing archive",
+    "tampered archive hash",
+    "tampered member even after archive hash updated",
+    "modified external executing harness",
+    "legacy genuine unbound archive accepted only with explicit archive",
+    "changed end source/manifest/archive/internal manifest/executing harness",
+    "zero/negative argument counts",
+    "empty/missing/duplicate prompt repeats",
+    "missing/failed/empty/mismatched variant outputs with stale equality flags",
+    "CPU-only probe failure retains actual error and excludes absolute private locator"
+  ],
+  "source_sha256": {
+    "benchmarks/experiments/ds_budget_ablation.py": "5e910651566c0a104404eb5acd84abb6ae64b47a74a170a66bf86aa673ce7506",
+    "benchmarks/experiments/hybrid_lagged_probe.py": "909429945d9e0ab197efda153e60ac6c62a8e720183ee4f42d8696522b586b15",
+    "scripts/freeze_ds_source.py": "f3825430e7148cfc62890c3a7369862e99a38c94feb34406148c624ccb69535d",
+    "tests/test_ds_experiment_harness.py": "be2830ac98c6c47011985f86d04ca8063bcbee1c49526a844fbcf24a8ceb6da7",
+    "docs/DS_DESIGN_MAPPING.md": "2d15e39d10a8dc60e9ea010e1b7c08d5dfed21de23dd153c101e07ec9294e613"
+  },
+  "limits": [
+    "No new GPU/real-model maturity result or benchmark was executed.",
+    "Independent review requested; this author evidence does not itself close the review findings."
+  ],
+  "separate_style_cleanup": "site/build.py only UP009/I001 mechanical fixes authorized by root; no behavior change"
+}

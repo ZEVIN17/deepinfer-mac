@@ -11,7 +11,7 @@ def public_report(value, *, workspace=None, snapshot=None):
 
     def visit(item):
         if isinstance(item, dict):
-            return {key: visit(value) for key, value in item.items()}
+            return {visit(key): visit(value) for key, value in item.items()}
         if isinstance(item, (list, tuple)):
             return [visit(value) for value in item]
         if isinstance(item, str):

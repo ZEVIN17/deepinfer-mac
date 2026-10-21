@@ -16,7 +16,7 @@ from pathlib import Path
 from public_service_report import public_report
 
 
-def measure(url, model, case, timeout=600, request_options=None):
+def request_body(model, case, request_options=None):
     body = {
         "model": model,
         "messages": case["messages"],
@@ -28,6 +28,11 @@ def measure(url, model, case, timeout=600, request_options=None):
         if set(request_options) - {"mode", "stream_options", "chat_template_kwargs"}:
             raise ValueError("Only explicit mode/template/usage request options may vary by engine")
         body.update(request_options)
+    return body
+
+
+def measure(url, model, case, timeout=600, request_options=None):
+    body = request_body(model, case, request_options)
     request = urllib.request.Request(
         url.rstrip("/") + "/v1/chat/completions",
         data=json.dumps(body).encode(),
@@ -88,6 +93,24 @@ def measure(url, model, case, timeout=600, request_options=None):
                 result["server_run"] = json.load(response)
         except (OSError, ValueError) as error:
             result["server_metrics_error"] = f"{type(error).__name__}: {error}"
+    run = result.get("server_run", {})
+    run = run if isinstance(run, dict) else {}
+    metrics = run.get("result", {}).get("metrics", {}) if isinstance(run.get("result"), dict) else {}
+    observed_hit = metrics.get("cache_hit_tokens")
+    source = "server_run.result.metrics.cache_hit_tokens" if observed_hit is not None else None
+    if observed_hit is None:
+        for event in result["events"]:
+            usage = event["payload"].get("usage")
+            details = usage.get("prompt_tokens_details", {}) if isinstance(usage, dict) else {}
+            if isinstance(details, dict) and type(details.get("cached_tokens")) is int:
+                observed_hit = details["cached_tokens"]
+                source = "sse.usage.prompt_tokens_details.cached_tokens"
+    result["cache_observation"] = {
+        "cache_hit_tokens": observed_hit,
+        "source": source,
+        "proven_zero_hit": observed_hit == 0,
+        "note": "Unknown is not cold KV; request-kind names do not establish cache state.",
+    }
     return result
 
 

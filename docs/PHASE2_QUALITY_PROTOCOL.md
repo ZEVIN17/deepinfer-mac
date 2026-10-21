@@ -42,8 +42,11 @@ closing delimiter in thinking mode and scores only text after it.
 Code smoke scoring runs restricted constructs in a separate isolated Python
 process with a three-second timeout and records actual unit-test values.
 Unsupported harness constructs are inconclusive/manual, not model failures.
-Chinese tasks require recorded human review against the fixed rubrics; keyword
-presence never substitutes for coherent explanations. Dev/held-out results,
+Chinese tasks require a recorded per-response review against the fixed rubrics;
+keyword presence never substitutes for coherent explanations. The current
+`manual_reviewed` annotations are Codex rubric reviews, not independent human
+labels or a human preference study. Independent human annotation remains
+unavailable; this distinction limits subjective Chinese-quality conclusions. Dev/held-out results,
 failures and truncations remain visible. No few-example pass rate establishes
 full capability parity or replaces a versioned public evaluation.
 

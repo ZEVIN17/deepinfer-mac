@@ -1,0 +1,98 @@
+{
+  "status": "approved",
+  "date_utc": "2026-10-21T06:53:18.922474+00:00",
+  "scope": "Independent CPU schema-fix re-review and replay of immutable actual GPU evidence; no new GPU execution",
+  "new_gpu_executed": false,
+  "performance_claim": false,
+  "changes": "Only tuple/list pair containers canonicalized; float values still compared exactly. No engine or scheduler algorithm change.",
+  "source_sha256": {
+    "benchmarks/experiments/verify_lagged_trace.py": "f3b82f112bdc3348647a77ddee4348127ba7182ea9e1429690be5c4244c3b2b6",
+    "tests/test_ds_experiment_harness.py": "ea63af29e2a929136c3bac0e0b7b4606e621e23eb058f6392848dab11614444b"
+  },
+  "immutable_artifact_sha256": {
+    "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8.json": "51c4b6e7744129fcfe55c69644d6d6129f021f255987058a8427223161be2060",
+    "benchmarks/reports/phase2-ds-source-v1-20261021/source.tar.gz": "f48d430d2433194f4680896e699760a8e0a9602505a320833c02fbbefabe60ab",
+    "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json": "d687d958894afaa8b22d9d3801ea3cdef22a3d70230666446ef4e9dbf85380ed",
+    "benchmarks/reports/phase2-experimental-api-qwen35-9b8.json": "ff8eb638ee2b5fcadce833a45d889e973bc1ab07a0e30a0d3874f7d454421f93"
+  },
+  "raw_probe_observations": {
+    "exact_token_ids": 128,
+    "completed_cycles": 58,
+    "mature_core_decisions": 28,
+    "original_accepted_frozen_probe_pass": false,
+    "original_frozen_execution_valid": true
+  },
+  "independent_replay": {
+    "original_archived_verifier_json": {
+      "matches": true,
+      "decisions": 28,
+      "source_sha256": "dac5dfcd531db17a161abbc4dd84ba340e9b23b2779e33c4742160093846bd71"
+    },
+    "original_runtime_tuple_error": {
+      "reproduced": true,
+      "projection_errors": 28
+    },
+    "json_lists": {
+      "matches": true,
+      "decisions": 28,
+      "history_errors": 0,
+      "one_python_float_ulp_tamper_rejected": true
+    },
+    "runtime_tuples": {
+      "matches": true,
+      "decisions": 28,
+      "history_errors": 0,
+      "one_python_float_ulp_tamper_rejected": true
+    }
+  },
+  "experimental_api_evidence_review": {
+    "strict_json_correct": 2,
+    "requests": 2,
+    "full_token_ids_equal": true,
+    "actual_output_tokens_each": 93,
+    "sse_completed": 2,
+    "non_greedy_status": 422,
+    "source_unchanged": true,
+    "experimental_metadata_explicit": true,
+    "public_verified_modes": [
+      "baseline"
+    ],
+    "limitation": "Artifact inspection/recomputed correctness only; reviewer did not restart a service or rerun GPU. Two ordered requests are no performance comparison."
+  },
+  "privacy": "Raw/supplement/API JSON has no home prefix or private archive_binding; archived source and raw reports unchanged.",
+  "limits": [
+    "Original raw accepted=false is preserved; supplemental replay does not rewrite historical acceptance.",
+    "Mature mechanism and token controls do not prove superiority to native MLX/oMLX or speedup.",
+    "Future in-process probes require a fresh frozen source archive containing the reviewed schema correction."
+  ],
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_ds_experiment_harness.py",
+      "result": "14 passed in2.66s"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q -m 'not metal'",
+      "result": "230 passed,41 deselected in10.05s"
+    },
+    {
+      "command": ".venv/bin/ruff check .",
+      "result": "All checks passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "resource_evidence_inspection": {
+    "report": "benchmarks/reports/context-4204-256-qwen35-9b8.json",
+    "sha256": "df628d7db06c5269800f4784295ad728a58637457ebcf6aa27454ed4423de95a",
+    "actual_input_tokens": 4204,
+    "actual_output_tokens": 256,
+    "stream_text_matches": true,
+    "load_swap_delta_bytes": 0,
+    "request_swap_delta_bytes": 0,
+    "overall_swap_delta_bytes": 0,
+    "peak_metal_bytes": 10651956858,
+    "limitation": "Single root-executed resource control at its recorded source; not a stress or no-swap guarantee for all workloads. Reviewer inspected report without GPU rerun."
+  }
+}

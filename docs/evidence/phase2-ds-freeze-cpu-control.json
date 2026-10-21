@@ -1,0 +1,21 @@
+{
+  "scope": "actual full source freeze and imported/executed frozen harness verification on CPU; no model execution",
+  "gpu_executed": false,
+  "performance_measurements": false,
+  "record": {
+    "provided": true,
+    "matches": true,
+    "formal_validity": true,
+    "manifest_name": "ds-source-manifest.json",
+    "manifest_sha256": "1446754ec958f2d02348e03dec0859761757d311466bd70636c6fb7f8b4d922f",
+    "tree_sha256": "fb849a807c9efa06533da7d0ae74ca69943c88074a7e9a0bcf5d8188e2450286",
+    "archive_name": "source.tar.gz",
+    "archive_sha256": "3391ed00c2fed69281693e640a7ee7d85bd2cc666613336f71ef69df91585d18",
+    "internal_manifest_sha256": "1a92cc07b00911895dbf58292c44ce62da630f07661050fd733da16617b96ddb",
+    "executing_harness_sha256": "5e910651566c0a104404eb5acd84abb6ae64b47a74a170a66bf86aa673ce7506",
+    "files": 47,
+    "errors": [],
+    "mismatches": [],
+    "missing_runtime_or_harness_files": []
+  }
+}

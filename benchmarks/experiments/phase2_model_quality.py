@@ -143,6 +143,7 @@ def main():
         output_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     import mlx.core as mx
     from mlx_lm.generate import generate_step
+    from mlx_lm.models.cache import make_prompt_cache
     from mlx_lm.sample_utils import make_logits_processors, make_sampler
 
     engine = InferenceEngine(checkpoint_interval_tokens=512)
@@ -155,7 +156,7 @@ def main():
                           'active_metal_bytes': mx.get_active_memory(), 'rss_bytes': psutil.Process().memory_info().rss,
                           'system_swap_delta_bytes': psutil.swap_memory().used-before}
         report['template_sha256'] = hashlib.sha256(engine.tokenizer.chat_template.encode()).hexdigest()
-        report['cache_types'] = sorted({type(c).__name__ for c in engine.model.make_cache()})
+        report['cache_types'] = sorted({type(c).__name__ for c in make_prompt_cache(engine.model)})
         save()
         for setting in args.settings:
             for task in tasks:
@@ -218,6 +219,10 @@ def main():
                 save()
                 print(json.dumps({'setting': setting, 'task': task['id'], 'quality': quality, 'tokens': len(ids), 'text_preview': text[:160]}, ensure_ascii=False), flush=True)
         report['status'] = 'measured'
+    except BaseException as exc:
+        report['status'] = 'failed'
+        report['error'] = f'{type(exc).__name__}: {exc}'
+        raise
     finally:
         engine.close()
         report['source_end'] = source_manifest()

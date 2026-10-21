@@ -1,0 +1,170 @@
+{
+  "status": "approved_cpu_scope_pending_hardware",
+  "review_type": "fresh independent CPU code quality review",
+  "date_utc": "2026-10-21T06:29:25.463340+00:00",
+  "gpu_executed": false,
+  "performance_claim": false,
+  "source_sha256": {
+    "src/deepinfer_mac/server/app.py": "8c76382db195dcf4fa8fbc0700fa6d08830268bc724b024c864b9c62a9a6d8d0",
+    "src/deepinfer_mac/engine.py": "dce5e20bfd130b3110c38e3515487e9c0d29aa94daa9f29d02857a770dc8af53",
+    "benchmarks/experiments/deepinfer_service_server.py": "65396207795c430a591c66f432c2ba1d1cfbb9dc235a0ace5ff5df31ed5bf18c",
+    "benchmarks/experiments/ds_budget_ablation.py": "5e910651566c0a104404eb5acd84abb6ae64b47a74a170a66bf86aa673ce7506",
+    "benchmarks/experiments/hybrid_lagged_probe.py": "909429945d9e0ab197efda153e60ac6c62a8e720183ee4f42d8696522b586b15",
+    "benchmarks/experiments/verify_lagged_trace.py": "dac5dfcd531db17a161abbc4dd84ba340e9b23b2779e33c4742160093846bd71",
+    "scripts/freeze_ds_source.py": "f3825430e7148cfc62890c3a7369862e99a38c94feb34406148c624ccb69535d",
+    "tests/test_experimental_service.py": "43cb2d3e1e0d1c8b7c7984f212bd3bc688d398d2aef27dbce97def23f27cf682",
+    "tests/test_ds_experiment_harness.py": "be2830ac98c6c47011985f86d04ca8063bcbee1c49526a844fbcf24a8ceb6da7",
+    "tests/test_execution_failures.py": "be1d460c2242b86478174845ddc92ba94199bdbcaa650b8e7cc21de9ec14d5f8",
+    "docs/DS_DESIGN_MAPPING.md": "2d15e39d10a8dc60e9ea010e1b7c08d5dfed21de23dd153c101e07ec9294e613"
+  },
+  "findings": [
+    {
+      "id": "freeze-loose-manifest",
+      "priority": "P2",
+      "file": "benchmarks/experiments/ds_budget_ablation.py",
+      "line": 54,
+      "problem": "Formal validity can pass without the frozen archive and with an incorrect manifest tree digest.",
+      "reproduction": [
+        "Read source_manifest()[files] and add the repository-relative required harness SHA256.",
+        "Write a temporary JSON with these files and tree_sha256=incorrect-tree-digest, without creating any archive.",
+        "Call freeze_record(temporary_manifest)."
+      ],
+      "observed": {
+        "matches": true,
+        "formal_validity": true,
+        "archive_exists": false,
+        "tree_sha256": "incorrect-tree-digest"
+      },
+      "required_fix": "Validate canonical manifest digest and a content-bound immutable archive at start and end. Matching loose files alone cannot certify an archive.",
+      "status": "resolved_after_independent_cpu_reverification",
+      "resolution": {
+        "change": "Real archive is mandatory. Canonical tree, internal unbound manifest, complete regular-file member map and every archived file hash are independently verified. Optional private binding additionally pins archive/internal-manifest digests.",
+        "tests": [
+          "test_loose_wrong_tree_and_missing_archive_cannot_certify",
+          "test_archive_hash_and_content_are_both_verified",
+          "test_genuine_archive_binding_and_legacy_explicit_archive"
+        ],
+        "independent_actual_control": "Original loose wrongdigest/noarchive rejected; genuine47file source archive passed both harnesses and extracted-runtime execution. Legacy internal manifest passed only with explicit genuine archive; archive SHA unchanged."
+      }
+    },
+    {
+      "id": "freeze-executed-harness",
+      "priority": "P2",
+      "file": "benchmarks/experiments/ds_budget_ablation.py",
+      "line": 67,
+      "problem": "Required harness is checked relative to cwd; the executing __file__ bytes need not equal that frozen file.",
+      "reproduction": [
+        "Create a genuine source archive using freeze() with current runtime files and the required ablation harness.",
+        "Copy the harness to a temporary external_harness.py and append a comment.",
+        "Import the external module and call its freeze_record(genuine_manifest) from the repository cwd."
+      ],
+      "observed": {
+        "valid_archive_created": true,
+        "executed_harness_differs_from_frozen": true,
+        "formal_validity": true
+      },
+      "required_fix": "Compare executing harness SHA256 from __file__ to the declared manifest entry, at start and end; apply the same binding to the development probe.",
+      "status": "resolved_after_independent_cpu_reverification",
+      "resolution": {
+        "change": "Both ablation and probe pass executing __file__ to the freeze verifier; the executed digest must equal the declared archived member. Final frozen_execution_valid binds initial/end manifest/archive/internal-manifest/source/harness digests.",
+        "tests": [
+          "test_executed_external_harness_cannot_borrow_frozen_cwd_hash",
+          "test_probe_acceptance_requires_end_source_manifest_archive_and_executing_script"
+        ],
+        "independent_actual_control": "Modified external harness imported from temporary path rejected against genuine archive; actual frozen harness with frozen runtime accepted."
+      }
+    },
+    {
+      "id": "empty-heldout-validity",
+      "priority": "P2",
+      "file": "benchmarks/experiments/ds_budget_ablation.py",
+      "line": 264,
+      "problem": "A nonpositive repeat count is accepted; empty held-out coverage passes all(empty).",
+      "reproduction": [
+        "Extract the exact equivalent_speedup_claim_supported expression from the current harness AST.",
+        "Evaluate with args.smoke=False, report.freeze.formal_validity=True and heldout=[].",
+        "The parser currently accepts --repeats=0; no fake benchmark or GPU execution was used for this logic repro."
+      ],
+      "observed": {
+        "method": "exact source AST expression evaluated on CPU",
+        "heldout_count": 0,
+        "equivalent_speedup_claim_supported": true
+      },
+      "required_fix": "Reject nonpositive repeats/max_tokens and require the complete nonempty predeclared held-out prompt/repeat coverage for an accepted performance-validity flag.",
+      "status": "resolved_after_independent_cpu_reverification",
+      "resolution": {
+        "change": "Positive counts validated before importing MLX. Final acceptance requires complete nonempty predeclared prompt/repeat/variant coverage, no errors, nonempty retained token IDs, finite positive measured time and direct token equality rather than stale equality flags.",
+        "tests": [
+          "test_protocol_rejects_nonpositive_counts_before_runtime_import",
+          "test_heldout_requires_full_nonempty_exact_predeclared_coverage"
+        ]
+      }
+    },
+    {
+      "id": "probe-accepted-provenance",
+      "priority": "P2",
+      "file": "benchmarks/experiments/hybrid_lagged_probe.py",
+      "line": 112,
+      "problem": "correctness_and_maturity_pass is computed without source_unchanged, initial/end freeze validity, or executing harness provenance.",
+      "reproduction": [
+        "Inspect summary construction followed by source_end/source_unchanged/freeze_end.",
+        "Those later results do not revise any accepted probe pass flag."
+      ],
+      "observed": {
+        "method": "control-flow inspection",
+        "performance_claim_always_false": true
+      },
+      "required_fix": "Keep separate raw functionality/oracle outcomes and introduce or gate an accepted frozen-probe pass using valid initial/end archive+executing-harness checks and unchanged source/harness.",
+      "status": "resolved_after_independent_cpu_reverification",
+      "resolution": {
+        "change": "Raw functionality/oracle outcomes are retained. accepted_frozen_probe_pass is computed only after end checks and requires unchanged genuine frozen execution; fatal error always rejects accepted probe.",
+        "tests": [
+          "test_probe_acceptance_requires_end_source_manifest_archive_and_executing_script",
+          "test_cpu_probe_failure_product_keeps_private_archive_binding_out_of_report"
+        ]
+      }
+    }
+  ],
+  "sound_controls": [
+    "Default public hybrid registry remains baseline-only and refuses speculative requests before enqueue.",
+    "Explicit experimental service metadata is a deep local copy; flags separately reach the default engine factory and benchmark wrapper.",
+    "Greedy-only speculative sampling constraints remain enforced.",
+    "Hybrid lagged adapter is scoped to hybrid adaptive requests; baseline/fixed/native and nonhybrid DS stay usable, with requested/applicable/effective metrics.",
+    "Performance wrapper defaults diagnostics off; profiling probe explicitly enables them.",
+    "Independent policy objects, development-only fixed tuning and full held-out outputs/errors are retained.",
+    "Independent C++ header SHA is checked; min5/window9 defaults and N-2/full-cycle/partial feedback remain explicit.",
+    "Immature trace does not pass the oracle."
+  ],
+  "limits": [
+    "No GPU inference, Metal API/SSE, real-model min5/window9 maturity, or speed benchmark was executed by this review.",
+    "Stateful fake-device traces and CPU provenance products are correctness controls, not model performance data.",
+    "These CPU changes are approved for fresh frozen hardware validation; this does not certify speedup, quality superiority, or completed joint release goal."
+  ],
+  "initial_review_source_sha256": {
+    "src/deepinfer_mac/server/app.py": "8c76382db195dcf4fa8fbc0700fa6d08830268bc724b024c864b9c62a9a6d8d0",
+    "src/deepinfer_mac/engine.py": "dce5e20bfd130b3110c38e3515487e9c0d29aa94daa9f29d02857a770dc8af53",
+    "benchmarks/experiments/deepinfer_service_server.py": "65396207795c430a591c66f432c2ba1d1cfbb9dc235a0ace5ff5df31ed5bf18c",
+    "benchmarks/experiments/ds_budget_ablation.py": "bad87df2ce177f159750205afb3dc040fb51583f062dedea2f234e8623353841",
+    "benchmarks/experiments/hybrid_lagged_probe.py": "9ded6e0ccfb8e7239584e68fef6b278a9eb7c45ef8fdc115ea3c6a32e783ecdf",
+    "benchmarks/experiments/verify_lagged_trace.py": "dac5dfcd531db17a161abbc4dd84ba340e9b23b2779e33c4742160093846bd71",
+    "scripts/freeze_ds_source.py": "8c512c80c882ea8e7bebdb2f0847ad3691613150cac39db7c0de3ed2886cdeff",
+    "tests/test_experimental_service.py": "43cb2d3e1e0d1c8b7c7984f212bd3bc688d398d2aef27dbce97def23f27cf682",
+    "tests/test_ds_experiment_harness.py": "63ab47c3b9a7d9e5e74c5b52ad57de625b2c7d9751a46f511e2fab8049ad1ebb",
+    "tests/test_execution_failures.py": "be1d460c2242b86478174845ddc92ba94199bdbcaa650b8e7cc21de9ec14d5f8",
+    "docs/DS_DESIGN_MAPPING.md": "28c8513476c3224b3ffa78ff4c4e27bada090eacaf190404b256365b30f57fc0"
+  },
+  "rereview_date_utc": "2026-10-21T06:41:54.998731+00:00",
+  "rereview": {
+    "portable_suite": "228 passed,41 deselected (concurrent unrelated protocol tests were also present in this full run)",
+    "scoped_suite": "111 passed",
+    "ruff": "All checks passed for entire repository",
+    "diff_check": "passed",
+    "actual_cpu_freeze_control": "docs/evidence/phase2-ds-freeze-independent-control.json",
+    "privacy": "Actual CPU failure-product test passed, with local absolute archive locator absent from emitted nested report and exception home path sanitized.",
+    "old_archives": "Genuine unbound internal manifest is verified with --freeze-archive; no historical archive bytes rewritten.",
+    "findings_closed": 4,
+    "new_gpu_executed": false,
+    "performance_claim": false,
+    "separate_style_cleanup": "site/build.py diff consists only of UTF-8 cookie removal and future-import blank line; no runtime behavior change."
+  }
+}

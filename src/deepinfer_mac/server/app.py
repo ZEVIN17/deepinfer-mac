@@ -6,6 +6,8 @@ import json
 import os
 import time
 from contextlib import asynccontextmanager
+from copy import deepcopy
+from functools import partial
 from importlib.resources import files
 
 from fastapi import Depends, FastAPI, HTTPException, Request
@@ -18,12 +20,15 @@ from .schemas import ChatRequest, CompareRequest
 from .worker import InferenceWorker, QueueFull
 
 
-def default_engine_factory():
+def default_engine_factory(experimental_hybrid_speculation=False):
     from ..engine import InferenceEngine
-    return InferenceEngine()
+    return InferenceEngine(experimental_hybrid_speculation=experimental_hybrid_speculation)
 
 
-def create_app(engine_factory=None, queue_size=4, token: str | None = None):
+def create_app(
+    engine_factory=None, queue_size=4, token: str | None = None,
+    experimental_hybrid_speculation=False,
+):
     access_token = token or os.getenv("DEEPINFER_MAC_TOKEN")
     bearer = HTTPBearer(auto_error=False)
 
@@ -34,7 +39,10 @@ def create_app(engine_factory=None, queue_size=4, token: str | None = None):
 
     @asynccontextmanager
     async def lifespan(app):
-        app.state.worker = InferenceWorker(engine_factory or default_engine_factory, queue_size=queue_size)
+        factory = engine_factory or partial(
+            default_engine_factory, experimental_hybrid_speculation=experimental_hybrid_speculation,
+        )
+        app.state.worker = InferenceWorker(factory, queue_size=queue_size)
         yield
         await asyncio.to_thread(app.state.worker.close)
 
@@ -74,7 +82,28 @@ def create_app(engine_factory=None, queue_size=4, token: str | None = None):
 
     def registered_models():
         from ..models import list_models
-        return list_models()
+        registry = list_models()
+        if not experimental_hybrid_speculation:
+            return registry
+        # This explicit experimental service advertises its own local view.
+        # Public metadata and the default service remain baseline-only for
+        # hybrid candidates. An engine flag is independently required as well.
+        registry = deepcopy(registry)
+        for model in registry:
+            if not (model.get("experimental_speculation") and model.get("hybrid_cache") and model.get("draft")):
+                continue
+            verified = list(model["supported_modes"])
+            modes = ["fixed_speculative", "adaptive"]
+            model.update(
+                verified_supported_modes=verified,
+                supported_modes=list(dict.fromkeys([*verified, *modes])),
+                experimental=True, experimental_modes=modes,
+            )
+            model["capabilities"].update(
+                speculative=True, speculative_verified="adaptive" in verified,
+                speculative_status="experimental",
+            )
+        return registry
 
     def validate_model(name, mode=None, compared=False):
         model = next((item for item in registered_models() if item["id"] == name), None)
@@ -91,7 +120,8 @@ def create_app(engine_factory=None, queue_size=4, token: str | None = None):
     async def health():
         worker = app.state.worker
         return {"status": "ok", "model_loaded": worker.engine is not None,
-                "active_run": worker.active.id if worker.active else None, "queued": worker.queue.qsize()}
+                "active_run": worker.active.id if worker.active else None, "queued": worker.queue.qsize(),
+                "experimental_hybrid_speculation": experimental_hybrid_speculation}
 
     @app.get("/v1/models", dependencies=security)
     async def models():

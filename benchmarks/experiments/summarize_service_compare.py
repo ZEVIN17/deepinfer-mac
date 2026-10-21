@@ -6,6 +6,8 @@ import random
 import statistics
 from pathlib import Path
 
+from service_inventory import audit
+
 
 def percentile(values, fraction):
     ordered = sorted(values)
@@ -16,15 +18,19 @@ def percentile(values, fraction):
 
 
 def summarize(raw, candidate, draws=10000, seed=20261021):
+    inventory = audit(raw)
     by_engine = {}
     for block in raw["blocks"]:
         records = by_engine.setdefault(block["engine"], {})
         for record in block["records"]:
             key = record["session_id"], record["case"]["kind"], record["repetition"]
-            records[key] = record
+            records.setdefault(key, record)
     result = {
         "scope": "Task correctness matched; SSE text TTFT and total time, not decode-token speedup",
         "candidate": candidate,
+        "protocol_inventory": inventory,
+        "resource_selection": raw.get("configuration", {}).get("resource_selection"),
+        "coverage_note": "Deferred groups remain unmeasured, not zero-scored; six clusters pooled across lengths do not establish six-cluster evidence per length.",
         "engines": {},
         "paired": [],
         "failed_blocks": [
@@ -85,7 +91,7 @@ def summarize(raw, candidate, draws=10000, seed=20261021):
                         distribution.append(1 - sum(p[0] for p in samples) / sum(p[1] for p in samples))
                     row["ci95"] = [percentile(distribution, 0.025), percentile(distribution, 0.975)]
                     row["engineering_target_met"] = (
-                        raw.get("status") == "completed"
+                        inventory["valid"]
                         and len(clusters) >= 6
                         and len(good_keys) == len(all_keys)
                         and row["latency_reduction"] >= 0.15
@@ -97,7 +103,7 @@ def summarize(raw, candidate, draws=10000, seed=20261021):
         "draws": draws,
         "seed": seed,
         "note": "Intervals are conditional on quality-passing paired tasks; failures remain above. "
-        "Target flag also requires complete paired quality coverage and six session clusters. "
+        "Target flag also requires complete paired quality coverage, six session clusters, and complete configured order-position rotation. "
         "This flag does not establish DS attribution or final project completion.",
     }
     return result

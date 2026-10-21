@@ -65,7 +65,9 @@
       "license": "Apache-2.0",
       "source_url": "https://huggingface.co/mlx-community/Qwen3.5-9B-8bit/tree/16daa4818c54ce5f5436f929d52542eb65bbed9d",
       "weights_loaded_during_header_audit": true,
-      "runtime_chat_template_string_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+      "runtime_chat_template_string_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "actual_text_baseline_loaded": true,
+      "quality_report": "public-quality-qwen35-9b8-v2-summary.json"
     },
     {
       "repo": "mlx-community/Qwen3.5-9B-4bit",
@@ -130,7 +132,9 @@
       "license": "Apache-2.0",
       "source_url": "https://huggingface.co/mlx-community/Qwen3.5-9B-4bit/tree/8b2b98c00a6b4d291155e4890773ca8f769aee53",
       "weights_loaded_during_header_audit": false,
-      "runtime_chat_template_string_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+      "runtime_chat_template_string_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "actual_text_baseline_loaded": true,
+      "quality_report": "public-quality-qwen35-9b4-v2-summary.json"
     },
     {
       "repo": "mlx-community/Qwen3-14B-4bit",
@@ -192,7 +196,9 @@
       },
       "license": "Apache-2.0",
       "source_url": "https://huggingface.co/mlx-community/Qwen3-14B-4bit/tree/a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
-      "weights_loaded_during_header_audit": false
+      "weights_loaded_during_header_audit": false,
+      "actual_text_baseline_loaded": true,
+      "runtime_chat_template_string_sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5"
     },
     {
       "repo": "mlx-community/Qwen3.5-0.8B-4bit",

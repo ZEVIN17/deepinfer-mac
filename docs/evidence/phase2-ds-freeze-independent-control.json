@@ -1,0 +1,20 @@
+{
+  "scope": "Independent actual CPU source freeze and adversarial provenance controls; no GPU/model execution",
+  "performance_claim": false,
+  "checks": {
+    "freeze": {
+      "archive_sha256": "3391ed00c2fed69281693e640a7ee7d85bd2cc666613336f71ef69df91585d18",
+      "tree_sha256": "fb849a807c9efa06533da7d0ae74ca69943c88074a7e9a0bcf5d8188e2450286",
+      "files": 47
+    },
+    "genuine_ablation": true,
+    "genuine_probe": true,
+    "loose_wrong_tree_rejected": true,
+    "external_harness_rejected": true,
+    "legacy_without_archive_rejected": true,
+    "legacy_explicit_archive_passed": true,
+    "archive_bytes_unchanged": true,
+    "records_home_path_free": true,
+    "extracted_runtime_and_harness_passed": true
+  }
+}

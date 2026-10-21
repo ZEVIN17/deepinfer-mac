@@ -108,7 +108,8 @@
         "tokenizer_config.json": "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182",
         "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
       },
-      "tensor_count": 1260
+      "tensor_count": 1260,
+      "quality_scope": "Fixed27public subset\u00d72shared settings measured with finite-budget failures retained. See public-quality-qwen35-9b4-v2-summary.json; lower footprint does not establish quality equivalence."
     },
     {
       "repo": "mlx-community/Qwen3-14B-4bit",
@@ -126,8 +127,8 @@
           "sha256": "2814562d654fe2d541fd4682804a0ccaa400e79701872c8e9f5998cf9481fdf8"
         }
       ],
-      "verified_weights_loaded": false,
-      "status": "candidate",
+      "verified_weights_loaded": true,
+      "status": "quality_review_required",
       "source": "https://huggingface.co/mlx-community/Qwen3-14B-4bit/tree/a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4",
       "weight_files_sha256_verified": true,
       "text_tensor_bytes": 8307783680,
@@ -138,7 +139,8 @@
         "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
         "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
       },
-      "tensor_count": 1007
+      "tensor_count": 1007,
+      "quality_scope": "Shared27public subset\u00d72 measured; local12\u00d74official-family smoke and12/12greedy/native full-token equality measured. Separate native official public control pending. See public-quality-qwen3-14b-v2-1-summary.json; no cross-protocol aggregate ranking."
     },
     {
       "repo": "mlx-community/Qwen3.5-0.8B-4bit",
@@ -198,7 +200,7 @@
     "qwen3-14b": {
       "target": "mlx-community/Qwen3-14B-4bit",
       "draft": "mlx-community/Qwen3-0.6B-4bit",
-      "status": "candidate"
+      "status": "quality_review_required"
     }
   },
   "tokenizer_compatibility": "Full vocabulary and special IDs checked at runtime before draft load; same tokenizer.json content digest in both repositories",

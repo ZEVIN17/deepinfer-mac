@@ -1,0 +1,15 @@
+{
+  "attempt_status": "harness_error_before_first_request",
+  "profile": "qwen3-14b",
+  "cases_generated": 0,
+  "load": {
+    "seconds": 1.6996973339701071,
+    "peak_metal_bytes": 8307800072,
+    "active_metal_bytes": 8307800072,
+    "rss_bytes": 5614682112,
+    "system_swap_delta_bytes": 0
+  },
+  "error": "AttributeError: 'Model' object has no attribute 'make_cache'",
+  "scope": "Model loading succeeded; runner cache-type logging assumed a hybrid-only method. No quality failure is inferred. make_prompt_cache is the official cross-model factory.",
+  "model_process_closed": true
+}

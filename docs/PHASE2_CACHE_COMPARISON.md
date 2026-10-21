@@ -1,6 +1,6 @@
 # Phase 2：缓存、三服务兼容与正式对照入口
 
-当前状态：三服务9B8bit真实兼容已通过；尚无正式竞争加速结论。消息边界检查点已接入生产prefill路径，但为**默认关闭的实验开关**，仅通过portable控制，需真实Metal采样/缓存一致性验证后才能参与benchmark。CPU阶段没有启动新的GPU任务，也没有改动冻结质量归档。
+当前状态：三服务9B8bit真实兼容已通过；尚无正式竞争加速结论。消息检查点仍默认关闭，但root已用冻结源码完成双sampler共20请求、16项token检查全部一致及prompt长度一致性验证。v3仅CPU预注册新增两个独立heldout会话，使资源准入的2K+4K合计六个会话；8K因实际swap增长暂缓。尚未观察v2/v3 heldout输出。本轮准备没有启动GPU或改动冻结质量归档。
 
 ## 当前运行入口
 
@@ -10,7 +10,7 @@
 - 正式对照组件：`prepare_service_compare.py`生成本机配置，`rotate_service_compare.py`独占启动、轮换、热身与原始采集，`summarize_service_compare.py`按session聚类bootstrap。
 - 数据/配置未冻结或GPU未明确交接时，不启动正式对照。旧`/tmp`配置可能对应较早源码，须重新准备；轮换器会拒绝runtime source hash变化及超过声明总上下文上限的请求。
 
-先验证消息检查点，以下命令仅在取得GPU后执行：
+消息检查点已验证入口（将来复验仍须独占GPU）：
 
 ```sh
 PYTHONPATH=src .venv/bin/python benchmarks/experiments/message_checkpoint_validation.py --run-metal --sampler both
@@ -18,13 +18,29 @@ PYTHONPATH=src .venv/bin/python benchmarks/experiments/message_checkpoint_valida
 
 只用v2的首个2K dev session，分别验证greedy(seed0)与官方non-thinking(seed42)；每种10请求，共20请求，预计约2–3分钟，实际耗时以运行记录为准。`--sampler official`减为10请求，约1–2分钟。比较关闭/开启检查点时cache=false、冷缓存、热缓存、改尾的完整真实生成IDs，保留失败。输出默认`benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json`。这是正确性验证，不计算竞争速度比。
 
-正式配置示例（CPU准备，不加载模型）：
+正式dev配置示例（CPU准备，不加载模型；目标仍为质量更稳的9B8bit，不以较低质量4bit替换）：
 
 ```sh
-.venv/bin/python benchmarks/experiments/prepare_service_compare.py --root /tmp/deepinfer-service-compare-v2 --manifest benchmarks/experiments/cache_sessions.v2.json --total-context-cap 4096 --snapshot "$HOME/.cache/huggingface/hub/models--mlx-community--Qwen3.5-9B-8bit/snapshots/16daa4818c54ce5f5436f929d52542eb65bbed9d"
+.venv/bin/python benchmarks/experiments/prepare_service_compare.py --root /tmp/deepinfer-service-v3-frozen-dev --python "$PWD/.venv/bin/python" --manifest benchmarks/experiments/cache_sessions.v3.json --resource-approved-lengths 2048 4096 --total-context-cap 8192 --variants baseline ds-original ds-lagged --dev-tuning-grid --snapshot "$HOME/.cache/huggingface/hub/models--mlx-community--Qwen3.5-9B-8bit/snapshots/16daa4818c54ce5f5436f929d52542eb65bbed9d"
 ```
 
-v2包含超过初始4096总cap的组，因此不能直接对全manifest启动。后续需根据实际资源probe声明阶段准入和暂未运行的组；不得静默截断或把未运行记为零分。最终模型/量化由质量选型决定，9B4bit若胜出须统一重建三方配置，不能沿用8bit结果。
+该命令复制完整服务runtime、全部experiment/helper/manifest及locks到`source/`并生成可复现`service-source.tar.gz`，执行解释器单独指定；安装的两个环境版本及实际文件字节另行指纹，不导入MLX。已有不同source extraction或普通model alias目录会拒绝并保留原目录，须选新root。model alias仅接受解析到精确snapshot的symlink，运行每次复查。先做纯CPU检查：
+
+```sh
+PYTHONPATH=/tmp/deepinfer-service-v3-frozen-dev/source/src .venv/bin/python /tmp/deepinfer-service-v3-frozen-dev/source/benchmarks/experiments/rotate_service_compare.py --configuration /tmp/deepinfer-service-v3-frozen-dev/configuration.json --manifest /tmp/deepinfer-service-v3-frozen-dev/source/benchmarks/experiments/cache_sessions.v3.json --verify-only
+```
+
+root/quality明确交接GPU且I/O空闲后，对同一冻结入口去掉`--verify-only`，追加`--split dev --repeats 3 --output "$PWD/benchmarks/reports/phase2-service-v3-dev-grid"`。不能调用live runner/helper/manifest，service的argv、cwd及PYTHONPATH也绑定此extraction。每block前后与最终检查实际源码、archive和解释器环境字节，证据写入raw，drift即禁止目标通过。这些检查不计请求timing。正式heldout前仍需4K 4204+256实际资源门槛；准入清单是预注册选择，不代替资源实测。
+
+完整server日志和private raw只写`benchmarks/results/private-service/<run>/`；公开JSON仅包含`<PRIVATE_RESULTS>`别名、字节数和SHA256，不携带`.log`或私有traceback原文。汇总器从configuration、manifest、split及重复数重建完整顺序清单，核对所有block、请求kind/session顺序、warmup、实际payload、正且有限的timing与source evidence；重复、缺失、额外、失败和顺序异常会保留诊断，但target=false。旧不具备完整证据的report仍可读作部分诊断，不能补造target通过。
+
+此grid为17种独立候选：本项目baseline/DS original/DS lagged各128/256/512/1024，native同四候选，oMLX保留官方2048与内存guard。轮换器拒绝grid运行heldout。先按严格质量/协议筛选，再分别以dev总耗时最低选择每引擎/模式chunk，TTFT作同分决胜；保留全部负结果，不假定相同chunk最优。正式运行前去掉`--dev-tuning-grid`，用`--own-prefill-step-size`、`--ds-original-prefill-step-size`、`--ds-lagged-prefill-step-size`、`--native-prefill-step-size`分别填实际选择并重新冻结源码/配置。调度贡献另需同chunk、同draft、同循环的on/off消融，不能用不同调参的胜负归因DS。
+
+dev grid的3重复是探索，不构成竞争收益结论；完整grid为816请求（含408排除的warmup）。正式五variant对照以5次重复完成一个完整顺序轮换周期（`--repeats 5`，每variant五次），使每个variant处在每个顺序位置；记录`order_balance`，不完整位置轮换不会标记工程目标通过。首次正式heldout共800请求，其中200为排除的warmup；重复仍只有六独立heldout clusters，不变成30个。
+
+`--message-checkpoints`仅显式选择；默认关闭。此基础优化可引用20请求正确性证据，不能把其中timing当竞争结果。DS服务使用真实`--experimental-hybrid-speculation --adaptive-scheduler ds --hybrid-cost-adapter original|lagged_mean`，请求`mode=adaptive`；局部`/v1/models`会标experimental，公开默认服务仍baseline。性能配置显式记录`round_diagnostics=false`，使用适配器默认False且不加`--round-diagnostics`，保留轻量预算/接受计数；heavy replay/profile另跑，不能混进竞争timing。两DS配置额外草稿`mlx-community/Qwen3.5-0.8B-4bit@da28692b5f139cb0ec58a356b437486b7dac7462`，文件625,229,487 bytes，SHA256 `f5a0d9dd3efa73510542a8023d610ff26be2b4b020d181cfc4bedaa1fcc5dd9e`，成本计入完整耗时/资源，不声称三方总驻留内存相等。
+
+配置显式保存全部selected/deferred会话，8K三会话仍在manifest与报告中，不截断、不记零分；runner校验清单、总cap、源码和harness哈希。当前并发1；并发2/4尚需独立资源准入及真实测试，本项目FIFO不是连续batch。9B4bit不能与8bit混作纯引擎对照。
 
 ## 已验证的真实兼容证据
 
@@ -53,7 +69,8 @@ v1首个dev session的三种请求×三引擎，共9次请求全部因Markdown�
 | 不可混用的输入版本 | SHA256 | 状态 |
 |---|---|---|
 | `cache_sessions.v1.json` | `1922cc460a93c2cb5d9f615bc40ca77449e04dd520fad8c6129f42f5d7b2bcc1` | 负结果保留 |
-| `cache_sessions.v2.json` | `f891ff522edc120731781f5a0e8f3b211774b4dfea696af1690ec8f4c5d81ad5` | CPU校准冻结，未运行v2 GPU/heldout |
+| `cache_sessions.v2.json` | `f891ff522edc120731781f5a0e8f3b211774b4dfea696af1690ec8f4c5d81ad5` | 输入冻结；首2K dev用于正确性，heldout未运行 |
+| `cache_sessions.v3.json` | `16750b5d512df3d88a0d9086f1b2070dc5ebacffb047cc2f512cda35af03deb7` | CPU预注册11评分会话+2独立warmup；GPU/dev调优/heldout均未运行 |
 
 仅依据v1 dev，v2对所有引擎及dev/heldout统一追加“首字符{、末字符}、禁止Markdown/围栏/前言/结语”；严格JSON评分不变，未观察heldout输出来修改提示。v2以实际锁定tokenizer/template校准，`enable_thinking=false`，显式`return_dict=false`以避免把Transformers5 BatchEncoding的字典长度当token数。每个session保留同一个system前缀以验证真实续聊。
 
@@ -63,19 +80,27 @@ v1首个dev session的三种请求×三引擎，共9次请求全部因Markdown�
 | 4K | 4096 | 4204 | 256 | 4460 |
 | 8K | 8192 | 8300 | 256 | 8556 |
 
-初始4096总上下文阶段仅允许2K组。登记profile总cap8192时不足以容纳8K输入加输出；8K组需独立资源probe及显式上限调整后准入。后续上限/硬件结果以registry与资源报告为准，本manifest不自动提升上限。校准明细：`artifacts/phase2-competitor-audit/cache-manifest-v2-calibration.json`；重现脚本：`freeze_cache_manifest_v2.py`。
+初始4096总上下文阶段仅允许2K组；当前正式准备声明总cap8192、只准入2K/4K组。实际8300+256探测已完成但swap增加约2.60GiB，见`benchmarks/reports/context-8300-256-qwen35-9b8.json`，不将它算作稳定8K竞争性能证据。v2校准明细：`artifacts/phase2-competitor-audit/cache-manifest-v2-calibration.json`。
 
-输入为公开项目记录，3 dev/6 heldout，中文/英文，严格四条记录JSON提取；固定参考assistant回答使后续请求跨引擎相同，参考回答不算模型成功。这套缓存任务不替代独立代码/IFEval/知识质量集。
+v3在未观察任何heldout模型输出前扩展：原v2全部9会话与cases原样保留（含8K），dev不变；增加`public-ledger-09-zh`（108行，2K）与`public-ledger-10-en`（221行，4K），使用不同记录种子与答案，不是重复测量。准入2K/4K各3个heldout，共6独立session clusters；单一length只有3个，不单独满足六cluster门槛。新增输入seed/重复/改尾2048或4096，续聊2156或4204，输出预算256，全部实际token IDs哈希在v3内。六cluster门槛、≥15%目标、严格JSON评分均未降低。
+
+每个引擎/variant/block评分前完整执行独立`public-ledger-11-zh`与`public-ledger-12-en`的2K/4K、seed/重复/改尾/续聊共8请求热身，以覆盖准入长度与路径。两者不属于评分/dev/heldout会话，结果单列`warmups`，输入及token哈希同样冻结。`seed_cold_kv`仅为历史kind标签，不能证明零命中；`cache_observation`只读取实际run metrics或SSE usage中的cached_tokens，无此数据则null，不声称warmup后缓存为空。重现只需CPU：
+
+```sh
+.venv/bin/python benchmarks/experiments/freeze_cache_manifest_v3.py --snapshot "$HOME/.cache/huggingface/hub/models--mlx-community--Qwen3.5-9B-8bit/snapshots/16daa4818c54ce5f5436f929d52542eb65bbed9d"
+```
+
+输入为本项目公开、Apache-2.0的合成ledger任务，合成的是输入及确定参考答案，没有模拟性能或模型输出。固定参考assistant回答使续聊输入跨引擎相同，参考回答不算模型成功；这套事实提取缓存任务不替代独立代码/IFEval/知识质量集。
 
 ## 消息边界检查点：实现与剩余验证
 
 改尾原生1480而本项目1024，说明需要追平消息分段能力。`session_boundaries.message_boundaries`只返回与实际full IDs相同的proper prefixes。Qwen3.5拒绝system-only渲染时，参考MLX-LM空user探针取真实公共前缀；dummy tokens不会送入模型或cache key。CPU实际位置：v1 system1480/user1507；v2 system2014/user2041，见`artifacts/phase2-competitor-audit/message-boundaries-tokenizer-check.json`。
 
-`InferenceEngine(message_checkpoints=True, cache_backend="native")`已接入实际prefill；默认False。开启时仅cache=true按真实边界拆分，模型消费后`mx.eval`再clone快照，透传system/user/assistant eviction优先级。常规chunk网格保留；cache=false或关闭开关时仍用原chunk计算，不额外渲染partial messages。native_mlx委托上游prefill，不套用该分块器。服务适配器可显式传`--message-checkpoints`，正式基准尚不得默认开启。
+`InferenceEngine(message_checkpoints=True, cache_backend="native")`已接入实际prefill；默认False。开启时仅cache=true按真实边界拆分，模型消费后`mx.eval`再clone快照，透传system/user/assistant eviction优先级，warm full-prefix命中也保留已验证角色。常规chunk网格保留；cache=false或关闭开关时仍用原chunk计算，不额外渲染partial messages。native_mlx委托上游prefill，不套用该分块器。
 
 metrics包含实际边界、写入offset/role、host tokenizer/快照成本、写入逻辑bytes、`prefill_shapes_changed`及需真实采样验证标记。逻辑bytes可能共享不可变MLX数组，不是物理RSS；host时间不冒充GPU时间。
 
-Portable生产prefill控制覆盖：关闭及cache=false原shape、nontrimmable target+draft精确状态、分段顺序、改尾仅重放真实后缀、分支隔离、full-hit留最后输入token。相关16通过，ruff通过；这些确定性数组控制不证明真实量化模型数值等价。冷prefill分块变化可能影响greedy/采样，必须先跑上面的真实控制并保留分歧，才能用于对照或考虑默认化。
+Portable控制覆盖关闭/cache=false原shape、nontrimmable target+draft精确状态、分段顺序、真实后缀重放、分支隔离、full-hit留尾token与warm边界角色。真实冻结源码20请求报告`benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json`的16项检查全相同；只覆盖首2K dev的两sampler，不外推所有长度/任务数值等价，也不证明性能收益。
 
 缓存复用、消息分段和此平台适配属于**独立基础优化/MLX能力追平**，不计DS核心贡献。没有关闭对手缓存来制造优势。
 
@@ -88,3 +113,5 @@ Portable生产prefill控制覆盖：关闭及cache=false原shape、nontrimmable 
 - oMLX使用官方`model_type_override=llm`文本路径、`enable_thinking=false`、RAM hot-only512MiB；保留成熟缓存能力，SSD另列产品场景。其Qwen3.5 MTP/精确恢复源码是oMLX/MLX工程参考，不当作DS来源或本项目已实现能力。
 
 正式实验必须同模型repo/revision/量化、模板、采样、缓存预算、请求与并发；dev调优后冻结。每引擎独占GPU热身、轮换完整block，冷加载/暖模型/热KV分开，额外审查开关关闭。bootstrap以session为单位，保留全部质量失败和缺失；重复次数不是独立题。≥15%为待验目标，需DS开关贡献及两个主要对照共同支持，通用缓存改进不能单独完成目标。
+
+oMLX优化能力另需核验：安装的官方0.7.1源码明确支持Qwen3.5-family DFlash，默认关闭；需要匹配目标hidden-state/layer配置的训练draft checkpoint，经已安装mlx-vlm loader绑定，不等同于普通0.8B自回归草稿。它只读取显式repo/path或target内`dflash/`，锁定9B8bit仓库没有捆绑draft；本次本地源码审查尚未核实公开9B训练checkpoint的pin/大小。证据与下一步见`docs/evidence/phase2-omlx-dflash-source-audit.json`。应先核公开候选metadata/license，再协调下载和真实dev质量/资源/速度；可用优化应纳入oMLX主要对照或另列，不得以default baseline对比概括其完整能力，也不给未验证优化记零分。

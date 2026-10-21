@@ -45,16 +45,16 @@ PROFILES = {
         "weight_bytes": 5950221072, "quantization": "4-bit affine, group size 64",
         "context_limit": 8192, "supported_modes": ["baseline"], "status": "quality_review_required",
         "role": "same_model_efficiency_control",
-        "limitations": "Text baseline loaded; fixed quality comparison in progress. Hybrid speculative modes remain experimental and unverified for this quantization.",
+        "limitations": "Text baseline/public27shared-protocol comparison measured; local Chinese/thinking smoke pending. Hybrid speculation remains experimental and unverified for this quantization.",
     },
     "qwen3-14b": {
         "target": {"repo": "mlx-community/Qwen3-14B-4bit", "revision": "a4d9b2df59d2c150bef02fcbe0d91046b7ca33a4"},
         "draft": DRAFT, "draft_weight_bytes": 335450584,
         "minimum_memory_bytes": 0, "advisory_memory_estimates": True,
         "weight_bytes": 8307898514, "quantization": "4-bit affine, group size 64",
-        "context_limit": 8192, "supported_modes": ["baseline"], "status": "candidate",
+        "context_limit": 8192, "supported_modes": ["baseline"], "status": "quality_review_required",
         "role": "engineering_fallback",
-        "limitations": "Quality, native consistency and draft pairing not yet validated; baseline only until verification.",
+        "limitations": "Text baseline/public27shared comparison and12task native consistency measured; separate official public control pending. Draft pairing unvalidated; baseline only.",
     },
 }
 

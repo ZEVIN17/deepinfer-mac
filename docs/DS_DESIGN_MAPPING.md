@@ -111,3 +111,65 @@ CPU分析产物：`benchmarks/reports/phase2-hybrid-recovery-cost-analysis.json`
 DS的schedule/process轮次仍正常推进，prev_accept_rates移为先前accept_rates，当前accept_rates保持原估计，不制造新拒绝；lagged_mean保持整个observation一轮滞后，partial标记不进入后续cost曲线。之前已完成周期仍按年龄正常发布，不能为隐藏partial而重置历史。
 
 portable回归通过真实hybrid与trimmable生成器分别验证：legacy/DS/lagged三策略在首次k4输出一个accepted token后close或消费者抛错，shared cost/positions完全不变；下次仍探索缺证据的k4，后续完整周期只贡献一次真实接受信息，N−2状态正确。原始C++ oracle回放同时插入partial周期验证预算规则。证据与源码hash见 `docs/evidence/phase2-recovery-partial-feedback-fix.json`。此修复没有新增GPU性能证据。
+
+## 可复现实验服务与lagged_mean消融入口（CPU接线，未新增硬件成绩）
+
+公开registry保持9B `supported_modes=["baseline"]`。`create_app(experimental_hybrid_speculation=True)`只在当前服务的局部metadata副本中，为已声明experimental_speculation、hybrid_cache且有真实draft pin的profile开放fixed/adaptive；`/v1/models`同时返回experimental、experimental_modes、verified_supported_modes及speculative_verified=False。默认服务仍在提交前422。engine自身仍需独立的实验flag，采样继续严格greedy；14B等未声明的候选不会随服务flag被放开。
+
+独立实验server命令（需在获得GPU使用权后执行；当前仅完成CPU验证）：
+
+```sh
+.venv/bin/python benchmarks/experiments/deepinfer_service_server.py --port 8082 --experimental-hybrid-speculation --adaptive-scheduler ds --hybrid-cost-adapter original --prefill-step-size 512
+# 对照进程使用同配置，仅改 --hybrid-cost-adapter lagged_mean；请求mode=baseline为DS off、adaptive为DS on。
+```
+
+`--prefill-step-size`仅是实验进程配置，通过dataclasses.replace作用于请求副本，不新增公共API字段。所有竞品的chunk设置/可调限制、额外625,229,487 bytes草稿权重和512MiB逻辑cache预算需进入实验manifest；不能假设驻留内存与target-only对照相同。
+
+`ds_budget_ablation.py`在hybrid上明确包括独立state的original DS、ds_lagged_mean、legacy、fixed0/1/2/4与开发集锁定tunedfixed；原生只有其真实支持的greedy。新adapter保持预定min5/window9，无保留集反向调参；在线状态仅按已经完成的测量更新。失败保留error、实际partial输出和已产生rounds，不以零耗时代替错误；自家tunedfixed不是第二个竞争框架。
+
+为新阶段提供独立冻结工具，不覆盖既有quality档案：
+
+```sh
+.venv/bin/python scripts/freeze_ds_source.py --output benchmarks/reports/phase2-ds-source-v1/source.tar.gz --extract /tmp/deepinfer-phase2-ds-source-v1
+```
+
+工具对已有archive/extract拒绝覆盖；冻结runtime、locks、具体harness、独立未修改C++ oracle与许可证，并写出`ds-source-manifest.json`。运行时必须从提取目录加载代码，以原仓库venv Python执行；`--freeze-manifest ds-source-manifest.json`验证真实tar的完整成员集、内容hash、内部manifest及canonical tree digest，并绑定执行中的`__file__`与imported runtime。提取目录的本地manifest另带archive_binding定位原档案（不进入tar或报告）；旧的无binding提取manifest可显式指定`--freeze-archive <archive.tar.gz>`。缺档案、缺文件、imported runtime不匹配或执行期间变化都禁止正式等价速度声明。源码冻结不代表已做性能测量。
+
+短开发控制准备为 `hybrid_lagged_probe.py --profile qwen3.5-9b-8bit --max-tokens 128 --max-requests 3 --freeze-manifest ds-source-manifest.json --output <fresh-report.json>`。最多三个预定开发请求，保持原min5，出现真实成熟core选择后按预定规则停止，与输出是否一致无关；baseline/候选完整输出、失败、成熟与否全部保存。不会自动运行GPU。
+
+独立 `verify_lagged_trace.py --input <report.json>`不导入Python scheduler：从实际rounds重建N−2完整cost样本/窗口/mean及两代acceptance，核对estimated curve每个输入都对应原测量，再把curve/state送未修改原始C++头。没有成熟curve明确报告insufficient_calibration，不能记作验证通过。CPU测试使用清楚标记的stateful fake-device fixture验证整条trace校验及篡改拒绝；这些fixture不是模型性能数据。
+
+新服务接线与freeze已通过独立CPU审查。实际9B8 lagged成熟probe已执行，结果与补充核验边界见下节；真实API/SSE与正式消融另行记录，不能把先前original DS的9B probe视为新adapter成绩。
+
+实验wrapper的性能默认是`round_diagnostics=False`，只保留轻量round计数；`--round-diagnostics`必须明确启用且属于独立profiling pass。公开engine的历史默认诊断设置没有改变。短成熟probe显式启用诊断以取得原C++回放输入，不能将这次profiling耗时混入性能服务结果。
+
+混合成本适配的作用域也显式限定：`lagged_mean`只作用于hybrid profile的adaptive请求；baseline/fixed/native不构造未使用的lagged策略，非hybrid adaptive继续使用original DS。每次结果metrics记录hybrid_cost_adapter_requested、applicable、effective，避免实验server仍公开4B能力却被无关hybrid检查阻断。此项由实际InferenceEngine.generate控制流的设备边界测试覆盖，默认公共能力守卫不变。
+
+
+### 实验来源与非空验收修复（独立审查四项P2）
+
+旧审查证据 `docs/evidence/phase2-experimental-service-review.json` 保留不改。修复后，loose文件hash即使与checkout相同，也不能替代真实冻结档案；外部修改过的harness不能借cwd下同名文件取得正式有效标记。开始与结束必须核对同一manifest、archive、内部manifest、tree、执行harness与runtime。发布报告只输出hash及档案文件名，绝不输出本地archive_binding或home路径。
+
+`--repeats`和`--max-tokens`在加载MLX前拒绝非正数。正式等价标记要求预定的每个held-out prompt×repeat恰好一次、每个variant均有真实非空输出与有效耗时、无失败且与原生greedy逐token相同；缺失、重复、空集合或陈旧的equal_to_greedy标志都不能通过。此标记表示比较有效性，仍不等于已证明优于竞争服务。
+
+短probe保留raw `correctness_and_maturity_pass`与`maturity_and_oracle_pass`；只有结束后全部来源核验通过才可给出`accepted_frozen_probe_pass=True`。源码、manifest、archive或执行harness变化时raw功能事实仍保留，accepted标记为false。当前只有portable正确性验证，没有新增硬件成熟/性能成绩。可复现CPU回归：
+
+```sh
+.venv/bin/python -m pytest -q -m 'not metal'
+.venv/bin/python -m pytest -q tests/test_ds_experiment_harness.py
+.venv/bin/ruff check benchmarks/experiments/ds_budget_ablation.py benchmarks/experiments/hybrid_lagged_probe.py scripts/freeze_ds_source.py tests/test_ds_experiment_harness.py
+```
+
+
+### 真实9B8成熟曲线与核验容器修复
+
+`benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8.json`来自archive `f48d430d2433194f4680896e699760a8e0a9602505a320833c02fbbefabe60ab`：baseline与lagged各128个输出token完全相同，58周期中有28次成熟core决策，min5/window9保持原值。原probe的独立核验在内存中失败，因为scheduler curve使用tuple pair，而核验重建使用list pair；落盘JSON会将tuple转成list，所以原始未修改verifier对同一JSON已能完成28/28原C++匹配。
+
+本次只规范化pair的容器类型，不重新舍入、不增加浮点容差。真实报告分别恢复成runtime tuple与保留JSON list后均28/28匹配；任一cost改动一个Python浮点ULP仍被拒绝。原报告SHA为 `51c4b6e7744129fcfe55c69644d6d6129f021f255987058a8427223161be2060`，原始档案和`accepted_frozen_probe_pass=False`保持原样。独立补充结果另存 `benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json`，不把补充通过改写成原probe通过；此开发控制仍无正式速度结论，不需要重复GPU请求来修复序列化核验错误。
+
+```sh
+.venv/bin/python benchmarks/experiments/verify_lagged_trace.py --input benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8.json
+.venv/bin/python -m pytest -q tests/test_ds_experiment_harness.py
+```
+
+同档案的API入口已冻结，可从对应提取目录、以原venv解释器及`PYTHONPATH=src`运行 `benchmarks/experiments/deepinfer_service_server.py --port 8082 --experimental-hybrid-speculation --adaptive-scheduler ds --hybrid-cost-adapter lagged_mean --prefill-step-size 512`，默认diagnostics关闭，公共registry门槛不变。该服务runtime不依赖此次离线verifier修复；未来内存核验probe须用包含修复的新档案。硬件执行仍由root统一分配。

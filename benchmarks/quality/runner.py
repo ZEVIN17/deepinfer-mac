@@ -193,7 +193,8 @@ def score_model_report(report, tasks=None):
             'provenance': {
                 'profile': report.get('profile'), 'run_status': report.get('status'),
                 'runtime_source_tree_sha256': report.get('source_start', {}).get('source_tree_sha256'),
-                'runtime_source_unchanged_during_run': report.get('source_start') == report.get('source_end'),
+                'runtime_source_unchanged_during_run': (report['source_start'] == report['source_end']
+                                                      if report.get('source_start') is not None and report.get('source_end') is not None else None),
                 'frozen_source_tree_sha256': (report.get('frozen_source') or {}).get('tree_sha256'),
                 'public_tasks_sha256': report.get('corpus', {}).get('public_tasks_sha256'),
                 'additional_control': report.get('additional_control'),

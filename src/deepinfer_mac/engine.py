@@ -286,14 +286,17 @@ class InferenceEngine:
         load_start = time.perf_counter()
         self._load(request.profile, False)
         tokens = self._tokens(request)
+        hybrid_cost_applicable = (
+            request.mode == "adaptive" and spec.get("hybrid_cache", False)
+            and self.adaptive_scheduler == "ds"
+        )
+        effective_cost_adapter = self.hybrid_cost_adapter if hybrid_cost_applicable else "original"
         policy_key = (request.profile, request.enable_thinking, len(tokens) // 256,
-                      self.adaptive_scheduler, self.hybrid_cost_adapter)
+                      self.adaptive_scheduler, effective_cost_adapter)
         policy_type = DSAdaptivePolicy if self.adaptive_scheduler == "ds" else AdaptivePolicy
-        if self.hybrid_cost_adapter == "lagged_mean":
+        if effective_cost_adapter == "lagged_mean":
             from .ds.recovery_cost import LaggedMeanRecoveryPolicy
 
-            if not spec.get("hybrid_cache", False):
-                raise ValueError("lagged_mean is an experimental hybrid-cache cost adapter")
             policy_type = LaggedMeanRecoveryPolicy
         if policy_key not in self.policies:
             self.policies[policy_key] = policy_type()
@@ -568,6 +571,9 @@ class InferenceEngine:
             "draft_accepted_tokens": accepted,
             "calibrated_fallback": fallback,
             "adaptive_scheduler": self.adaptive_scheduler if request.mode == "adaptive" else None,
+            "hybrid_cost_adapter_requested": self.hybrid_cost_adapter,
+            "hybrid_cost_adapter_applicable": bool(hybrid_cost_applicable),
+            "hybrid_cost_adapter_effective": effective_cost_adapter if request.mode == "adaptive" else None,
             "round_diagnostics": self.round_diagnostics,
             "speculative_recovery": "hybrid exact snapshot + consumed-prefix replay" if hybrid_speculation else None,
         }
