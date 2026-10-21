@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "kind": "source_contract_review",
+  "accepted_runtime": false,
+  "scope": "CPU-only text review; no MLX import, Metal evaluation, model load, or download",
+  "installed_distribution_version": "0.32.2",
+  "source_identity_note": "Hashes bind installed bytes, not an assertion that all installed files are pristine upstream distribution bytes.",
+  "sources": [
+    {
+      "path": "mlx_lm/models/cache.py",
+      "sha256": "c96cb169fd5e0ec4584a162dd61dc62ab08ccdca03a9850f8a491ce6809145e6"
+    },
+    {
+      "path": "mlx_lm/models/base.py",
+      "sha256": "63d8e58a4b6f8c0902719499c693647fbf486bbd5d22b09868a07d37e08c83d6"
+    },
+    {
+      "path": "mlx_lm/models/llama.py",
+      "sha256": "dfb656511e6740781cd0563f7994a78b3404c199b9aebaa2fbca28a19e280891"
+    },
+    {
+      "path": "mlx_lm/models/qwen3_5.py",
+      "sha256": "851449fd9989d6bf4b3c4fed92ddc3be5f1e781eb2246f89c54d7eff2518d9c6"
+    },
+    {
+      "path": "mlx_lm/models/qwen3_next.py",
+      "sha256": "67ca08a4d08cb7be124965e95399735e556f1eaeb21a16bc23cb88d1ac035e11"
+    },
+    {
+      "path": "mlx_lm/models/gated_delta.py",
+      "sha256": "f69e837ea68641dbb06fdb5dcc024a9a7e1d9353f08ae58c05275253a0c39428"
+    },
+    {
+      "path": "mlx_lm/generate.py",
+      "sha256": "9d46803799f99d6fc7c35fff2d4357c79b1a25ae98cc63efeaaebeb50a7b5f33"
+    }
+  ],
+  "contracts": [
+    {
+      "source": "models/cache.py:339-422",
+      "cache": "KVCache",
+      "facts": [
+        "state=(keys,values,offset), scalar offset counts consumed tokens",
+        "merge(caches) returns BatchKVCache; single cache has no extract/filter/prepare methods",
+        "trim(n) only adjusts offset and is not recurrent rollback"
+      ]
+    },
+    {
+      "source": "models/cache.py:880-1100",
+      "cache": "BatchKVCache",
+      "facts": [
+        "merge right-aligns historical KV with left padding; per-row offset equals real history length while _idx equals maximum history length",
+        "model inputs in equal-q bucket may share q with differing history lengths; RoPE reads per-row offset and causal mask excludes historical left padding",
+        "extract(idx) returns KVCache with historical left padding removed and contiguous keys/values; requires initialized tensors",
+        "filter(indices) mutates rows and may shift common historical padding; stable request/slot identity must be tracked outside cache",
+        "prepare(*,left_padding=None,lengths=None,right_padding=None); lengths ignored for KV; new left_padding only permitted on empty cache",
+        "finalize rolls right padding to historical left and adjusts offsets",
+        "state omits _right_padding: do not snapshot prepared/unfinalized padded state using state alone",
+        "trim(n) subtracts same n from all rows; cannot represent unequal accepted-prefix lengths"
+      ]
+    },
+    {
+      "source": "models/cache.py:596-726",
+      "cache": "ArraysCache",
+      "facts": [
+        "state=(cache,left_padding,lengths), no token offset and no trim implementation",
+        "merge concatenates initialized row states, fills missing rows with zero; all-empty merge sets zero left_padding",
+        "extract(idx) slices every cache tensor and drops lengths/left_padding; None tensor raises on slicing",
+        "prepare(lengths=None,**kwargs) converts lengths; it does not install left_padding from kwargs",
+        "advance(N) subtracts N from lengths/left_padding; finalize clears both",
+        "make_mask(N) combines left-padding and remaining-length masks; context length need not match across initialized row states"
+      ]
+    },
+    {
+      "source": "models/qwen3_5.py:150-198; models/qwen3_next.py:240-293; models/gated_delta.py:97,423-425",
+      "cache": "hybrid model",
+      "facts": [
+        "Masked recurrent updates preserve prior recurrent state, but convolution-state handling separately depends on lengths",
+        "Simply append zero or pad tokens without prepare/mask/finalize is not safe recurrent recovery",
+        "For right-padded input prepare(lengths=real_lengths,right_padding=pad_counts) before model; consume complete tensor then finalize before extract. Upstream generate.py:1221-1236 follows this protocol",
+        "Equal-q verification buckets need no new-input padding; historical KV left padding does not imply padding recurrent input"
+      ]
+    }
+  ],
+  "minimal_algorithm": [
+    "Maintain single-row target and draft caches per stable request-id plus slot generation, fully initialized and finalized before merging.",
+    "Take independent original-row snapshot via audited CacheAdapter before speculative work. Merge matching layer caches into disposable bucket cache by exact q; run real model on [bucket_size,q].",
+    "q includes the current unconsumed token: propose at most q-1 drafts and verify [old_y,*draft]. Every row has at least q=1.",
+    "Use target greedy logits to accept contiguous matching draft prefix and one target replacement/bonus; apply output budget and first EOS before calculating consumed prefix.",
+    "On complete full acceptance adopt extracted target cache only if its consumed prefix is exactly [old_y,*actual[:-1]]. Otherwise restore original single-row cache and replay that exact consumed prefix.",
+    "Draft cache must independently reconcile its consumed prefix, including catch-up pending tokens; simplest correct control is restore original draft snapshot and replay old pending plus consumed tokens for every row.",
+    "On cancel/error discard disposable batch caches and leave original snapshots intact; do not publish partial cache or scheduler observations as completed work.",
+    "Record requested q, valid verified q, executed padded q, number of model forward submissions and end-to-end synchronized time. Forward call count is not Metal kernel count."
+  ],
+  "required_runtime_validation": [
+    "dense and hybrid heterogeneous-context same-q bucket logits/output comparison",
+    "shared-cap padded control with per-row mask/finalize and same recovery",
+    "mixed rejection/full-accept plus EOS and remaining output budget 1",
+    "single-row cache prefix equality after replay and next-token equality",
+    "cancellation/error/slot-reuse isolation",
+    "actual batch numeric divergence retained; source API review cannot prove bitwise equality or speed"
+  ],
+  "non_claims": [
+    "No runtime acceptance",
+    "No guaranteed greedy equivalence across differing batch shapes",
+    "No performance advantage established by this source review",
+    "No vector cap API assumed on upstream BatchGenerator"
+  ]
+}
