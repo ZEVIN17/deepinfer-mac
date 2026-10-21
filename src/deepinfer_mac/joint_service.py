@@ -13,7 +13,9 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from .continuous import AdmissionBudget, Prepared, batch_eligible
+from .cycle_cost import CycleCostTable, CycleShape
 from .ds.joint_budget import CostKey, JointBudget, RequestKey
+from .varlen_verify import execution_identity
 
 
 @dataclass(frozen=True)
@@ -23,12 +25,15 @@ class JointServiceConfig:
     strategy: str = "bucket"
     curve_file: str | None = None
     calibration_identity: str = "uncalibrated"
+    draft_budget: str = "full"
 
     def __post_init__(self):
         if not self.profile or type(self.depth) is not int or not 1 <= self.depth <= 16:
             raise ValueError("Joint service requires a profile and depth between 1 and 16")
         if self.strategy not in ("bucket", "padded_control", "shared_cap"):
             raise ValueError("Unknown joint verification strategy")
+        if self.draft_budget not in ("full", "allocated"):
+            raise ValueError("Unknown draft budget policy")
         if not self.calibration_identity:
             raise ValueError("Calibration identity must be explicit")
 
@@ -42,14 +47,15 @@ def public_round_metrics(result):
     names = ("requested_q", "effective_verified_q", "executed_verify_q", "padded_q",
              "executed_replay_q", "model_submissions", "gpu_kernel_count", "full_cycle_ms",
              "draft_cost_included", "strategy", "executed_total_q", "scheduler_ms",
-             "allocator", "draft_source", "confidence_source", "cost_curve_scope")
+             "allocator", "draft_source", "confidence_source", "cost_curve_scope",
+             "draft_budget", "executed_draft_q", "handoff_ms", "service_cycle_ms", "cost_observation_ms")
     return {name: result[name] for name in names if name in result}
 
 
 def runtime_source_hashes():
     root = Path(__file__).parent
     return {name: hashlib.sha256((root / name).read_bytes()).hexdigest()
-            for name in ("joint_service.py", "varlen_verify.py", "ds/joint_budget.py", "ds/mtp_varlen.py")}
+            for name in ("joint_service.py", "varlen_verify.py", "cycle_cost.py", "native_handoff.py", "ds/joint_budget.py", "ds/mtp_varlen.py")}
 
 
 def read_cost_curves(path, depth):
@@ -103,6 +109,9 @@ class MLXJointBatchSession:
         self.engine, self.profile, self.config, self.joint = engine, profile, config, joint
         self.mx, self.make_cache = mx, make_prompt_cache
         self.rows, self.next_uid, self.closed = {}, 0, False
+        self.native_generator, self.native_uids = None, {}
+        self.handoff_ms = 0.0
+        self.cycle_costs = CycleCostTable()
         self.load_started = time.perf_counter()
         self.model_warm = False
         engine._check_snapshot_unchanged()
@@ -128,13 +137,14 @@ class MLXJointBatchSession:
         if joint.curve_file:
             for key, costs in read_cost_curves(joint.curve_file, joint.depth):
                 if (key.model_identity != self.target_identity or key.draft_identity != self.draft_identity
-                        or key.quantization != self.quantization or key.execution_strategy != joint.strategy
+                        or key.quantization != self.quantization or key.execution_strategy != execution_identity(joint.strategy, draft_budget=joint.draft_budget)
                         or key.calibration_identity != joint.calibration_identity):
                     raise ValueError("Curve identity differs from loaded pair")
                 self.joint_budget.set_curve(key, costs)
         self.session = JointSpeculativeSession(engine.model, engine.draft_model, self.joint_budget,
                                               self.cost_key(1, 0), draft_identity=self.draft_identity,
-                                              calibration_identity=joint.calibration_identity, allocator="mlx")
+                                              calibration_identity=joint.calibration_identity, allocator="mlx",
+                                              draft_budget=joint.draft_budget)
         resident = mx.get_active_memory()
         capacity = resident + int(psutil.virtual_memory().available * 0.65)
         if engine.memory_limit_bytes is not None:
@@ -144,7 +154,8 @@ class MLXJointBatchSession:
 
     def cost_key(self, count, context):
         return CostKey(self.target_identity, self.draft_identity, self.quantization, count, context,
-                       self.joint.strategy, self.joint.calibration_identity)
+                       execution_identity(self.joint.strategy, draft_budget=self.joint.draft_budget),
+                       self.joint.calibration_identity)
 
     def prepare(self, request):
         self.joint.validate_request(request)
@@ -178,6 +189,16 @@ class MLXJointBatchSession:
     def insert(self, prepared, request, *, key=None, cancel=None):
         self.next_uid += 1
         uid = self.next_uid
+        if self.native_generator is not None:
+            if cancel is not None and cancel():
+                from .server.continuous_worker import RequestInsertionCancelled
+                raise RequestInsertionCancelled("Native insertion cancelled before mutation")
+            native_uid = self.native_generator.insert([prepared.tokens], max_tokens=[request.max_tokens])[0]
+            self.native_uids[native_uid] = uid
+            self.rows[uid] = SimpleNamespace(target=[], draft=[], tail=prepared.tokens[-1],
+                                             remaining=request.max_tokens, eos=prepared.eos_tokens,
+                                             consumed=len(prepared.tokens) - 1, key=key or RequestKey(str(uid), 1))
+            return uid
         target, draft = self.make_cache(self.engine.model), self.make_cache(self.engine.draft_model)
         # Allocated only after the worker checks admission. No output is emitted
         # from this prefill; final prompt token remains pending in both models.
@@ -195,10 +216,59 @@ class MLXJointBatchSession:
                                          consumed=len(prefix), key=key or RequestKey(str(uid), 1))
         return uid
 
+    def switch_to_native(self):
+        """Owner-thread boundary after a committed round, before the next tick.
+
+        One-way within this epoch. Failed insertion preserves target/draft state;
+        successful transfer drops draft caches and speculative history. Resident
+        draft weights remain charged until normal engine/session cleanup.
+        """
+        from .native_handoff import CommittedPrefix, transfer_to_native
+        if self.closed:
+            raise RuntimeError("Session is closed")
+        if self.native_generator is not None:
+            return
+        started = time.perf_counter()
+        generator, mapping = transfer_to_native(
+            self.engine.model,
+            [CommittedPrefix(uid, r.target, r.tail, r.remaining) for uid, r in self.rows.items()],
+            stop_tokens=[[t] for t in self.engine.tokenizer.eos_token_ids],
+            max_active=self.config.max_active, prefill_chunk=self.config.prefill_chunk)
+        self.native_generator, self.native_uids = generator, mapping
+        for row in self.rows.values():
+            row.target, row.draft = [], []
+        self.session = None
+        self.joint_budget.previous.clear()
+        self.joint_budget.latest.clear()
+        self.handoff_ms = (time.perf_counter() - started) * 1000
+
     def tick(self):
+        if self.native_generator is not None:
+            started = time.perf_counter()
+            prompts, outputs = self.native_generator.next()
+            for response in prompts + outputs:
+                response.uid = self.native_uids[response.uid]
+            for response in outputs:
+                row = self.rows[response.uid]
+                row.remaining -= 1
+                row.tail = response.token
+                row.consumed += 1
+                if response.finish_reason:
+                    self.rows.pop(response.uid)
+                    native_uid = next(k for k, v in self.native_uids.items() if v == response.uid)
+                    del self.native_uids[native_uid]
+            self.last_report = {"strategy": "native_batch", "draft_cost_included": False,
+                                "full_cycle_ms": (time.perf_counter() - started) * 1000,
+                                "handoff_ms": self.handoff_ms}
+            return prompts, outputs
         from .varlen_verify import VerifyRow
+        cycle_started = time.perf_counter()
         ids = list(self.rows)
+        if not ids:
+            return [], []
         rows = [self.rows[uid] for uid in ids]
+        contexts = tuple(r.consumed for r in rows)
+        cache_classes = tuple(f"{type(c).__module__}.{type(c).__name__}" for c in rows[0].target + rows[0].draft)
         key = self.cost_key(len(rows), max(r.consumed for r in rows))
         result = self.session.tick([VerifyRow(r.key, r.target, r.tail, (), r.remaining, r.eos) for r in rows],
                                    [r.draft for r in rows], strategy=self.joint.strategy, cost_key=key)
@@ -217,15 +287,31 @@ class MLXJointBatchSession:
                     self.rows.pop(uid)
             row.consumed += len(output)
             row.tail = output[-1]
+        service_cycle_ms = (time.perf_counter() - cycle_started) * 1000
+        observation_started = time.perf_counter()
+        shape = CycleShape(key, cache_classes, contexts, tuple(
+            (call["phase"], call["batch"], call["sequence_length"]) for call in result["model_calls"]))
+        self.cycle_costs.observe(shape, service_cycle_ms, sum(map(len, result["outputs"])))
+        self.last_report["service_cycle_ms"] = service_cycle_ms
+        self.last_report["cost_observation_ms"] = (time.perf_counter() - observation_started) * 1000
         return [], responses
 
     def remove(self, uid):
+        if self.native_generator is not None:
+            native_uid = next((k for k, v in self.native_uids.items() if v == uid), None)
+            if native_uid is not None:
+                self.native_generator.remove([native_uid], return_prompt_caches=False)
+                del self.native_uids[native_uid]
         self.rows.pop(uid, None)
 
     def close(self):
         if not self.closed:
             self.closed = True
             self.mx.synchronize()
+            if self.native_generator is not None:
+                self.native_generator.close()
+                self.native_generator = None
+                self.native_uids.clear()
             self.rows.clear()
             self.session = None
             self.mx.clear_cache()

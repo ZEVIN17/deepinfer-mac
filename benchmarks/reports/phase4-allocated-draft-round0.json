@@ -1,0 +1,3594 @@
+{
+  "scope": "development_allocated_draft_ablation",
+  "round": 0,
+  "tasks": [
+    "Write a Python function that returns the first duplicate in a list, or None if all values are unique.",
+    "Explain to a new developer why a cancelled HTTP request must release its database connection. Use three sentences."
+  ],
+  "output_limits": [
+    32,
+    32
+  ],
+  "natural_eos": true,
+  "models": [
+    "40e44f0e35876a3e846c856f830ecca4208db73319256ff4f493434d2723950d",
+    "a4f7f71502edccf61c70717a7edb5368266a104f0c45cc1c0ed72cfb7ea27981"
+  ],
+  "versions": {
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2"
+  },
+  "source_sha256": {
+    "benchmarks/experiments/phase4_allocated_draft.py": "da3d6c3b44ab0c75fe75cd8620646a9fca1fbc96dfc8c17edf055a0180638ba0",
+    "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+    "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+    "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+    "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+    "src/deepinfer_mac/cli.py": "7ab964114a39ad396ee4e08b334ece1455d4631daef0a6af8629646c1095455a",
+    "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+    "src/deepinfer_mac/continuous.py": "88f7ea524c48cd94188dbc0c202e41e91fbc8ed7b6298d449a0c483ceef2f821",
+    "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+    "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/joint_service.py": "f228e73ef0874d211a519ae75dc99897ae82ca417821233cc157cab527f739ed",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+    "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+    "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+    "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/server/app.py": "1f4e5144f0ed1d1d900a2b916ed7f182b36ea3a5656e4f8cf58b74bf4d96ac05",
+    "src/deepinfer_mac/server/continuous_worker.py": "a30d2204c76e1e019560c986800b89f449ff818b3d9c62c621a1fc6d557c95d0",
+    "src/deepinfer_mac/server/joint_worker.py": "a1a56e2fb5d3232336840b358d33e32f0f4b307f535a5781f991a7a7b3c1d7f0",
+    "src/deepinfer_mac/server/schemas.py": "87080294b40b3733f5e43493a1bdd25bb9dc8215b1521c25003fc268535ee256",
+    "src/deepinfer_mac/server/worker.py": "7ce9ba42ae69ba45f298c9f1bb6aef2ddaf4138b5d3bb0397a6575c1c5505d90",
+    "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/state.py": "d77e5d97484bd3dcdae324d6ee31830480bb7baafb1907bc10da7200fd17b096",
+    "src/deepinfer_mac/varlen_verify.py": "b60467a8864807bc50a343ae62237c41c937ec9e2180daafa0d0d5b9f456414e"
+  },
+  "controls": [
+    {
+      "control": "native",
+      "task_ms": 126.61195802502334,
+      "completed_ms": [
+        124.08887501806021,
+        124.08941600006074
+      ],
+      "outputs": [
+        [
+          4590,
+          506,
+          253,
+          5905,
+          1517,
+          338,
+          2925,
+          253,
+          932,
+          288,
+          1446,
+          4320,
+          282,
+          260,
+          2728,
+          357,
+          553,
+          2269,
+          588,
+          1869,
+          42,
+          198,
+          198,
+          3725,
+          5367,
+          198,
+          1604,
+          808,
+          79,
+          496,
+          10755,
+          24
+        ],
+        [
+          49,
+          725,
+          17848,
+          868,
+          1044,
+          338,
+          253,
+          35295,
+          17108,
+          3116,
+          1251,
+          4706,
+          624,
+          5817,
+          3890,
+          288,
+          1746,
+          940,
+          12691,
+          284,
+          2381,
+          260,
+          8988,
+          282,
+          260,
+          5817,
+          30,
+          669,
+          314,
+          3202,
+          327,
+          4719
+        ]
+      ],
+      "cycles": []
+    },
+    {
+      "control": "full",
+      "task_ms": 758.8091659126803,
+      "completed_ms": [
+        758.8082499569282,
+        413.7637079693377
+      ],
+      "outputs": [
+        [
+          4590,
+          506,
+          253,
+          5905,
+          1517,
+          338,
+          2925,
+          253,
+          932,
+          288,
+          1446,
+          4320,
+          282,
+          260,
+          2728,
+          357,
+          553,
+          2269,
+          588,
+          1869,
+          42,
+          198,
+          198,
+          3725,
+          5367,
+          198,
+          1604,
+          808,
+          79,
+          496,
+          10755,
+          24
+        ],
+        [
+          49,
+          725,
+          17848,
+          868,
+          1044,
+          338,
+          253,
+          35295,
+          17108,
+          3116,
+          1251,
+          4706,
+          624,
+          5817,
+          3890,
+          288,
+          1746,
+          940,
+          12691,
+          284,
+          2381,
+          260,
+          8988,
+          282,
+          260,
+          5817,
+          30,
+          669,
+          314,
+          3202,
+          327,
+          4719
+        ]
+      ],
+      "cycles": [
+        {
+          "full_cycle_ms": 35.44383298140019,
+          "executed_total_q": 17,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 34.45591602940112,
+          "executed_total_q": 19,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 3,
+              "tokens": 3
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 3,
+              "tokens": 3
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 34.063917002640665,
+          "executed_total_q": 17,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 34.56599998753518,
+          "executed_total_q": 21,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 34.662083024159074,
+          "executed_total_q": 21,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 33.95704203285277,
+          "executed_total_q": 17,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 34.65233405586332,
+          "executed_total_q": 21,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 34.244125010445714,
+          "executed_total_q": 21,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 33.30766607541591,
+          "executed_total_q": 15,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 34.721125033684075,
+          "executed_total_q": 21,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 33.933375030756,
+          "executed_total_q": 17,
+          "executed_draft_q": 6,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.331916907802224,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.341625014320016,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.313666943460703,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.389166936278343,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.38208399526775,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.324250027537346,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.285791993141174,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.29558310378343,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.354958061128855,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.299874987453222,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.3345419568941,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.340333968400955,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.371833975426853,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.399208921939135,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.662459005601704,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.646833042614162,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.372333047911525,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.350916936062276,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.376708052121103,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.308250022120774,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 16.468417015857995,
+          "executed_total_q": 6,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "control": "allocated",
+      "task_ms": 527.178707998246,
+      "completed_ms": [
+        527.1781249903142,
+        334.9874579580501
+      ],
+      "outputs": [
+        [
+          4590,
+          506,
+          253,
+          5905,
+          1517,
+          338,
+          2925,
+          253,
+          932,
+          288,
+          1446,
+          4320,
+          282,
+          260,
+          2728,
+          357,
+          553,
+          2269,
+          588,
+          1869,
+          42,
+          198,
+          198,
+          3725,
+          5367,
+          198,
+          1604,
+          808,
+          79,
+          496,
+          10755,
+          24
+        ],
+        [
+          49,
+          725,
+          17848,
+          868,
+          1044,
+          338,
+          253,
+          35295,
+          17108,
+          3116,
+          1251,
+          4706,
+          624,
+          5817,
+          3890,
+          288,
+          1746,
+          940,
+          12691,
+          284,
+          2381,
+          260,
+          8988,
+          282,
+          260,
+          5817,
+          30,
+          669,
+          314,
+          3202,
+          327,
+          4719
+        ]
+      ],
+      "cycles": [
+        {
+          "full_cycle_ms": 28.06545898783952,
+          "executed_total_q": 14,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 28.21612497791648,
+          "executed_total_q": 16,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 3,
+              "tokens": 3
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 3,
+              "tokens": 3
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 26.859750039875507,
+          "executed_total_q": 14,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 27.460457989946008,
+          "executed_total_q": 18,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 27.612708043307066,
+          "executed_total_q": 18,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 26.747958036139607,
+          "executed_total_q": 14,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 27.627917006611824,
+          "executed_total_q": 18,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 27.4478750070557,
+          "executed_total_q": 18,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 26.190166012383997,
+          "executed_total_q": 12,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 27.602417045272887,
+          "executed_total_q": 18,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 26.7900419421494,
+          "executed_total_q": 14,
+          "executed_draft_q": 3,
+          "seqlens_q": [
+            1,
+            4
+          ],
+          "model_calls": [
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 4,
+              "tokens": 4
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 2,
+              "tokens": 2
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.098167065531015,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.188666008412838,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.112166007980704,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.100125054828823,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.108333033509552,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.121707989834249,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.201042004860938,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.1240000911057,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.079457959160209,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.106082958169281,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.082665899768472,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.15370904840529,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.038374992087483,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.071333915926516,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.126457967795432,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.150458965450525,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.117916924878955,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.12112498190254,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.114832966588438,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.056458016857505,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        },
+        {
+          "full_cycle_ms": 9.03458392713219,
+          "executed_total_q": 3,
+          "executed_draft_q": 0,
+          "seqlens_q": [
+            1
+          ],
+          "model_calls": [
+            {
+              "phase": "verify",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "replay",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            },
+            {
+              "phase": "draft_catchup",
+              "batch": 1,
+              "sequence_length": 1,
+              "tokens": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "swap_before_bytes": 2006777856,
+  "performance_acceptance": false,
+  "timing_scope": "resident pair; includes prompt prefill and decode, excludes load and shared warmup",
+  "input_tokens": [
+    [
+      1,
+      9690,
+      198,
+      2683,
+      359,
+      253,
+      5356,
+      5646,
+      11173,
+      3365,
+      3511,
+      308,
+      34519,
+      28,
+      7018,
+      411,
+      407,
+      19712,
+      8182,
+      2,
+      198,
+      1,
+      4093,
+      198,
+      19161,
+      253,
+      5905,
+      1517,
+      338,
+      6765,
+      260,
+      808,
+      23488,
+      281,
+      253,
+      1398,
+      28,
+      355,
+      1943,
+      585,
+      511,
+      2396,
+      359,
+      2116,
+      30,
+      2,
+      198,
+      1,
+      520,
+      9531,
+      198
+    ],
+    [
+      1,
+      9690,
+      198,
+      2683,
+      359,
+      253,
+      5356,
+      5646,
+      11173,
+      3365,
+      3511,
+      308,
+      34519,
+      28,
+      7018,
+      411,
+      407,
+      19712,
+      8182,
+      2,
+      198,
+      1,
+      4093,
+      198,
+      36971,
+      288,
+      253,
+      725,
+      17848,
+      1701,
+      253,
+      35295,
+      17108,
+      3116,
+      1251,
+      4706,
+      624,
+      5817,
+      3890,
+      30,
+      4076,
+      1296,
+      8545,
+      30,
+      2,
+      198,
+      1,
+      520,
+      9531,
+      198
+    ]
+  ],
+  "outputs_match_native": true,
+  "source_unchanged": true,
+  "swap_after_bytes": 2006777856,
+  "peak_metal_bytes": 731302700
+}

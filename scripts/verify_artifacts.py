@@ -4,9 +4,13 @@ Use --dist for a temporary candidate build; published artifacts stay immutable.
 """
 import argparse
 import json
+import re
 import tarfile
 import zipfile
 from pathlib import Path
+
+# Match an actual home component; prose naming the generic /Users/ root is not private.
+PRIVATE_HOME = re.compile(b'/' + b'Users/' + rb'[^\s/,\"\'\\<>]+')
 
 root = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser(description=__doc__)
@@ -53,7 +57,7 @@ with zipfile.ZipFile(wheel) as archive:
     for name in files:
         check_release_json(name, archive.read(name))
         if name.endswith(('.py', '.md', '.json', '.toml', '.js', '.html', '.css', '.txt')):
-            assert (b'/' + b'Users' + b'/') not in archive.read(name), f'private home path in wheel: {name}'
+            assert not PRIVATE_HOME.search(archive.read(name)), f'private home path in wheel: {name}'
     for suffix in ('licenses/LICENSE', 'licenses/NOTICE', 'third_party/licenses/MLX-LM.txt'):
         assert any(name.endswith(suffix) for name in files), f'missing license: {suffix}'
 with tarfile.open(sdist) as archive:
@@ -62,7 +66,7 @@ with tarfile.open(sdist) as archive:
         if member.isfile() and member.name.endswith('.json'):
             check_release_json(member.name, archive.extractfile(member).read())
         if member.isfile() and member.name.endswith(('.py', '.md', '.json', '.toml', '.js', '.html', '.css', '.txt')):
-            assert (b'/' + b'Users' + b'/') not in archive.extractfile(member).read(), f'private home path in sdist: {member.name}'
+            assert not PRIVATE_HOME.search(archive.extractfile(member).read()), f'private home path in sdist: {member.name}'
     for suffix in ('/README.md', '/README.zh-CN.md', '/uv.lock', '/models.lock.json', '/upstream.lock.json',
                    '/site/build.py', '/.github/workflows/pages.yml', '/CONTRIBUTING.md'):
         assert any(name.endswith(suffix) for name in sources), f'missing sdist source {suffix}'

@@ -1,3 +1,17 @@
+# 0.1.0a3 — native-first local inference
+
+A complete Apple Silicon workflow: native MLX-LM batching, streamed chat, an included browser workspace, and inspectable scheduling decisions.
+
+- `serve` now selects native batching by default. Capability-aware serial fallback retains support for sampling and caches that cannot batch.
+- Bounded admission, context budgets, cancellation and request isolation are verified with real models.
+- Allocated draft work, bounded shape-specific cost observations and committed-prefix transfer provide explicit building blocks for advanced scheduling.
+- The bilingual showcase links directly to measured reports; wheel and source distributions include local UI resources, model locks and licenses.
+- [Run and verify](RELEASE.md) · [Measured scope and execution choices](PHASE4_NATIVE_RUNTIME.md).
+
+This version is prepared locally and becomes available from the repository when pushed. No PyPI publication is implied. Historical reports below retain their original version and scope.
+
+---
+
 # 0.1.0a2 — experimental candidate, unpublished
 
 - Phase 3 adds capability adapters, bounded continuous request ticks, joint confidence/cost budgets and actual variable-length target verification. An explicit joint service passed 35/35 real-model checks, including SSE and cancellation recovery.

@@ -1,0 +1,17 @@
+--- a/mlx_lm/generate.py
++++ b/mlx_lm/generate.py
+@@ -1653,3 +1653,14 @@
++    def set_prefill_step_size(self, prefill_step_size: int):
++        """Set the chunk size for current and future prompt batches.
++
++        Call between next() invocations on the generator's owning thread.
++        This does not interrupt an in-flight model call or change batch sizes.
++        """
++        if type(prefill_step_size) is not int or prefill_step_size < 1:
++            raise ValueError("prefill_step_size must be a positive integer")
++        self.prefill_step_size = prefill_step_size
++        self._prompt_batch.prefill_step_size = prefill_step_size
++
+     def close(self):
+         if self._old_wired_limit is not None:
+             mx.synchronize(self._stream)

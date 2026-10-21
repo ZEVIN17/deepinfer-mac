@@ -1,0 +1,309 @@
+{
+  "scope": "development_native_arrivals",
+  "round": 0,
+  "trace": [
+    [
+      0,
+      "chat",
+      0
+    ],
+    [
+      10,
+      "document",
+      250
+    ],
+    [
+      20,
+      "chat",
+      0
+    ],
+    [
+      30,
+      "document",
+      150
+    ],
+    [
+      40,
+      "chat",
+      0
+    ],
+    [
+      50,
+      "chat",
+      0
+    ]
+  ],
+  "model_identity": "40e44f0e35876a3e846c856f830ecca4208db73319256ff4f493434d2723950d",
+  "controls": [
+    {
+      "control": "fixed64",
+      "task_ms": 1885.7666669646278,
+      "ttft_p50_ms": 1123.9227919955738,
+      "ttft_p95_ms": 1613.5832817095798,
+      "itl_p95_ms": 19.22863926156424,
+      "max_itl_ms": 28.916166978888214,
+      "tokens_per_second": 203.6307071956548,
+      "prefill_chunks": [
+        64
+      ],
+      "admitted_ms": {
+        "0": 9.061750024557114,
+        "1": 32.34937496017665,
+        "2": 842.5732089672238,
+        "3": 1022.9185000061989,
+        "4": 1452.2756669903174,
+        "5": 1686.6043340414762
+      },
+      "prompt_tokens": [
+        42,
+        2292,
+        42,
+        1392,
+        42,
+        42
+      ],
+      "request_ttft_ms": [
+        57.16483399737626,
+        718.0448749661446,
+        860.0207499880344,
+        1387.8248340031132,
+        1446.4182500168681,
+        1669.3049589404836
+      ],
+      "completed_ms": {
+        "0": 833.8552500354126,
+        "1": 1013.2934170542285,
+        "2": 1443.4884999645874,
+        "3": 1677.641374990344,
+        "4": 1741.9729169923812,
+        "5": 1885.762167046778
+      },
+      "output_sha256": [
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "6ea0fab4bec33ad2dc4d1843eb864af474674da42e6e7b86f3570dcd2a137e2d",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "c2014dd95bf4a483f504c078b93b0d2751aeaa878b374523645a31922baa6657",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3"
+      ]
+    },
+    {
+      "control": "fixed256",
+      "task_ms": 1479.5302499551326,
+      "ttft_p50_ms": 828.8827914744616,
+      "ttft_p95_ms": 1232.543708247831,
+      "itl_p95_ms": 15.419381251558656,
+      "max_itl_ms": 51.8630410078913,
+      "tokens_per_second": 259.54183769588013,
+      "prefill_chunks": [
+        256
+      ],
+      "admitted_ms": {
+        "0": 9.091291925869882,
+        "1": 32.297291909344494,
+        "2": 670.1247079763561,
+        "3": 752.686082967557,
+        "4": 1177.5163329439238,
+        "5": 1270.711167016998
+      },
+      "prompt_tokens": [
+        42,
+        2292,
+        42,
+        1392,
+        42,
+        42
+      ],
+      "request_ttft_ms": [
+        76.93579199258238,
+        445.05616697482765,
+        687.4141249759123,
+        970.3514579730108,
+        1172.2795829782262,
+        1252.631750004366
+      ],
+      "completed_ms": {
+        "0": 661.2843329785392,
+        "1": 742.8025419358164,
+        "2": 1168.3745000045747,
+        "3": 1261.881500016898,
+        "4": 1437.6354169799015,
+        "5": 1479.5262919506058
+      },
+      "output_sha256": [
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "6ea0fab4bec33ad2dc4d1843eb864af474674da42e6e7b86f3570dcd2a137e2d",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "c2014dd95bf4a483f504c078b93b0d2751aeaa878b374523645a31922baa6657",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3"
+      ]
+    },
+    {
+      "control": "fixed1024",
+      "task_ms": 1383.9663749095052,
+      "ttft_p50_ms": 758.4582919604145,
+      "ttft_p95_ms": 1142.6374061999377,
+      "itl_p95_ms": 10.930590948555613,
+      "max_itl_ms": 150.7217079633847,
+      "tokens_per_second": 277.46338853435583,
+      "prefill_chunks": [
+        1024
+      ],
+      "admitted_ms": {
+        "0": 8.735874900594354,
+        "1": 32.1044169832021,
+        "2": 627.7009169571102,
+        "3": 687.9757089773193,
+        "4": 1112.433458911255,
+        "5": 1172.1622919430956
+      },
+      "prompt_tokens": [
+        42,
+        2292,
+        42,
+        1392,
+        42,
+        42
+      ],
+      "request_ttft_ms": [
+        170.2944169519469,
+        381.0467089153826,
+        645.4169999528676,
+        871.4995839679614,
+        1107.029749932699,
+        1154.506624955684
+      ],
+      "completed_ms": {
+        "0": 618.8597499858588,
+        "1": 678.2039999961853,
+        "2": 1103.4800839843228,
+        "3": 1162.959333974868,
+        "4": 1365.760499960743,
+        "5": 1383.9635839685798
+      },
+      "output_sha256": [
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "6ea0fab4bec33ad2dc4d1843eb864af474674da42e6e7b86f3570dcd2a137e2d",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "c2014dd95bf4a483f504c078b93b0d2751aeaa878b374523645a31922baa6657",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3"
+      ]
+    },
+    {
+      "control": "adaptive1024",
+      "task_ms": 4201.5659579774365,
+      "ttft_p50_ms": 3024.658707983326,
+      "ttft_p95_ms": 3935.4296979296487,
+      "itl_p95_ms": 8.139373140875247,
+      "max_itl_ms": 51.2806250480935,
+      "tokens_per_second": 91.39449525263461,
+      "prefill_chunks": [
+        1,
+        2,
+        4,
+        8,
+        9,
+        16,
+        17,
+        18,
+        32,
+        64,
+        128,
+        256,
+        512
+      ],
+      "admitted_ms": {
+        "0": 8.77845799550414,
+        "1": 31.72474994789809,
+        "2": 654.6386249829084,
+        "3": 2586.78724989295,
+        "4": 2680.5707078892738,
+        "5": 3978.1998329563066
+      },
+      "prompt_tokens": [
+        42,
+        2292,
+        42,
+        1392,
+        42,
+        42
+      ],
+      "request_ttft_ms": [
+        104.29895797278732,
+        2282.2849169699475,
+        2361.3852079911157,
+        3687.9322079755366,
+        3732.569541935809,
+        4003.0497499275953
+      ],
+      "completed_ms": {
+        "0": 645.3477499308065,
+        "1": 2576.8656668951735,
+        "2": 2671.430916991085,
+        "3": 3969.2535829963163,
+        "4": 4032.714082975872,
+        "5": 4201.55854197219
+      },
+      "output_sha256": [
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "6ea0fab4bec33ad2dc4d1843eb864af474674da42e6e7b86f3570dcd2a137e2d",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "c2014dd95bf4a483f504c078b93b0d2751aeaa878b374523645a31922baa6657",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3",
+        "2719ed93decf56968ae26cd5e71a76f90206953af2017fae555834cb4e2f1aa3"
+      ]
+    }
+  ],
+  "failures": [],
+  "source_sha256": {
+    "benchmarks/experiments/phase4_native_arrivals.py": "59ee2d5a5ae3836baf2d7c277c2f06111db29a5100ba6cfeb6b5138963e2aa49",
+    "src/deepinfer_mac/__init__.py": "c9c2b1560a4d015c1531ad2ab1baf5c4ea633e1960b0c157733711baf138cb50",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/benchmark/export.py": "03f8e75757e3cf3a8a320f987b834c2828a4b8a948035911d0431f97a54e0550",
+    "src/deepinfer_mac/benchmark/metrics.py": "348859cfd7834818daf754f28c86fdaef96f2896a866bba14a412aa967af36e0",
+    "src/deepinfer_mac/benchmark/runner.py": "ccd76d171d63dba9f6bcc027a830fe047dfba4bc279d3619ace5f2ada8e0aaf4",
+    "src/deepinfer_mac/cache.py": "3088bf3c757f400f1706dda66df436f2d36c4a3deac0f3483fa38933d6a72068",
+    "src/deepinfer_mac/cli.py": "0cb08a51c984939d950e2045344330606f5faef4dc92125328b4c11e3ac154f3",
+    "src/deepinfer_mac/config.py": "6ad85acf30684c928b43505ca7f207e309c2515bd832df8fa18fa81d1f3d2786",
+    "src/deepinfer_mac/continuous.py": "597578f63881334a3ac89e4c40999415973dc445d7e6e3d2ea9f9cc4af074dde",
+    "src/deepinfer_mac/cycle_cost.py": "f87ee249ac1c9ed359261a6f61601ac2a6784359ddf8047377d66a44d46cb9cc",
+    "src/deepinfer_mac/doctor.py": "ede6b069f4fb43e50cd4a99038bafd8166f5a35bb8e6f0dfd8f757974ae284ec",
+    "src/deepinfer_mac/ds/__init__.py": "c77f66fbd9fafbc80fb0958cf53c534bf205fdb2b70f8f7f582b92d3e488cba2",
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/ds/recovery_cost.py": "d62e4c6cb8d0a2afc3bff97f3a789e6c2c3bfdd4b273ff0db2d9ac52cfa31028",
+    "src/deepinfer_mac/engine.py": "ed3c9a8b17165935243010b47f150e9ed5523af8e53e345daad7bc635bb74c11",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/joint_service.py": "0e1dd1d11324bd036ab3ddb4287e20b3062082073ab113c3849049a3fa3c942f",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/native_handoff.py": "1ff456a016f063ea6ca4e62d24232deee14128ecdbc9a72479ad5039d98629c9",
+    "src/deepinfer_mac/policy.py": "cee3abdd1d5b9f29ce90b30106c4bd7b0ba6c62c3831482edef7ebb9178a5268",
+    "src/deepinfer_mac/provenance.py": "57eb6d5de88fb84e21e98cc15dbda6b40ce06f42dd3503a7232aa513ebce9d2f",
+    "src/deepinfer_mac/sampling.py": "e8c86b6d3d72f6b5121e23eee54f975044e23d10cc4d88648755cc9867b5d8d1",
+    "src/deepinfer_mac/server/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/deepinfer_mac/server/app.py": "619e299a35ee8d5420a4b1f4b2bdbf402380ad0d8f00fc2563fbd79919189086",
+    "src/deepinfer_mac/server/continuous_worker.py": "a9da58d4811f6aa78b1de36b618cca5a3e09875d5c088bf7aaeacba43f69376a",
+    "src/deepinfer_mac/server/joint_worker.py": "a1a56e2fb5d3232336840b358d33e32f0f4b307f535a5781f991a7a7b3c1d7f0",
+    "src/deepinfer_mac/server/runtime_worker.py": "c241d57346551d7c9673ffc29ed4800e81012265eda9ede3246650ba450152e1",
+    "src/deepinfer_mac/server/schemas.py": "87080294b40b3733f5e43493a1bdd25bb9dc8215b1521c25003fc268535ee256",
+    "src/deepinfer_mac/server/worker.py": "7ce9ba42ae69ba45f298c9f1bb6aef2ddaf4138b5d3bb0397a6575c1c5505d90",
+    "src/deepinfer_mac/session_boundaries.py": "ae8853b7f69e093b92ce2deda71039bcb3e73e1df3cb6e575dd01fde8963b98c",
+    "src/deepinfer_mac/speculative.py": "d9b24f6e3215bfb6e414ce7378e7dd0518ac9a1ad4ca00897e69998fb8a5e41e",
+    "src/deepinfer_mac/state.py": "d77e5d97484bd3dcdae324d6ee31830480bb7baafb1907bc10da7200fd17b096",
+    "src/deepinfer_mac/varlen_verify.py": "b60467a8864807bc50a343ae62237c41c937ec9e2180daafa0d0d5b9f456414e"
+  },
+  "swap_before_bytes": 2006777856,
+  "performance_acceptance": false,
+  "timing_scope": "resident warmed target; submit-to-emit includes tokenization/admission/ticks",
+  "target_tick_ms": 10,
+  "max_active": 2,
+  "output_limit": 64,
+  "natural_eos": true,
+  "outputs_equal": true,
+  "source_unchanged": true,
+  "swap_after_bytes": 2006777856,
+  "metal_peak_bytes": 1276215344
+}

@@ -33,13 +33,16 @@ class StageTimer:
             self.last = now
 
 
-def execution_identity(strategy, profiling=False, *, draft_execution="serial", recovery="exact_replay"):
+def execution_identity(strategy, profiling=False, *, draft_execution="serial", recovery="exact_replay", draft_budget="full"):
+    if draft_budget not in ("full", "allocated"):
+        raise ValueError("Unknown draft budget policy")
     if draft_execution not in ("serial", "batched") or recovery not in ("exact_replay", "dense_trim"):
         raise ValueError("Unknown draft execution or recovery policy")
-    if draft_execution == "serial" and recovery == "exact_replay" and not profiling:
+    if draft_execution == "serial" and recovery == "exact_replay" and not profiling and draft_budget == "full":
         return strategy  # Preserve the original unprofiled control's identity.
     profile = "wall_v1" if profiling else "off"
-    return f"{strategy}|draft={draft_execution}|recovery={recovery}|profile={profile}"
+    identity = f"{strategy}|draft={draft_execution}|recovery={recovery}|profile={profile}"
+    return identity if draft_budget == "full" else f"{identity}|draft_budget={draft_budget}"
 
 
 def dense_cache(cache):
@@ -251,7 +254,7 @@ class JointSpeculativeSession:
     """
     def __init__(self, target, draft, budget, cost_key, *, draft_identity,
                  calibration_identity, mechanism_control=False, allocator="cpu", profiling=False,
-                 draft_execution="serial", recovery="exact_replay"):
+                 draft_execution="serial", recovery="exact_replay", draft_budget="full"):
         from .ds.joint_budget import EmpiricalConfidence
         if allocator not in ("cpu", "mlx"):
             raise ValueError("Unknown allocator")
@@ -264,7 +267,8 @@ class JointSpeculativeSession:
         self.draft, self.budget, self.cost_key = draft, budget, cost_key
         self.calibration_identity = calibration_identity
         self.mechanism_control, self.allocator = mechanism_control, allocator
-        execution_identity("bucket", profiling, draft_execution=draft_execution, recovery=recovery)
+        execution_identity("bucket", profiling, draft_execution=draft_execution, recovery=recovery, draft_budget=draft_budget)
+        self.draft_budget = draft_budget
         self.draft_execution, self.recovery = draft_execution, recovery
         self.profiling = profiling
         self.predictors = {}
@@ -284,7 +288,8 @@ class JointSpeculativeSession:
                 or key.quantization != self.cost_key.quantization
                 or key.calibration_identity != self.calibration_identity
                 or key.execution_strategy != execution_identity(
-                    strategy, self.profiling, draft_execution=self.draft_execution, recovery=self.recovery) or key.context_bucket < 0):
+                    strategy, self.profiling, draft_execution=self.draft_execution, recovery=self.recovery,
+                    draft_budget=self.draft_budget) or key.context_bucket < 0):
             raise ValueError("Cost key identity/strategy mismatch")
         if len(rows) != len(draft_caches) or len(rows) != key.batch_size:
             raise ValueError("Draft caches/cost key must match active rows")
@@ -320,36 +325,43 @@ class JointSpeculativeSession:
             # overhead). Opt-in paths use private state until success; all paths
             # retain independent snapshots for complete rollback on failure.
             proposal_rows = [[] for _ in rows]
+            depths = ([self.budget.depth] * len(rows) if self.draft_budget == "full" else
+                      [max(lengths) - 1] * len(rows) if strategy == "shared_cap" and rows else
+                      [q - 1 for q in lengths])
             draft_work = draft_caches if (self.draft_execution == "serial" and self.recovery == "exact_replay") \
                 else copy.deepcopy(draft_caches)
             if self.draft_execution == "batched" and rows:
-                # cache.py KVCache.merge right-aligns heterogeneous history and
-                # preserves per-row RoPE offsets. One actual [B,1] call per step.
-                merged = [layer.merge([c[k] for c in draft_work])
-                          for k, layer in enumerate(draft_work[0])]
-                current = [row.tail for row in rows]
-                for _ in range(self.budget.depth):
-                    if cancel is not None and cancel():
-                        raise InterruptedError("Draft cancelled")
-                    timer.mark("draft_control_host")
-                    logits = self.draft(mx.array(current, dtype=mx.uint32)[:, None], cache=merged)
-                    chosen = mx.argmax(logits[:, -1, :], axis=-1)
-                    mx.eval(chosen, [c.state for c in merged])
-                    timer.mark("draft_forward_argmax_eval")
-                    current = chosen.tolist()
-                    timer.mark("draft_argmax_host")
-                    for proposals, token in zip(proposal_rows, current):
-                        proposals.append(token)
-                    draft_calls.append({"phase": "draft", "batch": len(rows), "sequence_length": 1,
-                                        "tokens": len(rows)})
-                # At depth zero an empty cache has no tensors to extract.
-                if self.budget.depth:
-                    draft_work = [[c.extract(i) for c in merged] for i in range(len(rows))]
-                timer.mark("draft_extract_host")
+                # Group by allocated depth so zero-budget rows perform no draft
+                # forward. Each group owns disposable merged state; rollback is
+                # still provided by the original per-row snapshots.
+                for depth in sorted(set(depths)):
+                    indices = [i for i, d in enumerate(depths) if d == depth]
+                    if not depth:
+                        continue
+                    merged = [layer.merge([draft_work[i][k] for i in indices])
+                              for k, layer in enumerate(draft_work[indices[0]])]
+                    current = [rows[i].tail for i in indices]
+                    for _ in range(depth):
+                        if cancel is not None and cancel():
+                            raise InterruptedError("Draft cancelled")
+                        timer.mark("draft_control_host")
+                        logits = self.draft(mx.array(current, dtype=mx.uint32)[:, None], cache=merged)
+                        chosen = mx.argmax(logits[:, -1, :], axis=-1)
+                        mx.eval(chosen, [c.state for c in merged])
+                        timer.mark("draft_forward_argmax_eval")
+                        current = chosen.tolist()
+                        timer.mark("draft_argmax_host")
+                        for i, token in zip(indices, current):
+                            proposal_rows[i].append(token)
+                        draft_calls.append({"phase": "draft", "batch": len(indices), "sequence_length": 1,
+                                            "tokens": len(indices)})
+                    for position, i in enumerate(indices):
+                        draft_work[i] = [c.extract(position) for c in merged]
+                    timer.mark("draft_extract_host")
             else:
-                for row, cache, proposals in zip(rows, draft_work, proposal_rows):
+                for row, cache, proposals, depth in zip(rows, draft_work, proposal_rows, depths):
                     current = row.tail
-                    for _ in range(self.budget.depth):
+                    for _ in range(depth):
                         if cancel is not None and cancel():
                             raise InterruptedError("Draft cancelled")
                         timer.mark("draft_control_host")
@@ -367,14 +379,14 @@ class JointSpeculativeSession:
             result = self.verifier.verify(working, lengths, strategy=strategy, cancel=cancel,
                                           profiling=self.profiling, recovery=self.recovery)
             timer.mark("verification_total")
-            for row, cache, private, snapshot, output in zip(
-                    rows, draft_caches, draft_work, draft_snapshots, result["outputs"]):
+            for row, cache, private, snapshot, output, depth in zip(
+                    rows, draft_caches, draft_work, draft_snapshots, result["outputs"], depths):
                 if cancel is not None and cancel():
                     raise InterruptedError("Catch-up cancelled")
                 timer.mark("catchup_control_host")
                 consumed = [row.tail, *output[:-1]]
                 if self.recovery == "dense_trim":
-                    k, depth = len(consumed), self.budget.depth
+                    k = len(consumed)
                     if k <= depth:
                         trim_cache(private, depth - k)
                         mx.eval([c.state for c in private])
@@ -404,7 +416,7 @@ class JointSpeculativeSession:
             for row, outcomes in zip(rows, result["outcomes"]):
                 predictor = predictors.setdefault(row.key, self.predictor_type(
                     self.budget.depth, self.budget.model_identity, self.calibration_identity))
-                predictor.observe(outcomes)
+                predictor.observe(outcomes + (None,) * (self.budget.depth - len(outcomes)))
                 observations.append((row.key, predictor.predict()))
             if rows:
                 self.budget.commit(observations)
@@ -425,6 +437,8 @@ class JointSpeculativeSession:
                        "draft_source": "mechanism_control" if self.mechanism_control else "external_model",
                        "confidence_source": "empirical", "cost_curve_scope": "whole_cycle_once",
                        "profiling": self.profiling, "draft_execution": self.draft_execution,
+                       "draft_budget": self.draft_budget, "draft_depths": tuple(depths),
+                       "executed_draft_q": sum(call["tokens"] for call in draft_calls),
                        "execution_identity": key.execution_strategy,
                        "cycle_stages_ms": timer.stages if self.profiling else None})
         if self.profiling:

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "scope": "development_cache_shape_diagnosis",
+  "models": [
+    "40e44f0e35876a3e846c856f830ecca4208db73319256ff4f493434d2723950d",
+    "a4f7f71502edccf61c70717a7edb5368266a104f0c45cc1c0ed72cfb7ea27981"
+  ],
+  "versions": {
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2"
+  },
+  "source_sha256": {
+    "benchmarks/experiments/phase4_cache_diagnosis.py": "2dc56c34d17c8f0c22b608ae04e12943661a59f147134ad5bf29580b2c1308f8",
+    "src/deepinfer_mac/varlen_verify.py": "a006535e63d8f51cbeacf020977c7ddc77df7e8f4a81b0d90901ff90f8b85686"
+  },
+  "tolerance": {
+    "atol": 2e-06,
+    "rtol": 1e-05
+  },
+  "cases": [],
+  "failures": [
+    {
+      "type": "ValueError",
+      "message": "not enough values to unpack (expected 3, got 2)"
+    }
+  ],
+  "performance_claim": false,
+  "swap_before_bytes": 2015166464
+}

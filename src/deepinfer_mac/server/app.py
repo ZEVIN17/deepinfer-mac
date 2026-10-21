@@ -62,11 +62,11 @@ def create_app(
         execution_backend = "joint_experimental"
     elif joint_config is not None:
         raise ValueError("joint_config requires experimental_joint_verification=True")
-    if execution_backend not in ("serial", "continuous", "joint_experimental"):
-        raise ValueError("execution_backend must be serial or continuous")
-    if execution_backend in ("continuous", "joint_experimental"):
+    if execution_backend not in ("serial", "continuous", "auto", "joint_experimental"):
+        raise ValueError("execution_backend must be serial, continuous or auto")
+    if execution_backend in ("continuous", "auto", "joint_experimental"):
         from ..continuous import ContinuousConfig
-        continuous_config = continuous_config or ContinuousConfig()
+        continuous_config = continuous_config or ContinuousConfig(policy="upstream" if execution_backend == "auto" else "interactive")
     access_token = token or os.getenv("DEEPINFER_MAC_TOKEN")
     bearer = HTTPBearer(auto_error=False)
 
@@ -81,12 +81,16 @@ def create_app(
             default_engine_factory, experimental_hybrid_speculation=experimental_hybrid_speculation, model_registry=model_registry,
             memory_limit_bytes=continuous_config.memory_budget_bytes if continuous_config else None,
         )
-        if execution_backend in ("continuous", "joint_experimental"):
+        if execution_backend in ("continuous", "auto", "joint_experimental"):
             from .continuous_worker import ContinuousInferenceWorker
             if execution_backend == "joint_experimental":
                 from .joint_worker import JointInferenceWorker
                 app.state.worker = JointInferenceWorker(factory, queue_size=queue_size, config=continuous_config,
                                                         joint_config=joint_config, session_factory=batch_session_factory)
+            elif execution_backend == "auto":
+                from .runtime_worker import RuntimeInferenceWorker
+                app.state.worker = RuntimeInferenceWorker(factory, queue_size=queue_size, config=continuous_config,
+                                                         session_factory=batch_session_factory)
             else:
                 app.state.worker = ContinuousInferenceWorker(factory, queue_size=queue_size,
                                                             config=continuous_config, session_factory=batch_session_factory)
@@ -142,7 +146,7 @@ def create_app(
                     model["experimental_joint"] = {"enabled": True, "verified": False,
                         "effective_mode": "joint_experimental", "greedy_only": True,
                         "trained_confidence": False, "depth": joint_config.depth,
-                        "strategy": joint_config.strategy}
+                        "strategy": joint_config.strategy, "draft_budget": joint_config.draft_budget}
         if not experimental_hybrid_speculation:
             return registry
         # This explicit experimental service advertises its own local view.
@@ -182,9 +186,9 @@ def create_app(
         return {"status": "ok", "model_loaded": worker.engine is not None,
                 "active_run": worker.active.id if worker.active else None, "queued": worker.queue.qsize(),
                 "execution_backend": execution_backend,
-                "active_requests": len(getattr(worker, "active_requests", {})) if execution_backend in ("continuous", "joint_experimental") else int(worker.active is not None),
+                "active_requests": len(getattr(worker, "active_requests", {})) if execution_backend in ("continuous", "auto", "joint_experimental") else int(worker.active is not None),
                 "continuous_policy": continuous_config.policy if continuous_config else None,
-                "preparing_run": worker.preparing.id if execution_backend in ("continuous", "joint_experimental") and worker.preparing else None,
+                "preparing_run": worker.preparing.id if execution_backend in ("continuous", "auto", "joint_experimental") and worker.preparing else None,
                 "cleanup_error_count": len(getattr(worker, "cleanup_errors", [])),
                 "experimental_hybrid_speculation": experimental_hybrid_speculation}
 

@@ -1,20 +1,20 @@
-# Candidate packaging and publication
+# Build, share, contribute
 
-The immutable historical [v0.1.0a1 release](https://github.com/ZEVIN17/deepinfer-mac/releases/tag/v0.1.0a1) and [GitHub Pages site](https://zevin17.github.io/deepinfer-mac/) are published. Working0.1.0a2 is an experimental update in preparation, not a published or jointly accepted release.
+DeepInfer-Mac brings native MLX batching, streamed chat and an inspectable execution layer to Apple Silicon. The bundled browser workspace makes the same engine approachable from the first prompt.
 
-Build candidates into an isolated directory so publisheda1 bytes remain unchanged:
+## Reproduce the release
 
 ```sh
-python3 site/build.py
-python3 site/check.py
-uv build --out-dir dist/v0.1.0a2
-python3 scripts/verify_artifacts.py --dist dist/v0.1.0a2
+./scripts/release-check.sh dist/current
+uv run pytest -q -m metal --run-metal
 ```
 
-Run portable checks, actual Metal controls and permitted report verification on the final source. Inspect source/wheel/site resources, locks, licenses and exclusions. Restricted public benchmark tasks/fixtures/generations stay in results/quality-cache and never enter the static site or package. Record candidate hashes and source state. Until final comparison completes, call this an experimental update and retain the open competitive goal.
+The build produces a wheel, source distribution and an eight-page bilingual showcase. [Release entry](RELEASE.md) contains install commands and evidence. The GitHub Actions workflows validate pushes, upload build artifacts and deploy Pages from main. Published historical package bytes remain unchanged.
 
-Pages builds site/dist through the existing workflow and deploys relative links under /deepinfer-mac/. Local website validation does not establish that a candidate has been deployed. No community announcement is sent by this task.
+## Project introduction
 
-Draft: “DeepInfer-Mac adds an executable DeepInfer-derived scheduler and hybrid-state recovery controls, plus a real9B baseline/sampling demo. Original C++ replay and model outputs are inspectable. Fair competitive advantage remains unproven; model quality and performance comparisons remain separate.”
+**English:** Meet DeepInfer-Mac: a local inference framework for Apple Silicon, powered by MLX. Run from your terminal, connect a streamed chat API, or open the included browser workspace. Native batching, bounded memory and inspectable scheduling give builders a clear path from first prompt to reproducible measurement. Explore the real demo, read the architecture, and contribute your Mac's results.
 
-中文：a1历史发布保持不变，a2先完成可复查产物。当前可以报告方法/正确性进展，不能宣传竞争加速或联合验收完成。
+**中文：** DeepInfer-Mac，让本地模型更懂你的 Mac。以 MLX 为执行后端，连接终端、流式 API 与浏览器工作台。原生批处理、限额内存管理和可核查的调度，让开发者从第一条提示词走到可复现的真实测量。打开演示，了解架构，带着你的 Mac 一起完善它。
+
+These are repository launch materials. No external community messages are sent automatically. Detailed measurements retain their hardware, model, workload and correctness scope in the linked technical reports.

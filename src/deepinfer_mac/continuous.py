@@ -20,6 +20,7 @@ class ContinuousConfig:
     max_active: int = 4
     tick_token_budget: int = 512
     prefill_chunk: int = 256
+    min_prefill_chunk: int = 32
     max_context_tokens: int = 32768
     memory_budget_bytes: int | None = None
     temporary_reserve_bytes: int = 64 * 1024**2
@@ -29,7 +30,7 @@ class ContinuousConfig:
     aging_seconds: float = 2.0
 
     def __post_init__(self):
-        for name in ("max_active", "tick_token_budget", "prefill_chunk", "max_context_tokens", "group_quota"):
+        for name in ("max_active", "tick_token_budget", "prefill_chunk", "min_prefill_chunk", "max_context_tokens", "group_quota"):
             if not isinstance(getattr(self, name), int) or isinstance(getattr(self, name), bool) or getattr(self, name) < 1:
                 raise ValueError(f"{name} must be a positive integer")
         if self.tick_token_budget <= self.max_active:
@@ -63,6 +64,59 @@ class Prepared:
     metadata: dict
     eos_tokens: set[int] = field(default_factory=set)
     kv_bytes: int = 0
+
+
+class PrefillController:
+    """Bounded host-wall feedback, scoped to ticks that actually prefill.
+
+    Mixed decode/prefill time is deliberately charged in full. This is a
+    responsiveness heuristic, not a GPU timer or a hard latency guarantee.
+    Two consecutive cheap prefill ticks are required before increasing work.
+    """
+    def __init__(self, config):
+        self.config = config
+        self.limit = min(config.prefill_chunk, config.tick_token_budget - config.max_active)
+        self.floor = min(self.limit, config.min_prefill_chunk)
+        self.chunk = self.limit
+        self.cheap_ticks = 0
+
+    def observe(self, elapsed_ms, prompt_responses):
+        if self.config.policy != "interactive":
+            return self.chunk
+        if not math.isfinite(elapsed_ms) or elapsed_ms < 0:
+            raise ValueError("tick time must be finite and nonnegative")
+        # End-of-prompt transfers consume the last input in generate(), not
+        # a configurable prefill chunk. Decode-only and idle ticks likewise
+        # provide no evidence for increasing or decreasing prefill work.
+        if not any(not response.end_of_prompt for response in prompt_responses):
+            self.cheap_ticks = 0
+            return self.chunk
+        if elapsed_ms > self.config.target_tick_ms:
+            self.chunk = max(self.floor, self.chunk // 2)
+            self.cheap_ticks = 0
+        elif elapsed_ms < self.config.target_tick_ms / 2:
+            self.cheap_ticks += 1
+            if self.cheap_ticks >= 2:
+                self.chunk = min(self.limit, self.chunk + 16)
+                self.cheap_ticks = 0
+        else:
+            self.cheap_ticks = 0
+        return self.chunk
+
+
+def set_prefill_chunk(generator, chunk):
+    """Pinned MLX-LM 0.32.2 bridge: update in-flight and future batches.
+
+    Keep this private upstream access in one place until a public setter is
+    available and audited. Validate both targets before changing either one.
+    """
+    if isinstance(chunk, bool) or not isinstance(chunk, int) or chunk < 1:
+        raise ValueError("prefill chunk must be a positive integer")
+    prompt_batch = generator._prompt_batch
+    if not hasattr(prompt_batch, "prefill_step_size") or not hasattr(generator, "prefill_step_size"):
+        raise RuntimeError("Unsupported upstream prefill configuration")
+    generator.prefill_step_size = chunk
+    prompt_batch.prefill_step_size = chunk
 
 
 class AdmissionBudget:
@@ -117,6 +171,10 @@ class AdmissionBudget:
         self.reservations.pop(key, None)
 
 
+class UnsupportedBatchCache(ValueError):
+    """Native batch cache protocol is absent; serial execution remains eligible."""
+
+
 class MLXBatchSession:
     """One profile, one generator; all methods called on its owner thread."""
     def __init__(self, engine, profile, config):
@@ -132,7 +190,8 @@ class MLXBatchSession:
         self.closed = False
         self.generator = None
         self.last_tick_ms = None
-        self.chunk = min(config.prefill_chunk, config.tick_token_budget - config.max_active)
+        self.prefill_controller = PrefillController(config)
+        self.chunk = self.prefill_controller.chunk
         self.load_started = time.perf_counter()
         self.model_warm = engine.profile == profile and engine.model is not None
         engine._check_snapshot_unchanged()
@@ -151,10 +210,10 @@ class MLXBatchSession:
         caches = make_prompt_cache(engine.model)
         self.cache_capabilities = self.adapter.cache.capabilities(caches)
         if not all(callable(getattr(cache, "merge", None)) for cache in caches):
-            raise ValueError("Continuous backend requires native batch cache operations; use serial backend")
+            raise UnsupportedBatchCache("Continuous backend requires native batch cache operations; use serial backend")
         merged = [cache.merge([cache]) for cache in caches]
         if not all(all(callable(getattr(cache, name, None)) for name in ("filter", "extend", "extract", "prepare")) for cache in merged):
-            raise ValueError("Merged cache lacks continuous batch operations; use serial backend")
+            raise UnsupportedBatchCache("Merged cache lacks continuous batch operations; use serial backend")
         del merged
         del caches
         resident = mx.get_active_memory()
@@ -206,15 +265,8 @@ class MLXBatchSession:
         result = self.generator.next()
         self.last_tick_ms = (time.perf_counter() - start) * 1000
         if self.config.policy == "interactive":
-            # Decrease chunks against observed whole-tick time. Decode itself
-            # can dominate; no promise of a hard latency bound or zero blocking.
-            if self.last_tick_ms > self.config.target_tick_ms:
-                self.chunk = max(1, self.chunk // 2)
-            elif self.last_tick_ms < self.config.target_tick_ms / 2:
-                self.chunk = min(self.config.prefill_chunk, self.chunk + 16,
-                                 self.config.tick_token_budget - self.config.max_active)
-            self.generator.prefill_step_size = self.chunk
-            self.generator._prompt_batch.prefill_step_size = self.chunk
+            self.chunk = self.prefill_controller.observe(self.last_tick_ms, result[0])
+            set_prefill_chunk(self.generator, self.chunk)
         return result
 
     def remove(self, uid):

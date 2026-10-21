@@ -26,7 +26,7 @@ class JointInferenceWorker(ContinuousInferenceWorker):
             experimental_joint_verification=True, confidence_source="empirical_uncalibrated",
             trained_confidence=False, prefill_scheduling="synchronous_chunked_no_preemption",
             cancellation_boundary="verified_round", strict_serial_equivalence_validated=False,
-            draft_depth=self.joint_config.depth, verification_strategy=self.joint_config.strategy,
+            draft_depth=self.joint_config.depth, draft_budget=self.joint_config.draft_budget, verification_strategy=self.joint_config.strategy,
             last_joint_round=public_round_metrics(getattr(self.session, "last_report", None) or {}),
             cost_curve_available=bool((getattr(self.session, "last_report", None) or {}).get("cost_curve_available", False)),
         )

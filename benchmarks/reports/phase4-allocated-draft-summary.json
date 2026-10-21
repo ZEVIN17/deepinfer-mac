@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "stage": "development",
+  "independent_processes": 3,
+  "task_median_ms": {
+    "native": 124.09291707444936,
+    "full": 760.5590421007946,
+    "allocated": 529.8368749208748
+  },
+  "internal_time_reduction": 0.303358653843133,
+  "allocated_over_native_time": 4.269678619957012,
+  "outputs_match_native": true,
+  "source_unchanged": true,
+  "no_swap_growth": true,
+  "input_reports": {
+    "benchmarks/reports/phase4-allocated-draft-round0.json": "0816bde17dde932393891fe778d348db556a6f6a615e406b6efd9928826359e3",
+    "benchmarks/reports/phase4-allocated-draft-round1.json": "a63f45ae257b08249d7c1c3859bca0b23cbcebdf598c0fe5a10a69f5a8da6a5b",
+    "benchmarks/reports/phase4-allocated-draft-round2.json": "194fb311fd2c2926f0499a1ffda475e17ff36229c70c1e119fdb4891b4b5eb37"
+  },
+  "competitive_acceptance": false,
+  "omlx_measured": false,
+  "heldout": false,
+  "ds_learned_budget_gain_established": false,
+  "decision": "Native BatchGenerator is the primary executor; allocated draft remains experimental."
+}

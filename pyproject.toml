@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "deepinfer-mac"
-version = "0.1.0a2"
+version = "0.1.0a3"
 description = "DeepInfer-inspired local inference for Apple Silicon, powered by MLX"
 readme = "README.md"
 requires-python = ">=3.12,<3.14"

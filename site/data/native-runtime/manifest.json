@@ -1,0 +1,13 @@
+{
+  "scope": "Local 0.1.0a3 candidate; recorded development and service evidence",
+  "files": {
+    "phase4-allocated-draft-summary.json": {
+      "source": "benchmarks/reports/phase4-allocated-draft-summary.json",
+      "sha256": "7b6154dd2a5aafd5eb6417a1a0d3f1423301576b6e2546434a18adc1174bfacd"
+    },
+    "phase4-service-verification.json": {
+      "source": "docs/evidence/phase4-service-verification.json",
+      "sha256": "eec553f098873e3672e8306a466c42494c8f576366aa0003ba95d6b62a4e6a30"
+    }
+  }
+}

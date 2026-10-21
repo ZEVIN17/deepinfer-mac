@@ -1,0 +1,24 @@
+{
+  "stage": "phase4_native_first_local_candidate",
+  "published": false,
+  "portable_passed": 364,
+  "metal_passed": 95,
+  "actual_service_checks_passed": 46,
+  "lint_passed": true,
+  "site_pages": 8,
+  "site_local_links": 138,
+  "site_deployed": false,
+  "wheel_sdist_verified": true,
+  "isolated_offline_install_and_cli_help_passed": true,
+  "installed_wheel_matches_verified_wheel": true,
+  "files": {
+    "deepinfer_mac-0.1.0a2.tar.gz": "608feb60395994ddf5409b56552e540512e389e2675b598830a61e7deaa06007",
+    "deepinfer_mac-0.1.0a2-py3-none-any.whl": "672d949e9004857438f21fb091755deb691b4450671e44c4e266051a5306dbb4"
+  },
+  "notes": [
+    "Build used cached dependencies offline. No environment lock changed.",
+    "Original package checker mistook generic home-root prose for a user path; actual-home component detection now retains privacy checks.",
+    "Public service source-hash keys were normalized to repository-relative paths; raw functional reports remain local.",
+    "Performance target remains unmet; native batching adopted, speculative admission remains experimental."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0a3",
+  "installed_wheel": true,
+  "source_checkout_imported": false,
+  "checks": {
+    "installed_cli_real_generation": true,
+    "health_auto": true,
+    "bundled_ui": true,
+    "bundled_js": true,
+    "chat_http_200": true,
+    "native_strategy": true,
+    "sse_done": true,
+    "sse_run_id": true,
+    "actual_output": true,
+    "no_swap_growth": true
+  },
+  "output_sha256": "4dee7be546bc5213eaeae3c094ea0b2af803b837a3412c478a9fb49a4c2bc20f",
+  "cli_token_count": 16,
+  "scope": "Real 135M model; installed wheel CLI, native API, SSE and bundled UI resources. Functional smoke, not performance benchmark."
+}

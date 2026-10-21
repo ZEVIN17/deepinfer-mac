@@ -40,6 +40,7 @@ def test_wrapper_batches_merged_kv_and_calls_one_next_per_tick(monkeypatch, tmp_
     class Generator:
         def __init__(self, model, **kwargs):
             calls.append(("init", kwargs))
+            self.prefill_step_size = kwargs["prefill_step_size"]
             self._prompt_batch = SimpleNamespace(prefill_step_size=kwargs["prefill_step_size"])
             self.prompt_cache_nbytes = 5
             self.stream = object()

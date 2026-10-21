@@ -82,6 +82,12 @@ class ContinuousInferenceWorker(InferenceWorker):
     def decorate_result(self, result):
         return result
 
+    def decorate_serial_result(self, result):
+        return result
+
+    def create_session(self, job):
+        return self.session_factory(self.engine, job.request.profile, self.config)
+
     def submit(self, request, compare=False):
         job = Job(uuid.uuid4().hex, request, compare)
         with self.wakeup:
@@ -347,6 +353,7 @@ class ContinuousInferenceWorker(InferenceWorker):
                 execution_backend="exclusive_serial", queue_ms=(start - job.submitted_at) * 1000,
                 total_with_queue_ms=(time.perf_counter() - job.submitted_at) * 1000,
             )
+            result = self.decorate_serial_result(result)
             job.result, job.status = result, "completed"
             job.transition("finished")
             job.emit({"type": "complete", "result": result, "run_id": job.id})
@@ -415,10 +422,14 @@ class ContinuousInferenceWorker(InferenceWorker):
                             self._exclusive(next_job)
                             continue
                         try:
-                            self.session = self.session_factory(self.engine, next_job.request.profile, self.config)
+                            self.session = self.create_session(next_job)
                         except Exception as exc:  # noqa: BLE001
                             self.preparing = None
                             self._fail(next_job, exc)
+                            continue
+                        if self.session is None:
+                            self.preparing = None
+                            self._exclusive(next_job)
                             continue
                         self._admit(next_job)
                     if self.session is None:
