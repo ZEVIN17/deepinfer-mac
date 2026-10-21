@@ -1,0 +1,51 @@
+{
+  "base_url": "https://zevin17.github.io/deepinfer-mac/",
+  "checks": [
+    {
+      "path": "index.html",
+      "http": 200,
+      "bytes": 10615
+    },
+    {
+      "path": "zh.html",
+      "http": 200,
+      "bytes": 10591
+    },
+    {
+      "path": "benchmarks.html",
+      "http": 200,
+      "bytes": 12633
+    },
+    {
+      "path": "qwen27.html",
+      "http": 200,
+      "bytes": 11182
+    },
+    {
+      "path": "assets/style.css",
+      "http": 200,
+      "bytes": 5907
+    },
+    {
+      "path": "data/benchmark.json",
+      "http": 200,
+      "bytes": 1698079
+    },
+    {
+      "path": "data/local-ui-demo.json",
+      "http": 200,
+      "bytes": 2948
+    },
+    {
+      "path": "data/cache-qwen3-4b.json",
+      "http": 200,
+      "bytes": 43246
+    },
+    {
+      "path": "data/source-manifest.json",
+      "http": 200,
+      "bytes": 3163
+    }
+  ],
+  "byte_equality": true
+}
