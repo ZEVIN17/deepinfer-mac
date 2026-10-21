@@ -88,3 +88,40 @@ retain all numbers and sparse held-out confidence diagnostics. Public reports
 replace generated token arrays with count/SHA256; raw outputs remain private.
 `benchmarks/experiments/phase3_pair_export.py` reproduces this transformation from
 the two raw artifacts without rerunning inference.
+
+## Development-only wall-stage diagnostic
+
+`--profile-stages` adds optional timing to the same development workload. It is
+rejected for held-out runs. Default execution keeps the original serial draft and
+exact replay algorithms; no new cache commit or batching optimization is enabled.
+
+```sh
+# Requires explicit GPU ownership; same admission, five-minute bound and no-overwrite guard.
+.venv/bin/python benchmarks/experiments/phase3_pair_cost.py --execute \
+  --stage development --profile-stages \
+  --output artifacts/phase3-pair-cost/development-stage-profile.json
+```
+
+`cycle_stages_ms` consists of disjoint host wall intervals; its sum plus
+`cycle_profile_residual_ms` equals `full_cycle_ms`. Its `verification_total`
+contains the separate `verification_stages_ms` breakdown: do not add nested
+verification stages to the cycle stages. Forward/argmax/eval intervals include
+lazy graph construction and the existing synchronization, not isolated GPU kernel
+time. Host scalar/list extraction is recorded separately. Copy/merge/input setup,
+target restoration/replay, draft restoration/catch-up and statistical commit are
+also labelled. No extra device synchronization is inserted, so lazy copy/merge
+work can be charged to the subsequent eval. These labels are not hardware hotspot
+attribution. Clock/recording overhead remains part of profiled wall time.
+
+Profiled cost identities append `draft=serial|recovery=exact_replay|profile=wall_v1`
+to the verification strategy. They cannot silently reuse original unprofiled
+curves. This diagnostic does not replace previous frozen reports or establish
+latency benefit; optimization selection must follow its actual observations.
+
+The held-out loader additionally requires explicit unprofiled execution metadata,
+exactly the batch-one and batch-two expected CostKeys, and finite positive points
+for every legal budget. Missing, duplicate or foreign keys reject before model
+loading instead of silently selecting full-budget fallback. Older artifacts without
+this metadata remain historical evidence; they are not relabelled as new calibration
+inputs. The independently recorded stage profile predates this input-only guard;
+its original measured source hashes remain unchanged.

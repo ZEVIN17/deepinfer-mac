@@ -233,3 +233,47 @@ def test_actual_session_dynamic_uid_generation_and_cost_strategy():
     assert list(budget.previous) == old_keys
     assert list(budget.latest) == [RequestKey("1", 1), RequestKey("0", 0)]
     assert set(session.predictors) == set(budget.latest)
+
+
+def test_stage_profile_preserves_outputs_and_committed_cache():
+    import mlx.core as mx
+
+    from deepinfer_mac.varlen_verify import MLXVariableVerifier
+
+    model = tiny()
+    plain, profiled = rows_for(model), rows_for(model)
+    reference = MLXVariableVerifier(model).verify(plain, (1, 2, 4))
+    measured = MLXVariableVerifier(model).verify(profiled, (1, 2, 4), profiling=True)
+    assert reference['outputs'] == measured['outputs']
+    assert reference['model_calls'] == measured['model_calls']
+    assert reference['verification_stages_ms'] is None
+    assert all(value >= 0 for value in measured['verification_stages_ms'].values())
+    for left, right in zip(plain, profiled):
+        assert [c.offset for c in left.cache] == [c.offset for c in right.cache]
+        token = mx.array([[reference['outputs'][int(left.key.uid)][-1]]])
+        a, b = model(token, cache=left.cache), model(token, cache=right.cache)
+        mx.eval(a, b)
+        assert mx.array_equal(a, b).item()
+
+
+def test_session_profile_cost_isolation_and_complete_partition():
+    from dataclasses import replace
+
+    from deepinfer_mac.ds.joint_budget import CostKey, JointBudget
+    from deepinfer_mac.varlen_verify import JointSpeculativeSession, execution_identity
+
+    target, draft = tiny(), tiny(19)
+    rows, draft_rows = rows_for(target), rows_for(draft)
+    key = CostKey('target', 'draft', 'float32', 3, 16, 'bucket', 'test-only')
+    session = JointSpeculativeSession(target, draft, JointBudget(3, 'target'), key,
+                                      draft_identity='draft', calibration_identity='test-only', profiling=True)
+    with pytest.raises(ValueError, match='strategy'):
+        session.tick(rows, [r.cache for r in draft_rows])
+    result = session.tick(rows, [r.cache for r in draft_rows], forced_lengths=[1, 2, 4],
+                          cost_key=replace(key, execution_strategy=execution_identity('bucket', True)))
+    assert result['profiling']
+    stages = result['cycle_stages_ms']
+    assert stages['verification_total'] >= sum(result['verification_stages_ms'].values())
+    assert result['cycle_profile_residual_ms'] >= 0
+    assert sum(stages.values()) + result['cycle_profile_residual_ms'] == pytest.approx(result['full_cycle_ms'])
+    assert {'draft_forward_argmax_eval', 'draft_argmax_host', 'draft_catchup_eval'} <= stages.keys()

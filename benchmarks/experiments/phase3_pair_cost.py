@@ -47,6 +47,36 @@ def workload(path):
     return manifest, data
 
 
+def validate_calibration(frozen, source, identities, calibration_id):
+    """Fail closed before device loading; never turn a wrong curve into fallback."""
+    import math
+
+    expected_execution = {"draft": "serial", "recovery": "exact_replay", "profiling": False}
+    if (frozen.get('stage') != 'development' or frozen.get('accepted') is not True
+            or frozen.get('calibration_frozen') is not True
+            or frozen.get('source_sha256') != source
+            or frozen.get('model_content_sha256') != identities
+            or frozen.get('calibration_identity') != calibration_id
+            or frozen.get('execution_identity') != expected_execution):
+        raise ValueError('Calibration must match frozen development source/model/workload and unprofiled execution identity')
+    expected = [{"model_identity": identities[0], "draft_identity": identities[1],
+                 "quantization": "target6bit-g64/draft8bit-g64", "batch_size": batch,
+                 "context_bucket": 512, "execution_strategy": "bucket",
+                 "calibration_identity": calibration_id} for batch in (1, 2)]
+    curves = frozen.get('curves', [])
+    if len(curves) != len(expected) or sorted(
+            json.dumps(c.get('key'), sort_keys=True) for c in curves) != sorted(
+            json.dumps(k, sort_keys=True) for k in expected):
+        raise ValueError('Calibration requires exactly all expected CostKeys, without duplicates or foreign strategies')
+    for curve in curves:
+        batch = curve['key']['batch_size']
+        points = curve.get('points', [])
+        if (not all(isinstance(p, list) and len(p) == 2 for p in points)
+                or [p[0] for p in points] != list(range(batch, batch * 4 + 1))
+                or any(type(p[1]) not in (int, float) or not math.isfinite(p[1]) or p[1] <= 0 for p in points)):
+            raise ValueError('Calibration requires positive finite costs for every legal budget')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--stage', choices=('development', 'heldout'), default='development')
@@ -54,7 +84,10 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--calibration', type=Path)
     parser.add_argument('--execute', action='store_true')
+    parser.add_argument('--profile-stages', action='store_true')
     args = parser.parse_args()
+    if args.profile_stages and args.stage != "development":
+        raise ValueError("Profiling is development-only; held-out workload stays frozen")
     manifest, data = workload(args.workload)
     if not args.execute:
         print(json.dumps({'stage': args.stage, 'manifest': manifest,
@@ -80,7 +113,7 @@ def main():
         allocate_cpu,
     )
     from deepinfer_mac.models import verify_pair
-    from deepinfer_mac.varlen_verify import JointSpeculativeSession, VerifyRow
+    from deepinfer_mac.varlen_verify import JointSpeculativeSession, VerifyRow, execution_identity
 
     def read_swap_bytes():
         return psutil.swap_memory().used
@@ -108,10 +141,9 @@ def main():
     frozen = None
     if args.stage == 'heldout':
         frozen = json.loads(args.calibration.read_text())
-        if (not frozen.get('calibration_frozen') or frozen['source_sha256'] != source
-                or frozen['model_content_sha256'] != identities or frozen['calibration_identity'] != calibration_id):
-            raise ValueError('Calibration must be successful, frozen, and exactly source/model/workload bound')
+        validate_calibration(frozen, source, identities, calibration_id)
     report = {'schema_version': 1, 'stage': args.stage, 'source_sha256': source,
+              'execution_identity': {'draft': 'serial', 'recovery': 'exact_replay', 'profiling': args.profile_stages},
               'model_content_sha256': identities, 'calibration_identity': calibration_id,
               'calibration_artifact_sha256': sha(args.calibration) if frozen else None,
               'workload_manifest': manifest, 'process_count': 1, 'versions': {p: version(p) for p in ('mlx', 'mlx-lm')},
@@ -173,14 +205,14 @@ def main():
         tokenized.append(tokens)
     report['input_token_counts'] = list(map(len, tokenized))
     def key(batch, strategy):
-        return CostKey(identities[0], identities[1], 'target6bit-g64/draft8bit-g64', batch, 512, strategy, calibration_id)
+        return CostKey(identities[0], identities[1], 'target6bit-g64/draft8bit-g64', batch, 512, execution_identity(strategy, args.profile_stages), calibration_id)
     def setup(tokens, strategy, curve=False):
         budget = JointBudget(3, identities[0])
         if curve:
             for item in frozen['curves']:
                 budget.set_curve(CostKey(**item['key']), item['points'])
         session = JointSpeculativeSession(target, draft, budget, key(len(tokens), strategy),
-                                         draft_identity=identities[1], calibration_identity=calibration_id, allocator='mlx')
+                                         draft_identity=identities[1], calibration_identity=calibration_id, allocator='mlx', profiling=args.profile_stages)
         rows = [VerifyRow(RequestKey(str(i), 0), prefill(target, t), t[-1], (), 32) for i, t in enumerate(tokens)]
         caches = [prefill(draft, t) for t in tokens]
         if frozen:

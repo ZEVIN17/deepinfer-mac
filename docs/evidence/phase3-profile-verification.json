@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "scope": "Independent development-only optional wall-stage profile verification",
+  "accepted": true,
+  "performance_claim": false,
+  "commands": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_stage_profile.py",
+      "result": "3 passed"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q --run-metal -m metal",
+      "result": "50 passed, 333 deselected in 1.09 s; approved GPU-access retry",
+      "initial_attempt": "Sandboxed MLX import aborted with exit 134; no measurement obtained"
+    },
+    {
+      "command": ".venv/bin/python benchmarks/experiments/phase3_pair_cost.py --execute --stage development --profile-stages --output artifacts/phase3-pair-cost/development-stage-profile-independent.json",
+      "result": "exit 0, accepted true, failures empty"
+    }
+  ],
+  "source_sha256": {
+    "benchmarks/experiments/phase3_pair_cost.py": "d2367826416ae649f5c8cb1af888e85b1caae4879075ca178d760d41a8ad4585",
+    "benchmarks/experiments/phase3_pair_workload_manifest.json": "f355eb44cdeedb8d02ad90b3fe1963503afd95c71d0913e8c7b27967aeef7bed",
+    "pyproject.toml": "6ae35ba5ae5e98bee69b04ec8ee975b03150957ceb0c7c6651fc824555118732",
+    "src/deepinfer_mac/adapters.py": "67f056a36c7efe2282b1872cd3842ac5f4b8bb440d880c7752a8efc4116d4083",
+    "src/deepinfer_mac/ds/joint_budget.py": "f3ed636aa87745ab2b99a5c00b57bb9d8f7804b78b612cc49a2dd06dc7e64613",
+    "src/deepinfer_mac/ds/mtp_varlen.py": "de78b73a6e26d89cf6cfdc7eb472ba061e2ffd8a2842c6a9a060feb382448eae",
+    "src/deepinfer_mac/hybrid_speculative.py": "6b51b39fc440739248e3fe7a623c2eb96a3b2ec194562dee3c8fb992c12c2e54",
+    "src/deepinfer_mac/models.py": "c80ec9da3d8350b4a17b6c14b97db6984c47f457c1a792f1b3db223d0b38a70e",
+    "src/deepinfer_mac/varlen_verify.py": "efaf49f08def4a6742add79a27c5762c2c868dbafe4f78908c355de96e7d91c4",
+    "uv.lock": "4f7233deea96b791ce4a893a38f0f8aa2ac13d22976f4ce223fb7d4045aa545d"
+  },
+  "raw_artifact_sha256": "b6b1ecaea9f8ff4d1e4f15c38c6ec30d7fc781e01016303c93eba96af2765ed4",
+  "profile_ticks": 25,
+  "assertions": {
+    "finite_nonnegative_stage_intervals": true,
+    "full_cycle_partition_abs_tolerance_ms": 1e-09,
+    "nested_verification_not_double_counted": true,
+    "profile_cost_identity_isolated": true,
+    "source_hashes_match_after_execution": true,
+    "fixed_stage_keys_without_uid_values": [
+      "catchup_control_host",
+      "draft_argmax_host",
+      "draft_catchup_eval",
+      "draft_control_host",
+      "draft_forward_argmax_eval",
+      "draft_restore_host",
+      "snapshot_scheduler_allocation_host",
+      "statistics_commit_host",
+      "verification_total"
+    ],
+    "default_off_outputs_model_calls_and_cache_logits_preserved": true,
+    "dynamic_uid_generation_isolation_existing_metal_regression": "passed as part of 50 tests",
+    "default_off_execution_strategy_unchanged": true
+  },
+  "cycle_total_ms": 752.8925000224262,
+  "cycle_stage_sum_ms": {
+    "snapshot_scheduler_allocation_host": 7.6607889495790005,
+    "draft_control_host": 0.3543406492099166,
+    "draft_forward_argmax_eval": 319.31000179611146,
+    "draft_argmax_host": 0.16674038488417864,
+    "verification_total": 312.0663342997432,
+    "catchup_control_host": 0.04666880704462528,
+    "draft_restore_host": 3.8838310865685344,
+    "draft_catchup_eval": 108.27120824251324,
+    "statistics_commit_host": 1.0569588048383594
+  },
+  "nested_verification_stage_sum_ms": {
+    "verification_control_host": 4.155042697675526,
+    "verification_copy_merge_inputs_host": 9.829877177253366,
+    "verification_forward_argmax_eval": 147.6077901897952,
+    "verification_argmax_host": 0.1005829544737935,
+    "verification_result_host": 1.0109172435477376,
+    "target_restore_host": 3.5822929348796606,
+    "target_replay_eval": 145.3866644296795,
+    "verification_accounting_host": 0.043373205699026585
+  },
+  "versions": {
+    "mlx": "0.32.4",
+    "mlx-lm": "0.32.2"
+  },
+  "metal_peak_bytes": 705727316,
+  "swap_delta_bytes": 0,
+  "limits": [
+    "One development process only; no held-out data used or competitive speed claim.",
+    "Host wall attribution at existing eval boundaries, not isolated GPU kernels. Lazy copy/merge work may be charged to the subsequent eval.",
+    "Nested verification stages are included in cycle verification_total and must not be added twice.",
+    "Profiling adds host clock and bookkeeping overhead. Default-off schema adds nullable timing fields; existing output and model-call results preserved by real-Metal tests.",
+    "Raw prompts and output tokens retained privately; this public report contains neither."
+  ],
+  "test_source_sha256": {
+    "tests/test_stage_profile.py": "7cbeabc2c0686312639cc513aafb04eba10523ca1d7e10f417a89f008d8d2f7d",
+    "tests/test_varlen_metal.py": "19b940df58a7921662ce73e66a8f1bb1aafaf8b83afd152a7607cb00c93e84b0"
+  }
+}

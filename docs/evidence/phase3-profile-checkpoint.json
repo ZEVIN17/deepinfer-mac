@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "scope": "Default-off stage profiling and local bilingual product candidate; experimental branch checkpoint only",
+  "base_commit": "d54f09ec709b3cb65513057e0d6f1eb54e13a1ae",
+  "accepted": true,
+  "source_sha256": {
+    "README.md": "fb963d0700fbf1152a977bf8ee54503dcba1652bb6a2325e7d6d6055045523b0",
+    "README.zh-CN.md": "a523e853c3b5505e3a61b2010c2107febe430b132354439531f9e75640b6257c",
+    "benchmarks/experiments/phase3_pair_cost.py": "220e4ec71be43f6a91c3d264af4c45545a987fd66e5ca8d6f7f390abdedf64f2",
+    "docs/PAIR_COST_EXPERIMENT.md": "6fcea595372c2d070943335d0aec3d7e79a89028feaec3f5cc155dc5acb31207",
+    "site/README.md": "12edbea885dc0c2a64267e8fb3ea658ed441bfe48119b27702f598b3acaedfbd",
+    "site/build.py": "f8e09ceaed5477cbf39e44dfdf86a7f645a4cbabca5f0dc68af76f62592fcbc9",
+    "src/deepinfer_mac/varlen_verify.py": "efaf49f08def4a6742add79a27c5762c2c868dbafe4f78908c355de96e7d91c4",
+    "tests/test_varlen_metal.py": "19b940df58a7921662ce73e66a8f1bb1aafaf8b83afd152a7607cb00c93e84b0",
+    "tests/test_stage_profile.py": "264f6f7548d18ed4dd70a35e947581981e26706999a8e579851a331a632b6910",
+    "docs/evidence/phase3-product-joint-acceptance.json": "bab9463ee099d08648eedf4a463dd8f7d6e8dcda44db5810cc8340d04e5f44d8",
+    "docs/evidence/phase3-profile-anti-pattern-check.json": "c4b85725124b2975a15370020de221e65083a4bdcd5a4fb93ac07e2594e9a695",
+    "docs/evidence/phase3-profile-code-review.json": "b83b167ce876f8a389697074d98a958027a88e5e00aac2f7325c610d3dd3b3cf",
+    "docs/evidence/phase3-profile-verification.json": "961cc18e4ae34398808ba26bd20f604c6aa25b7e50e1614ad55c09837383a81c",
+    "docs/PROGRESS.md": "d96e510df41557af65860aa472730e8160b4e3db7eccbd9739453a020c050fa3",
+    "docs/history/PROGRESS_PHASE3_SERVICE_20261021.md": "544c7e2102b1262861d57c339f1ea7ef2bb55d1e4749387cd56e2ebb31497b9c"
+  },
+  "checks": {
+    "portable": "334 passed, 50 deselected in 10.45s",
+    "ruff": "passed",
+    "diff_check": "passed",
+    "review_and_anti_current_hashes": "all matched",
+    "history_preserved_byte_exact": true
+  },
+  "measurement_provenance": "50 actual-Metal tests and 25 development ticks bind the measured sources in phase3-profile-verification.json. Later harness calibration guard has separate CPU verification; no inference rerun or performance gain claimed.",
+  "publication": {
+    "branch": "codex/phase2-core",
+    "main_merge": false,
+    "tag": false,
+    "release": false,
+    "website_deployment": false,
+    "private_artifacts_included": false
+  }
+}

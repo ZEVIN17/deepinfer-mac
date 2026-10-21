@@ -25,9 +25,7 @@ The architecture is attributed to its actual components: MLX/MLX-LM execution an
 The product entry now presents an Apple Silicon inference framework with MLX as
 its execution backend; 9B remains the verified demonstration, not the product
 definition. Both homepages and the run guide include the same capability matrix.
-SmolLM2-135M-Instruct-8bit has passed real baseline/native, cache, CLI, API and SSE acceptance. Its separate milestone links to commit `43d967652683817daf7eff0b7553ae5d5293739e` for the integration report, weight audit and adapter guide. Other custom models require independent acceptance;
-cross-request/pipeline entries remain labelled building until their separate
-acceptance completes. Existing real milestones and the recorded
+SmolLM2-135M-Instruct-8bit has passed real baseline/native, cache, CLI, API and SSE acceptance. Its separate milestone links to commit `43d967652683817daf7eff0b7553ae5d5293739e` for the integration report, weight audit and adapter guide. Other custom models require independent acceptance. A separate joint-service milestone links to `d54f09ec709b3cb65513057e0d6f1eb54e13a1ae`: 35/35 actual-model service checks, 330 portable tests and 48 real Metal tests. It presents bounded multi-request execution, committed token SSE, cancellation isolation and recovery with the distinct 360M/135M research pair. Default baseline and experimental joint service remain explicit; these are service-function milestones, not comparative performance or general serial-token equivalence. Existing real milestones and the recorded
 SSE replay retain their frozen source bytes and attribution.
 
 `architecture.html#joint-budget` adds a browser-only allocation illustration.
@@ -40,3 +38,5 @@ performance animation and does not announce Phase 3 execution as complete.
 
 Build and link checks remain the commands above. Local source changes and a
 successful build do not update the deployed website or publish a release.
+
+The joint-service card appears on both homepages, architecture and milestones. It uses fixed-commit external report links, preserving the historical Phase2 bundle and replay. No new runtime simulation, prerecorded performance, hosted deployment or release is introduced.

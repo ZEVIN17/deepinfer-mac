@@ -57,7 +57,7 @@ curl http://127.0.0.1:8765/v1/chat/completions \
   -d '{"model":"qwen3.5-9b-8bit","messages":[{"role":"user","content":"Hello"}],"max_tokens":128,"temperature":0,"stream":true}'
 ```
 
-服务提供约定的聊天 API 子集、有界排队、取消与流式输出。当前生产服务由单一推理 owner 执行；并发执行准入及 DS 跨请求预算属于第三阶段工作。
+服务提供约定的聊天 API 子集、有界排队、取消与流式输出。默认服务使用 baseline；显式实验入口已接入有界多请求执行和联合目标验证，提供逐请求取消与恢复。
 
 ## 实验接口：接入其他模型
 
@@ -83,7 +83,7 @@ uv run deepinfer-mac run --model /path/to/complete-mlx-model \
 | Qwen3-14B-4bit | 已验证 baseline / native 控制 | 待验证 | Dense 工程对照 |
 | Qwen3-4B | 已验证回归路径 | 实验 fixed / adaptive | 较小的 Dense 回归模型 |
 | 可配置模型 / 缓存适配器 | SmolLM2-135M-8bit baseline / 缓存 / CLI / API / SSE 已验证 | 按能力开放 baseline | 路径 / repo 注册、透明 baseline 回退 |
-| 跨请求预算 / 状态流水 | 第三阶段构建中 | — | 尚非当前默认服务能力 |
+| 实验联合服务 | 360M 目标 + 135M 草稿通过 35/35 项服务功能检查 | 显式开启联合预算 / 变长验证 | Dense 研发模型对；真实 token SSE、取消隔离与恢复 |
 
 公开 9B API/UI 仍只开放 baseline。混合推测限定 greedy，通过 [DS 方法映射](docs/DS_DESIGN_MAPPING.md) 中的显式实验入口使用。模型成功加载、任务质量与优化验证分别记录。参见[模型选择](docs/PHASE2_MODEL_SELECTION.md)、[兼容说明](docs/compatibility.md)及不可变 [模型锁](models.lock.json)。
 
@@ -91,6 +91,7 @@ uv run deepinfer-mac run --model /path/to/complete-mlx-model \
 
 | 真实工作负载 | 结果 | 证据 |
 |---|---|---|
+| 小模型联合 API 服务 | 35/35 项真实模型服务检查；330 项 CPU + 48 项 Metal 测试通过 | [服务报告](https://github.com/ZEVIN17/deepinfer-mac/blob/d54f09ec709b3cb65513057e0d6f1eb54e13a1ae/benchmarks/reports/phase3-joint-service.json) |
 | 9B 自适应开发轨迹 | 28/28 次成熟决策与原始 C++ 一致；128 个输出 token 与 baseline 一致 | [补充核验](benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json) |
 | 9B 上下文复用 | 20 次请求；两种采样设置下 16/16 项完整 token 检查通过 | [缓存报告](benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json) |
 | M4 Pro / 24 GiB 上的 9B baseline | 4,204 输入 + 256 输出；该次运行未观测到 swap 增量 | [资源检查](benchmarks/reports/context-4204-256-qwen35-9b8.json) |
@@ -111,7 +112,7 @@ CLI / Python / 聊天 API / 本地 UI
           └── DeepInfer 派生预算 ┘
 ```
 
-当前自适应实现调度单个请求。第三阶段将其扩展为跨请求预算、真实变长验证与经过时间线验证的状态重叠。构建[本地展示站](site/README.md)即可查看交互式预算图：明确标为机制示意，与实测轨迹分开。
+实验路径已扩展为跨请求预算与真实变长目标验证，并接入有界 API 服务。逐请求状态、已提交 token 事件、取消隔离与恢复具有独立验收；完整成本校准和时间线驱动重叠仍按研究协议推进。构建[本地展示站](site/README.md)即可查看交互式预算图：明确标为机制示意，与实测轨迹分开。
 
 MLX / MLX-LM 提供模型执行、采样和原生 LRU；DeepInfer 提供参考调度方法；混合状态恢复与服务集成属于 Mac 适配。本项目为独立社区实现。[架构](docs/architecture.md) · [源码映射](docs/DS_DESIGN_MAPPING.md) · [第三方归属](NOTICE) · [Apache-2.0](LICENSE)。
 
@@ -127,4 +128,4 @@ python3 site/check.py
 
 [贡献指南](CONTRIBUTING.md) · [版本说明](docs/release-notes.md) · [证据索引](docs/evidence.md) · [第三阶段执行方案](docs/PHASE3_EXECUTION_PLAN.md)
 
-后续实现顺序为：能力适配器 → 请求 tick 与资源准入 → 跨请求验证预算 → 时间线驱动重叠 → 两框架公平对照。二阶段报告及冻结产物保持原样。
+能力适配器、请求 tick / 资源准入及实验联合验证服务已经落地；后续围绕成本校准、时间线驱动重叠与公平性能对照继续验证。二阶段报告及冻结产物保持原样。

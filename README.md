@@ -57,7 +57,7 @@ curl http://127.0.0.1:8765/v1/chat/completions \
   -d '{"model":"qwen3.5-9b-8bit","messages":[{"role":"user","content":"Hello"}],"max_tokens":128,"temperature":0,"stream":true}'
 ```
 
-The service implements a documented chat API subset, bounded queuing, cancellation and streaming. Current production execution has one inference owner; concurrent admission and DS cross-request budgets are Phase 3 work.
+The service implements a documented chat API subset, bounded queuing, cancellation and streaming. Default service uses baseline; explicit experimental entries connect bounded multi-request execution and joint target verification with per-request cancellation and recovery.
 
 ## Experimental: register another model
 
@@ -83,7 +83,7 @@ Registration is explicit and per process; custom models start with unverified ba
 | Qwen3-14B-4bit | Verified: baseline / native controls | Validation pending | Dense engineering control |
 | Qwen3-4B | Verified regression path | Experimental fixed / adaptive | Smaller dense regression model |
 | Configurable model / cache adapters | SmolLM2-135M-8bit baseline / cache / CLI / API / SSE verified | Capability-gated baseline | Model path/repo registration and transparent baseline fallback |
-| Cross-request budgets / state pipeline | Building in Phase 3 | — | Not part of the current default service |
+| Experimental joint service | 360M target + 135M draft pass 35/35 service checks | Explicit joint-budget / variable-length verification opt-in | Dense research pair; actual token SSE, cancellation isolation and recovery |
 
 Public 9B API/UI modes remain baseline. Hybrid speculation is greedy and uses the explicit experimental entry in [DS method mapping](docs/DS_DESIGN_MAPPING.md). Model loading is distinct from task quality and optimization validation. See [model selection](docs/PHASE2_MODEL_SELECTION.md), [compatibility](docs/compatibility.md) and immutable [model locks](models.lock.json).
 
@@ -91,6 +91,7 @@ Public 9B API/UI modes remain baseline. Hybrid speculation is greedy and uses th
 
 | Real workload | Result | Evidence |
 |---|---|---|
+| Small-model joint API service | 35/35 real-model service checks; 330 portable + 48 Metal tests pass | [Service report](https://github.com/ZEVIN17/deepinfer-mac/blob/d54f09ec709b3cb65513057e0d6f1eb54e13a1ae/benchmarks/reports/phase3-joint-service.json) |
 | 9B adaptive development trace | 28/28 mature decisions match original C++; 128 output tokens equal baseline | [Supplemental verification](benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json) |
 | 9B context reuse | 20 requests; 16/16 complete-token checks pass across two sampler settings | [Cache report](benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json) |
 | 9B baseline on M4 Pro / 24 GiB | 4,204 input + 256 output tokens; no measured swap increase for this run | [Resource check](benchmarks/reports/context-4204-256-qwen35-9b8.json) |
@@ -111,7 +112,7 @@ CLI / Python / chat API / local UI
        └──── DeepInfer-derived budget ──────┘
 ```
 
-The current adaptive implementation schedules a single request. Phase 3 extends this design to joint request budgets, real variable-length verification and measured state overlap. Build the [local showcase](site/README.md) to explore its interactive budget diagram: explicitly a mechanism illustration, separate from measured traces.
+The experimental path now connects joint request budgets and real variable-length target verification to a bounded API service. Per-request state, committed token events, cancellation isolation and recovery have independent acceptance; complete-cost calibration and trace-driven overlap continue under the research protocol. Build the [local showcase](site/README.md) to explore its interactive budget diagram: explicitly a mechanism illustration, separate from measured traces.
 
 MLX / MLX-LM provide model execution, sampling and native LRU. DeepInfer supplies the reference scheduling methods; hybrid recovery and service integration are Mac adaptations. This independent community project is not a full DSpark / DeepSeek V4.1 port. [Architecture](docs/architecture.md) · [Source mapping](docs/DS_DESIGN_MAPPING.md) · [NOTICE](NOTICE) · [Apache-2.0](LICENSE).
 
@@ -127,4 +128,4 @@ python3 site/check.py
 
 [Contribution guide](CONTRIBUTING.md) · [Release notes](docs/release-notes.md) · [Evidence index](docs/evidence.md) · [Phase 3 execution brief](docs/PHASE3_EXECUTION_PLAN.md)
 
-The next implementation sequence is capability adapters → request ticks and resource admission → cross-request verification budgets → trace-driven overlap → fair two-framework evaluation. Phase 2 reports and frozen artifacts remain unchanged.
+Capability adapters, request ticks / resource admission and the experimental joint verification service are implemented; cost calibration, trace-driven overlap and fair performance evaluation continue. Phase 2 reports and frozen artifacts remain unchanged.

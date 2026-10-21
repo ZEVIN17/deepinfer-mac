@@ -15,6 +15,28 @@ from .adapters import CacheAdapter
 from .ds.joint_budget import RequestKey
 
 
+class StageTimer:
+    """Optional non-overlapping host wall intervals at existing synchronization boundaries.
+
+    No extra device synchronization: a forward interval includes lazy graph building,
+    argmax and its existing eval. Host-only labels do not imply GPU kernel timing.
+    """
+    def __init__(self, enabled=False):
+        self.enabled = enabled
+        self.stages = {}
+        self.last = time.perf_counter() if enabled else None
+
+    def mark(self, name):
+        if self.enabled:
+            now = time.perf_counter()
+            self.stages[name] = self.stages.get(name, 0.0) + (now - self.last) * 1000
+            self.last = now
+
+
+def execution_identity(strategy, profiling=False):
+    return f"{strategy}|draft=serial|recovery=exact_replay|profile=wall_v1" if profiling else strategy
+
+
 @dataclass
 class VerifyRow:
     key: RequestKey
@@ -81,9 +103,10 @@ class MLXVariableVerifier:
         self.model = model
         self.adapter = CacheAdapter()
 
-    def verify(self, rows, lengths, *, strategy="bucket", cancel=None):
+    def verify(self, rows, lengths, *, strategy="bucket", cancel=None, profiling=False):
         import mlx.core as mx
         start = time.perf_counter()
+        timer = StageTimer(profiling)
         for row in rows:
             row.validate()
         if len(rows) != len(lengths) or len({r.key for r in rows}) != len(rows):
@@ -106,6 +129,7 @@ class MLXVariableVerifier:
                 raise InterruptedError("Verification cancelled")
 
         def forward(indices, q):
+            timer.mark("verification_control_host")
             check_cancel()
             dense = all(all(type(c).__name__ == "KVCache" for c in rows[i].cache) for i in indices)
             if len(indices) > 1 and not dense:
@@ -121,10 +145,13 @@ class MLXVariableVerifier:
                 row = rows[i]
                 tokens = [row.tail, *row.proposals[:effective[i] - 1]]
                 inputs.append(tokens + [0] * (q - len(tokens)))
+            timer.mark("verification_copy_merge_inputs_host")
             logits = self.model(mx.array(inputs, dtype=mx.uint32), cache=merged)
             chosen = mx.argmax(logits, axis=-1)
             mx.eval(chosen, [c.state for c in merged])
+            timer.mark("verification_forward_argmax_eval")
             actual = chosen.tolist()
+            timer.mark("verification_argmax_host")
             calls.append({"phase": "verify", "batch": len(indices), "sequence_length": q,
                           "tokens": len(indices) * q})
             for i, prediction in zip(indices, actual):
@@ -143,9 +170,12 @@ class MLXVariableVerifier:
                 outcomes.append(observed + (None,) * (len(row.proposals) - len(observed)))
                 # Cache stores all emitted tokens except final unconsumed tail.
                 consumed = [row.tail, *output[:-1]]
+                timer.mark("verification_result_host")
                 self.adapter.restore(row.cache, snapshots[i])
+                timer.mark("target_restore_host")
                 self.model(mx.array([consumed], dtype=mx.uint32), cache=row.cache)
                 mx.eval([c.state for c in row.cache])
+                timer.mark("target_replay_eval")
                 calls.append({"phase": "replay", "batch": 1, "sequence_length": len(consumed),
                               "tokens": len(consumed)})
             check_cancel()
@@ -153,6 +183,7 @@ class MLXVariableVerifier:
             for row, snapshot in zip(rows, snapshots):
                 self.adapter.restore(row.cache, snapshot)
             raise
+        timer.mark("verification_accounting_host")
         executed = sum(c["tokens"] for c in calls if c["phase"] == "verify")
         return {"outputs": outputs, "outcomes": outcomes, "requested_q": sum(lengths),
                 "effective_verified_q": sum(effective), "executed_verify_q": executed,
@@ -160,7 +191,8 @@ class MLXVariableVerifier:
                     c["tokens"] for c in calls if c["phase"] == "replay"),
                 "model_calls": calls, "model_submissions": len(calls), "gpu_kernel_count": None,
                 "verify_recovery_host_ms": (time.perf_counter() - start) * 1000,
-                "full_cycle_ms": None, "draft_cost_included": False, "strategy": strategy}
+                "full_cycle_ms": None, "draft_cost_included": False, "strategy": strategy,
+                "verification_stages_ms": timer.stages if profiling else None}
 
 
 class JointSpeculativeSession:
@@ -173,7 +205,7 @@ class JointSpeculativeSession:
     No pretrained performance or quality acceptance is implied by this interface.
     """
     def __init__(self, target, draft, budget, cost_key, *, draft_identity,
-                 calibration_identity, mechanism_control=False, allocator="cpu"):
+                 calibration_identity, mechanism_control=False, allocator="cpu", profiling=False):
         from .ds.joint_budget import EmpiricalConfidence
         if allocator not in ("cpu", "mlx"):
             raise ValueError("Unknown allocator")
@@ -186,6 +218,7 @@ class JointSpeculativeSession:
         self.draft, self.budget, self.cost_key = draft, budget, cost_key
         self.calibration_identity = calibration_identity
         self.mechanism_control, self.allocator = mechanism_control, allocator
+        self.profiling = profiling
         self.predictors = {}
         self.predictor_type = EmpiricalConfidence
 
@@ -194,6 +227,7 @@ class JointSpeculativeSession:
 
         from .ds.joint_budget import allocate_mlx, remap_keys
         start = time.perf_counter()
+        timer = StageTimer(self.profiling)
         for row in rows:
             row.validate()
         key = cost_key or self.cost_key
@@ -201,7 +235,7 @@ class JointSpeculativeSession:
                 or key.draft_identity != self.cost_key.draft_identity
                 or key.quantization != self.cost_key.quantization
                 or key.calibration_identity != self.calibration_identity
-                or key.execution_strategy != strategy or key.context_bucket < 0):
+                or key.execution_strategy != execution_identity(strategy, self.profiling) or key.context_bucket < 0):
             raise ValueError("Cost key identity/strategy mismatch")
         if len(rows) != len(draft_caches) or len(rows) != key.batch_size:
             raise ValueError("Draft caches/cost key must match active rows")
@@ -228,26 +262,36 @@ class JointSpeculativeSession:
                 mx.eval(device_lengths)
                 lengths = tuple(device_lengths.tolist())
             scheduler_ms = (time.perf_counter() - start) * 1000
+            timer.mark("snapshot_scheduler_allocation_host")
             for row, cache in zip(rows, draft_caches):
                 proposals, current = [], row.tail
                 for _ in range(self.budget.depth):
                     if cancel is not None and cancel():
                         raise InterruptedError("Draft cancelled")
+                    timer.mark("draft_control_host")
                     logits = self.draft(mx.array([[current]], dtype=mx.uint32), cache=cache)
                     chosen = mx.argmax(logits[:, -1, :], axis=-1)
                     mx.eval(chosen, [c.state for c in cache])
+                    timer.mark("draft_forward_argmax_eval")
                     current = chosen.item()
+                    timer.mark("draft_argmax_host")
                     proposals.append(current)
                     draft_calls.append({"phase": "draft", "batch": 1, "sequence_length": 1, "tokens": 1})
                 working.append(VerifyRow(row.key, row.cache, row.tail, tuple(proposals), row.remaining, row.eos))
-            result = self.verifier.verify(working, lengths, strategy=strategy, cancel=cancel)
+            timer.mark("draft_control_host")
+            result = self.verifier.verify(working, lengths, strategy=strategy, cancel=cancel,
+                                          profiling=self.profiling)
+            timer.mark("verification_total")
             for row, cache, snapshot, output in zip(rows, draft_caches, draft_snapshots, result["outputs"]):
                 if cancel is not None and cancel():
                     raise InterruptedError("Catch-up cancelled")
+                timer.mark("catchup_control_host")
                 adapter.restore(cache, snapshot)
+                timer.mark("draft_restore_host")
                 consumed = [row.tail, *output[:-1]]
                 self.draft(mx.array([consumed], dtype=mx.uint32), cache=cache)
                 mx.eval([c.state for c in cache])
+                timer.mark("draft_catchup_eval")
                 catchup_calls.append({"phase": "draft_catchup", "batch": 1,
                                       "sequence_length": len(consumed), "tokens": len(consumed)})
             if cancel is not None and cancel():
@@ -268,6 +312,7 @@ class JointSpeculativeSession:
             for cache, snapshot in zip(draft_caches, draft_snapshots):
                 adapter.restore(cache, snapshot)
             raise
+        timer.mark("statistics_commit_host")
         all_calls = [*draft_calls, *result["model_calls"], *catchup_calls]
         result.update({"model_calls": all_calls, "model_submissions": len(all_calls),
                        "executed_total_q": sum(call["tokens"] for call in all_calls),
@@ -275,5 +320,9 @@ class JointSpeculativeSession:
                        "draft_cost_included": True, "scheduler_ms": scheduler_ms,
                        "allocator": self.allocator, "seqlens_q": lengths,
                        "draft_source": "mechanism_control" if self.mechanism_control else "external_model",
-                       "confidence_source": "empirical", "cost_curve_scope": "whole_cycle_once"})
+                       "confidence_source": "empirical", "cost_curve_scope": "whole_cycle_once",
+                       "profiling": self.profiling,
+                       "cycle_stages_ms": timer.stages if self.profiling else None})
+        if self.profiling:
+            result["cycle_profile_residual_ms"] = result["full_cycle_ms"] - sum(timer.stages.values())
         return result
