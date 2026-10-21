@@ -1,0 +1,134 @@
+{
+  "status": "approved",
+  "date": "2026-10-21",
+  "role": "fresh independent verification",
+  "source_sha256": {
+    "site/build.py": "a5098afea6e03c368719b95cfa377021b32d4a5c33f7d5b4f0764354dd45f560",
+    "site/check.py": "2559216f56e11442dbf743d78cec27d398c47e393a3f8b6b9d4c8fd5aa0d3af4",
+    "site/README.md": "0f2f1dd6c47cc2867fa6d1b4df58fee3da4e21fde64079aa171ff8b4452fe818",
+    "site/assets/style.css": "d07705d7e3c50dd2bb8dcf0e50b4aba580eb0c49133e4b8ac1c3494701151346",
+    "site/assets/showcase.js": "44bd77bb34f2987d15bd9e9c0234239943235e429e5e447ac750e2a756e94cd6",
+    "site/data/phase2/manifest.json": "6c1cd9179f6ec16176bc400b8aa49f08fa01f78543f430bc1302be917e165c60"
+  },
+  "verification": {
+    "build": "passed",
+    "local_links": 138,
+    "pages": 8,
+    "ruff": "site/build.py and site/check.py passed",
+    "javascript_syntax": "node --check site/assets/showcase.js passed",
+    "main_site_only_closure": {
+      "base": "origin/main",
+      "base_commit": "db0eaeb44f81b361e5e4f0db55cd977a1e6d2330",
+      "python": "3.12.12 (main, Jan 14 2026, 23:36:32) [Clang 21.1.4 ]",
+      "overlay": "site/** only, excluding generated files",
+      "commands": [
+        {
+          "command": [
+            "Python3.12",
+            "site/build.py"
+          ],
+          "exit_code": 0,
+          "result": "8 pages; source-linked architecture and milestones"
+        },
+        {
+          "command": [
+            "Python3.12",
+            "site/check.py"
+          ],
+          "exit_code": 0,
+          "result": "138 local resource/document links, 8 pages, relocatable /deepinfer-mac/ artifact"
+        }
+      ],
+      "phase2_bundle_exact_git_members": [
+        "benchmarks/reports/phase2-ui-qwen35-9b8.json",
+        "benchmarks/reports/phase2-service-qwen3.5-9b-8bit.json",
+        "benchmarks/reports/phase2-service-sampling-qwen35-9b8.json",
+        "benchmarks/reports/phase2-message-checkpoints-qwen35-9b8.json",
+        "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8.json",
+        "benchmarks/reports/phase2-hybrid-lagged-dev-qwen35-9b8-supplemental-verification.json",
+        "benchmarks/reports/phase2-experimental-api-qwen35-9b8.json",
+        "benchmarks/reports/context-4204-256-qwen35-9b8.json",
+        "docs/evidence/phase2-local-ui-qwen35-9b8.png"
+      ],
+      "pinned_document_paths_exist": 15,
+      "active_and_main_overlay_artifacts_identical": true,
+      "tamper_controls": [
+        {
+          "case": "modified_report",
+          "rejected": true,
+          "existing_dist_preserved": true
+        },
+        {
+          "case": "unexpected_bundle_member",
+          "rejected": true,
+          "existing_dist_preserved": true
+        },
+        {
+          "case": "wrong_source_identity",
+          "rejected": true,
+          "existing_dist_preserved": true
+        }
+      ]
+    },
+    "historical_source_bytes": {
+      "site/data/source-manifest.json": {
+        "sha256": "ca7b9be9d1b292463e2f5e7ed6482cfeefc7c77db17954da02d9e1af94544eea",
+        "unchanged": true
+      },
+      "site/data/demo.json": {
+        "sha256": "386ea1dabd83affea11ecd3793cb9e937e4bce58277f1b750a7569260bb66d64",
+        "unchanged": true
+      },
+      "site/data/source.tar.gz": {
+        "sha256": "784ed67070dddd4326f088a8fccc6cd1aea9628da448bc2abd21a1a4cf8bbfe4",
+        "unchanged": true
+      },
+      "site/data/benchmark.json": {
+        "sha256": "3ba01a74cf79e2be7dd9ca38326ff0ae5517a05c242fd927bb99e3cc0e638a23",
+        "unchanged": true
+      },
+      "site/data/cache-qwen3-4b.json": {
+        "sha256": "61e426ff4c35c62afcab2a83b869ebd28ff0501bc642b7abc13a2c2532c8df09",
+        "unchanged": true
+      }
+    },
+    "browser": {
+      "tool": "CUA IAB",
+      "base_url": "http://127.0.0.1:8088/deepinfer-mac/",
+      "desktop": [
+        1280,
+        720
+      ],
+      "mobile": [
+        390,
+        844
+      ],
+      "all_8_pages_each_viewport": {
+        "one_h1": true,
+        "horizontal_overflow": false
+      },
+      "visually_reviewed": [
+        "Chinese desktop hero",
+        "English desktop hero",
+        "Chinese mobile hero",
+        "completed replay desktop"
+      ],
+      "architecture_tab_click_recover": true,
+      "architecture_keyboard_right_to_reuse": true,
+      "replay_4x_completed_expected_json": true,
+      "viewport_override_reset": true
+    },
+    "recorded_replay": {
+      "exact_source_event_extraction": true,
+      "content_events": 88,
+      "first_content_ms": 7433.918542112224,
+      "last_content_ms": 10659.09695904702,
+      "joined_content_matches_source_expected_json": true,
+      "explicit_recording_and_1x_4x_label": true
+    },
+    "install_api_cli": "Compared clone branch, uv extras, models target-only, serve default8765, run profile/mode and API body to src/deepinfer_mac/cli.py and current API schema; no model loaded"
+  },
+  "scope": "Static showcase and publication dependency closure only; no new engine, model-quality or framework-performance test",
+  "gpu_used": false,
+  "deployed": false
+}

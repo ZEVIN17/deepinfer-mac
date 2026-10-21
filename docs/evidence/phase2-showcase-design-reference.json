@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-21",
+  "scope": "Architecture-led revision of the existing GitHub Pages showcase",
+  "user_direction": "Focus the showcase on architecture and achievements; retain complete research records in technical documentation.",
+  "reference_pages_supplied_and_verified_by_root": [
+    {
+      "url": "https://vllm.ai/",
+      "pattern": "Clear positioning, capability hierarchy, direct start action"
+    },
+    {
+      "url": "https://docs.sglang.io/",
+      "pattern": "Concrete execution capabilities connected to documentation"
+    },
+    {
+      "url": "https://github.com/ml-explore/mlx-lm",
+      "pattern": "Copyable local model execution and source attribution"
+    }
+  ],
+  "original_design": "Existing warm paper, forest green, rust accent and monospace technical labels retained. New static architecture graphic, execution-stage explorer, source-linked milestones and real recorded replay.",
+  "content_sequence": [
+    "Positioning",
+    "Execution architecture",
+    "Implemented capabilities",
+    "Verified milestones",
+    "Actual local demo",
+    "Copyable branch-specific quick start",
+    "Technical documentation"
+  ],
+  "claim_policy": "Describe implemented responsibilities and workload-specific verification. Do not convert correctness milestones into competitor performance or model quality claims.",
+  "data_policy": "Original research documentation/reports remain unchanged. Recorded replay extracts real content events and timestamps. No generated performance, simulated response, remote fonts, analytics or localhost inference access."
+}
